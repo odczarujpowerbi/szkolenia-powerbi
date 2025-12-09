@@ -183,6 +183,9 @@
   },
   "active": "c6a8ca1a0082a34f",
   "lastOpenFiles": [
+    "02. OUTPUT/TMDL/_Parametr.md",
+    "convert_md_to_powerbi.py.tmp.66424.1765313206562",
+    "02. OUTPUT/TMDL/_HTML.md",
     "config.md",
     "01. THEORY/06. DAX - Zaawansowane Kwerendy.md",
     "02. OUTPUT/06. DAX - Zaawansowane Kwerendy - Query View.html",
@@ -194,7 +197,6 @@
     "02. OUTPUT/04. Modyfikowanie Kontekstu - ALLSELECTED.html",
     "02. OUTPUT/04. Modyfikowanie Kontekstu - ALLEXCEPT.html",
     "02. OUTPUT/04. Modyfikowanie Kontekstu - ALL i REMOVEFILTERS - usuwanie filtrów.html",
-    "02. OUTPUT/03. Wprowadzenie do CALCULATE - Operatory logiczne w `CALCULATE`.html",
     "01. THEORY/05. Tworzenie zestawień tabelarycznych.md",
     "01. THEORY/04. Modyfikowanie Kontekstu.md",
     "01. THEORY/03. Wprowadzenie do CALCULATE.md",
@@ -207,7 +209,6 @@
     "00. DRAFT/01. Podstawy DAX.md",
     "bin/Pasted image 20251209193536.png",
     "bin/Pasted image 20251209181932.png",
-    "02. OUTPUT/TMDL/_HTML.md",
     "03. TEMPLATE/CSS - Czerwony.md",
     "03. TEMPLATE/CSS - Niebieski.md",
     "bin/Pasted image 20251209173843.png",
@@ -227,7 +228,6 @@
     "03. TEMPLATE/JS.md",
     "Theory/00. Konfiguracja Power BI.md",
     "Theory/01. Podstawy DAX.md",
-    "Theory/02. DAX - Zmienne.md",
     "Generator.canvas"
   ]
 }

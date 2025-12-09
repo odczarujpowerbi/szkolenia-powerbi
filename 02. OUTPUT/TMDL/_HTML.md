@@ -1,7 +1,7 @@
 createOrReplace
 
     table _HTML
-        lineageTag: 8e881a0c-8a00-42c8-b5ab-25fba6fc8223
+        lineageTag: 04627823-0a3d-4c2c-a308-6e16c55baae2
 
         measure '00. Konfiguracja Power BI - Główne widoki Power BI Desktop' = ```
 "
@@ -214,7 +214,7 @@ createOrReplace
 
 "
 ```
-            lineageTag: 847a5c5c-4559-459d-841b-603a8ad43404
+            lineageTag: 63de6b5b-ac68-4fa1-be06-ab8e1b139b00
 
         measure '00. Konfiguracja Power BI - Przygotowanie środowiska Power BI' = ```
 "
@@ -404,7 +404,7 @@ createOrReplace
 
 "
 ```
-            lineageTag: 72c0812e-afac-4575-8f67-135ac53863a5
+            lineageTag: 57aa5fdd-8d01-4280-8454-d8692212131d
 
         measure '01. Podstawy DAX - Funkcje agregujące' = ```
 "
@@ -589,7 +589,7 @@ createOrReplace
 
 "
 ```
-            lineageTag: 888d5e5d-793a-42bb-a302-1da56c38d0fa
+            lineageTag: ccecd91d-a279-47cc-8b04-7956b10460c6
 
         measure '01. Podstawy DAX - Funkcje dat' = ```
 "
@@ -742,7 +742,7 @@ createOrReplace
 
 "
 ```
-            lineageTag: 939f6816-78c2-4e7c-aaae-46621f6349ed
+            lineageTag: fb8f9431-0bfa-4566-b6a1-bce7f86b7750
 
         measure '01. Podstawy DAX - Funkcje iteracyjne (X-functions)' = ```
 "
@@ -913,7 +913,7 @@ createOrReplace
 
 "
 ```
-            lineageTag: 2e384364-e28e-4cf1-a0a7-4c61c31d9ea2
+            lineageTag: c5db3e35-b969-4314-b530-ab714ab47a4b
 
         measure '01. Podstawy DAX - Funkcje logiczne' = ```
 "
@@ -1081,7 +1081,7 @@ createOrReplace
 
 "
 ```
-            lineageTag: 375cf43c-bc5b-49c4-9760-94edd0689797
+            lineageTag: db2e01d7-7b1b-4a29-9640-37ef7144f91f
 
         measure '01. Podstawy DAX - Funkcje tekstowe' = ```
 "
@@ -1234,7 +1234,7 @@ createOrReplace
 
 "
 ```
-            lineageTag: 3d50caa5-ed81-44c1-9395-e08b5e363fe0
+            lineageTag: 268ca929-2fe0-4a6d-8866-07287861d3ac
 
         measure '01. Podstawy DAX' = ```
 "
@@ -1512,7 +1512,7 @@ createOrReplace
 
 "
 ```
-            lineageTag: 9f497306-d79f-4787-aa98-3032c1c4cef3
+            lineageTag: d5565618-b74d-46f1-bb2f-152b7ae6fb96
 
         measure '02. Miary vs Kolumny kalkulowane - Miary vs Kolumny kalkulowane' = ```
 "
@@ -1794,7 +1794,7 @@ createOrReplace
 
 "
 ```
-            lineageTag: d6213c2a-c6c1-40cd-af22-cd05107eba4b
+            lineageTag: 913748e2-d544-4ee6-b10e-b580b5874dd9
 
         measure '03. Wprowadzenie do CALCULATE - Operatory logiczne w `CALCULATE`' = ```
 "
@@ -2064,7 +2064,7 @@ createOrReplace
 
 "
 ```
-            lineageTag: 9d3d022f-9fc5-4ad0-928c-ca9b7ae18b0a
+            lineageTag: ae85da39-cd98-465a-9227-616c8ed6240f
 
         measure '03. Wprowadzenie do CALCULATE - Użycie `CALCULATE`' = ```
 "
@@ -2235,7 +2235,7 @@ createOrReplace
 
 "
 ```
-            lineageTag: a667f7f7-6769-44dd-9726-f23d11bf930c
+            lineageTag: daeef7bb-b98f-46ee-8655-1af2d43ccccc
 
         measure '03. Wprowadzenie do CALCULATE - Wprowadzenie do CALCULATE' = ```
 "
@@ -2381,7 +2381,7 @@ createOrReplace
 
 "
 ```
-            lineageTag: 5e00e5ce-7b36-4dc5-9ad5-705edaa3d1be
+            lineageTag: 578e72e7-aa09-49c5-9efd-fe4afa4bae1c
 
         measure '04. Modyfikowanie Kontekstu - ALL i REMOVEFILTERS - usuwanie filtrów' = ```
 "
@@ -2597,7 +2597,7 @@ createOrReplace
 
 "
 ```
-            lineageTag: 59236685-133a-47dd-8b68-aa4f03210cfb
+            lineageTag: 1dabfaed-d080-4e79-b49e-9aabb04fbdf0
 
         measure '04. Modyfikowanie Kontekstu - ALLEXCEPT' = ```
 "
@@ -2819,7 +2819,7 @@ createOrReplace
 
 "
 ```
-            lineageTag: 13bf6363-0417-4c47-b774-87e669fe3348
+            lineageTag: 19743ea4-42eb-4874-97bd-4328f5e27cfe
 
         measure '04. Modyfikowanie Kontekstu - ALLSELECTED' = ```
 "
@@ -3096,7 +3096,7 @@ createOrReplace
 
 "
 ```
-            lineageTag: 306f8707-4d04-45b1-bca8-a215a3eeb387
+            lineageTag: e2442dcb-4b9b-49e8-aaa8-0cfade1e55dd
 
         measure '04. Modyfikowanie Kontekstu - CROSSFILTER' = ```
 "
@@ -3229,7 +3229,7 @@ createOrReplace
 
 "
 ```
-            lineageTag: efdd34e6-4e3f-4aac-9516-8cba9083f6e3
+            lineageTag: cd4ecdfd-cc31-4138-907b-593a6e3188e1
 
         measure '04. Modyfikowanie Kontekstu - KEEPFILTERS' = ```
 "
@@ -3446,7 +3446,7 @@ createOrReplace
 
 "
 ```
-            lineageTag: 074a0889-ddfb-4fe4-bd36-a9535bb8e557
+            lineageTag: 4d245dae-e742-4f63-9988-f33805d863df
 
         measure '04. Modyfikowanie Kontekstu - USERELATIONSHIP' = ```
 "
@@ -3594,7 +3594,7 @@ createOrReplace
 
 "
 ```
-            lineageTag: 2d3ae624-abfa-4cee-83bf-25306464af41
+            lineageTag: af09413d-239c-414c-aa04-3464c172e010
 
         measure '05. Tworzenie zestawień tabelarycznych' = ```
 "
@@ -3827,7 +3827,7 @@ createOrReplace
 
 "
 ```
-            lineageTag: 25457fb6-2e12-4169-bdc0-c2cb6b65a91b
+            lineageTag: 921c665d-1aa9-4ceb-8e07-d43816f3ceaa
 
         measure '06. DAX - Zaawansowane Kwerendy - Query View' = ```
 "
@@ -4030,7 +4030,7 @@ createOrReplace
 
 "
 ```
-            lineageTag: 989e30c0-09bb-4e8b-9bae-9beddfb517c0
+            lineageTag: fca9c590-f398-43dc-b0e2-e5a4c3406a42
 
         measure '06. DAX - Zaawansowane Kwerendy' = ```
 "
@@ -4277,7 +4277,7 @@ createOrReplace
 
 "
 ```
-            lineageTag: d85e2e49-09ed-4fbf-b2b5-da3d9f9d7c84
+            lineageTag: bb10c509-b0be-45f1-a06e-74910563ab02
 
         measure 'CSS - Czerwony' = ```
 "
@@ -4503,7 +4503,7 @@ createOrReplace
 </style>
 "
 ```
-            lineageTag: e0f34fe4-7ab8-4378-8f6b-4d815b16f89d
+            lineageTag: ad99ae7d-0910-4b32-a459-1af8814d7cb4
 
         measure 'CSS - Niebieski' = ```
 "
@@ -4729,7 +4729,7 @@ createOrReplace
 </style>
 "
 ```
-            lineageTag: 3f5be970-564f-4ebf-9b65-df1654f7eb2e
+            lineageTag: 303d2938-f38e-4c54-860f-f5aa37d32c0c
 
         partition _HTML = m
             mode: import

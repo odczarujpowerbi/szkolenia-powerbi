@@ -950,6 +950,86 @@ def read_measure_from_html(html_file_path):
     return measure_name, measure_content
 
 
+def extract_measure_metadata(measure_name):
+    """Wyciąga metadane z nazwy miary do użycia w parametrze pHTML
+
+    Args:
+        measure_name: str - pełna nazwa miary (np. "01. Podstawy DAX - Funkcje filtrujące")
+
+    Returns:
+        tuple: (full_name, short_name, module_number)
+            - full_name: pełna nazwa (np. "01. Podstawy DAX - Funkcje filtrujące")
+            - short_name: skrócona nazwa (np. "F. FILTRUJĄCE")
+            - module_number: numer modułu (np. "01")
+    """
+    full_name = measure_name
+
+    # Wyciągnij numer modułu (cyfry na początku do pierwszej kropki)
+    module_match = re.match(r'^(\d+)\.', measure_name)
+    module_number = module_match.group(1) if module_match else "00"
+
+    # Stwórz short_name z części po ostatnim " - " lub z całej nazwy
+    if ' - ' in measure_name:
+        # Weź część po ostatnim " - "
+        short_part = measure_name.split(' - ')[-1]
+    else:
+        # Weź część po pierwszej kropce (usuń numerację)
+        short_part = re.sub(r'^\d+\.\s*', '', measure_name)
+
+    # Skróć do wielkich liter i pierwszych słów
+    # Np. "Funkcje filtrujące" -> "F. FILTRUJĄCE"
+    words = short_part.split()
+    if len(words) > 0:
+        # Pierwsza litera pierwszego słowa + ". " + reszta wielkimi literami
+        if len(words) == 1:
+            short_name = words[0].upper()
+        else:
+            short_name = f"{words[0][0].upper()}. {' '.join(words[1:]).upper()}"
+    else:
+        short_name = short_part.upper()
+
+    return full_name, short_name, module_number
+
+
+def generate_parameter_file(measures, tmdl_dir):
+    """Generuje osobny plik _Parametr.md z tabelą kalkulowaną DAX zawierającą metadane miar
+
+    Args:
+        measures: list[(measure_name, measure_content)] - lista miar
+        tmdl_dir: Path - folder docelowy (02. OUTPUT/TMDL)
+    """
+    param_lines = []
+
+    # Nagłówek - struktura 1:1 jak w _pTeoria
+    param_lines.append("_pHTML = {\n")
+
+    # Dodaj wiersze z danymi jako krotki
+    for idx, (measure_name, _) in enumerate(measures):
+        full_name, short_name, module_number = extract_measure_metadata(measure_name)
+
+        # Escapuj cudzysłowy dla DAX (podwójny cudzysłów)
+        full_name_escaped = full_name.replace('"', '""')
+        short_name_escaped = short_name.replace('"', '""')
+
+        # Format: ("Pełna nazwa", NAMEOF('_HTML'[Nazwa]), sortowanie, "SKRÓCONA", "moduł")
+        param_lines.append(f'    ("{full_name_escaped}", NAMEOF(\'_HTML\'[{measure_name}]), {idx}, "{short_name_escaped}", "{module_number}"),\n')
+
+    # Usuń ostatni przecinek z ostatniego wiersza
+    if param_lines[-1].endswith(',\n'):
+        param_lines[-1] = param_lines[-1][:-2] + '\n'
+
+    # Zamknij nawias klamrowy
+    param_lines.append("}\n")
+
+    # Zapisz do pliku
+    param_file_path = tmdl_dir / "_Parametr.md"
+    with open(param_file_path, 'w', encoding='utf-8') as f:
+        f.writelines(param_lines)
+
+    print(f"[OK] Wygenerowano parametr: {param_file_path}")
+    print(f"     Liczba wierszy metadanych: {len(measures)}")
+
+
 def generate_tmdl(output_dir, tmdl_dir):
     """Generuje plik TMDL ze wszystkimi miarami z folderu 02. OUTPUT
 
@@ -1022,6 +1102,9 @@ def generate_tmdl(output_dir, tmdl_dir):
 
     print(f"[OK] Wygenerowano TMDL: {tmdl_file_path}")
     print(f"     Liczba miar: {len(measures)}")
+
+    # Generuj osobny plik z parametrem pHTML
+    generate_parameter_file(measures, tmdl_dir)
 
 
 if __name__ == '__main__':
