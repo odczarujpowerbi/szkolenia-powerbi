@@ -165,7 +165,7 @@
                   "repelStrength": 10,
                   "linkStrength": 1,
                   "linkDistance": 250,
-                  "scale": 0.6254472580599035,
+                  "scale": 1,
                   "close": true
                 }
               },
@@ -194,7 +194,7 @@
       "hide-folders:Show hidden folders": false
     }
   },
-  "active": "7293b29fa1965917",
+  "active": "792a46a7fb2f8591",
   "lastOpenFiles": [
     "02. OUTPUT/01. Podstawy DAX.html",
     "02. OUTPUT/01. Podstawy DAX - Funkcje agregujące.html",
