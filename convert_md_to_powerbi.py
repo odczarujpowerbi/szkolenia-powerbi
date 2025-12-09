@@ -129,9 +129,9 @@ def highlight_dax_syntax(code):
 
 def escape_html(text):
     """Escape specjalnych znaków HTML dla Power BI DAX"""
-    # W DAX stringach trzeba escapować < i > jako \&lt; i \&gt;
-    text = text.replace('<', '\\&lt;')
-    text = text.replace('>', '\\&gt;')
+    # W DAX stringach trzeba escapować < i > jako &lt; i &gt;
+    text = text.replace('<', '&lt;')
+    text = text.replace('>', '&gt;')
     return text
 
 
@@ -148,7 +148,14 @@ def process_inline_markdown(text):
         filename = match.group(1)
         # Zakoduj spacje jako %20
         encoded_filename = filename.replace(' ', '%20')
-        return f"<img src='https://github.com/odczarujpowerbi/szkolenia-powerbi/blob/main/bin/{encoded_filename}' width='100%'>"
+
+        # Rozróżnij GIF i PNG/inne formaty
+        if filename.lower().endswith('.gif'):
+            # GIF używa raw.githubusercontent.com/grafiki-do-szkolenia
+            return f"<img src='https://raw.githubusercontent.com/odczarujpowerbi/grafiki-do-szkolenia/main/{encoded_filename}' width='100%'>"
+        else:
+            # PNG i inne używają github.com/szkolenia-powerbi/blob/main/bin + ?raw=true
+            return f"<img src='https://github.com/odczarujpowerbi/szkolenia-powerbi/blob/main/bin/{encoded_filename}?raw=true' width='100%'>"
 
     text = re.sub(r'!\[\[(.*?)\]\]', replace_obsidian_image, text)
 
@@ -207,8 +214,51 @@ def convert_markdown_to_html(md_content):
             filename = line.strip()[3:-2]  # Usuń ![[ i ]]
             # Zakoduj spacje jako %20
             encoded_filename = filename.replace(' ', '%20')
-            html_lines.append(f"<img src='https://github.com/odczarujpowerbi/szkolenia-powerbi/blob/main/bin/{encoded_filename}' width='100%'>\n")
+
+            # Rozróżnij GIF i PNG/inne formaty
+            if filename.lower().endswith('.gif'):
+                # GIF używa raw.githubusercontent.com/grafiki-do-szkolenia
+                html_lines.append(f"<img src='https://raw.githubusercontent.com/odczarujpowerbi/grafiki-do-szkolenia/main/{encoded_filename}' width='100%'>\n")
+            else:
+                # PNG i inne używają github.com/szkolenia-powerbi/blob/main/bin + ?raw=true
+                html_lines.append(f"<img src='https://github.com/odczarujpowerbi/szkolenia-powerbi/blob/main/bin/{encoded_filename}?raw=true' width='100%'>\n")
             i += 1
+            continue
+
+        # Markdown tables: | col1 | col2 |
+        if line.strip().startswith('|') and '|' in line.strip()[1:]:
+            if in_list:
+                html_lines.append('</ul>\n')
+                in_list = False
+
+            # Zbierz wszystkie wiersze tabeli
+            table_lines = []
+            while i < len(lines) and lines[i].strip().startswith('|'):
+                table_lines.append(lines[i].strip())
+                i += 1
+
+            if len(table_lines) >= 2:
+                # Konwertuj tabelę na HTML
+                html_lines.append('<table>\n')
+
+                # Pierwszy wiersz to nagłówki
+                headers = [cell.strip() for cell in table_lines[0].split('|')[1:-1]]
+                html_lines.append('  <thead>\n    <tr>\n')
+                for header in headers:
+                    html_lines.append(f'      <th>{process_inline_markdown(header)}</th>\n')
+                html_lines.append('    </tr>\n  </thead>\n')
+
+                # Pomiń drugi wiersz (separator: | --- | --- |)
+                # Pozostałe wiersze to dane
+                html_lines.append('  <tbody>\n')
+                for row_line in table_lines[2:]:
+                    cells = [cell.strip() for cell in row_line.split('|')[1:-1]]
+                    html_lines.append('    <tr>\n')
+                    for cell in cells:
+                        html_lines.append(f'      <td>{process_inline_markdown(cell)}</td>\n')
+                    html_lines.append('    </tr>\n')
+                html_lines.append('  </tbody>\n')
+                html_lines.append('</table>\n')
             continue
 
         # Headings ## (h1)

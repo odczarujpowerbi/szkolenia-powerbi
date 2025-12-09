@@ -1,4 +1,4 @@
-Funkcje iteracyjne (X-functions) = 
+Przygotowanie środowiska Power BI = 
 
 "
 
@@ -7,7 +7,7 @@ Funkcje iteracyjne (X-functions) =
 <head>
     <meta charset='UTF-8'>
     <meta name='viewport' content='width=device-width, initial-scale=1.0'>
-    <title>Funkcje iteracyjne (X-functions)</title>
+    <title>Przygotowanie środowiska Power BI</title>
     <style>
             * {
                 margin: 0;
@@ -184,74 +184,73 @@ Funkcje iteracyjne (X-functions) =
 </head>
 <body>
 
-<div class='container' id='viz_6b285173'>
+<div class='container' id='viz_905d5ea6'>
     <!-- Nawigacja na górze -->
     <div class='navigation'>
-        <button id='prevBtn_6b285173' onclick='changePage_6b285173(-1)'>← Poprzednia</button>
+        <button id='prevBtn_905d5ea6' onclick='changePage_905d5ea6(-1)'>← Poprzednia</button>
         <span class='page-indicator'>
-            Strona <span id='currentPage_6b285173'>1</span> z <span id='totalPages_6b285173'>4</span>
+            Strona <span id='currentPage_905d5ea6'>1</span> z <span id='totalPages_905d5ea6'>4</span>
         </span>
-        <button id='nextBtn_6b285173' onclick='changePage_6b285173(1)'>Następna →</button>
+        <button id='nextBtn_905d5ea6' onclick='changePage_905d5ea6(1)'>Następna →</button>
     </div>
 
     <!-- Strona 1 -->
     <div class='page active'>
-        <p>Funkcje iteracyjne przechodzą przez <strong>każdy wiersz tabeli</strong> i wykonują obliczenia dla każdego wiersza osobno.</p>
-        <h1>SUMX – Suma z iteracją</h1>
-        <pre><code><span class='dax-function'>SUMX</span>(&lt;tabela&gt;, &lt;wyrażenie&gt;)</code></pre>
-        <p>Dla każdego wiersza tabeli oblicza wyrażenie, potem sumuje wyniki.</p>
-        <p><strong>Przykład:</strong></p>
-        <pre><code>Suma Wartości Zamówień = 
-        <span class='dax-function'>SUMX</span>(
-            Sprzedaz,
-            Sprzedaz[Ilość] * Sprzedaz[Cena]
-        )</code></pre>
-        <p><strong>Co się dzieje:</strong></p>
-        <ul>
-        <li>Dla każdego wiersza w tabeli <code>Sprzedaz</code> mnoży <code>Ilość * Cena</code></li>
-        <li>Potem sumuje wszystkie wyniki</li>
-        </ul>
+        <h1>Ustawienia programu Power BI</h1>
+        <p>Przed rozpoczęciem pracy z Power BI Desktop warto odpowiednio skonfigurować środowisko pracy. Prawidłowe ustawienia programu umożliwiają dostęp do nowych funkcji oraz optymalizują sposób pracy z danymi.</p>
+        <h2>Włączenie funkcji w wersji zapoznawczej (Preview Features)</h2>
+        <p>Power BI regularnie wprowadza nowe funkcje, które na początku dostępne są jako wersje zapoznawcze. Aby je włączyć:</p>
+        <p>1. Otwórz <strong>Plik</strong> → <strong>Opcje i ustawienia</strong> → <strong>Opcje</strong></p>
+        <p>2. Przejdź do sekcji <strong>Funkcje w wersji zapoznawczej</strong> (Preview features)</p>
+        <p>3. Zaznacz następujące opcje:</p>
+        <p>   - <strong>Obliczenia wizualne</strong> - pozwala na tworzenie bardziej zaawansowanych wizualizacji</p>
+        <p>   - <strong>Nowe wizualizacje</strong> - daje dostęp do najnowszych typów wizualizacji</p>
+        <p><strong>Uwaga:</strong> Po włączeniu funkcji w wersji zapoznawczej konieczne jest ponowne uruchomienie Power BI Desktop.</p>
+        <p><img src='https://raw.githubusercontent.com/odczarujpowerbi/grafiki-do-szkolenia/main/PowerBI - Ustawienia - Preview Features.gif' width='100%'></p>
 
     </div>
 
     <!-- Strona 2 -->
     <div class='page'>
-        <h1>AVERAGEX – Średnia z iteracją</h1>
-        <pre><code><span class='dax-function'>AVERAGEX</span>(&lt;tabela&gt;, &lt;wyrażenie&gt;)</code></pre>
-        <p><strong>Przykład:</strong></p>
-        <pre><code>Średnia Marża = 
-        <span class='dax-function'>AVERAGEX</span>(
-            Sprzedaz,
-            Sprzedaz[Przychód] - Sprzedaz[Koszt]
-        )</code></pre>
+        <h2>Konfiguracja ustawień raportu- włączenie interakcji między obiektami na raporcie</h2>
+        <p>Interakcje między wizualizacjami pozwalają na dynamiczne filtrowanie danych. Aby włączyć tę funkcję:</p>
+        <p>1. Przejdź do widoku <strong>Raport</strong></p>
+        <p>2. Kliknij <strong>Plik</strong> → <strong>Opcje i ustawienia</strong> → <strong>Opcje</strong></p>
+        <p>3. W sekcji <strong>Bieżący plik</strong> → <strong>Ustawienia raportu</strong></p>
+        <p>4. Upewnij się, że opcja dotycząca interakcji wizualizacji jest włączona</p>
+        <p>Dzięki temu kliknięcie na element jednej wizualizacji (np. kolumnę na wykresie) automatycznie przefiltruje pozostałe wizualizacje na stronie raportu.</p>
 
     </div>
 
     <!-- Strona 3 -->
     <div class='page'>
-        <h1>COUNTX – Liczenie z iteracją</h1>
-        <pre><code><span class='dax-function'>COUNTX</span>(&lt;tabela&gt;, &lt;wyrażenie&gt;)</code></pre>
-        <p>Liczy ile razy wyrażenie zwróciło <strong>niepustą wartość</strong>.</p>
-        <p><strong>Przykład:</strong></p>
-        <pre><code>Liczba Zamówień Powyżej <span class='dax-number'>1000</span> = 
-        <span class='dax-function'>COUNTX</span>(
-            Sprzedaz,
-            <span class='dax-function'>IF</span>(Sprzedaz[Kwota] &gt; <span class='dax-number'>1000</span>, <span class='dax-number'>1</span>, <span class='dax-function'>BLANK</span>())
-        )</code></pre>
+        <h2>Ustawienia Power Query-  wyłączenie automatycznego wykrywania typów kolumn</h2>
+        <p>Automatyczne wykrywanie typów danych przez Power Query może czasem prowadzić do błędów lub niepożądanych konwersji. Zaleca się wyłączenie tej opcji i ręczne kontrolowanie typów danych:</p>
+        <p>1. Otwórz <strong>Plik</strong> → <strong>Opcje i ustawienia</strong> → <strong>Opcje</strong></p>
+        <p>2. Przejdź do sekcji <strong>BIEŻĄCY PLIK</strong> → <strong>Ładowanie danych</strong></p>
+        <p>3. Odznacz opcję <strong>Automatycznie wykrywaj typy kolumn i nagłówki dla źródeł nieustrukturyzowanych</strong></p>
+        <p>Dzięki temu będziesz mieć pełną kontrolę nad tym, jakie typy danych są przypisywane do poszczególnych kolumn.</p>
 
     </div>
 
     <!-- Strona 4 -->
     <div class='page'>
-        <h1>MINX i MAXX – Minimum i maksimum z iteracją</h1>
-        <pre><code><span class='dax-function'>MINX</span>(&lt;tabela&gt;, &lt;wyrażenie&gt;)
-        <span class='dax-function'>MAXX</span>(&lt;tabela&gt;, &lt;wyrażenie&gt;)</code></pre>
-        <p><strong>Przykład:</strong></p>
-        <pre><code>Najwyższa Marża = 
-        <span class='dax-function'>MAXX</span>(
-            Sprzedaz,
-            Sprzedaz[Przychód] - Sprzedaz[Koszt]
-        )</code></pre>
+        <h2>Ustawienie wersji językowej</h2>
+        <p>Wersja językowa Power BI wpływa na separatory dziesiętne, daty oraz niektóre funkcje DAX:</p>
+        <p>1. Otwórz <strong>Plik</strong> → <strong>Opcje i ustawienia</strong> → <strong>Opcje</strong></p>
+        <p>2. Przejdź do sekcji <strong>GLOBALNE</strong> → <strong>Ustawienia regionalne</strong></p>
+        <p>3. Wybierz odpowiedni język (np. Polski lub Angielski)</p>
+        <p><strong>Uwaga:</strong></p>
+        <ul>
+        <li>W polskiej wersji separator dziesiętny to przecinek (<code>,</code>), a separator argumentów to średnik (<code>;</code>)</li>
+        <li>W angielskiej wersji separator dziesiętny to kropka (<code>.</code>), a separator argumentów to przecinek (<code>,</code>)</li>
+        </ul>
+        <p>Przykład różnic w składni DAX:</p>
+        <pre><code>// Wersja polska
+        Suma wartości = <span class='dax-function'>SUMX</span>(fDemo; fDemo[Price] * fDemo[Quantity])
+
+        // Wersja angielska
+        Suma wartości = <span class='dax-function'>SUMX</span>(fDemo, fDemo[Price] * fDemo[Quantity])</code></pre>
         <p>---</p>
 
     </div>
@@ -261,10 +260,10 @@ Funkcje iteracyjne (X-functions) =
 <script>
 (function() {
     // Unikalny ID dla tej wizualizacji (wstrzykiwany przez Python)
-    var vizId = '6b285173';
+    var vizId = '905d5ea6';
     var containerId = 'viz_' + vizId;
 
-    var currentPage_6b285173 = 1;
+    var currentPage_905d5ea6 = 1;
     var container = document.getElementById(containerId);
 
     if (!container) return;
@@ -274,27 +273,27 @@ Funkcje iteracyjne (X-functions) =
 
     document.getElementById('totalPages_' + vizId).textContent = totalPages;
 
-    window['showPage_6b285173'] = function(n) {
-        if (n > totalPages) currentPage_6b285173 = totalPages;
-        if (n < 1) currentPage_6b285173 = 1;
+    window['showPage_905d5ea6'] = function(n) {
+        if (n > totalPages) currentPage_905d5ea6 = totalPages;
+        if (n < 1) currentPage_905d5ea6 = 1;
 
         for (var i = 0; i < pages.length; i++) {
             pages[i].classList.remove('active');
         }
-        pages[currentPage_6b285173 - 1].classList.add('active');
+        pages[currentPage_905d5ea6 - 1].classList.add('active');
 
-        document.getElementById('currentPage_' + vizId).textContent = currentPage_6b285173;
-        document.getElementById('prevBtn_' + vizId).disabled = (currentPage_6b285173 === 1);
-        document.getElementById('nextBtn_' + vizId).disabled = (currentPage_6b285173 === totalPages);
+        document.getElementById('currentPage_' + vizId).textContent = currentPage_905d5ea6;
+        document.getElementById('prevBtn_' + vizId).disabled = (currentPage_905d5ea6 === 1);
+        document.getElementById('nextBtn_' + vizId).disabled = (currentPage_905d5ea6 === totalPages);
     };
 
-    window['changePage_6b285173'] = function(n) {
-        currentPage_6b285173 += n;
-        window['showPage_6b285173'](currentPage_6b285173);
+    window['changePage_905d5ea6'] = function(n) {
+        currentPage_905d5ea6 += n;
+        window['showPage_905d5ea6'](currentPage_905d5ea6);
     };
 
     // Inicjalizacja
-    window['showPage_6b285173'](1);
+    window['showPage_905d5ea6'](1);
 })();
 </script>
 

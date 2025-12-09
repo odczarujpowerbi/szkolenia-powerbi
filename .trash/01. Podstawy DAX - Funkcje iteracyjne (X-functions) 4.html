@@ -198,7 +198,7 @@ Funkcje iteracyjne (X-functions) =
     <div class='page active'>
         <p>Funkcje iteracyjne przechodzą przez <strong>każdy wiersz tabeli</strong> i wykonują obliczenia dla każdego wiersza osobno.</p>
         <h1>SUMX – Suma z iteracją</h1>
-        <pre><code><span class='dax-function'>SUMX</span>(&lt;tabela&gt;, &lt;wyrażenie&gt;)</code></pre>
+        <pre><code><span class='dax-function'>SUMX</span>(\&lt;tabela\&gt;, \&lt;wyrażenie\&gt;)</code></pre>
         <p>Dla każdego wiersza tabeli oblicza wyrażenie, potem sumuje wyniki.</p>
         <p><strong>Przykład:</strong></p>
         <pre><code>Suma Wartości Zamówień = 
@@ -217,7 +217,7 @@ Funkcje iteracyjne (X-functions) =
     <!-- Strona 2 -->
     <div class='page'>
         <h1>AVERAGEX – Średnia z iteracją</h1>
-        <pre><code><span class='dax-function'>AVERAGEX</span>(&lt;tabela&gt;, &lt;wyrażenie&gt;)</code></pre>
+        <pre><code><span class='dax-function'>AVERAGEX</span>(\&lt;tabela\&gt;, \&lt;wyrażenie\&gt;)</code></pre>
         <p><strong>Przykład:</strong></p>
         <pre><code>Średnia Marża = 
         <span class='dax-function'>AVERAGEX</span>(
@@ -230,13 +230,13 @@ Funkcje iteracyjne (X-functions) =
     <!-- Strona 3 -->
     <div class='page'>
         <h1>COUNTX – Liczenie z iteracją</h1>
-        <pre><code><span class='dax-function'>COUNTX</span>(&lt;tabela&gt;, &lt;wyrażenie&gt;)</code></pre>
+        <pre><code><span class='dax-function'>COUNTX</span>(\&lt;tabela\&gt;, \&lt;wyrażenie\&gt;)</code></pre>
         <p>Liczy ile razy wyrażenie zwróciło <strong>niepustą wartość</strong>.</p>
         <p><strong>Przykład:</strong></p>
         <pre><code>Liczba Zamówień Powyżej <span class='dax-number'>1000</span> = 
         <span class='dax-function'>COUNTX</span>(
             Sprzedaz,
-            <span class='dax-function'>IF</span>(Sprzedaz[Kwota] &gt; <span class='dax-number'>1000</span>, <span class='dax-number'>1</span>, <span class='dax-function'>BLANK</span>())
+            <span class='dax-function'>IF</span>(Sprzedaz[Kwota] \&gt; <span class='dax-number'>1000</span>, <span class='dax-number'>1</span>, <span class='dax-function'>BLANK</span>())
         )</code></pre>
 
     </div>
@@ -244,8 +244,8 @@ Funkcje iteracyjne (X-functions) =
     <!-- Strona 4 -->
     <div class='page'>
         <h1>MINX i MAXX – Minimum i maksimum z iteracją</h1>
-        <pre><code><span class='dax-function'>MINX</span>(&lt;tabela&gt;, &lt;wyrażenie&gt;)
-        <span class='dax-function'>MAXX</span>(&lt;tabela&gt;, &lt;wyrażenie&gt;)</code></pre>
+        <pre><code><span class='dax-function'>MINX</span>(\&lt;tabela\&gt;, \&lt;wyrażenie\&gt;)
+        <span class='dax-function'>MAXX</span>(\&lt;tabela\&gt;, \&lt;wyrażenie\&gt;)</code></pre>
         <p><strong>Przykład:</strong></p>
         <pre><code>Najwyższa Marża = 
         <span class='dax-function'>MAXX</span>(

@@ -1,4 +1,4 @@
-Funkcje iteracyjne (X-functions) = 
+Funkcje logiczne = 
 
 "
 
@@ -7,7 +7,7 @@ Funkcje iteracyjne (X-functions) =
 <head>
     <meta charset='UTF-8'>
     <meta name='viewport' content='width=device-width, initial-scale=1.0'>
-    <title>Funkcje iteracyjne (X-functions)</title>
+    <title>Funkcje logiczne</title>
     <style>
             * {
                 margin: 0;
@@ -184,73 +184,69 @@ Funkcje iteracyjne (X-functions) =
 </head>
 <body>
 
-<div class='container' id='viz_6b285173'>
+<div class='container' id='viz_a487a00b'>
     <!-- Nawigacja na górze -->
     <div class='navigation'>
-        <button id='prevBtn_6b285173' onclick='changePage_6b285173(-1)'>← Poprzednia</button>
+        <button id='prevBtn_a487a00b' onclick='changePage_a487a00b(-1)'>← Poprzednia</button>
         <span class='page-indicator'>
-            Strona <span id='currentPage_6b285173'>1</span> z <span id='totalPages_6b285173'>4</span>
+            Strona <span id='currentPage_a487a00b'>1</span> z <span id='totalPages_a487a00b'>4</span>
         </span>
-        <button id='nextBtn_6b285173' onclick='changePage_6b285173(1)'>Następna →</button>
+        <button id='nextBtn_a487a00b' onclick='changePage_a487a00b(1)'>Następna →</button>
     </div>
 
     <!-- Strona 1 -->
     <div class='page active'>
-        <p>Funkcje iteracyjne przechodzą przez <strong>każdy wiersz tabeli</strong> i wykonują obliczenia dla każdego wiersza osobno.</p>
-        <h1>SUMX – Suma z iteracją</h1>
-        <pre><code><span class='dax-function'>SUMX</span>(&lt;tabela&gt;, &lt;wyrażenie&gt;)</code></pre>
-        <p>Dla każdego wiersza tabeli oblicza wyrażenie, potem sumuje wyniki.</p>
+        <h1>IF – Warunek logiczny</h1>
+        <p>Zwraca jedną wartość jeśli warunek jest prawdziwy, inną jeśli fałszywy:</p>
+        <pre><code><span class='dax-function'>IF</span>(\&lt;warunek\&gt;, \&lt;wartość_jeśli_prawda\&gt;, \&lt;wartość_jeśli_fałsz\&gt;)</code></pre>
         <p><strong>Przykład:</strong></p>
-        <pre><code>Suma Wartości Zamówień = 
-        <span class='dax-function'>SUMX</span>(
-            Sprzedaz,
-            Sprzedaz[Ilość] * Sprzedaz[Cena]
+        <pre><code>Kategoria Sprzedaży = 
+        <span class='dax-function'>IF</span>(
+            Sprzedaz[Kwota] \&gt; <span class='dax-number'>1000</span>,
+            'Wysoka',
+            'Niska'
         )</code></pre>
-        <p><strong>Co się dzieje:</strong></p>
-        <ul>
-        <li>Dla każdego wiersza w tabeli <code>Sprzedaz</code> mnoży <code>Ilość * Cena</code></li>
-        <li>Potem sumuje wszystkie wyniki</li>
-        </ul>
 
     </div>
 
     <!-- Strona 2 -->
     <div class='page'>
-        <h1>AVERAGEX – Średnia z iteracją</h1>
-        <pre><code><span class='dax-function'>AVERAGEX</span>(&lt;tabela&gt;, &lt;wyrażenie&gt;)</code></pre>
+        <h1>AND – Sprawdza czy wszystkie warunki są prawdziwe</h1>
+        <pre><code><span class='dax-function'>AND</span>(\&lt;warunek1\&gt;, \&lt;warunek2\&gt;)</code></pre>
         <p><strong>Przykład:</strong></p>
-        <pre><code>Średnia Marża = 
-        <span class='dax-function'>AVERAGEX</span>(
-            Sprzedaz,
-            Sprzedaz[Przychód] - Sprzedaz[Koszt]
+        <pre><code>Czy VIP = 
+        <span class='dax-function'>IF</span>(
+            <span class='dax-function'>AND</span>(Klienci[Przychód] \&gt; <span class='dax-number'>50000</span>, Klienci[Lata Współpracy] \&gt; <span class='dax-number'>5</span>),
+            'TAK',
+            'NIE'
         )</code></pre>
 
     </div>
 
     <!-- Strona 3 -->
     <div class='page'>
-        <h1>COUNTX – Liczenie z iteracją</h1>
-        <pre><code><span class='dax-function'>COUNTX</span>(&lt;tabela&gt;, &lt;wyrażenie&gt;)</code></pre>
-        <p>Liczy ile razy wyrażenie zwróciło <strong>niepustą wartość</strong>.</p>
+        <h1>OR – Sprawdza czy przynajmniej jeden warunek jest prawdziwy</h1>
+        <pre><code><span class='dax-function'>OR</span>(\&lt;warunek1\&gt;, \&lt;warunek2\&gt;)</code></pre>
         <p><strong>Przykład:</strong></p>
-        <pre><code>Liczba Zamówień Powyżej <span class='dax-number'>1000</span> = 
-        <span class='dax-function'>COUNTX</span>(
-            Sprzedaz,
-            <span class='dax-function'>IF</span>(Sprzedaz[Kwota] &gt; <span class='dax-number'>1000</span>, <span class='dax-number'>1</span>, <span class='dax-function'>BLANK</span>())
+        <pre><code>Czy Promocja = 
+        <span class='dax-function'>IF</span>(
+            <span class='dax-function'>OR</span>(Produkty[Kategoria] = 'Elektronika', Produkty[Wyprzedaż] = TRUE),
+            'TAK',
+            'NIE'
         )</code></pre>
 
     </div>
 
     <!-- Strona 4 -->
     <div class='page'>
-        <h1>MINX i MAXX – Minimum i maksimum z iteracją</h1>
-        <pre><code><span class='dax-function'>MINX</span>(&lt;tabela&gt;, &lt;wyrażenie&gt;)
-        <span class='dax-function'>MAXX</span>(&lt;tabela&gt;, &lt;wyrażenie&gt;)</code></pre>
+        <h1>NOT – Negacja warunku</h1>
+        <pre><code><span class='dax-function'>NOT</span>(\&lt;warunek\&gt;)</code></pre>
         <p><strong>Przykład:</strong></p>
-        <pre><code>Najwyższa Marża = 
-        <span class='dax-function'>MAXX</span>(
-            Sprzedaz,
-            Sprzedaz[Przychód] - Sprzedaz[Koszt]
+        <pre><code>Czy Nieaktywny = 
+        <span class='dax-function'>IF</span>(
+            <span class='dax-function'>NOT</span>(Klienci[Status] = 'Aktywny'),
+            'TAK',
+            'NIE'
         )</code></pre>
         <p>---</p>
 
@@ -261,10 +257,10 @@ Funkcje iteracyjne (X-functions) =
 <script>
 (function() {
     // Unikalny ID dla tej wizualizacji (wstrzykiwany przez Python)
-    var vizId = '6b285173';
+    var vizId = 'a487a00b';
     var containerId = 'viz_' + vizId;
 
-    var currentPage_6b285173 = 1;
+    var currentPage_a487a00b = 1;
     var container = document.getElementById(containerId);
 
     if (!container) return;
@@ -274,27 +270,27 @@ Funkcje iteracyjne (X-functions) =
 
     document.getElementById('totalPages_' + vizId).textContent = totalPages;
 
-    window['showPage_6b285173'] = function(n) {
-        if (n > totalPages) currentPage_6b285173 = totalPages;
-        if (n < 1) currentPage_6b285173 = 1;
+    window['showPage_a487a00b'] = function(n) {
+        if (n > totalPages) currentPage_a487a00b = totalPages;
+        if (n < 1) currentPage_a487a00b = 1;
 
         for (var i = 0; i < pages.length; i++) {
             pages[i].classList.remove('active');
         }
-        pages[currentPage_6b285173 - 1].classList.add('active');
+        pages[currentPage_a487a00b - 1].classList.add('active');
 
-        document.getElementById('currentPage_' + vizId).textContent = currentPage_6b285173;
-        document.getElementById('prevBtn_' + vizId).disabled = (currentPage_6b285173 === 1);
-        document.getElementById('nextBtn_' + vizId).disabled = (currentPage_6b285173 === totalPages);
+        document.getElementById('currentPage_' + vizId).textContent = currentPage_a487a00b;
+        document.getElementById('prevBtn_' + vizId).disabled = (currentPage_a487a00b === 1);
+        document.getElementById('nextBtn_' + vizId).disabled = (currentPage_a487a00b === totalPages);
     };
 
-    window['changePage_6b285173'] = function(n) {
-        currentPage_6b285173 += n;
-        window['showPage_6b285173'](currentPage_6b285173);
+    window['changePage_a487a00b'] = function(n) {
+        currentPage_a487a00b += n;
+        window['showPage_a487a00b'](currentPage_a487a00b);
     };
 
     // Inicjalizacja
-    window['showPage_6b285173'](1);
+    window['showPage_a487a00b'](1);
 })();
 </script>
 

@@ -1,7 +1,7 @@
 createOrReplace
 
     table _HTML
-        lineageTag: 32d72c62-5c99-4f5f-ab1a-e1f4675c6e13
+        lineageTag: 97e5dde1-15b0-45b6-94c5-9d9a32d12d4f
 
         measure '00. Konfiguracja Power BI - Główne widoki Power BI Desktop' = ```
 "
@@ -202,7 +202,7 @@ createOrReplace
     <div class='page active'>
         <p>Power BI Desktop oferuje pięć głównych widoków, z których każdy służy do różnych celów. Znajomość tych widoków jest kluczowa dla efektywnej pracy z narzędziem.</p>
         <h2>1. Widok Raport (Report View)</h2>
-        <img src='https://github.com/odczarujpowerbi/szkolenia-powerbi/blob/main/bin/Pasted%20image%2020251209155301.png' width='100%'>
+        <img src='https://github.com/odczarujpowerbi/szkolenia-powerbi/blob/main/bin/Pasted%20image%2020251209155301.png?raw=true' width='100%'>
         <p><strong>Zastosowanie:</strong> Tworzenie i projektowanie wizualizacji danych.</p>
         <p>W tym widoku:</p>
         <ul>
@@ -219,7 +219,7 @@ createOrReplace
     <!-- Strona 2 -->
     <div class='page'>
         <h2>2. Widok Dane (Data View)</h2>
-        <img src='https://github.com/odczarujpowerbi/szkolenia-powerbi/blob/main/bin/Pasted%20image%2020251209155324.png' width='100%'>
+        <img src='https://github.com/odczarujpowerbi/szkolenia-powerbi/blob/main/bin/Pasted%20image%2020251209155324.png?raw=true' width='100%'>
         <p><strong>Zastosowanie:</strong> Podgląd i weryfikacja danych w tabelach.</p>
         <p>W tym widoku:</p>
         <ul>
@@ -236,7 +236,7 @@ createOrReplace
     <!-- Strona 3 -->
     <div class='page'>
         <h2>3. Widok Model (Model View)</h2>
-        <img src='https://github.com/odczarujpowerbi/szkolenia-powerbi/blob/main/bin/Pasted%20image%2020251209155620.png' width='100%'>
+        <img src='https://github.com/odczarujpowerbi/szkolenia-powerbi/blob/main/bin/Pasted%20image%2020251209155620.png?raw=true' width='100%'>
         <p><strong>Zastosowanie:</strong> Zarządzanie relacjami między tabelami i strukturą modelu danych.</p>
         <p>W tym widoku:</p>
         <ul>
@@ -253,7 +253,7 @@ createOrReplace
     <!-- Strona 4 -->
     <div class='page'>
         <h2>4. Widok DAX Query (DAX Query View)</h2>
-        <img src='https://github.com/odczarujpowerbi/szkolenia-powerbi/blob/main/bin/Pasted%20image%2020251209155746.png' width='100%'>
+        <img src='https://github.com/odczarujpowerbi/szkolenia-powerbi/blob/main/bin/Pasted%20image%2020251209155746.png?raw=true' width='100%'>
         <p><strong>Zastosowanie:</strong> Testowanie zapytań DAX bez tworzenia miar w modelu.</p>
         <p>W tym widoku:</p>
         <ul>
@@ -276,7 +276,7 @@ createOrReplace
     <!-- Strona 5 -->
     <div class='page'>
         <h2>5. Widok TMDL (Tabular Model Definition Language)</h2>
-        <img src='https://github.com/odczarujpowerbi/szkolenia-powerbi/blob/main/bin/Pasted%20image%2020251209161608.png' width='100%'>
+        <img src='https://github.com/odczarujpowerbi/szkolenia-powerbi/blob/main/bin/Pasted%20image%2020251209161608.png?raw=true' width='100%'>
         <p><strong>Zastosowanie:</strong> Edycja modelu danych w formie tekstowej (dla zaawansowanych użytkowników).</p>
         <p>W tym widoku:</p>
         <ul>
@@ -348,7 +348,7 @@ createOrReplace
 
 "
 ```
-            lineageTag: 308805a3-3e6d-460b-93ad-e86c814a2973
+            lineageTag: acc1bd70-b347-4508-8f89-56f3a5438ac9
 
         measure '00. Konfiguracja Power BI - Przygotowanie środowiska Power BI' = ```
 "
@@ -653,7 +653,613 @@ createOrReplace
 
 "
 ```
-            lineageTag: 3270c267-4df0-4af1-9ebc-1cdaa65e3926
+            lineageTag: 52d12cc4-ccd8-4f7f-bc5d-2749ec3a380f
+
+        measure '01. Podstawy DAX - Funkcje agregujące' = ```
+"
+
+<!DOCTYPE html>
+<html lang='pl'>
+<head>
+    <meta charset='UTF-8'>
+    <meta name='viewport' content='width=device-width, initial-scale=1.0'>
+    <title>Funkcje agregujące</title>
+    <style>
+            * {
+                margin: 0;
+                padding: 0;
+                box-sizing: border-box;
+            }
+            
+            body {
+                font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+                font-size: 16px;
+                line-height: 1.7;
+                color: #333;
+                background: transparent;
+                padding: 20px;
+            }
+            
+            .container {
+                max-width: 800px;
+                margin: 0 auto;
+                background: transparent;
+                padding: 40px;
+            }
+            
+            .navigation {
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                margin-bottom: 40px;
+                padding-bottom: 20px;
+                border-bottom: 1px solid #e1e4e8;
+            }
+            
+            button {
+                background: #0066cc;
+                color: white;
+                border: none;
+                padding: 12px 28px;
+                border-radius: 4px;
+                cursor: pointer;
+                font-size: 1em;
+                font-weight: 500;
+                transition: background 0.2s;
+            }
+            
+            button:hover {
+                background: #0052a3;
+            }
+            
+            button:disabled {
+                background: #ccc;
+                cursor: not-allowed;
+            }
+            
+            .page-indicator {
+                color: #666;
+                font-size: 1em;
+            }
+            
+            .page {
+                display: none;
+                min-height: 500px;
+            }
+            
+            .page.active {
+                display: block;
+                animation: fadeIn 0.3s ease-in;
+            }
+            
+            @keyframes fadeIn {
+                from { opacity: 0; transform: translateY(10px); }
+                to { opacity: 1; transform: translateY(0); }
+            }
+            
+            h1 {
+                font-size: 1.8em;
+                font-weight: 600;
+                margin-bottom: 1em;
+                color: #1a1a1a;
+            }
+            
+            h2 {
+                font-size: 1.4em;
+                font-weight: 600;
+                margin: 1.5em 0 0.8em 0;
+                color: #2a2a2a;
+            }
+            
+            h3 {
+                font-size: 1.1em;
+                font-weight: 600;
+                margin: 1.2em 0 0.6em 0;
+                color: #444;
+            }
+            
+            p {
+                margin-bottom: 1em;
+                font-size: 1.05em;
+            }
+            
+            strong {
+                font-weight: 600;
+                color: #1a1a1a;
+            }
+            
+            code {
+                background: #f5f5f5;
+                padding: 3px 7px;
+                border-radius: 3px;
+                font-family: 'Courier New', monospace;
+                font-size: 0.95em;
+                color: #d73a49;
+            }
+            
+            pre {
+                background: #f8f9fa;
+                border-left: 3px solid #0066cc;
+                padding: 18px;
+                margin: 1em 0;
+                overflow-x: auto;
+                border-radius: 3px;
+            }
+            
+            pre code {
+                background: none;
+                padding: 0;
+                color: #24292e;
+                font-size: 1em;
+                line-height: 1.6;
+            }
+            
+            .dax-keyword {
+                color: #0066cc;
+                font-weight: 600;
+            }
+            
+            .dax-function {
+                color: #6f42c1;
+            }
+            
+            .dax-number {
+                color: #005cc5;
+            }
+            
+            .dax-comment {
+                color: #6a737d;
+                font-style: italic;
+            }
+            
+            ul, ol {
+                margin: 1em 0 1em 1.5em;
+            }
+            
+            li {
+                margin: 0.5em 0;
+                font-size: 1.05em;
+            }
+            
+            .iteration-box {
+                border-left: 3px solid #0066cc;
+                padding: 14px 18px;
+                margin: 0.8em 0;
+            }
+            
+            .result-box {
+                background: #f5f5f5;
+                border-left: 3px solid #999;
+                padding: 14px 18px;
+                margin: 0.8em 0;
+                font-weight: 500;
+                color: #555;
+                font-size: 1.05em;
+            }
+        </style>
+</head>
+<body>
+
+<div class='container' id='viz_0faeee3d'>
+    <!-- Nawigacja na górze -->
+    <div class='navigation'>
+        <button id='prevBtn_0faeee3d' onclick='changePage_0faeee3d(-1)'>← Poprzednia</button>
+        <span class='page-indicator'>
+            Strona <span id='currentPage_0faeee3d'>1</span> z <span id='totalPages_0faeee3d'>7</span>
+        </span>
+        <button id='nextBtn_0faeee3d' onclick='changePage_0faeee3d(1)'>Następna →</button>
+    </div>
+
+    <!-- Strona 1 -->
+    <div class='page active'>
+        <h1>SUM – Suma wartości</h1>
+        <p>Sumuje wszystkie wartości w kolumnie:</p>
+        <pre><code>Suma Sprzedaży = <span class='dax-function'>SUM</span>(Sprzedaz[Kwota])</code></pre>
+        <p><strong>Jak działa:</strong></p>
+        <ul>
+        <li>Dodaje wszystkie liczby w kolumnie <code>Sprzedaz[Kwota]</code></li>
+        <li>Pomija wartości <code>BLANK()</code> (puste)</li>
+        <li>Uwzględnia aktualny kontekst filtrowania</li>
+        </ul>
+
+    </div>
+
+    <!-- Strona 2 -->
+    <div class='page'>
+        <h1>AVERAGE – Średnia</h1>
+        <p>Oblicza średnią arytmetyczną:</p>
+        <pre><code>Średnia Cena = <span class='dax-function'>AVERAGE</span>(Produkty[Cena])</code></pre>
+        <p><strong>Jak działa:</strong></p>
+        <ul>
+        <li>Sumuje wszystkie wartości i dzieli przez ich liczbę</li>
+        <li>Pomija wartości puste</li>
+        </ul>
+
+    </div>
+
+    <!-- Strona 3 -->
+    <div class='page'>
+        <h1>COUNT – Liczba wartości niepustych</h1>
+        <p>Liczy ile jest niepustych wartości w kolumnie:</p>
+        <pre><code>Liczba Transakcji = <span class='dax-function'>COUNT</span>(Sprzedaz[ID Transakcji])</code></pre>
+        <p><strong>Uwaga:</strong> COUNT liczy tylko wartości <strong>niepuste</strong> (pomija BLANK).</p>
+
+    </div>
+
+    <!-- Strona 4 -->
+    <div class='page'>
+        <h1>COUNTA – Liczba wartości niepustych (dowolny typ)</h1>
+        <p>Podobnie jak COUNT, ale działa na <strong>wszystkich typach danych</strong> (tekst, liczby, daty):</p>
+        <pre><code>Liczba Produktów = <span class='dax-function'>COUNTA</span>(Produkty[Nazwa])</code></pre>
+
+    </div>
+
+    <!-- Strona 5 -->
+    <div class='page'>
+        <h1>COUNTROWS – Liczba wierszy w tabeli</h1>
+        <p>Liczy wszystkie wiersze w tabeli (nawet jeśli mają puste wartości):</p>
+        <pre><code>Liczba Zamówień = <span class='dax-function'>COUNTROWS</span>(Zamowienia)</code></pre>
+        <p><strong>Różnica COUNT vs COUNTROWS:</strong></p>
+        <ul>
+        <li><code>COUNT</code> – liczy niepuste wartości w <strong>konkretnej kolumnie</strong></li>
+        <li><code>COUNTROWS</code> – liczy <strong>wszystkie wiersze w tabeli</strong></li>
+        </ul>
+
+    </div>
+
+    <!-- Strona 6 -->
+    <div class='page'>
+        <h1>MIN i MAX – Minimum i maksimum</h1>
+        <pre><code>Najniższa Cena = <span class='dax-function'>MIN</span>(Produkty[Cena])
+        Najwyższa Cena = <span class='dax-function'>MAX</span>(Produkty[Cena])</code></pre>
+
+    </div>
+
+    <!-- Strona 7 -->
+    <div class='page'>
+        <h1>DISTINCTCOUNT – Liczba unikalnych wartości</h1>
+        <p>Liczy ile jest <strong>unikalnych</strong> (niepowtarzających się) wartości:</p>
+        <pre><code>Liczba Unikalnych Klientów = <span class='dax-function'>DISTINCTCOUNT</span>(Sprzedaz[ID Klienta])</code></pre>
+        <p><strong>Przykład:</strong> Jeśli kolumna zawiera: <code>{1, 2, 2, 3, 3, 3}</code>, to <code>DISTINCTCOUNT</code> zwróci <strong>3</strong>.</p>
+        <p>---</p>
+
+    </div>
+
+</div>
+
+<script>
+(function() {
+    // Unikalny ID dla tej wizualizacji (wstrzykiwany przez Python)
+    var vizId = '0faeee3d';
+    var containerId = 'viz_' + vizId;
+
+    var currentPage_0faeee3d = 1;
+    var container = document.getElementById(containerId);
+
+    if (!container) return;
+
+    var pages = container.querySelectorAll('.page');
+    var totalPages = pages.length;
+
+    document.getElementById('totalPages_' + vizId).textContent = totalPages;
+
+    window['showPage_0faeee3d'] = function(n) {
+        if (n > totalPages) currentPage_0faeee3d = totalPages;
+        if (n < 1) currentPage_0faeee3d = 1;
+
+        for (var i = 0; i < pages.length; i++) {
+            pages[i].classList.remove('active');
+        }
+        pages[currentPage_0faeee3d - 1].classList.add('active');
+
+        document.getElementById('currentPage_' + vizId).textContent = currentPage_0faeee3d;
+        document.getElementById('prevBtn_' + vizId).disabled = (currentPage_0faeee3d === 1);
+        document.getElementById('nextBtn_' + vizId).disabled = (currentPage_0faeee3d === totalPages);
+    };
+
+    window['changePage_0faeee3d'] = function(n) {
+        currentPage_0faeee3d += n;
+        window['showPage_0faeee3d'](currentPage_0faeee3d);
+    };
+
+    // Inicjalizacja
+    window['showPage_0faeee3d'](1);
+})();
+</script>
+
+</body>
+</html>
+
+"
+```
+            lineageTag: 9a3d85db-b618-42c3-8d20-56d4953b53ec
+
+        measure '01. Podstawy DAX - Funkcje dat' = ```
+"
+
+<!DOCTYPE html>
+<html lang='pl'>
+<head>
+    <meta charset='UTF-8'>
+    <meta name='viewport' content='width=device-width, initial-scale=1.0'>
+    <title>Funkcje dat</title>
+    <style>
+            * {
+                margin: 0;
+                padding: 0;
+                box-sizing: border-box;
+            }
+            
+            body {
+                font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+                font-size: 16px;
+                line-height: 1.7;
+                color: #333;
+                background: transparent;
+                padding: 20px;
+            }
+            
+            .container {
+                max-width: 800px;
+                margin: 0 auto;
+                background: transparent;
+                padding: 40px;
+            }
+            
+            .navigation {
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                margin-bottom: 40px;
+                padding-bottom: 20px;
+                border-bottom: 1px solid #e1e4e8;
+            }
+            
+            button {
+                background: #0066cc;
+                color: white;
+                border: none;
+                padding: 12px 28px;
+                border-radius: 4px;
+                cursor: pointer;
+                font-size: 1em;
+                font-weight: 500;
+                transition: background 0.2s;
+            }
+            
+            button:hover {
+                background: #0052a3;
+            }
+            
+            button:disabled {
+                background: #ccc;
+                cursor: not-allowed;
+            }
+            
+            .page-indicator {
+                color: #666;
+                font-size: 1em;
+            }
+            
+            .page {
+                display: none;
+                min-height: 500px;
+            }
+            
+            .page.active {
+                display: block;
+                animation: fadeIn 0.3s ease-in;
+            }
+            
+            @keyframes fadeIn {
+                from { opacity: 0; transform: translateY(10px); }
+                to { opacity: 1; transform: translateY(0); }
+            }
+            
+            h1 {
+                font-size: 1.8em;
+                font-weight: 600;
+                margin-bottom: 1em;
+                color: #1a1a1a;
+            }
+            
+            h2 {
+                font-size: 1.4em;
+                font-weight: 600;
+                margin: 1.5em 0 0.8em 0;
+                color: #2a2a2a;
+            }
+            
+            h3 {
+                font-size: 1.1em;
+                font-weight: 600;
+                margin: 1.2em 0 0.6em 0;
+                color: #444;
+            }
+            
+            p {
+                margin-bottom: 1em;
+                font-size: 1.05em;
+            }
+            
+            strong {
+                font-weight: 600;
+                color: #1a1a1a;
+            }
+            
+            code {
+                background: #f5f5f5;
+                padding: 3px 7px;
+                border-radius: 3px;
+                font-family: 'Courier New', monospace;
+                font-size: 0.95em;
+                color: #d73a49;
+            }
+            
+            pre {
+                background: #f8f9fa;
+                border-left: 3px solid #0066cc;
+                padding: 18px;
+                margin: 1em 0;
+                overflow-x: auto;
+                border-radius: 3px;
+            }
+            
+            pre code {
+                background: none;
+                padding: 0;
+                color: #24292e;
+                font-size: 1em;
+                line-height: 1.6;
+            }
+            
+            .dax-keyword {
+                color: #0066cc;
+                font-weight: 600;
+            }
+            
+            .dax-function {
+                color: #6f42c1;
+            }
+            
+            .dax-number {
+                color: #005cc5;
+            }
+            
+            .dax-comment {
+                color: #6a737d;
+                font-style: italic;
+            }
+            
+            ul, ol {
+                margin: 1em 0 1em 1.5em;
+            }
+            
+            li {
+                margin: 0.5em 0;
+                font-size: 1.05em;
+            }
+            
+            .iteration-box {
+                border-left: 3px solid #0066cc;
+                padding: 14px 18px;
+                margin: 0.8em 0;
+            }
+            
+            .result-box {
+                background: #f5f5f5;
+                border-left: 3px solid #999;
+                padding: 14px 18px;
+                margin: 0.8em 0;
+                font-weight: 500;
+                color: #555;
+                font-size: 1.05em;
+            }
+        </style>
+</head>
+<body>
+
+<div class='container' id='viz_5bcb381d'>
+    <!-- Nawigacja na górze -->
+    <div class='navigation'>
+        <button id='prevBtn_5bcb381d' onclick='changePage_5bcb381d(-1)'>← Poprzednia</button>
+        <span class='page-indicator'>
+            Strona <span id='currentPage_5bcb381d'>1</span> z <span id='totalPages_5bcb381d'>4</span>
+        </span>
+        <button id='nextBtn_5bcb381d' onclick='changePage_5bcb381d(1)'>Następna →</button>
+    </div>
+
+    <!-- Strona 1 -->
+    <div class='page active'>
+        <h1>DATE – Tworzenie daty</h1>
+        <pre><code><span class='dax-function'>DATE</span>(&lt;rok&gt;, &lt;miesiąc&gt;, &lt;dzień&gt;)</code></pre>
+        <p><strong>Przykład:</strong></p>
+        <pre><code>Data Bazowa = <span class='dax-function'>DATE</span>(<span class='dax-number'>2024</span>, <span class='dax-number'>1</span>, <span class='dax-number'>1</span>)</code></pre>
+
+    </div>
+
+    <!-- Strona 2 -->
+    <div class='page'>
+        <h1>TODAY i NOW – Dzisiejsza data</h1>
+        <pre><code><span class='dax-function'>TODAY</span>()     <span class='dax-comment'>-- Dzisiejsza data (bez godziny)</span>
+        <span class='dax-function'>NOW</span>()       <span class='dax-comment'>-- Dzisiejsza data i godzina</span></code></pre>
+        <p><strong>Przykład:</strong></p>
+        <pre><code>Aktualna Data = <span class='dax-function'>TODAY</span>()</code></pre>
+
+    </div>
+
+    <!-- Strona 3 -->
+    <div class='page'>
+        <h1>YEAR, MONTH, DAY – Wyciąganie składników daty</h1>
+        <pre><code><span class='dax-function'>YEAR</span>(&lt;data&gt;)   <span class='dax-comment'>-- Rok</span>
+        <span class='dax-function'>MONTH</span>(&lt;data&gt;)  <span class='dax-comment'>-- Miesiąc (1-12)</span>
+        <span class='dax-function'>DAY</span>(&lt;data&gt;)    <span class='dax-comment'>-- Dzień (1-31)</span></code></pre>
+        <p><strong>Przykład:</strong></p>
+        <pre><code>Rok Sprzedaży = <span class='dax-function'>YEAR</span>(Sprzedaz[Data])
+        Miesiąc Sprzedaży = <span class='dax-function'>MONTH</span>(Sprzedaz[Data])</code></pre>
+
+    </div>
+
+    <!-- Strona 4 -->
+    <div class='page'>
+        <h1>DATEDIFF – Różnica między datami</h1>
+        <pre><code><span class='dax-function'>DATEDIFF</span>(&lt;data_początkowa&gt;, &lt;data_końcowa&gt;, &lt;jednostka&gt;)</code></pre>
+        <p><strong>Jednostki:</strong> DAY, MONTH, YEAR, QUARTER</p>
+        <p><strong>Przykład:</strong></p>
+        <pre><code>Dni Od Zamówienia = 
+        <span class='dax-function'>DATEDIFF</span>(Zamowienia[Data Zamówienia], <span class='dax-function'>TODAY</span>(), DAY)</code></pre>
+        <p>---</p>
+
+    </div>
+
+</div>
+
+<script>
+(function() {
+    // Unikalny ID dla tej wizualizacji (wstrzykiwany przez Python)
+    var vizId = '5bcb381d';
+    var containerId = 'viz_' + vizId;
+
+    var currentPage_5bcb381d = 1;
+    var container = document.getElementById(containerId);
+
+    if (!container) return;
+
+    var pages = container.querySelectorAll('.page');
+    var totalPages = pages.length;
+
+    document.getElementById('totalPages_' + vizId).textContent = totalPages;
+
+    window['showPage_5bcb381d'] = function(n) {
+        if (n > totalPages) currentPage_5bcb381d = totalPages;
+        if (n < 1) currentPage_5bcb381d = 1;
+
+        for (var i = 0; i < pages.length; i++) {
+            pages[i].classList.remove('active');
+        }
+        pages[currentPage_5bcb381d - 1].classList.add('active');
+
+        document.getElementById('currentPage_' + vizId).textContent = currentPage_5bcb381d;
+        document.getElementById('prevBtn_' + vizId).disabled = (currentPage_5bcb381d === 1);
+        document.getElementById('nextBtn_' + vizId).disabled = (currentPage_5bcb381d === totalPages);
+    };
+
+    window['changePage_5bcb381d'] = function(n) {
+        currentPage_5bcb381d += n;
+        window['showPage_5bcb381d'](currentPage_5bcb381d);
+    };
+
+    // Inicjalizacja
+    window['showPage_5bcb381d'](1);
+})();
+</script>
+
+</body>
+</html>
+
+"
+```
+            lineageTag: 19a95c7b-4aed-488a-bd3d-7ef09a48ad8c
 
         measure '01. Podstawy DAX - Funkcje filtrujące' = ```
 "
@@ -854,17 +1460,17 @@ createOrReplace
     <div class='page active'>
         <h1>FILTER – Filtrowanie tabeli</h1>
         <p>Zwraca <strong>podzbiór tabeli</strong> spełniający warunek:</p>
-        <pre><code><span class='dax-function'>FILTER</span>(\&lt;tabela\&gt;, \&lt;warunek\&gt;)</code></pre>
+        <pre><code><span class='dax-function'>FILTER</span>(&lt;tabela&gt;, &lt;warunek&gt;)</code></pre>
         <p><strong>Przykład:</strong></p>
         <pre><code>Wysokie Sprzedaże = 
         <span class='dax-function'>FILTER</span>(
             Sprzedaz,
-            Sprzedaz[Kwota] \&gt; <span class='dax-number'>1000</span>
+            Sprzedaz[Kwota] &gt; <span class='dax-number'>1000</span>
         )</code></pre>
         <p><strong>Użycie z SUMX:</strong></p>
         <pre><code>Suma Wysokich Sprzedaży = 
         <span class='dax-function'>SUMX</span>(
-            <span class='dax-function'>FILTER</span>(Sprzedaz, Sprzedaz[Kwota] \&gt; <span class='dax-number'>1000</span>),
+            <span class='dax-function'>FILTER</span>(Sprzedaz, Sprzedaz[Kwota] &gt; <span class='dax-number'>1000</span>),
             Sprzedaz[Kwota]
         )</code></pre>
 
@@ -873,7 +1479,7 @@ createOrReplace
     <!-- Strona 2 -->
     <div class='page'>
         <h1>CALCULATE – Modyfikacja kontekstu filtrowania</h1>
-        <pre><code><span class='dax-function'>CALCULATE</span>(\&lt;wyrażenie\&gt;, \&lt;filtr1\&gt;, \&lt;filtr2\&gt;, ...)</code></pre>
+        <pre><code><span class='dax-function'>CALCULATE</span>(&lt;wyrażenie&gt;, &lt;filtr1&gt;, &lt;filtr2&gt;, ...)</code></pre>
         <p><strong>CALCULATE</strong> to <strong>najważniejsza funkcja w DAX</strong>. Pozwala:</p>
         <ul>
         <li>Zmienić kontekst filtrowania</li>
@@ -932,7 +1538,7 @@ createOrReplace
 
 "
 ```
-            lineageTag: 469cceaa-f036-465f-81ed-b6b445f3a009
+            lineageTag: 4f6ba14e-bcba-4546-b6b3-ae520ea6ba51
 
         measure '01. Podstawy DAX - Funkcje iteracyjne (X-functions)' = ```
 "
@@ -1133,7 +1739,7 @@ createOrReplace
     <div class='page active'>
         <p>Funkcje iteracyjne przechodzą przez <strong>każdy wiersz tabeli</strong> i wykonują obliczenia dla każdego wiersza osobno.</p>
         <h1>SUMX – Suma z iteracją</h1>
-        <pre><code><span class='dax-function'>SUMX</span>(\&lt;tabela\&gt;, \&lt;wyrażenie\&gt;)</code></pre>
+        <pre><code><span class='dax-function'>SUMX</span>(&lt;tabela&gt;, &lt;wyrażenie&gt;)</code></pre>
         <p>Dla każdego wiersza tabeli oblicza wyrażenie, potem sumuje wyniki.</p>
         <p><strong>Przykład:</strong></p>
         <pre><code>Suma Wartości Zamówień = 
@@ -1152,7 +1758,7 @@ createOrReplace
     <!-- Strona 2 -->
     <div class='page'>
         <h1>AVERAGEX – Średnia z iteracją</h1>
-        <pre><code><span class='dax-function'>AVERAGEX</span>(\&lt;tabela\&gt;, \&lt;wyrażenie\&gt;)</code></pre>
+        <pre><code><span class='dax-function'>AVERAGEX</span>(&lt;tabela&gt;, &lt;wyrażenie&gt;)</code></pre>
         <p><strong>Przykład:</strong></p>
         <pre><code>Średnia Marża = 
         <span class='dax-function'>AVERAGEX</span>(
@@ -1165,13 +1771,13 @@ createOrReplace
     <!-- Strona 3 -->
     <div class='page'>
         <h1>COUNTX – Liczenie z iteracją</h1>
-        <pre><code><span class='dax-function'>COUNTX</span>(\&lt;tabela\&gt;, \&lt;wyrażenie\&gt;)</code></pre>
+        <pre><code><span class='dax-function'>COUNTX</span>(&lt;tabela&gt;, &lt;wyrażenie&gt;)</code></pre>
         <p>Liczy ile razy wyrażenie zwróciło <strong>niepustą wartość</strong>.</p>
         <p><strong>Przykład:</strong></p>
         <pre><code>Liczba Zamówień Powyżej <span class='dax-number'>1000</span> = 
         <span class='dax-function'>COUNTX</span>(
             Sprzedaz,
-            <span class='dax-function'>IF</span>(Sprzedaz[Kwota] \&gt; <span class='dax-number'>1000</span>, <span class='dax-number'>1</span>, <span class='dax-function'>BLANK</span>())
+            <span class='dax-function'>IF</span>(Sprzedaz[Kwota] &gt; <span class='dax-number'>1000</span>, <span class='dax-number'>1</span>, <span class='dax-function'>BLANK</span>())
         )</code></pre>
 
     </div>
@@ -1179,8 +1785,8 @@ createOrReplace
     <!-- Strona 4 -->
     <div class='page'>
         <h1>MINX i MAXX – Minimum i maksimum z iteracją</h1>
-        <pre><code><span class='dax-function'>MINX</span>(\&lt;tabela\&gt;, \&lt;wyrażenie\&gt;)
-        <span class='dax-function'>MAXX</span>(\&lt;tabela\&gt;, \&lt;wyrażenie\&gt;)</code></pre>
+        <pre><code><span class='dax-function'>MINX</span>(&lt;tabela&gt;, &lt;wyrażenie&gt;)
+        <span class='dax-function'>MAXX</span>(&lt;tabela&gt;, &lt;wyrażenie&gt;)</code></pre>
         <p><strong>Przykład:</strong></p>
         <pre><code>Najwyższa Marża = 
         <span class='dax-function'>MAXX</span>(
@@ -1238,9 +1844,9 @@ createOrReplace
 
 "
 ```
-            lineageTag: f9e8808c-4ad9-4447-b288-94ea8da6ae11
+            lineageTag: 5bba1df8-73a6-4ff5-bd29-726a675c204d
 
-        measure '01. Podstawy DAX - Podstawowe funkcje agregujące' = ```
+        measure '01. Podstawy DAX - Funkcje logiczne' = ```
 "
 
 <!DOCTYPE html>
@@ -1248,7 +1854,7 @@ createOrReplace
 <head>
     <meta charset='UTF-8'>
     <meta name='viewport' content='width=device-width, initial-scale=1.0'>
-    <title>Podstawowe funkcje agregujące</title>
+    <title>Funkcje logiczne</title>
     <style>
             * {
                 margin: 0;
@@ -1425,631 +2031,25 @@ createOrReplace
 </head>
 <body>
 
-<div class='container' id='viz_4b21e28b'>
+<div class='container' id='viz_a487a00b'>
     <!-- Nawigacja na górze -->
     <div class='navigation'>
-        <button id='prevBtn_4b21e28b' onclick='changePage_4b21e28b(-1)'>← Poprzednia</button>
+        <button id='prevBtn_a487a00b' onclick='changePage_a487a00b(-1)'>← Poprzednia</button>
         <span class='page-indicator'>
-            Strona <span id='currentPage_4b21e28b'>1</span> z <span id='totalPages_4b21e28b'>7</span>
+            Strona <span id='currentPage_a487a00b'>1</span> z <span id='totalPages_a487a00b'>4</span>
         </span>
-        <button id='nextBtn_4b21e28b' onclick='changePage_4b21e28b(1)'>Następna →</button>
-    </div>
-
-    <!-- Strona 1 -->
-    <div class='page active'>
-        <h1>SUM – Suma wartości</h1>
-        <p>Sumuje wszystkie wartości w kolumnie:</p>
-        <pre><code>Suma Sprzedaży = <span class='dax-function'>SUM</span>(Sprzedaz[Kwota])</code></pre>
-        <p><strong>Jak działa:</strong></p>
-        <ul>
-        <li>Dodaje wszystkie liczby w kolumnie <code>Sprzedaz[Kwota]</code></li>
-        <li>Pomija wartości <code>BLANK()</code> (puste)</li>
-        <li>Uwzględnia aktualny kontekst filtrowania</li>
-        </ul>
-
-    </div>
-
-    <!-- Strona 2 -->
-    <div class='page'>
-        <h1>AVERAGE – Średnia</h1>
-        <p>Oblicza średnią arytmetyczną:</p>
-        <pre><code>Średnia Cena = <span class='dax-function'>AVERAGE</span>(Produkty[Cena])</code></pre>
-        <p><strong>Jak działa:</strong></p>
-        <ul>
-        <li>Sumuje wszystkie wartości i dzieli przez ich liczbę</li>
-        <li>Pomija wartości puste</li>
-        </ul>
-
-    </div>
-
-    <!-- Strona 3 -->
-    <div class='page'>
-        <h1>COUNT – Liczba wartości niepustych</h1>
-        <p>Liczy ile jest niepustych wartości w kolumnie:</p>
-        <pre><code>Liczba Transakcji = <span class='dax-function'>COUNT</span>(Sprzedaz[ID Transakcji])</code></pre>
-        <p><strong>Uwaga:</strong> COUNT liczy tylko wartości <strong>niepuste</strong> (pomija BLANK).</p>
-
-    </div>
-
-    <!-- Strona 4 -->
-    <div class='page'>
-        <h1>COUNTA – Liczba wartości niepustych (dowolny typ)</h1>
-        <p>Podobnie jak COUNT, ale działa na <strong>wszystkich typach danych</strong> (tekst, liczby, daty):</p>
-        <pre><code>Liczba Produktów = <span class='dax-function'>COUNTA</span>(Produkty[Nazwa])</code></pre>
-
-    </div>
-
-    <!-- Strona 5 -->
-    <div class='page'>
-        <h1>COUNTROWS – Liczba wierszy w tabeli</h1>
-        <p>Liczy wszystkie wiersze w tabeli (nawet jeśli mają puste wartości):</p>
-        <pre><code>Liczba Zamówień = <span class='dax-function'>COUNTROWS</span>(Zamowienia)</code></pre>
-        <p><strong>Różnica COUNT vs COUNTROWS:</strong></p>
-        <ul>
-        <li><code>COUNT</code> – liczy niepuste wartości w <strong>konkretnej kolumnie</strong></li>
-        <li><code>COUNTROWS</code> – liczy <strong>wszystkie wiersze w tabeli</strong></li>
-        </ul>
-
-    </div>
-
-    <!-- Strona 6 -->
-    <div class='page'>
-        <h1>MIN i MAX – Minimum i maksimum</h1>
-        <pre><code>Najniższa Cena = <span class='dax-function'>MIN</span>(Produkty[Cena])
-        Najwyższa Cena = <span class='dax-function'>MAX</span>(Produkty[Cena])</code></pre>
-
-    </div>
-
-    <!-- Strona 7 -->
-    <div class='page'>
-        <h1>DISTINCTCOUNT – Liczba unikalnych wartości</h1>
-        <p>Liczy ile jest <strong>unikalnych</strong> (niepowtarzających się) wartości:</p>
-        <pre><code>Liczba Unikalnych Klientów = <span class='dax-function'>DISTINCTCOUNT</span>(Sprzedaz[ID Klienta])</code></pre>
-        <p><strong>Przykład:</strong> Jeśli kolumna zawiera: <code>{1, 2, 2, 3, 3, 3}</code>, to <code>DISTINCTCOUNT</code> zwróci <strong>3</strong>.</p>
-        <p>---</p>
-
-    </div>
-
-</div>
-
-<script>
-(function() {
-    // Unikalny ID dla tej wizualizacji (wstrzykiwany przez Python)
-    var vizId = '4b21e28b';
-    var containerId = 'viz_' + vizId;
-
-    var currentPage_4b21e28b = 1;
-    var container = document.getElementById(containerId);
-
-    if (!container) return;
-
-    var pages = container.querySelectorAll('.page');
-    var totalPages = pages.length;
-
-    document.getElementById('totalPages_' + vizId).textContent = totalPages;
-
-    window['showPage_4b21e28b'] = function(n) {
-        if (n > totalPages) currentPage_4b21e28b = totalPages;
-        if (n < 1) currentPage_4b21e28b = 1;
-
-        for (var i = 0; i < pages.length; i++) {
-            pages[i].classList.remove('active');
-        }
-        pages[currentPage_4b21e28b - 1].classList.add('active');
-
-        document.getElementById('currentPage_' + vizId).textContent = currentPage_4b21e28b;
-        document.getElementById('prevBtn_' + vizId).disabled = (currentPage_4b21e28b === 1);
-        document.getElementById('nextBtn_' + vizId).disabled = (currentPage_4b21e28b === totalPages);
-    };
-
-    window['changePage_4b21e28b'] = function(n) {
-        currentPage_4b21e28b += n;
-        window['showPage_4b21e28b'](currentPage_4b21e28b);
-    };
-
-    // Inicjalizacja
-    window['showPage_4b21e28b'](1);
-})();
-</script>
-
-</body>
-</html>
-
-"
-```
-            lineageTag: 3493a52d-29e0-4a66-8e20-519a5e9f127e
-
-        measure '01. Podstawy DAX - Podstawowe funkcje dat' = ```
-"
-
-<!DOCTYPE html>
-<html lang='pl'>
-<head>
-    <meta charset='UTF-8'>
-    <meta name='viewport' content='width=device-width, initial-scale=1.0'>
-    <title>Podstawowe funkcje dat</title>
-    <style>
-            * {
-                margin: 0;
-                padding: 0;
-                box-sizing: border-box;
-            }
-            
-            body {
-                font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-                font-size: 16px;
-                line-height: 1.7;
-                color: #333;
-                background: transparent;
-                padding: 20px;
-            }
-            
-            .container {
-                max-width: 800px;
-                margin: 0 auto;
-                background: transparent;
-                padding: 40px;
-            }
-            
-            .navigation {
-                display: flex;
-                justify-content: space-between;
-                align-items: center;
-                margin-bottom: 40px;
-                padding-bottom: 20px;
-                border-bottom: 1px solid #e1e4e8;
-            }
-            
-            button {
-                background: #0066cc;
-                color: white;
-                border: none;
-                padding: 12px 28px;
-                border-radius: 4px;
-                cursor: pointer;
-                font-size: 1em;
-                font-weight: 500;
-                transition: background 0.2s;
-            }
-            
-            button:hover {
-                background: #0052a3;
-            }
-            
-            button:disabled {
-                background: #ccc;
-                cursor: not-allowed;
-            }
-            
-            .page-indicator {
-                color: #666;
-                font-size: 1em;
-            }
-            
-            .page {
-                display: none;
-                min-height: 500px;
-            }
-            
-            .page.active {
-                display: block;
-                animation: fadeIn 0.3s ease-in;
-            }
-            
-            @keyframes fadeIn {
-                from { opacity: 0; transform: translateY(10px); }
-                to { opacity: 1; transform: translateY(0); }
-            }
-            
-            h1 {
-                font-size: 1.8em;
-                font-weight: 600;
-                margin-bottom: 1em;
-                color: #1a1a1a;
-            }
-            
-            h2 {
-                font-size: 1.4em;
-                font-weight: 600;
-                margin: 1.5em 0 0.8em 0;
-                color: #2a2a2a;
-            }
-            
-            h3 {
-                font-size: 1.1em;
-                font-weight: 600;
-                margin: 1.2em 0 0.6em 0;
-                color: #444;
-            }
-            
-            p {
-                margin-bottom: 1em;
-                font-size: 1.05em;
-            }
-            
-            strong {
-                font-weight: 600;
-                color: #1a1a1a;
-            }
-            
-            code {
-                background: #f5f5f5;
-                padding: 3px 7px;
-                border-radius: 3px;
-                font-family: 'Courier New', monospace;
-                font-size: 0.95em;
-                color: #d73a49;
-            }
-            
-            pre {
-                background: #f8f9fa;
-                border-left: 3px solid #0066cc;
-                padding: 18px;
-                margin: 1em 0;
-                overflow-x: auto;
-                border-radius: 3px;
-            }
-            
-            pre code {
-                background: none;
-                padding: 0;
-                color: #24292e;
-                font-size: 1em;
-                line-height: 1.6;
-            }
-            
-            .dax-keyword {
-                color: #0066cc;
-                font-weight: 600;
-            }
-            
-            .dax-function {
-                color: #6f42c1;
-            }
-            
-            .dax-number {
-                color: #005cc5;
-            }
-            
-            .dax-comment {
-                color: #6a737d;
-                font-style: italic;
-            }
-            
-            ul, ol {
-                margin: 1em 0 1em 1.5em;
-            }
-            
-            li {
-                margin: 0.5em 0;
-                font-size: 1.05em;
-            }
-            
-            .iteration-box {
-                border-left: 3px solid #0066cc;
-                padding: 14px 18px;
-                margin: 0.8em 0;
-            }
-            
-            .result-box {
-                background: #f5f5f5;
-                border-left: 3px solid #999;
-                padding: 14px 18px;
-                margin: 0.8em 0;
-                font-weight: 500;
-                color: #555;
-                font-size: 1.05em;
-            }
-        </style>
-</head>
-<body>
-
-<div class='container' id='viz_923e2dba'>
-    <!-- Nawigacja na górze -->
-    <div class='navigation'>
-        <button id='prevBtn_923e2dba' onclick='changePage_923e2dba(-1)'>← Poprzednia</button>
-        <span class='page-indicator'>
-            Strona <span id='currentPage_923e2dba'>1</span> z <span id='totalPages_923e2dba'>4</span>
-        </span>
-        <button id='nextBtn_923e2dba' onclick='changePage_923e2dba(1)'>Następna →</button>
-    </div>
-
-    <!-- Strona 1 -->
-    <div class='page active'>
-        <h1>DATE – Tworzenie daty</h1>
-        <pre><code><span class='dax-function'>DATE</span>(\&lt;rok\&gt;, \&lt;miesiąc\&gt;, \&lt;dzień\&gt;)</code></pre>
-        <p><strong>Przykład:</strong></p>
-        <pre><code>Data Bazowa = <span class='dax-function'>DATE</span>(<span class='dax-number'>2024</span>, <span class='dax-number'>1</span>, <span class='dax-number'>1</span>)</code></pre>
-
-    </div>
-
-    <!-- Strona 2 -->
-    <div class='page'>
-        <h1>TODAY i NOW – Dzisiejsza data</h1>
-        <pre><code><span class='dax-function'>TODAY</span>()     <span class='dax-comment'>-- Dzisiejsza data (bez godziny)</span>
-        <span class='dax-function'>NOW</span>()       <span class='dax-comment'>-- Dzisiejsza data i godzina</span></code></pre>
-        <p><strong>Przykład:</strong></p>
-        <pre><code>Aktualna Data = <span class='dax-function'>TODAY</span>()</code></pre>
-
-    </div>
-
-    <!-- Strona 3 -->
-    <div class='page'>
-        <h1>YEAR, MONTH, DAY – Wyciąganie składników daty</h1>
-        <pre><code><span class='dax-function'>YEAR</span>(\&lt;data\&gt;)   <span class='dax-comment'>-- Rok</span>
-        <span class='dax-function'>MONTH</span>(\&lt;data\&gt;)  <span class='dax-comment'>-- Miesiąc (1-12)</span>
-        <span class='dax-function'>DAY</span>(\&lt;data\&gt;)    <span class='dax-comment'>-- Dzień (1-31)</span></code></pre>
-        <p><strong>Przykład:</strong></p>
-        <pre><code>Rok Sprzedaży = <span class='dax-function'>YEAR</span>(Sprzedaz[Data])
-        Miesiąc Sprzedaży = <span class='dax-function'>MONTH</span>(Sprzedaz[Data])</code></pre>
-
-    </div>
-
-    <!-- Strona 4 -->
-    <div class='page'>
-        <h1>DATEDIFF – Różnica między datami</h1>
-        <pre><code><span class='dax-function'>DATEDIFF</span>(\&lt;data_początkowa\&gt;, \&lt;data_końcowa\&gt;, \&lt;jednostka\&gt;)</code></pre>
-        <p><strong>Jednostki:</strong> DAY, MONTH, YEAR, QUARTER</p>
-        <p><strong>Przykład:</strong></p>
-        <pre><code>Dni Od Zamówienia = 
-        <span class='dax-function'>DATEDIFF</span>(Zamowienia[Data Zamówienia], <span class='dax-function'>TODAY</span>(), DAY)</code></pre>
-        <p>---</p>
-
-    </div>
-
-</div>
-
-<script>
-(function() {
-    // Unikalny ID dla tej wizualizacji (wstrzykiwany przez Python)
-    var vizId = '923e2dba';
-    var containerId = 'viz_' + vizId;
-
-    var currentPage_923e2dba = 1;
-    var container = document.getElementById(containerId);
-
-    if (!container) return;
-
-    var pages = container.querySelectorAll('.page');
-    var totalPages = pages.length;
-
-    document.getElementById('totalPages_' + vizId).textContent = totalPages;
-
-    window['showPage_923e2dba'] = function(n) {
-        if (n > totalPages) currentPage_923e2dba = totalPages;
-        if (n < 1) currentPage_923e2dba = 1;
-
-        for (var i = 0; i < pages.length; i++) {
-            pages[i].classList.remove('active');
-        }
-        pages[currentPage_923e2dba - 1].classList.add('active');
-
-        document.getElementById('currentPage_' + vizId).textContent = currentPage_923e2dba;
-        document.getElementById('prevBtn_' + vizId).disabled = (currentPage_923e2dba === 1);
-        document.getElementById('nextBtn_' + vizId).disabled = (currentPage_923e2dba === totalPages);
-    };
-
-    window['changePage_923e2dba'] = function(n) {
-        currentPage_923e2dba += n;
-        window['showPage_923e2dba'](currentPage_923e2dba);
-    };
-
-    // Inicjalizacja
-    window['showPage_923e2dba'](1);
-})();
-</script>
-
-</body>
-</html>
-
-"
-```
-            lineageTag: d45b1350-f608-4e07-b261-21a15fe7d8cc
-
-        measure '01. Podstawy DAX - Podstawowe funkcje logiczne' = ```
-"
-
-<!DOCTYPE html>
-<html lang='pl'>
-<head>
-    <meta charset='UTF-8'>
-    <meta name='viewport' content='width=device-width, initial-scale=1.0'>
-    <title>Podstawowe funkcje logiczne</title>
-    <style>
-            * {
-                margin: 0;
-                padding: 0;
-                box-sizing: border-box;
-            }
-            
-            body {
-                font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-                font-size: 16px;
-                line-height: 1.7;
-                color: #333;
-                background: transparent;
-                padding: 20px;
-            }
-            
-            .container {
-                max-width: 800px;
-                margin: 0 auto;
-                background: transparent;
-                padding: 40px;
-            }
-            
-            .navigation {
-                display: flex;
-                justify-content: space-between;
-                align-items: center;
-                margin-bottom: 40px;
-                padding-bottom: 20px;
-                border-bottom: 1px solid #e1e4e8;
-            }
-            
-            button {
-                background: #0066cc;
-                color: white;
-                border: none;
-                padding: 12px 28px;
-                border-radius: 4px;
-                cursor: pointer;
-                font-size: 1em;
-                font-weight: 500;
-                transition: background 0.2s;
-            }
-            
-            button:hover {
-                background: #0052a3;
-            }
-            
-            button:disabled {
-                background: #ccc;
-                cursor: not-allowed;
-            }
-            
-            .page-indicator {
-                color: #666;
-                font-size: 1em;
-            }
-            
-            .page {
-                display: none;
-                min-height: 500px;
-            }
-            
-            .page.active {
-                display: block;
-                animation: fadeIn 0.3s ease-in;
-            }
-            
-            @keyframes fadeIn {
-                from { opacity: 0; transform: translateY(10px); }
-                to { opacity: 1; transform: translateY(0); }
-            }
-            
-            h1 {
-                font-size: 1.8em;
-                font-weight: 600;
-                margin-bottom: 1em;
-                color: #1a1a1a;
-            }
-            
-            h2 {
-                font-size: 1.4em;
-                font-weight: 600;
-                margin: 1.5em 0 0.8em 0;
-                color: #2a2a2a;
-            }
-            
-            h3 {
-                font-size: 1.1em;
-                font-weight: 600;
-                margin: 1.2em 0 0.6em 0;
-                color: #444;
-            }
-            
-            p {
-                margin-bottom: 1em;
-                font-size: 1.05em;
-            }
-            
-            strong {
-                font-weight: 600;
-                color: #1a1a1a;
-            }
-            
-            code {
-                background: #f5f5f5;
-                padding: 3px 7px;
-                border-radius: 3px;
-                font-family: 'Courier New', monospace;
-                font-size: 0.95em;
-                color: #d73a49;
-            }
-            
-            pre {
-                background: #f8f9fa;
-                border-left: 3px solid #0066cc;
-                padding: 18px;
-                margin: 1em 0;
-                overflow-x: auto;
-                border-radius: 3px;
-            }
-            
-            pre code {
-                background: none;
-                padding: 0;
-                color: #24292e;
-                font-size: 1em;
-                line-height: 1.6;
-            }
-            
-            .dax-keyword {
-                color: #0066cc;
-                font-weight: 600;
-            }
-            
-            .dax-function {
-                color: #6f42c1;
-            }
-            
-            .dax-number {
-                color: #005cc5;
-            }
-            
-            .dax-comment {
-                color: #6a737d;
-                font-style: italic;
-            }
-            
-            ul, ol {
-                margin: 1em 0 1em 1.5em;
-            }
-            
-            li {
-                margin: 0.5em 0;
-                font-size: 1.05em;
-            }
-            
-            .iteration-box {
-                border-left: 3px solid #0066cc;
-                padding: 14px 18px;
-                margin: 0.8em 0;
-            }
-            
-            .result-box {
-                background: #f5f5f5;
-                border-left: 3px solid #999;
-                padding: 14px 18px;
-                margin: 0.8em 0;
-                font-weight: 500;
-                color: #555;
-                font-size: 1.05em;
-            }
-        </style>
-</head>
-<body>
-
-<div class='container' id='viz_eae3bcf3'>
-    <!-- Nawigacja na górze -->
-    <div class='navigation'>
-        <button id='prevBtn_eae3bcf3' onclick='changePage_eae3bcf3(-1)'>← Poprzednia</button>
-        <span class='page-indicator'>
-            Strona <span id='currentPage_eae3bcf3'>1</span> z <span id='totalPages_eae3bcf3'>4</span>
-        </span>
-        <button id='nextBtn_eae3bcf3' onclick='changePage_eae3bcf3(1)'>Następna →</button>
+        <button id='nextBtn_a487a00b' onclick='changePage_a487a00b(1)'>Następna →</button>
     </div>
 
     <!-- Strona 1 -->
     <div class='page active'>
         <h1>IF – Warunek logiczny</h1>
         <p>Zwraca jedną wartość jeśli warunek jest prawdziwy, inną jeśli fałszywy:</p>
-        <pre><code><span class='dax-function'>IF</span>(\&lt;warunek\&gt;, \&lt;wartość_jeśli_prawda\&gt;, \&lt;wartość_jeśli_fałsz\&gt;)</code></pre>
+        <pre><code><span class='dax-function'>IF</span>(&lt;warunek&gt;, &lt;wartość_jeśli_prawda&gt;, &lt;wartość_jeśli_fałsz&gt;)</code></pre>
         <p><strong>Przykład:</strong></p>
         <pre><code>Kategoria Sprzedaży = 
         <span class='dax-function'>IF</span>(
-            Sprzedaz[Kwota] \&gt; <span class='dax-number'>1000</span>,
+            Sprzedaz[Kwota] &gt; <span class='dax-number'>1000</span>,
             'Wysoka',
             'Niska'
         )</code></pre>
@@ -2059,11 +2059,11 @@ createOrReplace
     <!-- Strona 2 -->
     <div class='page'>
         <h1>AND – Sprawdza czy wszystkie warunki są prawdziwe</h1>
-        <pre><code><span class='dax-function'>AND</span>(\&lt;warunek1\&gt;, \&lt;warunek2\&gt;)</code></pre>
+        <pre><code><span class='dax-function'>AND</span>(&lt;warunek1&gt;, &lt;warunek2&gt;)</code></pre>
         <p><strong>Przykład:</strong></p>
         <pre><code>Czy VIP = 
         <span class='dax-function'>IF</span>(
-            <span class='dax-function'>AND</span>(Klienci[Przychód] \&gt; <span class='dax-number'>50000</span>, Klienci[Lata Współpracy] \&gt; <span class='dax-number'>5</span>),
+            <span class='dax-function'>AND</span>(Klienci[Przychód] &gt; <span class='dax-number'>50000</span>, Klienci[Lata Współpracy] &gt; <span class='dax-number'>5</span>),
             'TAK',
             'NIE'
         )</code></pre>
@@ -2073,7 +2073,7 @@ createOrReplace
     <!-- Strona 3 -->
     <div class='page'>
         <h1>OR – Sprawdza czy przynajmniej jeden warunek jest prawdziwy</h1>
-        <pre><code><span class='dax-function'>OR</span>(\&lt;warunek1\&gt;, \&lt;warunek2\&gt;)</code></pre>
+        <pre><code><span class='dax-function'>OR</span>(&lt;warunek1&gt;, &lt;warunek2&gt;)</code></pre>
         <p><strong>Przykład:</strong></p>
         <pre><code>Czy Promocja = 
         <span class='dax-function'>IF</span>(
@@ -2087,7 +2087,7 @@ createOrReplace
     <!-- Strona 4 -->
     <div class='page'>
         <h1>NOT – Negacja warunku</h1>
-        <pre><code><span class='dax-function'>NOT</span>(\&lt;warunek\&gt;)</code></pre>
+        <pre><code><span class='dax-function'>NOT</span>(&lt;warunek&gt;)</code></pre>
         <p><strong>Przykład:</strong></p>
         <pre><code>Czy Nieaktywny = 
         <span class='dax-function'>IF</span>(
@@ -2104,10 +2104,10 @@ createOrReplace
 <script>
 (function() {
     // Unikalny ID dla tej wizualizacji (wstrzykiwany przez Python)
-    var vizId = 'eae3bcf3';
+    var vizId = 'a487a00b';
     var containerId = 'viz_' + vizId;
 
-    var currentPage_eae3bcf3 = 1;
+    var currentPage_a487a00b = 1;
     var container = document.getElementById(containerId);
 
     if (!container) return;
@@ -2117,27 +2117,27 @@ createOrReplace
 
     document.getElementById('totalPages_' + vizId).textContent = totalPages;
 
-    window['showPage_eae3bcf3'] = function(n) {
-        if (n > totalPages) currentPage_eae3bcf3 = totalPages;
-        if (n < 1) currentPage_eae3bcf3 = 1;
+    window['showPage_a487a00b'] = function(n) {
+        if (n > totalPages) currentPage_a487a00b = totalPages;
+        if (n < 1) currentPage_a487a00b = 1;
 
         for (var i = 0; i < pages.length; i++) {
             pages[i].classList.remove('active');
         }
-        pages[currentPage_eae3bcf3 - 1].classList.add('active');
+        pages[currentPage_a487a00b - 1].classList.add('active');
 
-        document.getElementById('currentPage_' + vizId).textContent = currentPage_eae3bcf3;
-        document.getElementById('prevBtn_' + vizId).disabled = (currentPage_eae3bcf3 === 1);
-        document.getElementById('nextBtn_' + vizId).disabled = (currentPage_eae3bcf3 === totalPages);
+        document.getElementById('currentPage_' + vizId).textContent = currentPage_a487a00b;
+        document.getElementById('prevBtn_' + vizId).disabled = (currentPage_a487a00b === 1);
+        document.getElementById('nextBtn_' + vizId).disabled = (currentPage_a487a00b === totalPages);
     };
 
-    window['changePage_eae3bcf3'] = function(n) {
-        currentPage_eae3bcf3 += n;
-        window['showPage_eae3bcf3'](currentPage_eae3bcf3);
+    window['changePage_a487a00b'] = function(n) {
+        currentPage_a487a00b += n;
+        window['showPage_a487a00b'](currentPage_a487a00b);
     };
 
     // Inicjalizacja
-    window['showPage_eae3bcf3'](1);
+    window['showPage_a487a00b'](1);
 })();
 </script>
 
@@ -2146,9 +2146,9 @@ createOrReplace
 
 "
 ```
-            lineageTag: 11b9f042-1508-4d27-aa94-9dda2d06c8c8
+            lineageTag: 9ee81bf6-d128-428d-81f5-b77b0a82f5ec
 
-        measure '01. Podstawy DAX - Podstawowe funkcje tekstowe' = ```
+        measure '01. Podstawy DAX - Funkcje tekstowe' = ```
 "
 
 <!DOCTYPE html>
@@ -2156,7 +2156,7 @@ createOrReplace
 <head>
     <meta charset='UTF-8'>
     <meta name='viewport' content='width=device-width, initial-scale=1.0'>
-    <title>Podstawowe funkcje tekstowe</title>
+    <title>Funkcje tekstowe</title>
     <style>
             * {
                 margin: 0;
@@ -2333,20 +2333,20 @@ createOrReplace
 </head>
 <body>
 
-<div class='container' id='viz_caa8f251'>
+<div class='container' id='viz_ea79c585'>
     <!-- Nawigacja na górze -->
     <div class='navigation'>
-        <button id='prevBtn_caa8f251' onclick='changePage_caa8f251(-1)'>← Poprzednia</button>
+        <button id='prevBtn_ea79c585' onclick='changePage_ea79c585(-1)'>← Poprzednia</button>
         <span class='page-indicator'>
-            Strona <span id='currentPage_caa8f251'>1</span> z <span id='totalPages_caa8f251'>4</span>
+            Strona <span id='currentPage_ea79c585'>1</span> z <span id='totalPages_ea79c585'>4</span>
         </span>
-        <button id='nextBtn_caa8f251' onclick='changePage_caa8f251(1)'>Następna →</button>
+        <button id='nextBtn_ea79c585' onclick='changePage_ea79c585(1)'>Następna →</button>
     </div>
 
     <!-- Strona 1 -->
     <div class='page active'>
         <h1>CONCATENATE – Łączenie tekstów</h1>
-        <pre><code><span class='dax-function'>CONCATENATE</span>(\&lt;tekst1\&gt;, \&lt;tekst2\&gt;)</code></pre>
+        <pre><code><span class='dax-function'>CONCATENATE</span>(&lt;tekst1&gt;, &lt;tekst2&gt;)</code></pre>
         <p><strong>Przykład:</strong></p>
         <pre><code>Pełna Nazwa = <span class='dax-function'>CONCATENATE</span>(Klienci[Imię], ' ' & Klienci[Nazwisko])</code></pre>
         <p><strong>Alternatywa (łatwiejsza):</strong></p>
@@ -2357,9 +2357,9 @@ createOrReplace
     <!-- Strona 2 -->
     <div class='page'>
         <h1>LEFT, RIGHT, MID – Wyciąganie części tekstu</h1>
-        <pre><code><span class='dax-function'>LEFT</span>(\&lt;tekst\&gt;, \&lt;liczba_znaków\&gt;)    <span class='dax-comment'>-- Pierwsze znaki od lewej</span>
-        <span class='dax-function'>RIGHT</span>(\&lt;tekst\&gt;, \&lt;liczba_znaków\&gt;)   <span class='dax-comment'>-- Ostatnie znaki od prawej</span>
-        <span class='dax-function'>MID</span>(\&lt;tekst\&gt;, \&lt;start\&gt;, \&lt;liczba\&gt;)   <span class='dax-comment'>-- Znaki ze środka</span></code></pre>
+        <pre><code><span class='dax-function'>LEFT</span>(&lt;tekst&gt;, &lt;liczba_znaków&gt;)    <span class='dax-comment'>-- Pierwsze znaki od lewej</span>
+        <span class='dax-function'>RIGHT</span>(&lt;tekst&gt;, &lt;liczba_znaków&gt;)   <span class='dax-comment'>-- Ostatnie znaki od prawej</span>
+        <span class='dax-function'>MID</span>(&lt;tekst&gt;, &lt;start&gt;, &lt;liczba&gt;)   <span class='dax-comment'>-- Znaki ze środka</span></code></pre>
         <p><strong>Przykład:</strong></p>
         <pre><code>Pierwsze <span class='dax-number'>3</span> Znaki = <span class='dax-function'>LEFT</span>(Produkty[Kod], <span class='dax-number'>3</span>)
         Ostatnie <span class='dax-number'>2</span> Znaki = <span class='dax-function'>RIGHT</span>(Produkty[Kod], <span class='dax-number'>2</span>)</code></pre>
@@ -2369,8 +2369,8 @@ createOrReplace
     <!-- Strona 3 -->
     <div class='page'>
         <h1>UPPER, LOWER – Zmiana wielkości liter</h1>
-        <pre><code><span class='dax-function'>UPPER</span>(\&lt;tekst\&gt;)  <span class='dax-comment'>-- Wszystkie znaki WIELKIE</span>
-        <span class='dax-function'>LOWER</span>(\&lt;tekst\&gt;)  <span class='dax-comment'>-- Wszystkie znaki małe</span></code></pre>
+        <pre><code><span class='dax-function'>UPPER</span>(&lt;tekst&gt;)  <span class='dax-comment'>-- Wszystkie znaki WIELKIE</span>
+        <span class='dax-function'>LOWER</span>(&lt;tekst&gt;)  <span class='dax-comment'>-- Wszystkie znaki małe</span></code></pre>
         <p><strong>Przykład:</strong></p>
         <pre><code>Kategoria Wielkie Litery = <span class='dax-function'>UPPER</span>(Produkty[Kategoria])</code></pre>
 
@@ -2379,7 +2379,7 @@ createOrReplace
     <!-- Strona 4 -->
     <div class='page'>
         <h1>LEN – Długość tekstu</h1>
-        <pre><code><span class='dax-function'>LEN</span>(\&lt;tekst\&gt;)</code></pre>
+        <pre><code><span class='dax-function'>LEN</span>(&lt;tekst&gt;)</code></pre>
         <p><strong>Przykład:</strong></p>
         <pre><code>Długość Kodu = <span class='dax-function'>LEN</span>(Produkty[Kod Produktu])</code></pre>
         <p>---</p>
@@ -2391,10 +2391,10 @@ createOrReplace
 <script>
 (function() {
     // Unikalny ID dla tej wizualizacji (wstrzykiwany przez Python)
-    var vizId = 'caa8f251';
+    var vizId = 'ea79c585';
     var containerId = 'viz_' + vizId;
 
-    var currentPage_caa8f251 = 1;
+    var currentPage_ea79c585 = 1;
     var container = document.getElementById(containerId);
 
     if (!container) return;
@@ -2404,27 +2404,27 @@ createOrReplace
 
     document.getElementById('totalPages_' + vizId).textContent = totalPages;
 
-    window['showPage_caa8f251'] = function(n) {
-        if (n > totalPages) currentPage_caa8f251 = totalPages;
-        if (n < 1) currentPage_caa8f251 = 1;
+    window['showPage_ea79c585'] = function(n) {
+        if (n > totalPages) currentPage_ea79c585 = totalPages;
+        if (n < 1) currentPage_ea79c585 = 1;
 
         for (var i = 0; i < pages.length; i++) {
             pages[i].classList.remove('active');
         }
-        pages[currentPage_caa8f251 - 1].classList.add('active');
+        pages[currentPage_ea79c585 - 1].classList.add('active');
 
-        document.getElementById('currentPage_' + vizId).textContent = currentPage_caa8f251;
-        document.getElementById('prevBtn_' + vizId).disabled = (currentPage_caa8f251 === 1);
-        document.getElementById('nextBtn_' + vizId).disabled = (currentPage_caa8f251 === totalPages);
+        document.getElementById('currentPage_' + vizId).textContent = currentPage_ea79c585;
+        document.getElementById('prevBtn_' + vizId).disabled = (currentPage_ea79c585 === 1);
+        document.getElementById('nextBtn_' + vizId).disabled = (currentPage_ea79c585 === totalPages);
     };
 
-    window['changePage_caa8f251'] = function(n) {
-        currentPage_caa8f251 += n;
-        window['showPage_caa8f251'](currentPage_caa8f251);
+    window['changePage_ea79c585'] = function(n) {
+        currentPage_ea79c585 += n;
+        window['showPage_ea79c585'](currentPage_ea79c585);
     };
 
     // Inicjalizacja
-    window['showPage_caa8f251'](1);
+    window['showPage_ea79c585'](1);
 })();
 </script>
 
@@ -2433,7 +2433,7 @@ createOrReplace
 
 "
 ```
-            lineageTag: bef3c944-2246-4ebf-ba76-d94aa3223f72
+            lineageTag: 9e05f3cd-3d9d-4780-96b6-eaeaae276415
 
         measure '01. Podstawy DAX - Wprowadzenie do CALCULATE' = ```
 "
@@ -2640,7 +2640,7 @@ createOrReplace
 
     <!-- Strona 2 -->
     <div class='page'>
-        <h1>Podstawowe użycie CALCULATE</h1>
+        <h1> użycie CALCULATE</h1>
         <h2>Przykład 1: Dodanie filtra</h2>
         <pre><code>Sprzedaż w Warszawie = 
         <span class='dax-function'>CALCULATE</span>(
@@ -2806,7 +2806,7 @@ createOrReplace
 
 "
 ```
-            lineageTag: 5ea60fb6-b95b-4026-a585-5ed58646034e
+            lineageTag: c23b67e0-a373-4f07-9fa9-33967605d1e5
 
         measure '01. Podstawy DAX' = ```
 "
@@ -3079,15 +3079,52 @@ createOrReplace
     <div class='page'>
         <h1>Typy danych w DAX</h1>
         <p>DAX obsługuje kilka podstawowych typów danych:</p>
-        <p>| Typ                   | Przykład                           | Opis                    |</p>
-        <p>| --------------------- | ---------------------------------- | ----------------------- |</p>
-        <p>| <strong>Liczby całkowite</strong>  | <code>100</code>, <code>-50</code>                       | Integer                 |</p>
-        <p>| <strong>Liczby dziesiętne</strong> | <code>123.45</code>, <code>0.99</code>                   | Decimal/Float           |</p>
-        <p>| <strong>Tekst</strong>             | <code>'Warszawa'</code>, <code>'ABC'</code>              | String (w cudzysłowach) |</p>
-        <p>| <strong>Data</strong>              | <code>DATE(2024, 12, 8)</code>                | Date                    |</p>
-        <p>| <strong>Data i czas</strong>       | <code>DATETIME(2024, 12, 8, 14, 30, 0)</code> | DateTime                |</p>
-        <p>| <strong>Logiczne</strong>          | <code>TRUE</code>, <code>FALSE</code>                    | Boolean                 |</p>
-        <p>| <strong>Puste</strong>             | <code>BLANK()</code>                          | Null/Empty              |</p>
+        <table>
+          <thead>
+            <tr>
+              <th>Typ</th>
+              <th>Przykład</th>
+              <th>Opis</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>Liczby całkowite</strong></td>
+              <td><code>100</code>, <code>-50</code></td>
+              <td>Integer</td>
+            </tr>
+            <tr>
+              <td><strong>Liczby dziesiętne</strong></td>
+              <td><code>123.45</code>, <code>0.99</code></td>
+              <td>Decimal/Float</td>
+            </tr>
+            <tr>
+              <td><strong>Tekst</strong></td>
+              <td><code>'Warszawa'</code>, <code>'ABC'</code></td>
+              <td>String (w cudzysłowach)</td>
+            </tr>
+            <tr>
+              <td><strong>Data</strong></td>
+              <td><code>DATE(2024, 12, 8)</code></td>
+              <td>Date</td>
+            </tr>
+            <tr>
+              <td><strong>Data i czas</strong></td>
+              <td><code>DATETIME(2024, 12, 8, 14, 30, 0)</code></td>
+              <td>DateTime</td>
+            </tr>
+            <tr>
+              <td><strong>Logiczne</strong></td>
+              <td><code>TRUE</code>, <code>FALSE</code></td>
+              <td>Boolean</td>
+            </tr>
+            <tr>
+              <td><strong>Puste</strong></td>
+              <td><code>BLANK()</code></td>
+              <td>Null/Empty</td>
+            </tr>
+          </tbody>
+        </table>
 
     </div>
 
@@ -3109,14 +3146,14 @@ createOrReplace
     <div class='page'>
         <h1>Operatory porównania</h1>
         <pre><code>=   <span class='dax-comment'>-- Równe</span>
-        \&lt;\&gt;  <span class='dax-comment'>-- Różne od</span>
-        \&gt;   <span class='dax-comment'>-- Większe niż</span>
-        \&lt;   <span class='dax-comment'>-- Mniejsze niż</span>
-        \&gt;=  <span class='dax-comment'>-- Większe lub równe</span>
-        \&lt;=  <span class='dax-comment'>-- Mniejsze lub równe</span></code></pre>
+        &lt;&gt;  <span class='dax-comment'>-- Różne od</span>
+        &gt;   <span class='dax-comment'>-- Większe niż</span>
+        &lt;   <span class='dax-comment'>-- Mniejsze niż</span>
+        &gt;=  <span class='dax-comment'>-- Większe lub równe</span>
+        &lt;=  <span class='dax-comment'>-- Mniejsze lub równe</span></code></pre>
         <p><strong>Przykład:</strong></p>
         <pre><code>Czy Duża Sprzedaż = 
-        Sprzedaz[Kwota] \&gt; <span class='dax-number'>1000</span></code></pre>
+        Sprzedaz[Kwota] &gt; <span class='dax-number'>1000</span></code></pre>
 
     </div>
 
@@ -3128,7 +3165,7 @@ createOrReplace
         NOT <span class='dax-comment'>-- NOT (negacja)</span></code></pre>
         <p><strong>Przykład:</strong></p>
         <pre><code>Czy Premium = 
-        Klienci[Kategoria] = 'VIP' && Klienci[Przychód] \&gt; <span class='dax-number'>10000</span></code></pre>
+        Klienci[Kategoria] = 'VIP' && Klienci[Przychód] &gt; <span class='dax-number'>10000</span></code></pre>
 
     </div>
 
@@ -3190,7 +3227,7 @@ createOrReplace
 
 "
 ```
-            lineageTag: 4cf6057b-5f0c-40d2-959a-dd52fc3fe74c
+            lineageTag: 1d1231a6-29cc-4b8e-b0db-61966192c03b
 
         measure '02. DAX - Zmienne' = ```
 "
@@ -3412,10 +3449,10 @@ createOrReplace
     <div class='page'>
         <h1>Podstawowa składnia</h1>
         <pre><code>NazwaMiary = 
-        <span class='dax-keyword'>VAR</span> NazwaZmiennej1 = \&lt;wyrażenie1\&gt;
-        <span class='dax-keyword'>VAR</span> NazwaZmiennej2 = \&lt;wyrażenie2\&gt;
-        <span class='dax-keyword'>VAR</span> NazwaZmiennej3 = \&lt;wyrażenie3\&gt;
-        <span class='dax-keyword'>RETURN</span> \&lt;wynik_końcowy\&gt;</code></pre>
+        <span class='dax-keyword'>VAR</span> NazwaZmiennej1 = &lt;wyrażenie1&gt;
+        <span class='dax-keyword'>VAR</span> NazwaZmiennej2 = &lt;wyrażenie2&gt;
+        <span class='dax-keyword'>VAR</span> NazwaZmiennej3 = &lt;wyrażenie3&gt;
+        <span class='dax-keyword'>RETURN</span> &lt;wynik_końcowy&gt;</code></pre>
         <p><strong>Przykład prosty:</strong></p>
         <pre><code>Całkowity Koszt = 
         <span class='dax-keyword'>VAR</span> IloscSztuk = <span class='dax-number'>100</span>
@@ -3570,7 +3607,7 @@ createOrReplace
 
 "
 ```
-            lineageTag: 652bd72e-7e7f-446a-810d-c1a93bae73fd
+            lineageTag: a4b12a1c-e997-4c4f-8157-003f5539d39f
 
         measure '03. Test - Testowy dział' = ```
 "
@@ -3828,7 +3865,7 @@ createOrReplace
 
 "
 ```
-            lineageTag: f6d116ab-e456-443a-a269-cd703e88b4f9
+            lineageTag: e5e968d6-5743-4d68-8d63-1755a893cdd1
 
         measure 'CSS' = ```
 "
@@ -4009,7 +4046,7 @@ createOrReplace
 </style>
 "
 ```
-            lineageTag: d817768d-54f2-41a2-bac1-c19df6d30e12
+            lineageTag: 9f380233-b342-4151-b5e3-0f0ede8c2786
 
         partition _HTML = m
             mode: import

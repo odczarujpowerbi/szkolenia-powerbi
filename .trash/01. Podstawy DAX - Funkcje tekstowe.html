@@ -1,4 +1,4 @@
-Funkcje iteracyjne (X-functions) = 
+Funkcje tekstowe = 
 
 "
 
@@ -7,7 +7,7 @@ Funkcje iteracyjne (X-functions) =
 <head>
     <meta charset='UTF-8'>
     <meta name='viewport' content='width=device-width, initial-scale=1.0'>
-    <title>Funkcje iteracyjne (X-functions)</title>
+    <title>Funkcje tekstowe</title>
     <style>
             * {
                 margin: 0;
@@ -184,74 +184,55 @@ Funkcje iteracyjne (X-functions) =
 </head>
 <body>
 
-<div class='container' id='viz_6b285173'>
+<div class='container' id='viz_ea79c585'>
     <!-- Nawigacja na górze -->
     <div class='navigation'>
-        <button id='prevBtn_6b285173' onclick='changePage_6b285173(-1)'>← Poprzednia</button>
+        <button id='prevBtn_ea79c585' onclick='changePage_ea79c585(-1)'>← Poprzednia</button>
         <span class='page-indicator'>
-            Strona <span id='currentPage_6b285173'>1</span> z <span id='totalPages_6b285173'>4</span>
+            Strona <span id='currentPage_ea79c585'>1</span> z <span id='totalPages_ea79c585'>4</span>
         </span>
-        <button id='nextBtn_6b285173' onclick='changePage_6b285173(1)'>Następna →</button>
+        <button id='nextBtn_ea79c585' onclick='changePage_ea79c585(1)'>Następna →</button>
     </div>
 
     <!-- Strona 1 -->
     <div class='page active'>
-        <p>Funkcje iteracyjne przechodzą przez <strong>każdy wiersz tabeli</strong> i wykonują obliczenia dla każdego wiersza osobno.</p>
-        <h1>SUMX – Suma z iteracją</h1>
-        <pre><code><span class='dax-function'>SUMX</span>(&lt;tabela&gt;, &lt;wyrażenie&gt;)</code></pre>
-        <p>Dla każdego wiersza tabeli oblicza wyrażenie, potem sumuje wyniki.</p>
+        <h1>CONCATENATE – Łączenie tekstów</h1>
+        <pre><code><span class='dax-function'>CONCATENATE</span>(\&lt;tekst1\&gt;, \&lt;tekst2\&gt;)</code></pre>
         <p><strong>Przykład:</strong></p>
-        <pre><code>Suma Wartości Zamówień = 
-        <span class='dax-function'>SUMX</span>(
-            Sprzedaz,
-            Sprzedaz[Ilość] * Sprzedaz[Cena]
-        )</code></pre>
-        <p><strong>Co się dzieje:</strong></p>
-        <ul>
-        <li>Dla każdego wiersza w tabeli <code>Sprzedaz</code> mnoży <code>Ilość * Cena</code></li>
-        <li>Potem sumuje wszystkie wyniki</li>
-        </ul>
+        <pre><code>Pełna Nazwa = <span class='dax-function'>CONCATENATE</span>(Klienci[Imię], ' ' & Klienci[Nazwisko])</code></pre>
+        <p><strong>Alternatywa (łatwiejsza):</strong></p>
+        <pre><code>Pełna Nazwa = Klienci[Imię] & ' ' & Klienci[Nazwisko]</code></pre>
 
     </div>
 
     <!-- Strona 2 -->
     <div class='page'>
-        <h1>AVERAGEX – Średnia z iteracją</h1>
-        <pre><code><span class='dax-function'>AVERAGEX</span>(&lt;tabela&gt;, &lt;wyrażenie&gt;)</code></pre>
+        <h1>LEFT, RIGHT, MID – Wyciąganie części tekstu</h1>
+        <pre><code><span class='dax-function'>LEFT</span>(\&lt;tekst\&gt;, \&lt;liczba_znaków\&gt;)    <span class='dax-comment'>-- Pierwsze znaki od lewej</span>
+        <span class='dax-function'>RIGHT</span>(\&lt;tekst\&gt;, \&lt;liczba_znaków\&gt;)   <span class='dax-comment'>-- Ostatnie znaki od prawej</span>
+        <span class='dax-function'>MID</span>(\&lt;tekst\&gt;, \&lt;start\&gt;, \&lt;liczba\&gt;)   <span class='dax-comment'>-- Znaki ze środka</span></code></pre>
         <p><strong>Przykład:</strong></p>
-        <pre><code>Średnia Marża = 
-        <span class='dax-function'>AVERAGEX</span>(
-            Sprzedaz,
-            Sprzedaz[Przychód] - Sprzedaz[Koszt]
-        )</code></pre>
+        <pre><code>Pierwsze <span class='dax-number'>3</span> Znaki = <span class='dax-function'>LEFT</span>(Produkty[Kod], <span class='dax-number'>3</span>)
+        Ostatnie <span class='dax-number'>2</span> Znaki = <span class='dax-function'>RIGHT</span>(Produkty[Kod], <span class='dax-number'>2</span>)</code></pre>
 
     </div>
 
     <!-- Strona 3 -->
     <div class='page'>
-        <h1>COUNTX – Liczenie z iteracją</h1>
-        <pre><code><span class='dax-function'>COUNTX</span>(&lt;tabela&gt;, &lt;wyrażenie&gt;)</code></pre>
-        <p>Liczy ile razy wyrażenie zwróciło <strong>niepustą wartość</strong>.</p>
+        <h1>UPPER, LOWER – Zmiana wielkości liter</h1>
+        <pre><code><span class='dax-function'>UPPER</span>(\&lt;tekst\&gt;)  <span class='dax-comment'>-- Wszystkie znaki WIELKIE</span>
+        <span class='dax-function'>LOWER</span>(\&lt;tekst\&gt;)  <span class='dax-comment'>-- Wszystkie znaki małe</span></code></pre>
         <p><strong>Przykład:</strong></p>
-        <pre><code>Liczba Zamówień Powyżej <span class='dax-number'>1000</span> = 
-        <span class='dax-function'>COUNTX</span>(
-            Sprzedaz,
-            <span class='dax-function'>IF</span>(Sprzedaz[Kwota] &gt; <span class='dax-number'>1000</span>, <span class='dax-number'>1</span>, <span class='dax-function'>BLANK</span>())
-        )</code></pre>
+        <pre><code>Kategoria Wielkie Litery = <span class='dax-function'>UPPER</span>(Produkty[Kategoria])</code></pre>
 
     </div>
 
     <!-- Strona 4 -->
     <div class='page'>
-        <h1>MINX i MAXX – Minimum i maksimum z iteracją</h1>
-        <pre><code><span class='dax-function'>MINX</span>(&lt;tabela&gt;, &lt;wyrażenie&gt;)
-        <span class='dax-function'>MAXX</span>(&lt;tabela&gt;, &lt;wyrażenie&gt;)</code></pre>
+        <h1>LEN – Długość tekstu</h1>
+        <pre><code><span class='dax-function'>LEN</span>(\&lt;tekst\&gt;)</code></pre>
         <p><strong>Przykład:</strong></p>
-        <pre><code>Najwyższa Marża = 
-        <span class='dax-function'>MAXX</span>(
-            Sprzedaz,
-            Sprzedaz[Przychód] - Sprzedaz[Koszt]
-        )</code></pre>
+        <pre><code>Długość Kodu = <span class='dax-function'>LEN</span>(Produkty[Kod Produktu])</code></pre>
         <p>---</p>
 
     </div>
@@ -261,10 +242,10 @@ Funkcje iteracyjne (X-functions) =
 <script>
 (function() {
     // Unikalny ID dla tej wizualizacji (wstrzykiwany przez Python)
-    var vizId = '6b285173';
+    var vizId = 'ea79c585';
     var containerId = 'viz_' + vizId;
 
-    var currentPage_6b285173 = 1;
+    var currentPage_ea79c585 = 1;
     var container = document.getElementById(containerId);
 
     if (!container) return;
@@ -274,27 +255,27 @@ Funkcje iteracyjne (X-functions) =
 
     document.getElementById('totalPages_' + vizId).textContent = totalPages;
 
-    window['showPage_6b285173'] = function(n) {
-        if (n > totalPages) currentPage_6b285173 = totalPages;
-        if (n < 1) currentPage_6b285173 = 1;
+    window['showPage_ea79c585'] = function(n) {
+        if (n > totalPages) currentPage_ea79c585 = totalPages;
+        if (n < 1) currentPage_ea79c585 = 1;
 
         for (var i = 0; i < pages.length; i++) {
             pages[i].classList.remove('active');
         }
-        pages[currentPage_6b285173 - 1].classList.add('active');
+        pages[currentPage_ea79c585 - 1].classList.add('active');
 
-        document.getElementById('currentPage_' + vizId).textContent = currentPage_6b285173;
-        document.getElementById('prevBtn_' + vizId).disabled = (currentPage_6b285173 === 1);
-        document.getElementById('nextBtn_' + vizId).disabled = (currentPage_6b285173 === totalPages);
+        document.getElementById('currentPage_' + vizId).textContent = currentPage_ea79c585;
+        document.getElementById('prevBtn_' + vizId).disabled = (currentPage_ea79c585 === 1);
+        document.getElementById('nextBtn_' + vizId).disabled = (currentPage_ea79c585 === totalPages);
     };
 
-    window['changePage_6b285173'] = function(n) {
-        currentPage_6b285173 += n;
-        window['showPage_6b285173'](currentPage_6b285173);
+    window['changePage_ea79c585'] = function(n) {
+        currentPage_ea79c585 += n;
+        window['showPage_ea79c585'](currentPage_ea79c585);
     };
 
     // Inicjalizacja
-    window['showPage_6b285173'](1);
+    window['showPage_ea79c585'](1);
 })();
 </script>
 

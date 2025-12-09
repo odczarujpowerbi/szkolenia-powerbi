@@ -1,4 +1,4 @@
-Funkcje iteracyjne (X-functions) = 
+Testowy dział = 
 
 "
 
@@ -7,7 +7,7 @@ Funkcje iteracyjne (X-functions) =
 <head>
     <meta charset='UTF-8'>
     <meta name='viewport' content='width=device-width, initial-scale=1.0'>
-    <title>Funkcje iteracyjne (X-functions)</title>
+    <title>Testowy dział</title>
     <style>
             * {
                 margin: 0;
@@ -184,75 +184,27 @@ Funkcje iteracyjne (X-functions) =
 </head>
 <body>
 
-<div class='container' id='viz_6b285173'>
+<div class='container' id='viz_f51c1b72'>
     <!-- Nawigacja na górze -->
     <div class='navigation'>
-        <button id='prevBtn_6b285173' onclick='changePage_6b285173(-1)'>← Poprzednia</button>
+        <button id='prevBtn_f51c1b72' onclick='changePage_f51c1b72(-1)'>← Poprzednia</button>
         <span class='page-indicator'>
-            Strona <span id='currentPage_6b285173'>1</span> z <span id='totalPages_6b285173'>4</span>
+            Strona <span id='currentPage_f51c1b72'>1</span> z <span id='totalPages_f51c1b72'>2</span>
         </span>
-        <button id='nextBtn_6b285173' onclick='changePage_6b285173(1)'>Następna →</button>
+        <button id='nextBtn_f51c1b72' onclick='changePage_f51c1b72(1)'>Następna →</button>
     </div>
 
     <!-- Strona 1 -->
     <div class='page active'>
-        <p>Funkcje iteracyjne przechodzą przez <strong>każdy wiersz tabeli</strong> i wykonują obliczenia dla każdego wiersza osobno.</p>
-        <h1>SUMX – Suma z iteracją</h1>
-        <pre><code><span class='dax-function'>SUMX</span>(&lt;tabela&gt;, &lt;wyrażenie&gt;)</code></pre>
-        <p>Dla każdego wiersza tabeli oblicza wyrażenie, potem sumuje wyniki.</p>
-        <p><strong>Przykład:</strong></p>
-        <pre><code>Suma Wartości Zamówień = 
-        <span class='dax-function'>SUMX</span>(
-            Sprzedaz,
-            Sprzedaz[Ilość] * Sprzedaz[Cena]
-        )</code></pre>
-        <p><strong>Co się dzieje:</strong></p>
-        <ul>
-        <li>Dla każdego wiersza w tabeli <code>Sprzedaz</code> mnoży <code>Ilość * Cena</code></li>
-        <li>Potem sumuje wszystkie wyniki</li>
-        </ul>
+        <h1>Temat temat</h1>
+        <p><img src='https://raw.githubusercontent.com/odczarujpowerbi/grafiki-do-szkolenia/main/Screenshot%202024-07-24%20at%2023.10.58.png' width='100%'></p>
 
     </div>
 
     <!-- Strona 2 -->
     <div class='page'>
-        <h1>AVERAGEX – Średnia z iteracją</h1>
-        <pre><code><span class='dax-function'>AVERAGEX</span>(&lt;tabela&gt;, &lt;wyrażenie&gt;)</code></pre>
-        <p><strong>Przykład:</strong></p>
-        <pre><code>Średnia Marża = 
-        <span class='dax-function'>AVERAGEX</span>(
-            Sprzedaz,
-            Sprzedaz[Przychód] - Sprzedaz[Koszt]
-        )</code></pre>
-
-    </div>
-
-    <!-- Strona 3 -->
-    <div class='page'>
-        <h1>COUNTX – Liczenie z iteracją</h1>
-        <pre><code><span class='dax-function'>COUNTX</span>(&lt;tabela&gt;, &lt;wyrażenie&gt;)</code></pre>
-        <p>Liczy ile razy wyrażenie zwróciło <strong>niepustą wartość</strong>.</p>
-        <p><strong>Przykład:</strong></p>
-        <pre><code>Liczba Zamówień Powyżej <span class='dax-number'>1000</span> = 
-        <span class='dax-function'>COUNTX</span>(
-            Sprzedaz,
-            <span class='dax-function'>IF</span>(Sprzedaz[Kwota] &gt; <span class='dax-number'>1000</span>, <span class='dax-number'>1</span>, <span class='dax-function'>BLANK</span>())
-        )</code></pre>
-
-    </div>
-
-    <!-- Strona 4 -->
-    <div class='page'>
-        <h1>MINX i MAXX – Minimum i maksimum z iteracją</h1>
-        <pre><code><span class='dax-function'>MINX</span>(&lt;tabela&gt;, &lt;wyrażenie&gt;)
-        <span class='dax-function'>MAXX</span>(&lt;tabela&gt;, &lt;wyrażenie&gt;)</code></pre>
-        <p><strong>Przykład:</strong></p>
-        <pre><code>Najwyższa Marża = 
-        <span class='dax-function'>MAXX</span>(
-            Sprzedaz,
-            Sprzedaz[Przychód] - Sprzedaz[Koszt]
-        )</code></pre>
-        <p>---</p>
+        <h1>Nowa strona</h1>
+        <p><img src='https://raw.githubusercontent.com/odczarujpowerbi/grafiki-do-szkolenia/main/PowerBI - Ustawienia - Preview Features.gif' width='100%'></p>
 
     </div>
 
@@ -261,10 +213,10 @@ Funkcje iteracyjne (X-functions) =
 <script>
 (function() {
     // Unikalny ID dla tej wizualizacji (wstrzykiwany przez Python)
-    var vizId = '6b285173';
+    var vizId = 'f51c1b72';
     var containerId = 'viz_' + vizId;
 
-    var currentPage_6b285173 = 1;
+    var currentPage_f51c1b72 = 1;
     var container = document.getElementById(containerId);
 
     if (!container) return;
@@ -274,27 +226,27 @@ Funkcje iteracyjne (X-functions) =
 
     document.getElementById('totalPages_' + vizId).textContent = totalPages;
 
-    window['showPage_6b285173'] = function(n) {
-        if (n > totalPages) currentPage_6b285173 = totalPages;
-        if (n < 1) currentPage_6b285173 = 1;
+    window['showPage_f51c1b72'] = function(n) {
+        if (n > totalPages) currentPage_f51c1b72 = totalPages;
+        if (n < 1) currentPage_f51c1b72 = 1;
 
         for (var i = 0; i < pages.length; i++) {
             pages[i].classList.remove('active');
         }
-        pages[currentPage_6b285173 - 1].classList.add('active');
+        pages[currentPage_f51c1b72 - 1].classList.add('active');
 
-        document.getElementById('currentPage_' + vizId).textContent = currentPage_6b285173;
-        document.getElementById('prevBtn_' + vizId).disabled = (currentPage_6b285173 === 1);
-        document.getElementById('nextBtn_' + vizId).disabled = (currentPage_6b285173 === totalPages);
+        document.getElementById('currentPage_' + vizId).textContent = currentPage_f51c1b72;
+        document.getElementById('prevBtn_' + vizId).disabled = (currentPage_f51c1b72 === 1);
+        document.getElementById('nextBtn_' + vizId).disabled = (currentPage_f51c1b72 === totalPages);
     };
 
-    window['changePage_6b285173'] = function(n) {
-        currentPage_6b285173 += n;
-        window['showPage_6b285173'](currentPage_6b285173);
+    window['changePage_f51c1b72'] = function(n) {
+        currentPage_f51c1b72 += n;
+        window['showPage_f51c1b72'](currentPage_f51c1b72);
     };
 
     // Inicjalizacja
-    window['showPage_6b285173'](1);
+    window['showPage_f51c1b72'](1);
 })();
 </script>
 

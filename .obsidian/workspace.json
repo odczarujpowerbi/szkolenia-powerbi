@@ -11,14 +11,12 @@
             "id": "c6a8ca1a0082a34f",
             "type": "leaf",
             "state": {
-              "type": "markdown",
+              "type": "html-view",
               "state": {
-                "file": "Template/Markdown/Embed PNG.md",
-                "mode": "source",
-                "source": false
+                "file": "Output/01. Podstawy DAX.html"
               },
-              "icon": "lucide-file",
-              "title": "Embed PNG"
+              "icon": "code-glyph",
+              "title": "01. Podstawy DAX"
             }
           }
         ],
@@ -106,12 +104,13 @@
             "state": {
               "type": "outline",
               "state": {
-                "followCursor": false,
+                "file": "Output/01. Podstawy DAX.html",
+                "followCursor": true,
                 "showSearch": false,
                 "searchQuery": ""
               },
               "icon": "lucide-list",
-              "title": "Outline"
+              "title": "Outline of 01. Podstawy DAX"
             }
           },
           {
@@ -120,7 +119,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "Template/Markdown/Embed PNG.md",
+                "file": "Output/01. Podstawy DAX.html",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -130,7 +129,7 @@
                 "unlinkedCollapsed": true
               },
               "icon": "links-coming-in",
-              "title": "Backlinks for Embed PNG"
+              "title": "Backlinks for 01. Podstawy DAX"
             }
           },
           {
@@ -148,7 +147,7 @@
             }
           }
         ],
-        "currentTab": 2
+        "currentTab": 1
       },
       {
         "id": "a452d6d148f4c5b8",
@@ -161,7 +160,7 @@
             "state": {
               "type": "localgraph",
               "state": {
-                "file": "Template/Markdown/Embed PNG.md",
+                "file": "Output/01. Podstawy DAX.html",
                 "options": {
                   "collapse-filter": true,
                   "search": "",
@@ -189,15 +188,14 @@
                 }
               },
               "icon": "lucide-git-fork",
-              "title": "Graph of Embed PNG"
+              "title": "Graph of 01. Podstawy DAX"
             }
           }
         ]
       }
     ],
     "direction": "horizontal",
-    "width": 481.5,
-    "collapsed": true
+    "width": 481.5
   },
   "left-ribbon": {
     "hiddenItems": {
@@ -215,21 +213,23 @@
   },
   "active": "c6a8ca1a0082a34f",
   "lastOpenFiles": [
-    "Template/Markdown/Embed GIF.md",
-    "Template/Markdown/Embed PNG.md",
-    "Theory/00. Konfiguracja Power BI.md",
     "Output/00. Konfiguracja Power BI - Główne widoki Power BI Desktop.html",
-    "Output/00. Konfiguracja Power BI - Przygotowanie środowiska Power BI.html",
-    "convert_md_to_powerbi.py.tmp.58512.1765294369930",
-    "convert_md_to_powerbi.py.tmp.58512.1765294347218",
-    "Output/03. Test - Testowy dział.html",
-    "Theory/03. Test.md",
     "Output/TMDL/_HTML.md",
-    "Output/TMDL",
+    "Output/03. Test - Testowy dział.html",
     "Output/02. DAX - Zmienne.html",
     "Output/01. Podstawy DAX - Wprowadzenie do CALCULATE.html",
     "Output/01. Podstawy DAX - Funkcje filtrujące.html",
     "Output/01. Podstawy DAX - Funkcje iteracyjne (X-functions).html",
+    "Output/01. Podstawy DAX - Funkcje dat.html",
+    "Output/01. Podstawy DAX - Funkcje tekstowe.html",
+    "Output/01. Podstawy DAX - Funkcje logiczne.html",
+    "Output/01. Podstawy DAX - Funkcje agregujące.html",
+    "Output/01. Podstawy DAX.html",
+    "Theory/01. Podstawy DAX.md",
+    "Theory/00. Konfiguracja Power BI.md",
+    "Template/Markdown/Embed PNG.md",
+    "Template/Markdown/Embed GIF.md",
+    "Theory/03. Test.md",
     "Template/Markdown/Gaps Complete.md",
     "00. DRAFT/00. Przygotowanie środowiska.md",
     "bin/Pasted image 20251209161608.png",
@@ -245,7 +245,6 @@
     "Pasted image 20251209155005.png",
     "Template/Markdown/Quiz.md",
     "Template/Markdown/Teoria.md",
-    "Theory/01. Podstawy DAX.md",
     "00. DRAFT/01. Podstawy DAX.md",
     "00. DRAFT/02. Wstęp do Calculate.md",
     "Template/CSS.md",
