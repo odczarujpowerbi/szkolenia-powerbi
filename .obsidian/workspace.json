@@ -13,28 +13,13 @@
             "state": {
               "type": "html-view",
               "state": {
-                "file": "02. OUTPUT/01. Podstawy DAX.html"
+                "file": "02. OUTPUT/02. Wprowadzenie do CALCULATE - Wprowadzenie do CALCULATE.html"
               },
               "icon": "code-glyph",
-              "title": "01. Podstawy DAX"
-            }
-          },
-          {
-            "id": "7293b29fa1965917",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "01. THEORY/03. Modyfikowanie Kontekstu.md",
-                "mode": "source",
-                "source": false
-              },
-              "icon": "lucide-file",
-              "title": "03. Modyfikowanie Kontekstu"
+              "title": "02. Wprowadzenie do CALCULATE - Wprowadzenie do CALCULATE"
             }
           }
         ],
-        "currentTab": 1,
         "stacked": true
       }
     ],
@@ -119,13 +104,13 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "01. THEORY/03. Modyfikowanie Kontekstu.md",
+                "file": "02. OUTPUT/02. Wprowadzenie do CALCULATE - Wprowadzenie do CALCULATE.html",
                 "followCursor": true,
                 "showSearch": false,
                 "searchQuery": ""
               },
               "icon": "lucide-list",
-              "title": "Outline of 03. Modyfikowanie Kontekstu"
+              "title": "Outline of 02. Wprowadzenie do CALCULATE - Wprowadzenie do CALCULATE"
             }
           }
         ],
@@ -142,7 +127,7 @@
             "state": {
               "type": "localgraph",
               "state": {
-                "file": "01. THEORY/03. Modyfikowanie Kontekstu.md",
+                "file": "02. OUTPUT/02. Wprowadzenie do CALCULATE - Wprowadzenie do CALCULATE.html",
                 "options": {
                   "collapse-filter": true,
                   "search": "",
@@ -170,7 +155,7 @@
                 }
               },
               "icon": "lucide-git-fork",
-              "title": "Graph of 03. Modyfikowanie Kontekstu"
+              "title": "Graph of 02. Wprowadzenie do CALCULATE - Wprowadzenie do CALCULATE"
             }
           }
         ]
@@ -194,30 +179,29 @@
       "hide-folders:Show hidden folders": false
     }
   },
-  "active": "792a46a7fb2f8591",
+  "active": "c6a8ca1a0082a34f",
   "lastOpenFiles": [
-    "02. OUTPUT/01. Podstawy DAX.html",
-    "02. OUTPUT/01. Podstawy DAX - Funkcje agregujące.html",
+    "01. THEORY/03. Modyfikowanie Kontekstu.md",
+    "01. THEORY/02. Wprowadzenie do CALCULATE.md",
+    "02. OUTPUT/02. Wprowadzenie do CALCULATE - Wprowadzenie do CALCULATE.html",
+    "02. OUTPUT/03. Modyfikowanie Kontekstu - ALL i REMOVEFILTERS - usuwanie filtrów.html",
+    "02. OUTPUT/01. Podstawy DAX - Funkcje iteracyjne (X-functions).html",
     "02. OUTPUT/01. Podstawy DAX - Funkcje dat.html",
+    "02. OUTPUT/01. Podstawy DAX.html",
+    "02. OUTPUT/01. Podstawy DAX - Funkcje logiczne.html",
+    "02. OUTPUT/01. Podstawy DAX - Funkcje agregujące.html",
+    "01. THEORY/01. Podstawy DAX.md",
+    "01. THEORY/00. Konfiguracja Power BI.md",
     "02. OUTPUT/00. Konfiguracja Power BI - Główne widoki Power BI Desktop.html",
     "01. THEORY/04. Tworzenie zestawień tabelarycznych.md",
-    "01. THEORY/03. Modyfikowanie Kontekstu.md",
     "00. DRAFT/02. Wstęp do Calculate.md",
     "00. DRAFT/00. Przygotowanie środowiska.md",
     "00. DRAFT/03. Kontekst Filtra.md",
     "00. DRAFT/01. Podstawy DAX.md",
     "bin/Pasted image 20251209193536.png",
-    "01. THEORY/02. Wprowadzenie do CALCULATE.md",
-    "01. THEORY/01. Podstawy DAX.md",
-    "02. OUTPUT/01. Podstawy DAX - Funkcje iteracyjne (X-functions).html",
-    "02. OUTPUT/01. Podstawy DAX - Funkcje logiczne.html",
-    "02. OUTPUT/03. Modyfikowanie Kontekstu - ALL i REMOVEFILTERS - usuwanie filtrów.html",
     "01. THEORY/05. DAX - Zaawansowane Kwerendy.md",
     "02. OUTPUT/05. DAX - Zaawansowane Kwerendy - Query View.html",
     "02. OUTPUT/05. DAX - Zaawansowane Kwerendy.html",
-    "02. OUTPUT/04. Tworzenie zestawień tabelarycznych.html",
-    "02. OUTPUT/02. Wprowadzenie do CALCULATE - Wprowadzenie do CALCULATE.html",
-    "01. THEORY/00. Konfiguracja Power BI.md",
     "bin/Pasted image 20251209181932.png",
     "02. OUTPUT/TMDL/_HTML.md",
     "config.md",
