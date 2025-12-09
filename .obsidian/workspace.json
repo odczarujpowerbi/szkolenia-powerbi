@@ -13,12 +13,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "02. OUTPUT/TMDL/_HTML.md",
+                "file": "03. TEMPLATE/CSS - Czerwony.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "_HTML"
+              "title": "CSS - Czerwony"
             }
           }
         ],
@@ -106,13 +106,13 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "02. OUTPUT/TMDL/_HTML.md",
+                "file": "03. TEMPLATE/CSS - Czerwony.md",
                 "followCursor": true,
                 "showSearch": false,
                 "searchQuery": ""
               },
               "icon": "lucide-list",
-              "title": "Outline of _HTML"
+              "title": "Outline of CSS - Czerwony"
             }
           }
         ],
@@ -129,7 +129,7 @@
             "state": {
               "type": "localgraph",
               "state": {
-                "file": "02. OUTPUT/TMDL/_HTML.md",
+                "file": "03. TEMPLATE/CSS - Czerwony.md",
                 "options": {
                   "collapse-filter": true,
                   "search": "",
@@ -157,7 +157,7 @@
                 }
               },
               "icon": "lucide-git-fork",
-              "title": "Graph of _HTML"
+              "title": "Graph of CSS - Czerwony"
             }
           }
         ]
@@ -183,9 +183,10 @@
   },
   "active": "c6a8ca1a0082a34f",
   "lastOpenFiles": [
+    "01. THEORY/00. Konfiguracja Power BI.md",
+    "02. OUTPUT/TMDL/_HTML.md",
     "02. OUTPUT/TMDL/_Parametr.md",
     "convert_md_to_powerbi.py.tmp.66424.1765313206562",
-    "02. OUTPUT/TMDL/_HTML.md",
     "config.md",
     "01. THEORY/06. DAX - Zaawansowane Kwerendy.md",
     "02. OUTPUT/06. DAX - Zaawansowane Kwerendy - Query View.html",
@@ -202,7 +203,6 @@
     "01. THEORY/03. Wprowadzenie do CALCULATE.md",
     "01. THEORY/02. Miary vs Kolumny kalkulowane.md",
     "01. THEORY/01. Podstawy DAX.md",
-    "01. THEORY/00. Konfiguracja Power BI.md",
     "00. DRAFT/02. Wstęp do Calculate.md",
     "00. DRAFT/00. Przygotowanie środowiska.md",
     "00. DRAFT/03. Kontekst Filtra.md",

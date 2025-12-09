@@ -33,7 +33,7 @@
         }
 
         button {
-            background: #df4a16;
+            background: #6b1718;
             color: white;
             border: none;
             padding: 12px 28px;
@@ -45,7 +45,7 @@
         }
 
         button:hover {
-            background: #df7a16;
+            background: #380c0c;
         }
 
         button:disabled {
@@ -80,8 +80,8 @@
             padding-top: 14px;
             padding-bottom: 6px;
             margin-bottom: 1em;
-            color: #df4a16;
-            border-bottom: 2px solid #df4a16;
+            color: #6b1718;
+            border-bottom: 2px solid #6b1718;
         }
 
         h2 {
@@ -125,7 +125,7 @@
 
         pre {
             background: #f8f9fa;
-            border-left: 3px solid #df4a16;
+            border-left: 3px solid #6b1718;
             padding: 18px;
             margin: 1em 0;
             overflow-x: auto;
@@ -141,7 +141,7 @@
         }
 
         .dax-keyword {
-            color: #df4a16;
+            color: #6b1718;
             font-weight: 600;
         }
 
@@ -189,7 +189,7 @@
         }
 
         blockquote {
-            border-left: 3px solid #df4a16;
+            border-left: 3px solid #6b1718;
             background: #f8f9fa;
             padding: 14px 18px;
             margin: 1em 0;
@@ -202,7 +202,7 @@
         }
 
         .iteration-box {
-            border-left: 3px solid #df4a16;
+            border-left: 3px solid #6b1718;
             padding: 14px 18px;
             margin: 0.8em 0;
         }
