@@ -1,0 +1,144 @@
+Wprowadzenie do CALCULATE = 
+
+"
+
+<!DOCTYPE html>
+<html lang='pl'>
+<head>
+    <meta charset='UTF-8'>
+    <meta name='viewport' content='width=device-width, initial-scale=1.0'>
+    <title>Wprowadzenie do CALCULATE</title>
+</head>
+<body>
+
+<div class='container' id='viz_a6296909'>
+    <!-- Nawigacja na górze -->
+    <div class='navigation'>
+        <button id='prevBtn_a6296909' onclick='changePage_a6296909(-1)'>← Poprzednia</button>
+        <span class='page-indicator'>
+            Strona <span id='currentPage_a6296909'>1</span> z <span id='totalPages_a6296909'>2</span>
+        </span>
+        <button id='nextBtn_a6296909' onclick='changePage_a6296909(1)'>Następna →</button>
+    </div>
+
+    <!-- Strona 1 -->
+    <div class='page active'>
+        <h1>Czym jest <code>CALCULATE</code> i dlaczego jest najważniejsza w DAX</h1>
+        <p><strong>CALCULATE</strong> to najpotężniejsza funkcja w języku DAX. Pozwala ona <strong>modyfikować kontekst filtrów</strong>, w którym obliczana jest miara.</p>
+        <h2>Dlaczego <code>CALCULATE</code> jest tak ważna?</h2>
+        <p>W poprzednim rozdziale nauczyliśmy się, że miary obliczają się dynamicznie w zależności od kontekstu filtrów. Funkcja CALCULATE pozwala:</p>
+        <p>✓ <strong>Nadpisać</strong> istniejące filtry ✓ <strong>Dodać</strong> nowe filtry ✓ <strong>Usunąć</strong> filtry ✓ <strong>Zmienić</strong> sposób działania kontekstu</p>
+        <p><strong>Innymi słowy:</strong> CALCULATE daje Ci pełną kontrolę nad tym, na jakich danych oblicza się Twoja miara.</p>
+        <h2>Podstawowa składnia</h2>
+        <pre><code><span class='dax-function'>CALCULATE</span>(
+            &lt;wyrażenie&gt;,
+            &lt;filtr1&gt;,
+            &lt;filtr2&gt;,
+            ...
+        )</code></pre>
+        <ul>
+        <li><strong>wyrażenie</strong> - miara lub wyrażenie do obliczenia</li>
+        <li><strong>filtr1, filtr2, ...</strong> - filtry, które mają być zastosowane</li>
+        </ul>
+
+    </div>
+
+    <!-- Strona 2 -->
+    <div class='page'>
+        <h1>Czym jest kontekst filtrowania?</h1>
+        <p><strong>Kontekst filtrowania</strong> to zbiór filtrów aktywnych w danym momencie obliczeń. Określa on <strong>jakie wiersze</strong> z tabel są brane pod uwagę.</p>
+        <p><strong>Przykład:</strong> Jeśli na wizualizację naniesiesz kolumnę <code>Rok - Miesiac</code> i miarę <code>Sprzedaż Netto</code>, to</p>
+        <ul>
+        <li><code>Rok - Miesiac</code> staję się <strong>kontekstem filtrowania</strong></li>
+        <li>Więc miara <code>Sprzedaż Netto</code> jest obliczana <strong>w kontekście kolumn</strong> <code>Rok - Miesiac</code> <img src='https://github.com/odczarujpowerbi/szkolenia-powerbi/blob/main/bin/Pasted%20image%2020251209173843.png?raw=true' width='100%'></li>
+        </ul>
+        <p>> W Power BI często określa się to terminami: kontekstu, filtra lub kontekstu filtra - można stosować je niemalże zamiennie</p>
+        <p>---</p>
+
+    </div>
+
+</div>
+
+<script>
+(function() {
+    // Unikalny ID dla tej wizualizacji (wstrzykiwany przez Python)
+    var vizId = 'a6296909';
+    var containerId = 'viz_' + vizId;
+
+    var currentPage_a6296909 = 1;
+    var container = document.getElementById(containerId);
+
+    if (!container) return;
+
+    var pages = container.querySelectorAll('.page');
+    var totalPages = pages.length;
+
+    document.getElementById('totalPages_' + vizId).textContent = totalPages;
+
+    window['showPage_a6296909'] = function(n) {
+        if (n > totalPages) currentPage_a6296909 = totalPages;
+        if (n < 1) currentPage_a6296909 = 1;
+
+        for (var i = 0; i < pages.length; i++) {
+            pages[i].classList.remove('active');
+        }
+        pages[currentPage_a6296909 - 1].classList.add('active');
+
+        document.getElementById('currentPage_' + vizId).textContent = currentPage_a6296909;
+        document.getElementById('prevBtn_' + vizId).disabled = (currentPage_a6296909 === 1);
+        document.getElementById('nextBtn_' + vizId).disabled = (currentPage_a6296909 === totalPages);
+    };
+
+    window['changePage_a6296909'] = function(n) {
+        currentPage_a6296909 += n;
+        window['showPage_a6296909'](currentPage_a6296909);
+    };
+
+    // Inicjalizacja
+    window['showPage_a6296909'](1);
+
+    // Funkcjonalność powiększania obrazów
+    var images = container.querySelectorAll('img');
+    images.forEach(function(img) {
+        img.style.cursor = 'pointer';
+        img.style.transition = 'transform 0.3s ease';
+
+        img.addEventListener('click', function() {
+            if (this.classList.contains('zoomed')) {
+                // Pomniejsz obraz
+                this.classList.remove('zoomed');
+                this.style.position = '';
+                this.style.top = '';
+                this.style.left = '';
+                this.style.transform = '';
+                this.style.width = '100%';
+                this.style.maxWidth = '';
+                this.style.maxHeight = '';
+                this.style.zIndex = '';
+                this.style.backgroundColor = '';
+                this.style.padding = '';
+                this.style.boxShadow = '';
+            } else {
+                // Powiększ obraz
+                this.classList.add('zoomed');
+                this.style.position = 'fixed';
+                this.style.top = '50%';
+                this.style.left = '50%';
+                this.style.transform = 'translate(-50%, -50%)';
+                this.style.width = 'auto';
+                this.style.maxWidth = '95vw';
+                this.style.maxHeight = '95vh';
+                this.style.zIndex = '9999';
+                this.style.backgroundColor = 'rgba(255, 255, 255, 0.95)';
+                this.style.padding = '10px';
+                this.style.boxShadow = '0 4px 20px rgba(0, 0, 0, 0.3)';
+            }
+        });
+    });
+})();
+</script>
+
+</body>
+</html>
+
+"

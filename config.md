@@ -1,7 +1,7 @@
  *wystarczy edytować poniższy codeblock .json*
 ```json
 {
-  "css_files": ["CSS - Czerwony.md"],
+  "css_files": [],
   "js_files": ["JS.md"],
   "generate_css_measures": true
 }

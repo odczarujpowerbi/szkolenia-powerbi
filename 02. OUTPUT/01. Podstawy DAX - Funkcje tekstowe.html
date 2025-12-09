@@ -1,0 +1,151 @@
+Funkcje tekstowe = 
+
+"
+
+<!DOCTYPE html>
+<html lang='pl'>
+<head>
+    <meta charset='UTF-8'>
+    <meta name='viewport' content='width=device-width, initial-scale=1.0'>
+    <title>Funkcje tekstowe</title>
+</head>
+<body>
+
+<div class='container' id='viz_ea79c585'>
+    <!-- Nawigacja na górze -->
+    <div class='navigation'>
+        <button id='prevBtn_ea79c585' onclick='changePage_ea79c585(-1)'>← Poprzednia</button>
+        <span class='page-indicator'>
+            Strona <span id='currentPage_ea79c585'>1</span> z <span id='totalPages_ea79c585'>4</span>
+        </span>
+        <button id='nextBtn_ea79c585' onclick='changePage_ea79c585(1)'>Następna →</button>
+    </div>
+
+    <!-- Strona 1 -->
+    <div class='page active'>
+        <h1>CONCATENATE – Łączenie tekstów</h1>
+        <pre><code><span class='dax-function'>CONCATENATE</span>(&lt;tekst1&gt;, &lt;tekst2&gt;)</code></pre>
+        <p><strong>Przykład:</strong></p>
+        <pre><code>Pełna Nazwa = <span class='dax-function'>CONCATENATE</span>(Klienci[Imię], ' ' & Klienci[Nazwisko])</code></pre>
+        <p><strong>Alternatywa (łatwiejsza):</strong></p>
+        <pre><code>Pełna Nazwa = Klienci[Imię] & ' ' & Klienci[Nazwisko]</code></pre>
+
+    </div>
+
+    <!-- Strona 2 -->
+    <div class='page'>
+        <h1>LEFT, RIGHT, MID – Wyciąganie części tekstu</h1>
+        <pre><code><span class='dax-function'>LEFT</span>(&lt;tekst&gt;, &lt;liczba_znaków&gt;)    <span class='dax-comment'>-- Pierwsze znaki od lewej</span>
+        <span class='dax-function'>RIGHT</span>(&lt;tekst&gt;, &lt;liczba_znaków&gt;)   <span class='dax-comment'>-- Ostatnie znaki od prawej</span>
+        <span class='dax-function'>MID</span>(&lt;tekst&gt;, &lt;start&gt;, &lt;liczba&gt;)   <span class='dax-comment'>-- Znaki ze środka</span></code></pre>
+        <p><strong>Przykład:</strong></p>
+        <pre><code>Pierwsze <span class='dax-number'>3</span> Znaki = <span class='dax-function'>LEFT</span>(Produkty[Kod], <span class='dax-number'>3</span>)
+        Ostatnie <span class='dax-number'>2</span> Znaki = <span class='dax-function'>RIGHT</span>(Produkty[Kod], <span class='dax-number'>2</span>)</code></pre>
+
+    </div>
+
+    <!-- Strona 3 -->
+    <div class='page'>
+        <h1>UPPER, LOWER – Zmiana wielkości liter</h1>
+        <pre><code><span class='dax-function'>UPPER</span>(&lt;tekst&gt;)  <span class='dax-comment'>-- Wszystkie znaki WIELKIE</span>
+        <span class='dax-function'>LOWER</span>(&lt;tekst&gt;)  <span class='dax-comment'>-- Wszystkie znaki małe</span></code></pre>
+        <p><strong>Przykład:</strong></p>
+        <pre><code>Kategoria Wielkie Litery = <span class='dax-function'>UPPER</span>(Produkty[Kategoria])</code></pre>
+
+    </div>
+
+    <!-- Strona 4 -->
+    <div class='page'>
+        <h1>LEN – Długość tekstu</h1>
+        <pre><code><span class='dax-function'>LEN</span>(&lt;tekst&gt;)</code></pre>
+        <p><strong>Przykład:</strong></p>
+        <pre><code>Długość Kodu = <span class='dax-function'>LEN</span>(Produkty[Kod Produktu])</code></pre>
+        <p>---</p>
+
+    </div>
+
+</div>
+
+<script>
+(function() {
+    // Unikalny ID dla tej wizualizacji (wstrzykiwany przez Python)
+    var vizId = 'ea79c585';
+    var containerId = 'viz_' + vizId;
+
+    var currentPage_ea79c585 = 1;
+    var container = document.getElementById(containerId);
+
+    if (!container) return;
+
+    var pages = container.querySelectorAll('.page');
+    var totalPages = pages.length;
+
+    document.getElementById('totalPages_' + vizId).textContent = totalPages;
+
+    window['showPage_ea79c585'] = function(n) {
+        if (n > totalPages) currentPage_ea79c585 = totalPages;
+        if (n < 1) currentPage_ea79c585 = 1;
+
+        for (var i = 0; i < pages.length; i++) {
+            pages[i].classList.remove('active');
+        }
+        pages[currentPage_ea79c585 - 1].classList.add('active');
+
+        document.getElementById('currentPage_' + vizId).textContent = currentPage_ea79c585;
+        document.getElementById('prevBtn_' + vizId).disabled = (currentPage_ea79c585 === 1);
+        document.getElementById('nextBtn_' + vizId).disabled = (currentPage_ea79c585 === totalPages);
+    };
+
+    window['changePage_ea79c585'] = function(n) {
+        currentPage_ea79c585 += n;
+        window['showPage_ea79c585'](currentPage_ea79c585);
+    };
+
+    // Inicjalizacja
+    window['showPage_ea79c585'](1);
+
+    // Funkcjonalność powiększania obrazów
+    var images = container.querySelectorAll('img');
+    images.forEach(function(img) {
+        img.style.cursor = 'pointer';
+        img.style.transition = 'transform 0.3s ease';
+
+        img.addEventListener('click', function() {
+            if (this.classList.contains('zoomed')) {
+                // Pomniejsz obraz
+                this.classList.remove('zoomed');
+                this.style.position = '';
+                this.style.top = '';
+                this.style.left = '';
+                this.style.transform = '';
+                this.style.width = '100%';
+                this.style.maxWidth = '';
+                this.style.maxHeight = '';
+                this.style.zIndex = '';
+                this.style.backgroundColor = '';
+                this.style.padding = '';
+                this.style.boxShadow = '';
+            } else {
+                // Powiększ obraz
+                this.classList.add('zoomed');
+                this.style.position = 'fixed';
+                this.style.top = '50%';
+                this.style.left = '50%';
+                this.style.transform = 'translate(-50%, -50%)';
+                this.style.width = 'auto';
+                this.style.maxWidth = '95vw';
+                this.style.maxHeight = '95vh';
+                this.style.zIndex = '9999';
+                this.style.backgroundColor = 'rgba(255, 255, 255, 0.95)';
+                this.style.padding = '10px';
+                this.style.boxShadow = '0 4px 20px rgba(0, 0, 0, 0.3)';
+            }
+        });
+    });
+})();
+</script>
+
+</body>
+</html>
+
+"

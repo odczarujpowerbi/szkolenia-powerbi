@@ -1,0 +1,220 @@
+ALLEXCEPT = 
+
+"
+
+<!DOCTYPE html>
+<html lang='pl'>
+<head>
+    <meta charset='UTF-8'>
+    <meta name='viewport' content='width=device-width, initial-scale=1.0'>
+    <title>ALLEXCEPT</title>
+</head>
+<body>
+
+<div class='container' id='viz_c3f109de'>
+    <!-- Nawigacja na górze -->
+    <div class='navigation'>
+        <button id='prevBtn_c3f109de' onclick='changePage_c3f109de(-1)'>← Poprzednia</button>
+        <span class='page-indicator'>
+            Strona <span id='currentPage_c3f109de'>1</span> z <span id='totalPages_c3f109de'>3</span>
+        </span>
+        <button id='nextBtn_c3f109de' onclick='changePage_c3f109de(1)'>Następna →</button>
+    </div>
+
+    <!-- Strona 1 -->
+    <div class='page active'>
+        <h2>Problem, który rozwiązuje ALLEXCEPT</h2>
+        <p>Wyobraź sobie tabelę dProduct z kolumnami: ProductKey, ProductName, ProductCategoryName, ProductSubcategoryName, BrandName, Color, UnitPrice.</p>
+        <p>Chcesz policzyć udział produktu w swojej kategorii. Potrzebujesz usunąć filtry z produktu, ale ZACHOWAĆ filtr kategorii.</p>
+        <pre><code>// Podejście <span class='dax-number'>1</span>: wymieniasz wszystko co chcesz usunąć
+        fSprzedaż Category Total v1 =
+        <span class='dax-function'>CALCULATE</span>(
+            [Total fSprzedaż],
+            <span class='dax-function'>ALL</span>(
+                dProduct[ProductKey],
+                dProduct[ProductName],
+                dProduct[ProductSubcategoryName],
+                dProduct[BrandName],
+                dProduct[Color],
+                dProduct[UnitPrice]
+            )
+        )</code></pre>
+        <p>Działa, ale jest nieczytelne i łatwo o pomyłkę. A co jeśli ktoś doda nową kolumnę do tabeli?</p>
+        <pre><code>// Podejście <span class='dax-number'>2</span>: ALLEXCEPT
+        fSprzedaż Category Total v2 =
+        <span class='dax-function'>CALCULATE</span>(
+            [Total fSprzedaż],
+            <span class='dax-function'>ALLEXCEPT</span>(dProduct, dProduct[ProductCategoryName])
+        )</code></pre>
+        <p><code>ALLEXCEPT</code> mówi: 'usuń wszystkie filtry z dProduct OPRÓCZ filtra na ProductCategoryName'.</p>
+
+    </div>
+
+    <!-- Strona 2 -->
+    <div class='page'>
+        <h2>Wizualizacja działania</h2>
+        <p>Raport pokazuje produkty w kategorii 'Computers':</p>
+        <table>
+          <thead>
+            <tr>
+              <th>Produkt</th>
+              <th>[Total fSprzedaż]</th>
+              <th>[fSprzedaż Category Total]</th>
+              <th>Udział</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Laptop A</td>
+              <td>150 000 zł</td>
+              <td>400 000 zł</td>
+              <td>37.5%</td>
+            </tr>
+            <tr>
+              <td>Laptop B</td>
+              <td>120 000 zł</td>
+              <td>400 000 zł</td>
+              <td>30.0%</td>
+            </tr>
+            <tr>
+              <td>Desktop C</td>
+              <td>130 000 zł</td>
+              <td>400 000 zł</td>
+              <td>32.5%</td>
+            </tr>
+          </tbody>
+        </table>
+        <p>Gdy użytkownik przełączy na kategorię 'Cameras':</p>
+        <table>
+          <thead>
+            <tr>
+              <th>Produkt</th>
+              <th>[Total fSprzedaż]</th>
+              <th>[fSprzedaż Category Total]</th>
+              <th>Udział</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Camera X</td>
+              <td>100 000 zł</td>
+              <td>250 000 zł</td>
+              <td>40.0%</td>
+            </tr>
+            <tr>
+              <td>Camera Y</td>
+              <td>150 000 zł</td>
+              <td>250 000 zł</td>
+              <td>60.0%</td>
+            </tr>
+          </tbody>
+        </table>
+        <p>Filtr kategorii jest respektowany - total zmienia się z 400 000 na 250 000.</p>
+
+    </div>
+
+    <!-- Strona 3 -->
+    <div class='page'>
+        <h2>ALLEXCEPT z wieloma kolumnami</h2>
+        <p>Możesz zachować filtry na wielu kolumnach:</p>
+        <pre><code>// Udział produktu w swojej kategorii I kraju
+        fSprzedaż Category Country Total =
+        <span class='dax-function'>CALCULATE</span>(
+            [Total fSprzedaż],
+            <span class='dax-function'>ALLEXCEPT</span>(
+                dProduct,
+                dProduct[ProductCategoryName]
+            ),
+            <span class='dax-function'>ALLEXCEPT</span>(
+                dGeography,
+                dGeography[RegionCountryName]
+            )
+        )</code></pre>
+
+    </div>
+
+</div>
+
+<script>
+(function() {
+    // Unikalny ID dla tej wizualizacji (wstrzykiwany przez Python)
+    var vizId = 'c3f109de';
+    var containerId = 'viz_' + vizId;
+
+    var currentPage_c3f109de = 1;
+    var container = document.getElementById(containerId);
+
+    if (!container) return;
+
+    var pages = container.querySelectorAll('.page');
+    var totalPages = pages.length;
+
+    document.getElementById('totalPages_' + vizId).textContent = totalPages;
+
+    window['showPage_c3f109de'] = function(n) {
+        if (n > totalPages) currentPage_c3f109de = totalPages;
+        if (n < 1) currentPage_c3f109de = 1;
+
+        for (var i = 0; i < pages.length; i++) {
+            pages[i].classList.remove('active');
+        }
+        pages[currentPage_c3f109de - 1].classList.add('active');
+
+        document.getElementById('currentPage_' + vizId).textContent = currentPage_c3f109de;
+        document.getElementById('prevBtn_' + vizId).disabled = (currentPage_c3f109de === 1);
+        document.getElementById('nextBtn_' + vizId).disabled = (currentPage_c3f109de === totalPages);
+    };
+
+    window['changePage_c3f109de'] = function(n) {
+        currentPage_c3f109de += n;
+        window['showPage_c3f109de'](currentPage_c3f109de);
+    };
+
+    // Inicjalizacja
+    window['showPage_c3f109de'](1);
+
+    // Funkcjonalność powiększania obrazów
+    var images = container.querySelectorAll('img');
+    images.forEach(function(img) {
+        img.style.cursor = 'pointer';
+        img.style.transition = 'transform 0.3s ease';
+
+        img.addEventListener('click', function() {
+            if (this.classList.contains('zoomed')) {
+                // Pomniejsz obraz
+                this.classList.remove('zoomed');
+                this.style.position = '';
+                this.style.top = '';
+                this.style.left = '';
+                this.style.transform = '';
+                this.style.width = '100%';
+                this.style.maxWidth = '';
+                this.style.maxHeight = '';
+                this.style.zIndex = '';
+                this.style.backgroundColor = '';
+                this.style.padding = '';
+                this.style.boxShadow = '';
+            } else {
+                // Powiększ obraz
+                this.classList.add('zoomed');
+                this.style.position = 'fixed';
+                this.style.top = '50%';
+                this.style.left = '50%';
+                this.style.transform = 'translate(-50%, -50%)';
+                this.style.width = 'auto';
+                this.style.maxWidth = '95vw';
+                this.style.maxHeight = '95vh';
+                this.style.zIndex = '9999';
+                this.style.backgroundColor = 'rgba(255, 255, 255, 0.95)';
+                this.style.padding = '10px';
+                this.style.boxShadow = '0 4px 20px rgba(0, 0, 0, 0.3)';
+            }
+        });
+    });
+})();
+</script>
+
+</body>
+</html>
+
+"

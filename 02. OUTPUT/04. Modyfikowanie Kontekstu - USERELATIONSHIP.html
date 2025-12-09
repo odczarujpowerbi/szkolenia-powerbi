@@ -1,0 +1,146 @@
+USERELATIONSHIP = 
+
+"
+
+<!DOCTYPE html>
+<html lang='pl'>
+<head>
+    <meta charset='UTF-8'>
+    <meta name='viewport' content='width=device-width, initial-scale=1.0'>
+    <title>USERELATIONSHIP</title>
+</head>
+<body>
+
+<div class='container' id='viz_b61f34a7'>
+    <!-- Nawigacja na górze -->
+    <div class='navigation'>
+        <button id='prevBtn_b61f34a7' onclick='changePage_b61f34a7(-1)'>← Poprzednia</button>
+        <span class='page-indicator'>
+            Strona <span id='currentPage_b61f34a7'>1</span> z <span id='totalPages_b61f34a7'>1</span>
+        </span>
+        <button id='nextBtn_b61f34a7' onclick='changePage_b61f34a7(1)'>Następna →</button>
+    </div>
+
+    <!-- Strona 1 -->
+    <div class='page active'>
+        <p><strong>USERELATIONSHIP</strong> aktywuje nieaktywną relację między tabelami na czas trwania obliczenia. W modelu Power BI między dwiema tabelami może istnieć wiele relacji, ale tylko jedna może być aktywna domyślnie.</p>
+        <h2>Typowy scenariusz</h2>
+        <p>Najczęstszy przypadek to tabela faktów z wieloma kolumnami dat powiązanymi z jedną tabelą kalendarza:</p>
+        <pre><code>fSprzedaż
+        ├─ Data Sprzedaży      → 'dKalendarz'[Data] (relacja aktywna)
+        ├─ Data Fakturowania   → 'dKalendarz'[Data] (relacja nieaktywna)
+        └─ Data Dostawy        → 'dKalendarz'[Data] (relacja nieaktywna)</code></pre>
+        <img src='https://github.com/odczarujpowerbi/szkolenia-powerbi/blob/main/bin/Pasted%20image%2020251209193536.png?raw=true' width='100%'>
+        <h1>Podstawowa składnia</h1>
+        <pre><code><span class='dax-comment'>------- Miara używająca domyślnej relacji (OrderDate)</span>
+        fSprzedaż Amount = 
+            <span class='dax-function'>SUMX</span> ( fSprzedaż, fSprzedaż[Quantity] * fSprzedaż[Unit Price] )
+
+        <span class='dax-comment'>------- Miara aktywująca relację ShipmentDate</span>
+        fSprzedaż Amount by Shipment = 
+        <span class='dax-function'>CALCULATE</span> (
+            <span class='dax-function'>SUMX</span> ( fSprzedaż, fSprzedaż[Quantity] * fSprzedaż[Unit Price] ),
+            <span class='dax-function'>USERELATIONSHIP</span> ( fSprzedaż[ShipmentDate], 'Calendar'[Date] )
+        )
+
+        <span class='dax-comment'>------- Miara aktywująca relację DeliveryDate</span>
+        fSprzedaż Amount by Delivery = 
+        <span class='dax-function'>CALCULATE</span> (
+            <span class='dax-function'>SUMX</span> ( fSprzedaż, fSprzedaż[Quantity] * fSprzedaż[Unit Price] ),
+            <span class='dax-function'>USERELATIONSHIP</span> ( fSprzedaż[DeliveryDate], 'Calendar'[Date] )
+        )</code></pre>
+        <p><strong>Kluczowe zasady:</strong></p>
+        <ul>
+        <li>USERELATIONSHIP działa tylko wewnątrz CALCULATE lub CALCULATETABLE</li>
+        <li>Pierwszym parametrem jest kolumna z tabeli faktów (strona 'wiele')</li>
+        <li>Drugim parametrem jest kolumna z tabeli wymiaru (strona 'jeden')</li>
+        <li>Relacja musi fizycznie istnieć w modelu (być zdefiniowana, choć nieaktywna)</li>
+        </ul>
+
+    </div>
+
+</div>
+
+<script>
+(function() {
+    // Unikalny ID dla tej wizualizacji (wstrzykiwany przez Python)
+    var vizId = 'b61f34a7';
+    var containerId = 'viz_' + vizId;
+
+    var currentPage_b61f34a7 = 1;
+    var container = document.getElementById(containerId);
+
+    if (!container) return;
+
+    var pages = container.querySelectorAll('.page');
+    var totalPages = pages.length;
+
+    document.getElementById('totalPages_' + vizId).textContent = totalPages;
+
+    window['showPage_b61f34a7'] = function(n) {
+        if (n > totalPages) currentPage_b61f34a7 = totalPages;
+        if (n < 1) currentPage_b61f34a7 = 1;
+
+        for (var i = 0; i < pages.length; i++) {
+            pages[i].classList.remove('active');
+        }
+        pages[currentPage_b61f34a7 - 1].classList.add('active');
+
+        document.getElementById('currentPage_' + vizId).textContent = currentPage_b61f34a7;
+        document.getElementById('prevBtn_' + vizId).disabled = (currentPage_b61f34a7 === 1);
+        document.getElementById('nextBtn_' + vizId).disabled = (currentPage_b61f34a7 === totalPages);
+    };
+
+    window['changePage_b61f34a7'] = function(n) {
+        currentPage_b61f34a7 += n;
+        window['showPage_b61f34a7'](currentPage_b61f34a7);
+    };
+
+    // Inicjalizacja
+    window['showPage_b61f34a7'](1);
+
+    // Funkcjonalność powiększania obrazów
+    var images = container.querySelectorAll('img');
+    images.forEach(function(img) {
+        img.style.cursor = 'pointer';
+        img.style.transition = 'transform 0.3s ease';
+
+        img.addEventListener('click', function() {
+            if (this.classList.contains('zoomed')) {
+                // Pomniejsz obraz
+                this.classList.remove('zoomed');
+                this.style.position = '';
+                this.style.top = '';
+                this.style.left = '';
+                this.style.transform = '';
+                this.style.width = '100%';
+                this.style.maxWidth = '';
+                this.style.maxHeight = '';
+                this.style.zIndex = '';
+                this.style.backgroundColor = '';
+                this.style.padding = '';
+                this.style.boxShadow = '';
+            } else {
+                // Powiększ obraz
+                this.classList.add('zoomed');
+                this.style.position = 'fixed';
+                this.style.top = '50%';
+                this.style.left = '50%';
+                this.style.transform = 'translate(-50%, -50%)';
+                this.style.width = 'auto';
+                this.style.maxWidth = '95vw';
+                this.style.maxHeight = '95vh';
+                this.style.zIndex = '9999';
+                this.style.backgroundColor = 'rgba(255, 255, 255, 0.95)';
+                this.style.padding = '10px';
+                this.style.boxShadow = '0 4px 20px rgba(0, 0, 0, 0.3)';
+            }
+        });
+    });
+})();
+</script>
+
+</body>
+</html>
+
+"

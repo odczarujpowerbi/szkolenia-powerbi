@@ -1,0 +1,169 @@
+Użycie `CALCULATE` = 
+
+"
+
+<!DOCTYPE html>
+<html lang='pl'>
+<head>
+    <meta charset='UTF-8'>
+    <meta name='viewport' content='width=device-width, initial-scale=1.0'>
+    <title>Użycie `CALCULATE`</title>
+</head>
+<body>
+
+<div class='container' id='viz_603da463'>
+    <!-- Nawigacja na górze -->
+    <div class='navigation'>
+        <button id='prevBtn_603da463' onclick='changePage_603da463(-1)'>← Poprzednia</button>
+        <span class='page-indicator'>
+            Strona <span id='currentPage_603da463'>1</span> z <span id='totalPages_603da463'>3</span>
+        </span>
+        <button id='nextBtn_603da463' onclick='changePage_603da463(1)'>Następna →</button>
+    </div>
+
+    <!-- Strona 1 -->
+    <div class='page active'>
+        <h2>Przykład 1: Dodanie filtra</h2>
+        <pre><code>Sprzedaż Netto - Napoje =
+        <span class='dax-function'>CALCULATE</span>(
+            [Sprzedaż Netto],
+            dKategorie[Kategoria] = 'NAPOJE'
+        )</code></pre>
+        <p><strong>Co się dzieje:</strong></p>
+        <ul>
+        <li>Bierze miarę <code>[Sprzedaż Netto]</code></li>
+        <li>Dodaje filtr: tylko dla kategorii 'NAPOJE'</li>
+        <li>Zwraca sumę tylko dla napojów <img src='https://github.com/odczarujpowerbi/szkolenia-powerbi/blob/main/bin/Pasted%20image%2020251209172007.png?raw=true' width='100%'></li>
+        </ul>
+
+    </div>
+
+    <!-- Strona 2 -->
+    <div class='page'>
+        <h2>Przykład 2: Wiele filtrów</h2>
+        <pre><code>Sprzedaż VIP w <span class='dax-number'>2024</span> = 
+        <span class='dax-function'>CALCULATE</span>(
+            [Sprzedaż Netto],
+            dKlienci[Kategoria] = 'VIP',
+            <span class='dax-function'>YEAR</span>(dKalendarz[Data]) = <span class='dax-number'>2024</span>
+        )</code></pre>
+        <p><strong>Filtry są łączone operatorem AND</strong> – muszą być <strong>oba</strong> spełnione.</p>
+        <img src='https://github.com/odczarujpowerbi/szkolenia-powerbi/blob/main/bin/Pasted%20image%2020251209172247.png?raw=true' width='100%'>
+
+    </div>
+
+    <!-- Strona 3 -->
+    <div class='page'>
+        <h2>Przykład 3: Nadpisanie istniejącego filtra</h2>
+        <p>A co jeżeli chcemy policzyć udział sprzedaży w sprzedaży ogółem?</p>
+        <ul>
+        <li>Jeżeli nałożymy na wizualizację kolumnę, tworzy ona kontekst filtra/kolumny</li>
+        <li>Do pozbycia się kontekstu służy funkcja <code>REMOVEFILTERS()</code></li>
+        </ul>
+        <pre><code>Sprzedaż Netto - Cały Okres = 
+        <span class='dax-function'>CALCULATE</span>(
+            [Sprzedaż Netto], 
+            <span class='dax-function'>REMOVEFILTERS</span>(dKalendarz)
+        )</code></pre>
+        <p><strong>Co robi <code>REMOVEFILTERS</code>?</strong></p>
+        <ul>
+        <li>Usuwa filtry z tabeli <code>dKalendarz</code></li>
+        <li>Dzięki temu <code>Sprzedaż Netto - Cały Okres</code> pokazuje sumę dla <strong>wszystkich dni</strong>, niezależnie od tego, jaki kontekst <strong>Kalendarza</strong> zostanie nałożony na wizualizację</li>
+        </ul>
+        <p>Teraz wystarczy napisać miarę, która podzieli jedną wartość przez drugą.</p>
+        <pre><code>Sprzedaż Netto - Udział w Sprzedaży = <span class='dax-function'>DIVIDE</span>(
+            [Sprzedaż Netto],
+            [Sprzedaż Netto - Cały Okres],
+            <span class='dax-function'>BLANK</span>() <span class='dax-comment'>-- jeżeli dzielenie przez 0, to zwróć wartość pustą</span>
+        )</code></pre>
+        <img src='https://github.com/odczarujpowerbi/szkolenia-powerbi/blob/main/bin/Pasted%20image%2020251209173050.png?raw=true' width='100%'>
+        <p>> <strong>Ciekawostka:</strong> Funkcję <code>REMOVEFILTERS()</code> można używać zamiennie z funkcją <code>ALL()</code>. W tym przypadku ich zastosowanie jest identyczne, natomiast <code>ALL()</code> ma dodatkowe funkcjonalności, o których później.</p>
+        <p>---</p>
+
+    </div>
+
+</div>
+
+<script>
+(function() {
+    // Unikalny ID dla tej wizualizacji (wstrzykiwany przez Python)
+    var vizId = '603da463';
+    var containerId = 'viz_' + vizId;
+
+    var currentPage_603da463 = 1;
+    var container = document.getElementById(containerId);
+
+    if (!container) return;
+
+    var pages = container.querySelectorAll('.page');
+    var totalPages = pages.length;
+
+    document.getElementById('totalPages_' + vizId).textContent = totalPages;
+
+    window['showPage_603da463'] = function(n) {
+        if (n > totalPages) currentPage_603da463 = totalPages;
+        if (n < 1) currentPage_603da463 = 1;
+
+        for (var i = 0; i < pages.length; i++) {
+            pages[i].classList.remove('active');
+        }
+        pages[currentPage_603da463 - 1].classList.add('active');
+
+        document.getElementById('currentPage_' + vizId).textContent = currentPage_603da463;
+        document.getElementById('prevBtn_' + vizId).disabled = (currentPage_603da463 === 1);
+        document.getElementById('nextBtn_' + vizId).disabled = (currentPage_603da463 === totalPages);
+    };
+
+    window['changePage_603da463'] = function(n) {
+        currentPage_603da463 += n;
+        window['showPage_603da463'](currentPage_603da463);
+    };
+
+    // Inicjalizacja
+    window['showPage_603da463'](1);
+
+    // Funkcjonalność powiększania obrazów
+    var images = container.querySelectorAll('img');
+    images.forEach(function(img) {
+        img.style.cursor = 'pointer';
+        img.style.transition = 'transform 0.3s ease';
+
+        img.addEventListener('click', function() {
+            if (this.classList.contains('zoomed')) {
+                // Pomniejsz obraz
+                this.classList.remove('zoomed');
+                this.style.position = '';
+                this.style.top = '';
+                this.style.left = '';
+                this.style.transform = '';
+                this.style.width = '100%';
+                this.style.maxWidth = '';
+                this.style.maxHeight = '';
+                this.style.zIndex = '';
+                this.style.backgroundColor = '';
+                this.style.padding = '';
+                this.style.boxShadow = '';
+            } else {
+                // Powiększ obraz
+                this.classList.add('zoomed');
+                this.style.position = 'fixed';
+                this.style.top = '50%';
+                this.style.left = '50%';
+                this.style.transform = 'translate(-50%, -50%)';
+                this.style.width = 'auto';
+                this.style.maxWidth = '95vw';
+                this.style.maxHeight = '95vh';
+                this.style.zIndex = '9999';
+                this.style.backgroundColor = 'rgba(255, 255, 255, 0.95)';
+                this.style.padding = '10px';
+                this.style.boxShadow = '0 4px 20px rgba(0, 0, 0, 0.3)';
+            }
+        });
+    });
+})();
+</script>
+
+</body>
+</html>
+
+"

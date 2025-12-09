@@ -1,0 +1,214 @@
+ALL i REMOVEFILTERS - usuwanie filtrów = 
+
+"
+
+<!DOCTYPE html>
+<html lang='pl'>
+<head>
+    <meta charset='UTF-8'>
+    <meta name='viewport' content='width=device-width, initial-scale=1.0'>
+    <title>ALL i REMOVEFILTERS - usuwanie filtrów</title>
+</head>
+<body>
+
+<div class='container' id='viz_624e3a9b'>
+    <!-- Nawigacja na górze -->
+    <div class='navigation'>
+        <button id='prevBtn_624e3a9b' onclick='changePage_624e3a9b(-1)'>← Poprzednia</button>
+        <span class='page-indicator'>
+            Strona <span id='currentPage_624e3a9b'>1</span> z <span id='totalPages_624e3a9b'>3</span>
+        </span>
+        <button id='nextBtn_624e3a9b' onclick='changePage_624e3a9b(1)'>Następna →</button>
+    </div>
+
+    <!-- Strona 1 -->
+    <div class='page active'>
+        <h2>Czym jest ALL?</h2>
+        <p>ALL usuwa filtry z tabeli lub kolumny. Mówisz silnikowi DAX: 'zignoruj wszelkie filtry, które użytkownik (lub inne miary) nałożył na ten obiekt'.</p>
+        <pre><code><span class='dax-function'>ALL</span>(tabela)
+        <span class='dax-function'>ALL</span>(tabela[kolumna])
+        <span class='dax-function'>ALL</span>(tabela[kolumna1], tabela[kolumna2], ...)</code></pre>
+        <h2>Podstawowy przypadek - procent od całości</h2>
+        <p>Użytkownik wybiera w slicerze kategorię 'Computers'. Chcesz pokazać:</p>
+        <ul>
+        <li>Sprzedaż Computers: 400 000 zł</li>
+        <li>Sprzedaż całkowita: 1 000 000 zł (mimo filtru!)</li>
+        <li>Udział: 40%</li>
+        </ul>
+        <pre><code>Total fSprzedaż = <span class='dax-function'>SUM</span>(ffSprzedaż[fSprzedażAmount])
+
+        Total fSprzedaż All Categories = 
+        <span class='dax-function'>CALCULATE</span>(
+            [Total fSprzedaż],
+            <span class='dax-function'>ALL</span>(dProduct[ProductCategoryName])
+        )
+
+        fSprzedaż % = <span class='dax-function'>DIVIDE</span>([Total fSprzedaż], [Total fSprzedaż All Categories])</code></pre>
+        <p>Co się dzieje:</p>
+        <table>
+          <thead>
+            <tr>
+              <th>Kontekst użytkownika</th>
+              <th>[Total fSprzedaż]</th>
+              <th>[Total fSprzedaż All Categories]</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Computers</td>
+              <td>400 000 zł</td>
+              <td>1 000 000 zł</td>
+            </tr>
+            <tr>
+              <td>Cameras</td>
+              <td>250 000 zł</td>
+              <td>1 000 000 zł</td>
+            </tr>
+            <tr>
+              <td>TV</td>
+              <td>350 000 zł</td>
+              <td>1 000 000 zł</td>
+            </tr>
+          </tbody>
+        </table>
+        <p><code>ALL(dProduct[ProductCategoryName])</code> mówi: 'usuń filtr z kategorii, ale zostaw inne filtry (np. na roku, kraju)'.</p>
+
+    </div>
+
+    <!-- Strona 2 -->
+    <div class='page'>
+        <h2>ALL na całej tabeli vs na kolumnie</h2>
+        <ul>
+        <li>Usuwa filtr <strong>TYLKO</strong> z kategorii</li>
+        <li>Filtr na kraju, roku itp. nadal działa</li>
+        </ul>
+        <pre><code><span class='dax-function'>CALCULATE</span>(
+        	[Total fSprzedaż],
+        	<span class='dax-function'>ALL</span>(dProduct[ProductCategoryName])
+        )</code></pre>
+        <ul>
+        <li> Usuwa <strong>WSZYSTKIE</strong> filtry z tabeli <strong>dProduct</strong></li>
+        <li> Kolor, marka, podkategoria - wszystko zignorowane</li>
+        </ul>
+        <pre><code><span class='dax-function'>CALCULATE</span>(
+        	[Total fSprzedaż],
+        	 <span class='dax-function'>ALL</span>(dProduct)
+         )</code></pre>
+
+    </div>
+
+    <!-- Strona 3 -->
+    <div class='page'>
+        <h2>REMOVEFILTERS - nowszy odpowiednik ALL</h2>
+        <p>Od 2019 roku mamy <code>REMOVEFILTERS</code>, który robi dokładnie to samo co <code>ALL</code> w kontekście <code>CALCULATE</code>:</p>
+        <pre><code>// Te dwie miary są identyczne:
+        <span class='dax-function'>CALCULATE</span>(
+        	[Total fSprzedaż],
+        	 <span class='dax-function'>ALL</span>(dProduct)
+         )
+        <span class='dax-function'>CALCULATE</span>(
+        	[Total fSprzedaż],
+        	 <span class='dax-function'>REMOVEFILTERS</span>(dProduct)
+        )</code></pre>
+        <p>Dlaczego <code>REMOVEFILTERS</code> jest lepszy?</p>
+        <ol>
+        <li>Nazwa jasno mówi co robi (usuwa filtry, nie 'wszystko')</li>
+        <li><code>ALL</code> ma podwójne znaczenie - jako modyfikator filtra i jako funkcja tabelaryczna</li>
+        <li>Czytelność kodu</li>
+        </ol>
+        <pre><code>// ALL jako funkcja tabelaryczna (zwraca tabelę bez filtrów)
+        All Products Table = <span class='dax-function'>ALL</span>(dProduct)
+
+        // ALL jako modyfikator w <span class='dax-function'>CALCULATE</span> (usuwa filtry)
+        fSprzedaż Without Filter = <span class='dax-function'>CALCULATE</span>([Total fSprzedaż], <span class='dax-function'>ALL</span>(dProduct))
+
+        // REMOVEFILTERS - jednoznaczne, tylko modyfikator
+        fSprzedaż Without Filter = <span class='dax-function'>CALCULATE</span>([Total fSprzedaż], <span class='dax-function'>REMOVEFILTERS</span>(dProduct))</code></pre>
+
+    </div>
+
+</div>
+
+<script>
+(function() {
+    // Unikalny ID dla tej wizualizacji (wstrzykiwany przez Python)
+    var vizId = '624e3a9b';
+    var containerId = 'viz_' + vizId;
+
+    var currentPage_624e3a9b = 1;
+    var container = document.getElementById(containerId);
+
+    if (!container) return;
+
+    var pages = container.querySelectorAll('.page');
+    var totalPages = pages.length;
+
+    document.getElementById('totalPages_' + vizId).textContent = totalPages;
+
+    window['showPage_624e3a9b'] = function(n) {
+        if (n > totalPages) currentPage_624e3a9b = totalPages;
+        if (n < 1) currentPage_624e3a9b = 1;
+
+        for (var i = 0; i < pages.length; i++) {
+            pages[i].classList.remove('active');
+        }
+        pages[currentPage_624e3a9b - 1].classList.add('active');
+
+        document.getElementById('currentPage_' + vizId).textContent = currentPage_624e3a9b;
+        document.getElementById('prevBtn_' + vizId).disabled = (currentPage_624e3a9b === 1);
+        document.getElementById('nextBtn_' + vizId).disabled = (currentPage_624e3a9b === totalPages);
+    };
+
+    window['changePage_624e3a9b'] = function(n) {
+        currentPage_624e3a9b += n;
+        window['showPage_624e3a9b'](currentPage_624e3a9b);
+    };
+
+    // Inicjalizacja
+    window['showPage_624e3a9b'](1);
+
+    // Funkcjonalność powiększania obrazów
+    var images = container.querySelectorAll('img');
+    images.forEach(function(img) {
+        img.style.cursor = 'pointer';
+        img.style.transition = 'transform 0.3s ease';
+
+        img.addEventListener('click', function() {
+            if (this.classList.contains('zoomed')) {
+                // Pomniejsz obraz
+                this.classList.remove('zoomed');
+                this.style.position = '';
+                this.style.top = '';
+                this.style.left = '';
+                this.style.transform = '';
+                this.style.width = '100%';
+                this.style.maxWidth = '';
+                this.style.maxHeight = '';
+                this.style.zIndex = '';
+                this.style.backgroundColor = '';
+                this.style.padding = '';
+                this.style.boxShadow = '';
+            } else {
+                // Powiększ obraz
+                this.classList.add('zoomed');
+                this.style.position = 'fixed';
+                this.style.top = '50%';
+                this.style.left = '50%';
+                this.style.transform = 'translate(-50%, -50%)';
+                this.style.width = 'auto';
+                this.style.maxWidth = '95vw';
+                this.style.maxHeight = '95vh';
+                this.style.zIndex = '9999';
+                this.style.backgroundColor = 'rgba(255, 255, 255, 0.95)';
+                this.style.padding = '10px';
+                this.style.boxShadow = '0 4px 20px rgba(0, 0, 0, 0.3)';
+            }
+        });
+    });
+})();
+</script>
+
+</body>
+</html>
+
+"
