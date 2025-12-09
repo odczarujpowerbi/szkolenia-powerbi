@@ -13,12 +13,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "Theory - DRAFT/00. Przygotowanie środowiska.md",
+                "file": "Template/Markdown/HTML Embedded Media.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "00. Przygotowanie środowiska"
+              "title": "HTML Embedded Media"
             }
           }
         ],
@@ -75,8 +75,7 @@
               "title": "Bookmarks"
             }
           }
-        ],
-        "currentTab": 1
+        ]
       }
     ],
     "direction": "horizontal",
@@ -121,7 +120,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "Theory - DRAFT/00. Przygotowanie środowiska.md",
+                "file": "Template/Markdown/HTML Embedded Media.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -131,7 +130,7 @@
                 "unlinkedCollapsed": true
               },
               "icon": "links-coming-in",
-              "title": "Backlinks for 00. Przygotowanie środowiska"
+              "title": "Backlinks for HTML Embedded Media"
             }
           },
           {
@@ -162,7 +161,7 @@
             "state": {
               "type": "localgraph",
               "state": {
-                "file": "Theory - DRAFT/00. Przygotowanie środowiska.md",
+                "file": "Template/Markdown/HTML Embedded Media.md",
                 "options": {
                   "collapse-filter": true,
                   "search": "",
@@ -190,7 +189,7 @@
                 }
               },
               "icon": "lucide-git-fork",
-              "title": "Graph of 00. Przygotowanie środowiska"
+              "title": "Graph of HTML Embedded Media"
             }
           }
         ]
@@ -213,10 +212,13 @@
       "obsidian-git:Open Git source control": false
     }
   },
-  "active": "2d861daab21a57c6",
+  "active": "401f23438fc0af83",
   "lastOpenFiles": [
-    "Theory - DRAFT/03. Kontekst Filtra.md",
+    "Theory/00. Konfiguracja Power BI.md",
+    "Output/00. Konfiguracja Power BI - Przygotowanie środowiska Power BI.html",
     "Theory - DRAFT/00. Przygotowanie środowiska.md",
+    "bin/Pasted image 20251209161608.png",
+    "Theory - DRAFT/03. Kontekst Filtra.md",
     "bin/Pasted image 20251209155746.png",
     "bin/Pasted image 20251209155620.png",
     "bin/Pasted image 20251209155324.png",
@@ -246,7 +248,6 @@
     "Output/01. Podstawy DAX - Funkcje filtrujące.html",
     "Output/01. Podstawy DAX - Podstawowe funkcje agregujące.html",
     "Output/01. Podstawy DAX - Funkcje iteracyjne (X-functions).html",
-    "Output/TMDL",
     "TMDL/_HTML.md",
     "Theory/02. DAX - Zmienne.md",
     "Generator.canvas",
