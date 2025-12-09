@@ -75,7 +75,8 @@
               "title": "Bookmarks"
             }
           }
-        ]
+        ],
+        "currentTab": 1
       }
     ],
     "direction": "horizontal",
@@ -101,20 +102,6 @@
             }
           },
           {
-            "id": "08b4c519bba90d15",
-            "type": "leaf",
-            "state": {
-              "type": "all-properties",
-              "state": {
-                "sortOrder": "frequency",
-                "showSearch": false,
-                "searchQuery": ""
-              },
-              "icon": "lucide-archive",
-              "title": "All properties"
-            }
-          },
-          {
             "id": "b284d6787240cf61",
             "type": "leaf",
             "state": {
@@ -134,6 +121,7 @@
             "state": {
               "type": "backlink",
               "state": {
+                "file": "Theory - DRAFT/00. Przygotowanie środowiska.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -143,38 +131,25 @@
                 "unlinkedCollapsed": true
               },
               "icon": "links-coming-in",
-              "title": "Backlinks"
+              "title": "Backlinks for 00. Przygotowanie środowiska"
             }
           },
           {
-            "id": "fac4440afaf3e962",
+            "id": "1a571e2274b02b3e",
             "type": "leaf",
             "state": {
-              "type": "outgoing-link",
-              "state": {
-                "linksCollapsed": false,
-                "unlinkedCollapsed": true
-              },
-              "icon": "links-going-out",
-              "title": "Outgoing links"
-            }
-          },
-          {
-            "id": "dfa59fe69960e339",
-            "type": "leaf",
-            "state": {
-              "type": "tag",
+              "type": "all-properties",
               "state": {
                 "sortOrder": "frequency",
-                "useHierarchy": true,
                 "showSearch": false,
                 "searchQuery": ""
               },
-              "icon": "lucide-tags",
-              "title": "Tags"
+              "icon": "lucide-archive",
+              "title": "All properties"
             }
           }
-        ]
+        ],
+        "currentTab": 2
       },
       {
         "id": "a452d6d148f4c5b8",
@@ -238,8 +213,11 @@
       "obsidian-git:Open Git source control": false
     }
   },
-  "active": "401f23438fc0af83",
+  "active": "2d861daab21a57c6",
   "lastOpenFiles": [
+    "Theory - DRAFT/03. Kontekst Filtra.md",
+    "Theory - DRAFT/00. Przygotowanie środowiska.md",
+    "bin/Pasted image 20251209155746.png",
     "bin/Pasted image 20251209155620.png",
     "bin/Pasted image 20251209155324.png",
     "bin/Pasted image 20251209155301.png",
@@ -249,8 +227,6 @@
     "bin/Pasted image 20251209155134.png",
     "bin",
     "Pasted image 20251209155005.png",
-    "Theory - DRAFT/00. Przygotowanie środowiska.md",
-    "Theory - DRAFT/03. Kontekst Filtra.md",
     "Template/Markdown/Gaps Complete.md",
     "Template/Markdown/HTML Embedded Media.md",
     "Template/Markdown/Quiz.md",
