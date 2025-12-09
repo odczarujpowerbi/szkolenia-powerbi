@@ -11,12 +11,14 @@
             "id": "c6a8ca1a0082a34f",
             "type": "leaf",
             "state": {
-              "type": "html-view",
+              "type": "markdown",
               "state": {
-                "file": "02. OUTPUT/01. Podstawy DAX - Funkcje agregujące.html"
+                "file": "00. DRAFT/02. Wstęp do Calculate.md",
+                "mode": "source",
+                "source": false
               },
-              "icon": "code-glyph",
-              "title": "01. Podstawy DAX - Funkcje agregujące"
+              "icon": "lucide-file",
+              "title": "02. Wstęp do Calculate"
             }
           },
           {
@@ -196,6 +198,10 @@
   },
   "active": "7418d5e27621761b",
   "lastOpenFiles": [
+    "00. DRAFT/02. Wstęp do Calculate.md",
+    "02. OUTPUT/01. Podstawy DAX - Funkcje agregujące.html",
+    "01. THEORY/02. Wprowadzenie do CALCULATE.md",
+    "bin/Pasted image 20251209173050.png",
     "bin/Pasted image 20251209172247.png",
     "bin/Pasted image 20251209172231.png",
     "bin/Pasted image 20251209172007.png",
@@ -203,9 +209,7 @@
     "bin/Pasted image 20251209171436.png",
     "bin/Pasted image 20251209171433.png",
     "01. THEORY/01. Podstawy DAX.md",
-    "01. THEORY/02. Wprowadzenie do CALCULATE.md",
     "01. THEORY/03. DAX - Zmienne.md",
-    "02. OUTPUT/01. Podstawy DAX - Funkcje agregujące.html",
     "02. OUTPUT/01. Podstawy DAX.html",
     "02. OUTPUT/00. Konfiguracja Power BI - Przygotowanie środowiska Power BI.html",
     "01. THEORY/00. Konfiguracja Power BI.md",
@@ -216,7 +220,6 @@
     "00. DRAFT/03. Kontekst Filtra.md",
     "03. TEMPLATE/Markdown/Board.md",
     "00. DRAFT/01. Podstawy DAX.md",
-    "bin/Pasted image 20251209170031.png",
     "convert_md_to_powerbi.py.tmp.8660.1765295585837",
     "02. OUTPUT/01. Podstawy DAX - Funkcje dat.html",
     "02. OUTPUT/01. Podstawy DAX - Funkcje filtrujące.html",
@@ -240,8 +243,6 @@
     "Template/Markdown/Embed GIF.md",
     "Template/Markdown/Gaps Complete.md",
     "00. DRAFT/00. Przygotowanie środowiska.md",
-    "bin/Pasted image 20251209161608.png",
-    "USAGE.md",
     "Generator.canvas"
   ]
 }
