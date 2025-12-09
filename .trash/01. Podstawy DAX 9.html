@@ -1,4 +1,4 @@
-Przygotowanie środowiska Power BI = 
+01. Podstawy DAX = 
 
 "
 
@@ -7,7 +7,7 @@ Przygotowanie środowiska Power BI =
 <head>
     <meta charset='UTF-8'>
     <meta name='viewport' content='width=device-width, initial-scale=1.0'>
-    <title>Przygotowanie środowiska Power BI</title>
+    <title>01. Podstawy DAX</title>
     <style>
             * {
                 margin: 0;
@@ -229,92 +229,189 @@ Przygotowanie środowiska Power BI =
 </head>
 <body>
 
-<div class='container' id='viz_905d5ea6'>
+<div class='container' id='viz_bb3ff736'>
     <!-- Nawigacja na górze -->
     <div class='navigation'>
-        <button id='prevBtn_905d5ea6' onclick='changePage_905d5ea6(-1)'>← Poprzednia</button>
+        <button id='prevBtn_bb3ff736' onclick='changePage_bb3ff736(-1)'>← Poprzednia</button>
         <span class='page-indicator'>
-            Strona <span id='currentPage_905d5ea6'>1</span> z <span id='totalPages_905d5ea6'>4</span>
+            Strona <span id='currentPage_bb3ff736'>1</span> z <span id='totalPages_bb3ff736'>10</span>
         </span>
-        <button id='nextBtn_905d5ea6' onclick='changePage_905d5ea6(1)'>Następna →</button>
+        <button id='nextBtn_bb3ff736' onclick='changePage_bb3ff736(1)'>Następna →</button>
     </div>
 
     <!-- Strona 1 -->
     <div class='page active'>
-        <h1>Ustawienia programu Power BI</h1>
-        <p>Przed rozpoczęciem pracy z Power BI Desktop warto odpowiednio skonfigurować środowisko pracy. Prawidłowe ustawienia programu umożliwiają dostęp do nowych funkcji oraz optymalizują sposób pracy z danymi.</p>
-        <h2>Włączenie funkcji w wersji zapoznawczej (Preview Features)</h2>
-        <p>Power BI regularnie wprowadza nowe funkcje, które na początku dostępne są jako wersje zapoznawcze. Aby je włączyć:</p>
-        <ol>
-        <li>Otwórz <strong>Plik</strong> → <strong>Opcje i ustawienia</strong> → <strong>Opcje</strong></li>
-        <li>Przejdź do sekcji <strong>Funkcje w wersji zapoznawczej</strong> (Preview features)</li>
-        <li>Zaznacz następujące opcje:
+        <h1>Czym jest DAX?</h1>
+        <p><strong>DAX (Data Analysis Expressions)</strong> to język formuł używany w Power BI, Excel Power Pivot i Analysis Services do tworzenia:</p>
         <ul>
-        <li><strong>Obliczenia wizualne</strong> - pozwala na tworzenie bardziej zaawansowanych wizualizacji</li>
-        <li><strong>Nowe wizualizacje</strong> - daje dostęp do najnowszych typów wizualizacji</li>
+        <li><strong>Miar</strong> (measures) – dynamicznych obliczeń</li>
+        <li><strong>Kolumn kalkulowanych</strong> – stałych wartości w tabelach</li>
+        <li><strong>Tabel kalkulowanych</strong> – nowych tabel powstałych z obliczeń</li>
         </ul>
-        </li>
-        </ol>
-        <p><strong>Uwaga:</strong> Po włączeniu funkcji w wersji zapoznawczej konieczne jest ponowne uruchomienie Power BI Desktop.</p>
-        <p><img src='https://raw.githubusercontent.com/odczarujpowerbi/grafiki-do-szkolenia/main/PowerBI - Ustawienia - Preview Features.gif' width='100%'></p>
+        <p>DAX pozwala na analizę danych, tworzenie raportów i budowanie zaawansowanej logiki biznesowej.</p>
 
     </div>
 
     <!-- Strona 2 -->
     <div class='page'>
-        <h2>Konfiguracja ustawień raportu- włączenie interakcji między obiektami na raporcie</h2>
-        <p>Interakcje między wizualizacjami pozwalają na dynamiczne filtrowanie danych. Aby włączyć tę funkcję:</p>
-        <ol>
-        <li>Przejdź do widoku <strong>Raport</strong></li>
-        <li>Kliknij <strong>Plik</strong> → <strong>Opcje i ustawienia</strong> → <strong>Opcje</strong></li>
-        <li>W sekcji <strong>BIEŻĄCY PLIK</strong> → <strong>Ustawienia raportu</strong></li>
-        <li>Upewnij się, że opcja dotycząca interakcji wizualizacji jest włączona</li>
-        </ol>
-        <img src='https://github.com/odczarujpowerbi/szkolenia-powerbi/blob/main/bin/Pasted%20image%2020251209170359.png?raw=true' width='100%'>
-        <p>> Dzięki temu kliknięcie na element jednej wizualizacji (np. kolumnę na wykresie) automatycznie przefiltruje pozostałe wizualizacje na stronie raportu.</p>
+        <h1>Odwoływanie się do tabel i kolumn</h1>
+        <h2>Podstawowa składnia: NazwaTabeli[NazwaKolumny]</h2>
+        <p>W DAX zawsze odwołujesz się do kolumn poprzez <strong>nazwę tabeli</strong> i <strong>nazwę kolumny</strong> w nawiasach kwadratowych:</p>
+        <pre><code>Sprzedaz[Kwota]
+        Produkty[Kategoria]
+        Klienci[Miasto]</code></pre>
+        <p><strong>Zasady:</strong></p>
+        <ul>
+        <li>Nazwa tabeli <strong>przed</strong> nawiasem kwadratowym</li>
+        <li>Nazwa kolumny <strong>w</strong> nawiasach kwadratowych</li>
+        <li>To zapobiega niejednoznaczności gdy masz kolumny o tych samych nazwach w różnych tabelach</li>
+        </ul>
 
     </div>
 
     <!-- Strona 3 -->
     <div class='page'>
-        <h2>Ustawienia Power Query-  wyłączenie automatycznego wykrywania typów kolumn</h2>
-        <p>Automatyczne wykrywanie typów danych przez Power Query może czasem prowadzić do błędów lub niepożądanych konwersji. Zaleca się wyłączenie tej opcji i ręczne kontrolowanie typów danych:</p>
-        <ol>
-        <li>Otwórz <strong>Plik</strong> → <strong>Opcje i ustawienia</strong> → <strong>Opcje</strong></li>
-        <li>Przejdź do sekcji <strong>BIEŻĄCY PLIK</strong> → <strong>Ładowanie danych</strong></li>
-        <li>Odznacz opcję <strong>Automatycznie wykrywaj typy kolumn i nagłówki dla źródeł nieustrukturyzowanych</strong></li>
-        </ol>
-        <img src='https://github.com/odczarujpowerbi/szkolenia-powerbi/blob/main/bin/Pasted%20image%2020251209170441.png?raw=true' width='100%'>
-        <p>Dzięki temu będziesz mieć pełną kontrolę nad tym, jakie typy danych są przypisywane do poszczególnych kolumn.</p>
+        <h2>Nazwy z apostrofami (gdy zawierają spacje lub znaki specjalne)</h2>
+        <p>Jeśli nazwa tabeli lub kolumny zawiera:</p>
+        <ul>
+        <li>Spacje</li>
+        <li>Znaki specjalne (np. <code>-</code>, <code>#</code>, <code>%</code>)</li>
+        <li>Polskie znaki</li>
+        </ul>
+        <p>Musisz ująć je w <strong>apostrofy</strong> <code>'</code>:</p>
+        <pre><code>'Tabela Sprzedaży'[Kwota Netto]
+        'Dane-Produktów'[Nazwa Produktu]
+        '<span class='dax-number'>2024</span> Wyniki'[Przychód]
+        Produkty[Cena (netto)]</code></pre>
+        <p><strong>Przykład błędny:</strong></p>
+        <pre><code>Tabela Sprzedaży[Kwota Netto]  <span class='dax-comment'>-- ❌ Błąd składni!</span></code></pre>
+        <p><strong>Przykład poprawny:</strong></p>
+        <pre><code>'Tabela Sprzedaży'[Kwota Netto]  <span class='dax-comment'>-- ✅ Działa</span></code></pre>
 
     </div>
 
     <!-- Strona 4 -->
     <div class='page'>
-        <h2>Ustawienie wersji językowej</h2>
-        <p>Wersja językowa Power BI wpływa na separatory dziesiętne, daty oraz niektóre funkcje DAX:</p>
-        <ol>
-        <li>Otwórz <strong>Plik</strong> → <strong>Opcje i ustawienia</strong> → <strong>Opcje</strong></li>
-        <li>Przejdź do sekcji <strong>GLOBALNE</strong> → <strong>Ustawienia regionalne</strong></li>
-        <li>Wybierz odpowiedni język - zalecany jest Angielski ze względu na:
-        <ul>
-        <li>Prostszą integrację z AI</li>
-        <li>Spójność nazewnictwa z dokumentacją Microsoft Learn</li>
-        </ul>
-        </li>
-        </ol>
-        <img src='https://github.com/odczarujpowerbi/szkolenia-powerbi/blob/main/bin/Pasted%20image%2020251209170514.png?raw=true' width='100%'>
-        <p><strong>Uwaga:</strong></p>
-        <ul>
-        <li>W polskiej wersji separator dziesiętny to przecinek (<code>,</code>), a separator argumentów to średnik (<code>;</code>)</li>
-        <li>W angielskiej wersji separator dziesiętny to kropka (<code>.</code>), a separator argumentów to przecinek (<code>,</code>)</li>
-        </ul>
-        <p>Przykład różnic w składni DAX:</p>
-        <pre><code>// Wersja polska
-        Suma wartości = <span class='dax-function'>SUMX</span>(fDemo; fDemo[Price] * fDemo[Quantity])
+        <h2>Odwoływanie się do miar: [NazwaMiary]</h2>
+        <p>Miary (measures) odwołujesz się <strong>bez nazwy tabeli</strong>, tylko w nawiasach kwadratowych:</p>
+        <pre><code>[Suma Sprzedaży]
+        [Średnia Cena]
+        [Liczba Klientów]</code></pre>
+        <p>Możesz też użyć pełnej notacji z nazwą tabeli, ale nie jest to wymagane:</p>
+        <pre><code>Sprzedaz[Suma Sprzedaży]  <span class='dax-comment'>-- Działa, ale zwykle niepotrzebne</span></code></pre>
 
-        // Wersja angielska
-        Suma wartości = <span class='dax-function'>SUMX</span>(fDemo, fDemo[Price] * fDemo[Quantity])</code></pre>
+    </div>
+
+    <!-- Strona 5 -->
+    <div class='page'>
+        <h2>Pełna nazwa tabeli (gdy jest w innym modelu)</h2>
+        <p>Jeśli pracujesz z wieloma modelami danych, możesz użyć pełnej ścieżki:</p>
+        <pre><code>'Nazwa Modelu'[Nazwa Tabeli][Nazwa Kolumny]</code></pre>
+        <p>W większości przypadków wystarczy standardowa notacja <code>Tabela[Kolumna]</code>.</p>
+
+    </div>
+
+    <!-- Strona 6 -->
+    <div class='page'>
+        <h1>Typy danych w DAX</h1>
+        <p>DAX obsługuje kilka podstawowych typów danych:</p>
+        <table>
+          <thead>
+            <tr>
+              <th>Typ</th>
+              <th>Przykład</th>
+              <th>Opis</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>Liczby całkowite</strong></td>
+              <td><code>100</code>, <code>-50</code></td>
+              <td>Integer</td>
+            </tr>
+            <tr>
+              <td><strong>Liczby dziesiętne</strong></td>
+              <td><code>123.45</code>, <code>0.99</code></td>
+              <td>Decimal/Float</td>
+            </tr>
+            <tr>
+              <td><strong>Tekst</strong></td>
+              <td><code>'Warszawa'</code>, <code>'ABC'</code></td>
+              <td>String (w cudzysłowach)</td>
+            </tr>
+            <tr>
+              <td><strong>Data</strong></td>
+              <td><code>DATE(2024, 12, 8)</code></td>
+              <td>Date</td>
+            </tr>
+            <tr>
+              <td><strong>Data i czas</strong></td>
+              <td><code>DATETIME(2024, 12, 8, 14, 30, 0)</code></td>
+              <td>DateTime</td>
+            </tr>
+            <tr>
+              <td><strong>Logiczne</strong></td>
+              <td><code>TRUE</code>, <code>FALSE</code></td>
+              <td>Boolean</td>
+            </tr>
+            <tr>
+              <td><strong>Puste</strong></td>
+              <td><code>BLANK()</code></td>
+              <td>Null/Empty</td>
+            </tr>
+          </tbody>
+        </table>
+
+    </div>
+
+    <!-- Strona 7 -->
+    <div class='page'>
+        <h1>Operatory matematyczne</h1>
+        <pre><code>+   <span class='dax-comment'>-- Dodawanie</span>
+        -   <span class='dax-comment'>-- Odejmowanie</span>
+        *   <span class='dax-comment'>-- Mnożenie</span>
+        /   <span class='dax-comment'>-- Dzielenie</span>
+        ^   <span class='dax-comment'>-- Potęgowanie</span></code></pre>
+        <p><strong>Przykład:</strong></p>
+        <pre><code>Marża = 
+        Sprzedaz[Przychód] - Sprzedaz[Koszt]</code></pre>
+
+    </div>
+
+    <!-- Strona 8 -->
+    <div class='page'>
+        <h1>Operatory porównania</h1>
+        <pre><code>=   <span class='dax-comment'>-- Równe</span>
+        &lt;&gt;  <span class='dax-comment'>-- Różne od</span>
+        &gt;   <span class='dax-comment'>-- Większe niż</span>
+        &lt;   <span class='dax-comment'>-- Mniejsze niż</span>
+        &gt;=  <span class='dax-comment'>-- Większe lub równe</span>
+        &lt;=  <span class='dax-comment'>-- Mniejsze lub równe</span></code></pre>
+        <p><strong>Przykład:</strong></p>
+        <pre><code>Czy Duża Sprzedaż = 
+        Sprzedaz[Kwota] &gt; <span class='dax-number'>1000</span></code></pre>
+
+    </div>
+
+    <!-- Strona 9 -->
+    <div class='page'>
+        <h1>Operatory logiczne</h1>
+        <pre><code>&&  <span class='dax-comment'>-- AND (i)</span>
+        ||  <span class='dax-comment'>-- OR (lub)</span>
+        NOT <span class='dax-comment'>-- NOT (negacja)</span></code></pre>
+        <p><strong>Przykład:</strong></p>
+        <pre><code>Czy Premium = 
+        Klienci[Kategoria] = 'VIP' && Klienci[Przychód] &gt; <span class='dax-number'>10000</span></code></pre>
+
+    </div>
+
+    <!-- Strona 10 -->
+    <div class='page'>
+        <h1>Operator łączenia tekstów</h1>
+        <pre><code>&   <span class='dax-comment'>-- Konkatenacja (łączenie tekstów)</span></code></pre>
+        <p><strong>Przykład:</strong></p>
+        <pre><code>Pełna Nazwa = 
+        Klienci[Imię] & ' ' & Klienci[Nazwisko]</code></pre>
         <p>---</p>
 
     </div>
@@ -324,10 +421,10 @@ Przygotowanie środowiska Power BI =
 <script>
 (function() {
     // Unikalny ID dla tej wizualizacji (wstrzykiwany przez Python)
-    var vizId = '905d5ea6';
+    var vizId = 'bb3ff736';
     var containerId = 'viz_' + vizId;
 
-    var currentPage_905d5ea6 = 1;
+    var currentPage_bb3ff736 = 1;
     var container = document.getElementById(containerId);
 
     if (!container) return;
@@ -337,27 +434,27 @@ Przygotowanie środowiska Power BI =
 
     document.getElementById('totalPages_' + vizId).textContent = totalPages;
 
-    window['showPage_905d5ea6'] = function(n) {
-        if (n > totalPages) currentPage_905d5ea6 = totalPages;
-        if (n < 1) currentPage_905d5ea6 = 1;
+    window['showPage_bb3ff736'] = function(n) {
+        if (n > totalPages) currentPage_bb3ff736 = totalPages;
+        if (n < 1) currentPage_bb3ff736 = 1;
 
         for (var i = 0; i < pages.length; i++) {
             pages[i].classList.remove('active');
         }
-        pages[currentPage_905d5ea6 - 1].classList.add('active');
+        pages[currentPage_bb3ff736 - 1].classList.add('active');
 
-        document.getElementById('currentPage_' + vizId).textContent = currentPage_905d5ea6;
-        document.getElementById('prevBtn_' + vizId).disabled = (currentPage_905d5ea6 === 1);
-        document.getElementById('nextBtn_' + vizId).disabled = (currentPage_905d5ea6 === totalPages);
+        document.getElementById('currentPage_' + vizId).textContent = currentPage_bb3ff736;
+        document.getElementById('prevBtn_' + vizId).disabled = (currentPage_bb3ff736 === 1);
+        document.getElementById('nextBtn_' + vizId).disabled = (currentPage_bb3ff736 === totalPages);
     };
 
-    window['changePage_905d5ea6'] = function(n) {
-        currentPage_905d5ea6 += n;
-        window['showPage_905d5ea6'](currentPage_905d5ea6);
+    window['changePage_bb3ff736'] = function(n) {
+        currentPage_bb3ff736 += n;
+        window['showPage_bb3ff736'](currentPage_bb3ff736);
     };
 
     // Inicjalizacja
-    window['showPage_905d5ea6'](1);
+    window['showPage_bb3ff736'](1);
 
     // Funkcjonalność powiększania obrazów
     var images = container.querySelectorAll('img');

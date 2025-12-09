@@ -1,7 +1,7 @@
 createOrReplace
 
     table _HTML
-        lineageTag: 2f3b66d4-f70d-4c54-9722-0f806c551f1c
+        lineageTag: dd71492b-5d00-4dab-a5f0-c0f8059c6911
 
         measure '00. Konfiguracja Power BI - Główne widoki Power BI Desktop' = ```
 "
@@ -432,7 +432,7 @@ createOrReplace
 
 "
 ```
-            lineageTag: 99923b5c-b809-4745-9bf4-49ef1b8610ce
+            lineageTag: 568b4cf7-0a62-4b94-9495-348f06d97a62
 
         measure '00. Konfiguracja Power BI - Przygotowanie środowiska Power BI' = ```
 "
@@ -683,10 +683,13 @@ createOrReplace
         <ol>
         <li>Otwórz <strong>Plik</strong> → <strong>Opcje i ustawienia</strong> → <strong>Opcje</strong></li>
         <li>Przejdź do sekcji <strong>Funkcje w wersji zapoznawczej</strong> (Preview features)</li>
-        <li>Zaznacz następujące opcje:</li>
+        <li>Zaznacz następujące opcje:
+        <ul>
+        <li><strong>Obliczenia wizualne</strong> - pozwala na tworzenie bardziej zaawansowanych wizualizacji</li>
+        <li><strong>Nowe wizualizacje</strong> - daje dostęp do najnowszych typów wizualizacji</li>
+        </ul>
+        </li>
         </ol>
-        <p>   - <strong>Obliczenia wizualne</strong> - pozwala na tworzenie bardziej zaawansowanych wizualizacji</p>
-        <p>   - <strong>Nowe wizualizacje</strong> - daje dostęp do najnowszych typów wizualizacji</p>
         <p><strong>Uwaga:</strong> Po włączeniu funkcji w wersji zapoznawczej konieczne jest ponowne uruchomienie Power BI Desktop.</p>
         <p><img src='https://raw.githubusercontent.com/odczarujpowerbi/grafiki-do-szkolenia/main/PowerBI - Ustawienia - Preview Features.gif' width='100%'></p>
 
@@ -728,10 +731,13 @@ createOrReplace
         <ol>
         <li>Otwórz <strong>Plik</strong> → <strong>Opcje i ustawienia</strong> → <strong>Opcje</strong></li>
         <li>Przejdź do sekcji <strong>GLOBALNE</strong> → <strong>Ustawienia regionalne</strong></li>
-        <li>Wybierz odpowiedni język - zalecany jest Angielski ze względu na:</li>
+        <li>Wybierz odpowiedni język - zalecany jest Angielski ze względu na:
+        <ul>
+        <li>Prostszą integrację z AI</li>
+        <li>Spójność nazewnictwa z dokumentacją Microsoft Learn</li>
+        </ul>
+        </li>
         </ol>
-        <p>	- Prostszą integrację z AI</p>
-        <p>	- Spójność nazewnictwa z dokumentacją Microsoft Learn</p>
         <img src='https://github.com/odczarujpowerbi/szkolenia-powerbi/blob/main/bin/Pasted%20image%2020251209170514.png?raw=true' width='100%'>
         <p><strong>Uwaga:</strong></p>
         <ul>
@@ -834,7 +840,7 @@ createOrReplace
 
 "
 ```
-            lineageTag: c8fc8bcf-a315-4ec1-b663-f9d7784fbe28
+            lineageTag: 535d57a0-82c2-4063-bfd4-5fd8690bf986
 
         measure '01. Podstawy DAX - Funkcje agregujące' = ```
 "
@@ -1237,7 +1243,7 @@ createOrReplace
 
 "
 ```
-            lineageTag: 5ddd701a-079a-49ba-b83f-b8582e226a44
+            lineageTag: 15b5b5e6-b26a-4f28-afd6-3b50a6b8c0a0
 
         measure '01. Podstawy DAX - Funkcje dat' = ```
 "
@@ -1608,7 +1614,7 @@ createOrReplace
 
 "
 ```
-            lineageTag: 59546fa0-92f2-4b94-8b79-e139764db14a
+            lineageTag: 0021b381-bf67-4d46-9079-65c3689b924d
 
         measure '01. Podstawy DAX - Funkcje iteracyjne (X-functions)' = ```
 "
@@ -1997,7 +2003,7 @@ createOrReplace
 
 "
 ```
-            lineageTag: f1300f69-239c-4903-a142-a3cc7f657aea
+            lineageTag: c54666d6-eb3c-4cde-812f-89f36e819c8f
 
         measure '01. Podstawy DAX - Funkcje logiczne' = ```
 "
@@ -2383,7 +2389,7 @@ createOrReplace
 
 "
 ```
-            lineageTag: 93a2c7a5-2b84-4323-b7d3-3e6ec7810efc
+            lineageTag: b941b662-ba88-4c57-b4d8-b5c6f7c73681
 
         measure '01. Podstawy DAX - Funkcje tekstowe' = ```
 "
@@ -2754,7 +2760,7 @@ createOrReplace
 
 "
 ```
-            lineageTag: 643bb5ad-3170-4b36-9561-a48322a892a0
+            lineageTag: 1a48d460-f1b3-427b-977b-b96dbc89589a
 
         measure '01. Podstawy DAX' = ```
 "
@@ -3259,7 +3265,7 @@ createOrReplace
 
 "
 ```
-            lineageTag: 5505276e-a13b-4bcf-99d8-be9707fafed9
+            lineageTag: 443b2802-6cdb-419c-b627-b438b1a0cc91
 
         measure '02. Wprowadzenie do CALCULATE - Wprowadzenie do CALCULATE' = ```
 "
@@ -3844,9 +3850,9 @@ createOrReplace
 
 "
 ```
-            lineageTag: a77a37b9-a271-48c0-850c-fce1a139192d
+            lineageTag: f0ada595-bdf7-4633-9058-de36f3c1587e
 
-        measure '03. DAX - Zmienne' = ```
+        measure '03. Modyfikowanie Kontekstu - ALL i REMOVEFILTERS - usuwanie filtrów' = ```
 "
 
 <!DOCTYPE html>
@@ -3854,7 +3860,7 @@ createOrReplace
 <head>
     <meta charset='UTF-8'>
     <meta name='viewport' content='width=device-width, initial-scale=1.0'>
-    <title>03. DAX - Zmienne</title>
+    <title>ALL i REMOVEFILTERS - usuwanie filtrów</title>
     <style>
             * {
                 margin: 0;
@@ -4076,14 +4082,1731 @@ createOrReplace
 </head>
 <body>
 
-<div class='container' id='viz_8c2a7e79'>
+<div class='container' id='viz_624e3a9b'>
     <!-- Nawigacja na górze -->
     <div class='navigation'>
-        <button id='prevBtn_8c2a7e79' onclick='changePage_8c2a7e79(-1)'>← Poprzednia</button>
+        <button id='prevBtn_624e3a9b' onclick='changePage_624e3a9b(-1)'>← Poprzednia</button>
         <span class='page-indicator'>
-            Strona <span id='currentPage_8c2a7e79'>1</span> z <span id='totalPages_8c2a7e79'>4</span>
+            Strona <span id='currentPage_624e3a9b'>1</span> z <span id='totalPages_624e3a9b'>13</span>
         </span>
-        <button id='nextBtn_8c2a7e79' onclick='changePage_8c2a7e79(1)'>Następna →</button>
+        <button id='nextBtn_624e3a9b' onclick='changePage_624e3a9b(1)'>Następna →</button>
+    </div>
+
+    <!-- Strona 1 -->
+    <div class='page active'>
+        <h2>Czym jest ALL?</h2>
+        <p>ALL usuwa filtry z tabeli lub kolumny. Mówisz silnikowi DAX: 'zignoruj wszelkie filtry, które użytkownik (lub inne miary) nałożył na ten obiekt'.</p>
+        <pre><code><span class='dax-function'>ALL</span>(tabela)
+        <span class='dax-function'>ALL</span>(tabela[kolumna])
+        <span class='dax-function'>ALL</span>(tabela[kolumna1], tabela[kolumna2], ...)</code></pre>
+        <h2>Podstawowy przypadek - procent od całości</h2>
+        <p>Użytkownik wybiera w slicerze kategorię 'Computers'. Chcesz pokazać:</p>
+        <ul>
+        <li>Sprzedaż Computers: 400 000 zł</li>
+        <li>Sprzedaż całkowita: 1 000 000 zł (mimo filtru!)</li>
+        <li>Udział: 40%</li>
+        </ul>
+        <pre><code>Total Sales = <span class='dax-function'>SUM</span>(fSales[SalesAmount])
+
+        Total Sales All Categories = 
+        <span class='dax-function'>CALCULATE</span>(
+            [Total Sales],
+            <span class='dax-function'>ALL</span>(dProduct[ProductCategoryName])
+        )
+
+        Sales % = <span class='dax-function'>DIVIDE</span>([Total Sales], [Total Sales All Categories])</code></pre>
+        <p>Co się dzieje:</p>
+        <table>
+          <thead>
+            <tr>
+              <th>Kontekst użytkownika</th>
+              <th>[Total Sales]</th>
+              <th>[Total Sales All Categories]</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Computers</td>
+              <td>400 000 zł</td>
+              <td>1 000 000 zł</td>
+            </tr>
+            <tr>
+              <td>Cameras</td>
+              <td>250 000 zł</td>
+              <td>1 000 000 zł</td>
+            </tr>
+            <tr>
+              <td>TV</td>
+              <td>350 000 zł</td>
+              <td>1 000 000 zł</td>
+            </tr>
+          </tbody>
+        </table>
+        <p><code>ALL(dProduct[ProductCategoryName])</code> mówi: 'usuń filtr z kategorii, ale zostaw inne filtry (np. na roku, kraju)'.</p>
+
+    </div>
+
+    <!-- Strona 2 -->
+    <div class='page'>
+        <h2>ALL na całej tabeli vs na kolumnie</h2>
+        <pre><code>// Usuwa filtr TYLKO z kategorii
+        // Filtr na kraju, roku itp. nadal działa
+        V1 = <span class='dax-function'>CALCULATE</span>([Total Sales], <span class='dax-function'>ALL</span>(dProduct[ProductCategoryName]))
+
+        // Usuwa WSZYSTKIE filtry z tabeli dProduct
+        // Kolor, marka, podkategoria - wszystko zignorowane
+        V2 = <span class='dax-function'>CALCULATE</span>([Total Sales], <span class='dax-function'>ALL</span>(dProduct))</code></pre>
+
+    </div>
+
+    <!-- Strona 3 -->
+    <div class='page'>
+        <h2>REMOVEFILTERS - nowszy odpowiednik ALL</h2>
+        <p>Od 2019 roku mamy REMOVEFILTERS, który robi dokładnie to samo co ALL w kontekście CALCULATE:</p>
+        <pre><code>// Te dwie miary są identyczne:
+        V1 = <span class='dax-function'>CALCULATE</span>([Total Sales], <span class='dax-function'>ALL</span>(dProduct))
+        V2 = <span class='dax-function'>CALCULATE</span>([Total Sales], <span class='dax-function'>REMOVEFILTERS</span>(dProduct))</code></pre>
+        <p>Dlaczego REMOVEFILTERS jest lepszy?</p>
+        <ol>
+        <li>Nazwa jasno mówi co robi (usuwa filtry, nie 'wszystko')</li>
+        <li>ALL ma podwójne znaczenie - jako modyfikator filtra i jako funkcja tabelaryczna</li>
+        <li>Czytelność kodu</li>
+        </ol>
+        <pre><code>// ALL jako funkcja tabelaryczna (zwraca tabelę bez filtrów)
+        All Products Table = <span class='dax-function'>ALL</span>(dProduct)
+
+        // ALL jako modyfikator w <span class='dax-function'>CALCULATE</span> (usuwa filtry)
+        Sales Without Filter = <span class='dax-function'>CALCULATE</span>([Total Sales], <span class='dax-function'>ALL</span>(dProduct))
+
+        // REMOVEFILTERS - jednoznaczne, tylko modyfikator
+        Sales Without Filter = <span class='dax-function'>CALCULATE</span>([Total Sales], <span class='dax-function'>REMOVEFILTERS</span>(dProduct))</code></pre>
+        <h1>ALLEXCEPT - usuń wszystko OPRÓCZ</h1>
+        <h2>Problem, który rozwiązuje ALLEXCEPT</h2>
+        <p>Wyobraź sobie tabelę dProduct z kolumnami: ProductKey, ProductName, ProductCategoryName, ProductSubcategoryName, BrandName, Color, UnitPrice.</p>
+        <p>Chcesz policzyć udział produktu w swojej kategorii. Potrzebujesz usunąć filtry z produktu, ale ZACHOWAĆ filtr kategorii.</p>
+        <pre><code>// Podejście <span class='dax-number'>1</span>: wymieniasz wszystko co chcesz usunąć
+        Sales Category Total v1 =
+        <span class='dax-function'>CALCULATE</span>(
+            [Total Sales],
+            <span class='dax-function'>ALL</span>(
+                dProduct[ProductKey],
+                dProduct[ProductName],
+                dProduct[ProductSubcategoryName],
+                dProduct[BrandName],
+                dProduct[Color],
+                dProduct[UnitPrice]
+            )
+        )</code></pre>
+        <p>Działa, ale jest nieczytelne i łatwo o pomyłkę. A co jeśli ktoś doda nową kolumnę do tabeli?</p>
+        <pre><code>// Podejście <span class='dax-number'>2</span>: ALLEXCEPT
+        Sales Category Total v2 =
+        <span class='dax-function'>CALCULATE</span>(
+            [Total Sales],
+            <span class='dax-function'>ALLEXCEPT</span>(dProduct, dProduct[ProductCategoryName])
+        )</code></pre>
+        <p>ALLEXCEPT mówi: 'usuń wszystkie filtry z dProduct OPRÓCZ filtra na ProductCategoryName'.</p>
+
+    </div>
+
+    <!-- Strona 4 -->
+    <div class='page'>
+        <h2>Wizualizacja działania</h2>
+        <p>Raport pokazuje produkty w kategorii 'Computers':</p>
+        <table>
+          <thead>
+            <tr>
+              <th>Produkt</th>
+              <th>[Total Sales]</th>
+              <th>[Sales Category Total]</th>
+              <th>Udział</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Laptop A</td>
+              <td>150 000 zł</td>
+              <td>400 000 zł</td>
+              <td>37.5%</td>
+            </tr>
+            <tr>
+              <td>Laptop B</td>
+              <td>120 000 zł</td>
+              <td>400 000 zł</td>
+              <td>30.0%</td>
+            </tr>
+            <tr>
+              <td>Desktop C</td>
+              <td>130 000 zł</td>
+              <td>400 000 zł</td>
+              <td>32.5%</td>
+            </tr>
+          </tbody>
+        </table>
+        <p>Gdy użytkownik przełączy na kategorię 'Cameras':</p>
+        <table>
+          <thead>
+            <tr>
+              <th>Produkt</th>
+              <th>[Total Sales]</th>
+              <th>[Sales Category Total]</th>
+              <th>Udział</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Camera X</td>
+              <td>100 000 zł</td>
+              <td>250 000 zł</td>
+              <td>40.0%</td>
+            </tr>
+            <tr>
+              <td>Camera Y</td>
+              <td>150 000 zł</td>
+              <td>250 000 zł</td>
+              <td>60.0%</td>
+            </tr>
+          </tbody>
+        </table>
+        <p>Filtr kategorii jest respektowany - total zmienia się z 400 000 na 250 000.</p>
+
+    </div>
+
+    <!-- Strona 5 -->
+    <div class='page'>
+        <h2>ALLEXCEPT z wieloma kolumnami</h2>
+        <p>Możesz zachować filtry na wielu kolumnach:</p>
+        <pre><code>// Udział produktu w swojej kategorii I kraju
+        Sales Category Country Total =
+        <span class='dax-function'>CALCULATE</span>(
+            [Total Sales],
+            <span class='dax-function'>ALLEXCEPT</span>(
+                dProduct,
+                dProduct[ProductCategoryName]
+            ),
+            <span class='dax-function'>ALLEXCEPT</span>(
+                dGeography,
+                dGeography[RegionCountryName]
+            )
+        )</code></pre>
+        <h1>ALLSELECTED - uwzględnij kontekst fragmentatora</h1>
+        <p>Masz raport z tabelą pokazującą sprzedaż po kategoriach. Użytkownik wybiera w slicerze trzy kategorie: Computers, Cameras, TV. Chce widzieć udział każdej z tych trzech w ich łącznej sumie.</p>
+        <pre><code>// Próba z ALL
+        Sales % with ALL =
+        <span class='dax-function'>DIVIDE</span>(
+            [Total Sales],
+            <span class='dax-function'>CALCULATE</span>([Total Sales], <span class='dax-function'>ALL</span>(dProduct[ProductCategoryName]))
+        )</code></pre>
+        <p>Problem: ALL usuwa WSZYSTKIE filtry z kategorii - czyli ignoruje też slicer. Mianownik to sprzedaż wszystkich kategorii w bazie (także Audio, Games, itd.), nie tylko trzech wybranych.</p>
+        <table>
+          <thead>
+            <tr>
+              <th>Kategoria</th>
+              <th>[Total Sales]</th>
+              <th>Mianownik (ALL)</th>
+              <th>%</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Computers</td>
+              <td>400 000 zł</td>
+              <td>2 000 000 zł</td>
+              <td>20%</td>
+            </tr>
+            <tr>
+              <td>Cameras</td>
+              <td>250 000 zł</td>
+              <td>2 000 000 zł</td>
+              <td>12.5%</td>
+            </tr>
+            <tr>
+              <td>TV</td>
+              <td>350 000 zł</td>
+              <td>2 000 000 zł</td>
+              <td>17.5%</td>
+            </tr>
+            <tr>
+              <td><strong>Suma</strong></td>
+              <td><strong>1 000 000 zł</strong></td>
+              <td></td>
+              <td><strong>50%</strong> ← nie sumuje się do 100%!</td>
+            </tr>
+          </tbody>
+        </table>
+
+    </div>
+
+    <!-- Strona 6 -->
+    <div class='page'>
+        <h2>ALLSELECTED - rozwiązanie</h2>
+        <p>ALLSELECTED usuwa filtry z wizualizacji (tabeli, wykresu), ale ZACHOWUJE filtry zewnętrzne (slicery, filtry strony/raportu).</p>
+        <pre><code>Sales % with ALLSELECTED =
+        <span class='dax-function'>DIVIDE</span>(
+            [Total Sales],
+            <span class='dax-function'>CALCULATE</span>([Total Sales], <span class='dax-function'>ALLSELECTED</span>(dProduct[ProductCategoryName]))
+        )</code></pre>
+        <p>Teraz mianownik to suma tylko dla kategorii wybranych w slicerze:</p>
+        <table>
+          <thead>
+            <tr>
+              <th>Kategoria</th>
+              <th>[Total Sales]</th>
+              <th>Mianownik (ALLSELECTED)</th>
+              <th>%</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Computers</td>
+              <td>400 000 zł</td>
+              <td>1 000 000 zł</td>
+              <td>40%</td>
+            </tr>
+            <tr>
+              <td>Cameras</td>
+              <td>250 000 zł</td>
+              <td>1 000 000 zł</td>
+              <td>25%</td>
+            </tr>
+            <tr>
+              <td>TV</td>
+              <td>350 000 zł</td>
+              <td>1 000 000 zł</td>
+              <td>35%</td>
+            </tr>
+            <tr>
+              <td><strong>Suma</strong></td>
+              <td><strong>1 000 000 zł</strong></td>
+              <td></td>
+              <td><strong>100%</strong> ✓</td>
+            </tr>
+          </tbody>
+        </table>
+        <h2>ALLSELECTED bez argumentów</h2>
+        <p>Możesz użyć ALLSELECTED() bez podawania tabeli/kolumny - wtedy usuwa filtry wizualizacji ze WSZYSTKICH tabel:</p>
+        <pre><code>// Usuwa filtr wizualizacji tylko z kategorii
+        V1 = <span class='dax-function'>CALCULATE</span>([Total Sales], <span class='dax-function'>ALLSELECTED</span>(dProduct[ProductCategoryName]))
+
+        // Usuwa filtr wizualizacji ze wszystkiego (produkty, czas, geografia...)
+        V2 = <span class='dax-function'>CALCULATE</span>([Total Sales], <span class='dax-function'>ALLSELECTED</span>())</code></pre>
+
+    </div>
+
+    <!-- Strona 7 -->
+    <div class='page'>
+        <h2>Porównanie ALL vs ALLSELECTED</h2>
+        <pre><code>Total Sales = <span class='dax-function'>SUM</span>(fSales[SalesAmount])
+
+        // Ignoruje WSZYSTKO - zawsze pełna baza
+        Grand Total ALL =
+        <span class='dax-function'>CALCULATE</span>([Total Sales], <span class='dax-function'>ALL</span>(dProduct))
+
+        // Ignoruje wizualizację, respektuje slicery
+        Grand Total ALLSELECTED =
+        <span class='dax-function'>CALCULATE</span>([Total Sales], <span class='dax-function'>ALLSELECTED</span>(dProduct))</code></pre>
+        <p>Scenariusz: Slicer = 'Computers', tabela pokazuje podkategorie:</p>
+        <table>
+          <thead>
+            <tr>
+              <th>Podkategoria</th>
+              <th>[Total Sales]</th>
+              <th>[Grand Total ALL]</th>
+              <th>[Grand Total ALLSELECTED]</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Laptops</td>
+              <td>200 000 zł</td>
+              <td>2 000 000 zł</td>
+              <td>400 000 zł</td>
+            </tr>
+            <tr>
+              <td>Desktops</td>
+              <td>150 000 zł</td>
+              <td>2 000 000 zł</td>
+              <td>400 000 zł</td>
+            </tr>
+            <tr>
+              <td>Tablets</td>
+              <td>50 000 zł</td>
+              <td>2 000 000 zł</td>
+              <td>400 000 zł</td>
+            </tr>
+          </tbody>
+        </table>
+        <ul>
+        <li>ALL daje całą bazę (2 mln)</li>
+        <li>ALLSELECTED daje sumę dla 'Computers' (400k) - respektuje slicer</li>
+        </ul>
+
+    </div>
+
+    <!-- Strona 8 -->
+    <div class='page'>
+        <h1>KEEPFILTERS - zachowaj istniejące filtry</h1>
+        <h2>Problem: CALCULATE nadpisuje filtry</h2>
+        <p>Domyślnie filtr w CALCULATE <strong>zastępuje</strong> istniejący filtr na tej samej kolumnie:</p>
+        <pre><code>Sales Computers =
+        <span class='dax-function'>CALCULATE</span>(
+            [Total Sales],
+            dProduct[ProductCategoryName] = 'Computers'
+        )</code></pre>
+        <p>Co się stanie, gdy użytkownik wybierze w slicerze 'Cameras'?</p>
+        <table>
+          <thead>
+            <tr>
+              <th>Kontekst użytkownika</th>
+              <th>[Total Sales]</th>
+              <th>[Sales Computers]</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>(brak filtra)</td>
+              <td>1 000 000 zł</td>
+              <td>400 000 zł</td>
+            </tr>
+            <tr>
+              <td>Cameras</td>
+              <td>250 000 zł</td>
+              <td>400 000 zł</td>
+            </tr>
+            <tr>
+              <td>Computers</td>
+              <td>400 000 zł</td>
+              <td>400 000 zł</td>
+            </tr>
+          </tbody>
+        </table>
+        <p>Filtr z CALCULATE wygrywa - nadpisuje wybór użytkownika. Czasem tego chcesz, czasem nie.</p>
+
+    </div>
+
+    <!-- Strona 9 -->
+    <div class='page'>
+        <h2>KEEPFILTERS - przecięcie filtrów</h2>
+        <p>KEEPFILTERS mówi: 'nie nadpisuj, tylko znajdź część wspólną'.</p>
+        <pre><code>Sales Computers Keep =
+        <span class='dax-function'>CALCULATE</span>(
+            [Total Sales],
+            <span class='dax-function'>KEEPFILTERS</span>(dProduct[ProductCategoryName] = 'Computers')
+        )</code></pre>
+        <p>Teraz:</p>
+        <table>
+          <thead>
+            <tr>
+              <th>Kontekst użytkownika</th>
+              <th>[Sales Computers]</th>
+              <th>[Sales Computers Keep]</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>(brak filtra)</td>
+              <td>400 000 zł</td>
+              <td>400 000 zł</td>
+            </tr>
+            <tr>
+              <td>Cameras</td>
+              <td>400 000 zł</td>
+              <td><strong>BLANK</strong></td>
+            </tr>
+            <tr>
+              <td>Computers</td>
+              <td>400 000 zł</td>
+              <td>400 000 zł</td>
+            </tr>
+          </tbody>
+        </table>
+        <p>Gdy użytkownik wybiera 'Cameras', KEEPFILTERS szuka przecięcia: (Cameras) ∩ (Computers) = zbiór pusty = BLANK.</p>
+
+    </div>
+
+    <!-- Strona 10 -->
+    <div class='page'>
+        <h2>Praktyczny przypadek dla KEEPFILTERS</h2>
+        <p>Masz raport z podziałem na segmenty klientów. Chcesz pokazać sprzedaż 'Premium' tylko gdy użytkownik patrzy na segment Premium (nie na siłę):</p>
+        <pre><code>// Bez KEEPFILTERS - zawsze pokazuje Premium, nawet gdy wybrano 'Standard'
+        Sales Premium Wrong =
+        <span class='dax-function'>CALCULATE</span>([Total Sales], dCustomer[Segment] = 'Premium')
+
+        // Z KEEPFILTERS - pokazuje Premium tylko gdy kontekst to Premium
+        Sales Premium Correct =
+        <span class='dax-function'>CALCULATE</span>([Total Sales], <span class='dax-function'>KEEPFILTERS</span>(dCustomer[Segment] = 'Premium'))</code></pre>
+
+    </div>
+
+    <!-- Strona 11 -->
+    <div class='page'>
+        <h2>Kiedy używać KEEPFILTERS?</h2>
+        <p>Rzadko - ale są scenariusze:</p>
+        <ol>
+        <li>Walidacja danych (pokaż wartość tylko gdy kontekst się zgadza)</li>
+        <li>Warunkowe KPI (np. 'cel' ma sens tylko dla konkretnego regionu)</li>
+        <li>Unikanie 'wyciekania' danych do innych kontekstów</li>
+        </ol>
+
+    </div>
+
+    <!-- Strona 12 -->
+    <div class='page'>
+        <h1>CROSSFILTER</h1>
+        <p>Umożliwia tymczasową zmianę kierunku filtrowania relacji w kontekście danego wyrażenia DAX.</p>
+        <pre><code>CROSSFILTER(&lt;columnName1&gt;, &lt;columnName2&gt;, &lt;direction&gt;)</code></pre>
+        <ul>
+        <li><code>Both</code> — filtrowanie dwukierunkowe (filtry przechodzą w obu kierunkach, domyślnie jest jednokierunkowe).</li>
+        <li><code>None</code> — wyłącza filtrowanie między tabelami.</li>
+        <li><code>OneWay</code> — jednokierunkowe filtrowanie z Column1 do Column2 (domyślnie).</li>
+        <li><code>OneWayReverse</code> — jednokierunkowe filtrowanie z Column2 do Column1.</li>
+        </ul>
+        <p>###### Przykład</p>
+        <pre><code>BiDi= 
+        	CALCULATE(
+        		[Distinct Count of ProductKey]
+        		, CROSSFILTER(FactInternetSales[ProductKey]
+        		, DimProduct[ProductKey]
+        		, Both)
+        	)</code></pre>
+
+    </div>
+
+    <!-- Strona 13 -->
+    <div class='page'>
+        <h1>USERELATIONSHIP</h1>
+        <p><strong>USERELATIONSHIP</strong> aktywuje nieaktywną relację między tabelami na czas trwania obliczenia. W modelu Power BI między dwiema tabelami może istnieć wiele relacji, ale tylko jedna może być aktywna domyślnie.</p>
+        <h2>Typowy scenariusz</h2>
+        <p>Najczęstszy przypadek to tabela faktów z wieloma kolumnami dat powiązanymi z jedną tabelą kalendarza:</p>
+        <pre><code>Sales
+        ├─ OrderDate      → 'Calendar'[Date] (relacja aktywna)
+        ├─ ShipmentDate   → 'Calendar'[Date] (relacja nieaktywna)
+        └─ DeliveryDate   → 'Calendar'[Date] (relacja nieaktywna)</code></pre>
+        <h1>Podstawowa składnia</h1>
+        <pre><code><span class='dax-comment'>------- Miara używająca domyślnej relacji (OrderDate)</span>
+        Sales Amount = 
+            <span class='dax-function'>SUMX</span> ( Sales, Sales[Quantity] * Sales[Unit Price] )
+
+        <span class='dax-comment'>------- Miara aktywująca relację ShipmentDate</span>
+        Sales Amount by Shipment = 
+        <span class='dax-function'>CALCULATE</span> (
+            <span class='dax-function'>SUMX</span> ( Sales, Sales[Quantity] * Sales[Unit Price] ),
+            <span class='dax-function'>USERELATIONSHIP</span> ( Sales[ShipmentDate], 'Calendar'[Date] )
+        )
+
+        <span class='dax-comment'>------- Miara aktywująca relację DeliveryDate</span>
+        Sales Amount by Delivery = 
+        <span class='dax-function'>CALCULATE</span> (
+            <span class='dax-function'>SUMX</span> ( Sales, Sales[Quantity] * Sales[Unit Price] ),
+            <span class='dax-function'>USERELATIONSHIP</span> ( Sales[DeliveryDate], 'Calendar'[Date] )
+        )</code></pre>
+        <p><strong>Kluczowe zasady:</strong></p>
+        <ul>
+        <li>USERELATIONSHIP działa tylko wewnątrz CALCULATE lub CALCULATETABLE</li>
+        <li>Pierwszym parametrem jest kolumna z tabeli faktów (strona 'wiele')</li>
+        <li>Drugim parametrem jest kolumna z tabeli wymiaru (strona 'jeden')</li>
+        <li>Relacja musi fizycznie istnieć w modelu (być zdefiniowana, choć nieaktywna)</li>
+        </ul>
+
+    </div>
+
+</div>
+
+<script>
+(function() {
+    // Unikalny ID dla tej wizualizacji (wstrzykiwany przez Python)
+    var vizId = '624e3a9b';
+    var containerId = 'viz_' + vizId;
+
+    var currentPage_624e3a9b = 1;
+    var container = document.getElementById(containerId);
+
+    if (!container) return;
+
+    var pages = container.querySelectorAll('.page');
+    var totalPages = pages.length;
+
+    document.getElementById('totalPages_' + vizId).textContent = totalPages;
+
+    window['showPage_624e3a9b'] = function(n) {
+        if (n > totalPages) currentPage_624e3a9b = totalPages;
+        if (n < 1) currentPage_624e3a9b = 1;
+
+        for (var i = 0; i < pages.length; i++) {
+            pages[i].classList.remove('active');
+        }
+        pages[currentPage_624e3a9b - 1].classList.add('active');
+
+        document.getElementById('currentPage_' + vizId).textContent = currentPage_624e3a9b;
+        document.getElementById('prevBtn_' + vizId).disabled = (currentPage_624e3a9b === 1);
+        document.getElementById('nextBtn_' + vizId).disabled = (currentPage_624e3a9b === totalPages);
+    };
+
+    window['changePage_624e3a9b'] = function(n) {
+        currentPage_624e3a9b += n;
+        window['showPage_624e3a9b'](currentPage_624e3a9b);
+    };
+
+    // Inicjalizacja
+    window['showPage_624e3a9b'](1);
+
+    // Funkcjonalność powiększania obrazów
+    var images = container.querySelectorAll('img');
+    images.forEach(function(img) {
+        img.style.cursor = 'pointer';
+        img.style.transition = 'transform 0.3s ease';
+
+        img.addEventListener('click', function() {
+            if (this.classList.contains('zoomed')) {
+                // Pomniejsz obraz
+                this.classList.remove('zoomed');
+                this.style.position = '';
+                this.style.top = '';
+                this.style.left = '';
+                this.style.transform = '';
+                this.style.width = '100%';
+                this.style.maxWidth = '';
+                this.style.maxHeight = '';
+                this.style.zIndex = '';
+                this.style.backgroundColor = '';
+                this.style.padding = '';
+                this.style.boxShadow = '';
+            } else {
+                // Powiększ obraz
+                this.classList.add('zoomed');
+                this.style.position = 'fixed';
+                this.style.top = '50%';
+                this.style.left = '50%';
+                this.style.transform = 'translate(-50%, -50%)';
+                this.style.width = 'auto';
+                this.style.maxWidth = '95vw';
+                this.style.maxHeight = '95vh';
+                this.style.zIndex = '9999';
+                this.style.backgroundColor = 'rgba(255, 255, 255, 0.95)';
+                this.style.padding = '10px';
+                this.style.boxShadow = '0 4px 20px rgba(0, 0, 0, 0.3)';
+            }
+        });
+    });
+})();
+</script>
+
+</body>
+</html>
+
+"
+```
+            lineageTag: 07e0fefe-df05-46cd-ac86-0a651cf0e6df
+
+        measure '04. Tworzenie zestawień tabelarycznych' = ```
+"
+
+<!DOCTYPE html>
+<html lang='pl'>
+<head>
+    <meta charset='UTF-8'>
+    <meta name='viewport' content='width=device-width, initial-scale=1.0'>
+    <title>04. Tworzenie zestawień tabelarycznych</title>
+    <style>
+            * {
+                margin: 0;
+                padding: 0;
+                box-sizing: border-box;
+            }
+    
+            body {
+                font-family: 'Roboto', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+                font-size: 16px;
+                font-weight: 400;
+                line-height: 1.7;
+                color: #333;
+                background: transparent;
+                padding: 20px;
+            }
+    
+            .container {
+                max-width: 800px;
+                margin: 0 auto;
+                background: transparent;
+                padding: 40px;
+            }
+    
+            .navigation {
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                margin-bottom: 40px;
+                padding-bottom: 20px;
+                border-bottom: 1px solid #e1e4e8;
+            }
+    
+            button {
+                background: #df4a16;
+                color: white;
+                border: none;
+                padding: 12px 28px;
+                border-radius: 4px;
+                cursor: pointer;
+                font-size: 1em;
+                font-weight: 500;
+                transition: background 0.2s;
+            }
+    
+            button:hover {
+                background: #df7a16;
+            }
+    
+            button:disabled {
+                background: #ccc;
+                cursor: not-allowed;
+            }
+    
+            .page-indicator {
+                color: #666;
+                font-size: 1em;
+            }
+    
+            .page {
+                display: none;
+                min-height: 500px;
+            }
+    
+            .page.active {
+                display: block;
+                animation: fadeIn 0.3s ease-in;
+            }
+    
+            @keyframes fadeIn {
+                from { opacity: 0; transform: translateY(10px); }
+                to { opacity: 1; transform: translateY(0); }
+            }
+    
+            h1 {
+                font-size: 26px;
+                line-height: 36px;
+                font-weight: 600;
+                padding-top: 14px;
+                padding-bottom: 6px;
+                margin-bottom: 1em;
+                color: #df4a16;
+                border-bottom: 2px solid #df4a16;
+            }
+    
+            h2 {
+                font-size: 26px;
+                line-height: 36px;
+                font-weight: 600;
+                padding-top: 14px;
+                padding-bottom: 6px;
+                margin: 1.5em 0 0.8em 0;
+                color: #1a1a1a;
+                border-bottom: 2px solid #1a1a1a;
+            }
+    
+            h3 {
+                font-size: 1.1em;
+                font-weight: 600;
+                margin: 1.2em 0 0.6em 0;
+                padding-bottom: 5px;
+                color: #444;
+                border-bottom: 1px solid #999;
+            }
+    
+            p {
+                margin-bottom: 1em;
+                font-size: 1.05em;
+            }
+    
+            strong {
+                font-weight: 700;
+                color: #1a1a1a;
+            }
+    
+            code {
+                background: #f5f5f5;
+                padding: 3px 7px;
+                border-radius: 3px;
+                font-family: 'Fira Code', 'Courier New', monospace;
+                font-size: 0.95em;
+                color: #b82b4e;
+            }
+    
+            pre {
+                background: #f8f9fa;
+                border-left: 3px solid #df4a16;
+                padding: 18px;
+                margin: 1em 0;
+                overflow-x: auto;
+                border-radius: 3px;
+            }
+    
+            pre code {
+                background: none;
+                padding: 0;
+                color: #24292e;
+                font-size: 1em;
+                line-height: 1.6;
+            }
+    
+            .dax-keyword {
+                color: #df4a16;
+                font-weight: 600;
+            }
+    
+            .dax-function {
+                color: #6f42c1;
+            }
+    
+            .dax-number {
+                color: #005cc5;
+            }
+    
+            .dax-comment {
+                color: #6a737d;
+                font-style: italic;
+            }
+    
+            ul, ol {
+                margin: 0.3em 0;
+                padding-left: 1.8em;
+            }
+    
+            li {
+                margin: 0;
+                padding-left: 0.2em;
+                font-size: 1.05em;
+                line-height: 1.6;
+            }
+    
+            ol {
+                list-style-type: decimal;
+            }
+    
+            ol li::marker {
+                color: #999;
+                font-weight: 400;
+            }
+    
+            ul li::marker {
+                color: #999;
+            }
+    
+            ul ul, ol ol, ul ol, ol ul {
+                margin: 0.2em 0;
+                padding-left: 1.5em;
+            }
+    
+            blockquote {
+                border-left: 3px solid #df4a16;
+                background: #f8f9fa;
+                padding: 14px 18px;
+                margin: 1em 0;
+                color: #555;
+                font-style: italic;
+            }
+    
+            blockquote p {
+                margin: 0;
+            }
+    
+            .iteration-box {
+                border-left: 3px solid #df4a16;
+                padding: 14px 18px;
+                margin: 0.8em 0;
+            }
+    
+            .result-box {
+                background: #f5f5f5;
+                border-left: 3px solid #999;
+                padding: 14px 18px;
+                margin: 0.8em 0;
+                font-weight: 500;
+                color: #555;
+                font-size: 1.05em;
+            }
+        </style>
+</head>
+<body>
+
+<div class='container' id='viz_d89a1ef8'>
+    <!-- Nawigacja na górze -->
+    <div class='navigation'>
+        <button id='prevBtn_d89a1ef8' onclick='changePage_d89a1ef8(-1)'>← Poprzednia</button>
+        <span class='page-indicator'>
+            Strona <span id='currentPage_d89a1ef8'>1</span> z <span id='totalPages_d89a1ef8'>3</span>
+        </span>
+        <button id='nextBtn_d89a1ef8' onclick='changePage_d89a1ef8(1)'>Następna →</button>
+    </div>
+
+    <!-- Strona 1 -->
+    <div class='page active'>
+        <h2>Podstawowe użycie: SUMMARIZE vs SUMMARIZECOLUMNS</h2>
+        <p><strong>Podejście legacy (SUMMARIZE):</strong></p>
+        <ul>
+        <li>Wymaga dodatkowego ADDCOLUMNS do obliczenia miar</li>
+        <li>Trzeba ręcznie filtrować puste wiersze przez FILTER + NOT ISBLANK</li>
+        <li>Bardziej rozwlekłe i podatne na błędy kontekstowe</li>
+        <li>SUMMARIZE może dać niespodziewane wyniki bez ADDCOLUMNS</li>
+        </ul>
+        <p><strong>Podejście modern (SUMMARIZECOLUMNS):</strong></p>
+        <ul>
+        <li>Łączy grupowanie, dodawanie obliczeń i usuwanie pustych wierszy w jednej funkcji</li>
+        <li>Krótsze, czytelniejsze, bezpieczniejsze</li>
+        <li>Obecnie zalecany standard do raportów i zapytań w DAX</li>
+        </ul>
+        <pre><code><span class='dax-comment'>------- LEGACY  </span>
+        EVALUATE  
+            <span class='dax-function'>FILTER</span> (  
+                <span class='dax-function'>ADDCOLUMNS</span> (  
+                    <span class='dax-function'>SUMMARIZE</span> ( Sales, 'Product'[Brand], 'Date'[Year] ),  
+                    'Sales', <span class='dax-function'>CALCULATE</span> ( <span class='dax-function'>SUMX</span> ( Sales, Sales[Quantity] * Sales[Unit Price] ) )  
+                ),  
+                NOT <span class='dax-function'>ISBLANK</span> ( [Sales] )  
+            )  
+
+        <span class='dax-comment'>------- MODERN  </span>
+        EVALUATE  
+            <span class='dax-function'>SUMMARIZECOLUMNS</span> (  
+                'Product'[Brand], 'Date'[Year],  
+                'Sales', <span class='dax-function'>CALCULATE</span> ( <span class='dax-function'>SUMX</span> ( Sales, Sales[Quantity] * Sales[Unit Price] ) )  
+            )</code></pre>
+
+    </div>
+
+    <!-- Strona 2 -->
+    <div class='page'>
+        <h2>Praca z wieloma tabelami faktów</h2>
+        <p><strong>Zalety SUMMARIZECOLUMNS:</strong></p>
+        <ul>
+        <li>Rozumie kontekst całego modelu danych</li>
+        <li>Działa spójnie z modelem gwiazdy – automatycznie obsługuje kombinacje wymiarów</li>
+        <li>Pozwala w jednym wyrażeniu pobierać dane z różnych tabel faktów</li>
+        <li>Zwraca kompletny wynik w jednej tabeli</li>
+        </ul>
+        <p><strong>Problemy z SUMMARIZE:</strong></p>
+        <ul>
+        <li>Ogranicza się do jednej tabeli faktów</li>
+        <li>Wymaga ręcznego tworzenia siatki kombinacji przez CROSSJOIN</li>
+        <li>Trzeba łączyć wyniki przez NATURALLEFTOUTERJOIN</li>
+        <li>Bardziej skomplikowane, mniej czytelne i podatne na błędy</li>
+        </ul>
+        <pre><code><span class='dax-comment'>------- RECOMMENDED  </span>
+        EVALUATE  
+            <span class='dax-function'>SUMMARIZECOLUMNS</span> (  
+                'Product'[Category],  
+                Store[Country],  
+                'Sales', <span class='dax-function'>CALCULATE</span> ( <span class='dax-function'>SUMX</span> ( Sales, Sales[Quantity] * Sales[Net Price] ) ),  
+                'Purchases', <span class='dax-function'>CALCULATE</span> ( <span class='dax-function'>SUMX</span> ( Purchase, Purchase[Quantity] * Purchase[Unit Cost] ) )   
+            )  
+
+        <span class='dax-comment'>------- PROBLEMATIC  </span>
+        EVALUATE  
+            <span class='dax-keyword'>VAR</span> S =   
+                <span class='dax-function'>ADDCOLUMNS</span> (  
+                    <span class='dax-function'>SUMMARIZE</span> ( Sales, 'Product'[Category], Store[Country] ),  
+                    'Sales', <span class='dax-function'>CALCULATE</span> ( <span class='dax-function'>SUMX</span> ( Sales, Sales[Quantity] * Sales[Net Price] ) )   
+                )  
+            <span class='dax-keyword'>VAR</span> P =   
+                <span class='dax-function'>ADDCOLUMNS</span> (  
+                    <span class='dax-function'>SUMMARIZE</span> ( Purchase, 'Product'[Category], Store[Country] ),  
+                    'Purchase', <span class='dax-function'>CALCULATE</span> ( <span class='dax-function'>SUMX</span> ( Purchase, Purchase[Quantity] * Purchase[Unit Cost] ) )   
+                )  
+            <span class='dax-keyword'>VAR</span> G =   
+                <span class='dax-function'>CROSSJOIN</span>( <span class='dax-function'>VALUES</span> ( 'Product'[Category] ), <span class='dax-function'>VALUES</span> ( Store[Country] ) )  
+        <span class='dax-keyword'>RETURN</span>  
+            <span class='dax-function'>NATURALLEFTOUTERJOIN</span> ( <span class='dax-function'>NATURALLEFTOUTERJOIN</span> ( G, P ), S )</code></pre>
+
+    </div>
+
+    <!-- Strona 3 -->
+    <div class='page'>
+        <h1>Kiedy używać SUMMARIZE zamiast SUMMARIZECOLUMNS</h1>
+        <p><strong>Gdy potrzebujesz tylko istniejących kombinacji:</strong></p>
+        <ul>
+        <li>SUMMARIZE z tabelą źródłową zwraca tylko kombinacje występujące w danych faktycznych</li>
+        <li>Filtruje automatycznie do rzeczywistych relacji w tabeli Sales</li>
+        <li>To najczęściej oczekiwane zachowanie w raportach</li>
+        </ul>
+        <p><strong>Problem z SUMMARIZECOLUMNS bez miar:</strong></p>
+        <ul>
+        <li>Bez tabeli źródłowej generuje wszystkie możliwe kombinacje (jak CROSSJOIN)</li>
+        <li>Może zwrócić wiele pustych kombinacji, które nie istnieją w danych</li>
+        <li>Nie jest to zwykle pożądane zachowanie</li>
+        </ul>
+        <pre><code><span class='dax-comment'>------- RECOMMENDED  </span>
+        EVALUATE  
+            <span class='dax-function'>SUMMARIZE</span> (  
+                'Sales',  
+                'Product'[Brand],  
+                Customer[Continent],  
+                'Date'[Date]  
+            )  
+
+        <span class='dax-comment'>------- PROBLEMATIC  </span>
+        EVALUATE  
+            <span class='dax-function'>SUMMARIZECOLUMNS</span> (  
+                'Product'[Brand],  
+                Customer[Continent],  
+                'Date'[Date]  
+            )  
+
+        <span class='dax-comment'>-- Równoważne z:  </span>
+        EVALUATE  
+            <span class='dax-function'>CROSSJOIN</span> (  
+                <span class='dax-function'>VALUES</span> ( 'Product'[Brand] ),  
+                <span class='dax-function'>VALUES</span> ( Customer[Continent] ),  
+                <span class='dax-function'>VALUES</span> ( 'Date'[Date] )   
+            )</code></pre>
+        <p><strong>Zasada:</strong> Do samego grupowania bez miar używaj SUMMARIZE z tabelą źródłową. Do grupowania z miarami używaj SUMMARIZECOLUMNS.</p>
+
+    </div>
+
+</div>
+
+<script>
+(function() {
+    // Unikalny ID dla tej wizualizacji (wstrzykiwany przez Python)
+    var vizId = 'd89a1ef8';
+    var containerId = 'viz_' + vizId;
+
+    var currentPage_d89a1ef8 = 1;
+    var container = document.getElementById(containerId);
+
+    if (!container) return;
+
+    var pages = container.querySelectorAll('.page');
+    var totalPages = pages.length;
+
+    document.getElementById('totalPages_' + vizId).textContent = totalPages;
+
+    window['showPage_d89a1ef8'] = function(n) {
+        if (n > totalPages) currentPage_d89a1ef8 = totalPages;
+        if (n < 1) currentPage_d89a1ef8 = 1;
+
+        for (var i = 0; i < pages.length; i++) {
+            pages[i].classList.remove('active');
+        }
+        pages[currentPage_d89a1ef8 - 1].classList.add('active');
+
+        document.getElementById('currentPage_' + vizId).textContent = currentPage_d89a1ef8;
+        document.getElementById('prevBtn_' + vizId).disabled = (currentPage_d89a1ef8 === 1);
+        document.getElementById('nextBtn_' + vizId).disabled = (currentPage_d89a1ef8 === totalPages);
+    };
+
+    window['changePage_d89a1ef8'] = function(n) {
+        currentPage_d89a1ef8 += n;
+        window['showPage_d89a1ef8'](currentPage_d89a1ef8);
+    };
+
+    // Inicjalizacja
+    window['showPage_d89a1ef8'](1);
+
+    // Funkcjonalność powiększania obrazów
+    var images = container.querySelectorAll('img');
+    images.forEach(function(img) {
+        img.style.cursor = 'pointer';
+        img.style.transition = 'transform 0.3s ease';
+
+        img.addEventListener('click', function() {
+            if (this.classList.contains('zoomed')) {
+                // Pomniejsz obraz
+                this.classList.remove('zoomed');
+                this.style.position = '';
+                this.style.top = '';
+                this.style.left = '';
+                this.style.transform = '';
+                this.style.width = '100%';
+                this.style.maxWidth = '';
+                this.style.maxHeight = '';
+                this.style.zIndex = '';
+                this.style.backgroundColor = '';
+                this.style.padding = '';
+                this.style.boxShadow = '';
+            } else {
+                // Powiększ obraz
+                this.classList.add('zoomed');
+                this.style.position = 'fixed';
+                this.style.top = '50%';
+                this.style.left = '50%';
+                this.style.transform = 'translate(-50%, -50%)';
+                this.style.width = 'auto';
+                this.style.maxWidth = '95vw';
+                this.style.maxHeight = '95vh';
+                this.style.zIndex = '9999';
+                this.style.backgroundColor = 'rgba(255, 255, 255, 0.95)';
+                this.style.padding = '10px';
+                this.style.boxShadow = '0 4px 20px rgba(0, 0, 0, 0.3)';
+            }
+        });
+    });
+})();
+</script>
+
+</body>
+</html>
+
+"
+```
+            lineageTag: f6caa81c-60a4-4bfc-8a2a-9daf242d358c
+
+        measure '05. DAX - Zaawansowane Kwerendy - Query View' = ```
+"
+
+<!DOCTYPE html>
+<html lang='pl'>
+<head>
+    <meta charset='UTF-8'>
+    <meta name='viewport' content='width=device-width, initial-scale=1.0'>
+    <title>Query View</title>
+    <style>
+            * {
+                margin: 0;
+                padding: 0;
+                box-sizing: border-box;
+            }
+    
+            body {
+                font-family: 'Roboto', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+                font-size: 16px;
+                font-weight: 400;
+                line-height: 1.7;
+                color: #333;
+                background: transparent;
+                padding: 20px;
+            }
+    
+            .container {
+                max-width: 800px;
+                margin: 0 auto;
+                background: transparent;
+                padding: 40px;
+            }
+    
+            .navigation {
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                margin-bottom: 40px;
+                padding-bottom: 20px;
+                border-bottom: 1px solid #e1e4e8;
+            }
+    
+            button {
+                background: #df4a16;
+                color: white;
+                border: none;
+                padding: 12px 28px;
+                border-radius: 4px;
+                cursor: pointer;
+                font-size: 1em;
+                font-weight: 500;
+                transition: background 0.2s;
+            }
+    
+            button:hover {
+                background: #df7a16;
+            }
+    
+            button:disabled {
+                background: #ccc;
+                cursor: not-allowed;
+            }
+    
+            .page-indicator {
+                color: #666;
+                font-size: 1em;
+            }
+    
+            .page {
+                display: none;
+                min-height: 500px;
+            }
+    
+            .page.active {
+                display: block;
+                animation: fadeIn 0.3s ease-in;
+            }
+    
+            @keyframes fadeIn {
+                from { opacity: 0; transform: translateY(10px); }
+                to { opacity: 1; transform: translateY(0); }
+            }
+    
+            h1 {
+                font-size: 26px;
+                line-height: 36px;
+                font-weight: 600;
+                padding-top: 14px;
+                padding-bottom: 6px;
+                margin-bottom: 1em;
+                color: #df4a16;
+                border-bottom: 2px solid #df4a16;
+            }
+    
+            h2 {
+                font-size: 26px;
+                line-height: 36px;
+                font-weight: 600;
+                padding-top: 14px;
+                padding-bottom: 6px;
+                margin: 1.5em 0 0.8em 0;
+                color: #1a1a1a;
+                border-bottom: 2px solid #1a1a1a;
+            }
+    
+            h3 {
+                font-size: 1.1em;
+                font-weight: 600;
+                margin: 1.2em 0 0.6em 0;
+                padding-bottom: 5px;
+                color: #444;
+                border-bottom: 1px solid #999;
+            }
+    
+            p {
+                margin-bottom: 1em;
+                font-size: 1.05em;
+            }
+    
+            strong {
+                font-weight: 700;
+                color: #1a1a1a;
+            }
+    
+            code {
+                background: #f5f5f5;
+                padding: 3px 7px;
+                border-radius: 3px;
+                font-family: 'Fira Code', 'Courier New', monospace;
+                font-size: 0.95em;
+                color: #b82b4e;
+            }
+    
+            pre {
+                background: #f8f9fa;
+                border-left: 3px solid #df4a16;
+                padding: 18px;
+                margin: 1em 0;
+                overflow-x: auto;
+                border-radius: 3px;
+            }
+    
+            pre code {
+                background: none;
+                padding: 0;
+                color: #24292e;
+                font-size: 1em;
+                line-height: 1.6;
+            }
+    
+            .dax-keyword {
+                color: #df4a16;
+                font-weight: 600;
+            }
+    
+            .dax-function {
+                color: #6f42c1;
+            }
+    
+            .dax-number {
+                color: #005cc5;
+            }
+    
+            .dax-comment {
+                color: #6a737d;
+                font-style: italic;
+            }
+    
+            ul, ol {
+                margin: 0.3em 0;
+                padding-left: 1.8em;
+            }
+    
+            li {
+                margin: 0;
+                padding-left: 0.2em;
+                font-size: 1.05em;
+                line-height: 1.6;
+            }
+    
+            ol {
+                list-style-type: decimal;
+            }
+    
+            ol li::marker {
+                color: #999;
+                font-weight: 400;
+            }
+    
+            ul li::marker {
+                color: #999;
+            }
+    
+            ul ul, ol ol, ul ol, ol ul {
+                margin: 0.2em 0;
+                padding-left: 1.5em;
+            }
+    
+            blockquote {
+                border-left: 3px solid #df4a16;
+                background: #f8f9fa;
+                padding: 14px 18px;
+                margin: 1em 0;
+                color: #555;
+                font-style: italic;
+            }
+    
+            blockquote p {
+                margin: 0;
+            }
+    
+            .iteration-box {
+                border-left: 3px solid #df4a16;
+                padding: 14px 18px;
+                margin: 0.8em 0;
+            }
+    
+            .result-box {
+                background: #f5f5f5;
+                border-left: 3px solid #999;
+                padding: 14px 18px;
+                margin: 0.8em 0;
+                font-weight: 500;
+                color: #555;
+                font-size: 1.05em;
+            }
+        </style>
+</head>
+<body>
+
+<div class='container' id='viz_69087c0f'>
+    <!-- Nawigacja na górze -->
+    <div class='navigation'>
+        <button id='prevBtn_69087c0f' onclick='changePage_69087c0f(-1)'>← Poprzednia</button>
+        <span class='page-indicator'>
+            Strona <span id='currentPage_69087c0f'>1</span> z <span id='totalPages_69087c0f'>4</span>
+        </span>
+        <button id='nextBtn_69087c0f' onclick='changePage_69087c0f(1)'>Następna →</button>
+    </div>
+
+    <!-- Strona 1 -->
+    <div class='page active'>
+        <p><strong>Query View</strong> to specjalny tryb w Power BI Desktop (dostępny w External Tools lub przez DAX Studio), który pozwala wykonywać zapytania DAX bezpośrednio na modelu danych. W przeciwieństwie do zwykłych miar, które działają w kontekście wizualizacji, Query View umożliwia pisanie zapytań tabelarycznych z użyciem słowa kluczowego <code>EVALUATE</code> oraz definiowanie tymczasowych miar i zmiennych za pomocą <code>DEFINE</code>. Jest to narzędzie programistyczne do testowania logiki DAX, debugowania obliczeń i eksploracji danych bez konieczności tworzenia wizualizacji.</p>
+        <h2>VAR bez RETURN (błąd składniowy)</h2>
+        <pre><code><span class='dax-keyword'>VAR</span> A = <span class='dax-number'>1</span>
+        <span class='dax-keyword'>VAR</span> B = <span class='dax-number'>5</span>
+        A + B</code></pre>
+        <p><strong>Status:</strong> ❌ <strong>To jest niepoprawne!</strong></p>
+        <ul>
+        <li>Zmienne <code>VAR</code> <strong>zawsze muszą być zakończone słowem kluczowym <code>RETURN</code></strong></li>
+        <li>DAX nie wie, co ma zwrócić jako wynik</li>
+        <li>Ten kod spowoduje błąd składniowy</li>
+        </ul>
+        <pre><code>EVALUATE
+            <span class='dax-keyword'>VAR</span> A = <span class='dax-number'>1</span>
+            <span class='dax-keyword'>VAR</span> B = <span class='dax-number'>5</span>
+        <span class='dax-keyword'>RETURN</span>
+        A + B</code></pre>
+        <p><strong>Status:</strong> ❌ <strong>Blisko, ale wciąż źle!</strong></p>
+        <ul>
+        <li>DAX potrafi zwracać wyłącznie wartości tabelaryczne. A + B zwraca pojedynczą wartość</li>
+        <li>Należy utworzyć 'sztuczną' tabelę (np. z funkcją <code>ROW()</code>), albo podsumować według istniejących kolumn za pomocą <code>SUMMARIZECOLUMNS()</code> ``</li>
+        </ul>
+
+    </div>
+
+    <!-- Strona 2 -->
+    <div class='page'>
+        <h2>VAR z RETURN w zapytaniu EVALUATE</h2>
+        <pre><code>EVALUATE
+            <span class='dax-keyword'>VAR</span> A = <span class='dax-number'>1</span>
+            <span class='dax-keyword'>VAR</span> B = <span class='dax-number'>5</span>
+        <span class='dax-keyword'>RETURN</span>
+            <span class='dax-function'>ROW</span>('Test', A + B)</code></pre>
+        <p><strong>Status:</strong> ✅ <strong>Poprawne</strong></p>
+        <ul>
+        <li>Zmienne <code>A</code> i <code>B</code> są tworzone <strong>przed</strong> wykonaniem właściwego zapytania</li>
+        <li><code>RETURN</code> zwraca tabelę z jednym wierszem i jedną kolumną o nazwie 'Test'</li>
+        <li>Wartość w kolumnie to wynik <code>A + B</code> = 6</li>
+        </ul>
+        <p><strong>Wynik zapytania:</strong></p>
+        <table>
+          <thead>
+            <tr>
+              <th>Test</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>6</td>
+            </tr>
+          </tbody>
+        </table>
+
+    </div>
+
+    <!-- Strona 3 -->
+    <div class='page'>
+        <h2>VAR wewnątrz definicji miary</h2>
+        <pre><code>DEFINE MEASURE _Measures[Test] = 
+            <span class='dax-keyword'>VAR</span> A = <span class='dax-number'>1</span>
+            <span class='dax-keyword'>VAR</span> B = <span class='dax-number'>5</span>
+        <span class='dax-keyword'>RETURN</span>
+            A + B
+
+        EVALUATE
+            <span class='dax-function'>ROW</span>('Test', [Test])</code></pre>
+        <p><strong>Status:</strong> ✅ <strong>Poprawne</strong></p>
+        <ul>
+        <li>Zmienne <code>VAR</code> są zdefiniowane <strong>wewnątrz miary</strong> <code>[Test]</code></li>
+        <li>Za każdym razem gdy miara jest wywoływana, zmienne są tworzone na nowo</li>
+        <li>Miara zwraca wartość <code>A + B</code> = 6</li>
+        <li><code>EVALUATE</code> wywołuje miarę i wyświetla jej wynik w tabeli</li>
+        </ul>
+
+    </div>
+
+    <!-- Strona 4 -->
+    <div class='page'>
+        <h1>Zastosowanie</h1>
+        <p>Query View i zapytania DAX znajdują zastosowanie w kilku kluczowych scenariuszach:</p>
+        <ul>
+        <li><strong>Testowanie i debugowanie</strong> – szybkie sprawdzanie logiki DAX bez tworzenia wizualizacji</li>
+        <li><strong>Eksploracja modelu danych</strong> – przeglądanie zawartości tabel, relacji i wyników obliczeń</li>
+        <li><strong>Prototypowanie miar</strong> – testowanie skomplikowanych formuł przed wdrożeniem do raportu</li>
+        <li><strong>Analiza wydajności</strong> – mierzenie czasu wykonania zapytań i optymalizacja modelu</li>
+        <li><strong>Eksport danych</strong> – pobieranie wyników zapytań do dalszej analizy w innych narzędziach</li>
+        <li><strong>Dokumentacja</strong> – tworzenie przykładów działania miar dla zespołu lub klientów</li>
+        </ul>
+        <img src='https://github.com/odczarujpowerbi/szkolenia-powerbi/blob/main/bin/Pasted%20image%2020251209181932.png?raw=true' width='100%'>
+
+    </div>
+
+</div>
+
+<script>
+(function() {
+    // Unikalny ID dla tej wizualizacji (wstrzykiwany przez Python)
+    var vizId = '69087c0f';
+    var containerId = 'viz_' + vizId;
+
+    var currentPage_69087c0f = 1;
+    var container = document.getElementById(containerId);
+
+    if (!container) return;
+
+    var pages = container.querySelectorAll('.page');
+    var totalPages = pages.length;
+
+    document.getElementById('totalPages_' + vizId).textContent = totalPages;
+
+    window['showPage_69087c0f'] = function(n) {
+        if (n > totalPages) currentPage_69087c0f = totalPages;
+        if (n < 1) currentPage_69087c0f = 1;
+
+        for (var i = 0; i < pages.length; i++) {
+            pages[i].classList.remove('active');
+        }
+        pages[currentPage_69087c0f - 1].classList.add('active');
+
+        document.getElementById('currentPage_' + vizId).textContent = currentPage_69087c0f;
+        document.getElementById('prevBtn_' + vizId).disabled = (currentPage_69087c0f === 1);
+        document.getElementById('nextBtn_' + vizId).disabled = (currentPage_69087c0f === totalPages);
+    };
+
+    window['changePage_69087c0f'] = function(n) {
+        currentPage_69087c0f += n;
+        window['showPage_69087c0f'](currentPage_69087c0f);
+    };
+
+    // Inicjalizacja
+    window['showPage_69087c0f'](1);
+
+    // Funkcjonalność powiększania obrazów
+    var images = container.querySelectorAll('img');
+    images.forEach(function(img) {
+        img.style.cursor = 'pointer';
+        img.style.transition = 'transform 0.3s ease';
+
+        img.addEventListener('click', function() {
+            if (this.classList.contains('zoomed')) {
+                // Pomniejsz obraz
+                this.classList.remove('zoomed');
+                this.style.position = '';
+                this.style.top = '';
+                this.style.left = '';
+                this.style.transform = '';
+                this.style.width = '100%';
+                this.style.maxWidth = '';
+                this.style.maxHeight = '';
+                this.style.zIndex = '';
+                this.style.backgroundColor = '';
+                this.style.padding = '';
+                this.style.boxShadow = '';
+            } else {
+                // Powiększ obraz
+                this.classList.add('zoomed');
+                this.style.position = 'fixed';
+                this.style.top = '50%';
+                this.style.left = '50%';
+                this.style.transform = 'translate(-50%, -50%)';
+                this.style.width = 'auto';
+                this.style.maxWidth = '95vw';
+                this.style.maxHeight = '95vh';
+                this.style.zIndex = '9999';
+                this.style.backgroundColor = 'rgba(255, 255, 255, 0.95)';
+                this.style.padding = '10px';
+                this.style.boxShadow = '0 4px 20px rgba(0, 0, 0, 0.3)';
+            }
+        });
+    });
+})();
+</script>
+
+</body>
+</html>
+
+"
+```
+            lineageTag: dc9b3b71-9636-44f2-af4d-137ee20d7f03
+
+        measure '05. DAX - Zaawansowane Kwerendy' = ```
+"
+
+<!DOCTYPE html>
+<html lang='pl'>
+<head>
+    <meta charset='UTF-8'>
+    <meta name='viewport' content='width=device-width, initial-scale=1.0'>
+    <title>05. DAX - Zaawansowane Kwerendy</title>
+    <style>
+            * {
+                margin: 0;
+                padding: 0;
+                box-sizing: border-box;
+            }
+    
+            body {
+                font-family: 'Roboto', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+                font-size: 16px;
+                font-weight: 400;
+                line-height: 1.7;
+                color: #333;
+                background: transparent;
+                padding: 20px;
+            }
+    
+            .container {
+                max-width: 800px;
+                margin: 0 auto;
+                background: transparent;
+                padding: 40px;
+            }
+    
+            .navigation {
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                margin-bottom: 40px;
+                padding-bottom: 20px;
+                border-bottom: 1px solid #e1e4e8;
+            }
+    
+            button {
+                background: #df4a16;
+                color: white;
+                border: none;
+                padding: 12px 28px;
+                border-radius: 4px;
+                cursor: pointer;
+                font-size: 1em;
+                font-weight: 500;
+                transition: background 0.2s;
+            }
+    
+            button:hover {
+                background: #df7a16;
+            }
+    
+            button:disabled {
+                background: #ccc;
+                cursor: not-allowed;
+            }
+    
+            .page-indicator {
+                color: #666;
+                font-size: 1em;
+            }
+    
+            .page {
+                display: none;
+                min-height: 500px;
+            }
+    
+            .page.active {
+                display: block;
+                animation: fadeIn 0.3s ease-in;
+            }
+    
+            @keyframes fadeIn {
+                from { opacity: 0; transform: translateY(10px); }
+                to { opacity: 1; transform: translateY(0); }
+            }
+    
+            h1 {
+                font-size: 26px;
+                line-height: 36px;
+                font-weight: 600;
+                padding-top: 14px;
+                padding-bottom: 6px;
+                margin-bottom: 1em;
+                color: #df4a16;
+                border-bottom: 2px solid #df4a16;
+            }
+    
+            h2 {
+                font-size: 26px;
+                line-height: 36px;
+                font-weight: 600;
+                padding-top: 14px;
+                padding-bottom: 6px;
+                margin: 1.5em 0 0.8em 0;
+                color: #1a1a1a;
+                border-bottom: 2px solid #1a1a1a;
+            }
+    
+            h3 {
+                font-size: 1.1em;
+                font-weight: 600;
+                margin: 1.2em 0 0.6em 0;
+                padding-bottom: 5px;
+                color: #444;
+                border-bottom: 1px solid #999;
+            }
+    
+            p {
+                margin-bottom: 1em;
+                font-size: 1.05em;
+            }
+    
+            strong {
+                font-weight: 700;
+                color: #1a1a1a;
+            }
+    
+            code {
+                background: #f5f5f5;
+                padding: 3px 7px;
+                border-radius: 3px;
+                font-family: 'Fira Code', 'Courier New', monospace;
+                font-size: 0.95em;
+                color: #b82b4e;
+            }
+    
+            pre {
+                background: #f8f9fa;
+                border-left: 3px solid #df4a16;
+                padding: 18px;
+                margin: 1em 0;
+                overflow-x: auto;
+                border-radius: 3px;
+            }
+    
+            pre code {
+                background: none;
+                padding: 0;
+                color: #24292e;
+                font-size: 1em;
+                line-height: 1.6;
+            }
+    
+            .dax-keyword {
+                color: #df4a16;
+                font-weight: 600;
+            }
+    
+            .dax-function {
+                color: #6f42c1;
+            }
+    
+            .dax-number {
+                color: #005cc5;
+            }
+    
+            .dax-comment {
+                color: #6a737d;
+                font-style: italic;
+            }
+    
+            ul, ol {
+                margin: 0.3em 0;
+                padding-left: 1.8em;
+            }
+    
+            li {
+                margin: 0;
+                padding-left: 0.2em;
+                font-size: 1.05em;
+                line-height: 1.6;
+            }
+    
+            ol {
+                list-style-type: decimal;
+            }
+    
+            ol li::marker {
+                color: #999;
+                font-weight: 400;
+            }
+    
+            ul li::marker {
+                color: #999;
+            }
+    
+            ul ul, ol ol, ul ol, ol ul {
+                margin: 0.2em 0;
+                padding-left: 1.5em;
+            }
+    
+            blockquote {
+                border-left: 3px solid #df4a16;
+                background: #f8f9fa;
+                padding: 14px 18px;
+                margin: 1em 0;
+                color: #555;
+                font-style: italic;
+            }
+    
+            blockquote p {
+                margin: 0;
+            }
+    
+            .iteration-box {
+                border-left: 3px solid #df4a16;
+                padding: 14px 18px;
+                margin: 0.8em 0;
+            }
+    
+            .result-box {
+                background: #f5f5f5;
+                border-left: 3px solid #999;
+                padding: 14px 18px;
+                margin: 0.8em 0;
+                font-weight: 500;
+                color: #555;
+                font-size: 1.05em;
+            }
+        </style>
+</head>
+<body>
+
+<div class='container' id='viz_3d785b0e'>
+    <!-- Nawigacja na górze -->
+    <div class='navigation'>
+        <button id='prevBtn_3d785b0e' onclick='changePage_3d785b0e(-1)'>← Poprzednia</button>
+        <span class='page-indicator'>
+            Strona <span id='currentPage_3d785b0e'>1</span> z <span id='totalPages_3d785b0e'>4</span>
+        </span>
+        <button id='nextBtn_3d785b0e' onclick='changePage_3d785b0e(1)'>Następna →</button>
     </div>
 
     <!-- Strona 1 -->
@@ -4219,6 +5942,7 @@ createOrReplace
         <h3>Suma końcowa:</h3>
         <p>SUMX dodaje wszystkie odchylenia: (-2) + (-1) + 0 = <strong>-3</strong></p>
         </div>
+        <p>---</p>
 
     </div>
 
@@ -4227,10 +5951,10 @@ createOrReplace
 <script>
 (function() {
     // Unikalny ID dla tej wizualizacji (wstrzykiwany przez Python)
-    var vizId = '8c2a7e79';
+    var vizId = '3d785b0e';
     var containerId = 'viz_' + vizId;
 
-    var currentPage_8c2a7e79 = 1;
+    var currentPage_3d785b0e = 1;
     var container = document.getElementById(containerId);
 
     if (!container) return;
@@ -4240,27 +5964,27 @@ createOrReplace
 
     document.getElementById('totalPages_' + vizId).textContent = totalPages;
 
-    window['showPage_8c2a7e79'] = function(n) {
-        if (n > totalPages) currentPage_8c2a7e79 = totalPages;
-        if (n < 1) currentPage_8c2a7e79 = 1;
+    window['showPage_3d785b0e'] = function(n) {
+        if (n > totalPages) currentPage_3d785b0e = totalPages;
+        if (n < 1) currentPage_3d785b0e = 1;
 
         for (var i = 0; i < pages.length; i++) {
             pages[i].classList.remove('active');
         }
-        pages[currentPage_8c2a7e79 - 1].classList.add('active');
+        pages[currentPage_3d785b0e - 1].classList.add('active');
 
-        document.getElementById('currentPage_' + vizId).textContent = currentPage_8c2a7e79;
-        document.getElementById('prevBtn_' + vizId).disabled = (currentPage_8c2a7e79 === 1);
-        document.getElementById('nextBtn_' + vizId).disabled = (currentPage_8c2a7e79 === totalPages);
+        document.getElementById('currentPage_' + vizId).textContent = currentPage_3d785b0e;
+        document.getElementById('prevBtn_' + vizId).disabled = (currentPage_3d785b0e === 1);
+        document.getElementById('nextBtn_' + vizId).disabled = (currentPage_3d785b0e === totalPages);
     };
 
-    window['changePage_8c2a7e79'] = function(n) {
-        currentPage_8c2a7e79 += n;
-        window['showPage_8c2a7e79'](currentPage_8c2a7e79);
+    window['changePage_3d785b0e'] = function(n) {
+        currentPage_3d785b0e += n;
+        window['showPage_3d785b0e'](currentPage_3d785b0e);
     };
 
     // Inicjalizacja
-    window['showPage_8c2a7e79'](1);
+    window['showPage_3d785b0e'](1);
 
     // Funkcjonalność powiększania obrazów
     var images = container.querySelectorAll('img');
@@ -4308,7 +6032,7 @@ createOrReplace
 
 "
 ```
-            lineageTag: 606e3815-2711-4fe5-a047-3726f631a2a3
+            lineageTag: de3c8b04-f3b9-406f-b3f6-a7543f7be782
 
         measure 'CSS - Czerwony' = ```
 "
@@ -4534,7 +6258,7 @@ createOrReplace
 </style>
 "
 ```
-            lineageTag: 98f37c8f-81a0-455a-94c1-408208f3dca1
+            lineageTag: 6c77802e-c1ba-4016-be04-601106207501
 
         measure 'CSS - Niebieski' = ```
 "
@@ -4760,7 +6484,7 @@ createOrReplace
 </style>
 "
 ```
-            lineageTag: dfd58cd8-54a0-4352-b8e2-d0a5606f2532
+            lineageTag: 09931a50-4f57-4ec5-b653-679af74e2676
 
         partition _HTML = m
             mode: import

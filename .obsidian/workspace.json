@@ -11,17 +11,30 @@
             "id": "c6a8ca1a0082a34f",
             "type": "leaf",
             "state": {
+              "type": "html-view",
+              "state": {
+                "file": "02. OUTPUT/03. Modyfikowanie Kontekstu - ALL i REMOVEFILTERS - usuwanie filtrów.html"
+              },
+              "icon": "code-glyph",
+              "title": "03. Modyfikowanie Kontekstu - ALL i REMOVEFILTERS - usuwanie filtrów"
+            }
+          },
+          {
+            "id": "7293b29fa1965917",
+            "type": "leaf",
+            "state": {
               "type": "markdown",
               "state": {
-                "file": "01. THEORY/05. DAX - Zaawansowane Kwerendy.md",
+                "file": "01. THEORY/03. Modyfikowanie Kontekstu.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "05. DAX - Zaawansowane Kwerendy"
+              "title": "03. Modyfikowanie Kontekstu"
             }
           }
         ],
+        "currentTab": 1,
         "stacked": true
       }
     ],
@@ -106,13 +119,13 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "01. THEORY/05. DAX - Zaawansowane Kwerendy.md",
+                "file": "01. THEORY/03. Modyfikowanie Kontekstu.md",
                 "followCursor": true,
                 "showSearch": false,
                 "searchQuery": ""
               },
               "icon": "lucide-list",
-              "title": "Outline of 05. DAX - Zaawansowane Kwerendy"
+              "title": "Outline of 03. Modyfikowanie Kontekstu"
             }
           }
         ],
@@ -129,7 +142,7 @@
             "state": {
               "type": "localgraph",
               "state": {
-                "file": "01. THEORY/05. DAX - Zaawansowane Kwerendy.md",
+                "file": "01. THEORY/03. Modyfikowanie Kontekstu.md",
                 "options": {
                   "collapse-filter": true,
                   "search": "",
@@ -157,7 +170,7 @@
                 }
               },
               "icon": "lucide-git-fork",
-              "title": "Graph of 05. DAX - Zaawansowane Kwerendy"
+              "title": "Graph of 03. Modyfikowanie Kontekstu"
             }
           }
         ]
@@ -181,24 +194,24 @@
       "hide-folders:Show hidden folders": false
     }
   },
-  "active": "c6a8ca1a0082a34f",
+  "active": "7293b29fa1965917",
   "lastOpenFiles": [
-    "01. THEORY/04. Tworzenie zestawień tabelarycznych.md",
-    "01. THEORY/03. Modyfikowanie Kontekstu.md",
-    "01. THEORY/02. Wprowadzenie do CALCULATE.md",
+    "02. OUTPUT/03. Modyfikowanie Kontekstu - ALL i REMOVEFILTERS - usuwanie filtrów.html",
     "01. THEORY/05. DAX - Zaawansowane Kwerendy.md",
-    "01. THEORY/00. Konfiguracja Power BI.md",
-    "02. OUTPUT/00. Konfiguracja Power BI - Główne widoki Power BI Desktop.html",
-    "02. OUTPUT/00. Konfiguracja Power BI - Przygotowanie środowiska Power BI.html",
-    "bin/Pasted image 20251209181932.png",
-    "02. OUTPUT/03. DAX - Zmienne.html",
+    "02. OUTPUT/05. DAX - Zaawansowane Kwerendy - Query View.html",
+    "02. OUTPUT/05. DAX - Zaawansowane Kwerendy.html",
+    "02. OUTPUT/04. Tworzenie zestawień tabelarycznych.html",
     "02. OUTPUT/02. Wprowadzenie do CALCULATE - Wprowadzenie do CALCULATE.html",
     "02. OUTPUT/01. Podstawy DAX - Funkcje iteracyjne (X-functions).html",
     "02. OUTPUT/01. Podstawy DAX - Funkcje dat.html",
     "02. OUTPUT/01. Podstawy DAX - Funkcje tekstowe.html",
     "02. OUTPUT/01. Podstawy DAX - Funkcje logiczne.html",
     "02. OUTPUT/01. Podstawy DAX - Funkcje agregujące.html",
-    "02. OUTPUT/01. Podstawy DAX.html",
+    "01. THEORY/04. Tworzenie zestawień tabelarycznych.md",
+    "01. THEORY/03. Modyfikowanie Kontekstu.md",
+    "01. THEORY/02. Wprowadzenie do CALCULATE.md",
+    "01. THEORY/00. Konfiguracja Power BI.md",
+    "bin/Pasted image 20251209181932.png",
     "02. OUTPUT/TMDL/_HTML.md",
     "00. DRAFT/02. Wstęp do Calculate.md",
     "00. DRAFT/01. Podstawy DAX.md",
@@ -228,7 +241,6 @@
     "Theory/02. DAX - Zmienne.md",
     "Theory/03. Test.md",
     "Output/TMDL/_HTML.md",
-    "Template/Markdown/Embed PNG.md",
     "Generator.canvas"
   ]
 }

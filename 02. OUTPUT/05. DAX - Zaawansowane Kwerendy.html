@@ -1,4 +1,4 @@
-Przygotowanie środowiska Power BI = 
+05. DAX - Zaawansowane Kwerendy = 
 
 "
 
@@ -7,7 +7,7 @@ Przygotowanie środowiska Power BI =
 <head>
     <meta charset='UTF-8'>
     <meta name='viewport' content='width=device-width, initial-scale=1.0'>
-    <title>Przygotowanie środowiska Power BI</title>
+    <title>05. DAX - Zaawansowane Kwerendy</title>
     <style>
             * {
                 margin: 0;
@@ -229,92 +229,149 @@ Przygotowanie środowiska Power BI =
 </head>
 <body>
 
-<div class='container' id='viz_905d5ea6'>
+<div class='container' id='viz_3d785b0e'>
     <!-- Nawigacja na górze -->
     <div class='navigation'>
-        <button id='prevBtn_905d5ea6' onclick='changePage_905d5ea6(-1)'>← Poprzednia</button>
+        <button id='prevBtn_3d785b0e' onclick='changePage_3d785b0e(-1)'>← Poprzednia</button>
         <span class='page-indicator'>
-            Strona <span id='currentPage_905d5ea6'>1</span> z <span id='totalPages_905d5ea6'>4</span>
+            Strona <span id='currentPage_3d785b0e'>1</span> z <span id='totalPages_3d785b0e'>4</span>
         </span>
-        <button id='nextBtn_905d5ea6' onclick='changePage_905d5ea6(1)'>Następna →</button>
+        <button id='nextBtn_3d785b0e' onclick='changePage_3d785b0e(1)'>Następna →</button>
     </div>
 
     <!-- Strona 1 -->
     <div class='page active'>
-        <h1>Ustawienia programu Power BI</h1>
-        <p>Przed rozpoczęciem pracy z Power BI Desktop warto odpowiednio skonfigurować środowisko pracy. Prawidłowe ustawienia programu umożliwiają dostęp do nowych funkcji oraz optymalizują sposób pracy z danymi.</p>
-        <h2>Włączenie funkcji w wersji zapoznawczej (Preview Features)</h2>
-        <p>Power BI regularnie wprowadza nowe funkcje, które na początku dostępne są jako wersje zapoznawcze. Aby je włączyć:</p>
-        <ol>
-        <li>Otwórz <strong>Plik</strong> → <strong>Opcje i ustawienia</strong> → <strong>Opcje</strong></li>
-        <li>Przejdź do sekcji <strong>Funkcje w wersji zapoznawczej</strong> (Preview features)</li>
-        <li>Zaznacz następujące opcje:
+        <h1>Czym są VAR i RETURN?</h1>
+        <p><strong>VAR</strong> i <strong>RETURN</strong> to kluczowe słowa w języku DAX, które pozwalają na tworzenie <strong>zmiennych</strong> i <strong>zwracanie wyników</strong> w miarach i kolumnach kalkulowanych.</p>
+        <h2>VAR (Variable)</h2>
         <ul>
-        <li><strong>Obliczenia wizualne</strong> - pozwala na tworzenie bardziej zaawansowanych wizualizacji</li>
-        <li><strong>Nowe wizualizacje</strong> - daje dostęp do najnowszych typów wizualizacji</li>
+        <li>Służy do <strong>deklarowania zmiennych</strong> i przechowywania w nich wartości</li>
+        <li>Zmienne mogą zawierać: liczby, teksty, tabele, wyniki obliczeń</li>
+        <li>Zmienne są <strong>obliczane tylko raz</strong> i przechowują swoją wartość</li>
+        <li>Pomagają <strong>unikać powtarzania</strong> tego samego kodu</li>
+        <li>Poprawiają <strong>czytelność</strong> i <strong>wydajność</strong> miar</li>
         </ul>
-        </li>
-        </ol>
-        <p><strong>Uwaga:</strong> Po włączeniu funkcji w wersji zapoznawczej konieczne jest ponowne uruchomienie Power BI Desktop.</p>
-        <p><img src='https://raw.githubusercontent.com/odczarujpowerbi/grafiki-do-szkolenia/main/PowerBI - Ustawienia - Preview Features.gif' width='100%'></p>
+        <h2>RETURN</h2>
+        <ul>
+        <li><strong>Zwraca wynik</strong> całego wyrażenia DAX</li>
+        <li>W mierze/kolumnie może być <strong>tylko jedno RETURN</strong></li>
+        <li>To, co umieścisz po RETURN, stanie się <strong>końcowym wynikiem</strong></li>
+        </ul>
 
     </div>
 
     <!-- Strona 2 -->
     <div class='page'>
-        <h2>Konfiguracja ustawień raportu- włączenie interakcji między obiektami na raporcie</h2>
-        <p>Interakcje między wizualizacjami pozwalają na dynamiczne filtrowanie danych. Aby włączyć tę funkcję:</p>
-        <ol>
-        <li>Przejdź do widoku <strong>Raport</strong></li>
-        <li>Kliknij <strong>Plik</strong> → <strong>Opcje i ustawienia</strong> → <strong>Opcje</strong></li>
-        <li>W sekcji <strong>BIEŻĄCY PLIK</strong> → <strong>Ustawienia raportu</strong></li>
-        <li>Upewnij się, że opcja dotycząca interakcji wizualizacji jest włączona</li>
-        </ol>
-        <img src='https://github.com/odczarujpowerbi/szkolenia-powerbi/blob/main/bin/Pasted%20image%2020251209170359.png?raw=true' width='100%'>
-        <p>> Dzięki temu kliknięcie na element jednej wizualizacji (np. kolumnę na wykresie) automatycznie przefiltruje pozostałe wizualizacje na stronie raportu.</p>
+        <h1>Podstawowa składnia</h1>
+        <pre><code>NazwaMiary = 
+        <span class='dax-keyword'>VAR</span> NazwaZmiennej1 = &lt;wyrażenie1&gt;
+        <span class='dax-keyword'>VAR</span> NazwaZmiennej2 = &lt;wyrażenie2&gt;
+        <span class='dax-keyword'>VAR</span> NazwaZmiennej3 = &lt;wyrażenie3&gt;
+        <span class='dax-keyword'>RETURN</span> &lt;wynik_końcowy&gt;</code></pre>
+        <p><strong>Przykład prosty:</strong></p>
+        <pre><code>Całkowity Koszt = 
+        <span class='dax-keyword'>VAR</span> IloscSztuk = <span class='dax-number'>100</span>
+        <span class='dax-keyword'>VAR</span> CenaJednostkowa = <span class='dax-number'>25</span>
+        <span class='dax-keyword'>VAR</span> Koszt = IloscSztuk * CenaJednostkowa
+        <span class='dax-keyword'>RETURN</span> Koszt</code></pre>
+        <div class='result-box'>
+        Wynik: <strong>2500</strong>
+        </div>
 
     </div>
 
     <!-- Strona 3 -->
     <div class='page'>
-        <h2>Ustawienia Power Query-  wyłączenie automatycznego wykrywania typów kolumn</h2>
-        <p>Automatyczne wykrywanie typów danych przez Power Query może czasem prowadzić do błędów lub niepożądanych konwersji. Zaleca się wyłączenie tej opcji i ręczne kontrolowanie typów danych:</p>
-        <ol>
-        <li>Otwórz <strong>Plik</strong> → <strong>Opcje i ustawienia</strong> → <strong>Opcje</strong></li>
-        <li>Przejdź do sekcji <strong>BIEŻĄCY PLIK</strong> → <strong>Ładowanie danych</strong></li>
-        <li>Odznacz opcję <strong>Automatycznie wykrywaj typy kolumn i nagłówki dla źródeł nieustrukturyzowanych</strong></li>
-        </ol>
-        <img src='https://github.com/odczarujpowerbi/szkolenia-powerbi/blob/main/bin/Pasted%20image%2020251209170441.png?raw=true' width='100%'>
-        <p>Dzięki temu będziesz mieć pełną kontrolę nad tym, jakie typy danych są przypisywane do poszczególnych kolumn.</p>
+        <h1>Jak to działa w funkcjach iteracyjnych (SUMX, FILTER, itd.)?</h1>
+        <p>W funkcjach iteracyjnych jak <strong>SUMX</strong>, <strong>FILTER</strong>, <strong>ADDCOLUMNS</strong> zmienne VAR są <strong>przetwarzane w każdej iteracji</strong>:</p>
+        <p><strong>Zasada:</strong> Dla każdego wiersza tabeli, zmienne VAR są <strong>obliczane na nowo</strong> z wartościami z aktualnego wiersza.</p>
+        <pre><code><span class='dax-function'>SUMX</span>(
+            {<span class='dax-number'>1</span>, <span class='dax-number'>2</span>, <span class='dax-number'>3</span>},  <span class='dax-comment'>-- Iterujemy po wartościach 1, 2, 3</span>
+            <span class='dax-keyword'>VAR</span> Kwadrat = [Value] * [Value] <span class='dax-comment'>-- [Value] to domyślna nazwa utworzonej kolumny</span>
+            <span class='dax-keyword'>RETURN</span> Kwadrat
+        )</code></pre>
+        <h1>Kroki algorytmu:</h1>
+        <div class='iteration-box'>
+        <h3>Iteracja 1: [Value] = 1</h3>
+        <ul>
+        <li><code>Kwadrat</code> = 1 × 1 = <strong>1</strong></li>
+        <li>RETURN zwraca: <strong>1</strong></li>
+        </ul>
+        </div>
+        <div class='iteration-box'>
+        <h3>Iteracja 2: [Value] = 2</h3>
+        <ul>
+        <li><code>Kwadrat</code> = 2 × 2 = <strong>4</strong></li>
+        <li>RETURN zwraca: <strong>4</strong></li>
+        </ul>
+        </div>
+        <div class='iteration-box'>
+        <h3>Iteracja 3: [Value] = 3</h3>
+        <ul>
+        <li><code>Kwadrat</code> = 3 × 3 = <strong>9</strong></li>
+        <li>RETURN zwraca: <strong>9</strong></li>
+        </ul>
+        </div>
+        <div class='result-box'>
+        SUMX dodaje wszystkie zwrócone wartości: 1 + 4 + 9 = <strong>14</strong>
+        </div>
+        <p>W każdej iteracji zmienna <code>Kwadrat</code> jest <strong>tworzona od nowa</strong> z nową wartością! Nie jest to ta sama zmienna — każda iteracja ma własny 'kontekst wiersza' i własne wartości zmiennych.</p>
+        <p><strong>To oznacza:</strong></p>
+        <ul>
+        <li>Zmienne VAR wewnątrz iteracji są <strong>dynamiczne</strong></li>
+        <li>Dostosowują się do <strong>aktualnego wiersza</strong> w tabeli</li>
+        <li>Pozwalają na <strong>elastyczne obliczenia</strong> dla każdego elementu z osobna</li>
+        </ul>
 
     </div>
 
     <!-- Strona 4 -->
     <div class='page'>
-        <h2>Ustawienie wersji językowej</h2>
-        <p>Wersja językowa Power BI wpływa na separatory dziesiętne, daty oraz niektóre funkcje DAX:</p>
-        <ol>
-        <li>Otwórz <strong>Plik</strong> → <strong>Opcje i ustawienia</strong> → <strong>Opcje</strong></li>
-        <li>Przejdź do sekcji <strong>GLOBALNE</strong> → <strong>Ustawienia regionalne</strong></li>
-        <li>Wybierz odpowiedni język - zalecany jest Angielski ze względu na:
+        <h1>Odchylenie od średniej</h1>
+        <pre><code>Suma Odchyleń od Średniej = 
+        <span class='dax-keyword'>VAR</span> Srednia = <span class='dax-function'>AVERAGE</span>({<span class='dax-number'>1</span>, <span class='dax-number'>2</span>, <span class='dax-number'>3</span>, <span class='dax-number'>4</span>, <span class='dax-number'>5</span>})  <span class='dax-comment'>-- Obliczona raz: 3</span>
+        <span class='dax-keyword'>RETURN</span>
+            <span class='dax-function'>SUMX</span>(
+                {<span class='dax-number'>1</span>, <span class='dax-number'>2</span>, <span class='dax-number'>3</span>},
+                <span class='dax-keyword'>VAR</span> Wartosc = [Value]
+                <span class='dax-keyword'>VAR</span> Odchylenie = Wartosc - Srednia  <span class='dax-comment'>-- Używamy zmiennej spoza iteracji!</span>
+                <span class='dax-keyword'>RETURN</span> Odchylenie
+            )</code></pre>
+        <h2>Co się dzieje krok po kroku:</h2>
+        <div class='iteration-box'>
+        <h3>Przed iteracją:</h3>
         <ul>
-        <li>Prostszą integrację z AI</li>
-        <li>Spójność nazewnictwa z dokumentacją Microsoft Learn</li>
+        <li><code>Srednia</code> = (1 + 2 + 3) / 3 = 2 ← obliczone <strong>tylko raz</strong></li>
         </ul>
-        </li>
-        </ol>
-        <img src='https://github.com/odczarujpowerbi/szkolenia-powerbi/blob/main/bin/Pasted%20image%2020251209170514.png?raw=true' width='100%'>
-        <p><strong>Uwaga:</strong></p>
+        </div>
+        <div class='iteration-box'>
+        <h3>Iteracja 1: [Value] = 1</h3>
         <ul>
-        <li>W polskiej wersji separator dziesiętny to przecinek (<code>,</code>), a separator argumentów to średnik (<code>;</code>)</li>
-        <li>W angielskiej wersji separator dziesiętny to kropka (<code>.</code>), a separator argumentów to przecinek (<code>,</code>)</li>
+        <li><code>Wartosc</code> = 1</li>
+        <li><code>Odchylenie</code> = 1 - 3 = <strong>-2</strong></li>
+        <li>RETURN zwraca: <strong>-2</strong></li>
         </ul>
-        <p>Przykład różnic w składni DAX:</p>
-        <pre><code>// Wersja polska
-        Suma wartości = <span class='dax-function'>SUMX</span>(fDemo; fDemo[Price] * fDemo[Quantity])
-
-        // Wersja angielska
-        Suma wartości = <span class='dax-function'>SUMX</span>(fDemo, fDemo[Price] * fDemo[Quantity])</code></pre>
+        </div>
+        <div class='iteration-box'>
+        <h3>Iteracja 2: [Value] = 2</h3>
+        <ul>
+        <li><code>Wartosc</code> = 2</li>
+        <li><code>Odchylenie</code> = 2 - 3 = <strong>-1</strong></li>
+        <li>RETURN zwraca: <strong>-1</strong></li>
+        </ul>
+        </div>
+        <div class='iteration-box'>
+        <h3>Iteracja 3: [Value] = 3</h3>
+        <ul>
+        <li><code>Wartosc</code> = 3</li>
+        <li><code>Odchylenie</code> = 3 - 3 = <strong>0</strong></li>
+        <li>RETURN zwraca: <strong>0</strong></li>
+        </ul>
+        </div>
+        <div class='result-box'>
+        <h3>Suma końcowa:</h3>
+        <p>SUMX dodaje wszystkie odchylenia: (-2) + (-1) + 0 = <strong>-3</strong></p>
+        </div>
         <p>---</p>
 
     </div>
@@ -324,10 +381,10 @@ Przygotowanie środowiska Power BI =
 <script>
 (function() {
     // Unikalny ID dla tej wizualizacji (wstrzykiwany przez Python)
-    var vizId = '905d5ea6';
+    var vizId = '3d785b0e';
     var containerId = 'viz_' + vizId;
 
-    var currentPage_905d5ea6 = 1;
+    var currentPage_3d785b0e = 1;
     var container = document.getElementById(containerId);
 
     if (!container) return;
@@ -337,27 +394,27 @@ Przygotowanie środowiska Power BI =
 
     document.getElementById('totalPages_' + vizId).textContent = totalPages;
 
-    window['showPage_905d5ea6'] = function(n) {
-        if (n > totalPages) currentPage_905d5ea6 = totalPages;
-        if (n < 1) currentPage_905d5ea6 = 1;
+    window['showPage_3d785b0e'] = function(n) {
+        if (n > totalPages) currentPage_3d785b0e = totalPages;
+        if (n < 1) currentPage_3d785b0e = 1;
 
         for (var i = 0; i < pages.length; i++) {
             pages[i].classList.remove('active');
         }
-        pages[currentPage_905d5ea6 - 1].classList.add('active');
+        pages[currentPage_3d785b0e - 1].classList.add('active');
 
-        document.getElementById('currentPage_' + vizId).textContent = currentPage_905d5ea6;
-        document.getElementById('prevBtn_' + vizId).disabled = (currentPage_905d5ea6 === 1);
-        document.getElementById('nextBtn_' + vizId).disabled = (currentPage_905d5ea6 === totalPages);
+        document.getElementById('currentPage_' + vizId).textContent = currentPage_3d785b0e;
+        document.getElementById('prevBtn_' + vizId).disabled = (currentPage_3d785b0e === 1);
+        document.getElementById('nextBtn_' + vizId).disabled = (currentPage_3d785b0e === totalPages);
     };
 
-    window['changePage_905d5ea6'] = function(n) {
-        currentPage_905d5ea6 += n;
-        window['showPage_905d5ea6'](currentPage_905d5ea6);
+    window['changePage_3d785b0e'] = function(n) {
+        currentPage_3d785b0e += n;
+        window['showPage_3d785b0e'](currentPage_3d785b0e);
     };
 
     // Inicjalizacja
-    window['showPage_905d5ea6'](1);
+    window['showPage_3d785b0e'](1);
 
     // Funkcjonalność powiększania obrazów
     var images = container.querySelectorAll('img');

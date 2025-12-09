@@ -1,4 +1,4 @@
-Przygotowanie środowiska Power BI = 
+04. Tworzenie zestawień tabelarycznych = 
 
 "
 
@@ -7,7 +7,7 @@ Przygotowanie środowiska Power BI =
 <head>
     <meta charset='UTF-8'>
     <meta name='viewport' content='width=device-width, initial-scale=1.0'>
-    <title>Przygotowanie środowiska Power BI</title>
+    <title>04. Tworzenie zestawień tabelarycznych</title>
     <style>
             * {
                 margin: 0;
@@ -229,93 +229,136 @@ Przygotowanie środowiska Power BI =
 </head>
 <body>
 
-<div class='container' id='viz_905d5ea6'>
+<div class='container' id='viz_d89a1ef8'>
     <!-- Nawigacja na górze -->
     <div class='navigation'>
-        <button id='prevBtn_905d5ea6' onclick='changePage_905d5ea6(-1)'>← Poprzednia</button>
+        <button id='prevBtn_d89a1ef8' onclick='changePage_d89a1ef8(-1)'>← Poprzednia</button>
         <span class='page-indicator'>
-            Strona <span id='currentPage_905d5ea6'>1</span> z <span id='totalPages_905d5ea6'>4</span>
+            Strona <span id='currentPage_d89a1ef8'>1</span> z <span id='totalPages_d89a1ef8'>3</span>
         </span>
-        <button id='nextBtn_905d5ea6' onclick='changePage_905d5ea6(1)'>Następna →</button>
+        <button id='nextBtn_d89a1ef8' onclick='changePage_d89a1ef8(1)'>Następna →</button>
     </div>
 
     <!-- Strona 1 -->
     <div class='page active'>
-        <h1>Ustawienia programu Power BI</h1>
-        <p>Przed rozpoczęciem pracy z Power BI Desktop warto odpowiednio skonfigurować środowisko pracy. Prawidłowe ustawienia programu umożliwiają dostęp do nowych funkcji oraz optymalizują sposób pracy z danymi.</p>
-        <h2>Włączenie funkcji w wersji zapoznawczej (Preview Features)</h2>
-        <p>Power BI regularnie wprowadza nowe funkcje, które na początku dostępne są jako wersje zapoznawcze. Aby je włączyć:</p>
-        <ol>
-        <li>Otwórz <strong>Plik</strong> → <strong>Opcje i ustawienia</strong> → <strong>Opcje</strong></li>
-        <li>Przejdź do sekcji <strong>Funkcje w wersji zapoznawczej</strong> (Preview features)</li>
-        <li>Zaznacz następujące opcje:
+        <h2>Podstawowe użycie: SUMMARIZE vs SUMMARIZECOLUMNS</h2>
+        <p><strong>Podejście legacy (SUMMARIZE):</strong></p>
         <ul>
-        <li><strong>Obliczenia wizualne</strong> - pozwala na tworzenie bardziej zaawansowanych wizualizacji</li>
-        <li><strong>Nowe wizualizacje</strong> - daje dostęp do najnowszych typów wizualizacji</li>
+        <li>Wymaga dodatkowego ADDCOLUMNS do obliczenia miar</li>
+        <li>Trzeba ręcznie filtrować puste wiersze przez FILTER + NOT ISBLANK</li>
+        <li>Bardziej rozwlekłe i podatne na błędy kontekstowe</li>
+        <li>SUMMARIZE może dać niespodziewane wyniki bez ADDCOLUMNS</li>
         </ul>
-        </li>
-        </ol>
-        <p><strong>Uwaga:</strong> Po włączeniu funkcji w wersji zapoznawczej konieczne jest ponowne uruchomienie Power BI Desktop.</p>
-        <p><img src='https://raw.githubusercontent.com/odczarujpowerbi/grafiki-do-szkolenia/main/PowerBI - Ustawienia - Preview Features.gif' width='100%'></p>
+        <p><strong>Podejście modern (SUMMARIZECOLUMNS):</strong></p>
+        <ul>
+        <li>Łączy grupowanie, dodawanie obliczeń i usuwanie pustych wierszy w jednej funkcji</li>
+        <li>Krótsze, czytelniejsze, bezpieczniejsze</li>
+        <li>Obecnie zalecany standard do raportów i zapytań w DAX</li>
+        </ul>
+        <pre><code><span class='dax-comment'>------- LEGACY  </span>
+        EVALUATE  
+            <span class='dax-function'>FILTER</span> (  
+                <span class='dax-function'>ADDCOLUMNS</span> (  
+                    <span class='dax-function'>SUMMARIZE</span> ( Sales, 'Product'[Brand], 'Date'[Year] ),  
+                    'Sales', <span class='dax-function'>CALCULATE</span> ( <span class='dax-function'>SUMX</span> ( Sales, Sales[Quantity] * Sales[Unit Price] ) )  
+                ),  
+                NOT <span class='dax-function'>ISBLANK</span> ( [Sales] )  
+            )  
+
+        <span class='dax-comment'>------- MODERN  </span>
+        EVALUATE  
+            <span class='dax-function'>SUMMARIZECOLUMNS</span> (  
+                'Product'[Brand], 'Date'[Year],  
+                'Sales', <span class='dax-function'>CALCULATE</span> ( <span class='dax-function'>SUMX</span> ( Sales, Sales[Quantity] * Sales[Unit Price] ) )  
+            )</code></pre>
 
     </div>
 
     <!-- Strona 2 -->
     <div class='page'>
-        <h2>Konfiguracja ustawień raportu- włączenie interakcji między obiektami na raporcie</h2>
-        <p>Interakcje między wizualizacjami pozwalają na dynamiczne filtrowanie danych. Aby włączyć tę funkcję:</p>
-        <ol>
-        <li>Przejdź do widoku <strong>Raport</strong></li>
-        <li>Kliknij <strong>Plik</strong> → <strong>Opcje i ustawienia</strong> → <strong>Opcje</strong></li>
-        <li>W sekcji <strong>BIEŻĄCY PLIK</strong> → <strong>Ustawienia raportu</strong></li>
-        <li>Upewnij się, że opcja dotycząca interakcji wizualizacji jest włączona</li>
-        </ol>
-        <img src='https://github.com/odczarujpowerbi/szkolenia-powerbi/blob/main/bin/Pasted%20image%2020251209170359.png?raw=true' width='100%'>
-        <p>> Dzięki temu kliknięcie na element jednej wizualizacji (np. kolumnę na wykresie) automatycznie przefiltruje pozostałe wizualizacje na stronie raportu.</p>
+        <h2>Praca z wieloma tabelami faktów</h2>
+        <p><strong>Zalety SUMMARIZECOLUMNS:</strong></p>
+        <ul>
+        <li>Rozumie kontekst całego modelu danych</li>
+        <li>Działa spójnie z modelem gwiazdy – automatycznie obsługuje kombinacje wymiarów</li>
+        <li>Pozwala w jednym wyrażeniu pobierać dane z różnych tabel faktów</li>
+        <li>Zwraca kompletny wynik w jednej tabeli</li>
+        </ul>
+        <p><strong>Problemy z SUMMARIZE:</strong></p>
+        <ul>
+        <li>Ogranicza się do jednej tabeli faktów</li>
+        <li>Wymaga ręcznego tworzenia siatki kombinacji przez CROSSJOIN</li>
+        <li>Trzeba łączyć wyniki przez NATURALLEFTOUTERJOIN</li>
+        <li>Bardziej skomplikowane, mniej czytelne i podatne na błędy</li>
+        </ul>
+        <pre><code><span class='dax-comment'>------- RECOMMENDED  </span>
+        EVALUATE  
+            <span class='dax-function'>SUMMARIZECOLUMNS</span> (  
+                'Product'[Category],  
+                Store[Country],  
+                'Sales', <span class='dax-function'>CALCULATE</span> ( <span class='dax-function'>SUMX</span> ( Sales, Sales[Quantity] * Sales[Net Price] ) ),  
+                'Purchases', <span class='dax-function'>CALCULATE</span> ( <span class='dax-function'>SUMX</span> ( Purchase, Purchase[Quantity] * Purchase[Unit Cost] ) )   
+            )  
+
+        <span class='dax-comment'>------- PROBLEMATIC  </span>
+        EVALUATE  
+            <span class='dax-keyword'>VAR</span> S =   
+                <span class='dax-function'>ADDCOLUMNS</span> (  
+                    <span class='dax-function'>SUMMARIZE</span> ( Sales, 'Product'[Category], Store[Country] ),  
+                    'Sales', <span class='dax-function'>CALCULATE</span> ( <span class='dax-function'>SUMX</span> ( Sales, Sales[Quantity] * Sales[Net Price] ) )   
+                )  
+            <span class='dax-keyword'>VAR</span> P =   
+                <span class='dax-function'>ADDCOLUMNS</span> (  
+                    <span class='dax-function'>SUMMARIZE</span> ( Purchase, 'Product'[Category], Store[Country] ),  
+                    'Purchase', <span class='dax-function'>CALCULATE</span> ( <span class='dax-function'>SUMX</span> ( Purchase, Purchase[Quantity] * Purchase[Unit Cost] ) )   
+                )  
+            <span class='dax-keyword'>VAR</span> G =   
+                <span class='dax-function'>CROSSJOIN</span>( <span class='dax-function'>VALUES</span> ( 'Product'[Category] ), <span class='dax-function'>VALUES</span> ( Store[Country] ) )  
+        <span class='dax-keyword'>RETURN</span>  
+            <span class='dax-function'>NATURALLEFTOUTERJOIN</span> ( <span class='dax-function'>NATURALLEFTOUTERJOIN</span> ( G, P ), S )</code></pre>
 
     </div>
 
     <!-- Strona 3 -->
     <div class='page'>
-        <h2>Ustawienia Power Query-  wyłączenie automatycznego wykrywania typów kolumn</h2>
-        <p>Automatyczne wykrywanie typów danych przez Power Query może czasem prowadzić do błędów lub niepożądanych konwersji. Zaleca się wyłączenie tej opcji i ręczne kontrolowanie typów danych:</p>
-        <ol>
-        <li>Otwórz <strong>Plik</strong> → <strong>Opcje i ustawienia</strong> → <strong>Opcje</strong></li>
-        <li>Przejdź do sekcji <strong>BIEŻĄCY PLIK</strong> → <strong>Ładowanie danych</strong></li>
-        <li>Odznacz opcję <strong>Automatycznie wykrywaj typy kolumn i nagłówki dla źródeł nieustrukturyzowanych</strong></li>
-        </ol>
-        <img src='https://github.com/odczarujpowerbi/szkolenia-powerbi/blob/main/bin/Pasted%20image%2020251209170441.png?raw=true' width='100%'>
-        <p>Dzięki temu będziesz mieć pełną kontrolę nad tym, jakie typy danych są przypisywane do poszczególnych kolumn.</p>
-
-    </div>
-
-    <!-- Strona 4 -->
-    <div class='page'>
-        <h2>Ustawienie wersji językowej</h2>
-        <p>Wersja językowa Power BI wpływa na separatory dziesiętne, daty oraz niektóre funkcje DAX:</p>
-        <ol>
-        <li>Otwórz <strong>Plik</strong> → <strong>Opcje i ustawienia</strong> → <strong>Opcje</strong></li>
-        <li>Przejdź do sekcji <strong>GLOBALNE</strong> → <strong>Ustawienia regionalne</strong></li>
-        <li>Wybierz odpowiedni język - zalecany jest Angielski ze względu na:
+        <h1>Kiedy używać SUMMARIZE zamiast SUMMARIZECOLUMNS</h1>
+        <p><strong>Gdy potrzebujesz tylko istniejących kombinacji:</strong></p>
         <ul>
-        <li>Prostszą integrację z AI</li>
-        <li>Spójność nazewnictwa z dokumentacją Microsoft Learn</li>
+        <li>SUMMARIZE z tabelą źródłową zwraca tylko kombinacje występujące w danych faktycznych</li>
+        <li>Filtruje automatycznie do rzeczywistych relacji w tabeli Sales</li>
+        <li>To najczęściej oczekiwane zachowanie w raportach</li>
         </ul>
-        </li>
-        </ol>
-        <img src='https://github.com/odczarujpowerbi/szkolenia-powerbi/blob/main/bin/Pasted%20image%2020251209170514.png?raw=true' width='100%'>
-        <p><strong>Uwaga:</strong></p>
+        <p><strong>Problem z SUMMARIZECOLUMNS bez miar:</strong></p>
         <ul>
-        <li>W polskiej wersji separator dziesiętny to przecinek (<code>,</code>), a separator argumentów to średnik (<code>;</code>)</li>
-        <li>W angielskiej wersji separator dziesiętny to kropka (<code>.</code>), a separator argumentów to przecinek (<code>,</code>)</li>
+        <li>Bez tabeli źródłowej generuje wszystkie możliwe kombinacje (jak CROSSJOIN)</li>
+        <li>Może zwrócić wiele pustych kombinacji, które nie istnieją w danych</li>
+        <li>Nie jest to zwykle pożądane zachowanie</li>
         </ul>
-        <p>Przykład różnic w składni DAX:</p>
-        <pre><code>// Wersja polska
-        Suma wartości = <span class='dax-function'>SUMX</span>(fDemo; fDemo[Price] * fDemo[Quantity])
+        <pre><code><span class='dax-comment'>------- RECOMMENDED  </span>
+        EVALUATE  
+            <span class='dax-function'>SUMMARIZE</span> (  
+                'Sales',  
+                'Product'[Brand],  
+                Customer[Continent],  
+                'Date'[Date]  
+            )  
 
-        // Wersja angielska
-        Suma wartości = <span class='dax-function'>SUMX</span>(fDemo, fDemo[Price] * fDemo[Quantity])</code></pre>
-        <p>---</p>
+        <span class='dax-comment'>------- PROBLEMATIC  </span>
+        EVALUATE  
+            <span class='dax-function'>SUMMARIZECOLUMNS</span> (  
+                'Product'[Brand],  
+                Customer[Continent],  
+                'Date'[Date]  
+            )  
+
+        <span class='dax-comment'>-- Równoważne z:  </span>
+        EVALUATE  
+            <span class='dax-function'>CROSSJOIN</span> (  
+                <span class='dax-function'>VALUES</span> ( 'Product'[Brand] ),  
+                <span class='dax-function'>VALUES</span> ( Customer[Continent] ),  
+                <span class='dax-function'>VALUES</span> ( 'Date'[Date] )   
+            )</code></pre>
+        <p><strong>Zasada:</strong> Do samego grupowania bez miar używaj SUMMARIZE z tabelą źródłową. Do grupowania z miarami używaj SUMMARIZECOLUMNS.</p>
 
     </div>
 
@@ -324,10 +367,10 @@ Przygotowanie środowiska Power BI =
 <script>
 (function() {
     // Unikalny ID dla tej wizualizacji (wstrzykiwany przez Python)
-    var vizId = '905d5ea6';
+    var vizId = 'd89a1ef8';
     var containerId = 'viz_' + vizId;
 
-    var currentPage_905d5ea6 = 1;
+    var currentPage_d89a1ef8 = 1;
     var container = document.getElementById(containerId);
 
     if (!container) return;
@@ -337,27 +380,27 @@ Przygotowanie środowiska Power BI =
 
     document.getElementById('totalPages_' + vizId).textContent = totalPages;
 
-    window['showPage_905d5ea6'] = function(n) {
-        if (n > totalPages) currentPage_905d5ea6 = totalPages;
-        if (n < 1) currentPage_905d5ea6 = 1;
+    window['showPage_d89a1ef8'] = function(n) {
+        if (n > totalPages) currentPage_d89a1ef8 = totalPages;
+        if (n < 1) currentPage_d89a1ef8 = 1;
 
         for (var i = 0; i < pages.length; i++) {
             pages[i].classList.remove('active');
         }
-        pages[currentPage_905d5ea6 - 1].classList.add('active');
+        pages[currentPage_d89a1ef8 - 1].classList.add('active');
 
-        document.getElementById('currentPage_' + vizId).textContent = currentPage_905d5ea6;
-        document.getElementById('prevBtn_' + vizId).disabled = (currentPage_905d5ea6 === 1);
-        document.getElementById('nextBtn_' + vizId).disabled = (currentPage_905d5ea6 === totalPages);
+        document.getElementById('currentPage_' + vizId).textContent = currentPage_d89a1ef8;
+        document.getElementById('prevBtn_' + vizId).disabled = (currentPage_d89a1ef8 === 1);
+        document.getElementById('nextBtn_' + vizId).disabled = (currentPage_d89a1ef8 === totalPages);
     };
 
-    window['changePage_905d5ea6'] = function(n) {
-        currentPage_905d5ea6 += n;
-        window['showPage_905d5ea6'](currentPage_905d5ea6);
+    window['changePage_d89a1ef8'] = function(n) {
+        currentPage_d89a1ef8 += n;
+        window['showPage_d89a1ef8'](currentPage_d89a1ef8);
     };
 
     // Inicjalizacja
-    window['showPage_905d5ea6'](1);
+    window['showPage_d89a1ef8'](1);
 
     // Funkcjonalność powiększania obrazów
     var images = container.querySelectorAll('img');
