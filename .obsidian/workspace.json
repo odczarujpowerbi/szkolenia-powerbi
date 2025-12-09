@@ -13,10 +13,10 @@
             "state": {
               "type": "html-view",
               "state": {
-                "file": "02. OUTPUT/01. Podstawy DAX - Funkcje agregujące.html"
+                "file": "02. OUTPUT/01. Podstawy DAX.html"
               },
               "icon": "code-glyph",
-              "title": "01. Podstawy DAX - Funkcje agregujące"
+              "title": "01. Podstawy DAX"
             }
           },
           {
@@ -34,7 +34,6 @@
             }
           }
         ],
-        "currentTab": 1,
         "stacked": true
       }
     ],
@@ -67,7 +66,7 @@
             "state": {
               "type": "search",
               "state": {
-                "query": "Sales",
+                "query": "",
                 "matchingCase": false,
                 "explainSearch": false,
                 "collapseAll": false,
@@ -88,8 +87,7 @@
               "title": "Bookmarks"
             }
           }
-        ],
-        "currentTab": 1
+        ]
       }
     ],
     "direction": "horizontal",
@@ -120,13 +118,13 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "01. THEORY/03. Modyfikowanie Kontekstu.md",
+                "file": "02. OUTPUT/01. Podstawy DAX.html",
                 "followCursor": true,
                 "showSearch": false,
                 "searchQuery": ""
               },
               "icon": "lucide-list",
-              "title": "Outline of 03. Modyfikowanie Kontekstu"
+              "title": "Outline of 01. Podstawy DAX"
             }
           }
         ],
@@ -143,7 +141,7 @@
             "state": {
               "type": "localgraph",
               "state": {
-                "file": "01. THEORY/03. Modyfikowanie Kontekstu.md",
+                "file": "02. OUTPUT/01. Podstawy DAX.html",
                 "options": {
                   "collapse-filter": true,
                   "search": "",
@@ -171,7 +169,7 @@
                 }
               },
               "icon": "lucide-git-fork",
-              "title": "Graph of 03. Modyfikowanie Kontekstu"
+              "title": "Graph of 01. Podstawy DAX"
             }
           }
         ]
@@ -195,17 +193,22 @@
       "hide-folders:Show hidden folders": false
     }
   },
-  "active": "d92839609151aef8",
+  "active": "c6a8ca1a0082a34f",
   "lastOpenFiles": [
-    "bin/Pasted image 20251209193536.png",
+    "02. OUTPUT/01. Podstawy DAX - Funkcje agregujące.html",
+    "02. OUTPUT/01. Podstawy DAX - Funkcje dat.html",
+    "02. OUTPUT/00. Konfiguracja Power BI - Główne widoki Power BI Desktop.html",
     "01. THEORY/04. Tworzenie zestawień tabelarycznych.md",
     "01. THEORY/03. Modyfikowanie Kontekstu.md",
+    "00. DRAFT/02. Wstęp do Calculate.md",
+    "00. DRAFT/00. Przygotowanie środowiska.md",
+    "00. DRAFT/03. Kontekst Filtra.md",
+    "00. DRAFT/01. Podstawy DAX.md",
+    "bin/Pasted image 20251209193536.png",
     "01. THEORY/02. Wprowadzenie do CALCULATE.md",
     "01. THEORY/01. Podstawy DAX.md",
     "02. OUTPUT/01. Podstawy DAX - Funkcje iteracyjne (X-functions).html",
-    "02. OUTPUT/01. Podstawy DAX - Funkcje agregujące.html",
     "02. OUTPUT/01. Podstawy DAX.html",
-    "02. OUTPUT/01. Podstawy DAX - Funkcje dat.html",
     "02. OUTPUT/01. Podstawy DAX - Funkcje logiczne.html",
     "02. OUTPUT/03. Modyfikowanie Kontekstu - ALL i REMOVEFILTERS - usuwanie filtrów.html",
     "01. THEORY/05. DAX - Zaawansowane Kwerendy.md",
@@ -216,8 +219,6 @@
     "01. THEORY/00. Konfiguracja Power BI.md",
     "bin/Pasted image 20251209181932.png",
     "02. OUTPUT/TMDL/_HTML.md",
-    "00. DRAFT/02. Wstęp do Calculate.md",
-    "00. DRAFT/01. Podstawy DAX.md",
     "config.md",
     "03. TEMPLATE/CSS - Czerwony.md",
     "03. TEMPLATE/CSS - Niebieski.md",
@@ -229,8 +230,6 @@
     "bin/Pasted image 20251209172001.png",
     "bin/Pasted image 20251209171436.png",
     "bin/Pasted image 20251209171433.png",
-    "bin/Pasted image 20251209170514.png",
-    "00. DRAFT/03. Kontekst Filtra.md",
     "03. TEMPLATE/Markdown/Board.md",
     "03. TEMPLATE/Markdown/Teoria.md",
     "03. TEMPLATE/Markdown/Quiz.md",
@@ -242,7 +241,6 @@
     "Theory/01. Podstawy DAX.md",
     "Theory/02. DAX - Zmienne.md",
     "Theory/03. Test.md",
-    "Output/TMDL/_HTML.md",
     "Generator.canvas"
   ]
 }
