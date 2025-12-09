@@ -1,0 +1,375 @@
+DAX - Zmienne = 
+
+"
+
+<!DOCTYPE html>
+<html lang='pl'>
+<head>
+    <meta charset='UTF-8'>
+    <meta name='viewport' content='width=device-width, initial-scale=1.0'>
+    <title>DAX - Zmienne</title>
+    <style>
+            * {
+                margin: 0;
+                padding: 0;
+                box-sizing: border-box;
+            }
+            
+            body {
+                font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+                font-size: 16px;
+                line-height: 1.7;
+                color: #333;
+                background: transparent;
+                padding: 20px;
+            }
+            
+            .container {
+                max-width: 800px;
+                margin: 0 auto;
+                background: transparent;
+                padding: 40px;
+            }
+            
+            .navigation {
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                margin-bottom: 40px;
+                padding-bottom: 20px;
+                border-bottom: 1px solid #e1e4e8;
+            }
+            
+            button {
+                background: #0066cc;
+                color: white;
+                border: none;
+                padding: 12px 28px;
+                border-radius: 4px;
+                cursor: pointer;
+                font-size: 1em;
+                font-weight: 500;
+                transition: background 0.2s;
+            }
+            
+            button:hover {
+                background: #0052a3;
+            }
+            
+            button:disabled {
+                background: #ccc;
+                cursor: not-allowed;
+            }
+            
+            .page-indicator {
+                color: #666;
+                font-size: 1em;
+            }
+            
+            .page {
+                display: none;
+                min-height: 500px;
+            }
+            
+            .page.active {
+                display: block;
+                animation: fadeIn 0.3s ease-in;
+            }
+            
+            @keyframes fadeIn {
+                from { opacity: 0; transform: translateY(10px); }
+                to { opacity: 1; transform: translateY(0); }
+            }
+            
+            h1 {
+                font-size: 1.8em;
+                font-weight: 600;
+                margin-bottom: 1em;
+                color: #1a1a1a;
+            }
+            
+            h2 {
+                font-size: 1.4em;
+                font-weight: 600;
+                margin: 1.5em 0 0.8em 0;
+                color: #2a2a2a;
+            }
+            
+            h3 {
+                font-size: 1.1em;
+                font-weight: 600;
+                margin: 1.2em 0 0.6em 0;
+                color: #444;
+            }
+            
+            p {
+                margin-bottom: 1em;
+                font-size: 1.05em;
+            }
+            
+            strong {
+                font-weight: 600;
+                color: #1a1a1a;
+            }
+            
+            code {
+                background: #f5f5f5;
+                padding: 3px 7px;
+                border-radius: 3px;
+                font-family: 'Courier New', monospace;
+                font-size: 0.95em;
+                color: #d73a49;
+            }
+            
+            pre {
+                background: #f8f9fa;
+                border-left: 3px solid #0066cc;
+                padding: 18px;
+                margin: 1em 0;
+                overflow-x: auto;
+                border-radius: 3px;
+            }
+            
+            pre code {
+                background: none;
+                padding: 0;
+                color: #24292e;
+                font-size: 1em;
+                line-height: 1.6;
+            }
+            
+            .dax-keyword {
+                color: #0066cc;
+                font-weight: 600;
+            }
+            
+            .dax-function {
+                color: #6f42c1;
+            }
+            
+            .dax-number {
+                color: #005cc5;
+            }
+            
+            .dax-comment {
+                color: #6a737d;
+                font-style: italic;
+            }
+            
+            ul, ol {
+                margin: 1em 0 1em 1.5em;
+            }
+            
+            li {
+                margin: 0.5em 0;
+                font-size: 1.05em;
+            }
+            
+            .iteration-box {
+                border-left: 3px solid #0066cc;
+                padding: 14px 18px;
+                margin: 0.8em 0;
+            }
+            
+            .result-box {
+                background: #f5f5f5;
+                border-left: 3px solid #999;
+                padding: 14px 18px;
+                margin: 0.8em 0;
+                font-weight: 500;
+                color: #555;
+                font-size: 1.05em;
+            }
+        </style>
+</head>
+<body>
+
+<div class='container'>
+    <!-- Nawigacja na górze -->
+    <div class='navigation'>
+        <button id='prevBtn' onclick='changePage(-1)'>← Poprzednia</button>
+        <span class='page-indicator'>
+            Strona <span id='currentPage'>1</span> z <span id='totalPages'>4</span>
+        </span>
+        <button id='nextBtn' onclick='changePage(1)'>Następna →</button>
+    </div>
+
+    <!-- Strona 1 -->
+    <div class='page active'>
+        <h1>Czym są VAR i RETURN?</h1>
+        <p><strong>VAR</strong> i <strong>RETURN</strong> to kluczowe słowa w języku DAX, które pozwalają na tworzenie <strong>zmiennych</strong> i <strong>zwracanie wyników</strong> w miarach i kolumnach kalkulowanych.</p>
+        <h2>VAR (Variable)</h2>
+        <ul>
+        <li>Służy do <strong>deklarowania zmiennych</strong> i przechowywania w nich wartości</li>
+        <li>Zmienne mogą zawierać: liczby, teksty, tabele, wyniki obliczeń</li>
+        <li>Zmienne są <strong>obliczane tylko raz</strong> i przechowują swoją wartość</li>
+        <li>Pomagają <strong>unikać powtarzania</strong> tego samego kodu</li>
+        <li>Poprawiają <strong>czytelność</strong> i <strong>wydajność</strong> miar</li>
+        </ul>
+        <h2>RETURN</h2>
+        <ul>
+        <li><strong>Zwraca wynik</strong> całego wyrażenia DAX</li>
+        <li>W mierze/kolumnie może być <strong>tylko jedno RETURN</strong></li>
+        <li>To, co umieścisz po RETURN, stanie się <strong>końcowym wynikiem</strong></li>
+        </ul>
+
+    </div>
+
+    <!-- Strona 2 -->
+    <div class='page'>
+        <h1>Podstawowa składnia</h1>
+        <pre><code>NazwaMiary = 
+        <span class='dax-keyword'>VAR</span> NazwaZmiennej1 = \&lt;wyrażenie1\&gt;
+        <span class='dax-keyword'>VAR</span> NazwaZmiennej2 = \&lt;wyrażenie2\&gt;
+        <span class='dax-keyword'>VAR</span> NazwaZmiennej3 = \&lt;wyrażenie3\&gt;
+        <span class='dax-keyword'>RETURN</span> \&lt;wynik_końcowy\&gt;</code></pre>
+        <p><strong>Przykład prosty:</strong></p>
+        <pre><code>Całkowity Koszt = 
+        <span class='dax-keyword'>VAR</span> IloscSztuk = <span class='dax-number'>100</span>
+        <span class='dax-keyword'>VAR</span> CenaJednostkowa = <span class='dax-number'>25</span>
+        <span class='dax-keyword'>VAR</span> Koszt = IloscSztuk * CenaJednostkowa
+        <span class='dax-keyword'>RETURN</span> Koszt</code></pre>
+        <div class='result-box'>
+        Wynik: <strong>2500</strong>
+        </div>
+
+    </div>
+
+    <!-- Strona 3 -->
+    <div class='page'>
+        <h1>Jak to działa w funkcjach iteracyjnych (SUMX, FILTER, itd.)?</h1>
+        <p>W funkcjach iteracyjnych jak <strong>SUMX</strong>, <strong>FILTER</strong>, <strong>ADDCOLUMNS</strong> zmienne VAR są <strong>przetwarzane w każdej iteracji</strong>:</p>
+        <p><strong>Zasada:</strong> Dla każdego wiersza tabeli, zmienne VAR są <strong>obliczane na nowo</strong> z wartościami z aktualnego wiersza.</p>
+        <pre><code><span class='dax-function'>SUMX</span>(
+            {<span class='dax-number'>1</span>, <span class='dax-number'>2</span>, <span class='dax-number'>3</span>},  <span class='dax-comment'>-- Iterujemy po wartościach 1, 2, 3</span>
+            <span class='dax-keyword'>VAR</span> Kwadrat = [Value] * [Value] <span class='dax-comment'>-- [Value] to domyślna nazwa utworzonej kolumny</span>
+            <span class='dax-keyword'>RETURN</span> Kwadrat
+        )</code></pre>
+        <h1>Kroki algorytmu:</h1>
+        <div class='iteration-box'>
+        <h3>Iteracja 1: [Value] = 1</h3>
+        <ul>
+        <li><code>Kwadrat</code> = 1 × 1 = <strong>1</strong></li>
+        <li>RETURN zwraca: <strong>1</strong></li>
+        </ul>
+        </div>
+        <div class='iteration-box'>
+        <h3>Iteracja 2: [Value] = 2</h3>
+        <ul>
+        <li><code>Kwadrat</code> = 2 × 2 = <strong>4</strong></li>
+        <li>RETURN zwraca: <strong>4</strong></li>
+        </ul>
+        </div>
+        <div class='iteration-box'>
+        <h3>Iteracja 3: [Value] = 3</h3>
+        <ul>
+        <li><code>Kwadrat</code> = 3 × 3 = <strong>9</strong></li>
+        <li>RETURN zwraca: <strong>9</strong></li>
+        </ul>
+        </div>
+        <div class='result-box'>
+        SUMX dodaje wszystkie zwrócone wartości: 1 + 4 + 9 = <strong>14</strong>
+        </div>
+        <p>W każdej iteracji zmienna <code>Kwadrat</code> jest <strong>tworzona od nowa</strong> z nową wartością! Nie jest to ta sama zmienna — każda iteracja ma własny &quot;kontekst wiersza&quot; i własne wartości zmiennych.</p>
+        <p><strong>To oznacza:</strong></p>
+        <ul>
+        <li>Zmienne VAR wewnątrz iteracji są <strong>dynamiczne</strong></li>
+        <li>Dostosowują się do <strong>aktualnego wiersza</strong> w tabeli</li>
+        <li>Pozwalają na <strong>elastyczne obliczenia</strong> dla każdego elementu z osobna</li>
+        </ul>
+
+    </div>
+
+    <!-- Strona 4 -->
+    <div class='page'>
+        <h1>Odchylenie od średniej</h1>
+        <pre><code>Suma Odchyleń od Średniej = 
+        <span class='dax-keyword'>VAR</span> Srednia = <span class='dax-function'>AVERAGE</span>({<span class='dax-number'>1</span>, <span class='dax-number'>2</span>, <span class='dax-number'>3</span>, <span class='dax-number'>4</span>, <span class='dax-number'>5</span>})  <span class='dax-comment'>-- Obliczona raz: 3</span>
+        <span class='dax-keyword'>RETURN</span>
+            <span class='dax-function'>SUMX</span>(
+                {<span class='dax-number'>1</span>, <span class='dax-number'>2</span>, <span class='dax-number'>3</span>},
+                <span class='dax-keyword'>VAR</span> Wartosc = [Value]
+                <span class='dax-keyword'>VAR</span> Odchylenie = Wartosc - Srednia  <span class='dax-comment'>-- Używamy zmiennej spoza iteracji!</span>
+                <span class='dax-keyword'>RETURN</span> Odchylenie
+            )</code></pre>
+        <h1>Co się dzieje krok po kroku:</h1>
+        <div class='iteration-box'>
+        <h3>Przed iteracją:</h3>
+        <ul>
+        <li><code>Srednia</code> = (1 + 2 + 3) / 3 = 2 ← obliczone <strong>tylko raz</strong></li>
+        </ul>
+        </div>
+        <div class='iteration-box'>
+        <h3>Iteracja 1: [Value] = 1</h3>
+        <ul>
+        <li><code>Wartosc</code> = 1</li>
+        <li><code>Odchylenie</code> = 1 - 3 = <strong>-2</strong></li>
+        <li>RETURN zwraca: <strong>-2</strong></li>
+        </ul>
+        </div>
+        <div class='iteration-box'>
+        <h3>Iteracja 2: [Value] = 2</h3>
+        <ul>
+        <li><code>Wartosc</code> = 2</li>
+        <li><code>Odchylenie</code> = 2 - 3 = <strong>-1</strong></li>
+        <li>RETURN zwraca: <strong>-1</strong></li>
+        </ul>
+        </div>
+        <div class='iteration-box'>
+        <h3>Iteracja 3: [Value] = 3</h3>
+        <ul>
+        <li><code>Wartosc</code> = 3</li>
+        <li><code>Odchylenie</code> = 3 - 3 = <strong>0</strong></li>
+        <li>RETURN zwraca: <strong>0</strong></li>
+        </ul>
+        </div>
+        <div class='result-box'>
+        <h3>Suma końcowa:</h3>
+        <p>SUMX dodaje wszystkie odchylenia: (-2) + (-1) + 0 = <strong>-3</strong></p>
+        </div>
+
+    </div>
+
+</div>
+
+<script>
+    let currentPage = 1;
+    const totalPages = document.querySelectorAll('.page').length;
+    
+    document.getElementById('totalPages').textContent = totalPages;
+    
+    function showPage(n) {
+        const pages = document.querySelectorAll('.page');
+        
+        if (n > totalPages) currentPage = totalPages;
+        if (n < 1) currentPage = 1;
+        
+        pages.forEach(page => page.classList.remove('active'));
+        pages[currentPage - 1].classList.add('active');
+        
+        document.getElementById('currentPage').textContent = currentPage;
+        document.getElementById('prevBtn').disabled = currentPage === 1;
+        document.getElementById('nextBtn').disabled = currentPage === totalPages;
+        
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+    
+    function changePage(n) {
+        currentPage += n;
+        showPage(currentPage);
+    }
+    
+    // Obsługa strzałek na klawiaturze
+    document.addEventListener('keydown', function(e) {
+        if (e.key === 'ArrowLeft') changePage(-1);
+        if (e.key === 'ArrowRight') changePage(1);
+    });
+    
+    // Inicjalizacja
+    showPage(1);
+</script>
+
+</body>
+</html>
+
+"

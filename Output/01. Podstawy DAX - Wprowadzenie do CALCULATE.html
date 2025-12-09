@@ -1,0 +1,371 @@
+Wprowadzenie do CALCULATE = 
+
+"
+
+<!DOCTYPE html>
+<html lang='pl'>
+<head>
+    <meta charset='UTF-8'>
+    <meta name='viewport' content='width=device-width, initial-scale=1.0'>
+    <title>Wprowadzenie do CALCULATE</title>
+    <style>
+            * {
+                margin: 0;
+                padding: 0;
+                box-sizing: border-box;
+            }
+            
+            body {
+                font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+                font-size: 16px;
+                line-height: 1.7;
+                color: #333;
+                background: transparent;
+                padding: 20px;
+            }
+            
+            .container {
+                max-width: 800px;
+                margin: 0 auto;
+                background: transparent;
+                padding: 40px;
+            }
+            
+            .navigation {
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                margin-bottom: 40px;
+                padding-bottom: 20px;
+                border-bottom: 1px solid #e1e4e8;
+            }
+            
+            button {
+                background: #0066cc;
+                color: white;
+                border: none;
+                padding: 12px 28px;
+                border-radius: 4px;
+                cursor: pointer;
+                font-size: 1em;
+                font-weight: 500;
+                transition: background 0.2s;
+            }
+            
+            button:hover {
+                background: #0052a3;
+            }
+            
+            button:disabled {
+                background: #ccc;
+                cursor: not-allowed;
+            }
+            
+            .page-indicator {
+                color: #666;
+                font-size: 1em;
+            }
+            
+            .page {
+                display: none;
+                min-height: 500px;
+            }
+            
+            .page.active {
+                display: block;
+                animation: fadeIn 0.3s ease-in;
+            }
+            
+            @keyframes fadeIn {
+                from { opacity: 0; transform: translateY(10px); }
+                to { opacity: 1; transform: translateY(0); }
+            }
+            
+            h1 {
+                font-size: 1.8em;
+                font-weight: 600;
+                margin-bottom: 1em;
+                color: #1a1a1a;
+            }
+            
+            h2 {
+                font-size: 1.4em;
+                font-weight: 600;
+                margin: 1.5em 0 0.8em 0;
+                color: #2a2a2a;
+            }
+            
+            h3 {
+                font-size: 1.1em;
+                font-weight: 600;
+                margin: 1.2em 0 0.6em 0;
+                color: #444;
+            }
+            
+            p {
+                margin-bottom: 1em;
+                font-size: 1.05em;
+            }
+            
+            strong {
+                font-weight: 600;
+                color: #1a1a1a;
+            }
+            
+            code {
+                background: #f5f5f5;
+                padding: 3px 7px;
+                border-radius: 3px;
+                font-family: 'Courier New', monospace;
+                font-size: 0.95em;
+                color: #d73a49;
+            }
+            
+            pre {
+                background: #f8f9fa;
+                border-left: 3px solid #0066cc;
+                padding: 18px;
+                margin: 1em 0;
+                overflow-x: auto;
+                border-radius: 3px;
+            }
+            
+            pre code {
+                background: none;
+                padding: 0;
+                color: #24292e;
+                font-size: 1em;
+                line-height: 1.6;
+            }
+            
+            .dax-keyword {
+                color: #0066cc;
+                font-weight: 600;
+            }
+            
+            .dax-function {
+                color: #6f42c1;
+            }
+            
+            .dax-number {
+                color: #005cc5;
+            }
+            
+            .dax-comment {
+                color: #6a737d;
+                font-style: italic;
+            }
+            
+            ul, ol {
+                margin: 1em 0 1em 1.5em;
+            }
+            
+            li {
+                margin: 0.5em 0;
+                font-size: 1.05em;
+            }
+            
+            .iteration-box {
+                border-left: 3px solid #0066cc;
+                padding: 14px 18px;
+                margin: 0.8em 0;
+            }
+            
+            .result-box {
+                background: #f5f5f5;
+                border-left: 3px solid #999;
+                padding: 14px 18px;
+                margin: 0.8em 0;
+                font-weight: 500;
+                color: #555;
+                font-size: 1.05em;
+            }
+        </style>
+</head>
+<body>
+
+<div class='container' id='viz_a6296909'>
+    <!-- Nawigacja na górze -->
+    <div class='navigation'>
+        <button id='prevBtn_a6296909' onclick='changePage_a6296909(-1)'>← Poprzednia</button>
+        <span class='page-indicator'>
+            Strona <span id='currentPage_a6296909'>1</span> z <span id='totalPages_a6296909'>9</span>
+        </span>
+        <button id='nextBtn_a6296909' onclick='changePage_a6296909(1)'>Następna →</button>
+    </div>
+
+    <!-- Strona 1 -->
+    <div class='page active'>
+        <h1>Czym jest kontekst filtrowania?</h1>
+        <p><strong>Kontekst filtrowania</strong> to zbiór filtrów aktywnych w danym momencie obliczeń. Określa on <strong>jakie wiersze</strong> z tabel są brane pod uwagę.</p>
+        <p><strong>Przykład:</strong> Jeśli w wizualizacji masz slicer ustawiony na 'Rok = 2024', to wszystkie miary widzą tylko dane z 2024 roku.</p>
+
+    </div>
+
+    <!-- Strona 2 -->
+    <div class='page'>
+        <h1>Podstawowe użycie CALCULATE</h1>
+        <h2>Przykład 1: Dodanie filtra</h2>
+        <pre><code>Sprzedaż w Warszawie = 
+        <span class='dax-function'>CALCULATE</span>(
+            <span class='dax-function'>SUM</span>(Sprzedaz[Kwota]),
+            Klienci[Miasto] = 'Warszawa'
+        )</code></pre>
+        <p><strong>Co się dzieje:</strong></p>
+        <ul>
+        <li>Bierze <code>SUM(Sprzedaz[Kwota])</code></li>
+        <li>Dodaje filtr: tylko dla miasta 'Warszawa'</li>
+        <li>Zwraca sumę tylko dla Warszawy</li>
+        </ul>
+
+    </div>
+
+    <!-- Strona 3 -->
+    <div class='page'>
+        <h2>Przykład 2: Wiele filtrów</h2>
+        <pre><code>Sprzedaż VIP w <span class='dax-number'>2024</span> = 
+        <span class='dax-function'>CALCULATE</span>(
+            <span class='dax-function'>SUM</span>(Sprzedaz[Kwota]),
+            Klienci[Kategoria] = 'VIP',
+            <span class='dax-function'>YEAR</span>(Sprzedaz[Data]) = <span class='dax-number'>2024</span>
+        )</code></pre>
+        <p><strong>Filtry są łączone operatorem AND</strong> – muszą być <strong>oba</strong> spełnione.</p>
+
+    </div>
+
+    <!-- Strona 4 -->
+    <div class='page'>
+        <h2>Przykład 3: Nadpisanie istniejącego filtra</h2>
+        <pre><code>Całkowita Sprzedaż = 
+        <span class='dax-function'>CALCULATE</span>(
+            <span class='dax-function'>SUM</span>(Sprzedaz[Kwota]),
+            <span class='dax-function'>ALL</span>(Produkty[Kategoria])
+        )</code></pre>
+        <p><strong>Co robi <code>ALL</code>?</strong></p>
+        <ul>
+        <li>Usuwa filtry z kolumny <code>Produkty[Kategoria]</code></li>
+        <li>Dzięki temu <code>Całkowita Sprzedaż</code> pokazuje sumę dla <strong>wszystkich kategorii</strong>, niezależnie od tego, co jest wybrane w slicerze</li>
+        </ul>
+        <p>_(Funkcje ALL, ALLEXCEPT, REMOVEFILTERS omówimy w bardziej zaawansowanym materiale)_</p>
+
+    </div>
+
+    <!-- Strona 5 -->
+    <div class='page'>
+        <h1>Kiedy używać CALCULATE?</h1>
+        <p>✅ <strong>Używaj CALCULATE gdy:</strong></p>
+        <ul>
+        <li>Chcesz dodać <strong>dodatkowy filtr</strong> do obliczeń</li>
+        <li>Chcesz <strong>nadpisać</strong> istniejący filtr</li>
+        <li>Chcesz obliczyć wartość w <strong>innym kontekście</strong> niż aktualny (np. suma całkowita)</li>
+        <li>Chcesz porównać wartości (np. sprzedaż bieżącego roku vs poprzedniego)</li>
+        </ul>
+
+    </div>
+
+    <!-- Strona 6 -->
+    <div class='page'>
+        <h2>Przykład praktyczny: Udział w sprzedaży</h2>
+        <pre><code>Udział w Sprzedaży = 
+        <span class='dax-function'>DIVIDE</span>(
+            <span class='dax-function'>SUM</span>(Sprzedaz[Kwota]),
+            <span class='dax-function'>CALCULATE</span>(
+                <span class='dax-function'>SUM</span>(Sprzedaz[Kwota]),
+                <span class='dax-function'>ALL</span>(Produkty[Kategoria])
+            )
+        )</code></pre>
+        <p><strong>Jak to działa:</strong></p>
+        <ul>
+        <li><strong>Licznik:</strong> Suma sprzedaży dla aktualnej kategorii (np. 'Elektronika')</li>
+        <li><strong>Mianownik:</strong> Suma sprzedaży dla <strong>wszystkich</strong> kategorii (dzięki <code>ALL</code>)</li>
+        <li><strong>Wynik:</strong> Procent sprzedaży danej kategorii względem całości</li>
+        </ul>
+
+    </div>
+
+    <!-- Strona 7 -->
+    <div class='page'>
+        <h2>Przykład: Porównanie z poprzednim rokiem</h2>
+        <pre><code>Sprzedaż Poprzedni Rok = 
+        <span class='dax-function'>CALCULATE</span>(
+            <span class='dax-function'>SUM</span>(Sprzedaz[Kwota]),
+            <span class='dax-function'>SAMEPERIODLASTYEAR</span>(Kalendarz[Data])
+        )</code></pre>
+        <p><strong>Co się dzieje:</strong></p>
+        <ul>
+        <li><code>SAMEPERIODLASTYEAR</code> przesuwa kontekst dat o rok wstecz</li>
+        <li>Dzięki temu <code>CALCULATE</code> oblicza sprzedaż dla <strong>tego samego okresu rok temu</strong></li>
+        </ul>
+
+    </div>
+
+    <!-- Strona 8 -->
+    <div class='page'>
+        <h1>Kluczowe zasady CALCULATE</h1>
+        <p>1. <strong>CALCULATE zmienia kontekst filtrowania</strong> – to jego główna rola</p>
+        <p>2. <strong>Filtry w CALCULATE są stosowane jako AND</strong> – wszystkie muszą być spełnione</p>
+        <p>3. <strong>CALCULATE może nadpisać istniejące filtry</strong> – nowy filtr zastępuje stary</p>
+        <p>4. <strong>CALCULATE działa tylko w miarach</strong> – nie w kolumnach kalkulowanych (tam kontekst jest inny)</p>
+
+    </div>
+
+    <!-- Strona 9 -->
+    <div class='page'>
+        <h1>Podsumowanie CALCULATE</h1>
+        <p><strong>CALCULATE</strong> to fundament zaawansowanych obliczeń w DAX:</p>
+        <ul>
+        <li>Pozwala tworzyć <strong>dynamiczne miary</strong></li>
+        <li>Umożliwia <strong>porównania</strong> między różnymi okresami/kategoriami</li>
+        <li>Daje kontrolę nad <strong>kontekstem filtrowania</strong></li>
+        <li>Jest podstawą funkcji time intelligence (SAMEPERIODLASTYEAR, DATEADD, itd.)</li>
+        </ul>
+        <p><strong>Zapamiętaj:</strong> Jeśli chcesz obliczyć coś w <strong>innym kontekście</strong> niż aktualny, prawdopodobnie potrzebujesz <strong>CALCULATE</strong>.</p>
+
+    </div>
+
+</div>
+
+<script>
+(function() {
+    // Unikalny ID dla tej wizualizacji (wstrzykiwany przez Python)
+    var vizId = 'a6296909';
+    var containerId = 'viz_' + vizId;
+
+    var currentPage_a6296909 = 1;
+    var container = document.getElementById(containerId);
+
+    if (!container) return;
+
+    var pages = container.querySelectorAll('.page');
+    var totalPages = pages.length;
+
+    document.getElementById('totalPages_' + vizId).textContent = totalPages;
+
+    window['showPage_a6296909'] = function(n) {
+        if (n > totalPages) currentPage_a6296909 = totalPages;
+        if (n < 1) currentPage_a6296909 = 1;
+
+        for (var i = 0; i < pages.length; i++) {
+            pages[i].classList.remove('active');
+        }
+        pages[currentPage_a6296909 - 1].classList.add('active');
+
+        document.getElementById('currentPage_' + vizId).textContent = currentPage_a6296909;
+        document.getElementById('prevBtn_' + vizId).disabled = (currentPage_a6296909 === 1);
+        document.getElementById('nextBtn_' + vizId).disabled = (currentPage_a6296909 === totalPages);
+    };
+
+    window['changePage_a6296909'] = function(n) {
+        currentPage_a6296909 += n;
+        window['showPage_a6296909'](currentPage_a6296909);
+    };
+
+    // Inicjalizacja
+    window['showPage_a6296909'](1);
+})();
+</script>
+
+</body>
+</html>
+
+"

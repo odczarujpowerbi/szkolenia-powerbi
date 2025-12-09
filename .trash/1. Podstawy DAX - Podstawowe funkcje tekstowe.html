@@ -1,0 +1,282 @@
+Podstawowe funkcje tekstowe = 
+
+"
+
+<!DOCTYPE html>
+<html lang='pl'>
+<head>
+    <meta charset='UTF-8'>
+    <meta name='viewport' content='width=device-width, initial-scale=1.0'>
+    <title>Podstawowe funkcje tekstowe</title>
+    <style>
+            * {
+                margin: 0;
+                padding: 0;
+                box-sizing: border-box;
+            }
+            
+            body {
+                font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+                font-size: 16px;
+                line-height: 1.7;
+                color: #333;
+                background: transparent;
+                padding: 20px;
+            }
+            
+            .container {
+                max-width: 800px;
+                margin: 0 auto;
+                background: transparent;
+                padding: 40px;
+            }
+            
+            .navigation {
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                margin-bottom: 40px;
+                padding-bottom: 20px;
+                border-bottom: 1px solid #e1e4e8;
+            }
+            
+            button {
+                background: #0066cc;
+                color: white;
+                border: none;
+                padding: 12px 28px;
+                border-radius: 4px;
+                cursor: pointer;
+                font-size: 1em;
+                font-weight: 500;
+                transition: background 0.2s;
+            }
+            
+            button:hover {
+                background: #0052a3;
+            }
+            
+            button:disabled {
+                background: #ccc;
+                cursor: not-allowed;
+            }
+            
+            .page-indicator {
+                color: #666;
+                font-size: 1em;
+            }
+            
+            .page {
+                display: none;
+                min-height: 500px;
+            }
+            
+            .page.active {
+                display: block;
+                animation: fadeIn 0.3s ease-in;
+            }
+            
+            @keyframes fadeIn {
+                from { opacity: 0; transform: translateY(10px); }
+                to { opacity: 1; transform: translateY(0); }
+            }
+            
+            h1 {
+                font-size: 1.8em;
+                font-weight: 600;
+                margin-bottom: 1em;
+                color: #1a1a1a;
+            }
+            
+            h2 {
+                font-size: 1.4em;
+                font-weight: 600;
+                margin: 1.5em 0 0.8em 0;
+                color: #2a2a2a;
+            }
+            
+            h3 {
+                font-size: 1.1em;
+                font-weight: 600;
+                margin: 1.2em 0 0.6em 0;
+                color: #444;
+            }
+            
+            p {
+                margin-bottom: 1em;
+                font-size: 1.05em;
+            }
+            
+            strong {
+                font-weight: 600;
+                color: #1a1a1a;
+            }
+            
+            code {
+                background: #f5f5f5;
+                padding: 3px 7px;
+                border-radius: 3px;
+                font-family: 'Courier New', monospace;
+                font-size: 0.95em;
+                color: #d73a49;
+            }
+            
+            pre {
+                background: #f8f9fa;
+                border-left: 3px solid #0066cc;
+                padding: 18px;
+                margin: 1em 0;
+                overflow-x: auto;
+                border-radius: 3px;
+            }
+            
+            pre code {
+                background: none;
+                padding: 0;
+                color: #24292e;
+                font-size: 1em;
+                line-height: 1.6;
+            }
+            
+            .dax-keyword {
+                color: #0066cc;
+                font-weight: 600;
+            }
+            
+            .dax-function {
+                color: #6f42c1;
+            }
+            
+            .dax-number {
+                color: #005cc5;
+            }
+            
+            .dax-comment {
+                color: #6a737d;
+                font-style: italic;
+            }
+            
+            ul, ol {
+                margin: 1em 0 1em 1.5em;
+            }
+            
+            li {
+                margin: 0.5em 0;
+                font-size: 1.05em;
+            }
+            
+            .iteration-box {
+                border-left: 3px solid #0066cc;
+                padding: 14px 18px;
+                margin: 0.8em 0;
+            }
+            
+            .result-box {
+                background: #f5f5f5;
+                border-left: 3px solid #999;
+                padding: 14px 18px;
+                margin: 0.8em 0;
+                font-weight: 500;
+                color: #555;
+                font-size: 1.05em;
+            }
+        </style>
+</head>
+<body>
+
+<div class='container'>
+    <!-- Nawigacja na górze -->
+    <div class='navigation'>
+        <button id='prevBtn' onclick='changePage(-1)'>← Poprzednia</button>
+        <span class='page-indicator'>
+            Strona <span id='currentPage'>1</span> z <span id='totalPages'>4</span>
+        </span>
+        <button id='nextBtn' onclick='changePage(1)'>Następna →</button>
+    </div>
+
+    <!-- Strona 1 -->
+    <div class='page active'>
+        <h1>CONCATENATE – Łączenie tekstów</h1>
+        <pre><code><span class='dax-function'>CONCATENATE</span>(\&lt;tekst1\&gt;, \&lt;tekst2\&gt;)</code></pre>
+        <p><strong>Przykład:</strong></p>
+        <pre><code>Pełna Nazwa = <span class='dax-function'>CONCATENATE</span>(Klienci[Imię], " " & Klienci[Nazwisko])</code></pre>
+        <p><strong>Alternatywa (łatwiejsza):</strong></p>
+        <pre><code>Pełna Nazwa = Klienci[Imię] & " " & Klienci[Nazwisko]</code></pre>
+
+    </div>
+
+    <!-- Strona 2 -->
+    <div class='page'>
+        <h1>LEFT, RIGHT, MID – Wyciąganie części tekstu</h1>
+        <pre><code><span class='dax-function'>LEFT</span>(\&lt;tekst\&gt;, \&lt;liczba_znaków\&gt;)    <span class='dax-comment'>-- Pierwsze znaki od lewej</span>
+        <span class='dax-function'>RIGHT</span>(\&lt;tekst\&gt;, \&lt;liczba_znaków\&gt;)   <span class='dax-comment'>-- Ostatnie znaki od prawej</span>
+        <span class='dax-function'>MID</span>(\&lt;tekst\&gt;, \&lt;start\&gt;, \&lt;liczba\&gt;)   <span class='dax-comment'>-- Znaki ze środka</span></code></pre>
+        <p><strong>Przykład:</strong></p>
+        <pre><code>Pierwsze <span class='dax-number'>3</span> Znaki = <span class='dax-function'>LEFT</span>(Produkty[Kod], <span class='dax-number'>3</span>)
+        Ostatnie <span class='dax-number'>2</span> Znaki = <span class='dax-function'>RIGHT</span>(Produkty[Kod], <span class='dax-number'>2</span>)</code></pre>
+
+    </div>
+
+    <!-- Strona 3 -->
+    <div class='page'>
+        <h1>UPPER, LOWER – Zmiana wielkości liter</h1>
+        <pre><code><span class='dax-function'>UPPER</span>(\&lt;tekst\&gt;)  <span class='dax-comment'>-- Wszystkie znaki WIELKIE</span>
+        <span class='dax-function'>LOWER</span>(\&lt;tekst\&gt;)  <span class='dax-comment'>-- Wszystkie znaki małe</span></code></pre>
+        <p><strong>Przykład:</strong></p>
+        <pre><code>Kategoria Wielkie Litery = <span class='dax-function'>UPPER</span>(Produkty[Kategoria])</code></pre>
+
+    </div>
+
+    <!-- Strona 4 -->
+    <div class='page'>
+        <h1>LEN – Długość tekstu</h1>
+        <pre><code><span class='dax-function'>LEN</span>(\&lt;tekst\&gt;)</code></pre>
+        <p><strong>Przykład:</strong></p>
+        <pre><code>Długość Kodu = <span class='dax-function'>LEN</span>(Produkty[Kod Produktu])</code></pre>
+        <p>---</p>
+
+    </div>
+
+</div>
+
+<script>
+    let currentPage = 1;
+    const totalPages = document.querySelectorAll('.page').length;
+    
+    document.getElementById('totalPages').textContent = totalPages;
+    
+    function showPage(n) {
+        const pages = document.querySelectorAll('.page');
+        
+        if (n > totalPages) currentPage = totalPages;
+        if (n < 1) currentPage = 1;
+        
+        pages.forEach(page => page.classList.remove('active'));
+        pages[currentPage - 1].classList.add('active');
+        
+        document.getElementById('currentPage').textContent = currentPage;
+        document.getElementById('prevBtn').disabled = currentPage === 1;
+        document.getElementById('nextBtn').disabled = currentPage === totalPages;
+        
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+    
+    function changePage(n) {
+        currentPage += n;
+        showPage(currentPage);
+    }
+    
+    // Obsługa strzałek na klawiaturze
+    document.addEventListener('keydown', function(e) {
+        if (e.key === 'ArrowLeft') changePage(-1);
+        if (e.key === 'ArrowRight') changePage(1);
+    });
+    
+    // Inicjalizacja
+    showPage(1);
+</script>
+
+</body>
+</html>
+
+"

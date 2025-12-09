@@ -1,0 +1,824 @@
+Podstawy DAX = 
+
+"
+
+<!DOCTYPE html>
+<html lang='pl'>
+<head>
+    <meta charset='UTF-8'>
+    <meta name='viewport' content='width=device-width, initial-scale=1.0'>
+    <title>Podstawy DAX</title>
+    <style>
+            * {
+                margin: 0;
+                padding: 0;
+                box-sizing: border-box;
+            }
+            
+            body {
+                font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+                font-size: 16px;
+                line-height: 1.7;
+                color: #333;
+                background: transparent;
+                padding: 20px;
+            }
+            
+            .container {
+                max-width: 800px;
+                margin: 0 auto;
+                background: transparent;
+                padding: 40px;
+            }
+            
+            .navigation {
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                margin-bottom: 40px;
+                padding-bottom: 20px;
+                border-bottom: 1px solid #e1e4e8;
+            }
+            
+            button {
+                background: #0066cc;
+                color: white;
+                border: none;
+                padding: 12px 28px;
+                border-radius: 4px;
+                cursor: pointer;
+                font-size: 1em;
+                font-weight: 500;
+                transition: background 0.2s;
+            }
+            
+            button:hover {
+                background: #0052a3;
+            }
+            
+            button:disabled {
+                background: #ccc;
+                cursor: not-allowed;
+            }
+            
+            .page-indicator {
+                color: #666;
+                font-size: 1em;
+            }
+            
+            .page {
+                display: none;
+                min-height: 500px;
+            }
+            
+            .page.active {
+                display: block;
+                animation: fadeIn 0.3s ease-in;
+            }
+            
+            @keyframes fadeIn {
+                from { opacity: 0; transform: translateY(10px); }
+                to { opacity: 1; transform: translateY(0); }
+            }
+            
+            h1 {
+                font-size: 1.8em;
+                font-weight: 600;
+                margin-bottom: 1em;
+                color: #1a1a1a;
+            }
+            
+            h2 {
+                font-size: 1.4em;
+                font-weight: 600;
+                margin: 1.5em 0 0.8em 0;
+                color: #2a2a2a;
+            }
+            
+            h3 {
+                font-size: 1.1em;
+                font-weight: 600;
+                margin: 1.2em 0 0.6em 0;
+                color: #444;
+            }
+            
+            p {
+                margin-bottom: 1em;
+                font-size: 1.05em;
+            }
+            
+            strong {
+                font-weight: 600;
+                color: #1a1a1a;
+            }
+            
+            code {
+                background: #f5f5f5;
+                padding: 3px 7px;
+                border-radius: 3px;
+                font-family: 'Courier New', monospace;
+                font-size: 0.95em;
+                color: #d73a49;
+            }
+            
+            pre {
+                background: #f8f9fa;
+                border-left: 3px solid #0066cc;
+                padding: 18px;
+                margin: 1em 0;
+                overflow-x: auto;
+                border-radius: 3px;
+            }
+            
+            pre code {
+                background: none;
+                padding: 0;
+                color: #24292e;
+                font-size: 1em;
+                line-height: 1.6;
+            }
+            
+            .dax-keyword {
+                color: #0066cc;
+                font-weight: 600;
+            }
+            
+            .dax-function {
+                color: #6f42c1;
+            }
+            
+            .dax-number {
+                color: #005cc5;
+            }
+            
+            .dax-comment {
+                color: #6a737d;
+                font-style: italic;
+            }
+            
+            ul, ol {
+                margin: 1em 0 1em 1.5em;
+            }
+            
+            li {
+                margin: 0.5em 0;
+                font-size: 1.05em;
+            }
+            
+            .iteration-box {
+                border-left: 3px solid #0066cc;
+                padding: 14px 18px;
+                margin: 0.8em 0;
+            }
+            
+            .result-box {
+                background: #f5f5f5;
+                border-left: 3px solid #999;
+                padding: 14px 18px;
+                margin: 0.8em 0;
+                font-weight: 500;
+                color: #555;
+                font-size: 1.05em;
+            }
+        </style>
+</head>
+<body>
+
+<div class='container'>
+    <!-- Nawigacja na górze -->
+    <div class='navigation'>
+        <button id='prevBtn' onclick='changePage(-1)'>← Poprzednia</button>
+        <span class='page-indicator'>
+            Strona <span id='currentPage'>1</span> z <span id='totalPages'>44</span>
+        </span>
+        <button id='nextBtn' onclick='changePage(1)'>Następna →</button>
+    </div>
+
+    <!-- Strona 1 -->
+    <div class='page active'>
+        <h1>Czym jest DAX?</h1>
+        <p><strong>DAX (Data Analysis Expressions)</strong> to język formuł używany w Power BI, Excel Power Pivot i Analysis Services do tworzenia:</p>
+        <ul>
+        <li><strong>Miar</strong> (measures) – dynamicznych obliczeń</li>
+        <li><strong>Kolumn kalkulowanych</strong> – stałych wartości w tabelach</li>
+        <li><strong>Tabel kalkulowanych</strong> – nowych tabel powstałych z obliczeń</li>
+        </ul>
+        <p>DAX pozwala na analizę danych, tworzenie raportów i budowanie zaawansowanej logiki biznesowej.</p>
+
+    </div>
+
+    <!-- Strona 2 -->
+    <div class='page'>
+        <h1>Odwoływanie się do tabel i kolumn</h1>
+        <h2>Podstawowa składnia: NazwaTabeli[NazwaKolumny]</h2>
+        <p>W DAX zawsze odwołujesz się do kolumn poprzez <strong>nazwę tabeli</strong> i <strong>nazwę kolumny</strong> w nawiasach kwadratowych:</p>
+        <pre><code>Sprzedaz[Kwota]
+        Produkty[Kategoria]
+        Klienci[Miasto]</code></pre>
+        <p><strong>Zasady:</strong></p>
+        <ul>
+        <li>Nazwa tabeli <strong>przed</strong> nawiasem kwadratowym</li>
+        <li>Nazwa kolumny <strong>w</strong> nawiasach kwadratowych</li>
+        <li>To zapobiega niejednoznaczności gdy masz kolumny o tych samych nazwach w różnych tabelach</li>
+        </ul>
+
+    </div>
+
+    <!-- Strona 3 -->
+    <div class='page'>
+        <h2>Nazwy z apostrofami (gdy zawierają spacje lub znaki specjalne)</h2>
+        <p>Jeśli nazwa tabeli lub kolumny zawiera:</p>
+        <ul>
+        <li>Spacje</li>
+        <li>Znaki specjalne (np. <code>-</code>, <code>#</code>, <code>%</code>)</li>
+        <li>Polskie znaki</li>
+        </ul>
+        <p>Musisz ująć je w <strong>apostrofy</strong> <code>'</code>:</p>
+        <pre><code>'Tabela Sprzedaży'[Kwota Netto]
+        'Dane-Produktów'[Nazwa Produktu]
+        '<span class='dax-number'>2024</span> Wyniki'[Przychód]
+        Produkty[Cena (netto)]</code></pre>
+        <p><strong>Przykład błędny:</strong></p>
+        <pre><code>Tabela Sprzedaży[Kwota Netto]  <span class='dax-comment'>-- ❌ Błąd składni!</span></code></pre>
+        <p><strong>Przykład poprawny:</strong></p>
+        <pre><code>'Tabela Sprzedaży'[Kwota Netto]  <span class='dax-comment'>-- ✅ Działa</span></code></pre>
+
+    </div>
+
+    <!-- Strona 4 -->
+    <div class='page'>
+        <h2>Odwoływanie się do miar: [NazwaMiary]</h2>
+        <p>Miary (measures) odwołujesz się <strong>bez nazwy tabeli</strong>, tylko w nawiasach kwadratowych:</p>
+        <pre><code>[Suma Sprzedaży]
+        [Średnia Cena]
+        [Liczba Klientów]</code></pre>
+        <p>Możesz też użyć pełnej notacji z nazwą tabeli, ale nie jest to wymagane:</p>
+        <pre><code>Sprzedaz[Suma Sprzedaży]  <span class='dax-comment'>-- Działa, ale zwykle niepotrzebne</span></code></pre>
+
+    </div>
+
+    <!-- Strona 5 -->
+    <div class='page'>
+        <h2>Pełna nazwa tabeli (gdy jest w innym modelu)</h2>
+        <p>Jeśli pracujesz z wieloma modelami danych, możesz użyć pełnej ścieżki:</p>
+        <pre><code>'Nazwa Modelu'[Nazwa Tabeli][Nazwa Kolumny]</code></pre>
+        <p>W większości przypadków wystarczy standardowa notacja <code>Tabela[Kolumna]</code>.</p>
+
+    </div>
+
+    <!-- Strona 6 -->
+    <div class='page'>
+        <h1>Typy danych w DAX</h1>
+        <p>DAX obsługuje kilka podstawowych typów danych:</p>
+        <p>|Typ|Przykład|Opis|</p>
+        <p>|---|---|---|</p>
+        <p>|<strong>Liczby całkowite</strong>|<code>100</code>, <code>-50</code>|Integer|</p>
+        <p>|<strong>Liczby dziesiętne</strong>|<code>123.45</code>, <code>0.99</code>|Decimal/Float|</p>
+        <p>|<strong>Tekst</strong>|<code>"Warszawa"</code>, <code>"ABC"</code>|String (w cudzysłowach)|</p>
+        <p>|<strong>Data</strong>|<code>DATE(2024, 12, 8)</code>|Date|</p>
+        <p>|<strong>Data i czas</strong>|<code>DATETIME(2024, 12, 8, 14, 30, 0)</code>|DateTime|</p>
+        <p>|<strong>Logiczne</strong>|<code>TRUE</code>, <code>FALSE</code>|Boolean|</p>
+        <p>|<strong>Puste</strong>|<code>BLANK()</code>|Null/Empty|</p>
+
+    </div>
+
+    <!-- Strona 7 -->
+    <div class='page'>
+        <h1>Operatory matematyczne</h1>
+        <pre><code>+   <span class='dax-comment'>-- Dodawanie</span>
+        -   <span class='dax-comment'>-- Odejmowanie</span>
+        *   <span class='dax-comment'>-- Mnożenie</span>
+        /   <span class='dax-comment'>-- Dzielenie</span>
+        ^   <span class='dax-comment'>-- Potęgowanie</span></code></pre>
+        <p><strong>Przykład:</strong></p>
+        <pre><code>Marża = 
+        Sprzedaz[Przychód] - Sprzedaz[Koszt]</code></pre>
+
+    </div>
+
+    <!-- Strona 8 -->
+    <div class='page'>
+        <h1>Operatory porównania</h1>
+        <pre><code>=   <span class='dax-comment'>-- Równe</span>
+        \&lt;\&gt;  <span class='dax-comment'>-- Różne od</span>
+        \&gt;   <span class='dax-comment'>-- Większe niż</span>
+        \&lt;   <span class='dax-comment'>-- Mniejsze niż</span>
+        \&gt;=  <span class='dax-comment'>-- Większe lub równe</span>
+        \&lt;=  <span class='dax-comment'>-- Mniejsze lub równe</span></code></pre>
+        <p><strong>Przykład:</strong></p>
+        <pre><code>Czy Duża Sprzedaż = 
+        Sprzedaz[Kwota] \&gt; <span class='dax-number'>1000</span></code></pre>
+
+    </div>
+
+    <!-- Strona 9 -->
+    <div class='page'>
+        <h1>Operatory logiczne</h1>
+        <pre><code>&&  <span class='dax-comment'>-- AND (i)</span>
+        ||  <span class='dax-comment'>-- OR (lub)</span>
+        NOT <span class='dax-comment'>-- NOT (negacja)</span></code></pre>
+        <p><strong>Przykład:</strong></p>
+        <pre><code>Czy Premium = 
+        Klienci[Kategoria] = "VIP" && Klienci[Przychód] \&gt; <span class='dax-number'>10000</span></code></pre>
+
+    </div>
+
+    <!-- Strona 10 -->
+    <div class='page'>
+        <h1>Operator łączenia tekstów</h1>
+        <pre><code>&   <span class='dax-comment'>-- Konkatenacja (łączenie tekstów)</span></code></pre>
+        <p><strong>Przykład:</strong></p>
+        <pre><code>Pełna Nazwa = 
+        Klienci[Imię] & " " & Klienci[Nazwisko]</code></pre>
+
+    </div>
+
+    <!-- Strona 11 -->
+    <div class='page'>
+        <p># Podstawowe funkcje agregujące</p>
+        <h1>SUM – Suma wartości</h1>
+        <p>Sumuje wszystkie wartości w kolumnie:</p>
+        <pre><code>Suma Sprzedaży = <span class='dax-function'>SUM</span>(Sprzedaz[Kwota])</code></pre>
+        <p><strong>Jak działa:</strong></p>
+        <ul>
+        <li>Dodaje wszystkie liczby w kolumnie <code>Sprzedaz[Kwota]</code></li>
+        <li>Pomija wartości <code>BLANK()</code> (puste)</li>
+        <li>Uwzględnia aktualny kontekst filtrowania</li>
+        </ul>
+
+    </div>
+
+    <!-- Strona 12 -->
+    <div class='page'>
+        <h1>AVERAGE – Średnia</h1>
+        <p>Oblicza średnią arytmetyczną:</p>
+        <pre><code>Średnia Cena = <span class='dax-function'>AVERAGE</span>(Produkty[Cena])</code></pre>
+        <p><strong>Jak działa:</strong></p>
+        <ul>
+        <li>Sumuje wszystkie wartości i dzieli przez ich liczbę</li>
+        <li>Pomija wartości puste</li>
+        </ul>
+
+    </div>
+
+    <!-- Strona 13 -->
+    <div class='page'>
+        <h1>COUNT – Liczba wartości niepustych</h1>
+        <p>Liczy ile jest niepustych wartości w kolumnie:</p>
+        <pre><code>Liczba Transakcji = <span class='dax-function'>COUNT</span>(Sprzedaz[ID Transakcji])</code></pre>
+        <p><strong>Uwaga:</strong> COUNT liczy tylko wartości <strong>niepuste</strong> (pomija BLANK).</p>
+
+    </div>
+
+    <!-- Strona 14 -->
+    <div class='page'>
+        <h1>COUNTA – Liczba wartości niepustych (dowolny typ)</h1>
+        <p>Podobnie jak COUNT, ale działa na <strong>wszystkich typach danych</strong> (tekst, liczby, daty):</p>
+        <pre><code>Liczba Produktów = <span class='dax-function'>COUNTA</span>(Produkty[Nazwa])</code></pre>
+
+    </div>
+
+    <!-- Strona 15 -->
+    <div class='page'>
+        <h1>COUNTROWS – Liczba wierszy w tabeli</h1>
+        <p>Liczy wszystkie wiersze w tabeli (nawet jeśli mają puste wartości):</p>
+        <pre><code>Liczba Zamówień = <span class='dax-function'>COUNTROWS</span>(Zamowienia)</code></pre>
+        <p><strong>Różnica COUNT vs COUNTROWS:</strong></p>
+        <ul>
+        <li><code>COUNT</code> – liczy niepuste wartości w <strong>konkretnej kolumnie</strong></li>
+        <li><code>COUNTROWS</code> – liczy <strong>wszystkie wiersze w tabeli</strong></li>
+        </ul>
+
+    </div>
+
+    <!-- Strona 16 -->
+    <div class='page'>
+        <h1>MIN i MAX – Minimum i maksimum</h1>
+        <pre><code>Najniższa Cena = <span class='dax-function'>MIN</span>(Produkty[Cena])
+        Najwyższa Cena = <span class='dax-function'>MAX</span>(Produkty[Cena])</code></pre>
+
+    </div>
+
+    <!-- Strona 17 -->
+    <div class='page'>
+        <h1>DISTINCTCOUNT – Liczba unikalnych wartości</h1>
+        <p>Liczy ile jest <strong>unikalnych</strong> (niepowtarzających się) wartości:</p>
+        <pre><code>Liczba Unikalnych Klientów = <span class='dax-function'>DISTINCTCOUNT</span>(Sprzedaz[ID Klienta])</code></pre>
+        <p><strong>Przykład:</strong> Jeśli kolumna zawiera: <code>{1, 2, 2, 3, 3, 3}</code>, to <code>DISTINCTCOUNT</code> zwróci <strong>3</strong>.</p>
+
+    </div>
+
+    <!-- Strona 18 -->
+    <div class='page'>
+        <p># Podstawowe funkcje logiczne</p>
+        <h1>IF – Warunek logiczny</h1>
+        <p>Zwraca jedną wartość jeśli warunek jest prawdziwy, inną jeśli fałszywy:</p>
+        <pre><code><span class='dax-function'>IF</span>(\&lt;warunek\&gt;, \&lt;wartość_jeśli_prawda\&gt;, \&lt;wartość_jeśli_fałsz\&gt;)</code></pre>
+        <p><strong>Przykład:</strong></p>
+        <pre><code>Kategoria Sprzedaży = 
+        <span class='dax-function'>IF</span>(
+            Sprzedaz[Kwota] \&gt; <span class='dax-number'>1000</span>,
+            "Wysoka",
+            "Niska"
+        )</code></pre>
+
+    </div>
+
+    <!-- Strona 19 -->
+    <div class='page'>
+        <h1>AND – Sprawdza czy wszystkie warunki są prawdziwe</h1>
+        <pre><code><span class='dax-function'>AND</span>(\&lt;warunek1\&gt;, \&lt;warunek2\&gt;)</code></pre>
+        <p><strong>Przykład:</strong></p>
+        <pre><code>Czy VIP = 
+        <span class='dax-function'>IF</span>(
+            <span class='dax-function'>AND</span>(Klienci[Przychód] \&gt; <span class='dax-number'>50000</span>, Klienci[Lata Współpracy] \&gt; <span class='dax-number'>5</span>),
+            "TAK",
+            "NIE"
+        )</code></pre>
+
+    </div>
+
+    <!-- Strona 20 -->
+    <div class='page'>
+        <h1>OR – Sprawdza czy przynajmniej jeden warunek jest prawdziwy</h1>
+        <pre><code><span class='dax-function'>OR</span>(\&lt;warunek1\&gt;, \&lt;warunek2\&gt;)</code></pre>
+        <p><strong>Przykład:</strong></p>
+        <pre><code>Czy Promocja = 
+        <span class='dax-function'>IF</span>(
+            <span class='dax-function'>OR</span>(Produkty[Kategoria] = "Elektronika", Produkty[Wyprzedaż] = TRUE),
+            "TAK",
+            "NIE"
+        )</code></pre>
+
+    </div>
+
+    <!-- Strona 21 -->
+    <div class='page'>
+        <h1>NOT – Negacja warunku</h1>
+        <pre><code><span class='dax-function'>NOT</span>(\&lt;warunek\&gt;)</code></pre>
+        <p><strong>Przykład:</strong></p>
+        <pre><code>Czy Nieaktywny = 
+        <span class='dax-function'>IF</span>(
+            <span class='dax-function'>NOT</span>(Klienci[Status] = "Aktywny"),
+            "TAK",
+            "NIE"
+        )</code></pre>
+
+    </div>
+
+    <!-- Strona 22 -->
+    <div class='page'>
+        <p># Podstawowe funkcje tekstowe</p>
+        <h1>CONCATENATE – Łączenie tekstów</h1>
+        <pre><code><span class='dax-function'>CONCATENATE</span>(\&lt;tekst1\&gt;, \&lt;tekst2\&gt;)</code></pre>
+        <p><strong>Przykład:</strong></p>
+        <pre><code>Pełna Nazwa = <span class='dax-function'>CONCATENATE</span>(Klienci[Imię], " " & Klienci[Nazwisko])</code></pre>
+        <p><strong>Alternatywa (łatwiejsza):</strong></p>
+        <pre><code>Pełna Nazwa = Klienci[Imię] & " " & Klienci[Nazwisko]</code></pre>
+
+    </div>
+
+    <!-- Strona 23 -->
+    <div class='page'>
+        <h1>LEFT, RIGHT, MID – Wyciąganie części tekstu</h1>
+        <pre><code><span class='dax-function'>LEFT</span>(\&lt;tekst\&gt;, \&lt;liczba_znaków\&gt;)    <span class='dax-comment'>-- Pierwsze znaki od lewej</span>
+        <span class='dax-function'>RIGHT</span>(\&lt;tekst\&gt;, \&lt;liczba_znaków\&gt;)   <span class='dax-comment'>-- Ostatnie znaki od prawej</span>
+        <span class='dax-function'>MID</span>(\&lt;tekst\&gt;, \&lt;start\&gt;, \&lt;liczba\&gt;)   <span class='dax-comment'>-- Znaki ze środka</span></code></pre>
+        <p><strong>Przykład:</strong></p>
+        <pre><code>Pierwsze <span class='dax-number'>3</span> Znaki = <span class='dax-function'>LEFT</span>(Produkty[Kod], <span class='dax-number'>3</span>)
+        Ostatnie <span class='dax-number'>2</span> Znaki = <span class='dax-function'>RIGHT</span>(Produkty[Kod], <span class='dax-number'>2</span>)</code></pre>
+
+    </div>
+
+    <!-- Strona 24 -->
+    <div class='page'>
+        <h1>UPPER, LOWER – Zmiana wielkości liter</h1>
+        <pre><code><span class='dax-function'>UPPER</span>(\&lt;tekst\&gt;)  <span class='dax-comment'>-- Wszystkie znaki WIELKIE</span>
+        <span class='dax-function'>LOWER</span>(\&lt;tekst\&gt;)  <span class='dax-comment'>-- Wszystkie znaki małe</span></code></pre>
+        <p><strong>Przykład:</strong></p>
+        <pre><code>Kategoria Wielkie Litery = <span class='dax-function'>UPPER</span>(Produkty[Kategoria])</code></pre>
+
+    </div>
+
+    <!-- Strona 25 -->
+    <div class='page'>
+        <h1>LEN – Długość tekstu</h1>
+        <pre><code><span class='dax-function'>LEN</span>(\&lt;tekst\&gt;)</code></pre>
+        <p><strong>Przykład:</strong></p>
+        <pre><code>Długość Kodu = <span class='dax-function'>LEN</span>(Produkty[Kod Produktu])</code></pre>
+
+    </div>
+
+    <!-- Strona 26 -->
+    <div class='page'>
+        <p># Podstawowe funkcje dat</p>
+        <h1>DATE – Tworzenie daty</h1>
+        <pre><code><span class='dax-function'>DATE</span>(\&lt;rok\&gt;, \&lt;miesiąc\&gt;, \&lt;dzień\&gt;)</code></pre>
+        <p><strong>Przykład:</strong></p>
+        <pre><code>Data Bazowa = <span class='dax-function'>DATE</span>(<span class='dax-number'>2024</span>, <span class='dax-number'>1</span>, <span class='dax-number'>1</span>)</code></pre>
+
+    </div>
+
+    <!-- Strona 27 -->
+    <div class='page'>
+        <h1>TODAY i NOW – Dzisiejsza data</h1>
+        <pre><code><span class='dax-function'>TODAY</span>()     <span class='dax-comment'>-- Dzisiejsza data (bez godziny)</span>
+        <span class='dax-function'>NOW</span>()       <span class='dax-comment'>-- Dzisiejsza data i godzina</span></code></pre>
+        <p><strong>Przykład:</strong></p>
+        <pre><code>Aktualna Data = <span class='dax-function'>TODAY</span>()</code></pre>
+
+    </div>
+
+    <!-- Strona 28 -->
+    <div class='page'>
+        <h1>YEAR, MONTH, DAY – Wyciąganie składników daty</h1>
+        <pre><code><span class='dax-function'>YEAR</span>(\&lt;data\&gt;)   <span class='dax-comment'>-- Rok</span>
+        <span class='dax-function'>MONTH</span>(\&lt;data\&gt;)  <span class='dax-comment'>-- Miesiąc (1-12)</span>
+        <span class='dax-function'>DAY</span>(\&lt;data\&gt;)    <span class='dax-comment'>-- Dzień (1-31)</span></code></pre>
+        <p><strong>Przykład:</strong></p>
+        <pre><code>Rok Sprzedaży = <span class='dax-function'>YEAR</span>(Sprzedaz[Data])
+        Miesiąc Sprzedaży = <span class='dax-function'>MONTH</span>(Sprzedaz[Data])</code></pre>
+
+    </div>
+
+    <!-- Strona 29 -->
+    <div class='page'>
+        <h1>DATEDIFF – Różnica między datami</h1>
+        <pre><code><span class='dax-function'>DATEDIFF</span>(\&lt;data_początkowa\&gt;, \&lt;data_końcowa\&gt;, \&lt;jednostka\&gt;)</code></pre>
+        <p><strong>Jednostki:</strong> DAY, MONTH, YEAR, QUARTER</p>
+        <p><strong>Przykład:</strong></p>
+        <pre><code>Dni Od Zamówienia = 
+        <span class='dax-function'>DATEDIFF</span>(Zamowienia[Data Zamówienia], <span class='dax-function'>TODAY</span>(), DAY)</code></pre>
+
+    </div>
+
+    <!-- Strona 30 -->
+    <div class='page'>
+        <p># Funkcje iteracyjne (X-functions)</p>
+        <p>Funkcje iteracyjne przechodzą przez <strong>każdy wiersz tabeli</strong> i wykonują obliczenia dla każdego wiersza osobno.</p>
+        <h1>SUMX – Suma z iteracją</h1>
+        <pre><code><span class='dax-function'>SUMX</span>(\&lt;tabela\&gt;, \&lt;wyrażenie\&gt;)</code></pre>
+        <p>Dla każdego wiersza tabeli oblicza wyrażenie, potem sumuje wyniki.</p>
+        <p><strong>Przykład:</strong></p>
+        <pre><code>Suma Wartości Zamówień = 
+        <span class='dax-function'>SUMX</span>(
+            Sprzedaz,
+            Sprzedaz[Ilość] * Sprzedaz[Cena]
+        )</code></pre>
+        <p><strong>Co się dzieje:</strong></p>
+        <ul>
+        <li>Dla każdego wiersza w tabeli <code>Sprzedaz</code> mnoży <code>Ilość * Cena</code></li>
+        <li>Potem sumuje wszystkie wyniki</li>
+        </ul>
+
+    </div>
+
+    <!-- Strona 31 -->
+    <div class='page'>
+        <h1>AVERAGEX – Średnia z iteracją</h1>
+        <pre><code><span class='dax-function'>AVERAGEX</span>(\&lt;tabela\&gt;, \&lt;wyrażenie\&gt;)</code></pre>
+        <p><strong>Przykład:</strong></p>
+        <pre><code>Średnia Marża = 
+        <span class='dax-function'>AVERAGEX</span>(
+            Sprzedaz,
+            Sprzedaz[Przychód] - Sprzedaz[Koszt]
+        )</code></pre>
+
+    </div>
+
+    <!-- Strona 32 -->
+    <div class='page'>
+        <h1>COUNTX – Liczenie z iteracją</h1>
+        <pre><code><span class='dax-function'>COUNTX</span>(\&lt;tabela\&gt;, \&lt;wyrażenie\&gt;)</code></pre>
+        <p>Liczy ile razy wyrażenie zwróciło <strong>niepustą wartość</strong>.</p>
+        <p><strong>Przykład:</strong></p>
+        <pre><code>Liczba Zamówień Powyżej <span class='dax-number'>1000</span> = 
+        <span class='dax-function'>COUNTX</span>(
+            Sprzedaz,
+            <span class='dax-function'>IF</span>(Sprzedaz[Kwota] \&gt; <span class='dax-number'>1000</span>, <span class='dax-number'>1</span>, <span class='dax-function'>BLANK</span>())
+        )</code></pre>
+
+    </div>
+
+    <!-- Strona 33 -->
+    <div class='page'>
+        <h1>MINX i MAXX – Minimum i maksimum z iteracją</h1>
+        <pre><code><span class='dax-function'>MINX</span>(\&lt;tabela\&gt;, \&lt;wyrażenie\&gt;)
+        <span class='dax-function'>MAXX</span>(\&lt;tabela\&gt;, \&lt;wyrażenie\&gt;)</code></pre>
+        <p><strong>Przykład:</strong></p>
+        <pre><code>Najwyższa Marża = 
+        <span class='dax-function'>MAXX</span>(
+            Sprzedaz,
+            Sprzedaz[Przychód] - Sprzedaz[Koszt]
+        )</code></pre>
+
+    </div>
+
+    <!-- Strona 34 -->
+    <div class='page'>
+        <p># Funkcje filtrujące</p>
+        <h1>FILTER – Filtrowanie tabeli</h1>
+        <p>Zwraca <strong>podzbiór tabeli</strong> spełniający warunek:</p>
+        <pre><code><span class='dax-function'>FILTER</span>(\&lt;tabela\&gt;, \&lt;warunek\&gt;)</code></pre>
+        <p><strong>Przykład:</strong></p>
+        <pre><code>Wysokie Sprzedaże = 
+        <span class='dax-function'>FILTER</span>(
+            Sprzedaz,
+            Sprzedaz[Kwota] \&gt; <span class='dax-number'>1000</span>
+        )</code></pre>
+        <p><strong>Użycie z SUMX:</strong></p>
+        <pre><code>Suma Wysokich Sprzedaży = 
+        <span class='dax-function'>SUMX</span>(
+            <span class='dax-function'>FILTER</span>(Sprzedaz, Sprzedaz[Kwota] \&gt; <span class='dax-number'>1000</span>),
+            Sprzedaz[Kwota]
+        )</code></pre>
+
+    </div>
+
+    <!-- Strona 35 -->
+    <div class='page'>
+        <h1>CALCULATE – Modyfikacja kontekstu filtrowania</h1>
+        <pre><code><span class='dax-function'>CALCULATE</span>(\&lt;wyrażenie\&gt;, \&lt;filtr1\&gt;, \&lt;filtr2\&gt;, ...)</code></pre>
+        <p><strong>CALCULATE</strong> to <strong>najważniejsza funkcja w DAX</strong>. Pozwala:</p>
+        <ul>
+        <li>Zmienić kontekst filtrowania</li>
+        <li>Dodać nowe filtry</li>
+        <li>Nadpisać istniejące filtry</li>
+        <li>Stworzyć obliczenia w różnych kontekstach</li>
+        </ul>
+
+    </div>
+
+    <!-- Strona 36 -->
+    <div class='page'>
+        <p># Wprowadzenie do CALCULATE</p>
+        <h1>Czym jest kontekst filtrowania?</h1>
+        <p><strong>Kontekst filtrowania</strong> to zbiór filtrów aktywnych w danym momencie obliczeń. Określa on <strong>jakie wiersze</strong> z tabel są brane pod uwagę.</p>
+        <p><strong>Przykład:</strong> Jeśli w wizualizacji masz slicer ustawiony na "Rok = 2024", to wszystkie miary widzą tylko dane z 2024 roku.</p>
+
+    </div>
+
+    <!-- Strona 37 -->
+    <div class='page'>
+        <h1>Podstawowe użycie CALCULATE</h1>
+        <h2>Przykład 1: Dodanie filtra</h2>
+        <pre><code>Sprzedaż w Warszawie = 
+        <span class='dax-function'>CALCULATE</span>(
+            <span class='dax-function'>SUM</span>(Sprzedaz[Kwota]),
+            Klienci[Miasto] = "Warszawa"
+        )</code></pre>
+        <p><strong>Co się dzieje:</strong></p>
+        <ul>
+        <li>Bierze <code>SUM(Sprzedaz[Kwota])</code></li>
+        <li>Dodaje filtr: tylko dla miasta "Warszawa"</li>
+        <li>Zwraca sumę tylko dla Warszawy</li>
+        </ul>
+
+    </div>
+
+    <!-- Strona 38 -->
+    <div class='page'>
+        <h2>Przykład 2: Wiele filtrów</h2>
+        <pre><code>Sprzedaż VIP w <span class='dax-number'>2024</span> = 
+        <span class='dax-function'>CALCULATE</span>(
+            <span class='dax-function'>SUM</span>(Sprzedaz[Kwota]),
+            Klienci[Kategoria] = "VIP",
+            <span class='dax-function'>YEAR</span>(Sprzedaz[Data]) = <span class='dax-number'>2024</span>
+        )</code></pre>
+        <p><strong>Filtry są łączone operatorem AND</strong> – muszą być <strong>oba</strong> spełnione.</p>
+
+    </div>
+
+    <!-- Strona 39 -->
+    <div class='page'>
+        <h2>Przykład 3: Nadpisanie istniejącego filtra</h2>
+        <pre><code>Całkowita Sprzedaż = 
+        <span class='dax-function'>CALCULATE</span>(
+            <span class='dax-function'>SUM</span>(Sprzedaz[Kwota]),
+            <span class='dax-function'>ALL</span>(Produkty[Kategoria])
+        )</code></pre>
+        <p><strong>Co robi <code>ALL</code>?</strong></p>
+        <ul>
+        <li>Usuwa filtry z kolumny <code>Produkty[Kategoria]</code></li>
+        <li>Dzięki temu <code>Całkowita Sprzedaż</code> pokazuje sumę dla <strong>wszystkich kategorii</strong>, niezależnie od tego, co jest wybrane w slicerze</li>
+        </ul>
+        <p>_(Funkcje ALL, ALLEXCEPT, REMOVEFILTERS omówimy w bardziej zaawansowanym materiale)_</p>
+
+    </div>
+
+    <!-- Strona 40 -->
+    <div class='page'>
+        <h1>Kiedy używać CALCULATE?</h1>
+        <p>✅ <strong>Używaj CALCULATE gdy:</strong></p>
+        <ul>
+        <li>Chcesz dodać <strong>dodatkowy filtr</strong> do obliczeń</li>
+        <li>Chcesz <strong>nadpisać</strong> istniejący filtr</li>
+        <li>Chcesz obliczyć wartość w <strong>innym kontekście</strong> niż aktualny (np. suma całkowita)</li>
+        <li>Chcesz porównać wartości (np. sprzedaż bieżącego roku vs poprzedniego)</li>
+        </ul>
+
+    </div>
+
+    <!-- Strona 41 -->
+    <div class='page'>
+        <h2>Przykład praktyczny: Udział w sprzedaży</h2>
+        <pre><code>Udział w Sprzedaży = 
+        <span class='dax-function'>DIVIDE</span>(
+            <span class='dax-function'>SUM</span>(Sprzedaz[Kwota]),
+            <span class='dax-function'>CALCULATE</span>(
+                <span class='dax-function'>SUM</span>(Sprzedaz[Kwota]),
+                <span class='dax-function'>ALL</span>(Produkty[Kategoria])
+            )
+        )</code></pre>
+        <p><strong>Jak to działa:</strong></p>
+        <ul>
+        <li><strong>Licznik:</strong> Suma sprzedaży dla aktualnej kategorii (np. "Elektronika")</li>
+        <li><strong>Mianownik:</strong> Suma sprzedaży dla <strong>wszystkich</strong> kategorii (dzięki <code>ALL</code>)</li>
+        <li><strong>Wynik:</strong> Procent sprzedaży danej kategorii względem całości</li>
+        </ul>
+
+    </div>
+
+    <!-- Strona 42 -->
+    <div class='page'>
+        <h2>Przykład: Porównanie z poprzednim rokiem</h2>
+        <pre><code>Sprzedaż Poprzedni Rok = 
+        <span class='dax-function'>CALCULATE</span>(
+            <span class='dax-function'>SUM</span>(Sprzedaz[Kwota]),
+            <span class='dax-function'>SAMEPERIODLASTYEAR</span>(Kalendarz[Data])
+        )</code></pre>
+        <p><strong>Co się dzieje:</strong></p>
+        <ul>
+        <li><code>SAMEPERIODLASTYEAR</code> przesuwa kontekst dat o rok wstecz</li>
+        <li>Dzięki temu <code>CALCULATE</code> oblicza sprzedaż dla <strong>tego samego okresu rok temu</strong></li>
+        </ul>
+
+    </div>
+
+    <!-- Strona 43 -->
+    <div class='page'>
+        <h1>Kluczowe zasady CALCULATE</h1>
+        <p>1. <strong>CALCULATE zmienia kontekst filtrowania</strong> – to jego główna rola</p>
+        <p>2. <strong>Filtry w CALCULATE są stosowane jako AND</strong> – wszystkie muszą być spełnione</p>
+        <p>3. <strong>CALCULATE może nadpisać istniejące filtry</strong> – nowy filtr zastępuje stary</p>
+        <p>4. <strong>CALCULATE działa tylko w miarach</strong> – nie w kolumnach kalkulowanych (tam kontekst jest inny)</p>
+
+    </div>
+
+    <!-- Strona 44 -->
+    <div class='page'>
+        <h1>Podsumowanie CALCULATE</h1>
+        <p><strong>CALCULATE</strong> to fundament zaawansowanych obliczeń w DAX:</p>
+        <ul>
+        <li>Pozwala tworzyć <strong>dynamiczne miary</strong></li>
+        <li>Umożliwia <strong>porównania</strong> między różnymi okresami/kategoriami</li>
+        <li>Daje kontrolę nad <strong>kontekstem filtrowania</strong></li>
+        <li>Jest podstawą funkcji time intelligence (SAMEPERIODLASTYEAR, DATEADD, itd.)</li>
+        </ul>
+        <p><strong>Zapamiętaj:</strong> Jeśli chcesz obliczyć coś w <strong>innym kontekście</strong> niż aktualny, prawdopodobnie potrzebujesz <strong>CALCULATE</strong>.</p>
+
+    </div>
+
+</div>
+
+<script>
+    let currentPage = 1;
+    const totalPages = document.querySelectorAll('.page').length;
+    
+    document.getElementById('totalPages').textContent = totalPages;
+    
+    function showPage(n) {
+        const pages = document.querySelectorAll('.page');
+        
+        if (n > totalPages) currentPage = totalPages;
+        if (n < 1) currentPage = 1;
+        
+        pages.forEach(page => page.classList.remove('active'));
+        pages[currentPage - 1].classList.add('active');
+        
+        document.getElementById('currentPage').textContent = currentPage;
+        document.getElementById('prevBtn').disabled = currentPage === 1;
+        document.getElementById('nextBtn').disabled = currentPage === totalPages;
+        
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+    
+    function changePage(n) {
+        currentPage += n;
+        showPage(currentPage);
+    }
+    
+    // Obsługa strzałek na klawiaturze
+    document.addEventListener('keydown', function(e) {
+        if (e.key === 'ArrowLeft') changePage(-1);
+        if (e.key === 'ArrowRight') changePage(1);
+    });
+    
+    // Inicjalizacja
+    showPage(1);
+</script>
+
+</body>
+</html>
+
+"

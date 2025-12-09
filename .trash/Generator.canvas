@@ -1,0 +1,13 @@
+{
+	"nodes":[
+		{"id":"1d08e4077eb0673a","type":"file","file":"README.md","x":-641,"y":-426,"width":641,"height":646},
+		{"id":"ecb9ff873366cce8","type":"file","file":"USAGE.md","x":-641,"y":280,"width":641,"height":4986},
+		{"id":"0485700fec5ffb9b","type":"file","file":"Theory/01. Podstawy DAX.md","x":360,"y":-426,"width":802,"height":1186},
+		{"id":"5b7341d2f1e5bad1","type":"file","file":"Output/1. Podstawy DAX.html","x":1420,"y":-200,"width":820,"height":640}
+	],
+	"edges":[],
+	"metadata":{
+		"version":"1.0-1.0",
+		"frontmatter":{}
+	}
+}
