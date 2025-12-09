@@ -703,11 +703,11 @@ def load_config(config_path):
 
 
 def generate_css_measures(template_dir, output_dir):
-    """Generuje osobne miary Power BI dla każdego pliku CSS z folderu Template
+    """Generuje osobne miary Power BI dla każdego pliku CSS z folderu 03. TEMPLATE
 
     Args:
-        template_dir: Path - folder z templateami
-        output_dir: Path - folder wyjściowy
+        template_dir: Path - folder z templateami (03. TEMPLATE)
+        output_dir: Path - folder wyjściowy (02. OUTPUT)
 
     Returns:
         int - liczba wygenerowanych miar CSS
@@ -760,18 +760,18 @@ def main():
 
     # Ścieżki
     script_dir = Path(__file__).parent
-    theory_dir = script_dir / 'Theory'
-    template_dir = script_dir / 'Template'
-    output_dir = script_dir / 'Output'  # Output HTML
-    tmdl_dir = output_dir / 'TMDL'  # Folder TMDL wewnątrz Output
+    theory_dir = script_dir / '01. THEORY'
+    template_dir = script_dir / '03. TEMPLATE'
+    output_dir = script_dir / '02. OUTPUT'  # Output HTML
+    tmdl_dir = output_dir / 'TMDL'  # Folder TMDL wewnątrz OUTPUT
 
     # Sprawdź czy foldery istnieją
     if not theory_dir.exists():
-        print(f"[ERROR] Folder Theory nie istnieje: {theory_dir}")
+        print(f"[ERROR] Folder 01. THEORY nie istnieje: {theory_dir}")
         return
 
     if not template_dir.exists():
-        print(f"[ERROR] Folder Template nie istnieje: {template_dir}")
+        print(f"[ERROR] Folder 03. TEMPLATE nie istnieje: {template_dir}")
         return
 
     # Utwórz folder output jeśli nie istnieje
@@ -811,11 +811,11 @@ def main():
     # Wczytaj templates
     css, js = load_templates(template_dir, css_files, js_files)
 
-    # Przetwórz wszystkie pliki .md w Theory
+    # Przetwórz wszystkie pliki .md w 01. THEORY
     md_files = list(theory_dir.glob('*.md'))
 
     if not md_files:
-        print(f"[ERROR] Nie znaleziono plikow .md w folderze Theory: {theory_dir}")
+        print(f"[ERROR] Nie znaleziono plikow .md w folderze 01. THEORY: {theory_dir}")
         return
 
     print(f"\n=== Konwersja plikow Markdown -> Power BI HTML ===\n")
@@ -906,11 +906,11 @@ def read_measure_from_html(html_file_path):
 
 
 def generate_tmdl(output_dir, tmdl_dir):
-    """Generuje plik TMDL ze wszystkimi miarami z folderu Output
+    """Generuje plik TMDL ze wszystkimi miarami z folderu 02. OUTPUT
 
     Args:
-        output_dir: Path - folder z plikami HTML
-        tmdl_dir: Path - folder docelowy dla pliku TMDL
+        output_dir: Path - folder z plikami HTML (02. OUTPUT)
+        tmdl_dir: Path - folder docelowy dla pliku TMDL (02. OUTPUT/TMDL)
     """
     # Znajdź wszystkie pliki HTML
     html_files = sorted(output_dir.glob('*.html'))

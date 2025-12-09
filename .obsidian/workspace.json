@@ -11,11 +11,13 @@
             "id": "c6a8ca1a0082a34f",
             "type": "leaf",
             "state": {
-              "type": "html-view",
+              "type": "markdown",
               "state": {
-                "file": "Output/01. Podstawy DAX.html"
+                "file": "00. DRAFT/01. Podstawy DAX.md",
+                "mode": "source",
+                "source": false
               },
-              "icon": "code-glyph",
+              "icon": "lucide-file",
               "title": "01. Podstawy DAX"
             }
           }
@@ -104,46 +106,13 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "Output/01. Podstawy DAX.html",
+                "file": "00. DRAFT/01. Podstawy DAX.md",
                 "followCursor": true,
                 "showSearch": false,
                 "searchQuery": ""
               },
               "icon": "lucide-list",
               "title": "Outline of 01. Podstawy DAX"
-            }
-          },
-          {
-            "id": "2d861daab21a57c6",
-            "type": "leaf",
-            "state": {
-              "type": "backlink",
-              "state": {
-                "file": "Output/01. Podstawy DAX.html",
-                "collapseAll": false,
-                "extraContext": false,
-                "sortOrder": "alphabetical",
-                "showSearch": false,
-                "searchQuery": "",
-                "backlinkCollapsed": false,
-                "unlinkedCollapsed": true
-              },
-              "icon": "links-coming-in",
-              "title": "Backlinks for 01. Podstawy DAX"
-            }
-          },
-          {
-            "id": "1a571e2274b02b3e",
-            "type": "leaf",
-            "state": {
-              "type": "all-properties",
-              "state": {
-                "sortOrder": "frequency",
-                "showSearch": false,
-                "searchQuery": ""
-              },
-              "icon": "lucide-archive",
-              "title": "All properties"
             }
           }
         ],
@@ -160,7 +129,7 @@
             "state": {
               "type": "localgraph",
               "state": {
-                "file": "Output/01. Podstawy DAX.html",
+                "file": "00. DRAFT/01. Podstawy DAX.md",
                 "options": {
                   "collapse-filter": true,
                   "search": "",
@@ -208,28 +177,40 @@
       "obsidian-shellcommands:Shell commands: Custom variables": false,
       "webpage-html-export:Export as HTML": false,
       "obsidian-excalidraw-plugin:New drawing": false,
-      "obsidian-git:Open Git source control": false
+      "obsidian-git:Open Git source control": false,
+      "hide-folders:Show hidden folders": false
     }
   },
   "active": "c6a8ca1a0082a34f",
   "lastOpenFiles": [
-    "Output/00. Konfiguracja Power BI - Główne widoki Power BI Desktop.html",
-    "Output/TMDL/_HTML.md",
-    "Output/03. Test - Testowy dział.html",
-    "Output/02. DAX - Zmienne.html",
-    "Output/01. Podstawy DAX - Wprowadzenie do CALCULATE.html",
-    "Output/01. Podstawy DAX - Funkcje filtrujące.html",
-    "Output/01. Podstawy DAX - Funkcje iteracyjne (X-functions).html",
-    "Output/01. Podstawy DAX - Funkcje dat.html",
-    "Output/01. Podstawy DAX - Funkcje tekstowe.html",
-    "Output/01. Podstawy DAX - Funkcje logiczne.html",
-    "Output/01. Podstawy DAX - Funkcje agregujące.html",
-    "Output/01. Podstawy DAX.html",
-    "Theory/01. Podstawy DAX.md",
+    "01. THEORY/01. Podstawy DAX.md",
+    "02. OUTPUT/00. Konfiguracja Power BI - Przygotowanie środowiska Power BI.html",
+    "convert_md_to_powerbi.py.tmp.8660.1765295585837",
+    "02. OUTPUT/00. Konfiguracja Power BI - Główne widoki Power BI Desktop.html",
+    "02. OUTPUT/01. Podstawy DAX.html",
+    "02. OUTPUT/01. Podstawy DAX - Funkcje agregujące.html",
+    "02. OUTPUT/01. Podstawy DAX - Funkcje dat.html",
+    "02. OUTPUT/01. Podstawy DAX - Funkcje filtrujące.html",
+    "02. OUTPUT/01. Podstawy DAX - Funkcje logiczne.html",
+    "02. OUTPUT/01. Podstawy DAX - Funkcje tekstowe.html",
+    "02. OUTPUT/01. Podstawy DAX - Wprowadzenie do CALCULATE.html",
+    "03. TEMPLATE/Markdown/Teoria.md",
+    "03. TEMPLATE/Markdown/Quiz.md",
+    "03. TEMPLATE/Markdown/Gaps Complete.md",
+    "03. TEMPLATE/Markdown/Embed PNG.md",
+    "03. TEMPLATE/Markdown/Embed GIF.md",
+    "03. TEMPLATE/JS.md",
+    "03. TEMPLATE/CSS.md",
     "Theory/00. Konfiguracja Power BI.md",
+    "02. OUTPUT/TMDL/_HTML.md",
+    "01. THEORY/02. DAX - Zmienne.md",
+    "01. THEORY/00. Konfiguracja Power BI.md",
+    "Theory/01. Podstawy DAX.md",
+    "Theory/02. DAX - Zmienne.md",
+    "Theory/03. Test.md",
+    "Output/TMDL/_HTML.md",
     "Template/Markdown/Embed PNG.md",
     "Template/Markdown/Embed GIF.md",
-    "Theory/03. Test.md",
     "Template/Markdown/Gaps Complete.md",
     "00. DRAFT/00. Przygotowanie środowiska.md",
     "bin/Pasted image 20251209161608.png",
@@ -244,14 +225,6 @@
     "bin/Pasted image 20251209155134.png",
     "Pasted image 20251209155005.png",
     "Template/Markdown/Quiz.md",
-    "Template/Markdown/Teoria.md",
-    "00. DRAFT/01. Podstawy DAX.md",
-    "00. DRAFT/02. Wstęp do Calculate.md",
-    "Template/CSS.md",
-    "Template/JS.md",
-    "TMDL/_HTML.md",
-    "Theory/02. DAX - Zmienne.md",
-    "Generator.canvas",
-    "Convert.md"
+    "Generator.canvas"
   ]
 }
