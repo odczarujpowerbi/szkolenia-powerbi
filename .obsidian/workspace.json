@@ -13,12 +13,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "01. THEORY/02. Miary vs Kolumny kalkulowane.md",
+                "file": "01. THEORY/04. Modyfikowanie Kontekstu.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "02. Miary vs Kolumny kalkulowane"
+              "title": "04. Modyfikowanie Kontekstu"
             }
           }
         ],
@@ -106,13 +106,13 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "01. THEORY/02. Miary vs Kolumny kalkulowane.md",
+                "file": "01. THEORY/04. Modyfikowanie Kontekstu.md",
                 "followCursor": true,
                 "showSearch": false,
                 "searchQuery": ""
               },
               "icon": "lucide-list",
-              "title": "Outline of 02. Miary vs Kolumny kalkulowane"
+              "title": "Outline of 04. Modyfikowanie Kontekstu"
             }
           }
         ],
@@ -129,7 +129,7 @@
             "state": {
               "type": "localgraph",
               "state": {
-                "file": "01. THEORY/02. Miary vs Kolumny kalkulowane.md",
+                "file": "01. THEORY/04. Modyfikowanie Kontekstu.md",
                 "options": {
                   "collapse-filter": true,
                   "search": "",
@@ -157,7 +157,7 @@
                 }
               },
               "icon": "lucide-git-fork",
-              "title": "Graph of 02. Miary vs Kolumny kalkulowane"
+              "title": "Graph of 04. Modyfikowanie Kontekstu"
             }
           }
         ]
@@ -181,8 +181,13 @@
       "hide-folders:Show hidden folders": false
     }
   },
-  "active": "b284d6787240cf61",
+  "active": "c6a8ca1a0082a34f",
   "lastOpenFiles": [
+    "01. THEORY/03. Wprowadzenie do CALCULATE.md",
+    "01. THEORY/04. Modyfikowanie Kontekstu.md",
+    "01. THEORY/05. Tworzenie zestawień tabelarycznych.md",
+    "01. THEORY/02. Miary vs Kolumny kalkulowane.md",
+    "01. THEORY/01. Podstawy DAX.md",
     "02. OUTPUT/02. Miary vs Kolumny kalkulowane - Miary vs Kolumny kalkulowane.html",
     "02. OUTPUT/03. Wprowadzenie do CALCULATE - Użycie `CALCULATE`.html",
     "02. OUTPUT/03. Wprowadzenie do CALCULATE - Operatory logiczne w `CALCULATE`.html",
@@ -199,12 +204,6 @@
     "02. OUTPUT/04. Modyfikowanie Kontekstu - USERELATIONSHIP.html",
     "02. OUTPUT/04. Modyfikowanie Kontekstu - CROSSFILTER.html",
     "02. OUTPUT/04. Modyfikowanie Kontekstu - KEEPFILTERS.html",
-    "02. OUTPUT/04. Modyfikowanie Kontekstu - ALLSELECTED.html",
-    "01. THEORY/05. Tworzenie zestawień tabelarycznych.md",
-    "01. THEORY/04. Modyfikowanie Kontekstu.md",
-    "01. THEORY/03. Wprowadzenie do CALCULATE.md",
-    "01. THEORY/02. Miary vs Kolumny kalkulowane.md",
-    "01. THEORY/01. Podstawy DAX.md",
     "00. DRAFT/02. Wstęp do Calculate.md",
     "00. DRAFT/00. Przygotowanie środowiska.md",
     "00. DRAFT/03. Kontekst Filtra.md",
