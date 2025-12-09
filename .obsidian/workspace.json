@@ -13,12 +13,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "01. THEORY/06. DAX - Zaawansowane Kwerendy.md",
+                "file": "03. TEMPLATE/Markdown/Quiz.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "06. DAX - Zaawansowane Kwerendy"
+              "title": "Quiz"
             }
           }
         ],
@@ -106,13 +106,13 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "01. THEORY/06. DAX - Zaawansowane Kwerendy.md",
+                "file": "03. TEMPLATE/Markdown/Quiz.md",
                 "followCursor": true,
                 "showSearch": false,
                 "searchQuery": ""
               },
               "icon": "lucide-list",
-              "title": "Outline of 06. DAX - Zaawansowane Kwerendy"
+              "title": "Outline of Quiz"
             }
           }
         ],
@@ -129,7 +129,7 @@
             "state": {
               "type": "localgraph",
               "state": {
-                "file": "01. THEORY/06. DAX - Zaawansowane Kwerendy.md",
+                "file": "03. TEMPLATE/Markdown/Quiz.md",
                 "options": {
                   "collapse-filter": true,
                   "search": "",
@@ -157,7 +157,7 @@
                 }
               },
               "icon": "lucide-git-fork",
-              "title": "Graph of 06. DAX - Zaawansowane Kwerendy"
+              "title": "Graph of Quiz"
             }
           }
         ]
@@ -183,29 +183,36 @@
   },
   "active": "c6a8ca1a0082a34f",
   "lastOpenFiles": [
+    "03. TEMPLATE/Markdown/Gaps Complete.md",
+    "03. TEMPLATE/Markdown/Quiz.md",
+    "01. THEORY/05. Quiz.md",
+    "01. THEORY/01. Podstawy DAX.md",
+    "02. OUTPUT/04. Modyfikowanie Kontekstu - CROSSFILTER.html",
+    "config.md",
+    "02. OUTPUT/03. Quiz.html",
+    "02. OUTPUT/01. Quiz.html",
+    "01. THEORY/02. Quiz.md",
+    "01. THEORY/03. Quiz.md",
+    "01. THEORY/01. Quiz.md",
+    "02. OUTPUT/06. Quiz.html",
+    "02. OUTPUT/05. Quiz.html",
+    "02. OUTPUT/04. Quiz.html",
+    "02. OUTPUT/02. Quiz.html",
+    "01. THEORY/06. Quiz.md",
+    "01. THEORY/04. Quiz.md",
+    "01. THEORY/06. DAX - Zaawansowane Kwerendy.md",
     "02. OUTPUT/05. Tworzenie zestawień tabelarycznych - Tworzenie Tabeli.html",
     "02. OUTPUT/03. Wprowadzenie do CALCULATE - PODSUMOWANIE.html",
     "02. OUTPUT/02. Miary vs Kolumny kalkulowane - Pułapki.html",
-    "02. OUTPUT/02. Miary vs Kolumny kalkulowane - Różnice podejśc.html",
-    "02. OUTPUT/02. Miary vs Kolumny kalkulowane - Kolumny vs. Miary.html",
     "01. THEORY/05. Tworzenie zestawień tabelarycznych.md",
     "01. THEORY/04. Modyfikowanie Kontekstu.md",
     "bin/Pasted image 20251210001950.png",
     "01. THEORY/03. Wprowadzenie do CALCULATE.md",
     "01. THEORY/02. Miary vs Kolumny kalkulowane.md",
-    "01. THEORY/01. Podstawy DAX.md",
-    "02. OUTPUT/02. Miary vs Kolumny kalkulowane - Miary vs Kolumny kalkulowane.html",
-    "02. OUTPUT/03. Wprowadzenie do CALCULATE - Użycie `CALCULATE`.html",
-    "02. OUTPUT/03. Wprowadzenie do CALCULATE - Operatory logiczne w `CALCULATE`.html",
     "03. TEMPLATE/CSS - Czerwony.md",
     "01. THEORY/00. Konfiguracja Power BI.md",
     "02. OUTPUT/TMDL/_HTML.md",
     "02. OUTPUT/TMDL/_Parametr.md",
-    "convert_md_to_powerbi.py.tmp.66424.1765313206562",
-    "config.md",
-    "01. THEORY/06. DAX - Zaawansowane Kwerendy.md",
-    "02. OUTPUT/06. DAX - Zaawansowane Kwerendy - Query View.html",
-    "02. OUTPUT/06. DAX - Zaawansowane Kwerendy.html",
     "00. DRAFT/02. Wstęp do Calculate.md",
     "00. DRAFT/00. Przygotowanie środowiska.md",
     "00. DRAFT/03. Kontekst Filtra.md",
@@ -222,13 +229,6 @@
     "bin/Pasted image 20251209171436.png",
     "03. TEMPLATE/Markdown/Board.md",
     "03. TEMPLATE/Markdown/Teoria.md",
-    "03. TEMPLATE/Markdown/Quiz.md",
-    "03. TEMPLATE/Markdown/Gaps Complete.md",
-    "03. TEMPLATE/Markdown/Embed PNG.md",
-    "03. TEMPLATE/Markdown/Embed GIF.md",
-    "03. TEMPLATE/JS.md",
-    "Theory/00. Konfiguracja Power BI.md",
-    "Theory/01. Podstawy DAX.md",
     "Generator.canvas"
   ]
 }
