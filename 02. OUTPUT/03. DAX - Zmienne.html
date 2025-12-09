@@ -1,4 +1,4 @@
-Funkcje dat = 
+03. DAX - Zmienne = 
 
 "
 
@@ -7,7 +7,7 @@ Funkcje dat =
 <head>
     <meta charset='UTF-8'>
     <meta name='viewport' content='width=device-width, initial-scale=1.0'>
-    <title>Funkcje dat</title>
+    <title>03. DAX - Zmienne</title>
     <style>
             * {
                 margin: 0;
@@ -223,56 +223,149 @@ Funkcje dat =
 </head>
 <body>
 
-<div class='container' id='viz_5bcb381d'>
+<div class='container' id='viz_8c2a7e79'>
     <!-- Nawigacja na górze -->
     <div class='navigation'>
-        <button id='prevBtn_5bcb381d' onclick='changePage_5bcb381d(-1)'>← Poprzednia</button>
+        <button id='prevBtn_8c2a7e79' onclick='changePage_8c2a7e79(-1)'>← Poprzednia</button>
         <span class='page-indicator'>
-            Strona <span id='currentPage_5bcb381d'>1</span> z <span id='totalPages_5bcb381d'>4</span>
+            Strona <span id='currentPage_8c2a7e79'>1</span> z <span id='totalPages_8c2a7e79'>4</span>
         </span>
-        <button id='nextBtn_5bcb381d' onclick='changePage_5bcb381d(1)'>Następna →</button>
+        <button id='nextBtn_8c2a7e79' onclick='changePage_8c2a7e79(1)'>Następna →</button>
     </div>
 
     <!-- Strona 1 -->
     <div class='page active'>
-        <h1>DATE – Tworzenie daty</h1>
-        <pre><code><span class='dax-function'>DATE</span>(&lt;rok&gt;, &lt;miesiąc&gt;, &lt;dzień&gt;)</code></pre>
-        <p><strong>Przykład:</strong></p>
-        <pre><code>Data Bazowa = <span class='dax-function'>DATE</span>(<span class='dax-number'>2024</span>, <span class='dax-number'>1</span>, <span class='dax-number'>1</span>)</code></pre>
+        <h1>Czym są VAR i RETURN?</h1>
+        <p><strong>VAR</strong> i <strong>RETURN</strong> to kluczowe słowa w języku DAX, które pozwalają na tworzenie <strong>zmiennych</strong> i <strong>zwracanie wyników</strong> w miarach i kolumnach kalkulowanych.</p>
+        <h2>VAR (Variable)</h2>
+        <ul>
+        <li>Służy do <strong>deklarowania zmiennych</strong> i przechowywania w nich wartości</li>
+        <li>Zmienne mogą zawierać: liczby, teksty, tabele, wyniki obliczeń</li>
+        <li>Zmienne są <strong>obliczane tylko raz</strong> i przechowują swoją wartość</li>
+        <li>Pomagają <strong>unikać powtarzania</strong> tego samego kodu</li>
+        <li>Poprawiają <strong>czytelność</strong> i <strong>wydajność</strong> miar</li>
+        </ul>
+        <h2>RETURN</h2>
+        <ul>
+        <li><strong>Zwraca wynik</strong> całego wyrażenia DAX</li>
+        <li>W mierze/kolumnie może być <strong>tylko jedno RETURN</strong></li>
+        <li>To, co umieścisz po RETURN, stanie się <strong>końcowym wynikiem</strong></li>
+        </ul>
 
     </div>
 
     <!-- Strona 2 -->
     <div class='page'>
-        <h1>TODAY i NOW – Dzisiejsza data</h1>
-        <pre><code><span class='dax-function'>TODAY</span>()     <span class='dax-comment'>-- Dzisiejsza data (bez godziny)</span>
-        <span class='dax-function'>NOW</span>()       <span class='dax-comment'>-- Dzisiejsza data i godzina</span></code></pre>
-        <p><strong>Przykład:</strong></p>
-        <pre><code>Aktualna Data = <span class='dax-function'>TODAY</span>()</code></pre>
+        <h1>Podstawowa składnia</h1>
+        <pre><code>NazwaMiary = 
+        <span class='dax-keyword'>VAR</span> NazwaZmiennej1 = &lt;wyrażenie1&gt;
+        <span class='dax-keyword'>VAR</span> NazwaZmiennej2 = &lt;wyrażenie2&gt;
+        <span class='dax-keyword'>VAR</span> NazwaZmiennej3 = &lt;wyrażenie3&gt;
+        <span class='dax-keyword'>RETURN</span> &lt;wynik_końcowy&gt;</code></pre>
+        <p><strong>Przykład prosty:</strong></p>
+        <pre><code>Całkowity Koszt = 
+        <span class='dax-keyword'>VAR</span> IloscSztuk = <span class='dax-number'>100</span>
+        <span class='dax-keyword'>VAR</span> CenaJednostkowa = <span class='dax-number'>25</span>
+        <span class='dax-keyword'>VAR</span> Koszt = IloscSztuk * CenaJednostkowa
+        <span class='dax-keyword'>RETURN</span> Koszt</code></pre>
+        <div class='result-box'>
+        Wynik: <strong>2500</strong>
+        </div>
 
     </div>
 
     <!-- Strona 3 -->
     <div class='page'>
-        <h1>YEAR, MONTH, DAY – Wyciąganie składników daty</h1>
-        <pre><code><span class='dax-function'>YEAR</span>(&lt;data&gt;)   <span class='dax-comment'>-- Rok</span>
-        <span class='dax-function'>MONTH</span>(&lt;data&gt;)  <span class='dax-comment'>-- Miesiąc (1-12)</span>
-        <span class='dax-function'>DAY</span>(&lt;data&gt;)    <span class='dax-comment'>-- Dzień (1-31)</span></code></pre>
-        <p><strong>Przykład:</strong></p>
-        <pre><code>Rok Sprzedaży = <span class='dax-function'>YEAR</span>(Sprzedaz[Data])
-        Miesiąc Sprzedaży = <span class='dax-function'>MONTH</span>(Sprzedaz[Data])</code></pre>
+        <h1>Jak to działa w funkcjach iteracyjnych (SUMX, FILTER, itd.)?</h1>
+        <p>W funkcjach iteracyjnych jak <strong>SUMX</strong>, <strong>FILTER</strong>, <strong>ADDCOLUMNS</strong> zmienne VAR są <strong>przetwarzane w każdej iteracji</strong>:</p>
+        <p><strong>Zasada:</strong> Dla każdego wiersza tabeli, zmienne VAR są <strong>obliczane na nowo</strong> z wartościami z aktualnego wiersza.</p>
+        <pre><code><span class='dax-function'>SUMX</span>(
+            {<span class='dax-number'>1</span>, <span class='dax-number'>2</span>, <span class='dax-number'>3</span>},  <span class='dax-comment'>-- Iterujemy po wartościach 1, 2, 3</span>
+            <span class='dax-keyword'>VAR</span> Kwadrat = [Value] * [Value] <span class='dax-comment'>-- [Value] to domyślna nazwa utworzonej kolumny</span>
+            <span class='dax-keyword'>RETURN</span> Kwadrat
+        )</code></pre>
+        <h1>Kroki algorytmu:</h1>
+        <div class='iteration-box'>
+        <h3>Iteracja 1: [Value] = 1</h3>
+        <ul>
+        <li><code>Kwadrat</code> = 1 × 1 = <strong>1</strong></li>
+        <li>RETURN zwraca: <strong>1</strong></li>
+        </ul>
+        </div>
+        <div class='iteration-box'>
+        <h3>Iteracja 2: [Value] = 2</h3>
+        <ul>
+        <li><code>Kwadrat</code> = 2 × 2 = <strong>4</strong></li>
+        <li>RETURN zwraca: <strong>4</strong></li>
+        </ul>
+        </div>
+        <div class='iteration-box'>
+        <h3>Iteracja 3: [Value] = 3</h3>
+        <ul>
+        <li><code>Kwadrat</code> = 3 × 3 = <strong>9</strong></li>
+        <li>RETURN zwraca: <strong>9</strong></li>
+        </ul>
+        </div>
+        <div class='result-box'>
+        SUMX dodaje wszystkie zwrócone wartości: 1 + 4 + 9 = <strong>14</strong>
+        </div>
+        <p>W każdej iteracji zmienna <code>Kwadrat</code> jest <strong>tworzona od nowa</strong> z nową wartością! Nie jest to ta sama zmienna — każda iteracja ma własny 'kontekst wiersza' i własne wartości zmiennych.</p>
+        <p><strong>To oznacza:</strong></p>
+        <ul>
+        <li>Zmienne VAR wewnątrz iteracji są <strong>dynamiczne</strong></li>
+        <li>Dostosowują się do <strong>aktualnego wiersza</strong> w tabeli</li>
+        <li>Pozwalają na <strong>elastyczne obliczenia</strong> dla każdego elementu z osobna</li>
+        </ul>
 
     </div>
 
     <!-- Strona 4 -->
     <div class='page'>
-        <h1>DATEDIFF – Różnica między datami</h1>
-        <pre><code><span class='dax-function'>DATEDIFF</span>(&lt;data_początkowa&gt;, &lt;data_końcowa&gt;, &lt;jednostka&gt;)</code></pre>
-        <p><strong>Jednostki:</strong> DAY, MONTH, YEAR, QUARTER</p>
-        <p><strong>Przykład:</strong></p>
-        <pre><code>Dni Od Zamówienia = 
-        <span class='dax-function'>DATEDIFF</span>(Zamowienia[Data Zamówienia], <span class='dax-function'>TODAY</span>(), DAY)</code></pre>
-        <p>---</p>
+        <h1>Odchylenie od średniej</h1>
+        <pre><code>Suma Odchyleń od Średniej = 
+        <span class='dax-keyword'>VAR</span> Srednia = <span class='dax-function'>AVERAGE</span>({<span class='dax-number'>1</span>, <span class='dax-number'>2</span>, <span class='dax-number'>3</span>, <span class='dax-number'>4</span>, <span class='dax-number'>5</span>})  <span class='dax-comment'>-- Obliczona raz: 3</span>
+        <span class='dax-keyword'>RETURN</span>
+            <span class='dax-function'>SUMX</span>(
+                {<span class='dax-number'>1</span>, <span class='dax-number'>2</span>, <span class='dax-number'>3</span>},
+                <span class='dax-keyword'>VAR</span> Wartosc = [Value]
+                <span class='dax-keyword'>VAR</span> Odchylenie = Wartosc - Srednia  <span class='dax-comment'>-- Używamy zmiennej spoza iteracji!</span>
+                <span class='dax-keyword'>RETURN</span> Odchylenie
+            )</code></pre>
+        <h1>Co się dzieje krok po kroku:</h1>
+        <div class='iteration-box'>
+        <h3>Przed iteracją:</h3>
+        <ul>
+        <li><code>Srednia</code> = (1 + 2 + 3) / 3 = 2 ← obliczone <strong>tylko raz</strong></li>
+        </ul>
+        </div>
+        <div class='iteration-box'>
+        <h3>Iteracja 1: [Value] = 1</h3>
+        <ul>
+        <li><code>Wartosc</code> = 1</li>
+        <li><code>Odchylenie</code> = 1 - 3 = <strong>-2</strong></li>
+        <li>RETURN zwraca: <strong>-2</strong></li>
+        </ul>
+        </div>
+        <div class='iteration-box'>
+        <h3>Iteracja 2: [Value] = 2</h3>
+        <ul>
+        <li><code>Wartosc</code> = 2</li>
+        <li><code>Odchylenie</code> = 2 - 3 = <strong>-1</strong></li>
+        <li>RETURN zwraca: <strong>-1</strong></li>
+        </ul>
+        </div>
+        <div class='iteration-box'>
+        <h3>Iteracja 3: [Value] = 3</h3>
+        <ul>
+        <li><code>Wartosc</code> = 3</li>
+        <li><code>Odchylenie</code> = 3 - 3 = <strong>0</strong></li>
+        <li>RETURN zwraca: <strong>0</strong></li>
+        </ul>
+        </div>
+        <div class='result-box'>
+        <h3>Suma końcowa:</h3>
+        <p>SUMX dodaje wszystkie odchylenia: (-2) + (-1) + 0 = <strong>-3</strong></p>
+        </div>
 
     </div>
 
@@ -281,10 +374,10 @@ Funkcje dat =
 <script>
 (function() {
     // Unikalny ID dla tej wizualizacji (wstrzykiwany przez Python)
-    var vizId = '5bcb381d';
+    var vizId = '8c2a7e79';
     var containerId = 'viz_' + vizId;
 
-    var currentPage_5bcb381d = 1;
+    var currentPage_8c2a7e79 = 1;
     var container = document.getElementById(containerId);
 
     if (!container) return;
@@ -294,27 +387,27 @@ Funkcje dat =
 
     document.getElementById('totalPages_' + vizId).textContent = totalPages;
 
-    window['showPage_5bcb381d'] = function(n) {
-        if (n > totalPages) currentPage_5bcb381d = totalPages;
-        if (n < 1) currentPage_5bcb381d = 1;
+    window['showPage_8c2a7e79'] = function(n) {
+        if (n > totalPages) currentPage_8c2a7e79 = totalPages;
+        if (n < 1) currentPage_8c2a7e79 = 1;
 
         for (var i = 0; i < pages.length; i++) {
             pages[i].classList.remove('active');
         }
-        pages[currentPage_5bcb381d - 1].classList.add('active');
+        pages[currentPage_8c2a7e79 - 1].classList.add('active');
 
-        document.getElementById('currentPage_' + vizId).textContent = currentPage_5bcb381d;
-        document.getElementById('prevBtn_' + vizId).disabled = (currentPage_5bcb381d === 1);
-        document.getElementById('nextBtn_' + vizId).disabled = (currentPage_5bcb381d === totalPages);
+        document.getElementById('currentPage_' + vizId).textContent = currentPage_8c2a7e79;
+        document.getElementById('prevBtn_' + vizId).disabled = (currentPage_8c2a7e79 === 1);
+        document.getElementById('nextBtn_' + vizId).disabled = (currentPage_8c2a7e79 === totalPages);
     };
 
-    window['changePage_5bcb381d'] = function(n) {
-        currentPage_5bcb381d += n;
-        window['showPage_5bcb381d'](currentPage_5bcb381d);
+    window['changePage_8c2a7e79'] = function(n) {
+        currentPage_8c2a7e79 += n;
+        window['showPage_8c2a7e79'](currentPage_8c2a7e79);
     };
 
     // Inicjalizacja
-    window['showPage_5bcb381d'](1);
+    window['showPage_8c2a7e79'](1);
 
     // Funkcjonalność powiększania obrazów
     var images = container.querySelectorAll('img');

@@ -1,7 +1,7 @@
 createOrReplace
 
     table _HTML
-        lineageTag: 9cfec332-3eec-489b-bfd8-fdca2bfc0d5e
+        lineageTag: 996085fd-1b9d-45b7-afb5-2d04e5072b0c
 
         measure '00. Konfiguracja Power BI - Główne widoki Power BI Desktop' = ```
 "
@@ -22,7 +22,6 @@ createOrReplace
             body {
                 font-family: 'Roboto', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
                 font-size: 16px;
-                font-weight: 400;
                 line-height: 1.7;
                 color: #333;
                 background: transparent;
@@ -123,7 +122,7 @@ createOrReplace
             }
     
             strong {
-                font-weight: 700;
+                font-weight: 600;
                 color: #1a1a1a;
             }
     
@@ -172,40 +171,12 @@ createOrReplace
             }
     
             ul, ol {
-                margin: 0.5em 0 0.5em 1.5em;
-                padding-left: 0.5em;
+                margin: 1em 0 1em 1.5em;
             }
     
             li {
-                margin: 0.3em 0;
-                padding-left: 0.3em;
+                margin: 0.5em 0;
                 font-size: 1.05em;
-            }
-    
-            ol {
-                list-style-type: decimal;
-            }
-    
-            ol li::marker {
-                color: #999;
-                font-weight: 400;
-            }
-    
-            ul li::marker {
-                color: #999;
-            }
-    
-            blockquote {
-                border-left: 3px solid #df4a16;
-                background: #f8f9fa;
-                padding: 14px 18px;
-                margin: 1em 0;
-                color: #555;
-                font-style: italic;
-            }
-    
-            blockquote p {
-                margin: 0;
             }
     
             .iteration-box {
@@ -426,7 +397,7 @@ createOrReplace
 
 "
 ```
-            lineageTag: fc2bcd8d-54a2-4e00-a89f-8146ed3aaaa1
+            lineageTag: e89e4531-5f14-41b3-bbba-c95d6b981208
 
         measure '00. Konfiguracja Power BI - Przygotowanie środowiska Power BI' = ```
 "
@@ -447,7 +418,6 @@ createOrReplace
             body {
                 font-family: 'Roboto', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
                 font-size: 16px;
-                font-weight: 400;
                 line-height: 1.7;
                 color: #333;
                 background: transparent;
@@ -548,7 +518,7 @@ createOrReplace
             }
     
             strong {
-                font-weight: 700;
+                font-weight: 600;
                 color: #1a1a1a;
             }
     
@@ -597,40 +567,12 @@ createOrReplace
             }
     
             ul, ol {
-                margin: 0.5em 0 0.5em 1.5em;
-                padding-left: 0.5em;
+                margin: 1em 0 1em 1.5em;
             }
     
             li {
-                margin: 0.3em 0;
-                padding-left: 0.3em;
+                margin: 0.5em 0;
                 font-size: 1.05em;
-            }
-    
-            ol {
-                list-style-type: decimal;
-            }
-    
-            ol li::marker {
-                color: #999;
-                font-weight: 400;
-            }
-    
-            ul li::marker {
-                color: #999;
-            }
-    
-            blockquote {
-                border-left: 3px solid #df4a16;
-                background: #f8f9fa;
-                padding: 14px 18px;
-                margin: 1em 0;
-                color: #555;
-                font-style: italic;
-            }
-    
-            blockquote p {
-                margin: 0;
             }
     
             .iteration-box {
@@ -814,7 +756,7 @@ createOrReplace
 
 "
 ```
-            lineageTag: 8ff59530-8d02-4357-856e-35f9c6ea17f8
+            lineageTag: a338bc3c-f6c2-4e89-96b2-9696b67e3a8b
 
         measure '01. Podstawy DAX - Funkcje agregujące' = ```
 "
@@ -835,7 +777,6 @@ createOrReplace
             body {
                 font-family: 'Roboto', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
                 font-size: 16px;
-                font-weight: 400;
                 line-height: 1.7;
                 color: #333;
                 background: transparent;
@@ -936,7 +877,7 @@ createOrReplace
             }
     
             strong {
-                font-weight: 700;
+                font-weight: 600;
                 color: #1a1a1a;
             }
     
@@ -985,40 +926,12 @@ createOrReplace
             }
     
             ul, ol {
-                margin: 0.5em 0 0.5em 1.5em;
-                padding-left: 0.5em;
+                margin: 1em 0 1em 1.5em;
             }
     
             li {
-                margin: 0.3em 0;
-                padding-left: 0.3em;
+                margin: 0.5em 0;
                 font-size: 1.05em;
-            }
-    
-            ol {
-                list-style-type: decimal;
-            }
-    
-            ol li::marker {
-                color: #999;
-                font-weight: 400;
-            }
-    
-            ul li::marker {
-                color: #999;
-            }
-    
-            blockquote {
-                border-left: 3px solid #df4a16;
-                background: #f8f9fa;
-                padding: 14px 18px;
-                margin: 1em 0;
-                color: #555;
-                font-style: italic;
-            }
-    
-            blockquote p {
-                margin: 0;
             }
     
             .iteration-box {
@@ -1211,7 +1124,7 @@ createOrReplace
 
 "
 ```
-            lineageTag: 9ce7517d-2f5a-402a-97fe-5f59411c2243
+            lineageTag: a6a6119f-ccbc-4b9d-acfe-40ba9b90a3d3
 
         measure '01. Podstawy DAX - Funkcje dat' = ```
 "
@@ -1232,7 +1145,6 @@ createOrReplace
             body {
                 font-family: 'Roboto', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
                 font-size: 16px;
-                font-weight: 400;
                 line-height: 1.7;
                 color: #333;
                 background: transparent;
@@ -1333,7 +1245,7 @@ createOrReplace
             }
     
             strong {
-                font-weight: 700;
+                font-weight: 600;
                 color: #1a1a1a;
             }
     
@@ -1382,40 +1294,12 @@ createOrReplace
             }
     
             ul, ol {
-                margin: 0.5em 0 0.5em 1.5em;
-                padding-left: 0.5em;
+                margin: 1em 0 1em 1.5em;
             }
     
             li {
-                margin: 0.3em 0;
-                padding-left: 0.3em;
+                margin: 0.5em 0;
                 font-size: 1.05em;
-            }
-    
-            ol {
-                list-style-type: decimal;
-            }
-    
-            ol li::marker {
-                color: #999;
-                font-weight: 400;
-            }
-    
-            ul li::marker {
-                color: #999;
-            }
-    
-            blockquote {
-                border-left: 3px solid #df4a16;
-                background: #f8f9fa;
-                padding: 14px 18px;
-                margin: 1em 0;
-                color: #555;
-                font-style: italic;
-            }
-    
-            blockquote p {
-                margin: 0;
             }
     
             .iteration-box {
@@ -1576,7 +1460,286 @@ createOrReplace
 
 "
 ```
-            lineageTag: 149fc2f7-c586-4edf-a9c4-6f626dc9e3a2
+            lineageTag: 70eeb1b8-1934-49b0-a085-ef71ef8ea810
+
+        measure '01. Podstawy DAX - Funkcje filtrujące' = ```
+"
+
+<!DOCTYPE html>
+<html lang='pl'>
+<head>
+    <meta charset='UTF-8'>
+    <meta name='viewport' content='width=device-width, initial-scale=1.0'>
+    <title>Funkcje filtrujące</title>
+    <style>
+            * {
+                margin: 0;
+                padding: 0;
+                box-sizing: border-box;
+            }
+            
+            body {
+                font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+                font-size: 16px;
+                line-height: 1.7;
+                color: #333;
+                background: transparent;
+                padding: 20px;
+            }
+            
+            .container {
+                max-width: 800px;
+                margin: 0 auto;
+                background: transparent;
+                padding: 40px;
+            }
+            
+            .navigation {
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                margin-bottom: 40px;
+                padding-bottom: 20px;
+                border-bottom: 1px solid #e1e4e8;
+            }
+            
+            button {
+                background: #0066cc;
+                color: white;
+                border: none;
+                padding: 12px 28px;
+                border-radius: 4px;
+                cursor: pointer;
+                font-size: 1em;
+                font-weight: 500;
+                transition: background 0.2s;
+            }
+            
+            button:hover {
+                background: #0052a3;
+            }
+            
+            button:disabled {
+                background: #ccc;
+                cursor: not-allowed;
+            }
+            
+            .page-indicator {
+                color: #666;
+                font-size: 1em;
+            }
+            
+            .page {
+                display: none;
+                min-height: 500px;
+            }
+            
+            .page.active {
+                display: block;
+                animation: fadeIn 0.3s ease-in;
+            }
+            
+            @keyframes fadeIn {
+                from { opacity: 0; transform: translateY(10px); }
+                to { opacity: 1; transform: translateY(0); }
+            }
+            
+            h1 {
+                font-size: 1.8em;
+                font-weight: 600;
+                margin-bottom: 1em;
+                color: #1a1a1a;
+            }
+            
+            h2 {
+                font-size: 1.4em;
+                font-weight: 600;
+                margin: 1.5em 0 0.8em 0;
+                color: #2a2a2a;
+            }
+            
+            h3 {
+                font-size: 1.1em;
+                font-weight: 600;
+                margin: 1.2em 0 0.6em 0;
+                color: #444;
+            }
+            
+            p {
+                margin-bottom: 1em;
+                font-size: 1.05em;
+            }
+            
+            strong {
+                font-weight: 600;
+                color: #1a1a1a;
+            }
+            
+            code {
+                background: #f5f5f5;
+                padding: 3px 7px;
+                border-radius: 3px;
+                font-family: 'Courier New', monospace;
+                font-size: 0.95em;
+                color: #d73a49;
+            }
+            
+            pre {
+                background: #f8f9fa;
+                border-left: 3px solid #0066cc;
+                padding: 18px;
+                margin: 1em 0;
+                overflow-x: auto;
+                border-radius: 3px;
+            }
+            
+            pre code {
+                background: none;
+                padding: 0;
+                color: #24292e;
+                font-size: 1em;
+                line-height: 1.6;
+            }
+            
+            .dax-keyword {
+                color: #0066cc;
+                font-weight: 600;
+            }
+            
+            .dax-function {
+                color: #6f42c1;
+            }
+            
+            .dax-number {
+                color: #005cc5;
+            }
+            
+            .dax-comment {
+                color: #6a737d;
+                font-style: italic;
+            }
+            
+            ul, ol {
+                margin: 1em 0 1em 1.5em;
+            }
+            
+            li {
+                margin: 0.5em 0;
+                font-size: 1.05em;
+            }
+            
+            .iteration-box {
+                border-left: 3px solid #0066cc;
+                padding: 14px 18px;
+                margin: 0.8em 0;
+            }
+            
+            .result-box {
+                background: #f5f5f5;
+                border-left: 3px solid #999;
+                padding: 14px 18px;
+                margin: 0.8em 0;
+                font-weight: 500;
+                color: #555;
+                font-size: 1.05em;
+            }
+        </style>
+</head>
+<body>
+
+<div class='container' id='viz_2aa7098d'>
+    <!-- Nawigacja na górze -->
+    <div class='navigation'>
+        <button id='prevBtn_2aa7098d' onclick='changePage_2aa7098d(-1)'>← Poprzednia</button>
+        <span class='page-indicator'>
+            Strona <span id='currentPage_2aa7098d'>1</span> z <span id='totalPages_2aa7098d'>2</span>
+        </span>
+        <button id='nextBtn_2aa7098d' onclick='changePage_2aa7098d(1)'>Następna →</button>
+    </div>
+
+    <!-- Strona 1 -->
+    <div class='page active'>
+        <h1>FILTER – Filtrowanie tabeli</h1>
+        <p>Zwraca <strong>podzbiór tabeli</strong> spełniający warunek:</p>
+        <pre><code><span class='dax-function'>FILTER</span>(&lt;tabela&gt;, &lt;warunek&gt;)</code></pre>
+        <p><strong>Przykład:</strong></p>
+        <pre><code>Wysokie Sprzedaże = 
+        <span class='dax-function'>FILTER</span>(
+            Sprzedaz,
+            Sprzedaz[Kwota] &gt; <span class='dax-number'>1000</span>
+        )</code></pre>
+        <p><strong>Użycie z SUMX:</strong></p>
+        <pre><code>Suma Wysokich Sprzedaży = 
+        <span class='dax-function'>SUMX</span>(
+            <span class='dax-function'>FILTER</span>(Sprzedaz, Sprzedaz[Kwota] &gt; <span class='dax-number'>1000</span>),
+            Sprzedaz[Kwota]
+        )</code></pre>
+
+    </div>
+
+    <!-- Strona 2 -->
+    <div class='page'>
+        <h1>CALCULATE – Modyfikacja kontekstu filtrowania</h1>
+        <pre><code><span class='dax-function'>CALCULATE</span>(&lt;wyrażenie&gt;, &lt;filtr1&gt;, &lt;filtr2&gt;, ...)</code></pre>
+        <p><strong>CALCULATE</strong> to <strong>najważniejsza funkcja w DAX</strong>. Pozwala:</p>
+        <ul>
+        <li>Zmienić kontekst filtrowania</li>
+        <li>Dodać nowe filtry</li>
+        <li>Nadpisać istniejące filtry</li>
+        <li>Stworzyć obliczenia w różnych kontekstach</li>
+        </ul>
+        <p>---</p>
+
+    </div>
+
+</div>
+
+<script>
+(function() {
+    // Unikalny ID dla tej wizualizacji (wstrzykiwany przez Python)
+    var vizId = '2aa7098d';
+    var containerId = 'viz_' + vizId;
+
+    var currentPage_2aa7098d = 1;
+    var container = document.getElementById(containerId);
+
+    if (!container) return;
+
+    var pages = container.querySelectorAll('.page');
+    var totalPages = pages.length;
+
+    document.getElementById('totalPages_' + vizId).textContent = totalPages;
+
+    window['showPage_2aa7098d'] = function(n) {
+        if (n > totalPages) currentPage_2aa7098d = totalPages;
+        if (n < 1) currentPage_2aa7098d = 1;
+
+        for (var i = 0; i < pages.length; i++) {
+            pages[i].classList.remove('active');
+        }
+        pages[currentPage_2aa7098d - 1].classList.add('active');
+
+        document.getElementById('currentPage_' + vizId).textContent = currentPage_2aa7098d;
+        document.getElementById('prevBtn_' + vizId).disabled = (currentPage_2aa7098d === 1);
+        document.getElementById('nextBtn_' + vizId).disabled = (currentPage_2aa7098d === totalPages);
+    };
+
+    window['changePage_2aa7098d'] = function(n) {
+        currentPage_2aa7098d += n;
+        window['showPage_2aa7098d'](currentPage_2aa7098d);
+    };
+
+    // Inicjalizacja
+    window['showPage_2aa7098d'](1);
+})();
+</script>
+
+</body>
+</html>
+
+"
+```
+            lineageTag: da3134dc-5b3a-477c-a685-6718f926bedc
 
         measure '01. Podstawy DAX - Funkcje iteracyjne (X-functions)' = ```
 "
@@ -1597,7 +1760,6 @@ createOrReplace
             body {
                 font-family: 'Roboto', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
                 font-size: 16px;
-                font-weight: 400;
                 line-height: 1.7;
                 color: #333;
                 background: transparent;
@@ -1698,7 +1860,7 @@ createOrReplace
             }
     
             strong {
-                font-weight: 700;
+                font-weight: 600;
                 color: #1a1a1a;
             }
     
@@ -1747,40 +1909,12 @@ createOrReplace
             }
     
             ul, ol {
-                margin: 0.5em 0 0.5em 1.5em;
-                padding-left: 0.5em;
+                margin: 1em 0 1em 1.5em;
             }
     
             li {
-                margin: 0.3em 0;
-                padding-left: 0.3em;
+                margin: 0.5em 0;
                 font-size: 1.05em;
-            }
-    
-            ol {
-                list-style-type: decimal;
-            }
-    
-            ol li::marker {
-                color: #999;
-                font-weight: 400;
-            }
-    
-            ul li::marker {
-                color: #999;
-            }
-    
-            blockquote {
-                border-left: 3px solid #df4a16;
-                background: #f8f9fa;
-                padding: 14px 18px;
-                margin: 1em 0;
-                color: #555;
-                font-style: italic;
-            }
-    
-            blockquote p {
-                margin: 0;
             }
     
             .iteration-box {
@@ -1959,7 +2093,7 @@ createOrReplace
 
 "
 ```
-            lineageTag: f250b32c-d094-4994-8022-b1be990cf472
+            lineageTag: 9a1f4ace-8738-4754-92c9-9684f26e298b
 
         measure '01. Podstawy DAX - Funkcje logiczne' = ```
 "
@@ -1980,7 +2114,6 @@ createOrReplace
             body {
                 font-family: 'Roboto', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
                 font-size: 16px;
-                font-weight: 400;
                 line-height: 1.7;
                 color: #333;
                 background: transparent;
@@ -2081,7 +2214,7 @@ createOrReplace
             }
     
             strong {
-                font-weight: 700;
+                font-weight: 600;
                 color: #1a1a1a;
             }
     
@@ -2130,40 +2263,12 @@ createOrReplace
             }
     
             ul, ol {
-                margin: 0.5em 0 0.5em 1.5em;
-                padding-left: 0.5em;
+                margin: 1em 0 1em 1.5em;
             }
     
             li {
-                margin: 0.3em 0;
-                padding-left: 0.3em;
+                margin: 0.5em 0;
                 font-size: 1.05em;
-            }
-    
-            ol {
-                list-style-type: decimal;
-            }
-    
-            ol li::marker {
-                color: #999;
-                font-weight: 400;
-            }
-    
-            ul li::marker {
-                color: #999;
-            }
-    
-            blockquote {
-                border-left: 3px solid #df4a16;
-                background: #f8f9fa;
-                padding: 14px 18px;
-                margin: 1em 0;
-                color: #555;
-                font-style: italic;
-            }
-    
-            blockquote p {
-                margin: 0;
             }
     
             .iteration-box {
@@ -2339,7 +2444,7 @@ createOrReplace
 
 "
 ```
-            lineageTag: 7a981f13-4ba1-490b-9176-0b8d9c982976
+            lineageTag: 2c6affe0-2aed-458c-873f-c94f414762d7
 
         measure '01. Podstawy DAX - Funkcje tekstowe' = ```
 "
@@ -2360,7 +2465,6 @@ createOrReplace
             body {
                 font-family: 'Roboto', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
                 font-size: 16px;
-                font-weight: 400;
                 line-height: 1.7;
                 color: #333;
                 background: transparent;
@@ -2461,7 +2565,7 @@ createOrReplace
             }
     
             strong {
-                font-weight: 700;
+                font-weight: 600;
                 color: #1a1a1a;
             }
     
@@ -2510,40 +2614,12 @@ createOrReplace
             }
     
             ul, ol {
-                margin: 0.5em 0 0.5em 1.5em;
-                padding-left: 0.5em;
+                margin: 1em 0 1em 1.5em;
             }
     
             li {
-                margin: 0.3em 0;
-                padding-left: 0.3em;
+                margin: 0.5em 0;
                 font-size: 1.05em;
-            }
-    
-            ol {
-                list-style-type: decimal;
-            }
-    
-            ol li::marker {
-                color: #999;
-                font-weight: 400;
-            }
-    
-            ul li::marker {
-                color: #999;
-            }
-    
-            blockquote {
-                border-left: 3px solid #df4a16;
-                background: #f8f9fa;
-                padding: 14px 18px;
-                margin: 1em 0;
-                color: #555;
-                font-style: italic;
-            }
-    
-            blockquote p {
-                margin: 0;
             }
     
             .iteration-box {
@@ -2704,7 +2780,380 @@ createOrReplace
 
 "
 ```
-            lineageTag: aceb961a-b86e-439e-9f6d-9757e74f855c
+            lineageTag: e5381c1a-b4d9-4b3d-8fc4-25905b9d46ce
+
+        measure '01. Podstawy DAX - Wprowadzenie do CALCULATE' = ```
+"
+
+<!DOCTYPE html>
+<html lang='pl'>
+<head>
+    <meta charset='UTF-8'>
+    <meta name='viewport' content='width=device-width, initial-scale=1.0'>
+    <title>Wprowadzenie do CALCULATE</title>
+    <style>
+            * {
+                margin: 0;
+                padding: 0;
+                box-sizing: border-box;
+            }
+            
+            body {
+                font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+                font-size: 16px;
+                line-height: 1.7;
+                color: #333;
+                background: transparent;
+                padding: 20px;
+            }
+            
+            .container {
+                max-width: 800px;
+                margin: 0 auto;
+                background: transparent;
+                padding: 40px;
+            }
+            
+            .navigation {
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                margin-bottom: 40px;
+                padding-bottom: 20px;
+                border-bottom: 1px solid #e1e4e8;
+            }
+            
+            button {
+                background: #0066cc;
+                color: white;
+                border: none;
+                padding: 12px 28px;
+                border-radius: 4px;
+                cursor: pointer;
+                font-size: 1em;
+                font-weight: 500;
+                transition: background 0.2s;
+            }
+            
+            button:hover {
+                background: #0052a3;
+            }
+            
+            button:disabled {
+                background: #ccc;
+                cursor: not-allowed;
+            }
+            
+            .page-indicator {
+                color: #666;
+                font-size: 1em;
+            }
+            
+            .page {
+                display: none;
+                min-height: 500px;
+            }
+            
+            .page.active {
+                display: block;
+                animation: fadeIn 0.3s ease-in;
+            }
+            
+            @keyframes fadeIn {
+                from { opacity: 0; transform: translateY(10px); }
+                to { opacity: 1; transform: translateY(0); }
+            }
+            
+            h1 {
+                font-size: 1.8em;
+                font-weight: 600;
+                margin-bottom: 1em;
+                color: #1a1a1a;
+            }
+            
+            h2 {
+                font-size: 1.4em;
+                font-weight: 600;
+                margin: 1.5em 0 0.8em 0;
+                color: #2a2a2a;
+            }
+            
+            h3 {
+                font-size: 1.1em;
+                font-weight: 600;
+                margin: 1.2em 0 0.6em 0;
+                color: #444;
+            }
+            
+            p {
+                margin-bottom: 1em;
+                font-size: 1.05em;
+            }
+            
+            strong {
+                font-weight: 600;
+                color: #1a1a1a;
+            }
+            
+            code {
+                background: #f5f5f5;
+                padding: 3px 7px;
+                border-radius: 3px;
+                font-family: 'Courier New', monospace;
+                font-size: 0.95em;
+                color: #d73a49;
+            }
+            
+            pre {
+                background: #f8f9fa;
+                border-left: 3px solid #0066cc;
+                padding: 18px;
+                margin: 1em 0;
+                overflow-x: auto;
+                border-radius: 3px;
+            }
+            
+            pre code {
+                background: none;
+                padding: 0;
+                color: #24292e;
+                font-size: 1em;
+                line-height: 1.6;
+            }
+            
+            .dax-keyword {
+                color: #0066cc;
+                font-weight: 600;
+            }
+            
+            .dax-function {
+                color: #6f42c1;
+            }
+            
+            .dax-number {
+                color: #005cc5;
+            }
+            
+            .dax-comment {
+                color: #6a737d;
+                font-style: italic;
+            }
+            
+            ul, ol {
+                margin: 1em 0 1em 1.5em;
+            }
+            
+            li {
+                margin: 0.5em 0;
+                font-size: 1.05em;
+            }
+            
+            .iteration-box {
+                border-left: 3px solid #0066cc;
+                padding: 14px 18px;
+                margin: 0.8em 0;
+            }
+            
+            .result-box {
+                background: #f5f5f5;
+                border-left: 3px solid #999;
+                padding: 14px 18px;
+                margin: 0.8em 0;
+                font-weight: 500;
+                color: #555;
+                font-size: 1.05em;
+            }
+        </style>
+</head>
+<body>
+
+<div class='container' id='viz_a6296909'>
+    <!-- Nawigacja na górze -->
+    <div class='navigation'>
+        <button id='prevBtn_a6296909' onclick='changePage_a6296909(-1)'>← Poprzednia</button>
+        <span class='page-indicator'>
+            Strona <span id='currentPage_a6296909'>1</span> z <span id='totalPages_a6296909'>9</span>
+        </span>
+        <button id='nextBtn_a6296909' onclick='changePage_a6296909(1)'>Następna →</button>
+    </div>
+
+    <!-- Strona 1 -->
+    <div class='page active'>
+        <h1>Czym jest kontekst filtrowania?</h1>
+        <p><strong>Kontekst filtrowania</strong> to zbiór filtrów aktywnych w danym momencie obliczeń. Określa on <strong>jakie wiersze</strong> z tabel są brane pod uwagę.</p>
+        <p><strong>Przykład:</strong> Jeśli w wizualizacji masz slicer ustawiony na 'Rok = 2024', to wszystkie miary widzą tylko dane z 2024 roku.</p>
+
+    </div>
+
+    <!-- Strona 2 -->
+    <div class='page'>
+        <h1> użycie CALCULATE</h1>
+        <h2>Przykład 1: Dodanie filtra</h2>
+        <pre><code>Sprzedaż w Warszawie = 
+        <span class='dax-function'>CALCULATE</span>(
+            <span class='dax-function'>SUM</span>(Sprzedaz[Kwota]),
+            Klienci[Miasto] = 'Warszawa'
+        )</code></pre>
+        <p><strong>Co się dzieje:</strong></p>
+        <ul>
+        <li>Bierze <code>SUM(Sprzedaz[Kwota])</code></li>
+        <li>Dodaje filtr: tylko dla miasta 'Warszawa'</li>
+        <li>Zwraca sumę tylko dla Warszawy</li>
+        </ul>
+
+    </div>
+
+    <!-- Strona 3 -->
+    <div class='page'>
+        <h2>Przykład 2: Wiele filtrów</h2>
+        <pre><code>Sprzedaż VIP w <span class='dax-number'>2024</span> = 
+        <span class='dax-function'>CALCULATE</span>(
+            <span class='dax-function'>SUM</span>(Sprzedaz[Kwota]),
+            Klienci[Kategoria] = 'VIP',
+            <span class='dax-function'>YEAR</span>(Sprzedaz[Data]) = <span class='dax-number'>2024</span>
+        )</code></pre>
+        <p><strong>Filtry są łączone operatorem AND</strong> – muszą być <strong>oba</strong> spełnione.</p>
+
+    </div>
+
+    <!-- Strona 4 -->
+    <div class='page'>
+        <h2>Przykład 3: Nadpisanie istniejącego filtra</h2>
+        <pre><code>Całkowita Sprzedaż = 
+        <span class='dax-function'>CALCULATE</span>(
+            <span class='dax-function'>SUM</span>(Sprzedaz[Kwota]),
+            <span class='dax-function'>ALL</span>(Produkty[Kategoria])
+        )</code></pre>
+        <p><strong>Co robi <code>ALL</code>?</strong></p>
+        <ul>
+        <li>Usuwa filtry z kolumny <code>Produkty[Kategoria]</code></li>
+        <li>Dzięki temu <code>Całkowita Sprzedaż</code> pokazuje sumę dla <strong>wszystkich kategorii</strong>, niezależnie od tego, co jest wybrane w slicerze</li>
+        </ul>
+        <p>_(Funkcje ALL, ALLEXCEPT, REMOVEFILTERS omówimy w bardziej zaawansowanym materiale)_</p>
+
+    </div>
+
+    <!-- Strona 5 -->
+    <div class='page'>
+        <h1>Kiedy używać CALCULATE?</h1>
+        <p>✅ <strong>Używaj CALCULATE gdy:</strong></p>
+        <ul>
+        <li>Chcesz dodać <strong>dodatkowy filtr</strong> do obliczeń</li>
+        <li>Chcesz <strong>nadpisać</strong> istniejący filtr</li>
+        <li>Chcesz obliczyć wartość w <strong>innym kontekście</strong> niż aktualny (np. suma całkowita)</li>
+        <li>Chcesz porównać wartości (np. sprzedaż bieżącego roku vs poprzedniego)</li>
+        </ul>
+
+    </div>
+
+    <!-- Strona 6 -->
+    <div class='page'>
+        <h2>Przykład praktyczny: Udział w sprzedaży</h2>
+        <pre><code>Udział w Sprzedaży = 
+        <span class='dax-function'>DIVIDE</span>(
+            <span class='dax-function'>SUM</span>(Sprzedaz[Kwota]),
+            <span class='dax-function'>CALCULATE</span>(
+                <span class='dax-function'>SUM</span>(Sprzedaz[Kwota]),
+                <span class='dax-function'>ALL</span>(Produkty[Kategoria])
+            )
+        )</code></pre>
+        <p><strong>Jak to działa:</strong></p>
+        <ul>
+        <li><strong>Licznik:</strong> Suma sprzedaży dla aktualnej kategorii (np. 'Elektronika')</li>
+        <li><strong>Mianownik:</strong> Suma sprzedaży dla <strong>wszystkich</strong> kategorii (dzięki <code>ALL</code>)</li>
+        <li><strong>Wynik:</strong> Procent sprzedaży danej kategorii względem całości</li>
+        </ul>
+
+    </div>
+
+    <!-- Strona 7 -->
+    <div class='page'>
+        <h2>Przykład: Porównanie z poprzednim rokiem</h2>
+        <pre><code>Sprzedaż Poprzedni Rok = 
+        <span class='dax-function'>CALCULATE</span>(
+            <span class='dax-function'>SUM</span>(Sprzedaz[Kwota]),
+            <span class='dax-function'>SAMEPERIODLASTYEAR</span>(Kalendarz[Data])
+        )</code></pre>
+        <p><strong>Co się dzieje:</strong></p>
+        <ul>
+        <li><code>SAMEPERIODLASTYEAR</code> przesuwa kontekst dat o rok wstecz</li>
+        <li>Dzięki temu <code>CALCULATE</code> oblicza sprzedaż dla <strong>tego samego okresu rok temu</strong></li>
+        </ul>
+
+    </div>
+
+    <!-- Strona 8 -->
+    <div class='page'>
+        <h1>Kluczowe zasady CALCULATE</h1>
+        <p>1. <strong>CALCULATE zmienia kontekst filtrowania</strong> – to jego główna rola</p>
+        <p>2. <strong>Filtry w CALCULATE są stosowane jako AND</strong> – wszystkie muszą być spełnione</p>
+        <p>3. <strong>CALCULATE może nadpisać istniejące filtry</strong> – nowy filtr zastępuje stary</p>
+        <p>4. <strong>CALCULATE działa tylko w miarach</strong> – nie w kolumnach kalkulowanych (tam kontekst jest inny)</p>
+
+    </div>
+
+    <!-- Strona 9 -->
+    <div class='page'>
+        <h1>Podsumowanie CALCULATE</h1>
+        <p><strong>CALCULATE</strong> to fundament zaawansowanych obliczeń w DAX:</p>
+        <ul>
+        <li>Pozwala tworzyć <strong>dynamiczne miary</strong></li>
+        <li>Umożliwia <strong>porównania</strong> między różnymi okresami/kategoriami</li>
+        <li>Daje kontrolę nad <strong>kontekstem filtrowania</strong></li>
+        <li>Jest podstawą funkcji time intelligence (SAMEPERIODLASTYEAR, DATEADD, itd.)</li>
+        </ul>
+        <p><strong>Zapamiętaj:</strong> Jeśli chcesz obliczyć coś w <strong>innym kontekście</strong> niż aktualny, prawdopodobnie potrzebujesz <strong>CALCULATE</strong>.</p>
+
+    </div>
+
+</div>
+
+<script>
+(function() {
+    // Unikalny ID dla tej wizualizacji (wstrzykiwany przez Python)
+    var vizId = 'a6296909';
+    var containerId = 'viz_' + vizId;
+
+    var currentPage_a6296909 = 1;
+    var container = document.getElementById(containerId);
+
+    if (!container) return;
+
+    var pages = container.querySelectorAll('.page');
+    var totalPages = pages.length;
+
+    document.getElementById('totalPages_' + vizId).textContent = totalPages;
+
+    window['showPage_a6296909'] = function(n) {
+        if (n > totalPages) currentPage_a6296909 = totalPages;
+        if (n < 1) currentPage_a6296909 = 1;
+
+        for (var i = 0; i < pages.length; i++) {
+            pages[i].classList.remove('active');
+        }
+        pages[currentPage_a6296909 - 1].classList.add('active');
+
+        document.getElementById('currentPage_' + vizId).textContent = currentPage_a6296909;
+        document.getElementById('prevBtn_' + vizId).disabled = (currentPage_a6296909 === 1);
+        document.getElementById('nextBtn_' + vizId).disabled = (currentPage_a6296909 === totalPages);
+    };
+
+    window['changePage_a6296909'] = function(n) {
+        currentPage_a6296909 += n;
+        window['showPage_a6296909'](currentPage_a6296909);
+    };
+
+    // Inicjalizacja
+    window['showPage_a6296909'](1);
+})();
+</script>
+
+</body>
+</html>
+
+"
+```
+            lineageTag: 0ac9c37a-7443-4dec-baf7-9066a8641fe0
 
         measure '01. Podstawy DAX' = ```
 "
@@ -2725,7 +3174,6 @@ createOrReplace
             body {
                 font-family: 'Roboto', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
                 font-size: 16px;
-                font-weight: 400;
                 line-height: 1.7;
                 color: #333;
                 background: transparent;
@@ -2826,7 +3274,7 @@ createOrReplace
             }
     
             strong {
-                font-weight: 700;
+                font-weight: 600;
                 color: #1a1a1a;
             }
     
@@ -2875,40 +3323,12 @@ createOrReplace
             }
     
             ul, ol {
-                margin: 0.5em 0 0.5em 1.5em;
-                padding-left: 0.5em;
+                margin: 1em 0 1em 1.5em;
             }
     
             li {
-                margin: 0.3em 0;
-                padding-left: 0.3em;
+                margin: 0.5em 0;
                 font-size: 1.05em;
-            }
-    
-            ol {
-                list-style-type: decimal;
-            }
-    
-            ol li::marker {
-                color: #999;
-                font-weight: 400;
-            }
-    
-            ul li::marker {
-                color: #999;
-            }
-    
-            blockquote {
-                border-left: 3px solid #df4a16;
-                background: #f8f9fa;
-                padding: 14px 18px;
-                margin: 1em 0;
-                color: #555;
-                font-style: italic;
-            }
-    
-            blockquote p {
-                margin: 0;
             }
     
             .iteration-box {
@@ -3203,7 +3623,387 @@ createOrReplace
 
 "
 ```
-            lineageTag: c393bd06-8844-4ccf-994d-0f81fd935342
+            lineageTag: 108cca17-49b9-4134-bf94-a95c4039d320
+
+        measure '02. DAX - Zmienne' = ```
+"
+
+<!DOCTYPE html>
+<html lang='pl'>
+<head>
+    <meta charset='UTF-8'>
+    <meta name='viewport' content='width=device-width, initial-scale=1.0'>
+    <title>02. DAX - Zmienne</title>
+    <style>
+            * {
+                margin: 0;
+                padding: 0;
+                box-sizing: border-box;
+            }
+            
+            body {
+                font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+                font-size: 16px;
+                line-height: 1.7;
+                color: #333;
+                background: transparent;
+                padding: 20px;
+            }
+            
+            .container {
+                max-width: 800px;
+                margin: 0 auto;
+                background: transparent;
+                padding: 40px;
+            }
+            
+            .navigation {
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                margin-bottom: 40px;
+                padding-bottom: 20px;
+                border-bottom: 1px solid #e1e4e8;
+            }
+            
+            button {
+                background: #0066cc;
+                color: white;
+                border: none;
+                padding: 12px 28px;
+                border-radius: 4px;
+                cursor: pointer;
+                font-size: 1em;
+                font-weight: 500;
+                transition: background 0.2s;
+            }
+            
+            button:hover {
+                background: #0052a3;
+            }
+            
+            button:disabled {
+                background: #ccc;
+                cursor: not-allowed;
+            }
+            
+            .page-indicator {
+                color: #666;
+                font-size: 1em;
+            }
+            
+            .page {
+                display: none;
+                min-height: 500px;
+            }
+            
+            .page.active {
+                display: block;
+                animation: fadeIn 0.3s ease-in;
+            }
+            
+            @keyframes fadeIn {
+                from { opacity: 0; transform: translateY(10px); }
+                to { opacity: 1; transform: translateY(0); }
+            }
+            
+            h1 {
+                font-size: 1.8em;
+                font-weight: 600;
+                margin-bottom: 1em;
+                color: #1a1a1a;
+            }
+            
+            h2 {
+                font-size: 1.4em;
+                font-weight: 600;
+                margin: 1.5em 0 0.8em 0;
+                color: #2a2a2a;
+            }
+            
+            h3 {
+                font-size: 1.1em;
+                font-weight: 600;
+                margin: 1.2em 0 0.6em 0;
+                color: #444;
+            }
+            
+            p {
+                margin-bottom: 1em;
+                font-size: 1.05em;
+            }
+            
+            strong {
+                font-weight: 600;
+                color: #1a1a1a;
+            }
+            
+            code {
+                background: #f5f5f5;
+                padding: 3px 7px;
+                border-radius: 3px;
+                font-family: 'Courier New', monospace;
+                font-size: 0.95em;
+                color: #d73a49;
+            }
+            
+            pre {
+                background: #f8f9fa;
+                border-left: 3px solid #0066cc;
+                padding: 18px;
+                margin: 1em 0;
+                overflow-x: auto;
+                border-radius: 3px;
+            }
+            
+            pre code {
+                background: none;
+                padding: 0;
+                color: #24292e;
+                font-size: 1em;
+                line-height: 1.6;
+            }
+            
+            .dax-keyword {
+                color: #0066cc;
+                font-weight: 600;
+            }
+            
+            .dax-function {
+                color: #6f42c1;
+            }
+            
+            .dax-number {
+                color: #005cc5;
+            }
+            
+            .dax-comment {
+                color: #6a737d;
+                font-style: italic;
+            }
+            
+            ul, ol {
+                margin: 1em 0 1em 1.5em;
+            }
+            
+            li {
+                margin: 0.5em 0;
+                font-size: 1.05em;
+            }
+            
+            .iteration-box {
+                border-left: 3px solid #0066cc;
+                padding: 14px 18px;
+                margin: 0.8em 0;
+            }
+            
+            .result-box {
+                background: #f5f5f5;
+                border-left: 3px solid #999;
+                padding: 14px 18px;
+                margin: 0.8em 0;
+                font-weight: 500;
+                color: #555;
+                font-size: 1.05em;
+            }
+        </style>
+</head>
+<body>
+
+<div class='container' id='viz_41ce191a'>
+    <!-- Nawigacja na górze -->
+    <div class='navigation'>
+        <button id='prevBtn_41ce191a' onclick='changePage_41ce191a(-1)'>← Poprzednia</button>
+        <span class='page-indicator'>
+            Strona <span id='currentPage_41ce191a'>1</span> z <span id='totalPages_41ce191a'>4</span>
+        </span>
+        <button id='nextBtn_41ce191a' onclick='changePage_41ce191a(1)'>Następna →</button>
+    </div>
+
+    <!-- Strona 1 -->
+    <div class='page active'>
+        <h1>Czym są VAR i RETURN?</h1>
+        <p><strong>VAR</strong> i <strong>RETURN</strong> to kluczowe słowa w języku DAX, które pozwalają na tworzenie <strong>zmiennych</strong> i <strong>zwracanie wyników</strong> w miarach i kolumnach kalkulowanych.</p>
+        <h2>VAR (Variable)</h2>
+        <ul>
+        <li>Służy do <strong>deklarowania zmiennych</strong> i przechowywania w nich wartości</li>
+        <li>Zmienne mogą zawierać: liczby, teksty, tabele, wyniki obliczeń</li>
+        <li>Zmienne są <strong>obliczane tylko raz</strong> i przechowują swoją wartość</li>
+        <li>Pomagają <strong>unikać powtarzania</strong> tego samego kodu</li>
+        <li>Poprawiają <strong>czytelność</strong> i <strong>wydajność</strong> miar</li>
+        </ul>
+        <h2>RETURN</h2>
+        <ul>
+        <li><strong>Zwraca wynik</strong> całego wyrażenia DAX</li>
+        <li>W mierze/kolumnie może być <strong>tylko jedno RETURN</strong></li>
+        <li>To, co umieścisz po RETURN, stanie się <strong>końcowym wynikiem</strong></li>
+        </ul>
+
+    </div>
+
+    <!-- Strona 2 -->
+    <div class='page'>
+        <h1>Podstawowa składnia</h1>
+        <pre><code>NazwaMiary = 
+        <span class='dax-keyword'>VAR</span> NazwaZmiennej1 = &lt;wyrażenie1&gt;
+        <span class='dax-keyword'>VAR</span> NazwaZmiennej2 = &lt;wyrażenie2&gt;
+        <span class='dax-keyword'>VAR</span> NazwaZmiennej3 = &lt;wyrażenie3&gt;
+        <span class='dax-keyword'>RETURN</span> &lt;wynik_końcowy&gt;</code></pre>
+        <p><strong>Przykład prosty:</strong></p>
+        <pre><code>Całkowity Koszt = 
+        <span class='dax-keyword'>VAR</span> IloscSztuk = <span class='dax-number'>100</span>
+        <span class='dax-keyword'>VAR</span> CenaJednostkowa = <span class='dax-number'>25</span>
+        <span class='dax-keyword'>VAR</span> Koszt = IloscSztuk * CenaJednostkowa
+        <span class='dax-keyword'>RETURN</span> Koszt</code></pre>
+        <div class='result-box'>
+        Wynik: <strong>2500</strong>
+        </div>
+
+    </div>
+
+    <!-- Strona 3 -->
+    <div class='page'>
+        <h1>Jak to działa w funkcjach iteracyjnych (SUMX, FILTER, itd.)?</h1>
+        <p>W funkcjach iteracyjnych jak <strong>SUMX</strong>, <strong>FILTER</strong>, <strong>ADDCOLUMNS</strong> zmienne VAR są <strong>przetwarzane w każdej iteracji</strong>:</p>
+        <p><strong>Zasada:</strong> Dla każdego wiersza tabeli, zmienne VAR są <strong>obliczane na nowo</strong> z wartościami z aktualnego wiersza.</p>
+        <pre><code><span class='dax-function'>SUMX</span>(
+            {<span class='dax-number'>1</span>, <span class='dax-number'>2</span>, <span class='dax-number'>3</span>},  <span class='dax-comment'>-- Iterujemy po wartościach 1, 2, 3</span>
+            <span class='dax-keyword'>VAR</span> Kwadrat = [Value] * [Value] <span class='dax-comment'>-- [Value] to domyślna nazwa utworzonej kolumny</span>
+            <span class='dax-keyword'>RETURN</span> Kwadrat
+        )</code></pre>
+        <h1>Kroki algorytmu:</h1>
+        <div class='iteration-box'>
+        <h3>Iteracja 1: [Value] = 1</h3>
+        <ul>
+        <li><code>Kwadrat</code> = 1 × 1 = <strong>1</strong></li>
+        <li>RETURN zwraca: <strong>1</strong></li>
+        </ul>
+        </div>
+        <div class='iteration-box'>
+        <h3>Iteracja 2: [Value] = 2</h3>
+        <ul>
+        <li><code>Kwadrat</code> = 2 × 2 = <strong>4</strong></li>
+        <li>RETURN zwraca: <strong>4</strong></li>
+        </ul>
+        </div>
+        <div class='iteration-box'>
+        <h3>Iteracja 3: [Value] = 3</h3>
+        <ul>
+        <li><code>Kwadrat</code> = 3 × 3 = <strong>9</strong></li>
+        <li>RETURN zwraca: <strong>9</strong></li>
+        </ul>
+        </div>
+        <div class='result-box'>
+        SUMX dodaje wszystkie zwrócone wartości: 1 + 4 + 9 = <strong>14</strong>
+        </div>
+        <p>W każdej iteracji zmienna <code>Kwadrat</code> jest <strong>tworzona od nowa</strong> z nową wartością! Nie jest to ta sama zmienna — każda iteracja ma własny 'kontekst wiersza' i własne wartości zmiennych.</p>
+        <p><strong>To oznacza:</strong></p>
+        <ul>
+        <li>Zmienne VAR wewnątrz iteracji są <strong>dynamiczne</strong></li>
+        <li>Dostosowują się do <strong>aktualnego wiersza</strong> w tabeli</li>
+        <li>Pozwalają na <strong>elastyczne obliczenia</strong> dla każdego elementu z osobna</li>
+        </ul>
+
+    </div>
+
+    <!-- Strona 4 -->
+    <div class='page'>
+        <h1>Odchylenie od średniej</h1>
+        <pre><code>Suma Odchyleń od Średniej = 
+        <span class='dax-keyword'>VAR</span> Srednia = <span class='dax-function'>AVERAGE</span>({<span class='dax-number'>1</span>, <span class='dax-number'>2</span>, <span class='dax-number'>3</span>, <span class='dax-number'>4</span>, <span class='dax-number'>5</span>})  <span class='dax-comment'>-- Obliczona raz: 3</span>
+        <span class='dax-keyword'>RETURN</span>
+            <span class='dax-function'>SUMX</span>(
+                {<span class='dax-number'>1</span>, <span class='dax-number'>2</span>, <span class='dax-number'>3</span>},
+                <span class='dax-keyword'>VAR</span> Wartosc = [Value]
+                <span class='dax-keyword'>VAR</span> Odchylenie = Wartosc - Srednia  <span class='dax-comment'>-- Używamy zmiennej spoza iteracji!</span>
+                <span class='dax-keyword'>RETURN</span> Odchylenie
+            )</code></pre>
+        <h1>Co się dzieje krok po kroku:</h1>
+        <div class='iteration-box'>
+        <h3>Przed iteracją:</h3>
+        <ul>
+        <li><code>Srednia</code> = (1 + 2 + 3) / 3 = 2 ← obliczone <strong>tylko raz</strong></li>
+        </ul>
+        </div>
+        <div class='iteration-box'>
+        <h3>Iteracja 1: [Value] = 1</h3>
+        <ul>
+        <li><code>Wartosc</code> = 1</li>
+        <li><code>Odchylenie</code> = 1 - 3 = <strong>-2</strong></li>
+        <li>RETURN zwraca: <strong>-2</strong></li>
+        </ul>
+        </div>
+        <div class='iteration-box'>
+        <h3>Iteracja 2: [Value] = 2</h3>
+        <ul>
+        <li><code>Wartosc</code> = 2</li>
+        <li><code>Odchylenie</code> = 2 - 3 = <strong>-1</strong></li>
+        <li>RETURN zwraca: <strong>-1</strong></li>
+        </ul>
+        </div>
+        <div class='iteration-box'>
+        <h3>Iteracja 3: [Value] = 3</h3>
+        <ul>
+        <li><code>Wartosc</code> = 3</li>
+        <li><code>Odchylenie</code> = 3 - 3 = <strong>0</strong></li>
+        <li>RETURN zwraca: <strong>0</strong></li>
+        </ul>
+        </div>
+        <div class='result-box'>
+        <h3>Suma końcowa:</h3>
+        <p>SUMX dodaje wszystkie odchylenia: (-2) + (-1) + 0 = <strong>-3</strong></p>
+        </div>
+
+    </div>
+
+</div>
+
+<script>
+(function() {
+    // Unikalny ID dla tej wizualizacji (wstrzykiwany przez Python)
+    var vizId = '41ce191a';
+    var containerId = 'viz_' + vizId;
+
+    var currentPage_41ce191a = 1;
+    var container = document.getElementById(containerId);
+
+    if (!container) return;
+
+    var pages = container.querySelectorAll('.page');
+    var totalPages = pages.length;
+
+    document.getElementById('totalPages_' + vizId).textContent = totalPages;
+
+    window['showPage_41ce191a'] = function(n) {
+        if (n > totalPages) currentPage_41ce191a = totalPages;
+        if (n < 1) currentPage_41ce191a = 1;
+
+        for (var i = 0; i < pages.length; i++) {
+            pages[i].classList.remove('active');
+        }
+        pages[currentPage_41ce191a - 1].classList.add('active');
+
+        document.getElementById('currentPage_' + vizId).textContent = currentPage_41ce191a;
+        document.getElementById('prevBtn_' + vizId).disabled = (currentPage_41ce191a === 1);
+        document.getElementById('nextBtn_' + vizId).disabled = (currentPage_41ce191a === totalPages);
+    };
+
+    window['changePage_41ce191a'] = function(n) {
+        currentPage_41ce191a += n;
+        window['showPage_41ce191a'](currentPage_41ce191a);
+    };
+
+    // Inicjalizacja
+    window['showPage_41ce191a'](1);
+})();
+</script>
+
+</body>
+</html>
+
+"
+```
+            lineageTag: 019851a4-bc00-41e7-9a68-118ed1845cb0
 
         measure '02. Wprowadzenie do CALCULATE - Wprowadzenie do CALCULATE' = ```
 "
@@ -3224,7 +4024,6 @@ createOrReplace
             body {
                 font-family: 'Roboto', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
                 font-size: 16px;
-                font-weight: 400;
                 line-height: 1.7;
                 color: #333;
                 background: transparent;
@@ -3325,7 +4124,7 @@ createOrReplace
             }
     
             strong {
-                font-weight: 700;
+                font-weight: 600;
                 color: #1a1a1a;
             }
     
@@ -3374,40 +4173,12 @@ createOrReplace
             }
     
             ul, ol {
-                margin: 0.5em 0 0.5em 1.5em;
-                padding-left: 0.5em;
+                margin: 1em 0 1em 1.5em;
             }
     
             li {
-                margin: 0.3em 0;
-                padding-left: 0.3em;
+                margin: 0.5em 0;
                 font-size: 1.05em;
-            }
-    
-            ol {
-                list-style-type: decimal;
-            }
-    
-            ol li::marker {
-                color: #999;
-                font-weight: 400;
-            }
-    
-            ul li::marker {
-                color: #999;
-            }
-    
-            blockquote {
-                border-left: 3px solid #df4a16;
-                background: #f8f9fa;
-                padding: 14px 18px;
-                margin: 1em 0;
-                color: #555;
-                font-style: italic;
-            }
-    
-            blockquote p {
-                margin: 0;
             }
     
             .iteration-box {
@@ -3782,7 +4553,7 @@ createOrReplace
 
 "
 ```
-            lineageTag: 2e84f0bf-aceb-4af0-9d67-cf13143dae29
+            lineageTag: 64582ebf-9e1e-43d7-bbdb-c3af4d813b3d
 
         measure '03. DAX - Zmienne' = ```
 "
@@ -3803,7 +4574,6 @@ createOrReplace
             body {
                 font-family: 'Roboto', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
                 font-size: 16px;
-                font-weight: 400;
                 line-height: 1.7;
                 color: #333;
                 background: transparent;
@@ -3904,7 +4674,7 @@ createOrReplace
             }
     
             strong {
-                font-weight: 700;
+                font-weight: 600;
                 color: #1a1a1a;
             }
     
@@ -3953,40 +4723,12 @@ createOrReplace
             }
     
             ul, ol {
-                margin: 0.5em 0 0.5em 1.5em;
-                padding-left: 0.5em;
+                margin: 1em 0 1em 1.5em;
             }
     
             li {
-                margin: 0.3em 0;
-                padding-left: 0.3em;
+                margin: 0.5em 0;
                 font-size: 1.05em;
-            }
-    
-            ol {
-                list-style-type: decimal;
-            }
-    
-            ol li::marker {
-                color: #999;
-                font-weight: 400;
-            }
-    
-            ul li::marker {
-                color: #999;
-            }
-    
-            blockquote {
-                border-left: 3px solid #df4a16;
-                background: #f8f9fa;
-                padding: 14px 18px;
-                margin: 1em 0;
-                color: #555;
-                font-style: italic;
-            }
-    
-            blockquote p {
-                margin: 0;
             }
     
             .iteration-box {
@@ -4240,7 +4982,265 @@ createOrReplace
 
 "
 ```
-            lineageTag: e9c72f2b-bc2b-4b1c-be4e-0c2388bfcfab
+            lineageTag: d183d94c-7c45-46ca-b370-fd3634bca690
+
+        measure '03. Test - Testowy dział' = ```
+"
+
+<!DOCTYPE html>
+<html lang='pl'>
+<head>
+    <meta charset='UTF-8'>
+    <meta name='viewport' content='width=device-width, initial-scale=1.0'>
+    <title>Testowy dział</title>
+    <style>
+            * {
+                margin: 0;
+                padding: 0;
+                box-sizing: border-box;
+            }
+            
+            body {
+                font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+                font-size: 16px;
+                line-height: 1.7;
+                color: #333;
+                background: transparent;
+                padding: 20px;
+            }
+            
+            .container {
+                max-width: 800px;
+                margin: 0 auto;
+                background: transparent;
+                padding: 40px;
+            }
+            
+            .navigation {
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                margin-bottom: 40px;
+                padding-bottom: 20px;
+                border-bottom: 1px solid #e1e4e8;
+            }
+            
+            button {
+                background: #0066cc;
+                color: white;
+                border: none;
+                padding: 12px 28px;
+                border-radius: 4px;
+                cursor: pointer;
+                font-size: 1em;
+                font-weight: 500;
+                transition: background 0.2s;
+            }
+            
+            button:hover {
+                background: #0052a3;
+            }
+            
+            button:disabled {
+                background: #ccc;
+                cursor: not-allowed;
+            }
+            
+            .page-indicator {
+                color: #666;
+                font-size: 1em;
+            }
+            
+            .page {
+                display: none;
+                min-height: 500px;
+            }
+            
+            .page.active {
+                display: block;
+                animation: fadeIn 0.3s ease-in;
+            }
+            
+            @keyframes fadeIn {
+                from { opacity: 0; transform: translateY(10px); }
+                to { opacity: 1; transform: translateY(0); }
+            }
+            
+            h1 {
+                font-size: 1.8em;
+                font-weight: 600;
+                margin-bottom: 1em;
+                color: #1a1a1a;
+            }
+            
+            h2 {
+                font-size: 1.4em;
+                font-weight: 600;
+                margin: 1.5em 0 0.8em 0;
+                color: #2a2a2a;
+            }
+            
+            h3 {
+                font-size: 1.1em;
+                font-weight: 600;
+                margin: 1.2em 0 0.6em 0;
+                color: #444;
+            }
+            
+            p {
+                margin-bottom: 1em;
+                font-size: 1.05em;
+            }
+            
+            strong {
+                font-weight: 600;
+                color: #1a1a1a;
+            }
+            
+            code {
+                background: #f5f5f5;
+                padding: 3px 7px;
+                border-radius: 3px;
+                font-family: 'Courier New', monospace;
+                font-size: 0.95em;
+                color: #d73a49;
+            }
+            
+            pre {
+                background: #f8f9fa;
+                border-left: 3px solid #0066cc;
+                padding: 18px;
+                margin: 1em 0;
+                overflow-x: auto;
+                border-radius: 3px;
+            }
+            
+            pre code {
+                background: none;
+                padding: 0;
+                color: #24292e;
+                font-size: 1em;
+                line-height: 1.6;
+            }
+            
+            .dax-keyword {
+                color: #0066cc;
+                font-weight: 600;
+            }
+            
+            .dax-function {
+                color: #6f42c1;
+            }
+            
+            .dax-number {
+                color: #005cc5;
+            }
+            
+            .dax-comment {
+                color: #6a737d;
+                font-style: italic;
+            }
+            
+            ul, ol {
+                margin: 1em 0 1em 1.5em;
+            }
+            
+            li {
+                margin: 0.5em 0;
+                font-size: 1.05em;
+            }
+            
+            .iteration-box {
+                border-left: 3px solid #0066cc;
+                padding: 14px 18px;
+                margin: 0.8em 0;
+            }
+            
+            .result-box {
+                background: #f5f5f5;
+                border-left: 3px solid #999;
+                padding: 14px 18px;
+                margin: 0.8em 0;
+                font-weight: 500;
+                color: #555;
+                font-size: 1.05em;
+            }
+        </style>
+</head>
+<body>
+
+<div class='container' id='viz_f51c1b72'>
+    <!-- Nawigacja na górze -->
+    <div class='navigation'>
+        <button id='prevBtn_f51c1b72' onclick='changePage_f51c1b72(-1)'>← Poprzednia</button>
+        <span class='page-indicator'>
+            Strona <span id='currentPage_f51c1b72'>1</span> z <span id='totalPages_f51c1b72'>2</span>
+        </span>
+        <button id='nextBtn_f51c1b72' onclick='changePage_f51c1b72(1)'>Następna →</button>
+    </div>
+
+    <!-- Strona 1 -->
+    <div class='page active'>
+        <h1>Temat temat</h1>
+        <p><img src='https://raw.githubusercontent.com/odczarujpowerbi/grafiki-do-szkolenia/main/Screenshot%202024-07-24%20at%2023.10.58.png' width='100%'></p>
+
+    </div>
+
+    <!-- Strona 2 -->
+    <div class='page'>
+        <h1>Nowa strona</h1>
+        <p><img src='https://raw.githubusercontent.com/odczarujpowerbi/grafiki-do-szkolenia/main/PowerBI - Ustawienia - Preview Features.gif' width='100%'></p>
+
+    </div>
+
+</div>
+
+<script>
+(function() {
+    // Unikalny ID dla tej wizualizacji (wstrzykiwany przez Python)
+    var vizId = 'f51c1b72';
+    var containerId = 'viz_' + vizId;
+
+    var currentPage_f51c1b72 = 1;
+    var container = document.getElementById(containerId);
+
+    if (!container) return;
+
+    var pages = container.querySelectorAll('.page');
+    var totalPages = pages.length;
+
+    document.getElementById('totalPages_' + vizId).textContent = totalPages;
+
+    window['showPage_f51c1b72'] = function(n) {
+        if (n > totalPages) currentPage_f51c1b72 = totalPages;
+        if (n < 1) currentPage_f51c1b72 = 1;
+
+        for (var i = 0; i < pages.length; i++) {
+            pages[i].classList.remove('active');
+        }
+        pages[currentPage_f51c1b72 - 1].classList.add('active');
+
+        document.getElementById('currentPage_' + vizId).textContent = currentPage_f51c1b72;
+        document.getElementById('prevBtn_' + vizId).disabled = (currentPage_f51c1b72 === 1);
+        document.getElementById('nextBtn_' + vizId).disabled = (currentPage_f51c1b72 === totalPages);
+    };
+
+    window['changePage_f51c1b72'] = function(n) {
+        currentPage_f51c1b72 += n;
+        window['showPage_f51c1b72'](currentPage_f51c1b72);
+    };
+
+    // Inicjalizacja
+    window['showPage_f51c1b72'](1);
+})();
+</script>
+
+</body>
+</html>
+
+"
+```
+            lineageTag: 18e7a491-554d-4dc4-a111-c0569aea1f7a
 
         measure 'CSS - Czerwony' = ```
 "
@@ -4255,7 +5255,6 @@ createOrReplace
         body {
             font-family: 'Roboto', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
             font-size: 16px;
-            font-weight: 400;
             line-height: 1.7;
             color: #333;
             background: transparent;
@@ -4356,7 +5355,7 @@ createOrReplace
         }
 
         strong {
-            font-weight: 700;
+            font-weight: 600;
             color: #1a1a1a;
         }
 
@@ -4405,40 +5404,12 @@ createOrReplace
         }
 
         ul, ol {
-            margin: 0.5em 0 0.5em 1.5em;
-            padding-left: 0.5em;
+            margin: 1em 0 1em 1.5em;
         }
 
         li {
-            margin: 0.3em 0;
-            padding-left: 0.3em;
+            margin: 0.5em 0;
             font-size: 1.05em;
-        }
-
-        ol {
-            list-style-type: decimal;
-        }
-
-        ol li::marker {
-            color: #999;
-            font-weight: 400;
-        }
-
-        ul li::marker {
-            color: #999;
-        }
-
-        blockquote {
-            border-left: 3px solid #df4a16;
-            background: #f8f9fa;
-            padding: 14px 18px;
-            margin: 1em 0;
-            color: #555;
-            font-style: italic;
-        }
-
-        blockquote p {
-            margin: 0;
         }
 
         .iteration-box {
@@ -4460,7 +5431,7 @@ createOrReplace
 </style>
 "
 ```
-            lineageTag: 0632ef72-f93f-4341-a1ed-54f83ca0bd7e
+            lineageTag: 06a0b946-7599-4748-a154-6d61c81d51aa
 
         measure 'CSS - Niebieski' = ```
 "
@@ -4475,7 +5446,6 @@ createOrReplace
         body {
             font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
             font-size: 16px;
-            font-weight: 400;
             line-height: 1.7;
             color: #333;
             background: transparent;
@@ -4576,7 +5546,7 @@ createOrReplace
         }
         
         strong {
-            font-weight: 700;
+            font-weight: 600;
             color: #1a1a1a;
         }
         
@@ -4625,40 +5595,12 @@ createOrReplace
         }
         
         ul, ol {
-            margin: 0.5em 0 0.5em 1.5em;
-            padding-left: 0.5em;
+            margin: 1em 0 1em 1.5em;
         }
-
+        
         li {
-            margin: 0.3em 0;
-            padding-left: 0.3em;
+            margin: 0.5em 0;
             font-size: 1.05em;
-        }
-
-        ol {
-            list-style-type: decimal;
-        }
-
-        ol li::marker {
-            color: #999;
-            font-weight: 400;
-        }
-
-        ul li::marker {
-            color: #999;
-        }
-
-        blockquote {
-            border-left: 3px solid #0066cc;
-            background: #f8f9fa;
-            padding: 14px 18px;
-            margin: 1em 0;
-            color: #555;
-            font-style: italic;
-        }
-
-        blockquote p {
-            margin: 0;
         }
         
         .iteration-box {
@@ -4680,7 +5622,188 @@ createOrReplace
 </style>
 "
 ```
-            lineageTag: 4540db71-2e01-440f-8a8a-fc5157b1f833
+            lineageTag: 58ef5d89-5cbd-402f-9dce-0f7ec95c3a42
+
+        measure 'CSS' = ```
+"
+<style>
+<style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            font-size: 16px;
+            line-height: 1.7;
+            color: #333;
+            background: transparent;
+            padding: 20px;
+        }
+        
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            background: transparent;
+            padding: 40px;
+        }
+        
+        .navigation {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 40px;
+            padding-bottom: 20px;
+            border-bottom: 1px solid #e1e4e8;
+        }
+        
+        button {
+            background: #0066cc;
+            color: white;
+            border: none;
+            padding: 12px 28px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 1em;
+            font-weight: 500;
+            transition: background 0.2s;
+        }
+        
+        button:hover {
+            background: #0052a3;
+        }
+        
+        button:disabled {
+            background: #ccc;
+            cursor: not-allowed;
+        }
+        
+        .page-indicator {
+            color: #666;
+            font-size: 1em;
+        }
+        
+        .page {
+            display: none;
+            min-height: 500px;
+        }
+        
+        .page.active {
+            display: block;
+            animation: fadeIn 0.3s ease-in;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        h1 {
+            font-size: 1.8em;
+            font-weight: 600;
+            margin-bottom: 1em;
+            color: #1a1a1a;
+        }
+        
+        h2 {
+            font-size: 1.4em;
+            font-weight: 600;
+            margin: 1.5em 0 0.8em 0;
+            color: #2a2a2a;
+        }
+        
+        h3 {
+            font-size: 1.1em;
+            font-weight: 600;
+            margin: 1.2em 0 0.6em 0;
+            color: #444;
+        }
+        
+        p {
+            margin-bottom: 1em;
+            font-size: 1.05em;
+        }
+        
+        strong {
+            font-weight: 600;
+            color: #1a1a1a;
+        }
+        
+        code {
+            background: #f5f5f5;
+            padding: 3px 7px;
+            border-radius: 3px;
+            font-family: 'Courier New', monospace;
+            font-size: 0.95em;
+            color: #d73a49;
+        }
+        
+        pre {
+            background: #f8f9fa;
+            border-left: 3px solid #0066cc;
+            padding: 18px;
+            margin: 1em 0;
+            overflow-x: auto;
+            border-radius: 3px;
+        }
+        
+        pre code {
+            background: none;
+            padding: 0;
+            color: #24292e;
+            font-size: 1em;
+            line-height: 1.6;
+        }
+        
+        .dax-keyword {
+            color: #0066cc;
+            font-weight: 600;
+        }
+        
+        .dax-function {
+            color: #6f42c1;
+        }
+        
+        .dax-number {
+            color: #005cc5;
+        }
+        
+        .dax-comment {
+            color: #6a737d;
+            font-style: italic;
+        }
+        
+        ul, ol {
+            margin: 1em 0 1em 1.5em;
+        }
+        
+        li {
+            margin: 0.5em 0;
+            font-size: 1.05em;
+        }
+        
+        .iteration-box {
+            border-left: 3px solid #0066cc;
+            padding: 14px 18px;
+            margin: 0.8em 0;
+        }
+        
+        .result-box {
+            background: #f5f5f5;
+            border-left: 3px solid #999;
+            padding: 14px 18px;
+            margin: 0.8em 0;
+            font-weight: 500;
+            color: #555;
+            font-size: 1.05em;
+        }
+    </style>
+</style>
+"
+```
+            lineageTag: 5e6f893d-8a5f-4bfe-a463-967c830b3cf3
 
         partition _HTML = m
             mode: import

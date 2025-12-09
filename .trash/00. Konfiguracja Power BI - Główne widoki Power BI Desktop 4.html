@@ -1,4 +1,4 @@
-Funkcje dat = 
+Główne widoki Power BI Desktop = 
 
 "
 
@@ -7,7 +7,7 @@ Funkcje dat =
 <head>
     <meta charset='UTF-8'>
     <meta name='viewport' content='width=device-width, initial-scale=1.0'>
-    <title>Funkcje dat</title>
+    <title>Główne widoki Power BI Desktop</title>
     <style>
             * {
                 margin: 0;
@@ -18,7 +18,6 @@ Funkcje dat =
             body {
                 font-family: 'Roboto', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
                 font-size: 16px;
-                font-weight: 400;
                 line-height: 1.7;
                 color: #333;
                 background: transparent;
@@ -119,7 +118,7 @@ Funkcje dat =
             }
     
             strong {
-                font-weight: 700;
+                font-weight: 600;
                 color: #1a1a1a;
             }
     
@@ -168,40 +167,12 @@ Funkcje dat =
             }
     
             ul, ol {
-                margin: 0.5em 0 0.5em 1.5em;
-                padding-left: 0.5em;
+                margin: 1em 0 1em 1.5em;
             }
     
             li {
-                margin: 0.3em 0;
-                padding-left: 0.3em;
+                margin: 0.5em 0;
                 font-size: 1.05em;
-            }
-    
-            ol {
-                list-style-type: decimal;
-            }
-    
-            ol li::marker {
-                color: #999;
-                font-weight: 400;
-            }
-    
-            ul li::marker {
-                color: #999;
-            }
-    
-            blockquote {
-                border-left: 3px solid #df4a16;
-                background: #f8f9fa;
-                padding: 14px 18px;
-                margin: 1em 0;
-                color: #555;
-                font-style: italic;
-            }
-    
-            blockquote p {
-                margin: 0;
             }
     
             .iteration-box {
@@ -223,56 +194,116 @@ Funkcje dat =
 </head>
 <body>
 
-<div class='container' id='viz_5bcb381d'>
+<div class='container' id='viz_5dc96cd3'>
     <!-- Nawigacja na górze -->
     <div class='navigation'>
-        <button id='prevBtn_5bcb381d' onclick='changePage_5bcb381d(-1)'>← Poprzednia</button>
+        <button id='prevBtn_5dc96cd3' onclick='changePage_5dc96cd3(-1)'>← Poprzednia</button>
         <span class='page-indicator'>
-            Strona <span id='currentPage_5bcb381d'>1</span> z <span id='totalPages_5bcb381d'>4</span>
+            Strona <span id='currentPage_5dc96cd3'>1</span> z <span id='totalPages_5dc96cd3'>6</span>
         </span>
-        <button id='nextBtn_5bcb381d' onclick='changePage_5bcb381d(1)'>Następna →</button>
+        <button id='nextBtn_5dc96cd3' onclick='changePage_5dc96cd3(1)'>Następna →</button>
     </div>
 
     <!-- Strona 1 -->
     <div class='page active'>
-        <h1>DATE – Tworzenie daty</h1>
-        <pre><code><span class='dax-function'>DATE</span>(&lt;rok&gt;, &lt;miesiąc&gt;, &lt;dzień&gt;)</code></pre>
-        <p><strong>Przykład:</strong></p>
-        <pre><code>Data Bazowa = <span class='dax-function'>DATE</span>(<span class='dax-number'>2024</span>, <span class='dax-number'>1</span>, <span class='dax-number'>1</span>)</code></pre>
+        <p>Power BI Desktop oferuje pięć głównych widoków, z których każdy służy do różnych celów. Znajomość tych widoków jest kluczowa dla efektywnej pracy z narzędziem.</p>
+        <h2>1. Widok Raport (Report View)</h2>
+        <img src='https://github.com/odczarujpowerbi/szkolenia-powerbi/blob/main/bin/Pasted%20image%2020251209155301.png?raw=true' width='100%'>
+        <p><strong>Zastosowanie:</strong> Tworzenie i projektowanie wizualizacji danych.</p>
+        <p>W tym widoku:</p>
+        <ul>
+        <li>Tworzysz wykresy, tabele, karty i inne wizualizacje</li>
+        <li>Układasz elementy na stronach raportu</li>
+        <li>Konfigurujesz formatowanie wizualizacji</li>
+        <li>Ustawiasz interakcje między obiektami</li>
+        </ul>
+        <p><strong>Przykład użycia:</strong></p>
+        <p>Stworzenie wykresu słupkowego pokazującego sumę sprzedaży (Price × Quantity) według kategorii z tabeli fDemo.</p>
 
     </div>
 
     <!-- Strona 2 -->
     <div class='page'>
-        <h1>TODAY i NOW – Dzisiejsza data</h1>
-        <pre><code><span class='dax-function'>TODAY</span>()     <span class='dax-comment'>-- Dzisiejsza data (bez godziny)</span>
-        <span class='dax-function'>NOW</span>()       <span class='dax-comment'>-- Dzisiejsza data i godzina</span></code></pre>
-        <p><strong>Przykład:</strong></p>
-        <pre><code>Aktualna Data = <span class='dax-function'>TODAY</span>()</code></pre>
+        <h2>2. Widok Dane (Data View)</h2>
+        <img src='https://github.com/odczarujpowerbi/szkolenia-powerbi/blob/main/bin/Pasted%20image%2020251209155324.png?raw=true' width='100%'>
+        <p><strong>Zastosowanie:</strong> Podgląd i weryfikacja danych w tabelach.</p>
+        <p>W tym widoku:</p>
+        <ul>
+        <li>Przeglądasz zawartość tabel</li>
+        <li>Weryfikujesz poprawność danych</li>
+        <li>Tworzysz kolumny kalkulowane</li>
+        <li>Sprawdzasz wyniki transformacji</li>
+        </ul>
+        <p><strong>Przykład użycia:</strong></p>
+        <p>Sprawdzenie, czy wszystkie produkty z tabeli fDemo mają przypisane wartości w kolumnach Price, Quantity i Category.</p>
 
     </div>
 
     <!-- Strona 3 -->
     <div class='page'>
-        <h1>YEAR, MONTH, DAY – Wyciąganie składników daty</h1>
-        <pre><code><span class='dax-function'>YEAR</span>(&lt;data&gt;)   <span class='dax-comment'>-- Rok</span>
-        <span class='dax-function'>MONTH</span>(&lt;data&gt;)  <span class='dax-comment'>-- Miesiąc (1-12)</span>
-        <span class='dax-function'>DAY</span>(&lt;data&gt;)    <span class='dax-comment'>-- Dzień (1-31)</span></code></pre>
-        <p><strong>Przykład:</strong></p>
-        <pre><code>Rok Sprzedaży = <span class='dax-function'>YEAR</span>(Sprzedaz[Data])
-        Miesiąc Sprzedaży = <span class='dax-function'>MONTH</span>(Sprzedaz[Data])</code></pre>
+        <h2>3. Widok Model (Model View)</h2>
+        <img src='https://github.com/odczarujpowerbi/szkolenia-powerbi/blob/main/bin/Pasted%20image%2020251209155620.png?raw=true' width='100%'>
+        <p><strong>Zastosowanie:</strong> Zarządzanie relacjami między tabelami i strukturą modelu danych.</p>
+        <p>W tym widoku:</p>
+        <ul>
+        <li>Tworzysz relacje między tabelami</li>
+        <li>Zarządzasz kluczami głównymi i obcymi</li>
+        <li>Organizujesz tabele w grupy tematyczne</li>
+        <li>Definiujesz hierarchie wymiarów</li>
+        </ul>
+        <p><strong>Przykład użycia:</strong></p>
+        <p>W przypadku rozbudowy modelu o tabelę wymiarową 'DimCategory' można by tutaj utworzyć relację między fDemo[Category] a DimCategory[CategoryName].</p>
 
     </div>
 
     <!-- Strona 4 -->
     <div class='page'>
-        <h1>DATEDIFF – Różnica między datami</h1>
-        <pre><code><span class='dax-function'>DATEDIFF</span>(&lt;data_początkowa&gt;, &lt;data_końcowa&gt;, &lt;jednostka&gt;)</code></pre>
-        <p><strong>Jednostki:</strong> DAY, MONTH, YEAR, QUARTER</p>
-        <p><strong>Przykład:</strong></p>
-        <pre><code>Dni Od Zamówienia = 
-        <span class='dax-function'>DATEDIFF</span>(Zamowienia[Data Zamówienia], <span class='dax-function'>TODAY</span>(), DAY)</code></pre>
-        <p>---</p>
+        <h2>4. Widok DAX Query (DAX Query View)</h2>
+        <img src='https://github.com/odczarujpowerbi/szkolenia-powerbi/blob/main/bin/Pasted%20image%2020251209155746.png?raw=true' width='100%'>
+        <p><strong>Zastosowanie:</strong> Testowanie zapytań DAX bez tworzenia miar w modelu.</p>
+        <p>W tym widoku:</p>
+        <ul>
+        <li>Piszesz i testujesz zapytania DAX (podobnie jak SQL)</li>
+        <li>Szybko weryfikujesz wyniki wyrażeń</li>
+        <li>Eksplorujesz dane bez wpływu na model</li>
+        <li>Uczysz się składni DAX</li>
+        </ul>
+        <p><strong>Przykład zapytania:</strong></p>
+        <pre><code>EVALUATE
+        <span class='dax-function'>SUMMARIZECOLUMNS</span>(
+            fDemo[Category],
+            'Total Sales', <span class='dax-function'>SUMX</span>(fDemo, fDemo[Price] * fDemo[Quantity])
+        )
+        ORDER BY [Total Sales] DESC</code></pre>
+        <p>To zapytanie zwróci zestawienie sprzedaży według kategorii, posortowane malejąco.</p>
+
+    </div>
+
+    <!-- Strona 5 -->
+    <div class='page'>
+        <h2>5. Widok TMDL (Tabular Model Definition Language)</h2>
+        <img src='https://github.com/odczarujpowerbi/szkolenia-powerbi/blob/main/bin/Pasted%20image%2020251209161608.png?raw=true' width='100%'>
+        <p><strong>Zastosowanie:</strong> Edycja modelu danych w formie tekstowej (dla zaawansowanych użytkowników).</p>
+        <p>W tym widoku:</p>
+        <ul>
+        <li>Przeglądasz definicję modelu w postaci kodu</li>
+        <li>Możesz edytować właściwości obiektów</li>
+        <li>Przydatne do wersjonowania modelu (Git)</li>
+        <li>Umożliwia zaawansowane operacje masowe</li>
+        </ul>
+        <p><strong>Uwaga:</strong> Ten widok jest przeznaczony dla zaawansowanych użytkowników i programistów, którzy chcą zarządzać modelem jako kodem.</p>
+
+    </div>
+
+    <!-- Strona 6 -->
+    <div class='page'>
+        <h1>Podsumowanie</h1>
+        <p>Prawidłowe przygotowanie środowiska Power BI to fundament efektywnej pracy:</p>
+        <p>✓ Włącz niezbędne funkcje w wersji zapoznawczej</p>
+        <p>✓ Skonfiguruj ustawienia Power Query (wyłącz auto-detekcję typów)</p>
+        <p>✓ Ustaw właściwą wersję językową</p>
+        <p>✓ Poznaj wszystkie pięć widoków Power BI Desktop</p>
+        <p>Znajomość tych elementów pozwoli Ci sprawnie poruszać się po środowisku i skupić się na budowaniu efektywnych rozwiązań analitycznych.</p>
 
     </div>
 
@@ -281,10 +312,10 @@ Funkcje dat =
 <script>
 (function() {
     // Unikalny ID dla tej wizualizacji (wstrzykiwany przez Python)
-    var vizId = '5bcb381d';
+    var vizId = '5dc96cd3';
     var containerId = 'viz_' + vizId;
 
-    var currentPage_5bcb381d = 1;
+    var currentPage_5dc96cd3 = 1;
     var container = document.getElementById(containerId);
 
     if (!container) return;
@@ -294,27 +325,27 @@ Funkcje dat =
 
     document.getElementById('totalPages_' + vizId).textContent = totalPages;
 
-    window['showPage_5bcb381d'] = function(n) {
-        if (n > totalPages) currentPage_5bcb381d = totalPages;
-        if (n < 1) currentPage_5bcb381d = 1;
+    window['showPage_5dc96cd3'] = function(n) {
+        if (n > totalPages) currentPage_5dc96cd3 = totalPages;
+        if (n < 1) currentPage_5dc96cd3 = 1;
 
         for (var i = 0; i < pages.length; i++) {
             pages[i].classList.remove('active');
         }
-        pages[currentPage_5bcb381d - 1].classList.add('active');
+        pages[currentPage_5dc96cd3 - 1].classList.add('active');
 
-        document.getElementById('currentPage_' + vizId).textContent = currentPage_5bcb381d;
-        document.getElementById('prevBtn_' + vizId).disabled = (currentPage_5bcb381d === 1);
-        document.getElementById('nextBtn_' + vizId).disabled = (currentPage_5bcb381d === totalPages);
+        document.getElementById('currentPage_' + vizId).textContent = currentPage_5dc96cd3;
+        document.getElementById('prevBtn_' + vizId).disabled = (currentPage_5dc96cd3 === 1);
+        document.getElementById('nextBtn_' + vizId).disabled = (currentPage_5dc96cd3 === totalPages);
     };
 
-    window['changePage_5bcb381d'] = function(n) {
-        currentPage_5bcb381d += n;
-        window['showPage_5bcb381d'](currentPage_5bcb381d);
+    window['changePage_5dc96cd3'] = function(n) {
+        currentPage_5dc96cd3 += n;
+        window['showPage_5dc96cd3'](currentPage_5dc96cd3);
     };
 
     // Inicjalizacja
-    window['showPage_5bcb381d'](1);
+    window['showPage_5dc96cd3'](1);
 
     // Funkcjonalność powiększania obrazów
     var images = container.querySelectorAll('img');

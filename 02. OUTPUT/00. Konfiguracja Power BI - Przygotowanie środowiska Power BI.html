@@ -14,23 +14,24 @@ Przygotowanie środowiska Power BI =
                 padding: 0;
                 box-sizing: border-box;
             }
-            
+    
             body {
-                font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+                font-family: 'Roboto', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
                 font-size: 16px;
+                font-weight: 400;
                 line-height: 1.7;
                 color: #333;
                 background: transparent;
                 padding: 20px;
             }
-            
+    
             .container {
                 max-width: 800px;
                 margin: 0 auto;
                 background: transparent;
                 padding: 40px;
             }
-            
+    
             .navigation {
                 display: flex;
                 justify-content: space-between;
@@ -39,9 +40,9 @@ Przygotowanie środowiska Power BI =
                 padding-bottom: 20px;
                 border-bottom: 1px solid #e1e4e8;
             }
-            
+    
             button {
-                background: #0066cc;
+                background: #df4a16;
                 color: white;
                 border: none;
                 padding: 12px 28px;
@@ -51,85 +52,95 @@ Przygotowanie środowiska Power BI =
                 font-weight: 500;
                 transition: background 0.2s;
             }
-            
+    
             button:hover {
-                background: #0052a3;
+                background: #df7a16;
             }
-            
+    
             button:disabled {
                 background: #ccc;
                 cursor: not-allowed;
             }
-            
+    
             .page-indicator {
                 color: #666;
                 font-size: 1em;
             }
-            
+    
             .page {
                 display: none;
                 min-height: 500px;
             }
-            
+    
             .page.active {
                 display: block;
                 animation: fadeIn 0.3s ease-in;
             }
-            
+    
             @keyframes fadeIn {
                 from { opacity: 0; transform: translateY(10px); }
                 to { opacity: 1; transform: translateY(0); }
             }
-            
+    
             h1 {
-                font-size: 1.8em;
+                font-size: 26px;
+                line-height: 36px;
                 font-weight: 600;
+                padding-top: 14px;
+                padding-bottom: 6px;
                 margin-bottom: 1em;
-                color: #1a1a1a;
+                color: #df4a16;
+                border-bottom: 2px solid #df4a16;
             }
-            
+    
             h2 {
-                font-size: 1.4em;
+                font-size: 26px;
+                line-height: 36px;
                 font-weight: 600;
+                padding-top: 14px;
+                padding-bottom: 6px;
                 margin: 1.5em 0 0.8em 0;
-                color: #2a2a2a;
+                color: #1a1a1a;
+                border-bottom: 2px solid #1a1a1a;
             }
-            
+    
             h3 {
                 font-size: 1.1em;
                 font-weight: 600;
                 margin: 1.2em 0 0.6em 0;
+                padding-bottom: 5px;
                 color: #444;
+                border-bottom: 1px solid #999;
             }
-            
+    
             p {
                 margin-bottom: 1em;
                 font-size: 1.05em;
             }
-            
+    
             strong {
-                font-weight: 600;
+                font-weight: 700;
                 color: #1a1a1a;
             }
-            
+    
             code {
                 background: #f5f5f5;
                 padding: 3px 7px;
                 border-radius: 3px;
-                font-family: 'Courier New', monospace;
+                font-family: 'Fira Code', 'Courier New', monospace;
                 font-size: 0.95em;
-                color: #d73a49;
+                color: #b82b4e;
             }
-            
+    
             pre {
                 background: #f8f9fa;
-                border-left: 3px solid #0066cc;
+                border-left: 3px solid #df4a16;
                 padding: 18px;
                 margin: 1em 0;
                 overflow-x: auto;
                 border-radius: 3px;
             }
-            
+    
             pre code {
                 background: none;
                 padding: 0;
@@ -137,40 +148,68 @@ Przygotowanie środowiska Power BI =
                 font-size: 1em;
                 line-height: 1.6;
             }
-            
+    
             .dax-keyword {
-                color: #0066cc;
+                color: #df4a16;
                 font-weight: 600;
             }
-            
+    
             .dax-function {
                 color: #6f42c1;
             }
-            
+    
             .dax-number {
                 color: #005cc5;
             }
-            
+    
             .dax-comment {
                 color: #6a737d;
                 font-style: italic;
             }
-            
+    
             ul, ol {
-                margin: 1em 0 1em 1.5em;
+                margin: 0.5em 0 0.5em 1.5em;
+                padding-left: 0.5em;
             }
-            
+    
             li {
-                margin: 0.5em 0;
+                margin: 0.3em 0;
+                padding-left: 0.3em;
                 font-size: 1.05em;
             }
-            
+    
+            ol {
+                list-style-type: decimal;
+            }
+    
+            ol li::marker {
+                color: #999;
+                font-weight: 400;
+            }
+    
+            ul li::marker {
+                color: #999;
+            }
+    
+            blockquote {
+                border-left: 3px solid #df4a16;
+                background: #f8f9fa;
+                padding: 14px 18px;
+                margin: 1em 0;
+                color: #555;
+                font-style: italic;
+            }
+    
+            blockquote p {
+                margin: 0;
+            }
+    
             .iteration-box {
-                border-left: 3px solid #0066cc;
+                border-left: 3px solid #df4a16;
                 padding: 14px 18px;
                 margin: 0.8em 0;
             }
-            
+    
             .result-box {
                 background: #f5f5f5;
                 border-left: 3px solid #999;
@@ -216,9 +255,10 @@ Przygotowanie środowiska Power BI =
         <p>Interakcje między wizualizacjami pozwalają na dynamiczne filtrowanie danych. Aby włączyć tę funkcję:</p>
         <p>1. Przejdź do widoku <strong>Raport</strong></p>
         <p>2. Kliknij <strong>Plik</strong> → <strong>Opcje i ustawienia</strong> → <strong>Opcje</strong></p>
-        <p>3. W sekcji <strong>Bieżący plik</strong> → <strong>Ustawienia raportu</strong></p>
+        <p>3. W sekcji <strong>BIEŻĄCY PLIK</strong> → <strong>Ustawienia raportu</strong></p>
         <p>4. Upewnij się, że opcja dotycząca interakcji wizualizacji jest włączona</p>
-        <p>Dzięki temu kliknięcie na element jednej wizualizacji (np. kolumnę na wykresie) automatycznie przefiltruje pozostałe wizualizacje na stronie raportu.</p>
+        <img src='https://github.com/odczarujpowerbi/szkolenia-powerbi/blob/main/bin/Pasted%20image%2020251209170359.png?raw=true' width='100%'>
+        <p>> Dzięki temu kliknięcie na element jednej wizualizacji (np. kolumnę na wykresie) automatycznie przefiltruje pozostałe wizualizacje na stronie raportu.</p>
 
     </div>
 
@@ -229,6 +269,7 @@ Przygotowanie środowiska Power BI =
         <p>1. Otwórz <strong>Plik</strong> → <strong>Opcje i ustawienia</strong> → <strong>Opcje</strong></p>
         <p>2. Przejdź do sekcji <strong>BIEŻĄCY PLIK</strong> → <strong>Ładowanie danych</strong></p>
         <p>3. Odznacz opcję <strong>Automatycznie wykrywaj typy kolumn i nagłówki dla źródeł nieustrukturyzowanych</strong></p>
+        <img src='https://github.com/odczarujpowerbi/szkolenia-powerbi/blob/main/bin/Pasted%20image%2020251209170441.png?raw=true' width='100%'>
         <p>Dzięki temu będziesz mieć pełną kontrolę nad tym, jakie typy danych są przypisywane do poszczególnych kolumn.</p>
 
     </div>
@@ -239,7 +280,10 @@ Przygotowanie środowiska Power BI =
         <p>Wersja językowa Power BI wpływa na separatory dziesiętne, daty oraz niektóre funkcje DAX:</p>
         <p>1. Otwórz <strong>Plik</strong> → <strong>Opcje i ustawienia</strong> → <strong>Opcje</strong></p>
         <p>2. Przejdź do sekcji <strong>GLOBALNE</strong> → <strong>Ustawienia regionalne</strong></p>
-        <p>3. Wybierz odpowiedni język (np. Polski lub Angielski)</p>
+        <p>3. Wybierz odpowiedni język - zalecany jest Angielski ze względu na:</p>
+        <p>	- Prostszą integrację z AI</p>
+        <p>	- Spójność nazewnictwa z dokumentacją Microsoft Learn</p>
+        <img src='https://github.com/odczarujpowerbi/szkolenia-powerbi/blob/main/bin/Pasted%20image%2020251209170514.png?raw=true' width='100%'>
         <p><strong>Uwaga:</strong></p>
         <ul>
         <li>W polskiej wersji separator dziesiętny to przecinek (<code>,</code>), a separator argumentów to średnik (<code>;</code>)</li>
@@ -294,6 +338,45 @@ Przygotowanie środowiska Power BI =
 
     // Inicjalizacja
     window['showPage_905d5ea6'](1);
+
+    // Funkcjonalność powiększania obrazów
+    var images = container.querySelectorAll('img');
+    images.forEach(function(img) {
+        img.style.cursor = 'pointer';
+        img.style.transition = 'transform 0.3s ease';
+
+        img.addEventListener('click', function() {
+            if (this.classList.contains('zoomed')) {
+                // Pomniejsz obraz
+                this.classList.remove('zoomed');
+                this.style.position = '';
+                this.style.top = '';
+                this.style.left = '';
+                this.style.transform = '';
+                this.style.width = '100%';
+                this.style.maxWidth = '';
+                this.style.maxHeight = '';
+                this.style.zIndex = '';
+                this.style.backgroundColor = '';
+                this.style.padding = '';
+                this.style.boxShadow = '';
+            } else {
+                // Powiększ obraz
+                this.classList.add('zoomed');
+                this.style.position = 'fixed';
+                this.style.top = '50%';
+                this.style.left = '50%';
+                this.style.transform = 'translate(-50%, -50%)';
+                this.style.width = 'auto';
+                this.style.maxWidth = '95vw';
+                this.style.maxHeight = '95vh';
+                this.style.zIndex = '9999';
+                this.style.backgroundColor = 'rgba(255, 255, 255, 0.95)';
+                this.style.padding = '10px';
+                this.style.boxShadow = '0 4px 20px rgba(0, 0, 0, 0.3)';
+            }
+        });
+    });
 })();
 </script>
 

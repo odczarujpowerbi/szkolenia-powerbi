@@ -1,4 +1,4 @@
-Funkcje dat = 
+Funkcje tekstowe = 
 
 "
 
@@ -7,7 +7,7 @@ Funkcje dat =
 <head>
     <meta charset='UTF-8'>
     <meta name='viewport' content='width=device-width, initial-scale=1.0'>
-    <title>Funkcje dat</title>
+    <title>Funkcje tekstowe</title>
     <style>
             * {
                 margin: 0;
@@ -18,7 +18,6 @@ Funkcje dat =
             body {
                 font-family: 'Roboto', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
                 font-size: 16px;
-                font-weight: 400;
                 line-height: 1.7;
                 color: #333;
                 background: transparent;
@@ -119,7 +118,7 @@ Funkcje dat =
             }
     
             strong {
-                font-weight: 700;
+                font-weight: 600;
                 color: #1a1a1a;
             }
     
@@ -168,40 +167,12 @@ Funkcje dat =
             }
     
             ul, ol {
-                margin: 0.5em 0 0.5em 1.5em;
-                padding-left: 0.5em;
+                margin: 1em 0 1em 1.5em;
             }
     
             li {
-                margin: 0.3em 0;
-                padding-left: 0.3em;
+                margin: 0.5em 0;
                 font-size: 1.05em;
-            }
-    
-            ol {
-                list-style-type: decimal;
-            }
-    
-            ol li::marker {
-                color: #999;
-                font-weight: 400;
-            }
-    
-            ul li::marker {
-                color: #999;
-            }
-    
-            blockquote {
-                border-left: 3px solid #df4a16;
-                background: #f8f9fa;
-                padding: 14px 18px;
-                margin: 1em 0;
-                color: #555;
-                font-style: italic;
-            }
-    
-            blockquote p {
-                margin: 0;
             }
     
             .iteration-box {
@@ -223,55 +194,55 @@ Funkcje dat =
 </head>
 <body>
 
-<div class='container' id='viz_5bcb381d'>
+<div class='container' id='viz_ea79c585'>
     <!-- Nawigacja na górze -->
     <div class='navigation'>
-        <button id='prevBtn_5bcb381d' onclick='changePage_5bcb381d(-1)'>← Poprzednia</button>
+        <button id='prevBtn_ea79c585' onclick='changePage_ea79c585(-1)'>← Poprzednia</button>
         <span class='page-indicator'>
-            Strona <span id='currentPage_5bcb381d'>1</span> z <span id='totalPages_5bcb381d'>4</span>
+            Strona <span id='currentPage_ea79c585'>1</span> z <span id='totalPages_ea79c585'>4</span>
         </span>
-        <button id='nextBtn_5bcb381d' onclick='changePage_5bcb381d(1)'>Następna →</button>
+        <button id='nextBtn_ea79c585' onclick='changePage_ea79c585(1)'>Następna →</button>
     </div>
 
     <!-- Strona 1 -->
     <div class='page active'>
-        <h1>DATE – Tworzenie daty</h1>
-        <pre><code><span class='dax-function'>DATE</span>(&lt;rok&gt;, &lt;miesiąc&gt;, &lt;dzień&gt;)</code></pre>
+        <h1>CONCATENATE – Łączenie tekstów</h1>
+        <pre><code><span class='dax-function'>CONCATENATE</span>(&lt;tekst1&gt;, &lt;tekst2&gt;)</code></pre>
         <p><strong>Przykład:</strong></p>
-        <pre><code>Data Bazowa = <span class='dax-function'>DATE</span>(<span class='dax-number'>2024</span>, <span class='dax-number'>1</span>, <span class='dax-number'>1</span>)</code></pre>
+        <pre><code>Pełna Nazwa = <span class='dax-function'>CONCATENATE</span>(Klienci[Imię], ' ' & Klienci[Nazwisko])</code></pre>
+        <p><strong>Alternatywa (łatwiejsza):</strong></p>
+        <pre><code>Pełna Nazwa = Klienci[Imię] & ' ' & Klienci[Nazwisko]</code></pre>
 
     </div>
 
     <!-- Strona 2 -->
     <div class='page'>
-        <h1>TODAY i NOW – Dzisiejsza data</h1>
-        <pre><code><span class='dax-function'>TODAY</span>()     <span class='dax-comment'>-- Dzisiejsza data (bez godziny)</span>
-        <span class='dax-function'>NOW</span>()       <span class='dax-comment'>-- Dzisiejsza data i godzina</span></code></pre>
+        <h1>LEFT, RIGHT, MID – Wyciąganie części tekstu</h1>
+        <pre><code><span class='dax-function'>LEFT</span>(&lt;tekst&gt;, &lt;liczba_znaków&gt;)    <span class='dax-comment'>-- Pierwsze znaki od lewej</span>
+        <span class='dax-function'>RIGHT</span>(&lt;tekst&gt;, &lt;liczba_znaków&gt;)   <span class='dax-comment'>-- Ostatnie znaki od prawej</span>
+        <span class='dax-function'>MID</span>(&lt;tekst&gt;, &lt;start&gt;, &lt;liczba&gt;)   <span class='dax-comment'>-- Znaki ze środka</span></code></pre>
         <p><strong>Przykład:</strong></p>
-        <pre><code>Aktualna Data = <span class='dax-function'>TODAY</span>()</code></pre>
+        <pre><code>Pierwsze <span class='dax-number'>3</span> Znaki = <span class='dax-function'>LEFT</span>(Produkty[Kod], <span class='dax-number'>3</span>)
+        Ostatnie <span class='dax-number'>2</span> Znaki = <span class='dax-function'>RIGHT</span>(Produkty[Kod], <span class='dax-number'>2</span>)</code></pre>
 
     </div>
 
     <!-- Strona 3 -->
     <div class='page'>
-        <h1>YEAR, MONTH, DAY – Wyciąganie składników daty</h1>
-        <pre><code><span class='dax-function'>YEAR</span>(&lt;data&gt;)   <span class='dax-comment'>-- Rok</span>
-        <span class='dax-function'>MONTH</span>(&lt;data&gt;)  <span class='dax-comment'>-- Miesiąc (1-12)</span>
-        <span class='dax-function'>DAY</span>(&lt;data&gt;)    <span class='dax-comment'>-- Dzień (1-31)</span></code></pre>
+        <h1>UPPER, LOWER – Zmiana wielkości liter</h1>
+        <pre><code><span class='dax-function'>UPPER</span>(&lt;tekst&gt;)  <span class='dax-comment'>-- Wszystkie znaki WIELKIE</span>
+        <span class='dax-function'>LOWER</span>(&lt;tekst&gt;)  <span class='dax-comment'>-- Wszystkie znaki małe</span></code></pre>
         <p><strong>Przykład:</strong></p>
-        <pre><code>Rok Sprzedaży = <span class='dax-function'>YEAR</span>(Sprzedaz[Data])
-        Miesiąc Sprzedaży = <span class='dax-function'>MONTH</span>(Sprzedaz[Data])</code></pre>
+        <pre><code>Kategoria Wielkie Litery = <span class='dax-function'>UPPER</span>(Produkty[Kategoria])</code></pre>
 
     </div>
 
     <!-- Strona 4 -->
     <div class='page'>
-        <h1>DATEDIFF – Różnica między datami</h1>
-        <pre><code><span class='dax-function'>DATEDIFF</span>(&lt;data_początkowa&gt;, &lt;data_końcowa&gt;, &lt;jednostka&gt;)</code></pre>
-        <p><strong>Jednostki:</strong> DAY, MONTH, YEAR, QUARTER</p>
+        <h1>LEN – Długość tekstu</h1>
+        <pre><code><span class='dax-function'>LEN</span>(&lt;tekst&gt;)</code></pre>
         <p><strong>Przykład:</strong></p>
-        <pre><code>Dni Od Zamówienia = 
-        <span class='dax-function'>DATEDIFF</span>(Zamowienia[Data Zamówienia], <span class='dax-function'>TODAY</span>(), DAY)</code></pre>
+        <pre><code>Długość Kodu = <span class='dax-function'>LEN</span>(Produkty[Kod Produktu])</code></pre>
         <p>---</p>
 
     </div>
@@ -281,10 +252,10 @@ Funkcje dat =
 <script>
 (function() {
     // Unikalny ID dla tej wizualizacji (wstrzykiwany przez Python)
-    var vizId = '5bcb381d';
+    var vizId = 'ea79c585';
     var containerId = 'viz_' + vizId;
 
-    var currentPage_5bcb381d = 1;
+    var currentPage_ea79c585 = 1;
     var container = document.getElementById(containerId);
 
     if (!container) return;
@@ -294,27 +265,27 @@ Funkcje dat =
 
     document.getElementById('totalPages_' + vizId).textContent = totalPages;
 
-    window['showPage_5bcb381d'] = function(n) {
-        if (n > totalPages) currentPage_5bcb381d = totalPages;
-        if (n < 1) currentPage_5bcb381d = 1;
+    window['showPage_ea79c585'] = function(n) {
+        if (n > totalPages) currentPage_ea79c585 = totalPages;
+        if (n < 1) currentPage_ea79c585 = 1;
 
         for (var i = 0; i < pages.length; i++) {
             pages[i].classList.remove('active');
         }
-        pages[currentPage_5bcb381d - 1].classList.add('active');
+        pages[currentPage_ea79c585 - 1].classList.add('active');
 
-        document.getElementById('currentPage_' + vizId).textContent = currentPage_5bcb381d;
-        document.getElementById('prevBtn_' + vizId).disabled = (currentPage_5bcb381d === 1);
-        document.getElementById('nextBtn_' + vizId).disabled = (currentPage_5bcb381d === totalPages);
+        document.getElementById('currentPage_' + vizId).textContent = currentPage_ea79c585;
+        document.getElementById('prevBtn_' + vizId).disabled = (currentPage_ea79c585 === 1);
+        document.getElementById('nextBtn_' + vizId).disabled = (currentPage_ea79c585 === totalPages);
     };
 
-    window['changePage_5bcb381d'] = function(n) {
-        currentPage_5bcb381d += n;
-        window['showPage_5bcb381d'](currentPage_5bcb381d);
+    window['changePage_ea79c585'] = function(n) {
+        currentPage_ea79c585 += n;
+        window['showPage_ea79c585'](currentPage_ea79c585);
     };
 
     // Inicjalizacja
-    window['showPage_5bcb381d'](1);
+    window['showPage_ea79c585'](1);
 
     // Funkcjonalność powiększania obrazów
     var images = container.querySelectorAll('img');
