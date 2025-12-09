@@ -16,7 +16,7 @@ Operatory logiczne w `CALCULATE` =
     <div class='navigation'>
         <button id='prevBtn_b9c59316' onclick='changePage_b9c59316(-1)'>← Poprzednia</button>
         <span class='page-indicator'>
-            Strona <span id='currentPage_b9c59316'>1</span> z <span id='totalPages_b9c59316'>6</span>
+            Strona <span id='currentPage_b9c59316'>1</span> z <span id='totalPages_b9c59316'>5</span>
         </span>
         <button id='nextBtn_b9c59316' onclick='changePage_b9c59316(1)'>Następna →</button>
     </div>
@@ -100,14 +100,18 @@ Operatory logiczne w `CALCULATE` =
         <pre><code>Sprzedaż Dni Robocze =
         <span class='dax-function'>CALCULATE</span>(
             [Sprzedaż Netto],
-            dKalendarz[DzienTygodnia] &gt;= <span class='dax-number'>1</span> && dKalendarz[DzienTygodnia] &lt;= <span class='dax-number'>5</span>
+            dKalendarz[DzienTygodnia] &gt;= <span class='dax-number'>1</span> &&
+            dKalendarz[DzienTygodnia] &lt;= <span class='dax-number'>5</span>
         )</code></pre>
         <p><strong>Warunek:</strong> <code>DzienTygodnia >= 1</code> <strong>I</strong> <code>DzienTygodnia <= 5</code></p>
         <p>Alternatywna składnia z funkcją AND():</p>
         <pre><code>Sprzedaż Dni Robocze (Alternatywna) =
         <span class='dax-function'>CALCULATE</span>(
             [Sprzedaż Netto],
-            <span class='dax-function'>AND</span>(dKalendarz[DzienTygodnia] &gt;= <span class='dax-number'>1</span>, dKalendarz[DzienTygodnia] &lt;= <span class='dax-number'>5</span>)
+            <span class='dax-function'>AND</span>(
+        	    dKalendarz[DzienTygodnia] &gt;= <span class='dax-number'>1</span>,
+        	    dKalendarz[DzienTygodnia] &lt;= <span class='dax-number'>5</span>
+             )
         )</code></pre>
 
     </div>
@@ -120,14 +124,18 @@ Operatory logiczne w `CALCULATE` =
         <pre><code>Sprzedaż Weekendy =
         <span class='dax-function'>CALCULATE</span>(
             [Sprzedaż Netto],
-            dKalendarz[DzienTygodnia] = <span class='dax-number'>6</span> || dKalendarz[DzienTygodnia] = <span class='dax-number'>7</span>
+            dKalendarz[DzienTygodnia] = <span class='dax-number'>6</span> ||
+            dKalendarz[DzienTygodnia] = <span class='dax-number'>7</span>
         )</code></pre>
         <p><strong>Warunek:</strong> <code>DzienTygodnia = 6</code> <strong>LUB</strong> <code>DzienTygodnia = 7</code></p>
         <p>Alternatywna składnia z funkcją OR():</p>
         <pre><code>Sprzedaż Weekendy (Alternatywna) =
         <span class='dax-function'>CALCULATE</span>(
             [Sprzedaż Netto],
-            <span class='dax-function'>OR</span>(dKalendarz[DzienTygodnia] = <span class='dax-number'>6</span>, dKalendarz[DzienTygodnia] = <span class='dax-number'>7</span>)
+            <span class='dax-function'>OR</span>(
+        	    dKalendarz[DzienTygodnia] = <span class='dax-number'>6</span>,
+        	    dKalendarz[DzienTygodnia] = <span class='dax-number'>7</span>
+            )
         )</code></pre>
 
     </div>
@@ -140,14 +148,16 @@ Operatory logiczne w `CALCULATE` =
         Sprzedaż Napoje lub Słodycze =
         <span class='dax-function'>CALCULATE</span>(
             [Sprzedaż Netto],
-            dKategorie[Kategoria] = 'NAPOJE' || dKategorie[Kategoria] = 'SŁODYCZE'
+            dKategorie[Kategoria] = 'NAPOJE' ||
+            dKategorie[Kategoria] = 'SŁODYCZE'
         )
 
         // ✓ Eleganckie
         Sprzedaż Napoje lub Słodycze =
         <span class='dax-function'>CALCULATE</span>(
             [Sprzedaż Netto],
-            dKategorie[Kategoria] IN {'NAPOJE', 'SŁODYCZE'}
+            dKategorie[Kategoria] IN
+             {'NAPOJE', 'SŁODYCZE'}
         )</code></pre>
         <p><strong>Operator IN</strong> sprawdza, czy wartość znajduje się w podanym zestawie.</p>
 
@@ -164,20 +174,7 @@ Operatory logiczne w `CALCULATE` =
             fSprzedaz[Kwota] &gt;= <span class='dax-number'>100</span>
         )</code></pre>
         <p><strong>Warunek:</strong> Kategoria = 'NAPOJE' <strong>I</strong> Kwota >= 100</p>
-
-    </div>
-
-    <!-- Strona 6 -->
-    <div class='page'>
-        <h1>Podsumowanie <code>CALCULATE</code></h1>
-        <p><strong>CALCULATE</strong> to fundament zaawansowanych obliczeń w DAX:</p>
-        <ul>
-        <li>Pozwala tworzyć <strong>dynamiczne miary</strong></li>
-        <li>Umożliwia <strong>porównania</strong> między różnymi okresami/kategoriami</li>
-        <li>Daje kontrolę nad <strong>kontekstem filtrowania</strong></li>
-        <li>Jest podstawą funkcji time intelligence (SAMEPERIODLASTYEAR, DATEADD, itd.)</li>
-        </ul>
-        <p><strong>Zapamiętaj:</strong> Jeśli chcesz obliczyć coś w <strong>innym kontekście</strong> niż aktualny, prawdopodobnie potrzebujesz <strong>CALCULATE</strong>.</p>
+        <p>---</p>
 
     </div>
 

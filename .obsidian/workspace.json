@@ -13,12 +13,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "01. THEORY/04. Modyfikowanie Kontekstu.md",
+                "file": "01. THEORY/06. DAX - Zaawansowane Kwerendy.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "04. Modyfikowanie Kontekstu"
+              "title": "06. DAX - Zaawansowane Kwerendy"
             }
           }
         ],
@@ -106,13 +106,13 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "01. THEORY/04. Modyfikowanie Kontekstu.md",
+                "file": "01. THEORY/06. DAX - Zaawansowane Kwerendy.md",
                 "followCursor": true,
                 "showSearch": false,
                 "searchQuery": ""
               },
               "icon": "lucide-list",
-              "title": "Outline of 04. Modyfikowanie Kontekstu"
+              "title": "Outline of 06. DAX - Zaawansowane Kwerendy"
             }
           }
         ],
@@ -129,7 +129,7 @@
             "state": {
               "type": "localgraph",
               "state": {
-                "file": "01. THEORY/04. Modyfikowanie Kontekstu.md",
+                "file": "01. THEORY/06. DAX - Zaawansowane Kwerendy.md",
                 "options": {
                   "collapse-filter": true,
                   "search": "",
@@ -157,7 +157,7 @@
                 }
               },
               "icon": "lucide-git-fork",
-              "title": "Graph of 04. Modyfikowanie Kontekstu"
+              "title": "Graph of 06. DAX - Zaawansowane Kwerendy"
             }
           }
         ]
@@ -183,9 +183,15 @@
   },
   "active": "c6a8ca1a0082a34f",
   "lastOpenFiles": [
-    "01. THEORY/03. Wprowadzenie do CALCULATE.md",
-    "01. THEORY/04. Modyfikowanie Kontekstu.md",
+    "02. OUTPUT/05. Tworzenie zestawień tabelarycznych - Tworzenie Tabeli.html",
+    "02. OUTPUT/03. Wprowadzenie do CALCULATE - PODSUMOWANIE.html",
+    "02. OUTPUT/02. Miary vs Kolumny kalkulowane - Pułapki.html",
+    "02. OUTPUT/02. Miary vs Kolumny kalkulowane - Różnice podejśc.html",
+    "02. OUTPUT/02. Miary vs Kolumny kalkulowane - Kolumny vs. Miary.html",
     "01. THEORY/05. Tworzenie zestawień tabelarycznych.md",
+    "01. THEORY/04. Modyfikowanie Kontekstu.md",
+    "bin/Pasted image 20251210001950.png",
+    "01. THEORY/03. Wprowadzenie do CALCULATE.md",
     "01. THEORY/02. Miary vs Kolumny kalkulowane.md",
     "01. THEORY/01. Podstawy DAX.md",
     "02. OUTPUT/02. Miary vs Kolumny kalkulowane - Miary vs Kolumny kalkulowane.html",
@@ -200,10 +206,6 @@
     "01. THEORY/06. DAX - Zaawansowane Kwerendy.md",
     "02. OUTPUT/06. DAX - Zaawansowane Kwerendy - Query View.html",
     "02. OUTPUT/06. DAX - Zaawansowane Kwerendy.html",
-    "02. OUTPUT/05. Tworzenie zestawień tabelarycznych.html",
-    "02. OUTPUT/04. Modyfikowanie Kontekstu - USERELATIONSHIP.html",
-    "02. OUTPUT/04. Modyfikowanie Kontekstu - CROSSFILTER.html",
-    "02. OUTPUT/04. Modyfikowanie Kontekstu - KEEPFILTERS.html",
     "00. DRAFT/02. Wstęp do Calculate.md",
     "00. DRAFT/00. Przygotowanie środowiska.md",
     "00. DRAFT/03. Kontekst Filtra.md",
@@ -218,7 +220,6 @@
     "bin/Pasted image 20251209172007.png",
     "bin/Pasted image 20251209172001.png",
     "bin/Pasted image 20251209171436.png",
-    "bin/Pasted image 20251209171433.png",
     "03. TEMPLATE/Markdown/Board.md",
     "03. TEMPLATE/Markdown/Teoria.md",
     "03. TEMPLATE/Markdown/Quiz.md",

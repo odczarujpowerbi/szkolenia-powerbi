@@ -1,7 +1,7 @@
 createOrReplace
 
     table _HTML
-        lineageTag: 04627823-0a3d-4c2c-a308-6e16c55baae2
+        lineageTag: 728df769-79a2-40e6-b082-7599901ec1ce
 
         measure '00. Konfiguracja Power BI - Główne widoki Power BI Desktop' = ```
 "
@@ -27,6 +27,7 @@ createOrReplace
 
     <!-- Strona 1 -->
     <div class='page active'>
+        <h1>Widoki Power BI Desktop</h1>
         <p>Power BI Desktop oferuje pięć głównych widoków, z których każdy służy do różnych celów. Znajomość tych widoków jest kluczowa dla efektywnej pracy z narzędziem.</p>
         <h2>1. Widok Raport (Report View)</h2>
         <img src='https://github.com/odczarujpowerbi/szkolenia-powerbi/blob/main/bin/Pasted%20image%2020251209155301.png?raw=true' width='100%'>
@@ -214,7 +215,7 @@ createOrReplace
 
 "
 ```
-            lineageTag: 63de6b5b-ac68-4fa1-be06-ab8e1b139b00
+            lineageTag: 962ef3a6-0f93-48d6-8f57-c17e3a5d5ca7
 
         measure '00. Konfiguracja Power BI - Przygotowanie środowiska Power BI' = ```
 "
@@ -404,7 +405,7 @@ createOrReplace
 
 "
 ```
-            lineageTag: 57aa5fdd-8d01-4280-8454-d8692212131d
+            lineageTag: 8d6bf22b-175c-4118-a3e0-6c4428a3f02a
 
         measure '01. Podstawy DAX - Funkcje agregujące' = ```
 "
@@ -589,7 +590,7 @@ createOrReplace
 
 "
 ```
-            lineageTag: ccecd91d-a279-47cc-8b04-7956b10460c6
+            lineageTag: a6f32543-c0c1-4b3c-8a73-3300f9b99100
 
         measure '01. Podstawy DAX - Funkcje dat' = ```
 "
@@ -742,7 +743,7 @@ createOrReplace
 
 "
 ```
-            lineageTag: fb8f9431-0bfa-4566-b6a1-bce7f86b7750
+            lineageTag: e5d2f624-997b-46d8-b640-0d3a868105a5
 
         measure '01. Podstawy DAX - Funkcje iteracyjne (X-functions)' = ```
 "
@@ -913,7 +914,7 @@ createOrReplace
 
 "
 ```
-            lineageTag: c5db3e35-b969-4314-b530-ab714ab47a4b
+            lineageTag: cfaeb3ac-2c70-461b-a789-2d94a2696f1a
 
         measure '01. Podstawy DAX - Funkcje logiczne' = ```
 "
@@ -1081,7 +1082,7 @@ createOrReplace
 
 "
 ```
-            lineageTag: db2e01d7-7b1b-4a29-9640-37ef7144f91f
+            lineageTag: cdf014ac-daa3-447d-8cef-c0303fa2847d
 
         measure '01. Podstawy DAX - Funkcje tekstowe' = ```
 "
@@ -1234,7 +1235,7 @@ createOrReplace
 
 "
 ```
-            lineageTag: 268ca929-2fe0-4a6d-8866-07287861d3ac
+            lineageTag: bf070691-b26e-438a-9536-58822b225a55
 
         measure '01. Podstawy DAX' = ```
 "
@@ -1512,7 +1513,300 @@ createOrReplace
 
 "
 ```
-            lineageTag: d5565618-b74d-46f1-bb2f-152b7ae6fb96
+            lineageTag: 2b1ee9f9-25de-4a4e-a45e-4ee5dcc3ae19
+
+        measure '02. Miary vs Kolumny kalkulowane - Kolumny vs. Miary' = ```
+"
+
+<!DOCTYPE html>
+<html lang='pl'>
+<head>
+    <meta charset='UTF-8'>
+    <meta name='viewport' content='width=device-width, initial-scale=1.0'>
+    <title>Kolumny vs. Miary</title>
+</head>
+<body>
+
+<div class='container' id='viz_cd2ce545'>
+    <!-- Nawigacja na górze -->
+    <div class='navigation'>
+        <button id='prevBtn_cd2ce545' onclick='changePage_cd2ce545(-1)'>← Poprzednia</button>
+        <span class='page-indicator'>
+            Strona <span id='currentPage_cd2ce545'>1</span> z <span id='totalPages_cd2ce545'>3</span>
+        </span>
+        <button id='nextBtn_cd2ce545' onclick='changePage_cd2ce545(1)'>Następna →</button>
+    </div>
+
+    <!-- Strona 1 -->
+    <div class='page active'>
+        <h1>Dwa podejścia do DAX</h1>
+        <p>Jedną z najważniejszych rzeczy do zrozumienia w DAX jest różnica między <strong>miarami</strong> a <strong>kolumnami kalkulowanymi</strong>. Choć obie używają formuł DAX, działają zupełnie inaczej i wymagają <strong>odmiennego podejścia do pisania kodu</strong>.</p>
+        <h1>Kolumny kalkulowane (Calculated Columns)</h1>
+        <p><strong>Kolumna kalkulowana</strong> to nowa kolumna dodana do tabeli, której wartość jest obliczana <strong>wiersz po wierszu</strong> (tzw. kontekst wiersza) w momencie odświeżania danych.</p>
+        <h2>Charakterystyka kolumn kalkulowanych:</h2>
+        <ul>
+        <li>Obliczane <strong>podczas ładowania/odświeżania danych</strong></li>
+        <li>Wartość obliczana <strong>dla każdego wiersza</strong> w tabeli</li>
+        <li>Wynik jest <strong>przechowywany</strong> w modelu (zajmuje miejsce w pamięci)</li>
+        <li>Można ich używać do <strong>filtrowania</strong>, <strong>grupowania</strong> lub <strong>sortowania</strong></li>
+        <li>Używają <strong>kontekstu wiersza</strong> (row context)</li>
+        </ul>
+        <h2>Przykład kolumny kalkulowanej:</h2>
+        <pre><code>Cena Jednostkowa =
+        Sprzedaż[Wartość netto] / Sprzedaż[Ilość]</code></pre>
+        <p><strong>Co się dzieje:</strong></p>
+        <ul>
+        <li>Formuła jest obliczana <strong>dla każdego wiersza</strong> w tabeli Sprzedaż</li>
+        <li>Jeśli masz 1000 wierszy, otrzymasz 1000 wartości</li>
+        <li>Wartości są zapisane w modelu i widoczne w widoku danych</li>
+        <li>Możesz użyć tej kolumny w slicerach, filtrach lub do sortowania</li>
+        </ul>
+        <h2>Podejście do pisania DAX w kolumnach</h2>
+        <p><strong>W kolumnach możesz operować na kolumnach jak na zmiennych:</strong></p>
+        <pre><code>// ✅ W KOLUMNACH - bezpośrednie odwołania do kolumn
+        Marża PLN = Sprzedaż[Wartość netto] - Sprzedaż[Koszt]
+
+        Marża % = 
+        <span class='dax-function'>DIVIDE</span>(
+            Sprzedaż[Wartość netto] - Sprzedaż[Koszt],
+            Sprzedaż[Wartość netto]
+        )
+
+        Cena z VAT = Sprzedaż[Cena netto] * <span class='dax-number'>1.23</span>
+
+        Kategoria cenowa = 
+        <span class='dax-function'>IF</span>(
+            Sprzedaż[Wartość netto] &gt; <span class='dax-number'>1000</span>,
+            'Premium',
+            'Standard'
+        )</code></pre>
+        <p><strong>Możesz:</strong></p>
+        <ul>
+        <li>✓ Odwoływać się bezpośrednio do kolumn: <code>Tabela[Kolumna]</code></li>
+        <li>✓ Używać standardowych operatorów: <code>+</code>, <code>-</code>, <code>*</code>, <code>/</code></li>
+        <li>✓ Mnożyć, dzielić, dodawać kolumny jak w Excelu</li>
+        <li>✓ Używać funkcji logicznych: <code>IF</code>, <code>SWITCH</code></li>
+        <li>✓ Odwoływać się do innych kolumn kalkulowanych w tej samej tabeli</li>
+        </ul>
+        <p><strong>Kiedy używać kolumn kalkulowanych:</strong></p>
+        <ul>
+        <li>Potrzebujesz wartości do <strong>filtrowania</strong> lub <strong>grupowania</strong></li>
+        <li>Chcesz <strong>posortować</strong> dane według obliczonej wartości</li>
+        <li>Wartość zależy <strong>tylko od danych w bieżącym wierszu</strong></li>
+        <li>Przykład: kategoria cenowa produktu, wiek klienta, dzień tygodnia, rabat procentowy</li>
+        </ul>
+
+    </div>
+
+    <!-- Strona 2 -->
+    <div class='page'>
+        <h1>Miary (Measures)</h1>
+        <p><strong>Miara</strong> to formuła, która oblicza się <strong>dynamicznie</strong> w zależności od kontekstu filtrów w raporcie.</p>
+        <h2>Charakterystyka miar:</h2>
+        <ul>
+        <li>Obliczane <strong>w momencie wyświetlania</strong> w wizualizacji</li>
+        <li>Nie są przechowywane w modelu (nie zajmują miejsca)</li>
+        <li>Wynik zależy od <strong>kontekstu filtrów</strong> na wizualizacji</li>
+        <li><strong>Nie można</strong> ich użyć do filtrowania wierszy</li>
+        <li>Używają <strong>kontekstu filtrów</strong> (filter context)</li>
+        </ul>
+        <h2>Przykład miary:</h2>
+        <pre><code>Sprzedaż Netto = <span class='dax-function'>SUM</span>(Sprzedaż[Wartość netto])</code></pre>
+        <p><strong>Co się dzieje:</strong></p>
+        <ul>
+        <li>Formuła oblicza sumę <strong>w zależności od kontekstu</strong></li>
+        <li>Na wykresie według kategorii: pokaże sumę dla każdej kategorii</li>
+        <li>Na wykresie według regionu: pokaże sumę dla każdego regionu</li>
+        <li>Bez filtrów: pokaże sumę całkowitą</li>
+        <li>Wartość <strong>nie jest przechowywana</strong>, tylko obliczana na żądanie</li>
+        </ul>
+        <h2>Podejście do pisania DAX w miarach</h2>
+        <p><strong>W miarach MUSISZ używać funkcji agregujących:</strong></p>
+        <pre><code>// ❌ ZŁE - nie zadziała w miarze
+        Marża PLN = Sprzedaż[Wartość netto] - Sprzedaż[Koszt]
+
+        // ✅ DOBRE - w miarach używamy funkcji agregujących
+        Marża PLN = 
+        <span class='dax-function'>SUM</span>(Sprzedaż[Wartość netto]) - <span class='dax-function'>SUM</span>(Sprzedaż[Koszt])
+
+        // ❌ ZŁE - próba mnożenia kolumn
+        Wartość z VAT = Sprzedaż[Wartość netto] * <span class='dax-number'>1.23</span>
+
+        // ✅ DOBRE - suma z mnożnikiem
+        Wartość z VAT = <span class='dax-function'>SUM</span>(Sprzedaż[Wartość netto]) * <span class='dax-number'>1.23</span>
+
+        // ❌ ZŁE - bezpośrednie dzielenie kolumn
+        Marża % = 
+        (Sprzedaż[Wartość netto] - Sprzedaż[Koszt]) / Sprzedaż[Wartość netto]
+
+        // ✅ DOBRE - dzielenie zagregowanych wartości
+        Marża % = 
+        <span class='dax-function'>DIVIDE</span>(
+            <span class='dax-function'>SUM</span>(Sprzedaż[Wartość netto]) - <span class='dax-function'>SUM</span>(Sprzedaż[Koszt]),
+            <span class='dax-function'>SUM</span>(Sprzedaż[Wartość netto])
+        )</code></pre>
+        <p><strong>W miarach:</strong></p>
+        <ul>
+        <li>❌ <strong>NIE MOŻESZ</strong> bezpośrednio mnożyć/dzielić kolumn</li>
+        <li>❌ <strong>NIE MOŻESZ</strong> używać <code>Tabela[Kolumna]</code> bez funkcji agregującej</li>
+        <li>✅ <strong>MUSISZ</strong> najpierw zagregować: <code>SUM()</code>, <code>AVERAGE()</code>, <code>COUNT()</code>, itp.</li>
+        <li>✅ Dopiero <strong>zagregowane wartości</strong> możesz mnożyć, dzielić, dodawać</li>
+        </ul>
+        <p><strong>Kiedy używać miar:</strong></p>
+        <ul>
+        <li>Potrzebujesz <strong>agregacji</strong> (suma, średnia, liczba)</li>
+        <li>Wynik ma zależeć od <strong>filtrów w raporcie</strong></li>
+        <li>Chcesz <strong>dynamicznych obliczeń</strong> (procent udziału, porównania okresów)</li>
+        <li>Przykład: suma sprzedaży, średnia wartość, liczba transakcji</li>
+        </ul>
+
+    </div>
+
+    <!-- Strona 3 -->
+    <div class='page'>
+        <h1>Porównanie: Kolumna kalkulowana vs Miara</h1>
+        <table>
+          <thead>
+            <tr>
+              <th>Aspekt</th>
+              <th>Kolumna kalkulowana</th>
+              <th>Miara</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>Kiedy obliczana</strong></td>
+              <td>Podczas odświeżania danych</td>
+              <td>Podczas wyświetlania wizualizacji</td>
+            </tr>
+            <tr>
+              <td><strong>Kontekst</strong></td>
+              <td>Kontekst wiersza (row context)</td>
+              <td>Kontekst filtrów (filter context)</td>
+            </tr>
+            <tr>
+              <td><strong>Składnia DAX</strong></td>
+              <td>Bezpośrednie odwołania do kolumn</td>
+              <td>Wymagane funkcje agregujące</td>
+            </tr>
+            <tr>
+              <td><strong>Operacje na kolumnach</strong></td>
+              <td>Możesz mnożyć/dzielić kolumny bezpośrednio</td>
+              <td>Musisz najpierw zagregować, potem mnożyć/dzielić</td>
+            </tr>
+            <tr>
+              <td><strong>Przechowywanie</strong></td>
+              <td>Tak - zajmuje miejsce w pamięci</td>
+              <td>Nie - obliczana na żądanie</td>
+            </tr>
+            <tr>
+              <td><strong>Użycie w slicerach</strong></td>
+              <td>Tak</td>
+              <td>Nie</td>
+            </tr>
+            <tr>
+              <td><strong>Użycie w wizualizacjach</strong></td>
+              <td>Jako pole do grupowania</td>
+              <td>Jako wartość do agregacji</td>
+            </tr>
+            <tr>
+              <td><strong>Ikona w Power BI</strong></td>
+              <td>Ikona tabeli (⚏)</td>
+              <td>Ikona kalkulatora (fx)</td>
+            </tr>
+          </tbody>
+        </table>
+        <p>---</p>
+
+    </div>
+
+</div>
+
+<script>
+(function() {
+    // Unikalny ID dla tej wizualizacji (wstrzykiwany przez Python)
+    var vizId = 'cd2ce545';
+    var containerId = 'viz_' + vizId;
+
+    var currentPage_cd2ce545 = 1;
+    var container = document.getElementById(containerId);
+
+    if (!container) return;
+
+    var pages = container.querySelectorAll('.page');
+    var totalPages = pages.length;
+
+    document.getElementById('totalPages_' + vizId).textContent = totalPages;
+
+    window['showPage_cd2ce545'] = function(n) {
+        if (n > totalPages) currentPage_cd2ce545 = totalPages;
+        if (n < 1) currentPage_cd2ce545 = 1;
+
+        for (var i = 0; i < pages.length; i++) {
+            pages[i].classList.remove('active');
+        }
+        pages[currentPage_cd2ce545 - 1].classList.add('active');
+
+        document.getElementById('currentPage_' + vizId).textContent = currentPage_cd2ce545;
+        document.getElementById('prevBtn_' + vizId).disabled = (currentPage_cd2ce545 === 1);
+        document.getElementById('nextBtn_' + vizId).disabled = (currentPage_cd2ce545 === totalPages);
+    };
+
+    window['changePage_cd2ce545'] = function(n) {
+        currentPage_cd2ce545 += n;
+        window['showPage_cd2ce545'](currentPage_cd2ce545);
+    };
+
+    // Inicjalizacja
+    window['showPage_cd2ce545'](1);
+
+    // Funkcjonalność powiększania obrazów
+    var images = container.querySelectorAll('img');
+    images.forEach(function(img) {
+        img.style.cursor = 'pointer';
+        img.style.transition = 'transform 0.3s ease';
+
+        img.addEventListener('click', function() {
+            if (this.classList.contains('zoomed')) {
+                // Pomniejsz obraz
+                this.classList.remove('zoomed');
+                this.style.position = '';
+                this.style.top = '';
+                this.style.left = '';
+                this.style.transform = '';
+                this.style.width = '100%';
+                this.style.maxWidth = '';
+                this.style.maxHeight = '';
+                this.style.zIndex = '';
+                this.style.backgroundColor = '';
+                this.style.padding = '';
+                this.style.boxShadow = '';
+            } else {
+                // Powiększ obraz
+                this.classList.add('zoomed');
+                this.style.position = 'fixed';
+                this.style.top = '50%';
+                this.style.left = '50%';
+                this.style.transform = 'translate(-50%, -50%)';
+                this.style.width = 'auto';
+                this.style.maxWidth = '95vw';
+                this.style.maxHeight = '95vh';
+                this.style.zIndex = '9999';
+                this.style.backgroundColor = 'rgba(255, 255, 255, 0.95)';
+                this.style.padding = '10px';
+                this.style.boxShadow = '0 4px 20px rgba(0, 0, 0, 0.3)';
+            }
+        });
+    });
+})();
+</script>
+
+</body>
+</html>
+
+"
+```
+            lineageTag: 6f488667-2332-4157-bf11-6bdeaebc6b4a
 
         measure '02. Miary vs Kolumny kalkulowane - Miary vs Kolumny kalkulowane' = ```
 "
@@ -1794,7 +2088,421 @@ createOrReplace
 
 "
 ```
-            lineageTag: 913748e2-d544-4ee6-b10e-b580b5874dd9
+            lineageTag: dd52230b-ef68-4716-af8e-f514d4534117
+
+        measure '02. Miary vs Kolumny kalkulowane - Pułapki' = ```
+"
+
+<!DOCTYPE html>
+<html lang='pl'>
+<head>
+    <meta charset='UTF-8'>
+    <meta name='viewport' content='width=device-width, initial-scale=1.0'>
+    <title>Pułapki</title>
+</head>
+<body>
+
+<div class='container' id='viz_8c56120f'>
+    <!-- Nawigacja na górze -->
+    <div class='navigation'>
+        <button id='prevBtn_8c56120f' onclick='changePage_8c56120f(-1)'>← Poprzednia</button>
+        <span class='page-indicator'>
+            Strona <span id='currentPage_8c56120f'>1</span> z <span id='totalPages_8c56120f'>3</span>
+        </span>
+        <button id='nextBtn_8c56120f' onclick='changePage_8c56120f(1)'>Następna →</button>
+    </div>
+
+    <!-- Strona 1 -->
+    <div class='page active'>
+        <h1>Najczęstsze błędy początkujących</h1>
+        <h2>Błąd 1: Tworzenie kolumny zamiast miary dla agregacji</h2>
+        <pre><code>// ❌ ZŁE - kolumna kalkulowana (niepotrzebnie zajmuje pamięć)
+        Suma Wartości Kolumna = <span class='dax-function'>SUM</span>(Sprzedaż[Wartość netto])
+
+        // ✅ DOBRE - miara (dynamiczna, nie zajmuje pamięci)
+        Suma Wartości Miara = <span class='dax-function'>SUM</span>(Sprzedaż[Wartość netto])</code></pre>
+        <h2>Błąd 2: Próba mnożenia kolumn w miarze</h2>
+        <pre><code>// ❌ ZŁE - nie zadziała w miarze
+        Wartość Brutto = Sprzedaż[Wartość netto] * <span class='dax-number'>1.23</span>
+
+        // ✅ DOBRE - agreguj najpierw
+        Wartość Brutto = <span class='dax-function'>SUM</span>(Sprzedaż[Wartość netto]) * <span class='dax-number'>1.23</span>
+
+        // ✅ ALBO użyj SUMX dla wiersz-po-wierszu
+        Wartość Brutto = <span class='dax-function'>SUMX</span>(Sprzedaż, Sprzedaż[Wartość netto] * <span class='dax-number'>1.23</span>)</code></pre>
+        <h2>Błąd 3: Zapominanie o agregacji w miarach</h2>
+        <pre><code>// ❌ ZŁE - w miarze musisz agregować
+        Średnia Cena = Sprzedaż[Wartość netto] / Sprzedaż[Ilość]
+
+        // ✅ DOBRE opcja <span class='dax-number'>1</span> - zagregowane dzielenie
+        Średnia Cena = 
+        <span class='dax-function'>DIVIDE</span>(
+            <span class='dax-function'>SUM</span>(Sprzedaż[Wartość netto]),
+            <span class='dax-function'>SUM</span>(Sprzedaż[Ilość])
+        )
+
+        // ✅ DOBRE opcja <span class='dax-number'>2</span> - iteracyjne obliczenie średniej
+        Średnia Cena = 
+        <span class='dax-function'>AVERAGEX</span>(
+            Sprzedaż,
+            <span class='dax-function'>DIVIDE</span>(Sprzedaż[Wartość netto], Sprzedaż[Ilość])
+        )</code></pre>
+
+    </div>
+
+    <!-- Strona 2 -->
+    <div class='page'>
+        <h1>Kiedy używać czego? - Decyzja</h1>
+        <p><strong>Użyj kolumny kalkulowanej gdy:</strong></p>
+        <ul>
+        <li>✓ Potrzebujesz wartości do <strong>filtrowania</strong> (slicer, filtr)</li>
+        <li>✓ Chcesz <strong>grupować</strong> według obliczonej wartości</li>
+        <li>✓ Wartość zależy tylko od <strong>bieżącego wiersza</strong></li>
+        <li>✓ Możesz zapisać DAX <strong>bez funkcji agregujących</strong></li>
+        <li>✓ Przykład: 'Kategoria wiekowa klienta', 'Dzień tygodnia sprzedaży', 'Rabat kwotowy'</li>
+        </ul>
+        <p><strong>Użyj miary gdy:</strong></p>
+        <ul>
+        <li>✓ Potrzebujesz <strong>agregacji</strong> (suma, średnia, liczba)</li>
+        <li>✓ Wynik ma być <strong>dynamiczny</strong> (zależny od filtrów)</li>
+        <li>✓ Chcesz <strong>oszczędzić pamięć</strong> w modelu</li>
+        <li>✓ W formule używasz <code>SUM()</code>, <code>AVERAGE()</code>, <code>COUNT()</code>, itp.</li>
+        <li>✓ Przykład: 'Suma sprzedaży', 'Liczba transakcji', 'Średnia wartość', '% udział'</li>
+        </ul>
+
+    </div>
+
+    <!-- Strona 3 -->
+    <div class='page'>
+        <h1>Złota zasada</h1>
+        <p>> <strong>Jeśli w formule używasz funkcji agregującej (<code>SUM</code>, <code>AVERAGE</code>, <code>COUNT</code>, itp.), prawie zawsze powinieneś tworzyć MIARĘ, nie kolumnę.</strong></p>
+        <p>> <strong>Jeśli możesz napisać formułę bez agregacji, tylko prostym odwołaniem do kolumn (jak w Excelu), prawdopodobnie potrzebujesz KOLUMNY.</strong></p>
+        <p>---</p>
+
+    </div>
+
+</div>
+
+<script>
+(function() {
+    // Unikalny ID dla tej wizualizacji (wstrzykiwany przez Python)
+    var vizId = '8c56120f';
+    var containerId = 'viz_' + vizId;
+
+    var currentPage_8c56120f = 1;
+    var container = document.getElementById(containerId);
+
+    if (!container) return;
+
+    var pages = container.querySelectorAll('.page');
+    var totalPages = pages.length;
+
+    document.getElementById('totalPages_' + vizId).textContent = totalPages;
+
+    window['showPage_8c56120f'] = function(n) {
+        if (n > totalPages) currentPage_8c56120f = totalPages;
+        if (n < 1) currentPage_8c56120f = 1;
+
+        for (var i = 0; i < pages.length; i++) {
+            pages[i].classList.remove('active');
+        }
+        pages[currentPage_8c56120f - 1].classList.add('active');
+
+        document.getElementById('currentPage_' + vizId).textContent = currentPage_8c56120f;
+        document.getElementById('prevBtn_' + vizId).disabled = (currentPage_8c56120f === 1);
+        document.getElementById('nextBtn_' + vizId).disabled = (currentPage_8c56120f === totalPages);
+    };
+
+    window['changePage_8c56120f'] = function(n) {
+        currentPage_8c56120f += n;
+        window['showPage_8c56120f'](currentPage_8c56120f);
+    };
+
+    // Inicjalizacja
+    window['showPage_8c56120f'](1);
+
+    // Funkcjonalność powiększania obrazów
+    var images = container.querySelectorAll('img');
+    images.forEach(function(img) {
+        img.style.cursor = 'pointer';
+        img.style.transition = 'transform 0.3s ease';
+
+        img.addEventListener('click', function() {
+            if (this.classList.contains('zoomed')) {
+                // Pomniejsz obraz
+                this.classList.remove('zoomed');
+                this.style.position = '';
+                this.style.top = '';
+                this.style.left = '';
+                this.style.transform = '';
+                this.style.width = '100%';
+                this.style.maxWidth = '';
+                this.style.maxHeight = '';
+                this.style.zIndex = '';
+                this.style.backgroundColor = '';
+                this.style.padding = '';
+                this.style.boxShadow = '';
+            } else {
+                // Powiększ obraz
+                this.classList.add('zoomed');
+                this.style.position = 'fixed';
+                this.style.top = '50%';
+                this.style.left = '50%';
+                this.style.transform = 'translate(-50%, -50%)';
+                this.style.width = 'auto';
+                this.style.maxWidth = '95vw';
+                this.style.maxHeight = '95vh';
+                this.style.zIndex = '9999';
+                this.style.backgroundColor = 'rgba(255, 255, 255, 0.95)';
+                this.style.padding = '10px';
+                this.style.boxShadow = '0 4px 20px rgba(0, 0, 0, 0.3)';
+            }
+        });
+    });
+})();
+</script>
+
+</body>
+</html>
+
+"
+```
+            lineageTag: 9d88c13c-dcf2-4f1f-ac3b-11096f272bc6
+
+        measure '02. Miary vs Kolumny kalkulowane - Różnice podejśc' = ```
+"
+
+<!DOCTYPE html>
+<html lang='pl'>
+<head>
+    <meta charset='UTF-8'>
+    <meta name='viewport' content='width=device-width, initial-scale=1.0'>
+    <title>Różnice podejśc</title>
+</head>
+<body>
+
+<div class='container' id='viz_f700bd9f'>
+    <!-- Nawigacja na górze -->
+    <div class='navigation'>
+        <button id='prevBtn_f700bd9f' onclick='changePage_f700bd9f(-1)'>← Poprzednia</button>
+        <span class='page-indicator'>
+            Strona <span id='currentPage_f700bd9f'>1</span> z <span id='totalPages_f700bd9f'>2</span>
+        </span>
+        <button id='nextBtn_f700bd9f' onclick='changePage_f700bd9f(1)'>Następna →</button>
+    </div>
+
+    <!-- Strona 1 -->
+    <div class='page active'>
+        <h1>Kluczowa różnica w podejściu do DAX</h1>
+        <h2>W kolumnach: 'Myśl wierszami'</h2>
+        <pre><code>// Pracujesz na JEDNYM wierszu naraz
+        // Możesz traktować kolumny jak zmienne
+
+        Rabat Kwotowy = Sprzedaż[Cena] * Sprzedaż[Procent rabatu]
+
+        Wartość końcowa = Sprzedaż[Cena] - Sprzedaż[Rabat Kwotowy]
+
+        Kategoria = 
+        <span class='dax-function'>SWITCH</span>(
+            <span class='dax-function'>TRUE</span>(),
+            Sprzedaż[Wartość] &lt; <span class='dax-number'>100</span>, 'Niska',
+            Sprzedaż[Wartość] &lt; <span class='dax-number'>500</span>, 'Średnia',
+            'Wysoka'
+        )</code></pre>
+        <h2>W miarach: 'Myśl agregacją'</h2>
+        <p>Najprościej mówiąc, w miarach:</p>
+        <ul>
+        <li>Pracujesz na ZBIORZE wierszy</li>
+        <li>Musisz najpierw zagregować, potem obliczać</li>
+        </ul>
+        <pre><code>// ❌ To nie zadziała:
+        Rabat Kwotowy = Sprzedaż[Cena] * Sprzedaż[Procent rabatu]
+
+        // ✅ Tak trzeba:
+        Rabat Kwotowy = <span class='dax-function'>SUMX</span>(Sprzedaż, Sprzedaż[Cena] * Sprzedaż[Procent rabatu])
+        // lub
+        Rabat Kwotowy = <span class='dax-function'>SUM</span>(Sprzedaż[Cena]) * <span class='dax-function'>AVERAGE</span>(Sprzedaż[Procent rabatu])</code></pre>
+        <p><strong>Uwaga!</strong></p>
+        <ul>
+        <li>Licząc z <code>SUMX</code> obliczasz: (1000 × 10%) + (2000 × 5%) + (500 × 20%) = 100 + 100 + 100 = <strong>300</strong></li>
+        <li>Natomiast z <code>SUM</code> i <code>AVERAGE</code>: (1000 + 2000 + 500) × (10%, 5%, 20%) / 3 = <strong>408</strong></li>
+        </ul>
+        <p>	- W pierwszym przypadku otrzymujemy sumę kwoty rabatów, a w drugim kwotę dla przeciętnego rabatu</p>
+
+    </div>
+
+    <!-- Strona 2 -->
+    <div class='page'>
+        <h1>Praktyczny przykład różnicy</h1>
+        <h2>Scenariusz: Obliczenie marży</h2>
+        <p><strong>Tabela Sprzedaż:</strong></p>
+        <table>
+          <thead>
+            <tr>
+              <th>Produkt</th>
+              <th>Wartość netto</th>
+              <th>Koszt</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>A</td>
+              <td>1000</td>
+              <td>600</td>
+            </tr>
+            <tr>
+              <td>B</td>
+              <td>2000</td>
+              <td>1400</td>
+            </tr>
+            <tr>
+              <td>C</td>
+              <td>500</td>
+              <td>350</td>
+            </tr>
+          </tbody>
+        </table>
+        <h2>Jako kolumna kalkulowana:</h2>
+        <pre><code>Marża PLN = Sprzedaż[Wartość netto] - Sprzedaż[Koszt]</code></pre>
+        <p><strong>Wynik w tabeli:</strong></p>
+        <table>
+          <thead>
+            <tr>
+              <th>Produkt</th>
+              <th>Wartość netto</th>
+              <th>Koszt</th>
+              <th>Marża PLN</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>A</td>
+              <td>1000</td>
+              <td>600</td>
+              <td><strong>400</strong></td>
+            </tr>
+            <tr>
+              <td>B</td>
+              <td>2000</td>
+              <td>1400</td>
+              <td><strong>600</strong></td>
+            </tr>
+            <tr>
+              <td>C</td>
+              <td>500</td>
+              <td>350</td>
+              <td><strong>150</strong></td>
+            </tr>
+          </tbody>
+        </table>
+        <ul>
+        <li>Obliczona dla <strong>każdego wiersza</strong> osobno</li>
+        <li>Wartości zapisane w modelu</li>
+        <li>Możesz filtrować: 'pokaż produkty gdzie Marża PLN > 500'</li>
+        </ul>
+        <h2>Jako miara:</h2>
+        <pre><code>Marża PLN = <span class='dax-function'>SUM</span>(Sprzedaż[Wartość netto]) - <span class='dax-function'>SUM</span>(Sprzedaż[Koszt])</code></pre>
+        <p><strong>Wynik na wizualizacji:</strong></p>
+        <ul>
+        <li>Bez filtrów: <strong>1150</strong> (suma wszystkich marż)</li>
+        <li>Dla produktu A: <strong>400</strong></li>
+        <li>Dla produktu B: <strong>600</strong></li>
+        <li>Według kategorii: suma marż w każdej kategorii</li>
+        <li>Obliczana <strong>dynamicznie</strong> według kontekstu</li>
+        <li>Nie zajmuje miejsca w pamięci</li>
+        <li><strong>Nie możesz</strong> filtrować wierszy według tej wartości</li>
+        </ul>
+        <p>---</p>
+
+    </div>
+
+</div>
+
+<script>
+(function() {
+    // Unikalny ID dla tej wizualizacji (wstrzykiwany przez Python)
+    var vizId = 'f700bd9f';
+    var containerId = 'viz_' + vizId;
+
+    var currentPage_f700bd9f = 1;
+    var container = document.getElementById(containerId);
+
+    if (!container) return;
+
+    var pages = container.querySelectorAll('.page');
+    var totalPages = pages.length;
+
+    document.getElementById('totalPages_' + vizId).textContent = totalPages;
+
+    window['showPage_f700bd9f'] = function(n) {
+        if (n > totalPages) currentPage_f700bd9f = totalPages;
+        if (n < 1) currentPage_f700bd9f = 1;
+
+        for (var i = 0; i < pages.length; i++) {
+            pages[i].classList.remove('active');
+        }
+        pages[currentPage_f700bd9f - 1].classList.add('active');
+
+        document.getElementById('currentPage_' + vizId).textContent = currentPage_f700bd9f;
+        document.getElementById('prevBtn_' + vizId).disabled = (currentPage_f700bd9f === 1);
+        document.getElementById('nextBtn_' + vizId).disabled = (currentPage_f700bd9f === totalPages);
+    };
+
+    window['changePage_f700bd9f'] = function(n) {
+        currentPage_f700bd9f += n;
+        window['showPage_f700bd9f'](currentPage_f700bd9f);
+    };
+
+    // Inicjalizacja
+    window['showPage_f700bd9f'](1);
+
+    // Funkcjonalność powiększania obrazów
+    var images = container.querySelectorAll('img');
+    images.forEach(function(img) {
+        img.style.cursor = 'pointer';
+        img.style.transition = 'transform 0.3s ease';
+
+        img.addEventListener('click', function() {
+            if (this.classList.contains('zoomed')) {
+                // Pomniejsz obraz
+                this.classList.remove('zoomed');
+                this.style.position = '';
+                this.style.top = '';
+                this.style.left = '';
+                this.style.transform = '';
+                this.style.width = '100%';
+                this.style.maxWidth = '';
+                this.style.maxHeight = '';
+                this.style.zIndex = '';
+                this.style.backgroundColor = '';
+                this.style.padding = '';
+                this.style.boxShadow = '';
+            } else {
+                // Powiększ obraz
+                this.classList.add('zoomed');
+                this.style.position = 'fixed';
+                this.style.top = '50%';
+                this.style.left = '50%';
+                this.style.transform = 'translate(-50%, -50%)';
+                this.style.width = 'auto';
+                this.style.maxWidth = '95vw';
+                this.style.maxHeight = '95vh';
+                this.style.zIndex = '9999';
+                this.style.backgroundColor = 'rgba(255, 255, 255, 0.95)';
+                this.style.padding = '10px';
+                this.style.boxShadow = '0 4px 20px rgba(0, 0, 0, 0.3)';
+            }
+        });
+    });
+})();
+</script>
+
+</body>
+</html>
+
+"
+```
+            lineageTag: 318379a8-6309-4024-b6db-3927eb8564e4
 
         measure '03. Wprowadzenie do CALCULATE - Operatory logiczne w `CALCULATE`' = ```
 "
@@ -1813,7 +2521,7 @@ createOrReplace
     <div class='navigation'>
         <button id='prevBtn_b9c59316' onclick='changePage_b9c59316(-1)'>← Poprzednia</button>
         <span class='page-indicator'>
-            Strona <span id='currentPage_b9c59316'>1</span> z <span id='totalPages_b9c59316'>6</span>
+            Strona <span id='currentPage_b9c59316'>1</span> z <span id='totalPages_b9c59316'>5</span>
         </span>
         <button id='nextBtn_b9c59316' onclick='changePage_b9c59316(1)'>Następna →</button>
     </div>
@@ -1897,14 +2605,18 @@ createOrReplace
         <pre><code>Sprzedaż Dni Robocze =
         <span class='dax-function'>CALCULATE</span>(
             [Sprzedaż Netto],
-            dKalendarz[DzienTygodnia] &gt;= <span class='dax-number'>1</span> && dKalendarz[DzienTygodnia] &lt;= <span class='dax-number'>5</span>
+            dKalendarz[DzienTygodnia] &gt;= <span class='dax-number'>1</span> &&
+            dKalendarz[DzienTygodnia] &lt;= <span class='dax-number'>5</span>
         )</code></pre>
         <p><strong>Warunek:</strong> <code>DzienTygodnia >= 1</code> <strong>I</strong> <code>DzienTygodnia <= 5</code></p>
         <p>Alternatywna składnia z funkcją AND():</p>
         <pre><code>Sprzedaż Dni Robocze (Alternatywna) =
         <span class='dax-function'>CALCULATE</span>(
             [Sprzedaż Netto],
-            <span class='dax-function'>AND</span>(dKalendarz[DzienTygodnia] &gt;= <span class='dax-number'>1</span>, dKalendarz[DzienTygodnia] &lt;= <span class='dax-number'>5</span>)
+            <span class='dax-function'>AND</span>(
+        	    dKalendarz[DzienTygodnia] &gt;= <span class='dax-number'>1</span>,
+        	    dKalendarz[DzienTygodnia] &lt;= <span class='dax-number'>5</span>
+             )
         )</code></pre>
 
     </div>
@@ -1917,14 +2629,18 @@ createOrReplace
         <pre><code>Sprzedaż Weekendy =
         <span class='dax-function'>CALCULATE</span>(
             [Sprzedaż Netto],
-            dKalendarz[DzienTygodnia] = <span class='dax-number'>6</span> || dKalendarz[DzienTygodnia] = <span class='dax-number'>7</span>
+            dKalendarz[DzienTygodnia] = <span class='dax-number'>6</span> ||
+            dKalendarz[DzienTygodnia] = <span class='dax-number'>7</span>
         )</code></pre>
         <p><strong>Warunek:</strong> <code>DzienTygodnia = 6</code> <strong>LUB</strong> <code>DzienTygodnia = 7</code></p>
         <p>Alternatywna składnia z funkcją OR():</p>
         <pre><code>Sprzedaż Weekendy (Alternatywna) =
         <span class='dax-function'>CALCULATE</span>(
             [Sprzedaż Netto],
-            <span class='dax-function'>OR</span>(dKalendarz[DzienTygodnia] = <span class='dax-number'>6</span>, dKalendarz[DzienTygodnia] = <span class='dax-number'>7</span>)
+            <span class='dax-function'>OR</span>(
+        	    dKalendarz[DzienTygodnia] = <span class='dax-number'>6</span>,
+        	    dKalendarz[DzienTygodnia] = <span class='dax-number'>7</span>
+            )
         )</code></pre>
 
     </div>
@@ -1937,14 +2653,16 @@ createOrReplace
         Sprzedaż Napoje lub Słodycze =
         <span class='dax-function'>CALCULATE</span>(
             [Sprzedaż Netto],
-            dKategorie[Kategoria] = 'NAPOJE' || dKategorie[Kategoria] = 'SŁODYCZE'
+            dKategorie[Kategoria] = 'NAPOJE' ||
+            dKategorie[Kategoria] = 'SŁODYCZE'
         )
 
         // ✓ Eleganckie
         Sprzedaż Napoje lub Słodycze =
         <span class='dax-function'>CALCULATE</span>(
             [Sprzedaż Netto],
-            dKategorie[Kategoria] IN {'NAPOJE', 'SŁODYCZE'}
+            dKategorie[Kategoria] IN
+             {'NAPOJE', 'SŁODYCZE'}
         )</code></pre>
         <p><strong>Operator IN</strong> sprawdza, czy wartość znajduje się w podanym zestawie.</p>
 
@@ -1961,20 +2679,7 @@ createOrReplace
             fSprzedaz[Kwota] &gt;= <span class='dax-number'>100</span>
         )</code></pre>
         <p><strong>Warunek:</strong> Kategoria = 'NAPOJE' <strong>I</strong> Kwota >= 100</p>
-
-    </div>
-
-    <!-- Strona 6 -->
-    <div class='page'>
-        <h1>Podsumowanie <code>CALCULATE</code></h1>
-        <p><strong>CALCULATE</strong> to fundament zaawansowanych obliczeń w DAX:</p>
-        <ul>
-        <li>Pozwala tworzyć <strong>dynamiczne miary</strong></li>
-        <li>Umożliwia <strong>porównania</strong> między różnymi okresami/kategoriami</li>
-        <li>Daje kontrolę nad <strong>kontekstem filtrowania</strong></li>
-        <li>Jest podstawą funkcji time intelligence (SAMEPERIODLASTYEAR, DATEADD, itd.)</li>
-        </ul>
-        <p><strong>Zapamiętaj:</strong> Jeśli chcesz obliczyć coś w <strong>innym kontekście</strong> niż aktualny, prawdopodobnie potrzebujesz <strong>CALCULATE</strong>.</p>
+        <p>---</p>
 
     </div>
 
@@ -2064,7 +2769,131 @@ createOrReplace
 
 "
 ```
-            lineageTag: ae85da39-cd98-465a-9227-616c8ed6240f
+            lineageTag: f5415e9b-c851-48cb-b6e4-43bed88063c0
+
+        measure '03. Wprowadzenie do CALCULATE - PODSUMOWANIE' = ```
+"
+
+<!DOCTYPE html>
+<html lang='pl'>
+<head>
+    <meta charset='UTF-8'>
+    <meta name='viewport' content='width=device-width, initial-scale=1.0'>
+    <title>PODSUMOWANIE</title>
+</head>
+<body>
+
+<div class='container' id='viz_1f337895'>
+    <!-- Nawigacja na górze -->
+    <div class='navigation'>
+        <button id='prevBtn_1f337895' onclick='changePage_1f337895(-1)'>← Poprzednia</button>
+        <span class='page-indicator'>
+            Strona <span id='currentPage_1f337895'>1</span> z <span id='totalPages_1f337895'>1</span>
+        </span>
+        <button id='nextBtn_1f337895' onclick='changePage_1f337895(1)'>Następna →</button>
+    </div>
+
+    <!-- Strona 1 -->
+    <div class='page active'>
+        <h1>Podsumowanie <code>CALCULATE</code></h1>
+        <p><strong>CALCULATE</strong> to fundament zaawansowanych obliczeń w DAX:</p>
+        <ul>
+        <li>Pozwala tworzyć <strong>dynamiczne miary</strong></li>
+        <li>Umożliwia <strong>porównania</strong> między różnymi okresami/kategoriami</li>
+        <li>Daje kontrolę nad <strong>kontekstem filtrowania</strong></li>
+        <li>Jest podstawą funkcji time intelligence (SAMEPERIODLASTYEAR, DATEADD, itd.)</li>
+        </ul>
+        <p><strong>Zapamiętaj:</strong> Jeśli chcesz obliczyć coś w <strong>innym kontekście</strong> niż aktualny, prawdopodobnie potrzebujesz <strong>CALCULATE</strong>.</p>
+
+    </div>
+
+</div>
+
+<script>
+(function() {
+    // Unikalny ID dla tej wizualizacji (wstrzykiwany przez Python)
+    var vizId = '1f337895';
+    var containerId = 'viz_' + vizId;
+
+    var currentPage_1f337895 = 1;
+    var container = document.getElementById(containerId);
+
+    if (!container) return;
+
+    var pages = container.querySelectorAll('.page');
+    var totalPages = pages.length;
+
+    document.getElementById('totalPages_' + vizId).textContent = totalPages;
+
+    window['showPage_1f337895'] = function(n) {
+        if (n > totalPages) currentPage_1f337895 = totalPages;
+        if (n < 1) currentPage_1f337895 = 1;
+
+        for (var i = 0; i < pages.length; i++) {
+            pages[i].classList.remove('active');
+        }
+        pages[currentPage_1f337895 - 1].classList.add('active');
+
+        document.getElementById('currentPage_' + vizId).textContent = currentPage_1f337895;
+        document.getElementById('prevBtn_' + vizId).disabled = (currentPage_1f337895 === 1);
+        document.getElementById('nextBtn_' + vizId).disabled = (currentPage_1f337895 === totalPages);
+    };
+
+    window['changePage_1f337895'] = function(n) {
+        currentPage_1f337895 += n;
+        window['showPage_1f337895'](currentPage_1f337895);
+    };
+
+    // Inicjalizacja
+    window['showPage_1f337895'](1);
+
+    // Funkcjonalność powiększania obrazów
+    var images = container.querySelectorAll('img');
+    images.forEach(function(img) {
+        img.style.cursor = 'pointer';
+        img.style.transition = 'transform 0.3s ease';
+
+        img.addEventListener('click', function() {
+            if (this.classList.contains('zoomed')) {
+                // Pomniejsz obraz
+                this.classList.remove('zoomed');
+                this.style.position = '';
+                this.style.top = '';
+                this.style.left = '';
+                this.style.transform = '';
+                this.style.width = '100%';
+                this.style.maxWidth = '';
+                this.style.maxHeight = '';
+                this.style.zIndex = '';
+                this.style.backgroundColor = '';
+                this.style.padding = '';
+                this.style.boxShadow = '';
+            } else {
+                // Powiększ obraz
+                this.classList.add('zoomed');
+                this.style.position = 'fixed';
+                this.style.top = '50%';
+                this.style.left = '50%';
+                this.style.transform = 'translate(-50%, -50%)';
+                this.style.width = 'auto';
+                this.style.maxWidth = '95vw';
+                this.style.maxHeight = '95vh';
+                this.style.zIndex = '9999';
+                this.style.backgroundColor = 'rgba(255, 255, 255, 0.95)';
+                this.style.padding = '10px';
+                this.style.boxShadow = '0 4px 20px rgba(0, 0, 0, 0.3)';
+            }
+        });
+    });
+})();
+</script>
+
+</body>
+</html>
+
+"
+```
+            lineageTag: c7c269d9-d721-4615-9984-30fab510a777
 
         measure '03. Wprowadzenie do CALCULATE - Użycie `CALCULATE`' = ```
 "
@@ -2235,7 +3064,7 @@ createOrReplace
 
 "
 ```
-            lineageTag: daeef7bb-b98f-46ee-8655-1af2d43ccccc
+            lineageTag: 6ff343bc-a1db-4ce8-8d3c-45503f3ae5f8
 
         measure '03. Wprowadzenie do CALCULATE - Wprowadzenie do CALCULATE' = ```
 "
@@ -2381,7 +3210,7 @@ createOrReplace
 
 "
 ```
-            lineageTag: 578e72e7-aa09-49c5-9efd-fe4afa4bae1c
+            lineageTag: 1d530357-95d5-4cff-983e-4dcd2b62f473
 
         measure '04. Modyfikowanie Kontekstu - ALL i REMOVEFILTERS - usuwanie filtrów' = ```
 "
@@ -2597,7 +3426,7 @@ createOrReplace
 
 "
 ```
-            lineageTag: 1dabfaed-d080-4e79-b49e-9aabb04fbdf0
+            lineageTag: f49b6ce9-e996-4546-8bc3-bbcf0759c1bc
 
         measure '04. Modyfikowanie Kontekstu - ALLEXCEPT' = ```
 "
@@ -2819,7 +3648,7 @@ createOrReplace
 
 "
 ```
-            lineageTag: 19743ea4-42eb-4874-97bd-4328f5e27cfe
+            lineageTag: db522e56-e8f1-4564-9a9e-30134a0a003d
 
         measure '04. Modyfikowanie Kontekstu - ALLSELECTED' = ```
 "
@@ -3096,7 +3925,7 @@ createOrReplace
 
 "
 ```
-            lineageTag: e2442dcb-4b9b-49e8-aaa8-0cfade1e55dd
+            lineageTag: a4467239-067f-46c4-815b-bdf9dccc0be0
 
         measure '04. Modyfikowanie Kontekstu - CROSSFILTER' = ```
 "
@@ -3115,7 +3944,7 @@ createOrReplace
     <div class='navigation'>
         <button id='prevBtn_06e680c7' onclick='changePage_06e680c7(-1)'>← Poprzednia</button>
         <span class='page-indicator'>
-            Strona <span id='currentPage_06e680c7'>1</span> z <span id='totalPages_06e680c7'>1</span>
+            Strona <span id='currentPage_06e680c7'>1</span> z <span id='totalPages_06e680c7'>2</span>
         </span>
         <button id='nextBtn_06e680c7' onclick='changePage_06e680c7(1)'>Następna →</button>
     </div>
@@ -3139,6 +3968,20 @@ createOrReplace
         			Both
         		)
         	)</code></pre>
+
+    </div>
+
+    <!-- Strona 2 -->
+    <div class='page'>
+        <h1>Zastosowanie</h1>
+        <p>Funkcja CROSSFILTER służy do dynamicznego modyfikowania kierunku przepływu filtru między tabelami w ramach pojedynczej miary lub wyrażenia DAX, bez konieczności zmiany ustawień relacji w modelu danych. Jest szczególnie przydatna, gdy standardowy kierunek filtrowania relacji nie wystarcza do osiągnięcia zamierzonego wyniku analitycznego, ale nie chcemy na stałe zmieniać modelu (np. włączać dwukierunkowego filtrowania wszędzie, co mogłoby pogorszyć wydajność).</p>
+        <img src='https://github.com/odczarujpowerbi/szkolenia-powerbi/blob/main/bin/Pasted%20image%2020251210001950.png?raw=true' width='100%'>
+        <p><strong>Typowe zastosowania:</strong></p>
+        <ul>
+        <li>Tymczasowe włączenie filtrowania dwukierunkowego dla specyficznych obliczeń</li>
+        <li>Całkowite wyłączenie filtrowania między tabelami w kontekście danej miary</li>
+        <li>Odwrócenie kierunku filtrowania relacji dla konkretnych analiz</li>
+        </ul>
         <p>---</p>
 
     </div>
@@ -3229,7 +4072,7 @@ createOrReplace
 
 "
 ```
-            lineageTag: cd4ecdfd-cc31-4138-907b-593a6e3188e1
+            lineageTag: eb1b6107-406d-4a3b-b004-705cbeec6799
 
         measure '04. Modyfikowanie Kontekstu - KEEPFILTERS' = ```
 "
@@ -3446,7 +4289,7 @@ createOrReplace
 
 "
 ```
-            lineageTag: 4d245dae-e742-4f63-9988-f33805d863df
+            lineageTag: 95478224-6899-400c-a175-837f52a9ae44
 
         measure '04. Modyfikowanie Kontekstu - USERELATIONSHIP' = ```
 "
@@ -3465,7 +4308,7 @@ createOrReplace
     <div class='navigation'>
         <button id='prevBtn_b61f34a7' onclick='changePage_b61f34a7(-1)'>← Poprzednia</button>
         <span class='page-indicator'>
-            Strona <span id='currentPage_b61f34a7'>1</span> z <span id='totalPages_b61f34a7'>1</span>
+            Strona <span id='currentPage_b61f34a7'>1</span> z <span id='totalPages_b61f34a7'>2</span>
         </span>
         <button id='nextBtn_b61f34a7' onclick='changePage_b61f34a7(1)'>Następna →</button>
     </div>
@@ -3480,6 +4323,11 @@ createOrReplace
         ├─ Data Fakturowania   → 'dKalendarz'[Data] (relacja nieaktywna)
         └─ Data Dostawy        → 'dKalendarz'[Data] (relacja nieaktywna)</code></pre>
         <img src='https://github.com/odczarujpowerbi/szkolenia-powerbi/blob/main/bin/Pasted%20image%2020251209193536.png?raw=true' width='100%'>
+
+    </div>
+
+    <!-- Strona 2 -->
+    <div class='page'>
         <h1>Podstawowa składnia</h1>
         <pre><code><span class='dax-comment'>------- Miara używająca domyślnej relacji (OrderDate)</span>
         fSprzedaż Amount = 
@@ -3594,7 +4442,240 @@ createOrReplace
 
 "
 ```
-            lineageTag: af09413d-239c-414c-aa04-3464c172e010
+            lineageTag: ce8db795-4bb5-44ca-8403-131f828a88ad
+
+        measure '05. Tworzenie zestawień tabelarycznych - Tworzenie Tabeli' = ```
+"
+
+<!DOCTYPE html>
+<html lang='pl'>
+<head>
+    <meta charset='UTF-8'>
+    <meta name='viewport' content='width=device-width, initial-scale=1.0'>
+    <title>Tworzenie Tabeli</title>
+</head>
+<body>
+
+<div class='container' id='viz_746dab9c'>
+    <!-- Nawigacja na górze -->
+    <div class='navigation'>
+        <button id='prevBtn_746dab9c' onclick='changePage_746dab9c(-1)'>← Poprzednia</button>
+        <span class='page-indicator'>
+            Strona <span id='currentPage_746dab9c'>1</span> z <span id='totalPages_746dab9c'>3</span>
+        </span>
+        <button id='nextBtn_746dab9c' onclick='changePage_746dab9c(1)'>Następna →</button>
+    </div>
+
+    <!-- Strona 1 -->
+    <div class='page active'>
+        <h1>SUMMARIZE vs SUMMARIZECOLUMNS</h1>
+        <p><strong>Podejście legacy (<code>SUMMARIZE</code>):</strong></p>
+        <ul>
+        <li>Wymaga dodatkowego <code>ADDCOLUMNS</code> do obliczenia miar</li>
+        <li>Trzeba ręcznie filtrować puste wiersze przez <code>FILTER</code> + <code>NOT</code> <code>ISBLANK</code></li>
+        <li>Bardziej rozwlekłe i podatne na błędy kontekstowe</li>
+        <li><code>SUMMARIZE</code> może dać niespodziewane wyniki bez <code>ADDCOLUMNS</code></li>
+        </ul>
+        <p><strong>Podejście modern (SUMMARIZECOLUMNS):</strong></p>
+        <ul>
+        <li>Łączy grupowanie, dodawanie obliczeń i usuwanie pustych wierszy w jednej funkcji</li>
+        <li>Krótsze, czytelniejsze, bezpieczniejsze</li>
+        <li>Obecnie zalecany standard do raportów i zapytań w DAX</li>
+        </ul>
+        <pre><code><span class='dax-comment'>------- LEGACY  </span>
+        EVALUATE  
+            <span class='dax-function'>FILTER</span> (  
+                <span class='dax-function'>ADDCOLUMNS</span> (  
+                    <span class='dax-function'>SUMMARIZE</span> ( Sales, 'Product'[Brand], 'Date'[Year] ),  
+                    'Sales', <span class='dax-function'>CALCULATE</span> ( <span class='dax-function'>SUMX</span> ( Sales, Sales[Quantity] * Sales[Unit Price] ) )  
+                ),  
+                NOT <span class='dax-function'>ISBLANK</span> ( [Sales] )  
+            )  
+
+        <span class='dax-comment'>------- MODERN  </span>
+        EVALUATE  
+            <span class='dax-function'>SUMMARIZECOLUMNS</span> (  
+                'Product'[Brand], 'Date'[Year],  
+                'Sales', <span class='dax-function'>CALCULATE</span> ( <span class='dax-function'>SUMX</span> ( Sales, Sales[Quantity] * Sales[Unit Price] ) )  
+            )</code></pre>
+
+    </div>
+
+    <!-- Strona 2 -->
+    <div class='page'>
+        <h1>Praca z wieloma tabelami faktów</h1>
+        <p><strong>Zalety SUMMARIZECOLUMNS:</strong></p>
+        <ul>
+        <li>Rozumie kontekst całego modelu danych</li>
+        <li>Działa spójnie z modelem gwiazdy – automatycznie obsługuje kombinacje wymiarów</li>
+        <li>Pozwala w jednym wyrażeniu pobierać dane z różnych tabel faktów</li>
+        <li>Zwraca kompletny wynik w jednej tabeli</li>
+        </ul>
+        <p><strong>Problemy z SUMMARIZE:</strong></p>
+        <ul>
+        <li>Ogranicza się do jednej tabeli faktów</li>
+        <li>Wymaga ręcznego tworzenia siatki kombinacji przez <code>CROSSJOIN</code></li>
+        <li>Trzeba łączyć wyniki przez <code>NATURALLEFTOUTERJOIN</code></li>
+        <li>Bardziej skomplikowane, mniej czytelne i podatne na błędy</li>
+        </ul>
+        <pre><code><span class='dax-comment'>------- RECOMMENDED  </span>
+        EVALUATE  
+            <span class='dax-function'>SUMMARIZECOLUMNS</span> (  
+                'Product'[Category],  
+                Store[Country],  
+                'Sales', <span class='dax-function'>CALCULATE</span> ( <span class='dax-function'>SUMX</span> ( Sales, Sales[Quantity] * Sales[Net Price] ) ),  
+                'Purchases', <span class='dax-function'>CALCULATE</span> ( <span class='dax-function'>SUMX</span> ( Purchase, Purchase[Quantity] * Purchase[Unit Cost] ) )   
+            )  
+
+        <span class='dax-comment'>------- PROBLEMATIC  </span>
+        EVALUATE  
+            <span class='dax-keyword'>VAR</span> S =   
+                <span class='dax-function'>ADDCOLUMNS</span> (  
+                    <span class='dax-function'>SUMMARIZE</span> ( Sales, 'Product'[Category], Store[Country] ),  
+                    'Sales', <span class='dax-function'>CALCULATE</span> ( <span class='dax-function'>SUMX</span> ( Sales, Sales[Quantity] * Sales[Net Price] ) )   
+                )  
+            <span class='dax-keyword'>VAR</span> P =   
+                <span class='dax-function'>ADDCOLUMNS</span> (  
+                    <span class='dax-function'>SUMMARIZE</span> ( Purchase, 'Product'[Category], Store[Country] ),  
+                    'Purchase', <span class='dax-function'>CALCULATE</span> ( <span class='dax-function'>SUMX</span> ( Purchase, Purchase[Quantity] * Purchase[Unit Cost] ) )   
+                )  
+            <span class='dax-keyword'>VAR</span> G =   
+                <span class='dax-function'>CROSSJOIN</span>( <span class='dax-function'>VALUES</span> ( 'Product'[Category] ), <span class='dax-function'>VALUES</span> ( Store[Country] ) )  
+        <span class='dax-keyword'>RETURN</span>  
+            <span class='dax-function'>NATURALLEFTOUTERJOIN</span> ( <span class='dax-function'>NATURALLEFTOUTERJOIN</span> ( G, P ), S )</code></pre>
+
+    </div>
+
+    <!-- Strona 3 -->
+    <div class='page'>
+        <h1>Kiedy używać SUMMARIZE zamiast SUMMARIZECOLUMNS</h1>
+        <p><strong>Gdy potrzebujesz tylko istniejących kombinacji:</strong></p>
+        <ul>
+        <li><code>SUMMARIZE</code> z tabelą źródłową zwraca tylko kombinacje występujące w danych faktycznych</li>
+        <li>Filtruje automatycznie do rzeczywistych relacji w tabeli Sales</li>
+        <li>To najczęściej oczekiwane zachowanie w raportach</li>
+        </ul>
+        <p><strong>Problem z SUMMARIZECOLUMNS bez miar:</strong></p>
+        <ul>
+        <li>Bez tabeli źródłowej generuje wszystkie możliwe kombinacje (jak <code>CROSSJOIN</code>)</li>
+        <li>Może zwrócić wiele pustych kombinacji, które nie istnieją w danych</li>
+        <li>Nie jest to zwykle pożądane zachowanie</li>
+        </ul>
+        <pre><code><span class='dax-comment'>------- RECOMMENDED  </span>
+        EVALUATE  
+            <span class='dax-function'>SUMMARIZE</span> (  
+                'Sales',  
+                'Product'[Brand],  
+                Customer[Continent],  
+                'Date'[Date]  
+            )  
+
+        <span class='dax-comment'>------- PROBLEMATIC  </span>
+        EVALUATE  
+            <span class='dax-function'>SUMMARIZECOLUMNS</span> (  
+                'Product'[Brand],  
+                Customer[Continent],  
+                'Date'[Date]  
+            )  
+
+        <span class='dax-comment'>-- Równoważne z:  </span>
+        EVALUATE  
+            <span class='dax-function'>CROSSJOIN</span> (  
+                <span class='dax-function'>VALUES</span> ( 'Product'[Brand] ),  
+                <span class='dax-function'>VALUES</span> ( Customer[Continent] ),  
+                <span class='dax-function'>VALUES</span> ( 'Date'[Date] )   
+            )</code></pre>
+        <p><strong>Zasada:</strong> Do samego grupowania bez miar używaj <code>SUMMARIZE</code> z tabelą źródłową. Do grupowania z miarami używaj <code>SUMMARIZECOLUMNS</code>.</p>
+
+    </div>
+
+</div>
+
+<script>
+(function() {
+    // Unikalny ID dla tej wizualizacji (wstrzykiwany przez Python)
+    var vizId = '746dab9c';
+    var containerId = 'viz_' + vizId;
+
+    var currentPage_746dab9c = 1;
+    var container = document.getElementById(containerId);
+
+    if (!container) return;
+
+    var pages = container.querySelectorAll('.page');
+    var totalPages = pages.length;
+
+    document.getElementById('totalPages_' + vizId).textContent = totalPages;
+
+    window['showPage_746dab9c'] = function(n) {
+        if (n > totalPages) currentPage_746dab9c = totalPages;
+        if (n < 1) currentPage_746dab9c = 1;
+
+        for (var i = 0; i < pages.length; i++) {
+            pages[i].classList.remove('active');
+        }
+        pages[currentPage_746dab9c - 1].classList.add('active');
+
+        document.getElementById('currentPage_' + vizId).textContent = currentPage_746dab9c;
+        document.getElementById('prevBtn_' + vizId).disabled = (currentPage_746dab9c === 1);
+        document.getElementById('nextBtn_' + vizId).disabled = (currentPage_746dab9c === totalPages);
+    };
+
+    window['changePage_746dab9c'] = function(n) {
+        currentPage_746dab9c += n;
+        window['showPage_746dab9c'](currentPage_746dab9c);
+    };
+
+    // Inicjalizacja
+    window['showPage_746dab9c'](1);
+
+    // Funkcjonalność powiększania obrazów
+    var images = container.querySelectorAll('img');
+    images.forEach(function(img) {
+        img.style.cursor = 'pointer';
+        img.style.transition = 'transform 0.3s ease';
+
+        img.addEventListener('click', function() {
+            if (this.classList.contains('zoomed')) {
+                // Pomniejsz obraz
+                this.classList.remove('zoomed');
+                this.style.position = '';
+                this.style.top = '';
+                this.style.left = '';
+                this.style.transform = '';
+                this.style.width = '100%';
+                this.style.maxWidth = '';
+                this.style.maxHeight = '';
+                this.style.zIndex = '';
+                this.style.backgroundColor = '';
+                this.style.padding = '';
+                this.style.boxShadow = '';
+            } else {
+                // Powiększ obraz
+                this.classList.add('zoomed');
+                this.style.position = 'fixed';
+                this.style.top = '50%';
+                this.style.left = '50%';
+                this.style.transform = 'translate(-50%, -50%)';
+                this.style.width = 'auto';
+                this.style.maxWidth = '95vw';
+                this.style.maxHeight = '95vh';
+                this.style.zIndex = '9999';
+                this.style.backgroundColor = 'rgba(255, 255, 255, 0.95)';
+                this.style.padding = '10px';
+                this.style.boxShadow = '0 4px 20px rgba(0, 0, 0, 0.3)';
+            }
+        });
+    });
+})();
+</script>
+
+</body>
+</html>
+
+"
+```
+            lineageTag: d1813142-a3e9-46e6-aa3b-06911abe078e
 
         measure '05. Tworzenie zestawień tabelarycznych' = ```
 "
@@ -3827,7 +4908,7 @@ createOrReplace
 
 "
 ```
-            lineageTag: 921c665d-1aa9-4ceb-8e07-d43816f3ceaa
+            lineageTag: 9839c55f-2711-444e-9ec5-671c4feeda1a
 
         measure '06. DAX - Zaawansowane Kwerendy - Query View' = ```
 "
@@ -4030,7 +5111,7 @@ createOrReplace
 
 "
 ```
-            lineageTag: fca9c590-f398-43dc-b0e2-e5a4c3406a42
+            lineageTag: b7efee0b-fc53-452a-a413-20173c005d6d
 
         measure '06. DAX - Zaawansowane Kwerendy' = ```
 "
@@ -4277,7 +5358,7 @@ createOrReplace
 
 "
 ```
-            lineageTag: bb10c509-b0be-45f1-a06e-74910563ab02
+            lineageTag: 73ebe01b-fb2e-4329-a6a9-71b2794a702b
 
         measure 'CSS - Czerwony' = ```
 "
@@ -4316,7 +5397,7 @@ createOrReplace
         }
 
         button {
-            background: #df4a16;
+            background: #6b1718;
             color: white;
             border: none;
             padding: 12px 28px;
@@ -4328,7 +5409,7 @@ createOrReplace
         }
 
         button:hover {
-            background: #df7a16;
+            background: #380c0c;
         }
 
         button:disabled {
@@ -4363,8 +5444,8 @@ createOrReplace
             padding-top: 14px;
             padding-bottom: 6px;
             margin-bottom: 1em;
-            color: #df4a16;
-            border-bottom: 2px solid #df4a16;
+            color: #6b1718;
+            border-bottom: 2px solid #6b1718;
         }
 
         h2 {
@@ -4408,7 +5489,7 @@ createOrReplace
 
         pre {
             background: #f8f9fa;
-            border-left: 3px solid #df4a16;
+            border-left: 3px solid #6b1718;
             padding: 18px;
             margin: 1em 0;
             overflow-x: auto;
@@ -4424,7 +5505,7 @@ createOrReplace
         }
 
         .dax-keyword {
-            color: #df4a16;
+            color: #6b1718;
             font-weight: 600;
         }
 
@@ -4472,7 +5553,7 @@ createOrReplace
         }
 
         blockquote {
-            border-left: 3px solid #df4a16;
+            border-left: 3px solid #6b1718;
             background: #f8f9fa;
             padding: 14px 18px;
             margin: 1em 0;
@@ -4485,7 +5566,7 @@ createOrReplace
         }
 
         .iteration-box {
-            border-left: 3px solid #df4a16;
+            border-left: 3px solid #6b1718;
             padding: 14px 18px;
             margin: 0.8em 0;
         }
@@ -4503,7 +5584,7 @@ createOrReplace
 </style>
 "
 ```
-            lineageTag: ad99ae7d-0910-4b32-a459-1af8814d7cb4
+            lineageTag: 133314e2-e17b-4703-b080-e6990d5f39c2
 
         measure 'CSS - Niebieski' = ```
 "
@@ -4729,7 +5810,7 @@ createOrReplace
 </style>
 "
 ```
-            lineageTag: 303d2938-f38e-4c54-860f-f5aa37d32c0c
+            lineageTag: 242e334a-4a5e-4876-b11c-dd24188ca12d
 
         partition _HTML = m
             mode: import

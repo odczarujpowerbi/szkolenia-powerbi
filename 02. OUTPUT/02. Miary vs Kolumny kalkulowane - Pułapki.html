@@ -1,0 +1,177 @@
+Pułapki = 
+
+"
+
+<!DOCTYPE html>
+<html lang='pl'>
+<head>
+    <meta charset='UTF-8'>
+    <meta name='viewport' content='width=device-width, initial-scale=1.0'>
+    <title>Pułapki</title>
+</head>
+<body>
+
+<div class='container' id='viz_8c56120f'>
+    <!-- Nawigacja na górze -->
+    <div class='navigation'>
+        <button id='prevBtn_8c56120f' onclick='changePage_8c56120f(-1)'>← Poprzednia</button>
+        <span class='page-indicator'>
+            Strona <span id='currentPage_8c56120f'>1</span> z <span id='totalPages_8c56120f'>3</span>
+        </span>
+        <button id='nextBtn_8c56120f' onclick='changePage_8c56120f(1)'>Następna →</button>
+    </div>
+
+    <!-- Strona 1 -->
+    <div class='page active'>
+        <h1>Najczęstsze błędy początkujących</h1>
+        <h2>Błąd 1: Tworzenie kolumny zamiast miary dla agregacji</h2>
+        <pre><code>// ❌ ZŁE - kolumna kalkulowana (niepotrzebnie zajmuje pamięć)
+        Suma Wartości Kolumna = <span class='dax-function'>SUM</span>(Sprzedaż[Wartość netto])
+
+        // ✅ DOBRE - miara (dynamiczna, nie zajmuje pamięci)
+        Suma Wartości Miara = <span class='dax-function'>SUM</span>(Sprzedaż[Wartość netto])</code></pre>
+        <h2>Błąd 2: Próba mnożenia kolumn w miarze</h2>
+        <pre><code>// ❌ ZŁE - nie zadziała w miarze
+        Wartość Brutto = Sprzedaż[Wartość netto] * <span class='dax-number'>1.23</span>
+
+        // ✅ DOBRE - agreguj najpierw
+        Wartość Brutto = <span class='dax-function'>SUM</span>(Sprzedaż[Wartość netto]) * <span class='dax-number'>1.23</span>
+
+        // ✅ ALBO użyj SUMX dla wiersz-po-wierszu
+        Wartość Brutto = <span class='dax-function'>SUMX</span>(Sprzedaż, Sprzedaż[Wartość netto] * <span class='dax-number'>1.23</span>)</code></pre>
+        <h2>Błąd 3: Zapominanie o agregacji w miarach</h2>
+        <pre><code>// ❌ ZŁE - w miarze musisz agregować
+        Średnia Cena = Sprzedaż[Wartość netto] / Sprzedaż[Ilość]
+
+        // ✅ DOBRE opcja <span class='dax-number'>1</span> - zagregowane dzielenie
+        Średnia Cena = 
+        <span class='dax-function'>DIVIDE</span>(
+            <span class='dax-function'>SUM</span>(Sprzedaż[Wartość netto]),
+            <span class='dax-function'>SUM</span>(Sprzedaż[Ilość])
+        )
+
+        // ✅ DOBRE opcja <span class='dax-number'>2</span> - iteracyjne obliczenie średniej
+        Średnia Cena = 
+        <span class='dax-function'>AVERAGEX</span>(
+            Sprzedaż,
+            <span class='dax-function'>DIVIDE</span>(Sprzedaż[Wartość netto], Sprzedaż[Ilość])
+        )</code></pre>
+
+    </div>
+
+    <!-- Strona 2 -->
+    <div class='page'>
+        <h1>Kiedy używać czego? - Decyzja</h1>
+        <p><strong>Użyj kolumny kalkulowanej gdy:</strong></p>
+        <ul>
+        <li>✓ Potrzebujesz wartości do <strong>filtrowania</strong> (slicer, filtr)</li>
+        <li>✓ Chcesz <strong>grupować</strong> według obliczonej wartości</li>
+        <li>✓ Wartość zależy tylko od <strong>bieżącego wiersza</strong></li>
+        <li>✓ Możesz zapisać DAX <strong>bez funkcji agregujących</strong></li>
+        <li>✓ Przykład: 'Kategoria wiekowa klienta', 'Dzień tygodnia sprzedaży', 'Rabat kwotowy'</li>
+        </ul>
+        <p><strong>Użyj miary gdy:</strong></p>
+        <ul>
+        <li>✓ Potrzebujesz <strong>agregacji</strong> (suma, średnia, liczba)</li>
+        <li>✓ Wynik ma być <strong>dynamiczny</strong> (zależny od filtrów)</li>
+        <li>✓ Chcesz <strong>oszczędzić pamięć</strong> w modelu</li>
+        <li>✓ W formule używasz <code>SUM()</code>, <code>AVERAGE()</code>, <code>COUNT()</code>, itp.</li>
+        <li>✓ Przykład: 'Suma sprzedaży', 'Liczba transakcji', 'Średnia wartość', '% udział'</li>
+        </ul>
+
+    </div>
+
+    <!-- Strona 3 -->
+    <div class='page'>
+        <h1>Złota zasada</h1>
+        <p>> <strong>Jeśli w formule używasz funkcji agregującej (<code>SUM</code>, <code>AVERAGE</code>, <code>COUNT</code>, itp.), prawie zawsze powinieneś tworzyć MIARĘ, nie kolumnę.</strong></p>
+        <p>> <strong>Jeśli możesz napisać formułę bez agregacji, tylko prostym odwołaniem do kolumn (jak w Excelu), prawdopodobnie potrzebujesz KOLUMNY.</strong></p>
+        <p>---</p>
+
+    </div>
+
+</div>
+
+<script>
+(function() {
+    // Unikalny ID dla tej wizualizacji (wstrzykiwany przez Python)
+    var vizId = '8c56120f';
+    var containerId = 'viz_' + vizId;
+
+    var currentPage_8c56120f = 1;
+    var container = document.getElementById(containerId);
+
+    if (!container) return;
+
+    var pages = container.querySelectorAll('.page');
+    var totalPages = pages.length;
+
+    document.getElementById('totalPages_' + vizId).textContent = totalPages;
+
+    window['showPage_8c56120f'] = function(n) {
+        if (n > totalPages) currentPage_8c56120f = totalPages;
+        if (n < 1) currentPage_8c56120f = 1;
+
+        for (var i = 0; i < pages.length; i++) {
+            pages[i].classList.remove('active');
+        }
+        pages[currentPage_8c56120f - 1].classList.add('active');
+
+        document.getElementById('currentPage_' + vizId).textContent = currentPage_8c56120f;
+        document.getElementById('prevBtn_' + vizId).disabled = (currentPage_8c56120f === 1);
+        document.getElementById('nextBtn_' + vizId).disabled = (currentPage_8c56120f === totalPages);
+    };
+
+    window['changePage_8c56120f'] = function(n) {
+        currentPage_8c56120f += n;
+        window['showPage_8c56120f'](currentPage_8c56120f);
+    };
+
+    // Inicjalizacja
+    window['showPage_8c56120f'](1);
+
+    // Funkcjonalność powiększania obrazów
+    var images = container.querySelectorAll('img');
+    images.forEach(function(img) {
+        img.style.cursor = 'pointer';
+        img.style.transition = 'transform 0.3s ease';
+
+        img.addEventListener('click', function() {
+            if (this.classList.contains('zoomed')) {
+                // Pomniejsz obraz
+                this.classList.remove('zoomed');
+                this.style.position = '';
+                this.style.top = '';
+                this.style.left = '';
+                this.style.transform = '';
+                this.style.width = '100%';
+                this.style.maxWidth = '';
+                this.style.maxHeight = '';
+                this.style.zIndex = '';
+                this.style.backgroundColor = '';
+                this.style.padding = '';
+                this.style.boxShadow = '';
+            } else {
+                // Powiększ obraz
+                this.classList.add('zoomed');
+                this.style.position = 'fixed';
+                this.style.top = '50%';
+                this.style.left = '50%';
+                this.style.transform = 'translate(-50%, -50%)';
+                this.style.width = 'auto';
+                this.style.maxWidth = '95vw';
+                this.style.maxHeight = '95vh';
+                this.style.zIndex = '9999';
+                this.style.backgroundColor = 'rgba(255, 255, 255, 0.95)';
+                this.style.padding = '10px';
+                this.style.boxShadow = '0 4px 20px rgba(0, 0, 0, 0.3)';
+            }
+        });
+    });
+})();
+</script>
+
+</body>
+</html>
+
+"
