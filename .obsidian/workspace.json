@@ -34,6 +34,7 @@
             }
           }
         ],
+        "currentTab": 1,
         "stacked": true
       }
     ],
@@ -118,13 +119,13 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "02. OUTPUT/01. Podstawy DAX.html",
+                "file": "01. THEORY/03. Modyfikowanie Kontekstu.md",
                 "followCursor": true,
                 "showSearch": false,
                 "searchQuery": ""
               },
               "icon": "lucide-list",
-              "title": "Outline of 01. Podstawy DAX"
+              "title": "Outline of 03. Modyfikowanie Kontekstu"
             }
           }
         ],
@@ -141,7 +142,7 @@
             "state": {
               "type": "localgraph",
               "state": {
-                "file": "02. OUTPUT/01. Podstawy DAX.html",
+                "file": "01. THEORY/03. Modyfikowanie Kontekstu.md",
                 "options": {
                   "collapse-filter": true,
                   "search": "",
@@ -169,7 +170,7 @@
                 }
               },
               "icon": "lucide-git-fork",
-              "title": "Graph of 01. Podstawy DAX"
+              "title": "Graph of 03. Modyfikowanie Kontekstu"
             }
           }
         ]
@@ -193,8 +194,9 @@
       "hide-folders:Show hidden folders": false
     }
   },
-  "active": "c6a8ca1a0082a34f",
+  "active": "7293b29fa1965917",
   "lastOpenFiles": [
+    "02. OUTPUT/01. Podstawy DAX.html",
     "02. OUTPUT/01. Podstawy DAX - Funkcje agregujące.html",
     "02. OUTPUT/01. Podstawy DAX - Funkcje dat.html",
     "02. OUTPUT/00. Konfiguracja Power BI - Główne widoki Power BI Desktop.html",
@@ -208,7 +210,6 @@
     "01. THEORY/02. Wprowadzenie do CALCULATE.md",
     "01. THEORY/01. Podstawy DAX.md",
     "02. OUTPUT/01. Podstawy DAX - Funkcje iteracyjne (X-functions).html",
-    "02. OUTPUT/01. Podstawy DAX.html",
     "02. OUTPUT/01. Podstawy DAX - Funkcje logiczne.html",
     "02. OUTPUT/03. Modyfikowanie Kontekstu - ALL i REMOVEFILTERS - usuwanie filtrów.html",
     "01. THEORY/05. DAX - Zaawansowane Kwerendy.md",
