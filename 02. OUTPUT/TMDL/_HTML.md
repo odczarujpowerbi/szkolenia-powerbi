@@ -1,7 +1,7 @@
 createOrReplace
 
     table _HTML
-        lineageTag: 9cfec332-3eec-489b-bfd8-fdca2bfc0d5e
+        lineageTag: 2f3b66d4-f70d-4c54-9722-0f806c551f1c
 
         measure '00. Konfiguracja Power BI - Główne widoki Power BI Desktop' = ```
 "
@@ -172,14 +172,15 @@ createOrReplace
             }
     
             ul, ol {
-                margin: 0.5em 0 0.5em 1.5em;
-                padding-left: 0.5em;
+                margin: 0.3em 0;
+                padding-left: 1.8em;
             }
     
             li {
-                margin: 0.3em 0;
-                padding-left: 0.3em;
+                margin: 0;
+                padding-left: 0.2em;
                 font-size: 1.05em;
+                line-height: 1.6;
             }
     
             ol {
@@ -193,6 +194,11 @@ createOrReplace
     
             ul li::marker {
                 color: #999;
+            }
+    
+            ul ul, ol ol, ul ol, ol ul {
+                margin: 0.2em 0;
+                padding-left: 1.5em;
             }
     
             blockquote {
@@ -426,7 +432,7 @@ createOrReplace
 
 "
 ```
-            lineageTag: fc2bcd8d-54a2-4e00-a89f-8146ed3aaaa1
+            lineageTag: 99923b5c-b809-4745-9bf4-49ef1b8610ce
 
         measure '00. Konfiguracja Power BI - Przygotowanie środowiska Power BI' = ```
 "
@@ -597,14 +603,15 @@ createOrReplace
             }
     
             ul, ol {
-                margin: 0.5em 0 0.5em 1.5em;
-                padding-left: 0.5em;
+                margin: 0.3em 0;
+                padding-left: 1.8em;
             }
     
             li {
-                margin: 0.3em 0;
-                padding-left: 0.3em;
+                margin: 0;
+                padding-left: 0.2em;
                 font-size: 1.05em;
+                line-height: 1.6;
             }
     
             ol {
@@ -618,6 +625,11 @@ createOrReplace
     
             ul li::marker {
                 color: #999;
+            }
+    
+            ul ul, ol ol, ul ol, ol ul {
+                margin: 0.2em 0;
+                padding-left: 1.5em;
             }
     
             blockquote {
@@ -668,9 +680,11 @@ createOrReplace
         <p>Przed rozpoczęciem pracy z Power BI Desktop warto odpowiednio skonfigurować środowisko pracy. Prawidłowe ustawienia programu umożliwiają dostęp do nowych funkcji oraz optymalizują sposób pracy z danymi.</p>
         <h2>Włączenie funkcji w wersji zapoznawczej (Preview Features)</h2>
         <p>Power BI regularnie wprowadza nowe funkcje, które na początku dostępne są jako wersje zapoznawcze. Aby je włączyć:</p>
-        <p>1. Otwórz <strong>Plik</strong> → <strong>Opcje i ustawienia</strong> → <strong>Opcje</strong></p>
-        <p>2. Przejdź do sekcji <strong>Funkcje w wersji zapoznawczej</strong> (Preview features)</p>
-        <p>3. Zaznacz następujące opcje:</p>
+        <ol>
+        <li>Otwórz <strong>Plik</strong> → <strong>Opcje i ustawienia</strong> → <strong>Opcje</strong></li>
+        <li>Przejdź do sekcji <strong>Funkcje w wersji zapoznawczej</strong> (Preview features)</li>
+        <li>Zaznacz następujące opcje:</li>
+        </ol>
         <p>   - <strong>Obliczenia wizualne</strong> - pozwala na tworzenie bardziej zaawansowanych wizualizacji</p>
         <p>   - <strong>Nowe wizualizacje</strong> - daje dostęp do najnowszych typów wizualizacji</p>
         <p><strong>Uwaga:</strong> Po włączeniu funkcji w wersji zapoznawczej konieczne jest ponowne uruchomienie Power BI Desktop.</p>
@@ -682,10 +696,12 @@ createOrReplace
     <div class='page'>
         <h2>Konfiguracja ustawień raportu- włączenie interakcji między obiektami na raporcie</h2>
         <p>Interakcje między wizualizacjami pozwalają na dynamiczne filtrowanie danych. Aby włączyć tę funkcję:</p>
-        <p>1. Przejdź do widoku <strong>Raport</strong></p>
-        <p>2. Kliknij <strong>Plik</strong> → <strong>Opcje i ustawienia</strong> → <strong>Opcje</strong></p>
-        <p>3. W sekcji <strong>BIEŻĄCY PLIK</strong> → <strong>Ustawienia raportu</strong></p>
-        <p>4. Upewnij się, że opcja dotycząca interakcji wizualizacji jest włączona</p>
+        <ol>
+        <li>Przejdź do widoku <strong>Raport</strong></li>
+        <li>Kliknij <strong>Plik</strong> → <strong>Opcje i ustawienia</strong> → <strong>Opcje</strong></li>
+        <li>W sekcji <strong>BIEŻĄCY PLIK</strong> → <strong>Ustawienia raportu</strong></li>
+        <li>Upewnij się, że opcja dotycząca interakcji wizualizacji jest włączona</li>
+        </ol>
         <img src='https://github.com/odczarujpowerbi/szkolenia-powerbi/blob/main/bin/Pasted%20image%2020251209170359.png?raw=true' width='100%'>
         <p>> Dzięki temu kliknięcie na element jednej wizualizacji (np. kolumnę na wykresie) automatycznie przefiltruje pozostałe wizualizacje na stronie raportu.</p>
 
@@ -695,9 +711,11 @@ createOrReplace
     <div class='page'>
         <h2>Ustawienia Power Query-  wyłączenie automatycznego wykrywania typów kolumn</h2>
         <p>Automatyczne wykrywanie typów danych przez Power Query może czasem prowadzić do błędów lub niepożądanych konwersji. Zaleca się wyłączenie tej opcji i ręczne kontrolowanie typów danych:</p>
-        <p>1. Otwórz <strong>Plik</strong> → <strong>Opcje i ustawienia</strong> → <strong>Opcje</strong></p>
-        <p>2. Przejdź do sekcji <strong>BIEŻĄCY PLIK</strong> → <strong>Ładowanie danych</strong></p>
-        <p>3. Odznacz opcję <strong>Automatycznie wykrywaj typy kolumn i nagłówki dla źródeł nieustrukturyzowanych</strong></p>
+        <ol>
+        <li>Otwórz <strong>Plik</strong> → <strong>Opcje i ustawienia</strong> → <strong>Opcje</strong></li>
+        <li>Przejdź do sekcji <strong>BIEŻĄCY PLIK</strong> → <strong>Ładowanie danych</strong></li>
+        <li>Odznacz opcję <strong>Automatycznie wykrywaj typy kolumn i nagłówki dla źródeł nieustrukturyzowanych</strong></li>
+        </ol>
         <img src='https://github.com/odczarujpowerbi/szkolenia-powerbi/blob/main/bin/Pasted%20image%2020251209170441.png?raw=true' width='100%'>
         <p>Dzięki temu będziesz mieć pełną kontrolę nad tym, jakie typy danych są przypisywane do poszczególnych kolumn.</p>
 
@@ -707,9 +725,11 @@ createOrReplace
     <div class='page'>
         <h2>Ustawienie wersji językowej</h2>
         <p>Wersja językowa Power BI wpływa na separatory dziesiętne, daty oraz niektóre funkcje DAX:</p>
-        <p>1. Otwórz <strong>Plik</strong> → <strong>Opcje i ustawienia</strong> → <strong>Opcje</strong></p>
-        <p>2. Przejdź do sekcji <strong>GLOBALNE</strong> → <strong>Ustawienia regionalne</strong></p>
-        <p>3. Wybierz odpowiedni język - zalecany jest Angielski ze względu na:</p>
+        <ol>
+        <li>Otwórz <strong>Plik</strong> → <strong>Opcje i ustawienia</strong> → <strong>Opcje</strong></li>
+        <li>Przejdź do sekcji <strong>GLOBALNE</strong> → <strong>Ustawienia regionalne</strong></li>
+        <li>Wybierz odpowiedni język - zalecany jest Angielski ze względu na:</li>
+        </ol>
         <p>	- Prostszą integrację z AI</p>
         <p>	- Spójność nazewnictwa z dokumentacją Microsoft Learn</p>
         <img src='https://github.com/odczarujpowerbi/szkolenia-powerbi/blob/main/bin/Pasted%20image%2020251209170514.png?raw=true' width='100%'>
@@ -814,7 +834,7 @@ createOrReplace
 
 "
 ```
-            lineageTag: 8ff59530-8d02-4357-856e-35f9c6ea17f8
+            lineageTag: c8fc8bcf-a315-4ec1-b663-f9d7784fbe28
 
         measure '01. Podstawy DAX - Funkcje agregujące' = ```
 "
@@ -985,14 +1005,15 @@ createOrReplace
             }
     
             ul, ol {
-                margin: 0.5em 0 0.5em 1.5em;
-                padding-left: 0.5em;
+                margin: 0.3em 0;
+                padding-left: 1.8em;
             }
     
             li {
-                margin: 0.3em 0;
-                padding-left: 0.3em;
+                margin: 0;
+                padding-left: 0.2em;
                 font-size: 1.05em;
+                line-height: 1.6;
             }
     
             ol {
@@ -1006,6 +1027,11 @@ createOrReplace
     
             ul li::marker {
                 color: #999;
+            }
+    
+            ul ul, ol ol, ul ol, ol ul {
+                margin: 0.2em 0;
+                padding-left: 1.5em;
             }
     
             blockquote {
@@ -1211,7 +1237,7 @@ createOrReplace
 
 "
 ```
-            lineageTag: 9ce7517d-2f5a-402a-97fe-5f59411c2243
+            lineageTag: 5ddd701a-079a-49ba-b83f-b8582e226a44
 
         measure '01. Podstawy DAX - Funkcje dat' = ```
 "
@@ -1382,14 +1408,15 @@ createOrReplace
             }
     
             ul, ol {
-                margin: 0.5em 0 0.5em 1.5em;
-                padding-left: 0.5em;
+                margin: 0.3em 0;
+                padding-left: 1.8em;
             }
     
             li {
-                margin: 0.3em 0;
-                padding-left: 0.3em;
+                margin: 0;
+                padding-left: 0.2em;
                 font-size: 1.05em;
+                line-height: 1.6;
             }
     
             ol {
@@ -1403,6 +1430,11 @@ createOrReplace
     
             ul li::marker {
                 color: #999;
+            }
+    
+            ul ul, ol ol, ul ol, ol ul {
+                margin: 0.2em 0;
+                padding-left: 1.5em;
             }
     
             blockquote {
@@ -1576,7 +1608,7 @@ createOrReplace
 
 "
 ```
-            lineageTag: 149fc2f7-c586-4edf-a9c4-6f626dc9e3a2
+            lineageTag: 59546fa0-92f2-4b94-8b79-e139764db14a
 
         measure '01. Podstawy DAX - Funkcje iteracyjne (X-functions)' = ```
 "
@@ -1747,14 +1779,15 @@ createOrReplace
             }
     
             ul, ol {
-                margin: 0.5em 0 0.5em 1.5em;
-                padding-left: 0.5em;
+                margin: 0.3em 0;
+                padding-left: 1.8em;
             }
     
             li {
-                margin: 0.3em 0;
-                padding-left: 0.3em;
+                margin: 0;
+                padding-left: 0.2em;
                 font-size: 1.05em;
+                line-height: 1.6;
             }
     
             ol {
@@ -1768,6 +1801,11 @@ createOrReplace
     
             ul li::marker {
                 color: #999;
+            }
+    
+            ul ul, ol ol, ul ol, ol ul {
+                margin: 0.2em 0;
+                padding-left: 1.5em;
             }
     
             blockquote {
@@ -1959,7 +1997,7 @@ createOrReplace
 
 "
 ```
-            lineageTag: f250b32c-d094-4994-8022-b1be990cf472
+            lineageTag: f1300f69-239c-4903-a142-a3cc7f657aea
 
         measure '01. Podstawy DAX - Funkcje logiczne' = ```
 "
@@ -2130,14 +2168,15 @@ createOrReplace
             }
     
             ul, ol {
-                margin: 0.5em 0 0.5em 1.5em;
-                padding-left: 0.5em;
+                margin: 0.3em 0;
+                padding-left: 1.8em;
             }
     
             li {
-                margin: 0.3em 0;
-                padding-left: 0.3em;
+                margin: 0;
+                padding-left: 0.2em;
                 font-size: 1.05em;
+                line-height: 1.6;
             }
     
             ol {
@@ -2151,6 +2190,11 @@ createOrReplace
     
             ul li::marker {
                 color: #999;
+            }
+    
+            ul ul, ol ol, ul ol, ol ul {
+                margin: 0.2em 0;
+                padding-left: 1.5em;
             }
     
             blockquote {
@@ -2339,7 +2383,7 @@ createOrReplace
 
 "
 ```
-            lineageTag: 7a981f13-4ba1-490b-9176-0b8d9c982976
+            lineageTag: 93a2c7a5-2b84-4323-b7d3-3e6ec7810efc
 
         measure '01. Podstawy DAX - Funkcje tekstowe' = ```
 "
@@ -2510,14 +2554,15 @@ createOrReplace
             }
     
             ul, ol {
-                margin: 0.5em 0 0.5em 1.5em;
-                padding-left: 0.5em;
+                margin: 0.3em 0;
+                padding-left: 1.8em;
             }
     
             li {
-                margin: 0.3em 0;
-                padding-left: 0.3em;
+                margin: 0;
+                padding-left: 0.2em;
                 font-size: 1.05em;
+                line-height: 1.6;
             }
     
             ol {
@@ -2531,6 +2576,11 @@ createOrReplace
     
             ul li::marker {
                 color: #999;
+            }
+    
+            ul ul, ol ol, ul ol, ol ul {
+                margin: 0.2em 0;
+                padding-left: 1.5em;
             }
     
             blockquote {
@@ -2704,7 +2754,7 @@ createOrReplace
 
 "
 ```
-            lineageTag: aceb961a-b86e-439e-9f6d-9757e74f855c
+            lineageTag: 643bb5ad-3170-4b36-9561-a48322a892a0
 
         measure '01. Podstawy DAX' = ```
 "
@@ -2875,14 +2925,15 @@ createOrReplace
             }
     
             ul, ol {
-                margin: 0.5em 0 0.5em 1.5em;
-                padding-left: 0.5em;
+                margin: 0.3em 0;
+                padding-left: 1.8em;
             }
     
             li {
-                margin: 0.3em 0;
-                padding-left: 0.3em;
+                margin: 0;
+                padding-left: 0.2em;
                 font-size: 1.05em;
+                line-height: 1.6;
             }
     
             ol {
@@ -2896,6 +2947,11 @@ createOrReplace
     
             ul li::marker {
                 color: #999;
+            }
+    
+            ul ul, ol ol, ul ol, ol ul {
+                margin: 0.2em 0;
+                padding-left: 1.5em;
             }
     
             blockquote {
@@ -3203,7 +3259,7 @@ createOrReplace
 
 "
 ```
-            lineageTag: c393bd06-8844-4ccf-994d-0f81fd935342
+            lineageTag: 5505276e-a13b-4bcf-99d8-be9707fafed9
 
         measure '02. Wprowadzenie do CALCULATE - Wprowadzenie do CALCULATE' = ```
 "
@@ -3374,14 +3430,15 @@ createOrReplace
             }
     
             ul, ol {
-                margin: 0.5em 0 0.5em 1.5em;
-                padding-left: 0.5em;
+                margin: 0.3em 0;
+                padding-left: 1.8em;
             }
     
             li {
-                margin: 0.3em 0;
-                padding-left: 0.3em;
+                margin: 0;
+                padding-left: 0.2em;
                 font-size: 1.05em;
+                line-height: 1.6;
             }
     
             ol {
@@ -3395,6 +3452,11 @@ createOrReplace
     
             ul li::marker {
                 color: #999;
+            }
+    
+            ul ul, ol ol, ul ol, ol ul {
+                margin: 0.2em 0;
+                padding-left: 1.5em;
             }
     
             blockquote {
@@ -3782,7 +3844,7 @@ createOrReplace
 
 "
 ```
-            lineageTag: 2e84f0bf-aceb-4af0-9d67-cf13143dae29
+            lineageTag: a77a37b9-a271-48c0-850c-fce1a139192d
 
         measure '03. DAX - Zmienne' = ```
 "
@@ -3953,14 +4015,15 @@ createOrReplace
             }
     
             ul, ol {
-                margin: 0.5em 0 0.5em 1.5em;
-                padding-left: 0.5em;
+                margin: 0.3em 0;
+                padding-left: 1.8em;
             }
     
             li {
-                margin: 0.3em 0;
-                padding-left: 0.3em;
+                margin: 0;
+                padding-left: 0.2em;
                 font-size: 1.05em;
+                line-height: 1.6;
             }
     
             ol {
@@ -3974,6 +4037,11 @@ createOrReplace
     
             ul li::marker {
                 color: #999;
+            }
+    
+            ul ul, ol ol, ul ol, ol ul {
+                margin: 0.2em 0;
+                padding-left: 1.5em;
             }
     
             blockquote {
@@ -4116,7 +4184,7 @@ createOrReplace
                 <span class='dax-keyword'>VAR</span> Odchylenie = Wartosc - Srednia  <span class='dax-comment'>-- Używamy zmiennej spoza iteracji!</span>
                 <span class='dax-keyword'>RETURN</span> Odchylenie
             )</code></pre>
-        <h1>Co się dzieje krok po kroku:</h1>
+        <h2>Co się dzieje krok po kroku:</h2>
         <div class='iteration-box'>
         <h3>Przed iteracją:</h3>
         <ul>
@@ -4240,7 +4308,7 @@ createOrReplace
 
 "
 ```
-            lineageTag: e9c72f2b-bc2b-4b1c-be4e-0c2388bfcfab
+            lineageTag: 606e3815-2711-4fe5-a047-3726f631a2a3
 
         measure 'CSS - Czerwony' = ```
 "
@@ -4405,14 +4473,15 @@ createOrReplace
         }
 
         ul, ol {
-            margin: 0.5em 0 0.5em 1.5em;
-            padding-left: 0.5em;
+            margin: 0.3em 0;
+            padding-left: 1.8em;
         }
 
         li {
-            margin: 0.3em 0;
-            padding-left: 0.3em;
+            margin: 0;
+            padding-left: 0.2em;
             font-size: 1.05em;
+            line-height: 1.6;
         }
 
         ol {
@@ -4426,6 +4495,11 @@ createOrReplace
 
         ul li::marker {
             color: #999;
+        }
+
+        ul ul, ol ol, ul ol, ol ul {
+            margin: 0.2em 0;
+            padding-left: 1.5em;
         }
 
         blockquote {
@@ -4460,7 +4534,7 @@ createOrReplace
 </style>
 "
 ```
-            lineageTag: 0632ef72-f93f-4341-a1ed-54f83ca0bd7e
+            lineageTag: 98f37c8f-81a0-455a-94c1-408208f3dca1
 
         measure 'CSS - Niebieski' = ```
 "
@@ -4625,14 +4699,15 @@ createOrReplace
         }
         
         ul, ol {
-            margin: 0.5em 0 0.5em 1.5em;
-            padding-left: 0.5em;
+            margin: 0.3em 0;
+            padding-left: 1.8em;
         }
 
         li {
-            margin: 0.3em 0;
-            padding-left: 0.3em;
+            margin: 0;
+            padding-left: 0.2em;
             font-size: 1.05em;
+            line-height: 1.6;
         }
 
         ol {
@@ -4646,6 +4721,11 @@ createOrReplace
 
         ul li::marker {
             color: #999;
+        }
+
+        ul ul, ol ol, ul ol, ol ul {
+            margin: 0.2em 0;
+            padding-left: 1.5em;
         }
 
         blockquote {
@@ -4680,7 +4760,7 @@ createOrReplace
 </style>
 "
 ```
-            lineageTag: 4540db71-2e01-440f-8a8a-fc5157b1f833
+            lineageTag: dfd58cd8-54a0-4352-b8e2-d0a5606f2532
 
         partition _HTML = m
             mode: import

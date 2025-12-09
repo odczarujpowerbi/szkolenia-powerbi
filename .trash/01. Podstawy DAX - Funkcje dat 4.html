@@ -1,4 +1,4 @@
-Przygotowanie środowiska Power BI = 
+Funkcje dat = 
 
 "
 
@@ -7,7 +7,7 @@ Przygotowanie środowiska Power BI =
 <head>
     <meta charset='UTF-8'>
     <meta name='viewport' content='width=device-width, initial-scale=1.0'>
-    <title>Przygotowanie środowiska Power BI</title>
+    <title>Funkcje dat</title>
     <style>
             * {
                 margin: 0;
@@ -168,15 +168,14 @@ Przygotowanie środowiska Power BI =
             }
     
             ul, ol {
-                margin: 0.3em 0;
-                padding-left: 1.8em;
+                margin: 0.5em 0 0.5em 1.5em;
+                padding-left: 0.5em;
             }
     
             li {
-                margin: 0;
-                padding-left: 0.2em;
+                margin: 0.3em 0;
+                padding-left: 0.3em;
                 font-size: 1.05em;
-                line-height: 1.6;
             }
     
             ol {
@@ -190,11 +189,6 @@ Przygotowanie środowiska Power BI =
     
             ul li::marker {
                 color: #999;
-            }
-    
-            ul ul, ol ol, ul ol, ol ul {
-                margin: 0.2em 0;
-                padding-left: 1.5em;
             }
     
             blockquote {
@@ -229,92 +223,55 @@ Przygotowanie środowiska Power BI =
 </head>
 <body>
 
-<div class='container' id='viz_905d5ea6'>
+<div class='container' id='viz_5bcb381d'>
     <!-- Nawigacja na górze -->
     <div class='navigation'>
-        <button id='prevBtn_905d5ea6' onclick='changePage_905d5ea6(-1)'>← Poprzednia</button>
+        <button id='prevBtn_5bcb381d' onclick='changePage_5bcb381d(-1)'>← Poprzednia</button>
         <span class='page-indicator'>
-            Strona <span id='currentPage_905d5ea6'>1</span> z <span id='totalPages_905d5ea6'>4</span>
+            Strona <span id='currentPage_5bcb381d'>1</span> z <span id='totalPages_5bcb381d'>4</span>
         </span>
-        <button id='nextBtn_905d5ea6' onclick='changePage_905d5ea6(1)'>Następna →</button>
+        <button id='nextBtn_5bcb381d' onclick='changePage_5bcb381d(1)'>Następna →</button>
     </div>
 
     <!-- Strona 1 -->
     <div class='page active'>
-        <h1>Ustawienia programu Power BI</h1>
-        <p>Przed rozpoczęciem pracy z Power BI Desktop warto odpowiednio skonfigurować środowisko pracy. Prawidłowe ustawienia programu umożliwiają dostęp do nowych funkcji oraz optymalizują sposób pracy z danymi.</p>
-        <h2>Włączenie funkcji w wersji zapoznawczej (Preview Features)</h2>
-        <p>Power BI regularnie wprowadza nowe funkcje, które na początku dostępne są jako wersje zapoznawcze. Aby je włączyć:</p>
-        <ol>
-        <li>Otwórz <strong>Plik</strong> → <strong>Opcje i ustawienia</strong> → <strong>Opcje</strong></li>
-        <li>Przejdź do sekcji <strong>Funkcje w wersji zapoznawczej</strong> (Preview features)</li>
-        <li>Zaznacz następujące opcje:
-        <ul>
-        <li><strong>Obliczenia wizualne</strong> - pozwala na tworzenie bardziej zaawansowanych wizualizacji</li>
-        <li><strong>Nowe wizualizacje</strong> - daje dostęp do najnowszych typów wizualizacji</li>
-        </ul>
-        </li>
-        </ol>
-        <p><strong>Uwaga:</strong> Po włączeniu funkcji w wersji zapoznawczej konieczne jest ponowne uruchomienie Power BI Desktop.</p>
-        <p><img src='https://raw.githubusercontent.com/odczarujpowerbi/grafiki-do-szkolenia/main/PowerBI - Ustawienia - Preview Features.gif' width='100%'></p>
+        <h1>DATE – Tworzenie daty</h1>
+        <pre><code><span class='dax-function'>DATE</span>(&lt;rok&gt;, &lt;miesiąc&gt;, &lt;dzień&gt;)</code></pre>
+        <p><strong>Przykład:</strong></p>
+        <pre><code>Data Bazowa = <span class='dax-function'>DATE</span>(<span class='dax-number'>2024</span>, <span class='dax-number'>1</span>, <span class='dax-number'>1</span>)</code></pre>
 
     </div>
 
     <!-- Strona 2 -->
     <div class='page'>
-        <h2>Konfiguracja ustawień raportu- włączenie interakcji między obiektami na raporcie</h2>
-        <p>Interakcje między wizualizacjami pozwalają na dynamiczne filtrowanie danych. Aby włączyć tę funkcję:</p>
-        <ol>
-        <li>Przejdź do widoku <strong>Raport</strong></li>
-        <li>Kliknij <strong>Plik</strong> → <strong>Opcje i ustawienia</strong> → <strong>Opcje</strong></li>
-        <li>W sekcji <strong>BIEŻĄCY PLIK</strong> → <strong>Ustawienia raportu</strong></li>
-        <li>Upewnij się, że opcja dotycząca interakcji wizualizacji jest włączona</li>
-        </ol>
-        <img src='https://github.com/odczarujpowerbi/szkolenia-powerbi/blob/main/bin/Pasted%20image%2020251209170359.png?raw=true' width='100%'>
-        <p>Dzięki temu kliknięcie na element jednej wizualizacji (np. kolumnę na wykresie) automatycznie przefiltruje pozostałe wizualizacje na stronie raportu.</p>
+        <h1>TODAY i NOW – Dzisiejsza data</h1>
+        <pre><code><span class='dax-function'>TODAY</span>()     <span class='dax-comment'>-- Dzisiejsza data (bez godziny)</span>
+        <span class='dax-function'>NOW</span>()       <span class='dax-comment'>-- Dzisiejsza data i godzina</span></code></pre>
+        <p><strong>Przykład:</strong></p>
+        <pre><code>Aktualna Data = <span class='dax-function'>TODAY</span>()</code></pre>
 
     </div>
 
     <!-- Strona 3 -->
     <div class='page'>
-        <h2>Ustawienia Power Query-  wyłączenie automatycznego wykrywania typów kolumn</h2>
-        <p>Automatyczne wykrywanie typów danych przez Power Query może czasem prowadzić do błędów lub niepożądanych konwersji. Zaleca się wyłączenie tej opcji i ręczne kontrolowanie typów danych:</p>
-        <ol>
-        <li>Otwórz <strong>Plik</strong> → <strong>Opcje i ustawienia</strong> → <strong>Opcje</strong></li>
-        <li>Przejdź do sekcji <strong>BIEŻĄCY PLIK</strong> → <strong>Ładowanie danych</strong></li>
-        <li>Odznacz opcję <strong>Automatycznie wykrywaj typy kolumn i nagłówki dla źródeł nieustrukturyzowanych</strong></li>
-        </ol>
-        <img src='https://github.com/odczarujpowerbi/szkolenia-powerbi/blob/main/bin/Pasted%20image%2020251209170441.png?raw=true' width='100%'>
-        <p>Dzięki temu będziesz mieć pełną kontrolę nad tym, jakie typy danych są przypisywane do poszczególnych kolumn.</p>
+        <h1>YEAR, MONTH, DAY – Wyciąganie składników daty</h1>
+        <pre><code><span class='dax-function'>YEAR</span>(&lt;data&gt;)   <span class='dax-comment'>-- Rok</span>
+        <span class='dax-function'>MONTH</span>(&lt;data&gt;)  <span class='dax-comment'>-- Miesiąc (1-12)</span>
+        <span class='dax-function'>DAY</span>(&lt;data&gt;)    <span class='dax-comment'>-- Dzień (1-31)</span></code></pre>
+        <p><strong>Przykład:</strong></p>
+        <pre><code>Rok Sprzedaży = <span class='dax-function'>YEAR</span>(Sprzedaz[Data])
+        Miesiąc Sprzedaży = <span class='dax-function'>MONTH</span>(Sprzedaz[Data])</code></pre>
 
     </div>
 
     <!-- Strona 4 -->
     <div class='page'>
-        <h2>Ustawienie wersji językowej</h2>
-        <p>Wersja językowa Power BI wpływa na separatory dziesiętne, daty oraz niektóre funkcje DAX:</p>
-        <ol>
-        <li>Otwórz <strong>Plik</strong> → <strong>Opcje i ustawienia</strong> → <strong>Opcje</strong></li>
-        <li>Przejdź do sekcji <strong>GLOBALNE</strong> → <strong>Ustawienia regionalne</strong></li>
-        <li>Wybierz odpowiedni język - zalecany jest Angielski ze względu na:
-        <ul>
-        <li>Prostszą integrację z AI</li>
-        <li>Spójność nazewnictwa z dokumentacją Microsoft Learn</li>
-        </ul>
-        </li>
-        </ol>
-        <img src='https://github.com/odczarujpowerbi/szkolenia-powerbi/blob/main/bin/Pasted%20image%2020251209170514.png?raw=true' width='100%'>
-        <p><strong>Uwaga:</strong></p>
-        <ul>
-        <li>W polskiej wersji separator dziesiętny to przecinek (<code>,</code>), a separator argumentów to średnik (<code>;</code>)</li>
-        <li>W angielskiej wersji separator dziesiętny to kropka (<code>.</code>), a separator argumentów to przecinek (<code>,</code>)</li>
-        </ul>
-        <p>Przykład różnic w składni DAX:</p>
-        <pre><code>// Wersja polska
-        Suma wartości = <span class='dax-function'>SUMX</span>(fDemo; fDemo[Price] * fDemo[Quantity])
-
-        // Wersja angielska
-        Suma wartości = <span class='dax-function'>SUMX</span>(fDemo, fDemo[Price] * fDemo[Quantity])</code></pre>
+        <h1>DATEDIFF – Różnica między datami</h1>
+        <pre><code><span class='dax-function'>DATEDIFF</span>(&lt;data_początkowa&gt;, &lt;data_końcowa&gt;, &lt;jednostka&gt;)</code></pre>
+        <p><strong>Jednostki:</strong> DAY, MONTH, YEAR, QUARTER</p>
+        <p><strong>Przykład:</strong></p>
+        <pre><code>Dni Od Zamówienia = 
+        <span class='dax-function'>DATEDIFF</span>(Zamowienia[Data Zamówienia], <span class='dax-function'>TODAY</span>(), DAY)</code></pre>
         <p>---</p>
 
     </div>
@@ -324,10 +281,10 @@ Przygotowanie środowiska Power BI =
 <script>
 (function() {
     // Unikalny ID dla tej wizualizacji (wstrzykiwany przez Python)
-    var vizId = '905d5ea6';
+    var vizId = '5bcb381d';
     var containerId = 'viz_' + vizId;
 
-    var currentPage_905d5ea6 = 1;
+    var currentPage_5bcb381d = 1;
     var container = document.getElementById(containerId);
 
     if (!container) return;
@@ -337,27 +294,27 @@ Przygotowanie środowiska Power BI =
 
     document.getElementById('totalPages_' + vizId).textContent = totalPages;
 
-    window['showPage_905d5ea6'] = function(n) {
-        if (n > totalPages) currentPage_905d5ea6 = totalPages;
-        if (n < 1) currentPage_905d5ea6 = 1;
+    window['showPage_5bcb381d'] = function(n) {
+        if (n > totalPages) currentPage_5bcb381d = totalPages;
+        if (n < 1) currentPage_5bcb381d = 1;
 
         for (var i = 0; i < pages.length; i++) {
             pages[i].classList.remove('active');
         }
-        pages[currentPage_905d5ea6 - 1].classList.add('active');
+        pages[currentPage_5bcb381d - 1].classList.add('active');
 
-        document.getElementById('currentPage_' + vizId).textContent = currentPage_905d5ea6;
-        document.getElementById('prevBtn_' + vizId).disabled = (currentPage_905d5ea6 === 1);
-        document.getElementById('nextBtn_' + vizId).disabled = (currentPage_905d5ea6 === totalPages);
+        document.getElementById('currentPage_' + vizId).textContent = currentPage_5bcb381d;
+        document.getElementById('prevBtn_' + vizId).disabled = (currentPage_5bcb381d === 1);
+        document.getElementById('nextBtn_' + vizId).disabled = (currentPage_5bcb381d === totalPages);
     };
 
-    window['changePage_905d5ea6'] = function(n) {
-        currentPage_905d5ea6 += n;
-        window['showPage_905d5ea6'](currentPage_905d5ea6);
+    window['changePage_5bcb381d'] = function(n) {
+        currentPage_5bcb381d += n;
+        window['showPage_5bcb381d'](currentPage_5bcb381d);
     };
 
     // Inicjalizacja
-    window['showPage_905d5ea6'](1);
+    window['showPage_5bcb381d'](1);
 
     // Funkcjonalność powiększania obrazów
     var images = container.querySelectorAll('img');

@@ -168,15 +168,14 @@ Przygotowanie środowiska Power BI =
             }
     
             ul, ol {
-                margin: 0.3em 0;
-                padding-left: 1.8em;
+                margin: 0.5em 0 0.5em 1.5em;
+                padding-left: 0.5em;
             }
     
             li {
-                margin: 0;
-                padding-left: 0.2em;
+                margin: 0.3em 0;
+                padding-left: 0.3em;
                 font-size: 1.05em;
-                line-height: 1.6;
             }
     
             ol {
@@ -190,11 +189,6 @@ Przygotowanie środowiska Power BI =
     
             ul li::marker {
                 color: #999;
-            }
-    
-            ul ul, ol ol, ul ol, ol ul {
-                margin: 0.2em 0;
-                padding-left: 1.5em;
             }
     
             blockquote {
@@ -245,16 +239,11 @@ Przygotowanie środowiska Power BI =
         <p>Przed rozpoczęciem pracy z Power BI Desktop warto odpowiednio skonfigurować środowisko pracy. Prawidłowe ustawienia programu umożliwiają dostęp do nowych funkcji oraz optymalizują sposób pracy z danymi.</p>
         <h2>Włączenie funkcji w wersji zapoznawczej (Preview Features)</h2>
         <p>Power BI regularnie wprowadza nowe funkcje, które na początku dostępne są jako wersje zapoznawcze. Aby je włączyć:</p>
-        <ol>
-        <li>Otwórz <strong>Plik</strong> → <strong>Opcje i ustawienia</strong> → <strong>Opcje</strong></li>
-        <li>Przejdź do sekcji <strong>Funkcje w wersji zapoznawczej</strong> (Preview features)</li>
-        <li>Zaznacz następujące opcje:
-        <ul>
-        <li><strong>Obliczenia wizualne</strong> - pozwala na tworzenie bardziej zaawansowanych wizualizacji</li>
-        <li><strong>Nowe wizualizacje</strong> - daje dostęp do najnowszych typów wizualizacji</li>
-        </ul>
-        </li>
-        </ol>
+        <p>1. Otwórz <strong>Plik</strong> → <strong>Opcje i ustawienia</strong> → <strong>Opcje</strong></p>
+        <p>2. Przejdź do sekcji <strong>Funkcje w wersji zapoznawczej</strong> (Preview features)</p>
+        <p>3. Zaznacz następujące opcje:</p>
+        <p>   - <strong>Obliczenia wizualne</strong> - pozwala na tworzenie bardziej zaawansowanych wizualizacji</p>
+        <p>   - <strong>Nowe wizualizacje</strong> - daje dostęp do najnowszych typów wizualizacji</p>
         <p><strong>Uwaga:</strong> Po włączeniu funkcji w wersji zapoznawczej konieczne jest ponowne uruchomienie Power BI Desktop.</p>
         <p><img src='https://raw.githubusercontent.com/odczarujpowerbi/grafiki-do-szkolenia/main/PowerBI - Ustawienia - Preview Features.gif' width='100%'></p>
 
@@ -264,14 +253,12 @@ Przygotowanie środowiska Power BI =
     <div class='page'>
         <h2>Konfiguracja ustawień raportu- włączenie interakcji między obiektami na raporcie</h2>
         <p>Interakcje między wizualizacjami pozwalają na dynamiczne filtrowanie danych. Aby włączyć tę funkcję:</p>
-        <ol>
-        <li>Przejdź do widoku <strong>Raport</strong></li>
-        <li>Kliknij <strong>Plik</strong> → <strong>Opcje i ustawienia</strong> → <strong>Opcje</strong></li>
-        <li>W sekcji <strong>BIEŻĄCY PLIK</strong> → <strong>Ustawienia raportu</strong></li>
-        <li>Upewnij się, że opcja dotycząca interakcji wizualizacji jest włączona</li>
-        </ol>
+        <p>1. Przejdź do widoku <strong>Raport</strong></p>
+        <p>2. Kliknij <strong>Plik</strong> → <strong>Opcje i ustawienia</strong> → <strong>Opcje</strong></p>
+        <p>3. W sekcji <strong>BIEŻĄCY PLIK</strong> → <strong>Ustawienia raportu</strong></p>
+        <p>4. Upewnij się, że opcja dotycząca interakcji wizualizacji jest włączona</p>
         <img src='https://github.com/odczarujpowerbi/szkolenia-powerbi/blob/main/bin/Pasted%20image%2020251209170359.png?raw=true' width='100%'>
-        <p>Dzięki temu kliknięcie na element jednej wizualizacji (np. kolumnę na wykresie) automatycznie przefiltruje pozostałe wizualizacje na stronie raportu.</p>
+        <p>> Dzięki temu kliknięcie na element jednej wizualizacji (np. kolumnę na wykresie) automatycznie przefiltruje pozostałe wizualizacje na stronie raportu.</p>
 
     </div>
 
@@ -279,11 +266,9 @@ Przygotowanie środowiska Power BI =
     <div class='page'>
         <h2>Ustawienia Power Query-  wyłączenie automatycznego wykrywania typów kolumn</h2>
         <p>Automatyczne wykrywanie typów danych przez Power Query może czasem prowadzić do błędów lub niepożądanych konwersji. Zaleca się wyłączenie tej opcji i ręczne kontrolowanie typów danych:</p>
-        <ol>
-        <li>Otwórz <strong>Plik</strong> → <strong>Opcje i ustawienia</strong> → <strong>Opcje</strong></li>
-        <li>Przejdź do sekcji <strong>BIEŻĄCY PLIK</strong> → <strong>Ładowanie danych</strong></li>
-        <li>Odznacz opcję <strong>Automatycznie wykrywaj typy kolumn i nagłówki dla źródeł nieustrukturyzowanych</strong></li>
-        </ol>
+        <p>1. Otwórz <strong>Plik</strong> → <strong>Opcje i ustawienia</strong> → <strong>Opcje</strong></p>
+        <p>2. Przejdź do sekcji <strong>BIEŻĄCY PLIK</strong> → <strong>Ładowanie danych</strong></p>
+        <p>3. Odznacz opcję <strong>Automatycznie wykrywaj typy kolumn i nagłówki dla źródeł nieustrukturyzowanych</strong></p>
         <img src='https://github.com/odczarujpowerbi/szkolenia-powerbi/blob/main/bin/Pasted%20image%2020251209170441.png?raw=true' width='100%'>
         <p>Dzięki temu będziesz mieć pełną kontrolę nad tym, jakie typy danych są przypisywane do poszczególnych kolumn.</p>
 
@@ -293,16 +278,11 @@ Przygotowanie środowiska Power BI =
     <div class='page'>
         <h2>Ustawienie wersji językowej</h2>
         <p>Wersja językowa Power BI wpływa na separatory dziesiętne, daty oraz niektóre funkcje DAX:</p>
-        <ol>
-        <li>Otwórz <strong>Plik</strong> → <strong>Opcje i ustawienia</strong> → <strong>Opcje</strong></li>
-        <li>Przejdź do sekcji <strong>GLOBALNE</strong> → <strong>Ustawienia regionalne</strong></li>
-        <li>Wybierz odpowiedni język - zalecany jest Angielski ze względu na:
-        <ul>
-        <li>Prostszą integrację z AI</li>
-        <li>Spójność nazewnictwa z dokumentacją Microsoft Learn</li>
-        </ul>
-        </li>
-        </ol>
+        <p>1. Otwórz <strong>Plik</strong> → <strong>Opcje i ustawienia</strong> → <strong>Opcje</strong></p>
+        <p>2. Przejdź do sekcji <strong>GLOBALNE</strong> → <strong>Ustawienia regionalne</strong></p>
+        <p>3. Wybierz odpowiedni język - zalecany jest Angielski ze względu na:</p>
+        <p>	- Prostszą integrację z AI</p>
+        <p>	- Spójność nazewnictwa z dokumentacją Microsoft Learn</p>
         <img src='https://github.com/odczarujpowerbi/szkolenia-powerbi/blob/main/bin/Pasted%20image%2020251209170514.png?raw=true' width='100%'>
         <p><strong>Uwaga:</strong></p>
         <ul>

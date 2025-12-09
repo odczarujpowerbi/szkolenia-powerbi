@@ -159,15 +159,15 @@
         }
 
         ul, ol {
-            margin: 0.5em 0 0.5em 1.5em;
-            padding-left: 0.5em;
+            margin: 0.3em 0;
+            padding-left: 1.8em;
         }
 
         li {
-            margin: 0.1em 0;
-            padding-left: 0.3em;
+            margin: 0;
+            padding-left: 0.2em;
             font-size: 1.05em;
-            line-height: 1.5;
+            line-height: 1.6;
         }
 
         ol {
@@ -181,6 +181,11 @@
 
         ul li::marker {
             color: #999;
+        }
+
+        ul ul, ol ol, ul ol, ol ul {
+            margin: 0.2em 0;
+            padding-left: 1.5em;
         }
 
         blockquote {

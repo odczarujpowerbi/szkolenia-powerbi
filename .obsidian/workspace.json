@@ -11,12 +11,14 @@
             "id": "c6a8ca1a0082a34f",
             "type": "leaf",
             "state": {
-              "type": "html-view",
+              "type": "markdown",
               "state": {
-                "file": "02. OUTPUT/03. DAX - Zmienne.html"
+                "file": "01. THEORY/03. DAX - Tworzenie zapytań.md",
+                "mode": "source",
+                "source": false
               },
-              "icon": "code-glyph",
-              "title": "03. DAX - Zmienne"
+              "icon": "lucide-file",
+              "title": "03. DAX - Tworzenie zapytań"
             }
           }
         ],
@@ -104,13 +106,13 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "02. OUTPUT/03. DAX - Zmienne.html",
+                "file": "01. THEORY/03. DAX - Tworzenie zapytań.md",
                 "followCursor": true,
                 "showSearch": false,
                 "searchQuery": ""
               },
               "icon": "lucide-list",
-              "title": "Outline of 03. DAX - Zmienne"
+              "title": "Outline of 03. DAX - Tworzenie zapytań"
             }
           }
         ],
@@ -127,7 +129,7 @@
             "state": {
               "type": "localgraph",
               "state": {
-                "file": "02. OUTPUT/03. DAX - Zmienne.html",
+                "file": "01. THEORY/03. DAX - Tworzenie zapytań.md",
                 "options": {
                   "collapse-filter": true,
                   "search": "",
@@ -155,14 +157,14 @@
                 }
               },
               "icon": "lucide-git-fork",
-              "title": "Graph of 03. DAX - Zmienne"
+              "title": "Graph of 03. DAX - Tworzenie zapytań"
             }
           }
         ]
       }
     ],
     "direction": "horizontal",
-    "width": 481.5
+    "width": 416.5
   },
   "left-ribbon": {
     "hiddenItems": {
@@ -181,23 +183,23 @@
   },
   "active": "c6a8ca1a0082a34f",
   "lastOpenFiles": [
-    "02. OUTPUT/01. Podstawy DAX - Funkcje agregujące.html",
+    "01. THEORY/02. Wprowadzenie do CALCULATE.md",
     "02. OUTPUT/00. Konfiguracja Power BI - Przygotowanie środowiska Power BI.html",
     "02. OUTPUT/00. Konfiguracja Power BI - Główne widoki Power BI Desktop.html",
-    "02. OUTPUT/01. Podstawy DAX - Funkcje dat.html",
-    "02. OUTPUT/01. Podstawy DAX - Funkcje logiczne.html",
-    "02. OUTPUT/01. Podstawy DAX - Funkcje tekstowe.html",
-    "01. THEORY/00. Konfiguracja Power BI.md",
-    "02. OUTPUT/TMDL/_HTML.md",
-    "02. OUTPUT/TMDL",
     "02. OUTPUT/03. DAX - Zmienne.html",
     "02. OUTPUT/02. Wprowadzenie do CALCULATE - Wprowadzenie do CALCULATE.html",
     "02. OUTPUT/01. Podstawy DAX - Funkcje iteracyjne (X-functions).html",
+    "02. OUTPUT/01. Podstawy DAX - Funkcje dat.html",
+    "02. OUTPUT/01. Podstawy DAX - Funkcje tekstowe.html",
+    "02. OUTPUT/01. Podstawy DAX - Funkcje logiczne.html",
+    "02. OUTPUT/01. Podstawy DAX - Funkcje agregujące.html",
     "02. OUTPUT/01. Podstawy DAX.html",
+    "01. THEORY/03. DAX - Tworzenie zapytań.md",
+    "01. THEORY/00. Konfiguracja Power BI.md",
+    "02. OUTPUT/TMDL/_HTML.md",
     "00. DRAFT/02. Wstęp do Calculate.md",
     "00. DRAFT/01. Podstawy DAX.md",
     "config.md",
-    "01. THEORY/02. Wprowadzenie do CALCULATE.md",
     "03. TEMPLATE/CSS - Czerwony.md",
     "03. TEMPLATE/CSS - Niebieski.md",
     "01. THEORY/01. Podstawy DAX.md",
@@ -209,7 +211,6 @@
     "bin/Pasted image 20251209172001.png",
     "bin/Pasted image 20251209171436.png",
     "bin/Pasted image 20251209171433.png",
-    "01. THEORY/03. DAX - Zmienne.md",
     "bin/Pasted image 20251209170514.png",
     "bin/Pasted image 20251209170441.png",
     "00. DRAFT/03. Kontekst Filtra.md",

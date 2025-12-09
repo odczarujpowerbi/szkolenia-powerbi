@@ -178,7 +178,7 @@ def convert_markdown_to_html(md_content):
         # Code blocks
         if line.strip().startswith('```'):
             if in_list:
-                html_lines.append('</ul>\n')
+                html_lines.append(f'</{in_list}>\n')
                 in_list = False
 
             if not in_code_block:
@@ -207,7 +207,7 @@ def convert_markdown_to_html(md_content):
         # Standalone images: ![[filename.png]]
         if line.strip().startswith('![[') and line.strip().endswith(']]'):
             if in_list:
-                html_lines.append('</ul>\n')
+                html_lines.append(f'</{in_list}>\n')
                 in_list = False
 
             # Wyciągnij nazwę pliku
@@ -228,7 +228,7 @@ def convert_markdown_to_html(md_content):
         # Markdown tables: | col1 | col2 |
         if line.strip().startswith('|') and '|' in line.strip()[1:]:
             if in_list:
-                html_lines.append('</ul>\n')
+                html_lines.append(f'</{in_list}>\n')
                 in_list = False
 
             # Zbierz wszystkie wiersze tabeli
@@ -264,7 +264,7 @@ def convert_markdown_to_html(md_content):
         # Headings ## (h1)
         if line.startswith('## '):
             if in_list:
-                html_lines.append('</ul>\n')
+                html_lines.append(f'</{in_list}>\n')
                 in_list = False
             html_lines.append(f"<h1>{process_inline_markdown(line[3:])}</h1>\n")
             i += 1
@@ -273,7 +273,7 @@ def convert_markdown_to_html(md_content):
         # Result boxes - "Suma końcowa:" jako nagłówek w result-box (sprawdź PRZED innymi ###)
         if line.startswith('### ') and 'Suma końcowa:' in line:
             if in_list:
-                html_lines.append('</ul>\n')
+                html_lines.append(f'</{in_list}>\n')
                 in_list = False
 
             html_lines.append("<div class='result-box'>\n")
@@ -291,7 +291,7 @@ def convert_markdown_to_html(md_content):
         # Headings ### (może być h2 lub h3 w iteration-box)
         if line.startswith('### '):
             if in_list:
-                html_lines.append('</ul>\n')
+                html_lines.append(f'</{in_list}>\n')
                 in_list = False
 
             # Sprawdź czy to nagłówek iteracji lub "Przed iteracją"
@@ -353,18 +353,63 @@ def convert_markdown_to_html(md_content):
         # Result boxes - "Wynik:" lub "SUMX dodaje"
         if line.strip().startswith('Wynik:') or 'SUMX dodaje' in line:
             if in_list:
-                html_lines.append('</ul>\n')
+                html_lines.append(f'</{in_list}>\n')
                 in_list = False
 
             html_lines.append(f"<div class='result-box'>\n{process_inline_markdown(line)}\n</div>\n")
             i += 1
             continue
 
-        # Lists
-        if line.startswith('- '):
+        # Numbered lists (1., 2., etc.)
+        numbered_match = re.match(r'^(\d+)\.\s+(.+)', line)
+        if numbered_match:
+            if not in_list:
+                html_lines.append('<ol>\n')
+                in_list = 'ol'
+            elif in_list == 'ul':
+                html_lines.append('</ul>\n')
+                html_lines.append('<ol>\n')
+                in_list = 'ol'
+
+            # Sprawdź czy następne linie to wcięte bullety (należące do tego <li>)
+            content = numbered_match.group(2)
+            html_lines.append(f"<li>{process_inline_markdown(content)}")
+
+            i += 1
+            # Sprawdź czy następne linie są wcięte (rozpoczynają się od spacji lub tabulatora)
+            nested_items = []
+            while i < len(lines):
+                next_line = lines[i]
+                # Wcięty bullet (spacja lub tab + "- ")
+                if re.match(r'^[\s\t]+-\s+(.+)', next_line):
+                    nested_match = re.match(r'^[\s\t]+-\s+(.+)', next_line)
+                    nested_items.append(nested_match.group(1))
+                    i += 1
+                # Pusta linia lub kolejny element listy głównej
+                elif not next_line.strip() or re.match(r'^\d+\.\s+', next_line):
+                    break
+                else:
+                    break
+
+            # Jeśli są zagnieżdżone elementy, dodaj <ul>
+            if nested_items:
+                html_lines.append('\n<ul>\n')
+                for nested_item in nested_items:
+                    html_lines.append(f"<li>{process_inline_markdown(nested_item)}</li>\n")
+                html_lines.append('</ul>\n')
+
+            html_lines.append("</li>\n")
+            continue
+
+        # Unordered lists (-) - tylko na głównym poziomie (nie wcięte)
+        if line.startswith('- ') and not re.match(r'^[\s\t]', line):
             if not in_list:
                 html_lines.append('<ul>\n')
-                in_list = True
+                in_list = 'ul'
+            elif in_list == 'ol':
+                html_lines.append('</ol>\n')
+                html_lines.append('<ul>\n')
+                in_list = 'ul'
             html_lines.append(f"<li>{process_inline_markdown(line[2:])}</li>\n")
             i += 1
             continue
@@ -372,14 +417,14 @@ def convert_markdown_to_html(md_content):
         # Empty lines
         if not line.strip():
             if in_list:
-                html_lines.append('</ul>\n')
+                html_lines.append(f'</{in_list}>\n')
                 in_list = False
             i += 1
             continue
 
         # Regular paragraphs
         if in_list:
-            html_lines.append('</ul>\n')
+            html_lines.append(f'</{in_list}>\n')
             in_list = False
         if line.strip():
             html_lines.append(f"<p>{process_inline_markdown(line)}</p>\n")
@@ -387,7 +432,7 @@ def convert_markdown_to_html(md_content):
 
     # Close any open lists
     if in_list:
-        html_lines.append('</ul>\n')
+        html_lines.append(f'</{in_list}>\n')
 
     return ''.join(html_lines)
 
