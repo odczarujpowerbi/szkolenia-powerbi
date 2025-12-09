@@ -13,10 +13,10 @@
             "state": {
               "type": "html-view",
               "state": {
-                "file": "02. OUTPUT/03. Modyfikowanie Kontekstu - ALL i REMOVEFILTERS - usuwanie filtrów.html"
+                "file": "02. OUTPUT/01. Podstawy DAX - Funkcje agregujące.html"
               },
               "icon": "code-glyph",
-              "title": "03. Modyfikowanie Kontekstu - ALL i REMOVEFILTERS - usuwanie filtrów"
+              "title": "01. Podstawy DAX - Funkcje agregujące"
             }
           },
           {
@@ -196,20 +196,21 @@
   },
   "active": "7293b29fa1965917",
   "lastOpenFiles": [
+    "01. THEORY/02. Wprowadzenie do CALCULATE.md",
+    "01. THEORY/01. Podstawy DAX.md",
+    "02. OUTPUT/01. Podstawy DAX - Funkcje iteracyjne (X-functions).html",
+    "02. OUTPUT/01. Podstawy DAX - Funkcje agregujące.html",
+    "02. OUTPUT/01. Podstawy DAX.html",
+    "02. OUTPUT/01. Podstawy DAX - Funkcje dat.html",
+    "02. OUTPUT/01. Podstawy DAX - Funkcje logiczne.html",
     "02. OUTPUT/03. Modyfikowanie Kontekstu - ALL i REMOVEFILTERS - usuwanie filtrów.html",
+    "01. THEORY/03. Modyfikowanie Kontekstu.md",
     "01. THEORY/05. DAX - Zaawansowane Kwerendy.md",
     "02. OUTPUT/05. DAX - Zaawansowane Kwerendy - Query View.html",
     "02. OUTPUT/05. DAX - Zaawansowane Kwerendy.html",
     "02. OUTPUT/04. Tworzenie zestawień tabelarycznych.html",
     "02. OUTPUT/02. Wprowadzenie do CALCULATE - Wprowadzenie do CALCULATE.html",
-    "02. OUTPUT/01. Podstawy DAX - Funkcje iteracyjne (X-functions).html",
-    "02. OUTPUT/01. Podstawy DAX - Funkcje dat.html",
-    "02. OUTPUT/01. Podstawy DAX - Funkcje tekstowe.html",
-    "02. OUTPUT/01. Podstawy DAX - Funkcje logiczne.html",
-    "02. OUTPUT/01. Podstawy DAX - Funkcje agregujące.html",
     "01. THEORY/04. Tworzenie zestawień tabelarycznych.md",
-    "01. THEORY/03. Modyfikowanie Kontekstu.md",
-    "01. THEORY/02. Wprowadzenie do CALCULATE.md",
     "01. THEORY/00. Konfiguracja Power BI.md",
     "bin/Pasted image 20251209181932.png",
     "02. OUTPUT/TMDL/_HTML.md",
@@ -218,7 +219,6 @@
     "config.md",
     "03. TEMPLATE/CSS - Czerwony.md",
     "03. TEMPLATE/CSS - Niebieski.md",
-    "01. THEORY/01. Podstawy DAX.md",
     "bin/Pasted image 20251209173843.png",
     "bin/Pasted image 20251209173050.png",
     "bin/Pasted image 20251209172247.png",
