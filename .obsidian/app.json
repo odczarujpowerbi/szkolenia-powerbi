@@ -8,5 +8,8 @@
     "downscalePercent": 100
   },
   "showUnsupportedFiles": true,
-  "attachmentFolderPath": "bin"
+  "attachmentFolderPath": "bin",
+  "showLineNumber": false,
+  "showInlineTitle": false,
+  "readableLineLength": true
 }

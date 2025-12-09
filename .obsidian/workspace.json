@@ -13,12 +13,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "03. TEMPLATE/CSS - Czerwony.md",
+                "file": "01. THEORY/02. Miary vs Kolumny kalkulowane.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "CSS - Czerwony"
+              "title": "02. Miary vs Kolumny kalkulowane"
             }
           }
         ],
@@ -106,13 +106,13 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "03. TEMPLATE/CSS - Czerwony.md",
+                "file": "01. THEORY/02. Miary vs Kolumny kalkulowane.md",
                 "followCursor": true,
                 "showSearch": false,
                 "searchQuery": ""
               },
               "icon": "lucide-list",
-              "title": "Outline of CSS - Czerwony"
+              "title": "Outline of 02. Miary vs Kolumny kalkulowane"
             }
           }
         ],
@@ -129,7 +129,7 @@
             "state": {
               "type": "localgraph",
               "state": {
-                "file": "03. TEMPLATE/CSS - Czerwony.md",
+                "file": "01. THEORY/02. Miary vs Kolumny kalkulowane.md",
                 "options": {
                   "collapse-filter": true,
                   "search": "",
@@ -157,7 +157,7 @@
                 }
               },
               "icon": "lucide-git-fork",
-              "title": "Graph of CSS - Czerwony"
+              "title": "Graph of 02. Miary vs Kolumny kalkulowane"
             }
           }
         ]
@@ -181,8 +181,12 @@
       "hide-folders:Show hidden folders": false
     }
   },
-  "active": "c6a8ca1a0082a34f",
+  "active": "b284d6787240cf61",
   "lastOpenFiles": [
+    "02. OUTPUT/02. Miary vs Kolumny kalkulowane - Miary vs Kolumny kalkulowane.html",
+    "02. OUTPUT/03. Wprowadzenie do CALCULATE - Użycie `CALCULATE`.html",
+    "02. OUTPUT/03. Wprowadzenie do CALCULATE - Operatory logiczne w `CALCULATE`.html",
+    "03. TEMPLATE/CSS - Czerwony.md",
     "01. THEORY/00. Konfiguracja Power BI.md",
     "02. OUTPUT/TMDL/_HTML.md",
     "02. OUTPUT/TMDL/_Parametr.md",
@@ -196,8 +200,6 @@
     "02. OUTPUT/04. Modyfikowanie Kontekstu - CROSSFILTER.html",
     "02. OUTPUT/04. Modyfikowanie Kontekstu - KEEPFILTERS.html",
     "02. OUTPUT/04. Modyfikowanie Kontekstu - ALLSELECTED.html",
-    "02. OUTPUT/04. Modyfikowanie Kontekstu - ALLEXCEPT.html",
-    "02. OUTPUT/04. Modyfikowanie Kontekstu - ALL i REMOVEFILTERS - usuwanie filtrów.html",
     "01. THEORY/05. Tworzenie zestawień tabelarycznych.md",
     "01. THEORY/04. Modyfikowanie Kontekstu.md",
     "01. THEORY/03. Wprowadzenie do CALCULATE.md",
@@ -209,7 +211,6 @@
     "00. DRAFT/01. Podstawy DAX.md",
     "bin/Pasted image 20251209193536.png",
     "bin/Pasted image 20251209181932.png",
-    "03. TEMPLATE/CSS - Czerwony.md",
     "03. TEMPLATE/CSS - Niebieski.md",
     "bin/Pasted image 20251209173843.png",
     "bin/Pasted image 20251209173050.png",
