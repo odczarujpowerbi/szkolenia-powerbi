@@ -1,7 +1,7 @@
 createOrReplace
 
     table _HTML
-        lineageTag: 5166a2b8-b3af-481b-8c88-ac01e50d9f1c
+        lineageTag: 677bd7d2-19b4-4cf6-80cf-4eeec7e13d2d
 
         measure '00. Konfiguracja Power BI - Główne widoki Power BI Desktop' = ```
 "
@@ -348,7 +348,7 @@ createOrReplace
 
 "
 ```
-            lineageTag: 00dd6b00-563d-46f5-a895-f3f0dbe4fc5c
+            lineageTag: 51d5fd1d-764a-4d08-85f4-a37be5e9d718
 
         measure '00. Konfiguracja Power BI - Przygotowanie środowiska Power BI' = ```
 "
@@ -653,7 +653,7 @@ createOrReplace
 
 "
 ```
-            lineageTag: 3eca6a3e-4d5b-483f-a68e-29065c23a06a
+            lineageTag: 925c2182-855d-4851-829e-e610d2df23c0
 
         measure '01. Podstawy DAX - Funkcje agregujące' = ```
 "
@@ -972,7 +972,7 @@ createOrReplace
 
 "
 ```
-            lineageTag: 0d92f9e2-263f-4704-8328-75444d9eb56b
+            lineageTag: 5ff981ff-d338-49fb-acc3-aa9968ddc284
 
         measure '01. Podstawy DAX - Funkcje dat' = ```
 "
@@ -1259,7 +1259,7 @@ createOrReplace
 
 "
 ```
-            lineageTag: debb632b-0880-4af4-823b-d093b656d158
+            lineageTag: 9d4beea9-5b99-4913-a636-31ebbcae1be3
 
         measure '01. Podstawy DAX - Funkcje filtrujące' = ```
 "
@@ -1538,7 +1538,7 @@ createOrReplace
 
 "
 ```
-            lineageTag: a408a804-e63c-4a48-bb70-eb3d5d2eb709
+            lineageTag: a180289c-5536-4e88-98d3-fdc54e38dd4d
 
         measure '01. Podstawy DAX - Funkcje iteracyjne (X-functions)' = ```
 "
@@ -1844,7 +1844,7 @@ createOrReplace
 
 "
 ```
-            lineageTag: ac028cc9-08e3-419e-9e08-11e8ff25d825
+            lineageTag: 0157e21d-297a-479f-b378-c6158a990851
 
         measure '01. Podstawy DAX - Funkcje logiczne' = ```
 "
@@ -2146,7 +2146,7 @@ createOrReplace
 
 "
 ```
-            lineageTag: b49f65ee-101e-4bbc-8c5d-a53935deac01
+            lineageTag: 46c2d37d-c40f-4a84-a5f6-bda8f1347346
 
         measure '01. Podstawy DAX - Funkcje tekstowe' = ```
 "
@@ -2433,7 +2433,7 @@ createOrReplace
 
 "
 ```
-            lineageTag: 418d4345-02e4-41e5-858b-b978ca386fb7
+            lineageTag: ad8d4f0c-954d-4e62-81ea-6af69d297f1b
 
         measure '01. Podstawy DAX - Wprowadzenie do CALCULATE' = ```
 "
@@ -2806,7 +2806,7 @@ createOrReplace
 
 "
 ```
-            lineageTag: c49aa7db-d753-46c1-aa0d-45ff12a86bef
+            lineageTag: 6eb1a3a6-277b-438e-8810-791a9b2496a3
 
         measure '01. Podstawy DAX' = ```
 "
@@ -3227,7 +3227,7 @@ createOrReplace
 
 "
 ```
-            lineageTag: 7919ca48-01f9-46bd-a5ce-519f5f534056
+            lineageTag: d389492e-5eb0-4274-9bd2-2d45c1a740f3
 
         measure '02. DAX - Zmienne' = ```
 "
@@ -3607,7 +3607,7 @@ createOrReplace
 
 "
 ```
-            lineageTag: 52a8084c-1305-42fe-9744-3416ce313a38
+            lineageTag: 4e4e183e-b253-4e96-b2d1-f7ec57e5ed6f
 
         measure '03. Test - Testowy dział' = ```
 "
@@ -3865,7 +3865,7 @@ createOrReplace
 
 "
 ```
-            lineageTag: dca15fa9-76c7-4662-9587-150b6f7949f3
+            lineageTag: 530c223f-fde3-498d-9c6a-2dbeaa520329
 
         measure 'CSS' = ```
 "
@@ -4046,7 +4046,7 @@ createOrReplace
 </style>
 "
 ```
-            lineageTag: fb56ed17-dfd3-41ac-a080-bec0c78ce6c7
+            lineageTag: 71f6ff3f-4fb4-4c6e-8084-9fff154cf9ba
 
         partition _HTML = m
             mode: import
