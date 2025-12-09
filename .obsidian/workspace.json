@@ -4,17 +4,21 @@
     "type": "split",
     "children": [
       {
-        "id": "e45aa9902d157a72",
+        "id": "77b40e40094abaed",
         "type": "tabs",
         "children": [
           {
-            "id": "375d8ef20b8e8d36",
+            "id": "401f23438fc0af83",
             "type": "leaf",
             "state": {
-              "type": "empty",
-              "state": {},
+              "type": "markdown",
+              "state": {
+                "file": "Theory - DRAFT/00. Przygotowanie środowiska.md",
+                "mode": "source",
+                "source": false
+              },
               "icon": "lucide-file",
-              "title": "New tab"
+              "title": "00. Przygotowanie środowiska"
             }
           }
         ],
@@ -86,6 +90,16 @@
         "type": "tabs",
         "dimension": 69.3103448275862,
         "children": [
+          {
+            "id": "257cfe7088d8211a",
+            "type": "leaf",
+            "state": {
+              "type": "git-history-view",
+              "state": {},
+              "icon": "history",
+              "title": "History"
+            }
+          },
           {
             "id": "08b4c519bba90d15",
             "type": "leaf",
@@ -160,8 +174,7 @@
               "title": "Tags"
             }
           }
-        ],
-        "currentTab": 1
+        ]
       },
       {
         "id": "a452d6d148f4c5b8",
@@ -174,6 +187,7 @@
             "state": {
               "type": "localgraph",
               "state": {
+                "file": "Theory - DRAFT/00. Przygotowanie środowiska.md",
                 "options": {
                   "collapse-filter": true,
                   "search": "",
@@ -201,14 +215,14 @@
                 }
               },
               "icon": "lucide-git-fork",
-              "title": "Graph view"
+              "title": "Graph of 00. Przygotowanie środowiska"
             }
           }
         ]
       }
     ],
     "direction": "horizontal",
-    "width": 300
+    "width": 481.5
   },
   "left-ribbon": {
     "hiddenItems": {
@@ -224,12 +238,19 @@
       "obsidian-git:Open Git source control": false
     }
   },
-  "active": "375d8ef20b8e8d36",
+  "active": "401f23438fc0af83",
   "lastOpenFiles": [
-    "Theory - DRAFT/00. Przygotowanie środowiska.md",
-    "Theory - DRAFT/03. Kontekst Filtra.md",
+    "bin/Pasted image 20251209155620.png",
+    "bin/Pasted image 20251209155324.png",
+    "bin/Pasted image 20251209155301.png",
     "USAGE.md",
     "config.md",
+    "README.md",
+    "bin/Pasted image 20251209155134.png",
+    "bin",
+    "Pasted image 20251209155005.png",
+    "Theory - DRAFT/00. Przygotowanie środowiska.md",
+    "Theory - DRAFT/03. Kontekst Filtra.md",
     "Template/Markdown/Gaps Complete.md",
     "Template/Markdown/HTML Embedded Media.md",
     "Template/Markdown/Quiz.md",
@@ -237,7 +258,6 @@
     "Theory/01. Podstawy DAX.md",
     "Theory - DRAFT/01. Podstawy DAX.md",
     "Theory - DRAFT/02. Wstęp do Calculate.md",
-    "README.md",
     "Output/03. Test - Testowy dział.html",
     "Output/CSS.html",
     "Theory/03. Test.md",
@@ -251,7 +271,6 @@
     "Output/01. Podstawy DAX - Podstawowe funkcje agregujące.html",
     "Output/01. Podstawy DAX - Funkcje iteracyjne (X-functions).html",
     "Output/TMDL",
-    "Output/02. DAX - Zmienne.html",
     "TMDL/_HTML.md",
     "Theory/02. DAX - Zmienne.md",
     "Generator.canvas",

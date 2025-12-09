@@ -8,7 +8,6 @@ Skrypt `convert_md_to_powerbi.py` automatyzuje proces konwersji plików Markdown
 - ✅ **Szybkość** - konwersja w sekundach zamiast minut
 - ✅ **Skalowalność** - łatwe przetwarzanie wielu plików
 - ✅ **Powtarzalność** - deterministyczne wyniki
-
 ## Wymagania
 
 - Python 3.6+
