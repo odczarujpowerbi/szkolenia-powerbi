@@ -4,19 +4,21 @@
     "type": "split",
     "children": [
       {
-        "id": "77b40e40094abaed",
+        "id": "04e6d62b73b78730",
         "type": "tabs",
         "children": [
           {
-            "id": "37d102dbc2d5c6a0",
+            "id": "c6a8ca1a0082a34f",
             "type": "leaf",
             "state": {
-              "type": "html-view",
+              "type": "markdown",
               "state": {
-                "file": "Output/00. Konfiguracja Power BI - Przygotowanie środowiska Power BI.html"
+                "file": "Template/Markdown/Embed PNG.md",
+                "mode": "source",
+                "source": false
               },
-              "icon": "code-glyph",
-              "title": "00. Konfiguracja Power BI - Przygotowanie środowiska Power BI"
+              "icon": "lucide-file",
+              "title": "Embed PNG"
             }
           }
         ],
@@ -118,7 +120,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "Output/00. Konfiguracja Power BI - Przygotowanie środowiska Power BI.html",
+                "file": "Template/Markdown/Embed PNG.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -128,7 +130,7 @@
                 "unlinkedCollapsed": true
               },
               "icon": "links-coming-in",
-              "title": "Backlinks for 00. Konfiguracja Power BI - Przygotowanie środowiska Power BI"
+              "title": "Backlinks for Embed PNG"
             }
           },
           {
@@ -159,7 +161,7 @@
             "state": {
               "type": "localgraph",
               "state": {
-                "file": "Output/00. Konfiguracja Power BI - Przygotowanie środowiska Power BI.html",
+                "file": "Template/Markdown/Embed PNG.md",
                 "options": {
                   "collapse-filter": true,
                   "search": "",
@@ -187,7 +189,7 @@
                 }
               },
               "icon": "lucide-git-fork",
-              "title": "Graph of 00. Konfiguracja Power BI - Przygotowanie środowiska Power BI"
+              "title": "Graph of Embed PNG"
             }
           }
         ]
@@ -211,25 +213,27 @@
       "obsidian-git:Open Git source control": false
     }
   },
-  "active": "37d102dbc2d5c6a0",
+  "active": "c6a8ca1a0082a34f",
   "lastOpenFiles": [
-    "Output/00. Konfiguracja Power BI - Główne widoki Power BI Desktop.html",
+    "Template/Markdown/Embed GIF.md",
+    "Template/Markdown/Embed PNG.md",
     "Theory/00. Konfiguracja Power BI.md",
+    "Output/00. Konfiguracja Power BI - Główne widoki Power BI Desktop.html",
     "Output/00. Konfiguracja Power BI - Przygotowanie środowiska Power BI.html",
+    "convert_md_to_powerbi.py.tmp.58512.1765294369930",
+    "convert_md_to_powerbi.py.tmp.58512.1765294347218",
+    "Output/03. Test - Testowy dział.html",
+    "Theory/03. Test.md",
     "Output/TMDL/_HTML.md",
     "Output/TMDL",
-    "Output/03. Test - Testowy dział.html",
     "Output/02. DAX - Zmienne.html",
     "Output/01. Podstawy DAX - Wprowadzenie do CALCULATE.html",
     "Output/01. Podstawy DAX - Funkcje filtrujące.html",
     "Output/01. Podstawy DAX - Funkcje iteracyjne (X-functions).html",
-    "Output/01. Podstawy DAX - Podstawowe funkcje dat.html",
-    "Output/01. Podstawy DAX - Podstawowe funkcje tekstowe.html",
     "Template/Markdown/Gaps Complete.md",
-    "Template/Markdown/HTML Embedded Media.md",
-    "Theory - DRAFT/00. Przygotowanie środowiska.md",
+    "00. DRAFT/00. Przygotowanie środowiska.md",
     "bin/Pasted image 20251209161608.png",
-    "Theory - DRAFT/03. Kontekst Filtra.md",
+    "00. DRAFT/03. Kontekst Filtra.md",
     "bin/Pasted image 20251209155746.png",
     "bin/Pasted image 20251209155620.png",
     "bin/Pasted image 20251209155324.png",
@@ -242,9 +246,8 @@
     "Template/Markdown/Quiz.md",
     "Template/Markdown/Teoria.md",
     "Theory/01. Podstawy DAX.md",
-    "Theory - DRAFT/01. Podstawy DAX.md",
-    "Theory - DRAFT/02. Wstęp do Calculate.md",
-    "Theory/03. Test.md",
+    "00. DRAFT/01. Podstawy DAX.md",
+    "00. DRAFT/02. Wstęp do Calculate.md",
     "Template/CSS.md",
     "Template/JS.md",
     "TMDL/_HTML.md",

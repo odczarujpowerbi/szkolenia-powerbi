@@ -1,7 +1,7 @@
 createOrReplace
 
     table _HTML
-        lineageTag: 78fa0e35-996f-452d-9bba-2e588303b3a3
+        lineageTag: 32d72c62-5c99-4f5f-ab1a-e1f4675c6e13
 
         measure '00. Konfiguracja Power BI - Główne widoki Power BI Desktop' = ```
 "
@@ -202,7 +202,7 @@ createOrReplace
     <div class='page active'>
         <p>Power BI Desktop oferuje pięć głównych widoków, z których każdy służy do różnych celów. Znajomość tych widoków jest kluczowa dla efektywnej pracy z narzędziem.</p>
         <h2>1. Widok Raport (Report View)</h2>
-        <p>![[Pasted image 20251209155301.png]]</p>
+        <img src='https://github.com/odczarujpowerbi/szkolenia-powerbi/blob/main/bin/Pasted%20image%2020251209155301.png' width='100%'>
         <p><strong>Zastosowanie:</strong> Tworzenie i projektowanie wizualizacji danych.</p>
         <p>W tym widoku:</p>
         <ul>
@@ -219,7 +219,7 @@ createOrReplace
     <!-- Strona 2 -->
     <div class='page'>
         <h2>2. Widok Dane (Data View)</h2>
-        <p>![[Pasted image 20251209155324.png]]</p>
+        <img src='https://github.com/odczarujpowerbi/szkolenia-powerbi/blob/main/bin/Pasted%20image%2020251209155324.png' width='100%'>
         <p><strong>Zastosowanie:</strong> Podgląd i weryfikacja danych w tabelach.</p>
         <p>W tym widoku:</p>
         <ul>
@@ -236,7 +236,7 @@ createOrReplace
     <!-- Strona 3 -->
     <div class='page'>
         <h2>3. Widok Model (Model View)</h2>
-        <p>![[Pasted image 20251209155620.png]]</p>
+        <img src='https://github.com/odczarujpowerbi/szkolenia-powerbi/blob/main/bin/Pasted%20image%2020251209155620.png' width='100%'>
         <p><strong>Zastosowanie:</strong> Zarządzanie relacjami między tabelami i strukturą modelu danych.</p>
         <p>W tym widoku:</p>
         <ul>
@@ -253,7 +253,7 @@ createOrReplace
     <!-- Strona 4 -->
     <div class='page'>
         <h2>4. Widok DAX Query (DAX Query View)</h2>
-        <p>![[Pasted image 20251209155746.png]]</p>
+        <img src='https://github.com/odczarujpowerbi/szkolenia-powerbi/blob/main/bin/Pasted%20image%2020251209155746.png' width='100%'>
         <p><strong>Zastosowanie:</strong> Testowanie zapytań DAX bez tworzenia miar w modelu.</p>
         <p>W tym widoku:</p>
         <ul>
@@ -276,7 +276,7 @@ createOrReplace
     <!-- Strona 5 -->
     <div class='page'>
         <h2>5. Widok TMDL (Tabular Model Definition Language)</h2>
-        <p>![[Pasted image 20251209161608.png]]</p>
+        <img src='https://github.com/odczarujpowerbi/szkolenia-powerbi/blob/main/bin/Pasted%20image%2020251209161608.png' width='100%'>
         <p><strong>Zastosowanie:</strong> Edycja modelu danych w formie tekstowej (dla zaawansowanych użytkowników).</p>
         <p>W tym widoku:</p>
         <ul>
@@ -348,7 +348,7 @@ createOrReplace
 
 "
 ```
-            lineageTag: 7924680e-8ed4-485f-8e86-5b2335638dd3
+            lineageTag: 308805a3-3e6d-460b-93ad-e86c814a2973
 
         measure '00. Konfiguracja Power BI - Przygotowanie środowiska Power BI' = ```
 "
@@ -563,8 +563,7 @@ createOrReplace
 
     <!-- Strona 2 -->
     <div class='page'>
-        <h2>Konfiguracja ustawień raportu</h2>
-        <p>#### Włączenie interakcji między obiektami na raporcie</p>
+        <h2>Konfiguracja ustawień raportu- włączenie interakcji między obiektami na raporcie</h2>
         <p>Interakcje między wizualizacjami pozwalają na dynamiczne filtrowanie danych. Aby włączyć tę funkcję:</p>
         <p>1. Przejdź do widoku <strong>Raport</strong></p>
         <p>2. Kliknij <strong>Plik</strong> → <strong>Opcje i ustawienia</strong> → <strong>Opcje</strong></p>
@@ -576,8 +575,7 @@ createOrReplace
 
     <!-- Strona 3 -->
     <div class='page'>
-        <h2>Ustawienia Power Query</h2>
-        <p>#### Wyłączenie automatycznego wykrywania typów kolumn</p>
+        <h2>Ustawienia Power Query-  wyłączenie automatycznego wykrywania typów kolumn</h2>
         <p>Automatyczne wykrywanie typów danych przez Power Query może czasem prowadzić do błędów lub niepożądanych konwersji. Zaleca się wyłączenie tej opcji i ręczne kontrolowanie typów danych:</p>
         <p>1. Otwórz <strong>Plik</strong> → <strong>Opcje i ustawienia</strong> → <strong>Opcje</strong></p>
         <p>2. Przejdź do sekcji <strong>BIEŻĄCY PLIK</strong> → <strong>Ładowanie danych</strong></p>
@@ -655,7 +653,7 @@ createOrReplace
 
 "
 ```
-            lineageTag: 42dd3640-fd1b-4233-94df-1f6856834b89
+            lineageTag: 3270c267-4df0-4af1-9ebc-1cdaa65e3926
 
         measure '01. Podstawy DAX - Funkcje filtrujące' = ```
 "
@@ -934,7 +932,7 @@ createOrReplace
 
 "
 ```
-            lineageTag: 6b12b7f6-a709-4dc6-9740-7c8f423e7cb9
+            lineageTag: 469cceaa-f036-465f-81ed-b6b445f3a009
 
         measure '01. Podstawy DAX - Funkcje iteracyjne (X-functions)' = ```
 "
@@ -1240,7 +1238,7 @@ createOrReplace
 
 "
 ```
-            lineageTag: f58eb4ae-dc35-4c65-912c-88f5776e672e
+            lineageTag: f9e8808c-4ad9-4447-b288-94ea8da6ae11
 
         measure '01. Podstawy DAX - Podstawowe funkcje agregujące' = ```
 "
@@ -1559,7 +1557,7 @@ createOrReplace
 
 "
 ```
-            lineageTag: 5271de72-eeed-4187-b51e-c6e86d3bdc3f
+            lineageTag: 3493a52d-29e0-4a66-8e20-519a5e9f127e
 
         measure '01. Podstawy DAX - Podstawowe funkcje dat' = ```
 "
@@ -1846,7 +1844,7 @@ createOrReplace
 
 "
 ```
-            lineageTag: 9bb3b8ac-d58e-4545-97e6-075c19d41009
+            lineageTag: d45b1350-f608-4e07-b261-21a15fe7d8cc
 
         measure '01. Podstawy DAX - Podstawowe funkcje logiczne' = ```
 "
@@ -2148,7 +2146,7 @@ createOrReplace
 
 "
 ```
-            lineageTag: b04c5d86-d23e-4f4b-ade6-ac5188b689f7
+            lineageTag: 11b9f042-1508-4d27-aa94-9dda2d06c8c8
 
         measure '01. Podstawy DAX - Podstawowe funkcje tekstowe' = ```
 "
@@ -2435,7 +2433,7 @@ createOrReplace
 
 "
 ```
-            lineageTag: 4d5250ef-6c02-48b2-b1d7-0516204a330d
+            lineageTag: bef3c944-2246-4ebf-ba76-d94aa3223f72
 
         measure '01. Podstawy DAX - Wprowadzenie do CALCULATE' = ```
 "
@@ -2808,7 +2806,7 @@ createOrReplace
 
 "
 ```
-            lineageTag: 2116a50d-1e53-4d54-94ec-40930f09b20a
+            lineageTag: 5ea60fb6-b95b-4026-a585-5ed58646034e
 
         measure '01. Podstawy DAX' = ```
 "
@@ -3192,7 +3190,7 @@ createOrReplace
 
 "
 ```
-            lineageTag: 4612cae5-bffd-4439-a152-10094a426113
+            lineageTag: 4cf6057b-5f0c-40d2-959a-dd52fc3fe74c
 
         measure '02. DAX - Zmienne' = ```
 "
@@ -3572,7 +3570,7 @@ createOrReplace
 
 "
 ```
-            lineageTag: 231bfc14-f335-4976-961b-98c48ef8b5cc
+            lineageTag: 652bd72e-7e7f-446a-810d-c1a93bae73fd
 
         measure '03. Test - Testowy dział' = ```
 "
@@ -3830,7 +3828,7 @@ createOrReplace
 
 "
 ```
-            lineageTag: 9c757bb7-699e-45ae-920d-35d6395cce7e
+            lineageTag: f6d116ab-e456-443a-a269-cd703e88b4f9
 
         measure 'CSS' = ```
 "
@@ -4011,7 +4009,7 @@ createOrReplace
 </style>
 "
 ```
-            lineageTag: ba6b88aa-dbce-465d-bea1-f44036ff0cc2
+            lineageTag: d817768d-54f2-41a2-bac1-c19df6d30e12
 
         partition _HTML = m
             mode: import

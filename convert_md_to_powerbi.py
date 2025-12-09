@@ -143,6 +143,15 @@ def process_inline_markdown(text):
     # Inline code (ale nie bloki kodu)
     text = re.sub(r'`([^`]+)`', r'<code>\1</code>', text)
 
+    # Obsidian image embeds: ![[filename.png]] -> <img src='https://github.com/...' width='100%'>
+    def replace_obsidian_image(match):
+        filename = match.group(1)
+        # Zakoduj spacje jako %20
+        encoded_filename = filename.replace(' ', '%20')
+        return f"<img src='https://github.com/odczarujpowerbi/szkolenia-powerbi/blob/main/bin/{encoded_filename}' width='100%'>"
+
+    text = re.sub(r'!\[\[(.*?)\]\]', replace_obsidian_image, text)
+
     return text
 
 
@@ -185,6 +194,20 @@ def convert_markdown_to_html(md_content):
 
         if in_code_block:
             code_block.append(escape_html(line))
+            i += 1
+            continue
+
+        # Standalone images: ![[filename.png]]
+        if line.strip().startswith('![[') and line.strip().endswith(']]'):
+            if in_list:
+                html_lines.append('</ul>\n')
+                in_list = False
+
+            # Wyciągnij nazwę pliku
+            filename = line.strip()[3:-2]  # Usuń ![[ i ]]
+            # Zakoduj spacje jako %20
+            encoded_filename = filename.replace(' ', '%20')
+            html_lines.append(f"<img src='https://github.com/odczarujpowerbi/szkolenia-powerbi/blob/main/bin/{encoded_filename}' width='100%'>\n")
             i += 1
             continue
 
