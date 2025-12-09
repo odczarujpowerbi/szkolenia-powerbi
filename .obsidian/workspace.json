@@ -8,17 +8,15 @@
         "type": "tabs",
         "children": [
           {
-            "id": "401f23438fc0af83",
+            "id": "37d102dbc2d5c6a0",
             "type": "leaf",
             "state": {
-              "type": "markdown",
+              "type": "html-view",
               "state": {
-                "file": "Template/Markdown/HTML Embedded Media.md",
-                "mode": "source",
-                "source": false
+                "file": "Output/00. Konfiguracja Power BI - Przygotowanie środowiska Power BI.html"
               },
-              "icon": "lucide-file",
-              "title": "HTML Embedded Media"
+              "icon": "code-glyph",
+              "title": "00. Konfiguracja Power BI - Przygotowanie środowiska Power BI"
             }
           }
         ],
@@ -120,7 +118,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "Template/Markdown/HTML Embedded Media.md",
+                "file": "Output/00. Konfiguracja Power BI - Przygotowanie środowiska Power BI.html",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -130,7 +128,7 @@
                 "unlinkedCollapsed": true
               },
               "icon": "links-coming-in",
-              "title": "Backlinks for HTML Embedded Media"
+              "title": "Backlinks for 00. Konfiguracja Power BI - Przygotowanie środowiska Power BI"
             }
           },
           {
@@ -161,7 +159,7 @@
             "state": {
               "type": "localgraph",
               "state": {
-                "file": "Template/Markdown/HTML Embedded Media.md",
+                "file": "Output/00. Konfiguracja Power BI - Przygotowanie środowiska Power BI.html",
                 "options": {
                   "collapse-filter": true,
                   "search": "",
@@ -189,14 +187,15 @@
                 }
               },
               "icon": "lucide-git-fork",
-              "title": "Graph of HTML Embedded Media"
+              "title": "Graph of 00. Konfiguracja Power BI - Przygotowanie środowiska Power BI"
             }
           }
         ]
       }
     ],
     "direction": "horizontal",
-    "width": 481.5
+    "width": 481.5,
+    "collapsed": true
   },
   "left-ribbon": {
     "hiddenItems": {
@@ -212,10 +211,22 @@
       "obsidian-git:Open Git source control": false
     }
   },
-  "active": "401f23438fc0af83",
+  "active": "37d102dbc2d5c6a0",
   "lastOpenFiles": [
+    "Output/00. Konfiguracja Power BI - Główne widoki Power BI Desktop.html",
     "Theory/00. Konfiguracja Power BI.md",
     "Output/00. Konfiguracja Power BI - Przygotowanie środowiska Power BI.html",
+    "Output/TMDL/_HTML.md",
+    "Output/TMDL",
+    "Output/03. Test - Testowy dział.html",
+    "Output/02. DAX - Zmienne.html",
+    "Output/01. Podstawy DAX - Wprowadzenie do CALCULATE.html",
+    "Output/01. Podstawy DAX - Funkcje filtrujące.html",
+    "Output/01. Podstawy DAX - Funkcje iteracyjne (X-functions).html",
+    "Output/01. Podstawy DAX - Podstawowe funkcje dat.html",
+    "Output/01. Podstawy DAX - Podstawowe funkcje tekstowe.html",
+    "Template/Markdown/Gaps Complete.md",
+    "Template/Markdown/HTML Embedded Media.md",
     "Theory - DRAFT/00. Przygotowanie środowiska.md",
     "bin/Pasted image 20251209161608.png",
     "Theory - DRAFT/03. Kontekst Filtra.md",
@@ -227,27 +238,15 @@
     "config.md",
     "README.md",
     "bin/Pasted image 20251209155134.png",
-    "bin",
     "Pasted image 20251209155005.png",
-    "Template/Markdown/Gaps Complete.md",
-    "Template/Markdown/HTML Embedded Media.md",
     "Template/Markdown/Quiz.md",
     "Template/Markdown/Teoria.md",
     "Theory/01. Podstawy DAX.md",
     "Theory - DRAFT/01. Podstawy DAX.md",
     "Theory - DRAFT/02. Wstęp do Calculate.md",
-    "Output/03. Test - Testowy dział.html",
-    "Output/CSS.html",
     "Theory/03. Test.md",
-    "Template/Markdown",
-    "convert_md_to_powerbi.py.tmp.55504.1765285350520",
-    "Output/TMDL/_HTML.md",
     "Template/CSS.md",
     "Template/JS.md",
-    "Output/01. Podstawy DAX.html",
-    "Output/01. Podstawy DAX - Funkcje filtrujące.html",
-    "Output/01. Podstawy DAX - Podstawowe funkcje agregujące.html",
-    "Output/01. Podstawy DAX - Funkcje iteracyjne (X-functions).html",
     "TMDL/_HTML.md",
     "Theory/02. DAX - Zmienne.md",
     "Generator.canvas",

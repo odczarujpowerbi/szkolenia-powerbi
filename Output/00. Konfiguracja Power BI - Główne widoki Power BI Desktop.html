@@ -1,4 +1,4 @@
-Przygotowanie środowiska Power BI = 
+Główne widoki Power BI Desktop = 
 
 "
 
@@ -7,7 +7,7 @@ Przygotowanie środowiska Power BI =
 <head>
     <meta charset='UTF-8'>
     <meta name='viewport' content='width=device-width, initial-scale=1.0'>
-    <title>Przygotowanie środowiska Power BI</title>
+    <title>Główne widoki Power BI Desktop</title>
     <style>
             * {
                 margin: 0;
@@ -184,76 +184,116 @@ Przygotowanie środowiska Power BI =
 </head>
 <body>
 
-<div class='container' id='viz_905d5ea6'>
+<div class='container' id='viz_5dc96cd3'>
     <!-- Nawigacja na górze -->
     <div class='navigation'>
-        <button id='prevBtn_905d5ea6' onclick='changePage_905d5ea6(-1)'>← Poprzednia</button>
+        <button id='prevBtn_5dc96cd3' onclick='changePage_5dc96cd3(-1)'>← Poprzednia</button>
         <span class='page-indicator'>
-            Strona <span id='currentPage_905d5ea6'>1</span> z <span id='totalPages_905d5ea6'>4</span>
+            Strona <span id='currentPage_5dc96cd3'>1</span> z <span id='totalPages_5dc96cd3'>6</span>
         </span>
-        <button id='nextBtn_905d5ea6' onclick='changePage_905d5ea6(1)'>Następna →</button>
+        <button id='nextBtn_5dc96cd3' onclick='changePage_5dc96cd3(1)'>Następna →</button>
     </div>
 
     <!-- Strona 1 -->
     <div class='page active'>
-        <h1>Ustawienia programu Power BI</h1>
-        <p>Przed rozpoczęciem pracy z Power BI Desktop warto odpowiednio skonfigurować środowisko pracy. Prawidłowe ustawienia programu umożliwiają dostęp do nowych funkcji oraz optymalizują sposób pracy z danymi.</p>
-        <h2>Włączenie funkcji w wersji zapoznawczej (Preview Features)</h2>
-        <p>Power BI regularnie wprowadza nowe funkcje, które na początku dostępne są jako wersje zapoznawcze. Aby je włączyć:</p>
-        <p>1. Otwórz <strong>Plik</strong> → <strong>Opcje i ustawienia</strong> → <strong>Opcje</strong></p>
-        <p>2. Przejdź do sekcji <strong>Funkcje w wersji zapoznawczej</strong> (Preview features)</p>
-        <p>3. Zaznacz następujące opcje:</p>
-        <p>   - <strong>Obliczenia wizualne</strong> - pozwala na tworzenie bardziej zaawansowanych wizualizacji</p>
-        <p>   - <strong>Nowe wizualizacje</strong> - daje dostęp do najnowszych typów wizualizacji</p>
-        <p><strong>Uwaga:</strong> Po włączeniu funkcji w wersji zapoznawczej konieczne jest ponowne uruchomienie Power BI Desktop.</p>
-        <p><img src='https://raw.githubusercontent.com/odczarujpowerbi/grafiki-do-szkolenia/main/PowerBI - Ustawienia - Preview Features.gif' width='100%'></p>
+        <p>Power BI Desktop oferuje pięć głównych widoków, z których każdy służy do różnych celów. Znajomość tych widoków jest kluczowa dla efektywnej pracy z narzędziem.</p>
+        <h2>1. Widok Raport (Report View)</h2>
+        <p>![[Pasted image 20251209155301.png]]</p>
+        <p><strong>Zastosowanie:</strong> Tworzenie i projektowanie wizualizacji danych.</p>
+        <p>W tym widoku:</p>
+        <ul>
+        <li>Tworzysz wykresy, tabele, karty i inne wizualizacje</li>
+        <li>Układasz elementy na stronach raportu</li>
+        <li>Konfigurujesz formatowanie wizualizacji</li>
+        <li>Ustawiasz interakcje między obiektami</li>
+        </ul>
+        <p><strong>Przykład użycia:</strong></p>
+        <p>Stworzenie wykresu słupkowego pokazującego sumę sprzedaży (Price × Quantity) według kategorii z tabeli fDemo.</p>
 
     </div>
 
     <!-- Strona 2 -->
     <div class='page'>
-        <h2>Konfiguracja ustawień raportu</h2>
-        <p>#### Włączenie interakcji między obiektami na raporcie</p>
-        <p>Interakcje między wizualizacjami pozwalają na dynamiczne filtrowanie danych. Aby włączyć tę funkcję:</p>
-        <p>1. Przejdź do widoku <strong>Raport</strong></p>
-        <p>2. Kliknij <strong>Plik</strong> → <strong>Opcje i ustawienia</strong> → <strong>Opcje</strong></p>
-        <p>3. W sekcji <strong>Bieżący plik</strong> → <strong>Ustawienia raportu</strong></p>
-        <p>4. Upewnij się, że opcja dotycząca interakcji wizualizacji jest włączona</p>
-        <p>Dzięki temu kliknięcie na element jednej wizualizacji (np. kolumnę na wykresie) automatycznie przefiltruje pozostałe wizualizacje na stronie raportu.</p>
+        <h2>2. Widok Dane (Data View)</h2>
+        <p>![[Pasted image 20251209155324.png]]</p>
+        <p><strong>Zastosowanie:</strong> Podgląd i weryfikacja danych w tabelach.</p>
+        <p>W tym widoku:</p>
+        <ul>
+        <li>Przeglądasz zawartość tabel</li>
+        <li>Weryfikujesz poprawność danych</li>
+        <li>Tworzysz kolumny kalkulowane</li>
+        <li>Sprawdzasz wyniki transformacji</li>
+        </ul>
+        <p><strong>Przykład użycia:</strong></p>
+        <p>Sprawdzenie, czy wszystkie produkty z tabeli fDemo mają przypisane wartości w kolumnach Price, Quantity i Category.</p>
 
     </div>
 
     <!-- Strona 3 -->
     <div class='page'>
-        <h2>Ustawienia Power Query</h2>
-        <p>#### Wyłączenie automatycznego wykrywania typów kolumn</p>
-        <p>Automatyczne wykrywanie typów danych przez Power Query może czasem prowadzić do błędów lub niepożądanych konwersji. Zaleca się wyłączenie tej opcji i ręczne kontrolowanie typów danych:</p>
-        <p>1. Otwórz <strong>Plik</strong> → <strong>Opcje i ustawienia</strong> → <strong>Opcje</strong></p>
-        <p>2. Przejdź do sekcji <strong>BIEŻĄCY PLIK</strong> → <strong>Ładowanie danych</strong></p>
-        <p>3. Odznacz opcję <strong>Automatycznie wykrywaj typy kolumn i nagłówki dla źródeł nieustrukturyzowanych</strong></p>
-        <p>Dzięki temu będziesz mieć pełną kontrolę nad tym, jakie typy danych są przypisywane do poszczególnych kolumn.</p>
+        <h2>3. Widok Model (Model View)</h2>
+        <p>![[Pasted image 20251209155620.png]]</p>
+        <p><strong>Zastosowanie:</strong> Zarządzanie relacjami między tabelami i strukturą modelu danych.</p>
+        <p>W tym widoku:</p>
+        <ul>
+        <li>Tworzysz relacje między tabelami</li>
+        <li>Zarządzasz kluczami głównymi i obcymi</li>
+        <li>Organizujesz tabele w grupy tematyczne</li>
+        <li>Definiujesz hierarchie wymiarów</li>
+        </ul>
+        <p><strong>Przykład użycia:</strong></p>
+        <p>W przypadku rozbudowy modelu o tabelę wymiarową 'DimCategory' można by tutaj utworzyć relację między fDemo[Category] a DimCategory[CategoryName].</p>
 
     </div>
 
     <!-- Strona 4 -->
     <div class='page'>
-        <h2>Ustawienie wersji językowej</h2>
-        <p>Wersja językowa Power BI wpływa na separatory dziesiętne, daty oraz niektóre funkcje DAX:</p>
-        <p>1. Otwórz <strong>Plik</strong> → <strong>Opcje i ustawienia</strong> → <strong>Opcje</strong></p>
-        <p>2. Przejdź do sekcji <strong>GLOBALNE</strong> → <strong>Ustawienia regionalne</strong></p>
-        <p>3. Wybierz odpowiedni język (np. Polski lub Angielski)</p>
-        <p><strong>Uwaga:</strong></p>
+        <h2>4. Widok DAX Query (DAX Query View)</h2>
+        <p>![[Pasted image 20251209155746.png]]</p>
+        <p><strong>Zastosowanie:</strong> Testowanie zapytań DAX bez tworzenia miar w modelu.</p>
+        <p>W tym widoku:</p>
         <ul>
-        <li>W polskiej wersji separator dziesiętny to przecinek (<code>,</code>), a separator argumentów to średnik (<code>;</code>)</li>
-        <li>W angielskiej wersji separator dziesiętny to kropka (<code>.</code>), a separator argumentów to przecinek (<code>,</code>)</li>
+        <li>Piszesz i testujesz zapytania DAX (podobnie jak SQL)</li>
+        <li>Szybko weryfikujesz wyniki wyrażeń</li>
+        <li>Eksplorujesz dane bez wpływu na model</li>
+        <li>Uczysz się składni DAX</li>
         </ul>
-        <p>Przykład różnic w składni DAX:</p>
-        <pre><code>// Wersja polska
-        Suma wartości = <span class='dax-function'>SUMX</span>(fDemo; fDemo[Price] * fDemo[Quantity])
+        <p><strong>Przykład zapytania:</strong></p>
+        <pre><code>EVALUATE
+        <span class='dax-function'>SUMMARIZECOLUMNS</span>(
+            fDemo[Category],
+            'Total Sales', <span class='dax-function'>SUMX</span>(fDemo, fDemo[Price] * fDemo[Quantity])
+        )
+        ORDER BY [Total Sales] DESC</code></pre>
+        <p>To zapytanie zwróci zestawienie sprzedaży według kategorii, posortowane malejąco.</p>
 
-        // Wersja angielska
-        Suma wartości = <span class='dax-function'>SUMX</span>(fDemo, fDemo[Price] * fDemo[Quantity])</code></pre>
-        <p>---</p>
+    </div>
+
+    <!-- Strona 5 -->
+    <div class='page'>
+        <h2>5. Widok TMDL (Tabular Model Definition Language)</h2>
+        <p>![[Pasted image 20251209161608.png]]</p>
+        <p><strong>Zastosowanie:</strong> Edycja modelu danych w formie tekstowej (dla zaawansowanych użytkowników).</p>
+        <p>W tym widoku:</p>
+        <ul>
+        <li>Przeglądasz definicję modelu w postaci kodu</li>
+        <li>Możesz edytować właściwości obiektów</li>
+        <li>Przydatne do wersjonowania modelu (Git)</li>
+        <li>Umożliwia zaawansowane operacje masowe</li>
+        </ul>
+        <p><strong>Uwaga:</strong> Ten widok jest przeznaczony dla zaawansowanych użytkowników i programistów, którzy chcą zarządzać modelem jako kodem.</p>
+
+    </div>
+
+    <!-- Strona 6 -->
+    <div class='page'>
+        <h1>Podsumowanie</h1>
+        <p>Prawidłowe przygotowanie środowiska Power BI to fundament efektywnej pracy:</p>
+        <p>✓ Włącz niezbędne funkcje w wersji zapoznawczej</p>
+        <p>✓ Skonfiguruj ustawienia Power Query (wyłącz auto-detekcję typów)</p>
+        <p>✓ Ustaw właściwą wersję językową</p>
+        <p>✓ Poznaj wszystkie pięć widoków Power BI Desktop</p>
+        <p>Znajomość tych elementów pozwoli Ci sprawnie poruszać się po środowisku i skupić się na budowaniu efektywnych rozwiązań analitycznych.</p>
 
     </div>
 
@@ -262,10 +302,10 @@ Przygotowanie środowiska Power BI =
 <script>
 (function() {
     // Unikalny ID dla tej wizualizacji (wstrzykiwany przez Python)
-    var vizId = '905d5ea6';
+    var vizId = '5dc96cd3';
     var containerId = 'viz_' + vizId;
 
-    var currentPage_905d5ea6 = 1;
+    var currentPage_5dc96cd3 = 1;
     var container = document.getElementById(containerId);
 
     if (!container) return;
@@ -275,27 +315,27 @@ Przygotowanie środowiska Power BI =
 
     document.getElementById('totalPages_' + vizId).textContent = totalPages;
 
-    window['showPage_905d5ea6'] = function(n) {
-        if (n > totalPages) currentPage_905d5ea6 = totalPages;
-        if (n < 1) currentPage_905d5ea6 = 1;
+    window['showPage_5dc96cd3'] = function(n) {
+        if (n > totalPages) currentPage_5dc96cd3 = totalPages;
+        if (n < 1) currentPage_5dc96cd3 = 1;
 
         for (var i = 0; i < pages.length; i++) {
             pages[i].classList.remove('active');
         }
-        pages[currentPage_905d5ea6 - 1].classList.add('active');
+        pages[currentPage_5dc96cd3 - 1].classList.add('active');
 
-        document.getElementById('currentPage_' + vizId).textContent = currentPage_905d5ea6;
-        document.getElementById('prevBtn_' + vizId).disabled = (currentPage_905d5ea6 === 1);
-        document.getElementById('nextBtn_' + vizId).disabled = (currentPage_905d5ea6 === totalPages);
+        document.getElementById('currentPage_' + vizId).textContent = currentPage_5dc96cd3;
+        document.getElementById('prevBtn_' + vizId).disabled = (currentPage_5dc96cd3 === 1);
+        document.getElementById('nextBtn_' + vizId).disabled = (currentPage_5dc96cd3 === totalPages);
     };
 
-    window['changePage_905d5ea6'] = function(n) {
-        currentPage_905d5ea6 += n;
-        window['showPage_905d5ea6'](currentPage_905d5ea6);
+    window['changePage_5dc96cd3'] = function(n) {
+        currentPage_5dc96cd3 += n;
+        window['showPage_5dc96cd3'](currentPage_5dc96cd3);
     };
 
     // Inicjalizacja
-    window['showPage_905d5ea6'](1);
+    window['showPage_5dc96cd3'](1);
 })();
 </script>
 

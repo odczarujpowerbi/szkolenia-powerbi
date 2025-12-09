@@ -1,7 +1,7 @@
 createOrReplace
 
     table _HTML
-        lineageTag: 78fa0e35-996f-452d-9bba-2e588303b3a3
+        lineageTag: 5b9b67a8-7789-492e-80bd-e6862290e36f
 
         measure '00. Konfiguracja Power BI - Główne widoki Power BI Desktop' = ```
 "
@@ -193,7 +193,7 @@ createOrReplace
     <div class='navigation'>
         <button id='prevBtn_5dc96cd3' onclick='changePage_5dc96cd3(-1)'>← Poprzednia</button>
         <span class='page-indicator'>
-            Strona <span id='currentPage_5dc96cd3'>1</span> z <span id='totalPages_5dc96cd3'>6</span>
+            Strona <span id='currentPage_5dc96cd3'>1</span> z <span id='totalPages_5dc96cd3'>2</span>
         </span>
         <button id='nextBtn_5dc96cd3' onclick='changePage_5dc96cd3(1)'>Następna →</button>
     </div>
@@ -213,11 +213,6 @@ createOrReplace
         </ul>
         <p><strong>Przykład użycia:</strong></p>
         <p>Stworzenie wykresu słupkowego pokazującego sumę sprzedaży (Price × Quantity) według kategorii z tabeli fDemo.</p>
-
-    </div>
-
-    <!-- Strona 2 -->
-    <div class='page'>
         <h2>2. Widok Dane (Data View)</h2>
         <p>![[Pasted image 20251209155324.png]]</p>
         <p><strong>Zastosowanie:</strong> Podgląd i weryfikacja danych w tabelach.</p>
@@ -230,11 +225,6 @@ createOrReplace
         </ul>
         <p><strong>Przykład użycia:</strong></p>
         <p>Sprawdzenie, czy wszystkie produkty z tabeli fDemo mają przypisane wartości w kolumnach Price, Quantity i Category.</p>
-
-    </div>
-
-    <!-- Strona 3 -->
-    <div class='page'>
         <h2>3. Widok Model (Model View)</h2>
         <p>![[Pasted image 20251209155620.png]]</p>
         <p><strong>Zastosowanie:</strong> Zarządzanie relacjami między tabelami i strukturą modelu danych.</p>
@@ -247,11 +237,6 @@ createOrReplace
         </ul>
         <p><strong>Przykład użycia:</strong></p>
         <p>W przypadku rozbudowy modelu o tabelę wymiarową 'DimCategory' można by tutaj utworzyć relację między fDemo[Category] a DimCategory[CategoryName].</p>
-
-    </div>
-
-    <!-- Strona 4 -->
-    <div class='page'>
         <h2>4. Widok DAX Query (DAX Query View)</h2>
         <p>![[Pasted image 20251209155746.png]]</p>
         <p><strong>Zastosowanie:</strong> Testowanie zapytań DAX bez tworzenia miar w modelu.</p>
@@ -270,11 +255,6 @@ createOrReplace
         )
         ORDER BY [Total Sales] DESC</code></pre>
         <p>To zapytanie zwróci zestawienie sprzedaży według kategorii, posortowane malejąco.</p>
-
-    </div>
-
-    <!-- Strona 5 -->
-    <div class='page'>
         <h2>5. Widok TMDL (Tabular Model Definition Language)</h2>
         <p>![[Pasted image 20251209161608.png]]</p>
         <p><strong>Zastosowanie:</strong> Edycja modelu danych w formie tekstowej (dla zaawansowanych użytkowników).</p>
@@ -289,7 +269,7 @@ createOrReplace
 
     </div>
 
-    <!-- Strona 6 -->
+    <!-- Strona 2 -->
     <div class='page'>
         <h1>Podsumowanie</h1>
         <p>Prawidłowe przygotowanie środowiska Power BI to fundament efektywnej pracy:</p>
@@ -348,7 +328,7 @@ createOrReplace
 
 "
 ```
-            lineageTag: 7924680e-8ed4-485f-8e86-5b2335638dd3
+            lineageTag: d1724970-4dd9-46eb-a949-e8ec68ae82e7
 
         measure '00. Konfiguracja Power BI - Przygotowanie środowiska Power BI' = ```
 "
@@ -655,7 +635,7 @@ createOrReplace
 
 "
 ```
-            lineageTag: 42dd3640-fd1b-4233-94df-1f6856834b89
+            lineageTag: 0e6a1cb7-84c6-4abd-8057-5d6267a9d71d
 
         measure '01. Podstawy DAX - Funkcje filtrujące' = ```
 "
@@ -934,7 +914,7 @@ createOrReplace
 
 "
 ```
-            lineageTag: 6b12b7f6-a709-4dc6-9740-7c8f423e7cb9
+            lineageTag: 686a36f4-bb81-49aa-9f1e-f7f860270664
 
         measure '01. Podstawy DAX - Funkcje iteracyjne (X-functions)' = ```
 "
@@ -1240,7 +1220,7 @@ createOrReplace
 
 "
 ```
-            lineageTag: f58eb4ae-dc35-4c65-912c-88f5776e672e
+            lineageTag: e45cfd13-422c-4858-81f3-0ad6c690c0b7
 
         measure '01. Podstawy DAX - Podstawowe funkcje agregujące' = ```
 "
@@ -1559,7 +1539,7 @@ createOrReplace
 
 "
 ```
-            lineageTag: 5271de72-eeed-4187-b51e-c6e86d3bdc3f
+            lineageTag: fe9b1cb3-045f-46e1-bb81-d7f17b09560d
 
         measure '01. Podstawy DAX - Podstawowe funkcje dat' = ```
 "
@@ -1846,7 +1826,7 @@ createOrReplace
 
 "
 ```
-            lineageTag: 9bb3b8ac-d58e-4545-97e6-075c19d41009
+            lineageTag: e5caa091-0364-46fc-b7d4-4f83a5db4f8c
 
         measure '01. Podstawy DAX - Podstawowe funkcje logiczne' = ```
 "
@@ -2148,7 +2128,7 @@ createOrReplace
 
 "
 ```
-            lineageTag: b04c5d86-d23e-4f4b-ade6-ac5188b689f7
+            lineageTag: bee66b0b-42b2-4ec8-b11f-827a3728718f
 
         measure '01. Podstawy DAX - Podstawowe funkcje tekstowe' = ```
 "
@@ -2435,7 +2415,7 @@ createOrReplace
 
 "
 ```
-            lineageTag: 4d5250ef-6c02-48b2-b1d7-0516204a330d
+            lineageTag: f13676c6-17c9-4a44-bd65-4de12136f364
 
         measure '01. Podstawy DAX - Wprowadzenie do CALCULATE' = ```
 "
@@ -2808,7 +2788,7 @@ createOrReplace
 
 "
 ```
-            lineageTag: 2116a50d-1e53-4d54-94ec-40930f09b20a
+            lineageTag: 48c39ff5-9704-4abd-9682-f7d5e1dec806
 
         measure '01. Podstawy DAX' = ```
 "
@@ -3192,7 +3172,7 @@ createOrReplace
 
 "
 ```
-            lineageTag: 4612cae5-bffd-4439-a152-10094a426113
+            lineageTag: 623ec4a3-74f1-457c-943a-c0fe7b0dd014
 
         measure '02. DAX - Zmienne' = ```
 "
@@ -3572,7 +3552,7 @@ createOrReplace
 
 "
 ```
-            lineageTag: 231bfc14-f335-4976-961b-98c48ef8b5cc
+            lineageTag: d89fcf14-d9b3-4926-a1ca-a743ac05fe9a
 
         measure '03. Test - Testowy dział' = ```
 "
@@ -3830,7 +3810,7 @@ createOrReplace
 
 "
 ```
-            lineageTag: 9c757bb7-699e-45ae-920d-35d6395cce7e
+            lineageTag: fe036776-deba-4934-8153-541cb8b56416
 
         measure 'CSS' = ```
 "
@@ -4011,7 +3991,7 @@ createOrReplace
 </style>
 "
 ```
-            lineageTag: ba6b88aa-dbce-465d-bea1-f44036ff0cc2
+            lineageTag: 326197a5-5963-47fb-be8b-1145e9067f7f
 
         partition _HTML = m
             mode: import

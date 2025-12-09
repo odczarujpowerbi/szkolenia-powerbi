@@ -1,4 +1,4 @@
-Przygotowanie środowiska Power BI = 
+Podstawowe funkcje agregujące = 
 
 "
 
@@ -7,7 +7,7 @@ Przygotowanie środowiska Power BI =
 <head>
     <meta charset='UTF-8'>
     <meta name='viewport' content='width=device-width, initial-scale=1.0'>
-    <title>Przygotowanie środowiska Power BI</title>
+    <title>Podstawowe funkcje agregujące</title>
     <style>
             * {
                 margin: 0;
@@ -184,75 +184,87 @@ Przygotowanie środowiska Power BI =
 </head>
 <body>
 
-<div class='container' id='viz_905d5ea6'>
+<div class='container' id='viz_4b21e28b'>
     <!-- Nawigacja na górze -->
     <div class='navigation'>
-        <button id='prevBtn_905d5ea6' onclick='changePage_905d5ea6(-1)'>← Poprzednia</button>
+        <button id='prevBtn_4b21e28b' onclick='changePage_4b21e28b(-1)'>← Poprzednia</button>
         <span class='page-indicator'>
-            Strona <span id='currentPage_905d5ea6'>1</span> z <span id='totalPages_905d5ea6'>4</span>
+            Strona <span id='currentPage_4b21e28b'>1</span> z <span id='totalPages_4b21e28b'>7</span>
         </span>
-        <button id='nextBtn_905d5ea6' onclick='changePage_905d5ea6(1)'>Następna →</button>
+        <button id='nextBtn_4b21e28b' onclick='changePage_4b21e28b(1)'>Następna →</button>
     </div>
 
     <!-- Strona 1 -->
     <div class='page active'>
-        <h1>Ustawienia programu Power BI</h1>
-        <p>Przed rozpoczęciem pracy z Power BI Desktop warto odpowiednio skonfigurować środowisko pracy. Prawidłowe ustawienia programu umożliwiają dostęp do nowych funkcji oraz optymalizują sposób pracy z danymi.</p>
-        <h2>Włączenie funkcji w wersji zapoznawczej (Preview Features)</h2>
-        <p>Power BI regularnie wprowadza nowe funkcje, które na początku dostępne są jako wersje zapoznawcze. Aby je włączyć:</p>
-        <p>1. Otwórz <strong>Plik</strong> → <strong>Opcje i ustawienia</strong> → <strong>Opcje</strong></p>
-        <p>2. Przejdź do sekcji <strong>Funkcje w wersji zapoznawczej</strong> (Preview features)</p>
-        <p>3. Zaznacz następujące opcje:</p>
-        <p>   - <strong>Obliczenia wizualne</strong> - pozwala na tworzenie bardziej zaawansowanych wizualizacji</p>
-        <p>   - <strong>Nowe wizualizacje</strong> - daje dostęp do najnowszych typów wizualizacji</p>
-        <p><strong>Uwaga:</strong> Po włączeniu funkcji w wersji zapoznawczej konieczne jest ponowne uruchomienie Power BI Desktop.</p>
-        <p><img src='https://raw.githubusercontent.com/odczarujpowerbi/grafiki-do-szkolenia/main/PowerBI - Ustawienia - Preview Features.gif' width='100%'></p>
+        <h1>SUM – Suma wartości</h1>
+        <p>Sumuje wszystkie wartości w kolumnie:</p>
+        <pre><code>Suma Sprzedaży = <span class='dax-function'>SUM</span>(Sprzedaz[Kwota])</code></pre>
+        <p><strong>Jak działa:</strong></p>
+        <ul>
+        <li>Dodaje wszystkie liczby w kolumnie <code>Sprzedaz[Kwota]</code></li>
+        <li>Pomija wartości <code>BLANK()</code> (puste)</li>
+        <li>Uwzględnia aktualny kontekst filtrowania</li>
+        </ul>
 
     </div>
 
     <!-- Strona 2 -->
     <div class='page'>
-        <h2>Konfiguracja ustawień raportu</h2>
-        <p>#### Włączenie interakcji między obiektami na raporcie</p>
-        <p>Interakcje między wizualizacjami pozwalają na dynamiczne filtrowanie danych. Aby włączyć tę funkcję:</p>
-        <p>1. Przejdź do widoku <strong>Raport</strong></p>
-        <p>2. Kliknij <strong>Plik</strong> → <strong>Opcje i ustawienia</strong> → <strong>Opcje</strong></p>
-        <p>3. W sekcji <strong>Bieżący plik</strong> → <strong>Ustawienia raportu</strong></p>
-        <p>4. Upewnij się, że opcja dotycząca interakcji wizualizacji jest włączona</p>
-        <p>Dzięki temu kliknięcie na element jednej wizualizacji (np. kolumnę na wykresie) automatycznie przefiltruje pozostałe wizualizacje na stronie raportu.</p>
+        <h1>AVERAGE – Średnia</h1>
+        <p>Oblicza średnią arytmetyczną:</p>
+        <pre><code>Średnia Cena = <span class='dax-function'>AVERAGE</span>(Produkty[Cena])</code></pre>
+        <p><strong>Jak działa:</strong></p>
+        <ul>
+        <li>Sumuje wszystkie wartości i dzieli przez ich liczbę</li>
+        <li>Pomija wartości puste</li>
+        </ul>
 
     </div>
 
     <!-- Strona 3 -->
     <div class='page'>
-        <h2>Ustawienia Power Query</h2>
-        <p>#### Wyłączenie automatycznego wykrywania typów kolumn</p>
-        <p>Automatyczne wykrywanie typów danych przez Power Query może czasem prowadzić do błędów lub niepożądanych konwersji. Zaleca się wyłączenie tej opcji i ręczne kontrolowanie typów danych:</p>
-        <p>1. Otwórz <strong>Plik</strong> → <strong>Opcje i ustawienia</strong> → <strong>Opcje</strong></p>
-        <p>2. Przejdź do sekcji <strong>BIEŻĄCY PLIK</strong> → <strong>Ładowanie danych</strong></p>
-        <p>3. Odznacz opcję <strong>Automatycznie wykrywaj typy kolumn i nagłówki dla źródeł nieustrukturyzowanych</strong></p>
-        <p>Dzięki temu będziesz mieć pełną kontrolę nad tym, jakie typy danych są przypisywane do poszczególnych kolumn.</p>
+        <h1>COUNT – Liczba wartości niepustych</h1>
+        <p>Liczy ile jest niepustych wartości w kolumnie:</p>
+        <pre><code>Liczba Transakcji = <span class='dax-function'>COUNT</span>(Sprzedaz[ID Transakcji])</code></pre>
+        <p><strong>Uwaga:</strong> COUNT liczy tylko wartości <strong>niepuste</strong> (pomija BLANK).</p>
 
     </div>
 
     <!-- Strona 4 -->
     <div class='page'>
-        <h2>Ustawienie wersji językowej</h2>
-        <p>Wersja językowa Power BI wpływa na separatory dziesiętne, daty oraz niektóre funkcje DAX:</p>
-        <p>1. Otwórz <strong>Plik</strong> → <strong>Opcje i ustawienia</strong> → <strong>Opcje</strong></p>
-        <p>2. Przejdź do sekcji <strong>GLOBALNE</strong> → <strong>Ustawienia regionalne</strong></p>
-        <p>3. Wybierz odpowiedni język (np. Polski lub Angielski)</p>
-        <p><strong>Uwaga:</strong></p>
-        <ul>
-        <li>W polskiej wersji separator dziesiętny to przecinek (<code>,</code>), a separator argumentów to średnik (<code>;</code>)</li>
-        <li>W angielskiej wersji separator dziesiętny to kropka (<code>.</code>), a separator argumentów to przecinek (<code>,</code>)</li>
-        </ul>
-        <p>Przykład różnic w składni DAX:</p>
-        <pre><code>// Wersja polska
-        Suma wartości = <span class='dax-function'>SUMX</span>(fDemo; fDemo[Price] * fDemo[Quantity])
+        <h1>COUNTA – Liczba wartości niepustych (dowolny typ)</h1>
+        <p>Podobnie jak COUNT, ale działa na <strong>wszystkich typach danych</strong> (tekst, liczby, daty):</p>
+        <pre><code>Liczba Produktów = <span class='dax-function'>COUNTA</span>(Produkty[Nazwa])</code></pre>
 
-        // Wersja angielska
-        Suma wartości = <span class='dax-function'>SUMX</span>(fDemo, fDemo[Price] * fDemo[Quantity])</code></pre>
+    </div>
+
+    <!-- Strona 5 -->
+    <div class='page'>
+        <h1>COUNTROWS – Liczba wierszy w tabeli</h1>
+        <p>Liczy wszystkie wiersze w tabeli (nawet jeśli mają puste wartości):</p>
+        <pre><code>Liczba Zamówień = <span class='dax-function'>COUNTROWS</span>(Zamowienia)</code></pre>
+        <p><strong>Różnica COUNT vs COUNTROWS:</strong></p>
+        <ul>
+        <li><code>COUNT</code> – liczy niepuste wartości w <strong>konkretnej kolumnie</strong></li>
+        <li><code>COUNTROWS</code> – liczy <strong>wszystkie wiersze w tabeli</strong></li>
+        </ul>
+
+    </div>
+
+    <!-- Strona 6 -->
+    <div class='page'>
+        <h1>MIN i MAX – Minimum i maksimum</h1>
+        <pre><code>Najniższa Cena = <span class='dax-function'>MIN</span>(Produkty[Cena])
+        Najwyższa Cena = <span class='dax-function'>MAX</span>(Produkty[Cena])</code></pre>
+
+    </div>
+
+    <!-- Strona 7 -->
+    <div class='page'>
+        <h1>DISTINCTCOUNT – Liczba unikalnych wartości</h1>
+        <p>Liczy ile jest <strong>unikalnych</strong> (niepowtarzających się) wartości:</p>
+        <pre><code>Liczba Unikalnych Klientów = <span class='dax-function'>DISTINCTCOUNT</span>(Sprzedaz[ID Klienta])</code></pre>
+        <p><strong>Przykład:</strong> Jeśli kolumna zawiera: <code>{1, 2, 2, 3, 3, 3}</code>, to <code>DISTINCTCOUNT</code> zwróci <strong>3</strong>.</p>
         <p>---</p>
 
     </div>
@@ -262,10 +274,10 @@ Przygotowanie środowiska Power BI =
 <script>
 (function() {
     // Unikalny ID dla tej wizualizacji (wstrzykiwany przez Python)
-    var vizId = '905d5ea6';
+    var vizId = '4b21e28b';
     var containerId = 'viz_' + vizId;
 
-    var currentPage_905d5ea6 = 1;
+    var currentPage_4b21e28b = 1;
     var container = document.getElementById(containerId);
 
     if (!container) return;
@@ -275,27 +287,27 @@ Przygotowanie środowiska Power BI =
 
     document.getElementById('totalPages_' + vizId).textContent = totalPages;
 
-    window['showPage_905d5ea6'] = function(n) {
-        if (n > totalPages) currentPage_905d5ea6 = totalPages;
-        if (n < 1) currentPage_905d5ea6 = 1;
+    window['showPage_4b21e28b'] = function(n) {
+        if (n > totalPages) currentPage_4b21e28b = totalPages;
+        if (n < 1) currentPage_4b21e28b = 1;
 
         for (var i = 0; i < pages.length; i++) {
             pages[i].classList.remove('active');
         }
-        pages[currentPage_905d5ea6 - 1].classList.add('active');
+        pages[currentPage_4b21e28b - 1].classList.add('active');
 
-        document.getElementById('currentPage_' + vizId).textContent = currentPage_905d5ea6;
-        document.getElementById('prevBtn_' + vizId).disabled = (currentPage_905d5ea6 === 1);
-        document.getElementById('nextBtn_' + vizId).disabled = (currentPage_905d5ea6 === totalPages);
+        document.getElementById('currentPage_' + vizId).textContent = currentPage_4b21e28b;
+        document.getElementById('prevBtn_' + vizId).disabled = (currentPage_4b21e28b === 1);
+        document.getElementById('nextBtn_' + vizId).disabled = (currentPage_4b21e28b === totalPages);
     };
 
-    window['changePage_905d5ea6'] = function(n) {
-        currentPage_905d5ea6 += n;
-        window['showPage_905d5ea6'](currentPage_905d5ea6);
+    window['changePage_4b21e28b'] = function(n) {
+        currentPage_4b21e28b += n;
+        window['showPage_4b21e28b'](currentPage_4b21e28b);
     };
 
     // Inicjalizacja
-    window['showPage_905d5ea6'](1);
+    window['showPage_4b21e28b'](1);
 })();
 </script>
 
