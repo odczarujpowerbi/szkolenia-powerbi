@@ -1,0 +1,1007 @@
+Cheatsheet = "
+
+<!DOCTYPE html>
+
+<html lang='pl'>
+
+<head>
+
+    <meta charset='UTF-8'>
+
+    <meta name='viewport' content='width=device-width, initial-scale=1.0'>
+
+    <title>DAX Master Board</title>
+
+    <style>
+
+        :root {
+
+            --primary-color: #6b1718; /* Twój kolor bazowy */
+
+            --primary-light: #8e2b2c;
+
+            --bg-color: #f4f4f4;
+
+            --card-bg: #ffffff;
+
+            --text-main: #2c3e50;
+
+            --text-muted: #6c757d;
+
+            --shadow-sm: 0 4px 6px rgba(0,0,0,0.05);
+
+            --shadow-hover: 0 10px 25px rgba(107, 23, 24, 0.15);
+
+            --code-bg: #f8f9fa;
+
+        }
+
+  
+
+        * {
+
+            margin: 0;
+
+            padding: 0;
+
+            box-sizing: border-box;
+
+        }
+
+  
+
+        body {
+
+            font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+
+            background-color: var(--bg-color);
+
+            color: var(--text-main);
+
+            line-height: 1.6;
+
+            padding: 40px 20px;
+
+            min-height: 100vh;
+
+        }
+
+  
+
+        .container {
+
+            max-width: 1200px;
+
+            margin: 0 auto;
+
+        }
+
+  
+
+        /* HEADER - Styl Plakatowy */
+
+        header {
+
+            text-align: center;
+
+            margin-bottom: 60px;
+
+        }
+
+  
+
+        header h1 {
+
+            font-size: 3rem;
+
+            font-weight: 800;
+
+            color: var(--primary-color);
+
+            letter-spacing: -1px;
+
+            margin-bottom: 10px;
+
+            text-transform: uppercase;
+
+        }
+
+  
+
+        header p {
+
+            font-size: 1.2rem;
+
+            color: var(--text-muted);
+
+            max-width: 600px;
+
+            margin: 0 auto;
+
+        }
+
+  
+
+        /* BOARD GRID */
+
+        .board-grid {
+
+            display: grid;
+
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+
+            gap: 30px;
+
+        }
+
+  
+
+        /* KARTY (Kafelki) */
+
+        .card {
+
+            background: var(--card-bg);
+
+            border-radius: 16px;
+
+            padding: 40px 30px;
+
+            text-align: center;
+
+            cursor: pointer;
+
+            transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+
+            border: 1px solid rgba(0,0,0,0.05);
+
+            box-shadow: var(--shadow-sm);
+
+            position: relative;
+
+            overflow: hidden;
+
+        }
+
+  
+
+        .card:hover {
+
+            transform: translateY(-8px);
+
+            box-shadow: var(--shadow-hover);
+
+            border-color: rgba(107, 23, 24, 0.2);
+
+        }
+
+  
+
+        .card::before {
+
+            content: '';
+
+            position: absolute;
+
+            top: 0;
+
+            left: 0;
+
+            width: 100%;
+
+            height: 6px;
+
+            background: var(--primary-color);
+
+            opacity: 0;
+
+            transition: opacity 0.3s;
+
+        }
+
+  
+
+        .card:hover::before {
+
+            opacity: 1;
+
+        }
+
+  
+
+        .icon-box {
+
+            width: 80px;
+
+            height: 80px;
+
+            background: rgba(107, 23, 24, 0.08);
+
+            border-radius: 50%;
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: center;
+
+            margin: 0 auto 25px auto;
+
+            color: var(--primary-color);
+
+            transition: transform 0.3s;
+
+        }
+
+  
+
+        .card:hover .icon-box {
+
+            transform: scale(1.1) rotate(5deg);
+
+            background: var(--primary-color);
+
+            color: #fff;
+
+        }
+
+  
+
+        .card h2 {
+
+            font-size: 1.5rem;
+
+            margin-bottom: 10px;
+
+            color: var(--text-main);
+
+        }
+
+  
+
+        .card p {
+
+            font-size: 0.95rem;
+
+            color: var(--text-muted);
+
+        }
+
+  
+
+        /* SVG Icons Styling */
+
+        svg {
+
+            width: 40px;
+
+            height: 40px;
+
+            stroke-width: 2;
+
+            stroke: currentColor;
+
+            fill: none;
+
+            stroke-linecap: round;
+
+            stroke-linejoin: round;
+
+        }
+
+  
+
+        /* MODAL / LIGHTBOX */
+
+        .modal-overlay {
+
+            position: fixed;
+
+            top: 0;
+
+            left: 0;
+
+            width: 100%;
+
+            height: 100%;
+
+            background: rgba(44, 62, 80, 0.85); /* Ciemne tło */
+
+            backdrop-filter: blur(5px);
+
+            z-index: 1000;
+
+            opacity: 0;
+
+            visibility: hidden;
+
+            transition: all 0.3s ease;
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: center;
+
+            padding: 20px;
+
+        }
+
+  
+
+        .modal-overlay.active {
+
+            opacity: 1;
+
+            visibility: visible;
+
+        }
+
+  
+
+        .modal-content {
+
+            background: white;
+
+            width: 100%;
+
+            max-width: 900px;
+
+            max-height: 90vh;
+
+            border-radius: 12px;
+
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+
+            transform: scale(0.9);
+
+            transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+
+            display: flex;
+
+            flex-direction: column;
+
+            overflow: hidden;
+
+        }
+
+  
+
+        .modal-overlay.active .modal-content {
+
+            transform: scale(1);
+
+        }
+
+  
+
+        .modal-header {
+
+            padding: 25px 30px;
+
+            border-bottom: 1px solid #eee;
+
+            display: flex;
+
+            justify-content: space-between;
+
+            align-items: center;
+
+            background: #fff;
+
+        }
+
+  
+
+        .modal-header h2 {
+
+            font-size: 1.8rem;
+
+            color: var(--primary-color);
+
+        }
+
+  
+
+        .close-btn {
+
+            background: none;
+
+            border: none;
+
+            font-size: 2rem;
+
+            line-height: 1;
+
+            color: #999;
+
+            cursor: pointer;
+
+            transition: color 0.2s;
+
+        }
+
+  
+
+        .close-btn:hover {
+
+            color: var(--primary-color);
+
+        }
+
+  
+
+        .modal-body {
+
+            padding: 30px;
+
+            overflow-y: auto;
+
+            line-height: 1.8;
+
+        }
+
+  
+
+        /* STYLIZACJA TREŚCI DAX (wewnątrz modala) */
+
+        h3 {
+
+            font-size: 1.2rem;
+
+            color: #333;
+
+            margin-top: 25px;
+
+            margin-bottom: 10px;
+
+            border-left: 4px solid var(--primary-color);
+
+            padding-left: 12px;
+
+        }
+
+  
+
+        h3:first-child {
+
+            margin-top: 0;
+
+        }
+
+  
+
+        code {
+
+            font-family: 'Consolas', 'Monaco', monospace;
+
+            background: rgba(107, 23, 24, 0.08);
+
+            color: var(--primary-color);
+
+            padding: 2px 6px;
+
+            border-radius: 4px;
+
+            font-size: 0.9em;
+
+        }
+
+  
+
+        pre {
+
+            background: var(--code-bg);
+
+            border: 1px solid #e1e4e8;
+
+            border-radius: 8px;
+
+            padding: 15px;
+
+            margin: 15px 0;
+
+            overflow-x: auto;
+
+            position: relative;
+
+        }
+
+  
+
+        pre code {
+
+            background: none;
+
+            color: #333;
+
+            padding: 0;
+
+            display: block;
+
+        }
+
+  
+
+        /* DAX Syntax Highlighting (Symulacja) */
+
+        .dax-func { color: #005cc5; font-weight: bold; }
+
+        .dax-table { color: #d73a49; } /* Table references usually distinct */
+
+        .dax-col { color: #24292e; }
+
+        .dax-val { color: #032f62; }
+
+        .dax-comment { color: #6a737d; font-style: italic; }
+
+  
+
+        @media (max-width: 600px) {
+
+            header h1 { font-size: 2rem; }
+
+            .board-grid { grid-template-columns: 1fr; }
+
+        }
+
+    </style>
+
+</head>
+
+<body>
+
+  
+
+<div class='container'>
+
+    <header>
+
+        <h1>DAX Master Board</h1>
+
+        <p>Interaktywny przewodnik po funkcjach języka DAX.<br>Wybierz kategorię, aby zobaczyć szczegóły.</p>
+
+    </header>
+
+  
+
+    <div class='board-grid'>
+
+        <!-- CARD 1: AGGREGATIONS -->
+
+        <div class='card' onclick='openModal('agg')'>
+
+            <div class='icon-box'>
+
+                <!-- Icon: Bar Chart / Calc -->
+
+                <svg viewBox='0 0 24 24'>
+
+                    <line x1='18' y1='20' x2='18' y2='10'></line>
+
+                    <line x1='12' y1='20' x2='12' y2='4'></line>
+
+                    <line x1='6' y1='20' x2='6' y2='14'></line>
+
+                </svg>
+
+            </div>
+
+            <h2>Agregacje</h2>
+
+            <p>SUM, AVERAGE, COUNT, DISTINCTCOUNT i podstawy liczenia.</p>
+
+        </div>
+
+  
+
+        <!-- CARD 2: ITERATIONS -->
+
+        <div class='card' onclick='openModal('iter')'>
+
+            <div class='icon-box'>
+
+                <!-- Icon: Refresh / Loop -->
+
+                <svg viewBox='0 0 24 24'>
+
+                    <path d='M23 4v6h-6'></path>
+
+                    <path d='M1 20v-6h6'></path>
+
+                    <path d='M3.51 9a9 9 0 0 1 14.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0 0 20.49 15'></path>
+
+                </svg>
+
+            </div>
+
+            <h2>Iteratory & Kontekst</h2>
+
+            <p>SUMX, FILTER, context transition i funkcje wierszowe.</p>
+
+        </div>
+
+  
+
+        <!-- CARD 3: DATE & TIME -->
+
+        <div class='card' onclick='openModal('date')'>
+
+            <div class='icon-box'>
+
+                <!-- Icon: Calendar -->
+
+                <svg viewBox='0 0 24 24'>
+
+                    <rect x='3' y='4' width='18' height='18' rx='2' ry='2'></rect>
+
+                    <line x1='16' y1='2' x2='16' y2='6'></line>
+
+                    <line x1='8' y1='2' x2='8' y2='6'></line>
+
+                    <line x1='3' y1='10' x2='21' y2='10'></line>
+
+                </svg>
+
+            </div>
+
+            <h2>Time Intelligence</h2>
+
+            <p>DATESYTD, SAMEPERIODLASTYEAR, kalkulacje w czasie.</p>
+
+        </div>
+
+  
+
+        <!-- CARD 4: TEXT & LOGIC -->
+
+        <div class='card' onclick='openModal('text')'>
+
+            <div class='icon-box'>
+
+                <!-- Icon: Type / Text -->
+
+                <svg viewBox='0 0 24 24'>
+
+                    <polyline points='4 7 4 4 20 4 20 7'></polyline>
+
+                    <line x1='9' y1='20' x2='15' y2='20'></line>
+
+                    <line x1='12' y1='4' x2='12' y2='20'></line>
+
+                </svg>
+
+            </div>
+
+            <h2>Tekst i Logika</h2>
+
+            <p>IF, SWITCH, FORMAT, LEFT, funkcje manipulacji ciągami.</p>
+
+        </div>
+
+  
+
+    </div>
+
+</div>
+
+  
+
+<!-- MODALS CONTAINER -->
+
+  
+
+<!-- Modal: Aggregations -->
+
+<div id='modal-agg' class='modal-overlay' onclick='closeModal(event)'>
+
+    <div class='modal-content'>
+
+        <div class='modal-header'>
+
+            <h2>Funkcje Agregujące</h2>
+
+            <button class='close-btn' onclick='closeSpecificModal('agg')'>&times;</button>
+
+        </div>
+
+        <div class='modal-body'>
+
+            <p>Fundament języka DAX. Funkcje te biorą kolumnę i zwracają pojedynczą wartość (skalar).</p>
+
+            <h3>SUM & AVERAGE</h3>
+
+            <p>Najprostsze funkcje, które respektują kontekst filtra.</p>
+
+            <pre><code>Total Sales = <span class='dax-func'>SUM</span>(Sales[Amount])
+
+Avg Price = <span class='dax-func'>AVERAGE</span>(Products[Unit Price])</code></pre>
+
+  
+
+            <h3>Rodzina COUNT</h3>
+
+            <ul>
+
+                <li><code>COUNT</code> - liczy liczby.</li>
+
+                <li><code>COUNTA</code> - liczy niepuste komórki (tekst/liczby).</li>
+
+                <li><code>COUNTROWS</code> - najszybsza metoda liczenia wierszy w tabeli.</li>
+
+                <li><code>DISTINCTCOUNT</code> - liczba unikalnych wartości.</li>
+
+            </ul>
+
+            <pre><code># Transactions = <span class='dax-func'>COUNTROWS</span>(Sales)
+
+Unique Customers = <span class='dax-func'>DISTINCTCOUNT</span>(Sales[CustomerKey])</code></pre>
+
+        </div>
+
+    </div>
+
+</div>
+
+  
+
+<!-- Modal: Iterations -->
+
+<div id='modal-iter' class='modal-overlay' onclick='closeModal(event)'>
+
+    <div class='modal-content'>
+
+        <div class='modal-header'>
+
+            <h2>Iteratory (Funkcje X)</h2>
+
+            <button class='close-btn' onclick='closeSpecificModal('iter')'>&times;</button>
+
+        </div>
+
+        <div class='modal-body'>
+
+            <p>Funkcje kończące się na 'X' (np. SUMX) iterują wiersz po wierszu przez podaną tabelę, wykonując wyrażenie dla każdego wiersza.</p>
+
+            <h3>SUMX - Kiedy używać?</h3>
+
+            <p>Gdy musisz wykonać mnożenie kolumn przed sumowaniem (np. Cena * Ilość).</p>
+
+            <pre><code>Total Revenue =
+
+<span class='dax-func'>SUMX</span>(
+
+    Sales,
+
+    Sales[Quantity] * Sales[Net Price]
+
+)</code></pre>
+
+  
+
+            <h3>FILTER jako tabela</h3>
+
+            <p>FILTER nie zmienia kontekstu sam w sobie, ale zwraca tabelę, którą można użyć w CALCULATE lub iteratorach.</p>
+
+            <pre><code>Red Sales =
+
+<span class='dax-func'>CALCULATE</span>(
+
+    [Total Sales],
+
+    <span class='dax-func'>FILTER</span>(Products, Products[Color] = 'Red')
+
+)</code></pre>
+
+        </div>
+
+    </div>
+
+</div>
+
+  
+
+<!-- Modal: Time Intelligence -->
+
+<div id='modal-date' class='modal-overlay' onclick='closeModal(event)'>
+
+    <div class='modal-content'>
+
+        <div class='modal-header'>
+
+            <h2>Time Intelligence</h2>
+
+            <button class='close-btn' onclick='closeSpecificModal('date')'>&times;</button>
+
+        </div>
+
+        <div class='modal-body'>
+
+            <p>Wymaga oznaczonej tabeli dat (Date Table). Pozwala na łatwe przesuwanie obliczeń w czasie.</p>
+
+  
+
+            <h3>Year-To-Date (YTD)</h3>
+
+            <pre><code>Sales YTD =
+
+<span class='dax-func'>TOTALYTD</span>(
+
+    [Total Sales],
+
+    'Date'[Date]
+
+)</code></pre>
+
+  
+
+            <h3>Porównanie z poprzednim rokiem (PY)</h3>
+
+            <pre><code>Sales PY =
+
+<span class='dax-func'>CALCULATE</span>(
+
+    [Total Sales],
+
+    <span class='dax-func'>SAMEPERIODLASTYEAR</span>('Date'[Date])
+
+)
+
+  
+
+<span class='dax-comment'>// Alternatywa z DATEADD (bardziej elastyczna)</span>
+
+Sales PY Flex =
+
+<span class='dax-func'>CALCULATE</span>(
+
+    [Total Sales],
+
+    <span class='dax-func'>DATEADD</span>('Date'[Date], -1, YEAR)
+
+)</code></pre>
+
+        </div>
+
+    </div>
+
+</div>
+
+  
+
+<!-- Modal: Text -->
+
+<div id='modal-text' class='modal-overlay' onclick='closeModal(event)'>
+
+    <div class='modal-content'>
+
+        <div class='modal-header'>
+
+            <h2>Tekst i Logika</h2>
+
+            <button class='close-btn' onclick='closeSpecificModal('text')'>&times;</button>
+
+        </div>
+
+        <div class='modal-body'>
+
+            <h3>Manipulacja tekstem</h3>
+
+            <p>Łączenie ciągów, wycinanie fragmentów.</p>
+
+            <pre><code>Full Name = 'Customer'[FirstName] & ' ' & 'Customer'[LastName]
+
+Short Code = <span class='dax-func'>LEFT</span>('Product'[ProductCode], 3)</code></pre>
+
+  
+
+            <h3>SWITCH - Elegancki IF</h3>
+
+            <p>Zamiast zagnieżdżać wiele funkcji IF, użyj SWITCH.</p>
+
+            <pre><code>Category Group =
+
+<span class='dax-func'>SWITCH</span>(
+
+    TRUE(),
+
+    'Product'[Price] < 10, 'Low',
+
+    'Product'[Price] < 50, 'Medium',
+
+    'High'
+
+)</code></pre>
+
+        </div>
+
+    </div>
+
+</div>
+
+  
+
+<script>
+
+    // Otwieranie modala
+
+    function openModal(id) {
+
+        const modal = document.getElementById('modal-' + id);
+
+        if (modal) {
+
+            modal.classList.add('active');
+
+            document.body.style.overflow = 'hidden'; // Zablokuj scrollowanie tła
+
+        }
+
+    }
+
+  
+
+    // Zamykanie konkretnego modala (krzyżyk)
+
+    function closeSpecificModal(id) {
+
+        const modal = document.getElementById('modal-' + id);
+
+        if (modal) {
+
+            modal.classList.remove('active');
+
+            document.body.style.overflow = '';
+
+        }
+
+    }
+
+  
+
+    // Zamykanie po kliknięciu w tło
+
+    function closeModal(event) {
+
+        if (event.target.classList.contains('modal-overlay')) {
+
+            event.target.classList.remove('active');
+
+            document.body.style.overflow = '';
+
+        }
+
+    }
+
+  
+
+    // Obsługa klawisza ESC
+
+    document.addEventListener('keydown', function(event) {
+
+        if (event.key === 'Escape') {
+
+            const activeModals = document.querySelectorAll('.modal-overlay.active');
+
+            activeModals.forEach(modal => {
+
+                modal.classList.remove('active');
+
+            });
+
+            document.body.style.overflow = '';
+
+        }
+
+    });
+
+</script>
+
+  
+
+</body>
+
+</html>
+
+  
+
+"
