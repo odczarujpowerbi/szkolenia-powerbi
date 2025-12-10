@@ -9,204 +9,236 @@
     <meta name='viewport' content='width=device-width, initial-scale=1.0'>
     <title>Quiz: Podstawy DAX</title>
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        body {
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-            font-size: 16px;
-            line-height: 1.7;
-            color: #333;
-            background: transparent;
-            padding: 20px;
-        }
-
-        .container {
-            max-width: 800px;
-            margin: 0 auto;
-            background: transparent;
-            padding: 40px;
-        }
-
-        .navigation {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 40px;
-            padding-bottom: 20px;
-            border-bottom: 1px solid #e1e4e8;
-        }
-
-        button {
-            background: #0066cc;
-            color: white;
-            border: none;
-            padding: 12px 28px;
-            border-radius: 4px;
-            cursor: pointer;
-            font-size: 1em;
-            font-weight: 500;
-            transition: background 0.2s;
-        }
-
-        button:hover {
-            background: #0052a3;
-        }
-
-        button:disabled {
-            background: #ccc;
-            cursor: not-allowed;
-        }
-
-        .page-indicator {
-            color: #666;
-            font-size: 1em;
-        }
-
-        .page {
-            display: none;
-            min-height: 500px;
-        }
-
-        .page.active {
-            display: block;
-            animation: fadeIn 0.3s ease-in;
-        }
-
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(10px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-
-        h1 {
-            font-size: 1.8em;
-            font-weight: 600;
-            margin-bottom: 1em;
-            color: #1a1a1a;
-        }
-
-        .question-box {
-            background: #f8f9fa;
-            border-left: 3px solid #0066cc;
-            padding: 20px;
-            margin: 1.5em 0;
-            border-radius: 3px;
-        }
-
-        .answers {
-            margin-top: 1.5em;
-        }
-
-        .answer-option {
-            background: white;
-            border: 2px solid #e1e4e8;
-            padding: 15px 20px;
-            margin: 10px 0;
-            border-radius: 4px;
-            cursor: pointer;
-            transition: all 0.2s;
-            font-size: 1.05em;
-        }
-
-        .answer-option:hover {
-            border-color: #0066cc;
-            background: #f0f7ff;
-        }
-
-        .answer-option.selected {
-            border-color: #0066cc;
-            background: #e6f2ff;
-        }
-
-        .answer-option.correct {
-            border-color: #28a745;
-            background: #d4edda;
-        }
-
-        .answer-option.incorrect {
-            border-color: #dc3545;
-            background: #f8d7da;
-        }
-
-        .feedback {
-            margin-top: 1.5em;
-            padding: 15px 20px;
-            border-radius: 4px;
-            display: none;
-            font-size: 1.05em;
-        }
-
-        .feedback.show {
-            display: block;
-        }
-
-        .feedback.correct {
-            background: #d4edda;
-            border-left: 3px solid #28a745;
-            color: #155724;
-        }
-
-        .feedback.incorrect {
-            background: #f8d7da;
-            border-left: 3px solid #dc3545;
-            color: #721c24;
-        }
-
-        .check-button {
-            margin-top: 1.5em;
-            background: #28a745;
-        }
-
-        .check-button:hover:not(:disabled) {
-            background: #218838;
-        }
-
-        .check-button:disabled {
-            background: #ccc;
-        }
-
-        pre {
-            background: #f8f9fa;
-            border-left: 3px solid #0066cc;
-            padding: 18px;
-            margin: 1em 0;
-            overflow-x: auto;
-            border-radius: 3px;
-        }
-
-        code {
-            font-family: 'Courier New', monospace;
-            font-size: 0.95em;
-        }
-
-        .score-box {
-            background: #0066cc;
-            color: white;
-            padding: 20px;
-            border-radius: 4px;
-            text-align: center;
-            font-size: 1.2em;
-            margin-bottom: 2em;
-        }
-
-        .summary-item {
-            background: #f8f9fa;
-            padding: 15px;
-            margin: 10px 0;
-            border-radius: 4px;
-            border-left: 3px solid #ccc;
-        }
-
-        .summary-item.correct {
-            border-left-color: #28a745;
-        }
-
-        .summary-item.incorrect {
-            border-left-color: #dc3545;
-        }
+    * {
+                margin: 0;
+                padding: 0;
+                box-sizing: border-box;
+            }
+    
+            body {
+                font-family: 'Roboto', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+                font-size: 16px;
+                font-weight: 400;
+                line-height: 1.7;
+                color: #333;
+                background: transparent;
+                padding: 20px;
+            }
+    
+            .container {
+                max-width: 800px;
+                margin: 0 auto;
+                background: transparent;
+                padding: 40px;
+            }
+    
+            .navigation {
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                margin-bottom: 40px;
+                padding-bottom: 20px;
+                border-bottom: 1px solid #e1e4e8;
+            }
+    
+            button {
+                background: #6b1718;
+                color: white;
+                border: none;
+                padding: 12px 28px;
+                border-radius: 4px;
+                cursor: pointer;
+                font-size: 1em;
+                font-weight: 500;
+                transition: background 0.2s;
+            }
+    
+            button:hover {
+                background: #380c0c;
+            }
+    
+            button:disabled {
+                background: #ccc;
+                cursor: not-allowed;
+            }
+    
+            .page-indicator {
+                color: #666;
+                font-size: 1em;
+            }
+    
+            .page {
+                display: none;
+                min-height: 500px;
+            }
+    
+            .page.active {
+                display: block;
+                animation: fadeIn 0.3s ease-in;
+            }
+    
+            @keyframes fadeIn {
+                from { opacity: 0; transform: translateY(10px); }
+                to { opacity: 1; transform: translateY(0); }
+            }
+    
+            h1 {
+                font-size: 26px;
+                line-height: 36px;
+                font-weight: 600;
+                padding-top: 14px;
+                padding-bottom: 6px;
+                margin-bottom: 1em;
+                color: #6b1718;
+                border-bottom: 2px solid #6b1718;
+            }
+    
+            h2 {
+                font-size: 26px;
+                line-height: 36px;
+                font-weight: 600;
+                padding-top: 14px;
+                padding-bottom: 6px;
+                margin: 1.5em 0 0.8em 0;
+                color: #1a1a1a;
+                border-bottom: 2px solid #1a1a1a;
+            }
+    
+            .question-box {
+                background: #f8f9fa;
+                border-left: 3px solid #6b1718;
+                padding: 20px;
+                margin: 1.5em 0;
+                border-radius: 3px;
+            }
+    
+            .question-box p {
+                margin: 0;
+                font-size: 1.05em;
+                color: #1a1a1a;
+            }
+    
+            .answers {
+                margin-top: 1.5em;
+            }
+    
+            .answer-option {
+                background: white;
+                border: 2px solid #e1e4e8;
+                padding: 15px 20px;
+                margin: 10px 0;
+                border-radius: 4px;
+                cursor: pointer;
+                transition: all 0.2s;
+                font-size: 1.05em;
+            }
+    
+            .answer-option:hover {
+                border-color: #6b1718;
+                background: #fef5f5;
+            }
+    
+            .answer-option.selected {
+                border-color: #6b1718;
+                background: #ffe5e6;
+            }
+    
+            .answer-option.correct {
+                border-color: #ccc;
+                background: #d4edda;
+            }
+    
+            .answer-option.incorrect {
+                border-color: #b82b4e;
+                background: #f8d7da;
+            }
+    
+            .feedback {
+                margin-top: 1.5em;
+                padding: 15px 20px;
+                border-radius: 4px;
+                display: none;
+                font-size: 1.05em;
+            }
+    
+            .feedback.show {
+                display: block;
+            }
+    
+            .feedback.correct {
+                background: #d4edda;
+                border-left: 3px solid #28a745;
+                color: #155724;
+            }
+    
+            .feedback.incorrect {
+                background: #f8d7da;
+                border-left: 3px solid #b82b4e;
+                color: #721c24;
+            }
+    
+            .check-button {
+                margin-top: 1.5em;
+                background: #121212;
+            }
+    
+            .check-button:hover:not(:disabled) {
+                background: #111111;
+            }
+    
+            .check-button:disabled {
+                background: #ccc;
+            }
+    
+            pre {
+                background: #f8f9fa;
+                border-left: 3px solid #6b1718;
+                padding: 18px;
+                margin: 1em 0;
+                overflow-x: auto;
+                border-radius: 3px;
+            }
+    
+            code {
+                font-family: 'Fira Code', 'Courier New', monospace;
+                font-size: 0.95em;
+                color: #b82b4e;
+            }
+    
+            .score-box {
+                background: #6b1718;
+                color: white;
+                padding: 20px;
+                border-radius: 4px;
+                text-align: center;
+                font-size: 1.2em;
+                margin-bottom: 2em;
+            }
+    
+            .summary-item {
+                background: #f8f9fa;
+                padding: 15px;
+                margin: 10px 0;
+                border-radius: 4px;
+                border-left: 3px solid #ccc;
+            }
+    
+            .summary-item.correct {
+                border-left-color: #28a745;
+            }
+    
+            .summary-item.incorrect {
+                border-left-color: #b82b4e;
+            }
+    
+            strong {
+                font-weight: 700;
+                color: #1a1a1a;
+            }
+    
+            p {
+                margin-bottom: 1em;
+            }
     </style>
 </head>
 <body>
@@ -216,7 +248,7 @@
     <div class='navigation'>
         <button id='prevBtn' onclick='changePage(-1)'>← Poprzednia</button>
         <span class='page-indicator'>
-            Pytanie <span id='currentPage'>1</span> z <span id='totalPages'>8</span>
+            Pytanie <span id='currentPage'>1</span> z <span id='totalPages'>7</span>
         </span>
         <button id='nextBtn' onclick='changePage(1)'>Następna →</button>
     </div>
@@ -273,23 +305,23 @@
     <div class='page'>
         <h1>Pytanie 3</h1>
         <div class='question-box'>
-            <p><strong>Kiedy musisz użyć apostrofów w nazwach tabel/kolumn?</strong></p>
+            <p><strong>Jak odwołać się do miary (measure) w DAX?</strong></p>
         </div>
         <div class='answers'>
             <div class='answer-option' onclick='selectAnswer(2, 0)'>
-                A) Zawsze
+                A) Tabela[Miara]
             </div>
             <div class='answer-option' onclick='selectAnswer(2, 1)'>
-                B) Nigdy
+                B) [Miara]
             </div>
             <div class='answer-option' onclick='selectAnswer(2, 2)'>
-                C) Gdy nazwa zawiera spacje lub znaki specjalne
+                C) Miara()
             </div>
             <div class='answer-option' onclick='selectAnswer(2, 3)'>
-                D) Tylko dla kolumn liczbowych
+                D) Obie odpowiedzi A i B są poprawne
             </div>
         </div>
-        <button class='check-button' onclick='checkAnswer(2, 2)'>Sprawdź odpowiedź</button>
+        <button class='check-button' onclick='checkAnswer(2, 3)'>Sprawdź odpowiedź</button>
         <div class='feedback' id='feedback-2'></div>
     </div>
 
@@ -297,23 +329,23 @@
     <div class='page'>
         <h1>Pytanie 4</h1>
         <div class='question-box'>
-            <p><strong>Jak odwołać się do miary (measure) w DAX?</strong></p>
+            <p><strong>Która funkcja sumuje wartości z kolumny?</strong></p>
         </div>
         <div class='answers'>
             <div class='answer-option' onclick='selectAnswer(3, 0)'>
-                A) Tabela[Miara]
+                A) SUMX()
             </div>
             <div class='answer-option' onclick='selectAnswer(3, 1)'>
-                B) [Miara]
+                B) SUM()
             </div>
             <div class='answer-option' onclick='selectAnswer(3, 2)'>
-                C) Miara()
+                C) TOTAL()
             </div>
             <div class='answer-option' onclick='selectAnswer(3, 3)'>
-                D) Obie odpowiedzi A i B są poprawne
+                D) AGGREGATE()
             </div>
         </div>
-        <button class='check-button' onclick='checkAnswer(3, 3)'>Sprawdź odpowiedź</button>
+        <button class='check-button' onclick='checkAnswer(3, 1)'>Sprawdź odpowiedź</button>
         <div class='feedback' id='feedback-3'></div>
     </div>
 
@@ -321,20 +353,20 @@
     <div class='page'>
         <h1>Pytanie 5</h1>
         <div class='question-box'>
-            <p><strong>Która funkcja sumuje wartości z kolumny?</strong></p>
+            <p><strong>Czym różni się COUNT od COUNTROWS?</strong></p>
         </div>
         <div class='answers'>
             <div class='answer-option' onclick='selectAnswer(4, 0)'>
-                A) SUMX()
+                A) COUNT liczy kolumny, COUNTROWS liczy wiersze
             </div>
             <div class='answer-option' onclick='selectAnswer(4, 1)'>
-                B) SUM()
+                B) COUNT liczy niepuste wartości w kolumnie, COUNTROWS liczy wszystkie wiersze tabeli
             </div>
             <div class='answer-option' onclick='selectAnswer(4, 2)'>
-                C) TOTAL()
+                C) Nie ma różnicy
             </div>
             <div class='answer-option' onclick='selectAnswer(4, 3)'>
-                D) AGGREGATE()
+                D) COUNT jest szybsze niż COUNTROWS
             </div>
         </div>
         <button class='check-button' onclick='checkAnswer(4, 1)'>Sprawdź odpowiedź</button>
@@ -345,75 +377,50 @@
     <div class='page'>
         <h1>Pytanie 6</h1>
         <div class='question-box'>
-            <p><strong>Czym różni się COUNT od COUNTROWS?</strong></p>
+            <p><strong>Co robi funkcja DISTINCTCOUNT?</strong></p>
         </div>
         <div class='answers'>
             <div class='answer-option' onclick='selectAnswer(5, 0)'>
-                A) COUNT liczy kolumny, COUNTROWS liczy wiersze
+                A) Liczy wszystkie wartości w kolumnie
             </div>
             <div class='answer-option' onclick='selectAnswer(5, 1)'>
-                B) COUNT liczy niepuste wartości w kolumnie, COUNTROWS liczy wszystkie wiersze tabeli
+                B) Liczy unikalne (niepowtarzające się) wartości
             </div>
             <div class='answer-option' onclick='selectAnswer(5, 2)'>
-                C) Nie ma różnicy
+                C) Usuwa duplikaty z tabeli
             </div>
             <div class='answer-option' onclick='selectAnswer(5, 3)'>
-                D) COUNT jest szybsze niż COUNTROWS
+                D) Zwraca liczbę różnych tabel
             </div>
         </div>
         <button class='check-button' onclick='checkAnswer(5, 1)'>Sprawdź odpowiedź</button>
         <div class='feedback' id='feedback-5'></div>
     </div>
 
-    <!-- Pytanie 7 -->
-    <div class='page'>
-        <h1>Pytanie 7</h1>
-        <div class='question-box'>
-            <p><strong>Co robi funkcja DISTINCTCOUNT?</strong></p>
-        </div>
-        <div class='answers'>
-            <div class='answer-option' onclick='selectAnswer(6, 0)'>
-                A) Liczy wszystkie wartości w kolumnie
-            </div>
-            <div class='answer-option' onclick='selectAnswer(6, 1)'>
-                B) Liczy unikalne (niepowtarzające się) wartości
-            </div>
-            <div class='answer-option' onclick='selectAnswer(6, 2)'>
-                C) Usuwa duplikaty z tabeli
-            </div>
-            <div class='answer-option' onclick='selectAnswer(6, 3)'>
-                D) Zwraca liczbę różnych tabel
-            </div>
-        </div>
-        <button class='check-button' onclick='checkAnswer(6, 1)'>Sprawdź odpowiedź</button>
-        <div class='feedback' id='feedback-6'></div>
-    </div>
-
     <!-- Podsumowanie quizu -->
     <div class='page'>
         <h1>Podsumowanie quizu</h1>
         <div class='score-box' id='finalScore'>
-            Twój wynik: <span id='scoreText'>0/7</span> (<span id='percentText'>0%</span>)
+            Twój wynik: <span id='scoreText'>0/6</span> (<span id='percentText'>0%</span>)
         </div>
         <div id='summaryContent'></div>
-        <button onclick='restartQuiz()' style='margin-top: 20px; width: 100%;'>🔄 Rozpocznij quiz od nowa</button>
+        <button onclick='restartQuiz()' style='margin-top: 20px; width: 100%;'> Rozpocznij quiz od nowa</button>
     </div>
 </div>
 
 <script>
     let currentPage = 1;
-    const totalPages = 8;
-    const totalQuestions = 7;
+    const totalPages = 7;
+    const totalQuestions = 6;
     
     const userAnswers = new Array(totalQuestions).fill(null);
     const answeredQuestions = new Array(totalQuestions).fill(false);
     
-    const correctAnswers = [0, 2, 2, 3, 1, 1, 1];
+    const correctAnswers = [0, 2, 3, 1, 1, 1];
     
     const explanations = [
         'Prawidłowa odpowiedź: A. DAX to skrót od Data Analysis Expressions - język formuł używany w Power BI, Excel Power Pivot i Analysis Services.',
         'Prawidłowa odpowiedź: C. W DAX zawsze używamy składni Tabela[Kolumna], gdzie nazwa tabeli jest przed nawiasem kwadratowym, a nazwa kolumny wewnątrz.',
-        'Prawidłowa odpowiedź: C. Apostrofy są wymagane gdy nazwa tabeli lub kolumny zawiera spacje, znaki specjalne (np. -, #, %) lub polskie znaki. Przykład: 'Tabela Sprzedaży'[Kwota Netto]',
         'Prawidłowa odpowiedź: D. Do miar można odwoływać się zarówno przez [Nazwa Miary] jak i przez Tabela[Nazwa Miary]. Pierwsza składnia jest częściej używana i krótsza.',
         'Prawidłowa odpowiedź: B. SUM(Tabela[Kolumna]) sumuje wszystkie wartości w kolumnie, pomijając wartości puste (BLANK) i uwzględniając aktualny kontekst filtrowania.',
         'Prawidłowa odpowiedź: B. COUNT liczy niepuste wartości numeryczne w konkretnej kolumnie, podczas gdy COUNTROWS liczy wszystkie wiersze w tabeli (nawet jeśli mają puste wartości).',
@@ -421,133 +428,133 @@
     ];
     
     document.getElementById('totalPages').textContent = totalPages;
-
-    function selectAnswer(questionIndex, answerIndex) {
-        if (answeredQuestions[questionIndex]) return;
-
-        const answers = document.querySelectorAll('.page')[questionIndex].querySelectorAll('.answer-option');
-        answers.forEach(a => a.classList.remove('selected'));
-        answers[answerIndex].classList.add('selected');
-        userAnswers[questionIndex] = answerIndex;
-    }
-
-    function checkAnswer(questionIndex, correctIndex) {
-        if (answeredQuestions[questionIndex]) return;
-
-        const answers = document.querySelectorAll('.page')[questionIndex].querySelectorAll('.answer-option');
-        const feedback = document.getElementById('feedback-' + questionIndex);
-        const checkBtn = document.querySelectorAll('.page')[questionIndex].querySelector('.check-button');
-
-        if (userAnswers[questionIndex] === null) {
-            feedback.className = 'feedback show incorrect';
-            feedback.textContent = '⚠️ Proszę najpierw wybrać odpowiedź!';
-            return;
+    
+        function selectAnswer(questionIndex, answerIndex) {
+            if (answeredQuestions[questionIndex]) return;
+    
+            const answers = document.querySelectorAll('.page')[questionIndex].querySelectorAll('.answer-option');
+            answers.forEach(a => a.classList.remove('selected'));
+            answers[answerIndex].classList.add('selected');
+            userAnswers[questionIndex] = answerIndex;
         }
-
-        answeredQuestions[questionIndex] = true;
-        checkBtn.disabled = true;
-
-        const isCorrect = userAnswers[questionIndex] === correctIndex;
-
-        answers.forEach((answer, index) => {
-            answer.style.cursor = 'default';
-            if (index === correctIndex) {
-                answer.classList.add('correct');
-            } else if (index === userAnswers[questionIndex]) {
-                answer.classList.add('incorrect');
+    
+        function checkAnswer(questionIndex, correctIndex) {
+            if (answeredQuestions[questionIndex]) return;
+    
+            const answers = document.querySelectorAll('.page')[questionIndex].querySelectorAll('.answer-option');
+            const feedback = document.getElementById('feedback-' + questionIndex);
+            const checkBtn = document.querySelectorAll('.page')[questionIndex].querySelector('.check-button');
+    
+            if (userAnswers[questionIndex] === null) {
+                feedback.className = 'feedback show incorrect';
+                feedback.textContent = 'Proszę najpierw wybrać odpowiedź!';
+                return;
             }
+    
+            answeredQuestions[questionIndex] = true;
+            checkBtn.disabled = true;
+    
+            const isCorrect = userAnswers[questionIndex] === correctIndex;
+    
+            answers.forEach((answer, index) => {
+                answer.style.cursor = 'default';
+                if (index === correctIndex) {
+                    answer.classList.add('correct');
+                } else if (index === userAnswers[questionIndex]) {
+                    answer.classList.add('incorrect');
+                }
+            });
+    
+            feedback.className = 'feedback show ' + (isCorrect ? 'correct' : 'incorrect');
+            feedback.innerHTML = (isCorrect ? '✅ Świetnie! ' : '❌ Nieprawidłowo. ') + explanations[questionIndex];
+    
+            if (questionIndex < totalQuestions - 1) {
+                setTimeout(() => {
+                    changePage(1);
+                }, 2500);
+            } else {
+                setTimeout(() => {
+                    showSummary();
+                    changePage(1);
+                }, 2500);
+            }
+        }
+    
+        function showSummary() {
+            let correctCount = 0;
+            for (let i = 0; i < totalQuestions; i++) {
+                if (userAnswers[i] === correctAnswers[i]) {
+                    correctCount++;
+                }
+            }
+    
+            const percentage = Math.round((correctCount / totalQuestions) * 100);
+            document.getElementById('scoreText').textContent = correctCount + '/' + totalQuestions;
+            document.getElementById('percentText').textContent = percentage + '%';
+    
+            let summaryHTML = '<h2>Szczegóły odpowiedzi:</h2>';
+            for (let i = 0; i < totalQuestions; i++) {
+                const isCorrect = userAnswers[i] === correctAnswers[i];
+                summaryHTML += `
+                    <div class='summary-item ${isCorrect ? 'correct' : 'incorrect'}'>
+                        <strong>Pytanie ${i + 1}:</strong> ${isCorrect ? '✅ Poprawnie' : '❌ Niepoprawnie'}<br>
+                        <small>${explanations[i]}</small>
+                    </div>
+                `;
+            }
+    
+            document.getElementById('summaryContent').innerHTML = summaryHTML;
+        }
+    
+        function restartQuiz() {
+            userAnswers.fill(null);
+            answeredQuestions.fill(false);
+            currentPage = 1;
+    
+            document.querySelectorAll('.page').forEach((page, index) => {
+                if (index < totalQuestions) {
+                    const answers = page.querySelectorAll('.answer-option');
+                    answers.forEach(a => {
+                        a.className = 'answer-option';
+                        a.style.cursor = 'pointer';
+                    });
+                    const feedback = page.querySelector('.feedback');
+                    feedback.className = 'feedback';
+                    const checkBtn = page.querySelector('.check-button');
+                    checkBtn.disabled = false;
+                }
+            });
+    
+            showPage(1);
+        }
+    
+        function showPage(n) {
+            const pages = document.querySelectorAll('.page');
+    
+            if (n > totalPages) currentPage = totalPages;
+            if (n < 1) currentPage = 1;
+    
+            pages.forEach(page => page.classList.remove('active'));
+            pages[currentPage - 1].classList.add('active');
+    
+            document.getElementById('currentPage').textContent = currentPage;
+            document.getElementById('prevBtn').disabled = currentPage === 1;
+            document.getElementById('nextBtn').disabled = currentPage === totalPages;
+    
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+    
+        function changePage(n) {
+            currentPage += n;
+            showPage(currentPage);
+        }
+    
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'ArrowLeft') changePage(-1);
+            if (e.key === 'ArrowRight') changePage(1);
         });
-
-        feedback.className = 'feedback show ' + (isCorrect ? 'correct' : 'incorrect');
-        feedback.innerHTML = (isCorrect ? '✅ Świetnie! ' : '❌ Nieprawidłowo. ') + explanations[questionIndex];
-
-        if (questionIndex < totalQuestions - 1) {
-            setTimeout(() => {
-                changePage(1);
-            }, 2500);
-        } else {
-            setTimeout(() => {
-                showSummary();
-                changePage(1);
-            }, 2500);
-        }
-    }
-
-    function showSummary() {
-        let correctCount = 0;
-        for (let i = 0; i < totalQuestions; i++) {
-            if (userAnswers[i] === correctAnswers[i]) {
-                correctCount++;
-            }
-        }
-
-        const percentage = Math.round((correctCount / totalQuestions) * 100);
-        document.getElementById('scoreText').textContent = correctCount + '/' + totalQuestions;
-        document.getElementById('percentText').textContent = percentage + '%';
-
-        let summaryHTML = '<h2>Szczegóły odpowiedzi:</h2>';
-        for (let i = 0; i < totalQuestions; i++) {
-            const isCorrect = userAnswers[i] === correctAnswers[i];
-            summaryHTML += `
-                <div class='summary-item ${isCorrect ? 'correct' : 'incorrect'}'>
-                    <strong>Pytanie ${i + 1}:</strong> ${isCorrect ? '✅ Poprawnie' : '❌ Niepoprawnie'}<br>
-                    <small>${explanations[i]}</small>
-                </div>
-            `;
-        }
-
-        document.getElementById('summaryContent').innerHTML = summaryHTML;
-    }
-
-    function restartQuiz() {
-        userAnswers.fill(null);
-        answeredQuestions.fill(false);
-        currentPage = 1;
-
-        document.querySelectorAll('.page').forEach((page, index) => {
-            if (index < totalQuestions) {
-                const answers = page.querySelectorAll('.answer-option');
-                answers.forEach(a => {
-                    a.className = 'answer-option';
-                    a.style.cursor = 'pointer';
-                });
-                const feedback = page.querySelector('.feedback');
-                feedback.className = 'feedback';
-                const checkBtn = page.querySelector('.check-button');
-                checkBtn.disabled = false;
-            }
-        });
-
+    
         showPage(1);
-    }
-
-    function showPage(n) {
-        const pages = document.querySelectorAll('.page');
-
-        if (n > totalPages) currentPage = totalPages;
-        if (n < 1) currentPage = 1;
-
-        pages.forEach(page => page.classList.remove('active'));
-        pages[currentPage - 1].classList.add('active');
-
-        document.getElementById('currentPage').textContent = currentPage;
-        document.getElementById('prevBtn').disabled = currentPage === 1;
-        document.getElementById('nextBtn').disabled = currentPage === totalPages;
-
-        window.scrollTo({ top: 0, behavior: 'smooth' });
-    }
-
-    function changePage(n) {
-        currentPage += n;
-        showPage(currentPage);
-    }
-
-    document.addEventListener('keydown', function(e) {
-        if (e.key === 'ArrowLeft') changePage(-1);
-        if (e.key === 'ArrowRight') changePage(1);
-    });
-
-    showPage(1);
 </script>
 
 </body>

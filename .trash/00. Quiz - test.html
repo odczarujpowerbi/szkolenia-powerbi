@@ -1,0 +1,431 @@
+00. Quiz - test = 
+
+"
+
+<!DOCTYPE html>
+<html lang='pl'>
+<head>
+    <meta charset='UTF-8'>
+    <meta name='viewport' content='width=device-width, initial-scale=1.0'>
+    <title>Nazwa Quizu</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            font-size: 16px;
+            line-height: 1.7;
+            color: #333;
+            background: transparent;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            background: transparent;
+            padding: 40px;
+        }
+
+        .navigation {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 40px;
+            padding-bottom: 20px;
+            border-bottom: 1px solid #e1e4e8;
+        }
+
+        button {
+            background: #0066cc;
+            color: white;
+            border: none;
+            padding: 12px 28px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 1em;
+            font-weight: 500;
+            transition: background 0.2s;
+        }
+
+        button:hover {
+            background: #0052a3;
+        }
+
+        button:disabled {
+            background: #ccc;
+            cursor: not-allowed;
+        }
+
+        .page-indicator {
+            color: #666;
+            font-size: 1em;
+        }
+
+        .page {
+            display: none;
+            min-height: 500px;
+        }
+
+        .page.active {
+            display: block;
+            animation: fadeIn 0.3s ease-in;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        h1 {
+            font-size: 1.8em;
+            font-weight: 600;
+            margin-bottom: 1em;
+            color: #1a1a1a;
+        }
+
+        .question-box {
+            background: #f8f9fa;
+            border-left: 3px solid #0066cc;
+            padding: 20px;
+            margin: 1.5em 0;
+            border-radius: 3px;
+        }
+
+        .answers {
+            margin-top: 1.5em;
+        }
+
+        .answer-option {
+            background: white;
+            border: 2px solid #e1e4e8;
+            padding: 15px 20px;
+            margin: 10px 0;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: all 0.2s;
+            font-size: 1.05em;
+        }
+
+        .answer-option:hover {
+            border-color: #0066cc;
+            background: #f0f7ff;
+        }
+
+        .answer-option.selected {
+            border-color: #0066cc;
+            background: #e6f2ff;
+        }
+
+        .answer-option.correct {
+            border-color: #28a745;
+            background: #d4edda;
+        }
+
+        .answer-option.incorrect {
+            border-color: #dc3545;
+            background: #f8d7da;
+        }
+
+        .feedback {
+            margin-top: 1.5em;
+            padding: 15px 20px;
+            border-radius: 4px;
+            display: none;
+            font-size: 1.05em;
+        }
+
+        .feedback.show {
+            display: block;
+        }
+
+        .feedback.correct {
+            background: #d4edda;
+            border-left: 3px solid #28a745;
+            color: #155724;
+        }
+
+        .feedback.incorrect {
+            background: #f8d7da;
+            border-left: 3px solid #dc3545;
+            color: #721c24;
+        }
+
+        .check-button {
+            margin-top: 1.5em;
+            background: #28a745;
+        }
+
+        .check-button:hover:not(:disabled) {
+            background: #218838;
+        }
+
+        .check-button:disabled {
+            background: #ccc;
+        }
+
+        pre {
+            background: #f8f9fa;
+            border-left: 3px solid #0066cc;
+            padding: 18px;
+            margin: 1em 0;
+            overflow-x: auto;
+            border-radius: 3px;
+        }
+
+        code {
+            font-family: 'Courier New', monospace;
+            font-size: 0.95em;
+        }
+
+        .score-box {
+            background: #0066cc;
+            color: white;
+            padding: 20px;
+            border-radius: 4px;
+            text-align: center;
+            font-size: 1.2em;
+            margin-bottom: 2em;
+        }
+
+        .summary-item {
+            background: #f8f9fa;
+            padding: 15px;
+            margin: 10px 0;
+            border-radius: 4px;
+            border-left: 3px solid #ccc;
+        }
+
+        .summary-item.correct {
+            border-left-color: #28a745;
+        }
+
+        .summary-item.incorrect {
+            border-left-color: #dc3545;
+        }
+    </style>
+</head>
+<body>
+
+<div class='container'>
+    <!-- Nawigacja na górze -->
+    <div class='navigation'>
+        <button id='prevBtn' onclick='changePage(-1)'>← Poprzednia</button>
+        <span class='page-indicator'>
+            Pytanie <span id='currentPage'>1</span> z <span id='totalPages'>3</span>
+        </span>
+        <button id='nextBtn' onclick='changePage(1)'>Następna →</button>
+    </div>
+
+    <!-- Pytanie 1 -->
+    <div class='page active'>
+        <h1>Pytanie 1</h1>
+        <div class='question-box'>
+            <p><strong>Która funkcja jest zalecana do tworzenia zestawień tabelarycznych?</strong></p>
+        </div>
+        <div class='answers'>
+            <div class='answer-option' onclick='selectAnswer(0, 0)'>
+                A) ZŁA
+            </div>
+            <div class='answer-option' onclick='selectAnswer(0, 1)'>
+                B) ZŁA
+            </div>
+            <div class='answer-option' onclick='selectAnswer(0, 2)'>
+                C) POPRAWNA
+            </div>
+            <div class='answer-option' onclick='selectAnswer(0, 3)'>
+                D) ZŁA
+            </div>
+        </div>
+        <button class='check-button' onclick='checkAnswer(0, 2)'>Sprawdź odpowiedź</button>
+        <div class='feedback' id='feedback-0'></div>
+    </div>
+
+    <!-- Pytanie 2 -->
+    <div class='page'>
+        <h1>Pytanie 2</h1>
+        <div class='question-box'>
+            <p><strong>Treść pytania 2</strong></p>
+        </div>
+        <div class='answers'>
+            <div class='answer-option' onclick='selectAnswer(1, 0)'>
+                A) POPRAWNA
+            </div>
+            <div class='answer-option' onclick='selectAnswer(1, 1)'>
+                B) ZŁA
+            </div>
+            <div class='answer-option' onclick='selectAnswer(1, 2)'>
+                C) ZŁA
+            </div>
+            <div class='answer-option' onclick='selectAnswer(1, 3)'>
+                D) ZŁA
+            </div>
+        </div>
+        <button class='check-button' onclick='checkAnswer(1, 0)'>Sprawdź odpowiedź</button>
+        <div class='feedback' id='feedback-1'></div>
+    </div>
+
+    <!-- Podsumowanie quizu -->
+    <div class='page'>
+        <h1>Podsumowanie quizu</h1>
+        <div class='score-box' id='finalScore'>
+            Twój wynik: <span id='scoreText'>0/2</span> (<span id='percentText'>0%</span>)
+        </div>
+        <div id='summaryContent'></div>
+        <button onclick='restartQuiz()' style='margin-top: 20px; width: 100%;'>🔄 Rozpocznij quiz od nowa</button>
+    </div>
+</div>
+
+<script>
+    let currentPage = 1;
+    const totalPages = 3;
+    const totalQuestions = 2;
+    
+    const userAnswers = new Array(totalQuestions).fill(null);
+    const answeredQuestions = new Array(totalQuestions).fill(false);
+    
+    const correctAnswers = [2, 0];
+    
+    const explanations = [
+        'wyjaśnienie',
+        'wyjaśnienie'
+    ];
+    
+    document.getElementById('totalPages').textContent = totalPages;
+
+    function selectAnswer(questionIndex, answerIndex) {
+        if (answeredQuestions[questionIndex]) return;
+
+        const answers = document.querySelectorAll('.page')[questionIndex].querySelectorAll('.answer-option');
+        answers.forEach(a => a.classList.remove('selected'));
+        answers[answerIndex].classList.add('selected');
+        userAnswers[questionIndex] = answerIndex;
+    }
+
+    function checkAnswer(questionIndex, correctIndex) {
+        if (answeredQuestions[questionIndex]) return;
+
+        const answers = document.querySelectorAll('.page')[questionIndex].querySelectorAll('.answer-option');
+        const feedback = document.getElementById('feedback-' + questionIndex);
+        const checkBtn = document.querySelectorAll('.page')[questionIndex].querySelector('.check-button');
+
+        if (userAnswers[questionIndex] === null) {
+            feedback.className = 'feedback show incorrect';
+            feedback.textContent = '⚠️ Proszę najpierw wybrać odpowiedź!';
+            return;
+        }
+
+        answeredQuestions[questionIndex] = true;
+        checkBtn.disabled = true;
+
+        const isCorrect = userAnswers[questionIndex] === correctIndex;
+
+        answers.forEach((answer, index) => {
+            answer.style.cursor = 'default';
+            if (index === correctIndex) {
+                answer.classList.add('correct');
+            } else if (index === userAnswers[questionIndex]) {
+                answer.classList.add('incorrect');
+            }
+        });
+
+        feedback.className = 'feedback show ' + (isCorrect ? 'correct' : 'incorrect');
+        feedback.innerHTML = (isCorrect ? '✅ Świetnie! ' : '❌ Nieprawidłowo. ') + explanations[questionIndex];
+
+        if (questionIndex < totalQuestions - 1) {
+            setTimeout(() => {
+                changePage(1);
+            }, 2500);
+        } else {
+            setTimeout(() => {
+                showSummary();
+                changePage(1);
+            }, 2500);
+        }
+    }
+
+    function showSummary() {
+        let correctCount = 0;
+        for (let i = 0; i < totalQuestions; i++) {
+            if (userAnswers[i] === correctAnswers[i]) {
+                correctCount++;
+            }
+        }
+
+        const percentage = Math.round((correctCount / totalQuestions) * 100);
+        document.getElementById('scoreText').textContent = correctCount + '/' + totalQuestions;
+        document.getElementById('percentText').textContent = percentage + '%';
+
+        let summaryHTML = '<h2>Szczegóły odpowiedzi:</h2>';
+        for (let i = 0; i < totalQuestions; i++) {
+            const isCorrect = userAnswers[i] === correctAnswers[i];
+            summaryHTML += `
+                <div class='summary-item ${isCorrect ? 'correct' : 'incorrect'}'>
+                    <strong>Pytanie ${i + 1}:</strong> ${isCorrect ? '✅ Poprawnie' : '❌ Niepoprawnie'}<br>
+                    <small>${explanations[i]}</small>
+                </div>
+            `;
+        }
+
+        document.getElementById('summaryContent').innerHTML = summaryHTML;
+    }
+
+    function restartQuiz() {
+        userAnswers.fill(null);
+        answeredQuestions.fill(false);
+        currentPage = 1;
+
+        document.querySelectorAll('.page').forEach((page, index) => {
+            if (index < totalQuestions) {
+                const answers = page.querySelectorAll('.answer-option');
+                answers.forEach(a => {
+                    a.className = 'answer-option';
+                    a.style.cursor = 'pointer';
+                });
+                const feedback = page.querySelector('.feedback');
+                feedback.className = 'feedback';
+                const checkBtn = page.querySelector('.check-button');
+                checkBtn.disabled = false;
+            }
+        });
+
+        showPage(1);
+    }
+
+    function showPage(n) {
+        const pages = document.querySelectorAll('.page');
+
+        if (n > totalPages) currentPage = totalPages;
+        if (n < 1) currentPage = 1;
+
+        pages.forEach(page => page.classList.remove('active'));
+        pages[currentPage - 1].classList.add('active');
+
+        document.getElementById('currentPage').textContent = currentPage;
+        document.getElementById('prevBtn').disabled = currentPage === 1;
+        document.getElementById('nextBtn').disabled = currentPage === totalPages;
+
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    function changePage(n) {
+        currentPage += n;
+        showPage(currentPage);
+    }
+
+    document.addEventListener('keydown', function(e) {
+        if (e.key === 'ArrowLeft') changePage(-1);
+        if (e.key === 'ArrowRight') changePage(1);
+    });
+
+    showPage(1);
+</script>
+
+</body>
+</html>
+
+"

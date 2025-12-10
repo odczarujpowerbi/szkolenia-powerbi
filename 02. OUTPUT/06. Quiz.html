@@ -9,204 +9,236 @@
     <meta name='viewport' content='width=device-width, initial-scale=1.0'>
     <title>Quiz: DAX - Zaawansowane Kwerendy (VAR i RETURN)</title>
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        body {
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-            font-size: 16px;
-            line-height: 1.7;
-            color: #333;
-            background: transparent;
-            padding: 20px;
-        }
-
-        .container {
-            max-width: 800px;
-            margin: 0 auto;
-            background: transparent;
-            padding: 40px;
-        }
-
-        .navigation {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 40px;
-            padding-bottom: 20px;
-            border-bottom: 1px solid #e1e4e8;
-        }
-
-        button {
-            background: #0066cc;
-            color: white;
-            border: none;
-            padding: 12px 28px;
-            border-radius: 4px;
-            cursor: pointer;
-            font-size: 1em;
-            font-weight: 500;
-            transition: background 0.2s;
-        }
-
-        button:hover {
-            background: #0052a3;
-        }
-
-        button:disabled {
-            background: #ccc;
-            cursor: not-allowed;
-        }
-
-        .page-indicator {
-            color: #666;
-            font-size: 1em;
-        }
-
-        .page {
-            display: none;
-            min-height: 500px;
-        }
-
-        .page.active {
-            display: block;
-            animation: fadeIn 0.3s ease-in;
-        }
-
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(10px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-
-        h1 {
-            font-size: 1.8em;
-            font-weight: 600;
-            margin-bottom: 1em;
-            color: #1a1a1a;
-        }
-
-        .question-box {
-            background: #f8f9fa;
-            border-left: 3px solid #0066cc;
-            padding: 20px;
-            margin: 1.5em 0;
-            border-radius: 3px;
-        }
-
-        .answers {
-            margin-top: 1.5em;
-        }
-
-        .answer-option {
-            background: white;
-            border: 2px solid #e1e4e8;
-            padding: 15px 20px;
-            margin: 10px 0;
-            border-radius: 4px;
-            cursor: pointer;
-            transition: all 0.2s;
-            font-size: 1.05em;
-        }
-
-        .answer-option:hover {
-            border-color: #0066cc;
-            background: #f0f7ff;
-        }
-
-        .answer-option.selected {
-            border-color: #0066cc;
-            background: #e6f2ff;
-        }
-
-        .answer-option.correct {
-            border-color: #28a745;
-            background: #d4edda;
-        }
-
-        .answer-option.incorrect {
-            border-color: #dc3545;
-            background: #f8d7da;
-        }
-
-        .feedback {
-            margin-top: 1.5em;
-            padding: 15px 20px;
-            border-radius: 4px;
-            display: none;
-            font-size: 1.05em;
-        }
-
-        .feedback.show {
-            display: block;
-        }
-
-        .feedback.correct {
-            background: #d4edda;
-            border-left: 3px solid #28a745;
-            color: #155724;
-        }
-
-        .feedback.incorrect {
-            background: #f8d7da;
-            border-left: 3px solid #dc3545;
-            color: #721c24;
-        }
-
-        .check-button {
-            margin-top: 1.5em;
-            background: #28a745;
-        }
-
-        .check-button:hover:not(:disabled) {
-            background: #218838;
-        }
-
-        .check-button:disabled {
-            background: #ccc;
-        }
-
-        pre {
-            background: #f8f9fa;
-            border-left: 3px solid #0066cc;
-            padding: 18px;
-            margin: 1em 0;
-            overflow-x: auto;
-            border-radius: 3px;
-        }
-
-        code {
-            font-family: 'Courier New', monospace;
-            font-size: 0.95em;
-        }
-
-        .score-box {
-            background: #0066cc;
-            color: white;
-            padding: 20px;
-            border-radius: 4px;
-            text-align: center;
-            font-size: 1.2em;
-            margin-bottom: 2em;
-        }
-
-        .summary-item {
-            background: #f8f9fa;
-            padding: 15px;
-            margin: 10px 0;
-            border-radius: 4px;
-            border-left: 3px solid #ccc;
-        }
-
-        .summary-item.correct {
-            border-left-color: #28a745;
-        }
-
-        .summary-item.incorrect {
-            border-left-color: #dc3545;
-        }
+    * {
+                margin: 0;
+                padding: 0;
+                box-sizing: border-box;
+            }
+    
+            body {
+                font-family: 'Roboto', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+                font-size: 16px;
+                font-weight: 400;
+                line-height: 1.7;
+                color: #333;
+                background: transparent;
+                padding: 20px;
+            }
+    
+            .container {
+                max-width: 800px;
+                margin: 0 auto;
+                background: transparent;
+                padding: 40px;
+            }
+    
+            .navigation {
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                margin-bottom: 40px;
+                padding-bottom: 20px;
+                border-bottom: 1px solid #e1e4e8;
+            }
+    
+            button {
+                background: #6b1718;
+                color: white;
+                border: none;
+                padding: 12px 28px;
+                border-radius: 4px;
+                cursor: pointer;
+                font-size: 1em;
+                font-weight: 500;
+                transition: background 0.2s;
+            }
+    
+            button:hover {
+                background: #380c0c;
+            }
+    
+            button:disabled {
+                background: #ccc;
+                cursor: not-allowed;
+            }
+    
+            .page-indicator {
+                color: #666;
+                font-size: 1em;
+            }
+    
+            .page {
+                display: none;
+                min-height: 500px;
+            }
+    
+            .page.active {
+                display: block;
+                animation: fadeIn 0.3s ease-in;
+            }
+    
+            @keyframes fadeIn {
+                from { opacity: 0; transform: translateY(10px); }
+                to { opacity: 1; transform: translateY(0); }
+            }
+    
+            h1 {
+                font-size: 26px;
+                line-height: 36px;
+                font-weight: 600;
+                padding-top: 14px;
+                padding-bottom: 6px;
+                margin-bottom: 1em;
+                color: #6b1718;
+                border-bottom: 2px solid #6b1718;
+            }
+    
+            h2 {
+                font-size: 26px;
+                line-height: 36px;
+                font-weight: 600;
+                padding-top: 14px;
+                padding-bottom: 6px;
+                margin: 1.5em 0 0.8em 0;
+                color: #1a1a1a;
+                border-bottom: 2px solid #1a1a1a;
+            }
+    
+            .question-box {
+                background: #f8f9fa;
+                border-left: 3px solid #6b1718;
+                padding: 20px;
+                margin: 1.5em 0;
+                border-radius: 3px;
+            }
+    
+            .question-box p {
+                margin: 0;
+                font-size: 1.05em;
+                color: #1a1a1a;
+            }
+    
+            .answers {
+                margin-top: 1.5em;
+            }
+    
+            .answer-option {
+                background: white;
+                border: 2px solid #e1e4e8;
+                padding: 15px 20px;
+                margin: 10px 0;
+                border-radius: 4px;
+                cursor: pointer;
+                transition: all 0.2s;
+                font-size: 1.05em;
+            }
+    
+            .answer-option:hover {
+                border-color: #6b1718;
+                background: #fef5f5;
+            }
+    
+            .answer-option.selected {
+                border-color: #6b1718;
+                background: #ffe5e6;
+            }
+    
+            .answer-option.correct {
+                border-color: #ccc;
+                background: #d4edda;
+            }
+    
+            .answer-option.incorrect {
+                border-color: #b82b4e;
+                background: #f8d7da;
+            }
+    
+            .feedback {
+                margin-top: 1.5em;
+                padding: 15px 20px;
+                border-radius: 4px;
+                display: none;
+                font-size: 1.05em;
+            }
+    
+            .feedback.show {
+                display: block;
+            }
+    
+            .feedback.correct {
+                background: #d4edda;
+                border-left: 3px solid #28a745;
+                color: #155724;
+            }
+    
+            .feedback.incorrect {
+                background: #f8d7da;
+                border-left: 3px solid #b82b4e;
+                color: #721c24;
+            }
+    
+            .check-button {
+                margin-top: 1.5em;
+                background: #121212;
+            }
+    
+            .check-button:hover:not(:disabled) {
+                background: #111111;
+            }
+    
+            .check-button:disabled {
+                background: #ccc;
+            }
+    
+            pre {
+                background: #f8f9fa;
+                border-left: 3px solid #6b1718;
+                padding: 18px;
+                margin: 1em 0;
+                overflow-x: auto;
+                border-radius: 3px;
+            }
+    
+            code {
+                font-family: 'Fira Code', 'Courier New', monospace;
+                font-size: 0.95em;
+                color: #b82b4e;
+            }
+    
+            .score-box {
+                background: #6b1718;
+                color: white;
+                padding: 20px;
+                border-radius: 4px;
+                text-align: center;
+                font-size: 1.2em;
+                margin-bottom: 2em;
+            }
+    
+            .summary-item {
+                background: #f8f9fa;
+                padding: 15px;
+                margin: 10px 0;
+                border-radius: 4px;
+                border-left: 3px solid #ccc;
+            }
+    
+            .summary-item.correct {
+                border-left-color: #28a745;
+            }
+    
+            .summary-item.incorrect {
+                border-left-color: #b82b4e;
+            }
+    
+            strong {
+                font-weight: 700;
+                color: #1a1a1a;
+            }
+    
+            p {
+                margin-bottom: 1em;
+            }
     </style>
 </head>
 <body>
@@ -396,7 +428,7 @@
             Twój wynik: <span id='scoreText'>0/7</span> (<span id='percentText'>0%</span>)
         </div>
         <div id='summaryContent'></div>
-        <button onclick='restartQuiz()' style='margin-top: 20px; width: 100%;'>🔄 Rozpocznij quiz od nowa</button>
+        <button onclick='restartQuiz()' style='margin-top: 20px; width: 100%;'> Rozpocznij quiz od nowa</button>
     </div>
 </div>
 
@@ -421,133 +453,133 @@
     ];
     
     document.getElementById('totalPages').textContent = totalPages;
-
-    function selectAnswer(questionIndex, answerIndex) {
-        if (answeredQuestions[questionIndex]) return;
-
-        const answers = document.querySelectorAll('.page')[questionIndex].querySelectorAll('.answer-option');
-        answers.forEach(a => a.classList.remove('selected'));
-        answers[answerIndex].classList.add('selected');
-        userAnswers[questionIndex] = answerIndex;
-    }
-
-    function checkAnswer(questionIndex, correctIndex) {
-        if (answeredQuestions[questionIndex]) return;
-
-        const answers = document.querySelectorAll('.page')[questionIndex].querySelectorAll('.answer-option');
-        const feedback = document.getElementById('feedback-' + questionIndex);
-        const checkBtn = document.querySelectorAll('.page')[questionIndex].querySelector('.check-button');
-
-        if (userAnswers[questionIndex] === null) {
-            feedback.className = 'feedback show incorrect';
-            feedback.textContent = '⚠️ Proszę najpierw wybrać odpowiedź!';
-            return;
+    
+        function selectAnswer(questionIndex, answerIndex) {
+            if (answeredQuestions[questionIndex]) return;
+    
+            const answers = document.querySelectorAll('.page')[questionIndex].querySelectorAll('.answer-option');
+            answers.forEach(a => a.classList.remove('selected'));
+            answers[answerIndex].classList.add('selected');
+            userAnswers[questionIndex] = answerIndex;
         }
-
-        answeredQuestions[questionIndex] = true;
-        checkBtn.disabled = true;
-
-        const isCorrect = userAnswers[questionIndex] === correctIndex;
-
-        answers.forEach((answer, index) => {
-            answer.style.cursor = 'default';
-            if (index === correctIndex) {
-                answer.classList.add('correct');
-            } else if (index === userAnswers[questionIndex]) {
-                answer.classList.add('incorrect');
+    
+        function checkAnswer(questionIndex, correctIndex) {
+            if (answeredQuestions[questionIndex]) return;
+    
+            const answers = document.querySelectorAll('.page')[questionIndex].querySelectorAll('.answer-option');
+            const feedback = document.getElementById('feedback-' + questionIndex);
+            const checkBtn = document.querySelectorAll('.page')[questionIndex].querySelector('.check-button');
+    
+            if (userAnswers[questionIndex] === null) {
+                feedback.className = 'feedback show incorrect';
+                feedback.textContent = 'Proszę najpierw wybrać odpowiedź!';
+                return;
             }
+    
+            answeredQuestions[questionIndex] = true;
+            checkBtn.disabled = true;
+    
+            const isCorrect = userAnswers[questionIndex] === correctIndex;
+    
+            answers.forEach((answer, index) => {
+                answer.style.cursor = 'default';
+                if (index === correctIndex) {
+                    answer.classList.add('correct');
+                } else if (index === userAnswers[questionIndex]) {
+                    answer.classList.add('incorrect');
+                }
+            });
+    
+            feedback.className = 'feedback show ' + (isCorrect ? 'correct' : 'incorrect');
+            feedback.innerHTML = (isCorrect ? '✅ Świetnie! ' : '❌ Nieprawidłowo. ') + explanations[questionIndex];
+    
+            if (questionIndex < totalQuestions - 1) {
+                setTimeout(() => {
+                    changePage(1);
+                }, 2500);
+            } else {
+                setTimeout(() => {
+                    showSummary();
+                    changePage(1);
+                }, 2500);
+            }
+        }
+    
+        function showSummary() {
+            let correctCount = 0;
+            for (let i = 0; i < totalQuestions; i++) {
+                if (userAnswers[i] === correctAnswers[i]) {
+                    correctCount++;
+                }
+            }
+    
+            const percentage = Math.round((correctCount / totalQuestions) * 100);
+            document.getElementById('scoreText').textContent = correctCount + '/' + totalQuestions;
+            document.getElementById('percentText').textContent = percentage + '%';
+    
+            let summaryHTML = '<h2>Szczegóły odpowiedzi:</h2>';
+            for (let i = 0; i < totalQuestions; i++) {
+                const isCorrect = userAnswers[i] === correctAnswers[i];
+                summaryHTML += `
+                    <div class='summary-item ${isCorrect ? 'correct' : 'incorrect'}'>
+                        <strong>Pytanie ${i + 1}:</strong> ${isCorrect ? '✅ Poprawnie' : '❌ Niepoprawnie'}<br>
+                        <small>${explanations[i]}</small>
+                    </div>
+                `;
+            }
+    
+            document.getElementById('summaryContent').innerHTML = summaryHTML;
+        }
+    
+        function restartQuiz() {
+            userAnswers.fill(null);
+            answeredQuestions.fill(false);
+            currentPage = 1;
+    
+            document.querySelectorAll('.page').forEach((page, index) => {
+                if (index < totalQuestions) {
+                    const answers = page.querySelectorAll('.answer-option');
+                    answers.forEach(a => {
+                        a.className = 'answer-option';
+                        a.style.cursor = 'pointer';
+                    });
+                    const feedback = page.querySelector('.feedback');
+                    feedback.className = 'feedback';
+                    const checkBtn = page.querySelector('.check-button');
+                    checkBtn.disabled = false;
+                }
+            });
+    
+            showPage(1);
+        }
+    
+        function showPage(n) {
+            const pages = document.querySelectorAll('.page');
+    
+            if (n > totalPages) currentPage = totalPages;
+            if (n < 1) currentPage = 1;
+    
+            pages.forEach(page => page.classList.remove('active'));
+            pages[currentPage - 1].classList.add('active');
+    
+            document.getElementById('currentPage').textContent = currentPage;
+            document.getElementById('prevBtn').disabled = currentPage === 1;
+            document.getElementById('nextBtn').disabled = currentPage === totalPages;
+    
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+    
+        function changePage(n) {
+            currentPage += n;
+            showPage(currentPage);
+        }
+    
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'ArrowLeft') changePage(-1);
+            if (e.key === 'ArrowRight') changePage(1);
         });
-
-        feedback.className = 'feedback show ' + (isCorrect ? 'correct' : 'incorrect');
-        feedback.innerHTML = (isCorrect ? '✅ Świetnie! ' : '❌ Nieprawidłowo. ') + explanations[questionIndex];
-
-        if (questionIndex < totalQuestions - 1) {
-            setTimeout(() => {
-                changePage(1);
-            }, 2500);
-        } else {
-            setTimeout(() => {
-                showSummary();
-                changePage(1);
-            }, 2500);
-        }
-    }
-
-    function showSummary() {
-        let correctCount = 0;
-        for (let i = 0; i < totalQuestions; i++) {
-            if (userAnswers[i] === correctAnswers[i]) {
-                correctCount++;
-            }
-        }
-
-        const percentage = Math.round((correctCount / totalQuestions) * 100);
-        document.getElementById('scoreText').textContent = correctCount + '/' + totalQuestions;
-        document.getElementById('percentText').textContent = percentage + '%';
-
-        let summaryHTML = '<h2>Szczegóły odpowiedzi:</h2>';
-        for (let i = 0; i < totalQuestions; i++) {
-            const isCorrect = userAnswers[i] === correctAnswers[i];
-            summaryHTML += `
-                <div class='summary-item ${isCorrect ? 'correct' : 'incorrect'}'>
-                    <strong>Pytanie ${i + 1}:</strong> ${isCorrect ? '✅ Poprawnie' : '❌ Niepoprawnie'}<br>
-                    <small>${explanations[i]}</small>
-                </div>
-            `;
-        }
-
-        document.getElementById('summaryContent').innerHTML = summaryHTML;
-    }
-
-    function restartQuiz() {
-        userAnswers.fill(null);
-        answeredQuestions.fill(false);
-        currentPage = 1;
-
-        document.querySelectorAll('.page').forEach((page, index) => {
-            if (index < totalQuestions) {
-                const answers = page.querySelectorAll('.answer-option');
-                answers.forEach(a => {
-                    a.className = 'answer-option';
-                    a.style.cursor = 'pointer';
-                });
-                const feedback = page.querySelector('.feedback');
-                feedback.className = 'feedback';
-                const checkBtn = page.querySelector('.check-button');
-                checkBtn.disabled = false;
-            }
-        });
-
+    
         showPage(1);
-    }
-
-    function showPage(n) {
-        const pages = document.querySelectorAll('.page');
-
-        if (n > totalPages) currentPage = totalPages;
-        if (n < 1) currentPage = 1;
-
-        pages.forEach(page => page.classList.remove('active'));
-        pages[currentPage - 1].classList.add('active');
-
-        document.getElementById('currentPage').textContent = currentPage;
-        document.getElementById('prevBtn').disabled = currentPage === 1;
-        document.getElementById('nextBtn').disabled = currentPage === totalPages;
-
-        window.scrollTo({ top: 0, behavior: 'smooth' });
-    }
-
-    function changePage(n) {
-        currentPage += n;
-        showPage(currentPage);
-    }
-
-    document.addEventListener('keydown', function(e) {
-        if (e.key === 'ArrowLeft') changePage(-1);
-        if (e.key === 'ArrowRight') changePage(1);
-    });
-
-    showPage(1);
 </script>
 
 </body>

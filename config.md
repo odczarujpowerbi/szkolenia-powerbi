@@ -1,15 +1,24 @@
  *wystarczy edytować poniższy codeblock .json*
 ```json
 {
-  "css_files": [],
-  "js_files": ["JS.md"],
-  "generate_css_measures": true
+    "assets": {
+        "teoria": {
+            "css": ["CSS - Teoria - Cherry.md"],
+            "js": ["JS - Teoria.md"]
+        },
+        "quiz": {
+            "css": ["CSS - Quiz - Cherry.md"],
+            "js": ["JS - Quiz.md"]
+        }
+    },
+    "generate_css_measures": true
 }
 ```
 
 > **Obecnie obsługuje**
-> - `css_files`: podawanie pojedynczego pliku `["CSS.md"]`, wielu plików `["CSS1.md", "CSS2.md"]`, lub pustym `[]` (nie osadza CSS w HTML)
-> 
-> - `js_files`: podawanie pojedynczego pliku `["JS.md"]`, wielu plików `["JS1.md", "JS2.md"]`, lub pustym `[]` (nie osadza JS w HTML)
-> 
+> - `assets`: mapowanie typów treści (teoria, quiz) na pliki CSS i JS
+>   - Każdy typ może mieć własne pliki CSS i JS z folderu `03. TEMPLATE`
+>   - Dostępne pliki CSS i JS w folderze **03. TEMPLATE**
+>   - Puste tablice `[]` oznaczają brak zewnętrznych assetów (użycie inline)
+>
 > - `generate_css_measures`: `true` (generuje osobne miary CSS*.html) lub `false` (wyłącza generowanie)

@@ -1,7 +1,7 @@
 createOrReplace
 
     table _HTML
-        lineageTag: 848aea6d-4163-4fcd-87dc-e29fb6419a5b
+        lineageTag: dd4432fe-d042-4874-aab6-ea4dbba73db5
 
         measure '00. Konfiguracja Power BI - Główne widoki Power BI Desktop' = ```
 "
@@ -12,6 +12,224 @@ createOrReplace
     <meta charset='UTF-8'>
     <meta name='viewport' content='width=device-width, initial-scale=1.0'>
     <title>Główne widoki Power BI Desktop</title>
+    <style>
+            * {
+                margin: 0;
+                padding: 0;
+                box-sizing: border-box;
+            }
+    
+            body {
+                font-family: 'Roboto', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+                font-size: 16px;
+                font-weight: 400;
+                line-height: 1.7;
+                color: #333;
+                background: transparent;
+                padding: 20px;
+            }
+    
+            .container {
+                max-width: 800px;
+                margin: 0 auto;
+                background: transparent;
+                padding: 40px;
+            }
+    
+            .navigation {
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                margin-bottom: 40px;
+                padding-bottom: 20px;
+                border-bottom: 1px solid #e1e4e8;
+            }
+    
+            button {
+                background: #6b1718;
+                color: white;
+                border: none;
+                padding: 12px 28px;
+                border-radius: 4px;
+                cursor: pointer;
+                font-size: 1em;
+                font-weight: 500;
+                transition: background 0.2s;
+            }
+    
+            button:hover {
+                background: #380c0c;
+            }
+    
+            button:disabled {
+                background: #ccc;
+                cursor: not-allowed;
+            }
+    
+            .page-indicator {
+                color: #666;
+                font-size: 1em;
+            }
+    
+            .page {
+                display: none;
+                min-height: 500px;
+            }
+    
+            .page.active {
+                display: block;
+                animation: fadeIn 0.3s ease-in;
+            }
+    
+            @keyframes fadeIn {
+                from { opacity: 0; transform: translateY(10px); }
+                to { opacity: 1; transform: translateY(0); }
+            }
+    
+            h1 {
+                font-size: 26px;
+                line-height: 36px;
+                font-weight: 600;
+                padding-top: 14px;
+                padding-bottom: 6px;
+                margin-bottom: 1em;
+                color: #6b1718;
+                border-bottom: 2px solid #6b1718;
+            }
+    
+            h2 {
+                font-size: 26px;
+                line-height: 36px;
+                font-weight: 600;
+                padding-top: 14px;
+                padding-bottom: 6px;
+                margin: 1.5em 0 0.8em 0;
+                color: #1a1a1a;
+                border-bottom: 2px solid #1a1a1a;
+            }
+    
+            h3 {
+                font-size: 1.1em;
+                font-weight: 600;
+                margin: 1.2em 0 0.6em 0;
+                padding-bottom: 5px;
+                color: #444;
+                border-bottom: 1px solid #999;
+            }
+    
+            p {
+                margin-bottom: 1em;
+                font-size: 1.05em;
+            }
+    
+            strong {
+                font-weight: 700;
+                color: #1a1a1a;
+            }
+    
+            code {
+                background: #f5f5f5;
+                padding: 3px 7px;
+                border-radius: 3px;
+                font-family: 'Fira Code', 'Courier New', monospace;
+                font-size: 0.95em;
+                color: #b82b4e;
+            }
+    
+            pre {
+                background: #f8f9fa;
+                border-left: 3px solid #6b1718;
+                padding: 18px;
+                margin: 1em 0;
+                overflow-x: auto;
+                border-radius: 3px;
+            }
+    
+            pre code {
+                background: none;
+                padding: 0;
+                color: #24292e;
+                font-size: 1em;
+                line-height: 1.6;
+            }
+    
+            .dax-keyword {
+                color: #6b1718;
+                font-weight: 600;
+            }
+    
+            .dax-function {
+                color: #6f42c1;
+            }
+    
+            .dax-number {
+                color: #005cc5;
+            }
+    
+            .dax-comment {
+                color: #6a737d;
+                font-style: italic;
+            }
+    
+            ul, ol {
+                margin: 0.3em 0;
+                padding-left: 1.8em;
+            }
+    
+            li {
+                margin: 0;
+                padding-left: 0.2em;
+                font-size: 1.05em;
+                line-height: 1.6;
+            }
+    
+            ol {
+                list-style-type: decimal;
+            }
+    
+            ol li::marker {
+                color: #999;
+                font-weight: 400;
+            }
+    
+            ul li::marker {
+                color: #999;
+            }
+    
+            ul ul, ol ol, ul ol, ol ul {
+                margin: 0.2em 0;
+                padding-left: 1.5em;
+            }
+    
+            blockquote {
+                border-left: 3px solid #6b1718;
+                background: #f8f9fa;
+                padding: 14px 18px;
+                margin: 1em 0;
+                color: #555;
+                font-style: italic;
+            }
+    
+            blockquote p {
+                margin: 0;
+            }
+    
+            .iteration-box {
+                border-left: 3px solid #6b1718;
+                padding: 14px 18px;
+                margin: 0.8em 0;
+            }
+    
+            .result-box {
+                background: #f5f5f5;
+                border-left: 3px solid #999;
+                padding: 14px 18px;
+                margin: 0.8em 0;
+                font-weight: 500;
+                color: #555;
+                font-size: 1.05em;
+            }
+        </style>
 </head>
 <body>
 
@@ -215,7 +433,7 @@ createOrReplace
 
 "
 ```
-            lineageTag: d68860a1-4acc-4371-b530-3966d788e750
+            lineageTag: b486947d-bb27-47ff-b05f-5c984144f866
 
         measure '00. Konfiguracja Power BI - Przygotowanie środowiska Power BI' = ```
 "
@@ -226,6 +444,224 @@ createOrReplace
     <meta charset='UTF-8'>
     <meta name='viewport' content='width=device-width, initial-scale=1.0'>
     <title>Przygotowanie środowiska Power BI</title>
+    <style>
+            * {
+                margin: 0;
+                padding: 0;
+                box-sizing: border-box;
+            }
+    
+            body {
+                font-family: 'Roboto', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+                font-size: 16px;
+                font-weight: 400;
+                line-height: 1.7;
+                color: #333;
+                background: transparent;
+                padding: 20px;
+            }
+    
+            .container {
+                max-width: 800px;
+                margin: 0 auto;
+                background: transparent;
+                padding: 40px;
+            }
+    
+            .navigation {
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                margin-bottom: 40px;
+                padding-bottom: 20px;
+                border-bottom: 1px solid #e1e4e8;
+            }
+    
+            button {
+                background: #6b1718;
+                color: white;
+                border: none;
+                padding: 12px 28px;
+                border-radius: 4px;
+                cursor: pointer;
+                font-size: 1em;
+                font-weight: 500;
+                transition: background 0.2s;
+            }
+    
+            button:hover {
+                background: #380c0c;
+            }
+    
+            button:disabled {
+                background: #ccc;
+                cursor: not-allowed;
+            }
+    
+            .page-indicator {
+                color: #666;
+                font-size: 1em;
+            }
+    
+            .page {
+                display: none;
+                min-height: 500px;
+            }
+    
+            .page.active {
+                display: block;
+                animation: fadeIn 0.3s ease-in;
+            }
+    
+            @keyframes fadeIn {
+                from { opacity: 0; transform: translateY(10px); }
+                to { opacity: 1; transform: translateY(0); }
+            }
+    
+            h1 {
+                font-size: 26px;
+                line-height: 36px;
+                font-weight: 600;
+                padding-top: 14px;
+                padding-bottom: 6px;
+                margin-bottom: 1em;
+                color: #6b1718;
+                border-bottom: 2px solid #6b1718;
+            }
+    
+            h2 {
+                font-size: 26px;
+                line-height: 36px;
+                font-weight: 600;
+                padding-top: 14px;
+                padding-bottom: 6px;
+                margin: 1.5em 0 0.8em 0;
+                color: #1a1a1a;
+                border-bottom: 2px solid #1a1a1a;
+            }
+    
+            h3 {
+                font-size: 1.1em;
+                font-weight: 600;
+                margin: 1.2em 0 0.6em 0;
+                padding-bottom: 5px;
+                color: #444;
+                border-bottom: 1px solid #999;
+            }
+    
+            p {
+                margin-bottom: 1em;
+                font-size: 1.05em;
+            }
+    
+            strong {
+                font-weight: 700;
+                color: #1a1a1a;
+            }
+    
+            code {
+                background: #f5f5f5;
+                padding: 3px 7px;
+                border-radius: 3px;
+                font-family: 'Fira Code', 'Courier New', monospace;
+                font-size: 0.95em;
+                color: #b82b4e;
+            }
+    
+            pre {
+                background: #f8f9fa;
+                border-left: 3px solid #6b1718;
+                padding: 18px;
+                margin: 1em 0;
+                overflow-x: auto;
+                border-radius: 3px;
+            }
+    
+            pre code {
+                background: none;
+                padding: 0;
+                color: #24292e;
+                font-size: 1em;
+                line-height: 1.6;
+            }
+    
+            .dax-keyword {
+                color: #6b1718;
+                font-weight: 600;
+            }
+    
+            .dax-function {
+                color: #6f42c1;
+            }
+    
+            .dax-number {
+                color: #005cc5;
+            }
+    
+            .dax-comment {
+                color: #6a737d;
+                font-style: italic;
+            }
+    
+            ul, ol {
+                margin: 0.3em 0;
+                padding-left: 1.8em;
+            }
+    
+            li {
+                margin: 0;
+                padding-left: 0.2em;
+                font-size: 1.05em;
+                line-height: 1.6;
+            }
+    
+            ol {
+                list-style-type: decimal;
+            }
+    
+            ol li::marker {
+                color: #999;
+                font-weight: 400;
+            }
+    
+            ul li::marker {
+                color: #999;
+            }
+    
+            ul ul, ol ol, ul ol, ol ul {
+                margin: 0.2em 0;
+                padding-left: 1.5em;
+            }
+    
+            blockquote {
+                border-left: 3px solid #6b1718;
+                background: #f8f9fa;
+                padding: 14px 18px;
+                margin: 1em 0;
+                color: #555;
+                font-style: italic;
+            }
+    
+            blockquote p {
+                margin: 0;
+            }
+    
+            .iteration-box {
+                border-left: 3px solid #6b1718;
+                padding: 14px 18px;
+                margin: 0.8em 0;
+            }
+    
+            .result-box {
+                background: #f5f5f5;
+                border-left: 3px solid #999;
+                padding: 14px 18px;
+                margin: 0.8em 0;
+                font-weight: 500;
+                color: #555;
+                font-size: 1.05em;
+            }
+        </style>
 </head>
 <body>
 
@@ -405,7 +841,472 @@ createOrReplace
 
 "
 ```
-            lineageTag: d1c679a3-53f8-4d71-a5b8-1c9f030b698c
+            lineageTag: 686b4886-85b7-4229-afd1-858d31030297
+
+        measure '00. Quiz - test' = ```
+"
+
+<!DOCTYPE html>
+<html lang='pl'>
+<head>
+    <meta charset='UTF-8'>
+    <meta name='viewport' content='width=device-width, initial-scale=1.0'>
+    <title>Nazwa Quizu</title>
+    <style>
+    * {
+                margin: 0;
+                padding: 0;
+                box-sizing: border-box;
+            }
+    
+            body {
+                font-family: 'Roboto', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+                font-size: 16px;
+                font-weight: 400;
+                line-height: 1.7;
+                color: #333;
+                background: transparent;
+                padding: 20px;
+            }
+    
+            .container {
+                max-width: 800px;
+                margin: 0 auto;
+                background: transparent;
+                padding: 40px;
+            }
+    
+            .navigation {
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                margin-bottom: 40px;
+                padding-bottom: 20px;
+                border-bottom: 1px solid #e1e4e8;
+            }
+    
+            button {
+                background: #6b1718;
+                color: white;
+                border: none;
+                padding: 12px 28px;
+                border-radius: 4px;
+                cursor: pointer;
+                font-size: 1em;
+                font-weight: 500;
+                transition: background 0.2s;
+            }
+    
+            button:hover {
+                background: #380c0c;
+            }
+    
+            button:disabled {
+                background: #ccc;
+                cursor: not-allowed;
+            }
+    
+            .page-indicator {
+                color: #666;
+                font-size: 1em;
+            }
+    
+            .page {
+                display: none;
+                min-height: 500px;
+            }
+    
+            .page.active {
+                display: block;
+                animation: fadeIn 0.3s ease-in;
+            }
+    
+            @keyframes fadeIn {
+                from { opacity: 0; transform: translateY(10px); }
+                to { opacity: 1; transform: translateY(0); }
+            }
+    
+            h1 {
+                font-size: 26px;
+                line-height: 36px;
+                font-weight: 600;
+                padding-top: 14px;
+                padding-bottom: 6px;
+                margin-bottom: 1em;
+                color: #6b1718;
+                border-bottom: 2px solid #6b1718;
+            }
+    
+            h2 {
+                font-size: 26px;
+                line-height: 36px;
+                font-weight: 600;
+                padding-top: 14px;
+                padding-bottom: 6px;
+                margin: 1.5em 0 0.8em 0;
+                color: #1a1a1a;
+                border-bottom: 2px solid #1a1a1a;
+            }
+    
+            .question-box {
+                background: #f8f9fa;
+                border-left: 3px solid #6b1718;
+                padding: 20px;
+                margin: 1.5em 0;
+                border-radius: 3px;
+            }
+    
+            .question-box p {
+                margin: 0;
+                font-size: 1.05em;
+                color: #1a1a1a;
+            }
+    
+            .answers {
+                margin-top: 1.5em;
+            }
+    
+            .answer-option {
+                background: white;
+                border: 2px solid #e1e4e8;
+                padding: 15px 20px;
+                margin: 10px 0;
+                border-radius: 4px;
+                cursor: pointer;
+                transition: all 0.2s;
+                font-size: 1.05em;
+            }
+    
+            .answer-option:hover {
+                border-color: #6b1718;
+                background: #fef5f5;
+            }
+    
+            .answer-option.selected {
+                border-color: #6b1718;
+                background: #ffe5e6;
+            }
+    
+            .answer-option.correct {
+                border-color: #ccc;
+                background: #d4edda;
+            }
+    
+            .answer-option.incorrect {
+                border-color: #b82b4e;
+                background: #f8d7da;
+            }
+    
+            .feedback {
+                margin-top: 1.5em;
+                padding: 15px 20px;
+                border-radius: 4px;
+                display: none;
+                font-size: 1.05em;
+            }
+    
+            .feedback.show {
+                display: block;
+            }
+    
+            .feedback.correct {
+                background: #d4edda;
+                border-left: 3px solid #28a745;
+                color: #155724;
+            }
+    
+            .feedback.incorrect {
+                background: #f8d7da;
+                border-left: 3px solid #b82b4e;
+                color: #721c24;
+            }
+    
+            .check-button {
+                margin-top: 1.5em;
+                background: #121212;
+            }
+    
+            .check-button:hover:not(:disabled) {
+                background: #111111;
+            }
+    
+            .check-button:disabled {
+                background: #ccc;
+            }
+    
+            pre {
+                background: #f8f9fa;
+                border-left: 3px solid #6b1718;
+                padding: 18px;
+                margin: 1em 0;
+                overflow-x: auto;
+                border-radius: 3px;
+            }
+    
+            code {
+                font-family: 'Fira Code', 'Courier New', monospace;
+                font-size: 0.95em;
+                color: #b82b4e;
+            }
+    
+            .score-box {
+                background: #6b1718;
+                color: white;
+                padding: 20px;
+                border-radius: 4px;
+                text-align: center;
+                font-size: 1.2em;
+                margin-bottom: 2em;
+            }
+    
+            .summary-item {
+                background: #f8f9fa;
+                padding: 15px;
+                margin: 10px 0;
+                border-radius: 4px;
+                border-left: 3px solid #ccc;
+            }
+    
+            .summary-item.correct {
+                border-left-color: #28a745;
+            }
+    
+            .summary-item.incorrect {
+                border-left-color: #b82b4e;
+            }
+    
+            strong {
+                font-weight: 700;
+                color: #1a1a1a;
+            }
+    
+            p {
+                margin-bottom: 1em;
+            }
+    </style>
+</head>
+<body>
+
+<div class='container'>
+    <!-- Nawigacja na górze -->
+    <div class='navigation'>
+        <button id='prevBtn' onclick='changePage(-1)'>← Poprzednia</button>
+        <span class='page-indicator'>
+            Pytanie <span id='currentPage'>1</span> z <span id='totalPages'>3</span>
+        </span>
+        <button id='nextBtn' onclick='changePage(1)'>Następna →</button>
+    </div>
+
+    <!-- Pytanie 1 -->
+    <div class='page active'>
+        <h1>Pytanie 1</h1>
+        <div class='question-box'>
+            <p><strong>Która funkcja jest zalecana do tworzenia zestawień tabelarycznych?</strong></p>
+        </div>
+        <div class='answers'>
+            <div class='answer-option' onclick='selectAnswer(0, 0)'>
+                A) ZŁA
+            </div>
+            <div class='answer-option' onclick='selectAnswer(0, 1)'>
+                B) ZŁA
+            </div>
+            <div class='answer-option' onclick='selectAnswer(0, 2)'>
+                C) POPRAWNA
+            </div>
+            <div class='answer-option' onclick='selectAnswer(0, 3)'>
+                D) ZŁA
+            </div>
+        </div>
+        <button class='check-button' onclick='checkAnswer(0, 2)'>Sprawdź odpowiedź</button>
+        <div class='feedback' id='feedback-0'></div>
+    </div>
+
+    <!-- Pytanie 2 -->
+    <div class='page'>
+        <h1>Pytanie 2</h1>
+        <div class='question-box'>
+            <p><strong>Treść pytania 2</strong></p>
+        </div>
+        <div class='answers'>
+            <div class='answer-option' onclick='selectAnswer(1, 0)'>
+                A) POPRAWNA
+            </div>
+            <div class='answer-option' onclick='selectAnswer(1, 1)'>
+                B) ZŁA
+            </div>
+            <div class='answer-option' onclick='selectAnswer(1, 2)'>
+                C) ZŁA
+            </div>
+            <div class='answer-option' onclick='selectAnswer(1, 3)'>
+                D) ZŁA
+            </div>
+        </div>
+        <button class='check-button' onclick='checkAnswer(1, 0)'>Sprawdź odpowiedź</button>
+        <div class='feedback' id='feedback-1'></div>
+    </div>
+
+    <!-- Podsumowanie quizu -->
+    <div class='page'>
+        <h1>Podsumowanie quizu</h1>
+        <div class='score-box' id='finalScore'>
+            Twój wynik: <span id='scoreText'>0/2</span> (<span id='percentText'>0%</span>)
+        </div>
+        <div id='summaryContent'></div>
+        <button onclick='restartQuiz()' style='margin-top: 20px; width: 100%;'> Rozpocznij quiz od nowa</button>
+    </div>
+</div>
+
+<script>
+    let currentPage = 1;
+    const totalPages = 3;
+    const totalQuestions = 2;
+    
+    const userAnswers = new Array(totalQuestions).fill(null);
+    const answeredQuestions = new Array(totalQuestions).fill(false);
+    
+    const correctAnswers = [2, 0];
+    
+    const explanations = [
+        'wyjaśnienie',
+        'wyjaśnienie'
+    ];
+    
+    document.getElementById('totalPages').textContent = totalPages;
+    
+        function selectAnswer(questionIndex, answerIndex) {
+            if (answeredQuestions[questionIndex]) return;
+    
+            const answers = document.querySelectorAll('.page')[questionIndex].querySelectorAll('.answer-option');
+            answers.forEach(a => a.classList.remove('selected'));
+            answers[answerIndex].classList.add('selected');
+            userAnswers[questionIndex] = answerIndex;
+        }
+    
+        function checkAnswer(questionIndex, correctIndex) {
+            if (answeredQuestions[questionIndex]) return;
+    
+            const answers = document.querySelectorAll('.page')[questionIndex].querySelectorAll('.answer-option');
+            const feedback = document.getElementById('feedback-' + questionIndex);
+            const checkBtn = document.querySelectorAll('.page')[questionIndex].querySelector('.check-button');
+    
+            if (userAnswers[questionIndex] === null) {
+                feedback.className = 'feedback show incorrect';
+                feedback.textContent = 'Proszę najpierw wybrać odpowiedź!';
+                return;
+            }
+    
+            answeredQuestions[questionIndex] = true;
+            checkBtn.disabled = true;
+    
+            const isCorrect = userAnswers[questionIndex] === correctIndex;
+    
+            answers.forEach((answer, index) => {
+                answer.style.cursor = 'default';
+                if (index === correctIndex) {
+                    answer.classList.add('correct');
+                } else if (index === userAnswers[questionIndex]) {
+                    answer.classList.add('incorrect');
+                }
+            });
+    
+            feedback.className = 'feedback show ' + (isCorrect ? 'correct' : 'incorrect');
+            feedback.innerHTML = (isCorrect ? '✅ Świetnie! ' : '❌ Nieprawidłowo. ') + explanations[questionIndex];
+    
+            if (questionIndex < totalQuestions - 1) {
+                setTimeout(() => {
+                    changePage(1);
+                }, 2500);
+            } else {
+                setTimeout(() => {
+                    showSummary();
+                    changePage(1);
+                }, 2500);
+            }
+        }
+    
+        function showSummary() {
+            let correctCount = 0;
+            for (let i = 0; i < totalQuestions; i++) {
+                if (userAnswers[i] === correctAnswers[i]) {
+                    correctCount++;
+                }
+            }
+    
+            const percentage = Math.round((correctCount / totalQuestions) * 100);
+            document.getElementById('scoreText').textContent = correctCount + '/' + totalQuestions;
+            document.getElementById('percentText').textContent = percentage + '%';
+    
+            let summaryHTML = '<h2>Szczegóły odpowiedzi:</h2>';
+            for (let i = 0; i < totalQuestions; i++) {
+                const isCorrect = userAnswers[i] === correctAnswers[i];
+                summaryHTML += `
+                    <div class='summary-item ${isCorrect ? 'correct' : 'incorrect'}'>
+                        <strong>Pytanie ${i + 1}:</strong> ${isCorrect ? '✅ Poprawnie' : '❌ Niepoprawnie'}<br>
+                        <small>${explanations[i]}</small>
+                    </div>
+                `;
+            }
+    
+            document.getElementById('summaryContent').innerHTML = summaryHTML;
+        }
+    
+        function restartQuiz() {
+            userAnswers.fill(null);
+            answeredQuestions.fill(false);
+            currentPage = 1;
+    
+            document.querySelectorAll('.page').forEach((page, index) => {
+                if (index < totalQuestions) {
+                    const answers = page.querySelectorAll('.answer-option');
+                    answers.forEach(a => {
+                        a.className = 'answer-option';
+                        a.style.cursor = 'pointer';
+                    });
+                    const feedback = page.querySelector('.feedback');
+                    feedback.className = 'feedback';
+                    const checkBtn = page.querySelector('.check-button');
+                    checkBtn.disabled = false;
+                }
+            });
+    
+            showPage(1);
+        }
+    
+        function showPage(n) {
+            const pages = document.querySelectorAll('.page');
+    
+            if (n > totalPages) currentPage = totalPages;
+            if (n < 1) currentPage = 1;
+    
+            pages.forEach(page => page.classList.remove('active'));
+            pages[currentPage - 1].classList.add('active');
+    
+            document.getElementById('currentPage').textContent = currentPage;
+            document.getElementById('prevBtn').disabled = currentPage === 1;
+            document.getElementById('nextBtn').disabled = currentPage === totalPages;
+    
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+    
+        function changePage(n) {
+            currentPage += n;
+            showPage(currentPage);
+        }
+    
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'ArrowLeft') changePage(-1);
+            if (e.key === 'ArrowRight') changePage(1);
+        });
+    
+        showPage(1);
+</script>
+
+</body>
+</html>
+
+"
+```
+            lineageTag: ce146c3c-0e30-476c-8d88-55a8667e77a5
 
         measure '01. Podstawy DAX - Funkcje agregujące' = ```
 "
@@ -416,6 +1317,224 @@ createOrReplace
     <meta charset='UTF-8'>
     <meta name='viewport' content='width=device-width, initial-scale=1.0'>
     <title>Funkcje agregujące</title>
+    <style>
+            * {
+                margin: 0;
+                padding: 0;
+                box-sizing: border-box;
+            }
+    
+            body {
+                font-family: 'Roboto', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+                font-size: 16px;
+                font-weight: 400;
+                line-height: 1.7;
+                color: #333;
+                background: transparent;
+                padding: 20px;
+            }
+    
+            .container {
+                max-width: 800px;
+                margin: 0 auto;
+                background: transparent;
+                padding: 40px;
+            }
+    
+            .navigation {
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                margin-bottom: 40px;
+                padding-bottom: 20px;
+                border-bottom: 1px solid #e1e4e8;
+            }
+    
+            button {
+                background: #6b1718;
+                color: white;
+                border: none;
+                padding: 12px 28px;
+                border-radius: 4px;
+                cursor: pointer;
+                font-size: 1em;
+                font-weight: 500;
+                transition: background 0.2s;
+            }
+    
+            button:hover {
+                background: #380c0c;
+            }
+    
+            button:disabled {
+                background: #ccc;
+                cursor: not-allowed;
+            }
+    
+            .page-indicator {
+                color: #666;
+                font-size: 1em;
+            }
+    
+            .page {
+                display: none;
+                min-height: 500px;
+            }
+    
+            .page.active {
+                display: block;
+                animation: fadeIn 0.3s ease-in;
+            }
+    
+            @keyframes fadeIn {
+                from { opacity: 0; transform: translateY(10px); }
+                to { opacity: 1; transform: translateY(0); }
+            }
+    
+            h1 {
+                font-size: 26px;
+                line-height: 36px;
+                font-weight: 600;
+                padding-top: 14px;
+                padding-bottom: 6px;
+                margin-bottom: 1em;
+                color: #6b1718;
+                border-bottom: 2px solid #6b1718;
+            }
+    
+            h2 {
+                font-size: 26px;
+                line-height: 36px;
+                font-weight: 600;
+                padding-top: 14px;
+                padding-bottom: 6px;
+                margin: 1.5em 0 0.8em 0;
+                color: #1a1a1a;
+                border-bottom: 2px solid #1a1a1a;
+            }
+    
+            h3 {
+                font-size: 1.1em;
+                font-weight: 600;
+                margin: 1.2em 0 0.6em 0;
+                padding-bottom: 5px;
+                color: #444;
+                border-bottom: 1px solid #999;
+            }
+    
+            p {
+                margin-bottom: 1em;
+                font-size: 1.05em;
+            }
+    
+            strong {
+                font-weight: 700;
+                color: #1a1a1a;
+            }
+    
+            code {
+                background: #f5f5f5;
+                padding: 3px 7px;
+                border-radius: 3px;
+                font-family: 'Fira Code', 'Courier New', monospace;
+                font-size: 0.95em;
+                color: #b82b4e;
+            }
+    
+            pre {
+                background: #f8f9fa;
+                border-left: 3px solid #6b1718;
+                padding: 18px;
+                margin: 1em 0;
+                overflow-x: auto;
+                border-radius: 3px;
+            }
+    
+            pre code {
+                background: none;
+                padding: 0;
+                color: #24292e;
+                font-size: 1em;
+                line-height: 1.6;
+            }
+    
+            .dax-keyword {
+                color: #6b1718;
+                font-weight: 600;
+            }
+    
+            .dax-function {
+                color: #6f42c1;
+            }
+    
+            .dax-number {
+                color: #005cc5;
+            }
+    
+            .dax-comment {
+                color: #6a737d;
+                font-style: italic;
+            }
+    
+            ul, ol {
+                margin: 0.3em 0;
+                padding-left: 1.8em;
+            }
+    
+            li {
+                margin: 0;
+                padding-left: 0.2em;
+                font-size: 1.05em;
+                line-height: 1.6;
+            }
+    
+            ol {
+                list-style-type: decimal;
+            }
+    
+            ol li::marker {
+                color: #999;
+                font-weight: 400;
+            }
+    
+            ul li::marker {
+                color: #999;
+            }
+    
+            ul ul, ol ol, ul ol, ol ul {
+                margin: 0.2em 0;
+                padding-left: 1.5em;
+            }
+    
+            blockquote {
+                border-left: 3px solid #6b1718;
+                background: #f8f9fa;
+                padding: 14px 18px;
+                margin: 1em 0;
+                color: #555;
+                font-style: italic;
+            }
+    
+            blockquote p {
+                margin: 0;
+            }
+    
+            .iteration-box {
+                border-left: 3px solid #6b1718;
+                padding: 14px 18px;
+                margin: 0.8em 0;
+            }
+    
+            .result-box {
+                background: #f5f5f5;
+                border-left: 3px solid #999;
+                padding: 14px 18px;
+                margin: 0.8em 0;
+                font-weight: 500;
+                color: #555;
+                font-size: 1.05em;
+            }
+        </style>
 </head>
 <body>
 
@@ -590,7 +1709,7 @@ createOrReplace
 
 "
 ```
-            lineageTag: f7853f95-f6b9-4a52-b931-3674fe173af3
+            lineageTag: b92f4c8f-c0fe-44e5-ac57-701940d100c1
 
         measure '01. Podstawy DAX - Funkcje dat' = ```
 "
@@ -601,6 +1720,224 @@ createOrReplace
     <meta charset='UTF-8'>
     <meta name='viewport' content='width=device-width, initial-scale=1.0'>
     <title>Funkcje dat</title>
+    <style>
+            * {
+                margin: 0;
+                padding: 0;
+                box-sizing: border-box;
+            }
+    
+            body {
+                font-family: 'Roboto', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+                font-size: 16px;
+                font-weight: 400;
+                line-height: 1.7;
+                color: #333;
+                background: transparent;
+                padding: 20px;
+            }
+    
+            .container {
+                max-width: 800px;
+                margin: 0 auto;
+                background: transparent;
+                padding: 40px;
+            }
+    
+            .navigation {
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                margin-bottom: 40px;
+                padding-bottom: 20px;
+                border-bottom: 1px solid #e1e4e8;
+            }
+    
+            button {
+                background: #6b1718;
+                color: white;
+                border: none;
+                padding: 12px 28px;
+                border-radius: 4px;
+                cursor: pointer;
+                font-size: 1em;
+                font-weight: 500;
+                transition: background 0.2s;
+            }
+    
+            button:hover {
+                background: #380c0c;
+            }
+    
+            button:disabled {
+                background: #ccc;
+                cursor: not-allowed;
+            }
+    
+            .page-indicator {
+                color: #666;
+                font-size: 1em;
+            }
+    
+            .page {
+                display: none;
+                min-height: 500px;
+            }
+    
+            .page.active {
+                display: block;
+                animation: fadeIn 0.3s ease-in;
+            }
+    
+            @keyframes fadeIn {
+                from { opacity: 0; transform: translateY(10px); }
+                to { opacity: 1; transform: translateY(0); }
+            }
+    
+            h1 {
+                font-size: 26px;
+                line-height: 36px;
+                font-weight: 600;
+                padding-top: 14px;
+                padding-bottom: 6px;
+                margin-bottom: 1em;
+                color: #6b1718;
+                border-bottom: 2px solid #6b1718;
+            }
+    
+            h2 {
+                font-size: 26px;
+                line-height: 36px;
+                font-weight: 600;
+                padding-top: 14px;
+                padding-bottom: 6px;
+                margin: 1.5em 0 0.8em 0;
+                color: #1a1a1a;
+                border-bottom: 2px solid #1a1a1a;
+            }
+    
+            h3 {
+                font-size: 1.1em;
+                font-weight: 600;
+                margin: 1.2em 0 0.6em 0;
+                padding-bottom: 5px;
+                color: #444;
+                border-bottom: 1px solid #999;
+            }
+    
+            p {
+                margin-bottom: 1em;
+                font-size: 1.05em;
+            }
+    
+            strong {
+                font-weight: 700;
+                color: #1a1a1a;
+            }
+    
+            code {
+                background: #f5f5f5;
+                padding: 3px 7px;
+                border-radius: 3px;
+                font-family: 'Fira Code', 'Courier New', monospace;
+                font-size: 0.95em;
+                color: #b82b4e;
+            }
+    
+            pre {
+                background: #f8f9fa;
+                border-left: 3px solid #6b1718;
+                padding: 18px;
+                margin: 1em 0;
+                overflow-x: auto;
+                border-radius: 3px;
+            }
+    
+            pre code {
+                background: none;
+                padding: 0;
+                color: #24292e;
+                font-size: 1em;
+                line-height: 1.6;
+            }
+    
+            .dax-keyword {
+                color: #6b1718;
+                font-weight: 600;
+            }
+    
+            .dax-function {
+                color: #6f42c1;
+            }
+    
+            .dax-number {
+                color: #005cc5;
+            }
+    
+            .dax-comment {
+                color: #6a737d;
+                font-style: italic;
+            }
+    
+            ul, ol {
+                margin: 0.3em 0;
+                padding-left: 1.8em;
+            }
+    
+            li {
+                margin: 0;
+                padding-left: 0.2em;
+                font-size: 1.05em;
+                line-height: 1.6;
+            }
+    
+            ol {
+                list-style-type: decimal;
+            }
+    
+            ol li::marker {
+                color: #999;
+                font-weight: 400;
+            }
+    
+            ul li::marker {
+                color: #999;
+            }
+    
+            ul ul, ol ol, ul ol, ol ul {
+                margin: 0.2em 0;
+                padding-left: 1.5em;
+            }
+    
+            blockquote {
+                border-left: 3px solid #6b1718;
+                background: #f8f9fa;
+                padding: 14px 18px;
+                margin: 1em 0;
+                color: #555;
+                font-style: italic;
+            }
+    
+            blockquote p {
+                margin: 0;
+            }
+    
+            .iteration-box {
+                border-left: 3px solid #6b1718;
+                padding: 14px 18px;
+                margin: 0.8em 0;
+            }
+    
+            .result-box {
+                background: #f5f5f5;
+                border-left: 3px solid #999;
+                padding: 14px 18px;
+                margin: 0.8em 0;
+                font-weight: 500;
+                color: #555;
+                font-size: 1.05em;
+            }
+        </style>
 </head>
 <body>
 
@@ -743,7 +2080,7 @@ createOrReplace
 
 "
 ```
-            lineageTag: e6af2016-1dc1-4cc2-adf3-5aad9ab9f060
+            lineageTag: de37df5c-9f0b-4318-bb40-9407d4e5c1db
 
         measure '01. Podstawy DAX - Funkcje iteracyjne (X-functions)' = ```
 "
@@ -754,6 +2091,224 @@ createOrReplace
     <meta charset='UTF-8'>
     <meta name='viewport' content='width=device-width, initial-scale=1.0'>
     <title>Funkcje iteracyjne (X-functions)</title>
+    <style>
+            * {
+                margin: 0;
+                padding: 0;
+                box-sizing: border-box;
+            }
+    
+            body {
+                font-family: 'Roboto', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+                font-size: 16px;
+                font-weight: 400;
+                line-height: 1.7;
+                color: #333;
+                background: transparent;
+                padding: 20px;
+            }
+    
+            .container {
+                max-width: 800px;
+                margin: 0 auto;
+                background: transparent;
+                padding: 40px;
+            }
+    
+            .navigation {
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                margin-bottom: 40px;
+                padding-bottom: 20px;
+                border-bottom: 1px solid #e1e4e8;
+            }
+    
+            button {
+                background: #6b1718;
+                color: white;
+                border: none;
+                padding: 12px 28px;
+                border-radius: 4px;
+                cursor: pointer;
+                font-size: 1em;
+                font-weight: 500;
+                transition: background 0.2s;
+            }
+    
+            button:hover {
+                background: #380c0c;
+            }
+    
+            button:disabled {
+                background: #ccc;
+                cursor: not-allowed;
+            }
+    
+            .page-indicator {
+                color: #666;
+                font-size: 1em;
+            }
+    
+            .page {
+                display: none;
+                min-height: 500px;
+            }
+    
+            .page.active {
+                display: block;
+                animation: fadeIn 0.3s ease-in;
+            }
+    
+            @keyframes fadeIn {
+                from { opacity: 0; transform: translateY(10px); }
+                to { opacity: 1; transform: translateY(0); }
+            }
+    
+            h1 {
+                font-size: 26px;
+                line-height: 36px;
+                font-weight: 600;
+                padding-top: 14px;
+                padding-bottom: 6px;
+                margin-bottom: 1em;
+                color: #6b1718;
+                border-bottom: 2px solid #6b1718;
+            }
+    
+            h2 {
+                font-size: 26px;
+                line-height: 36px;
+                font-weight: 600;
+                padding-top: 14px;
+                padding-bottom: 6px;
+                margin: 1.5em 0 0.8em 0;
+                color: #1a1a1a;
+                border-bottom: 2px solid #1a1a1a;
+            }
+    
+            h3 {
+                font-size: 1.1em;
+                font-weight: 600;
+                margin: 1.2em 0 0.6em 0;
+                padding-bottom: 5px;
+                color: #444;
+                border-bottom: 1px solid #999;
+            }
+    
+            p {
+                margin-bottom: 1em;
+                font-size: 1.05em;
+            }
+    
+            strong {
+                font-weight: 700;
+                color: #1a1a1a;
+            }
+    
+            code {
+                background: #f5f5f5;
+                padding: 3px 7px;
+                border-radius: 3px;
+                font-family: 'Fira Code', 'Courier New', monospace;
+                font-size: 0.95em;
+                color: #b82b4e;
+            }
+    
+            pre {
+                background: #f8f9fa;
+                border-left: 3px solid #6b1718;
+                padding: 18px;
+                margin: 1em 0;
+                overflow-x: auto;
+                border-radius: 3px;
+            }
+    
+            pre code {
+                background: none;
+                padding: 0;
+                color: #24292e;
+                font-size: 1em;
+                line-height: 1.6;
+            }
+    
+            .dax-keyword {
+                color: #6b1718;
+                font-weight: 600;
+            }
+    
+            .dax-function {
+                color: #6f42c1;
+            }
+    
+            .dax-number {
+                color: #005cc5;
+            }
+    
+            .dax-comment {
+                color: #6a737d;
+                font-style: italic;
+            }
+    
+            ul, ol {
+                margin: 0.3em 0;
+                padding-left: 1.8em;
+            }
+    
+            li {
+                margin: 0;
+                padding-left: 0.2em;
+                font-size: 1.05em;
+                line-height: 1.6;
+            }
+    
+            ol {
+                list-style-type: decimal;
+            }
+    
+            ol li::marker {
+                color: #999;
+                font-weight: 400;
+            }
+    
+            ul li::marker {
+                color: #999;
+            }
+    
+            ul ul, ol ol, ul ol, ol ul {
+                margin: 0.2em 0;
+                padding-left: 1.5em;
+            }
+    
+            blockquote {
+                border-left: 3px solid #6b1718;
+                background: #f8f9fa;
+                padding: 14px 18px;
+                margin: 1em 0;
+                color: #555;
+                font-style: italic;
+            }
+    
+            blockquote p {
+                margin: 0;
+            }
+    
+            .iteration-box {
+                border-left: 3px solid #6b1718;
+                padding: 14px 18px;
+                margin: 0.8em 0;
+            }
+    
+            .result-box {
+                background: #f5f5f5;
+                border-left: 3px solid #999;
+                padding: 14px 18px;
+                margin: 0.8em 0;
+                font-weight: 500;
+                color: #555;
+                font-size: 1.05em;
+            }
+        </style>
 </head>
 <body>
 
@@ -914,7 +2469,7 @@ createOrReplace
 
 "
 ```
-            lineageTag: 6cf6356b-e928-4693-8fea-b800cd19be70
+            lineageTag: d97e5334-c69c-4cde-9f4b-b5885ed3ffac
 
         measure '01. Podstawy DAX - Funkcje logiczne' = ```
 "
@@ -925,6 +2480,224 @@ createOrReplace
     <meta charset='UTF-8'>
     <meta name='viewport' content='width=device-width, initial-scale=1.0'>
     <title>Funkcje logiczne</title>
+    <style>
+            * {
+                margin: 0;
+                padding: 0;
+                box-sizing: border-box;
+            }
+    
+            body {
+                font-family: 'Roboto', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+                font-size: 16px;
+                font-weight: 400;
+                line-height: 1.7;
+                color: #333;
+                background: transparent;
+                padding: 20px;
+            }
+    
+            .container {
+                max-width: 800px;
+                margin: 0 auto;
+                background: transparent;
+                padding: 40px;
+            }
+    
+            .navigation {
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                margin-bottom: 40px;
+                padding-bottom: 20px;
+                border-bottom: 1px solid #e1e4e8;
+            }
+    
+            button {
+                background: #6b1718;
+                color: white;
+                border: none;
+                padding: 12px 28px;
+                border-radius: 4px;
+                cursor: pointer;
+                font-size: 1em;
+                font-weight: 500;
+                transition: background 0.2s;
+            }
+    
+            button:hover {
+                background: #380c0c;
+            }
+    
+            button:disabled {
+                background: #ccc;
+                cursor: not-allowed;
+            }
+    
+            .page-indicator {
+                color: #666;
+                font-size: 1em;
+            }
+    
+            .page {
+                display: none;
+                min-height: 500px;
+            }
+    
+            .page.active {
+                display: block;
+                animation: fadeIn 0.3s ease-in;
+            }
+    
+            @keyframes fadeIn {
+                from { opacity: 0; transform: translateY(10px); }
+                to { opacity: 1; transform: translateY(0); }
+            }
+    
+            h1 {
+                font-size: 26px;
+                line-height: 36px;
+                font-weight: 600;
+                padding-top: 14px;
+                padding-bottom: 6px;
+                margin-bottom: 1em;
+                color: #6b1718;
+                border-bottom: 2px solid #6b1718;
+            }
+    
+            h2 {
+                font-size: 26px;
+                line-height: 36px;
+                font-weight: 600;
+                padding-top: 14px;
+                padding-bottom: 6px;
+                margin: 1.5em 0 0.8em 0;
+                color: #1a1a1a;
+                border-bottom: 2px solid #1a1a1a;
+            }
+    
+            h3 {
+                font-size: 1.1em;
+                font-weight: 600;
+                margin: 1.2em 0 0.6em 0;
+                padding-bottom: 5px;
+                color: #444;
+                border-bottom: 1px solid #999;
+            }
+    
+            p {
+                margin-bottom: 1em;
+                font-size: 1.05em;
+            }
+    
+            strong {
+                font-weight: 700;
+                color: #1a1a1a;
+            }
+    
+            code {
+                background: #f5f5f5;
+                padding: 3px 7px;
+                border-radius: 3px;
+                font-family: 'Fira Code', 'Courier New', monospace;
+                font-size: 0.95em;
+                color: #b82b4e;
+            }
+    
+            pre {
+                background: #f8f9fa;
+                border-left: 3px solid #6b1718;
+                padding: 18px;
+                margin: 1em 0;
+                overflow-x: auto;
+                border-radius: 3px;
+            }
+    
+            pre code {
+                background: none;
+                padding: 0;
+                color: #24292e;
+                font-size: 1em;
+                line-height: 1.6;
+            }
+    
+            .dax-keyword {
+                color: #6b1718;
+                font-weight: 600;
+            }
+    
+            .dax-function {
+                color: #6f42c1;
+            }
+    
+            .dax-number {
+                color: #005cc5;
+            }
+    
+            .dax-comment {
+                color: #6a737d;
+                font-style: italic;
+            }
+    
+            ul, ol {
+                margin: 0.3em 0;
+                padding-left: 1.8em;
+            }
+    
+            li {
+                margin: 0;
+                padding-left: 0.2em;
+                font-size: 1.05em;
+                line-height: 1.6;
+            }
+    
+            ol {
+                list-style-type: decimal;
+            }
+    
+            ol li::marker {
+                color: #999;
+                font-weight: 400;
+            }
+    
+            ul li::marker {
+                color: #999;
+            }
+    
+            ul ul, ol ol, ul ol, ol ul {
+                margin: 0.2em 0;
+                padding-left: 1.5em;
+            }
+    
+            blockquote {
+                border-left: 3px solid #6b1718;
+                background: #f8f9fa;
+                padding: 14px 18px;
+                margin: 1em 0;
+                color: #555;
+                font-style: italic;
+            }
+    
+            blockquote p {
+                margin: 0;
+            }
+    
+            .iteration-box {
+                border-left: 3px solid #6b1718;
+                padding: 14px 18px;
+                margin: 0.8em 0;
+            }
+    
+            .result-box {
+                background: #f5f5f5;
+                border-left: 3px solid #999;
+                padding: 14px 18px;
+                margin: 0.8em 0;
+                font-weight: 500;
+                color: #555;
+                font-size: 1.05em;
+            }
+        </style>
 </head>
 <body>
 
@@ -1082,7 +2855,7 @@ createOrReplace
 
 "
 ```
-            lineageTag: 8447d73e-b693-44d5-99d9-c76d07bfb50b
+            lineageTag: 6b8de773-1cca-41b9-9ea2-8d225eeca471
 
         measure '01. Podstawy DAX - Funkcje tekstowe' = ```
 "
@@ -1093,6 +2866,224 @@ createOrReplace
     <meta charset='UTF-8'>
     <meta name='viewport' content='width=device-width, initial-scale=1.0'>
     <title>Funkcje tekstowe</title>
+    <style>
+            * {
+                margin: 0;
+                padding: 0;
+                box-sizing: border-box;
+            }
+    
+            body {
+                font-family: 'Roboto', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+                font-size: 16px;
+                font-weight: 400;
+                line-height: 1.7;
+                color: #333;
+                background: transparent;
+                padding: 20px;
+            }
+    
+            .container {
+                max-width: 800px;
+                margin: 0 auto;
+                background: transparent;
+                padding: 40px;
+            }
+    
+            .navigation {
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                margin-bottom: 40px;
+                padding-bottom: 20px;
+                border-bottom: 1px solid #e1e4e8;
+            }
+    
+            button {
+                background: #6b1718;
+                color: white;
+                border: none;
+                padding: 12px 28px;
+                border-radius: 4px;
+                cursor: pointer;
+                font-size: 1em;
+                font-weight: 500;
+                transition: background 0.2s;
+            }
+    
+            button:hover {
+                background: #380c0c;
+            }
+    
+            button:disabled {
+                background: #ccc;
+                cursor: not-allowed;
+            }
+    
+            .page-indicator {
+                color: #666;
+                font-size: 1em;
+            }
+    
+            .page {
+                display: none;
+                min-height: 500px;
+            }
+    
+            .page.active {
+                display: block;
+                animation: fadeIn 0.3s ease-in;
+            }
+    
+            @keyframes fadeIn {
+                from { opacity: 0; transform: translateY(10px); }
+                to { opacity: 1; transform: translateY(0); }
+            }
+    
+            h1 {
+                font-size: 26px;
+                line-height: 36px;
+                font-weight: 600;
+                padding-top: 14px;
+                padding-bottom: 6px;
+                margin-bottom: 1em;
+                color: #6b1718;
+                border-bottom: 2px solid #6b1718;
+            }
+    
+            h2 {
+                font-size: 26px;
+                line-height: 36px;
+                font-weight: 600;
+                padding-top: 14px;
+                padding-bottom: 6px;
+                margin: 1.5em 0 0.8em 0;
+                color: #1a1a1a;
+                border-bottom: 2px solid #1a1a1a;
+            }
+    
+            h3 {
+                font-size: 1.1em;
+                font-weight: 600;
+                margin: 1.2em 0 0.6em 0;
+                padding-bottom: 5px;
+                color: #444;
+                border-bottom: 1px solid #999;
+            }
+    
+            p {
+                margin-bottom: 1em;
+                font-size: 1.05em;
+            }
+    
+            strong {
+                font-weight: 700;
+                color: #1a1a1a;
+            }
+    
+            code {
+                background: #f5f5f5;
+                padding: 3px 7px;
+                border-radius: 3px;
+                font-family: 'Fira Code', 'Courier New', monospace;
+                font-size: 0.95em;
+                color: #b82b4e;
+            }
+    
+            pre {
+                background: #f8f9fa;
+                border-left: 3px solid #6b1718;
+                padding: 18px;
+                margin: 1em 0;
+                overflow-x: auto;
+                border-radius: 3px;
+            }
+    
+            pre code {
+                background: none;
+                padding: 0;
+                color: #24292e;
+                font-size: 1em;
+                line-height: 1.6;
+            }
+    
+            .dax-keyword {
+                color: #6b1718;
+                font-weight: 600;
+            }
+    
+            .dax-function {
+                color: #6f42c1;
+            }
+    
+            .dax-number {
+                color: #005cc5;
+            }
+    
+            .dax-comment {
+                color: #6a737d;
+                font-style: italic;
+            }
+    
+            ul, ol {
+                margin: 0.3em 0;
+                padding-left: 1.8em;
+            }
+    
+            li {
+                margin: 0;
+                padding-left: 0.2em;
+                font-size: 1.05em;
+                line-height: 1.6;
+            }
+    
+            ol {
+                list-style-type: decimal;
+            }
+    
+            ol li::marker {
+                color: #999;
+                font-weight: 400;
+            }
+    
+            ul li::marker {
+                color: #999;
+            }
+    
+            ul ul, ol ol, ul ol, ol ul {
+                margin: 0.2em 0;
+                padding-left: 1.5em;
+            }
+    
+            blockquote {
+                border-left: 3px solid #6b1718;
+                background: #f8f9fa;
+                padding: 14px 18px;
+                margin: 1em 0;
+                color: #555;
+                font-style: italic;
+            }
+    
+            blockquote p {
+                margin: 0;
+            }
+    
+            .iteration-box {
+                border-left: 3px solid #6b1718;
+                padding: 14px 18px;
+                margin: 0.8em 0;
+            }
+    
+            .result-box {
+                background: #f5f5f5;
+                border-left: 3px solid #999;
+                padding: 14px 18px;
+                margin: 0.8em 0;
+                font-weight: 500;
+                color: #555;
+                font-size: 1.05em;
+            }
+        </style>
 </head>
 <body>
 
@@ -1235,7 +3226,7 @@ createOrReplace
 
 "
 ```
-            lineageTag: e5f96566-fb10-4e79-9f41-e24e4d3a2773
+            lineageTag: 82e7a161-d609-410e-9e06-d49ba74ea7fe
 
         measure '01. Podstawy DAX' = ```
 "
@@ -1246,6 +3237,224 @@ createOrReplace
     <meta charset='UTF-8'>
     <meta name='viewport' content='width=device-width, initial-scale=1.0'>
     <title>01. Podstawy DAX</title>
+    <style>
+            * {
+                margin: 0;
+                padding: 0;
+                box-sizing: border-box;
+            }
+    
+            body {
+                font-family: 'Roboto', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+                font-size: 16px;
+                font-weight: 400;
+                line-height: 1.7;
+                color: #333;
+                background: transparent;
+                padding: 20px;
+            }
+    
+            .container {
+                max-width: 800px;
+                margin: 0 auto;
+                background: transparent;
+                padding: 40px;
+            }
+    
+            .navigation {
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                margin-bottom: 40px;
+                padding-bottom: 20px;
+                border-bottom: 1px solid #e1e4e8;
+            }
+    
+            button {
+                background: #6b1718;
+                color: white;
+                border: none;
+                padding: 12px 28px;
+                border-radius: 4px;
+                cursor: pointer;
+                font-size: 1em;
+                font-weight: 500;
+                transition: background 0.2s;
+            }
+    
+            button:hover {
+                background: #380c0c;
+            }
+    
+            button:disabled {
+                background: #ccc;
+                cursor: not-allowed;
+            }
+    
+            .page-indicator {
+                color: #666;
+                font-size: 1em;
+            }
+    
+            .page {
+                display: none;
+                min-height: 500px;
+            }
+    
+            .page.active {
+                display: block;
+                animation: fadeIn 0.3s ease-in;
+            }
+    
+            @keyframes fadeIn {
+                from { opacity: 0; transform: translateY(10px); }
+                to { opacity: 1; transform: translateY(0); }
+            }
+    
+            h1 {
+                font-size: 26px;
+                line-height: 36px;
+                font-weight: 600;
+                padding-top: 14px;
+                padding-bottom: 6px;
+                margin-bottom: 1em;
+                color: #6b1718;
+                border-bottom: 2px solid #6b1718;
+            }
+    
+            h2 {
+                font-size: 26px;
+                line-height: 36px;
+                font-weight: 600;
+                padding-top: 14px;
+                padding-bottom: 6px;
+                margin: 1.5em 0 0.8em 0;
+                color: #1a1a1a;
+                border-bottom: 2px solid #1a1a1a;
+            }
+    
+            h3 {
+                font-size: 1.1em;
+                font-weight: 600;
+                margin: 1.2em 0 0.6em 0;
+                padding-bottom: 5px;
+                color: #444;
+                border-bottom: 1px solid #999;
+            }
+    
+            p {
+                margin-bottom: 1em;
+                font-size: 1.05em;
+            }
+    
+            strong {
+                font-weight: 700;
+                color: #1a1a1a;
+            }
+    
+            code {
+                background: #f5f5f5;
+                padding: 3px 7px;
+                border-radius: 3px;
+                font-family: 'Fira Code', 'Courier New', monospace;
+                font-size: 0.95em;
+                color: #b82b4e;
+            }
+    
+            pre {
+                background: #f8f9fa;
+                border-left: 3px solid #6b1718;
+                padding: 18px;
+                margin: 1em 0;
+                overflow-x: auto;
+                border-radius: 3px;
+            }
+    
+            pre code {
+                background: none;
+                padding: 0;
+                color: #24292e;
+                font-size: 1em;
+                line-height: 1.6;
+            }
+    
+            .dax-keyword {
+                color: #6b1718;
+                font-weight: 600;
+            }
+    
+            .dax-function {
+                color: #6f42c1;
+            }
+    
+            .dax-number {
+                color: #005cc5;
+            }
+    
+            .dax-comment {
+                color: #6a737d;
+                font-style: italic;
+            }
+    
+            ul, ol {
+                margin: 0.3em 0;
+                padding-left: 1.8em;
+            }
+    
+            li {
+                margin: 0;
+                padding-left: 0.2em;
+                font-size: 1.05em;
+                line-height: 1.6;
+            }
+    
+            ol {
+                list-style-type: decimal;
+            }
+    
+            ol li::marker {
+                color: #999;
+                font-weight: 400;
+            }
+    
+            ul li::marker {
+                color: #999;
+            }
+    
+            ul ul, ol ol, ul ol, ol ul {
+                margin: 0.2em 0;
+                padding-left: 1.5em;
+            }
+    
+            blockquote {
+                border-left: 3px solid #6b1718;
+                background: #f8f9fa;
+                padding: 14px 18px;
+                margin: 1em 0;
+                color: #555;
+                font-style: italic;
+            }
+    
+            blockquote p {
+                margin: 0;
+            }
+    
+            .iteration-box {
+                border-left: 3px solid #6b1718;
+                padding: 14px 18px;
+                margin: 0.8em 0;
+            }
+    
+            .result-box {
+                background: #f5f5f5;
+                border-left: 3px solid #999;
+                padding: 14px 18px;
+                margin: 0.8em 0;
+                font-weight: 500;
+                color: #555;
+                font-size: 1.05em;
+            }
+        </style>
 </head>
 <body>
 
@@ -1513,7 +3722,7 @@ createOrReplace
 
 "
 ```
-            lineageTag: 7fa7ef86-3463-47fa-923d-21da720712d7
+            lineageTag: dc0a2166-0d9c-4d49-b94f-339a02028a6f
 
         measure '01. Quiz' = ```
 "
@@ -1525,204 +3734,236 @@ createOrReplace
     <meta name='viewport' content='width=device-width, initial-scale=1.0'>
     <title>Quiz: Podstawy DAX</title>
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        body {
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-            font-size: 16px;
-            line-height: 1.7;
-            color: #333;
-            background: transparent;
-            padding: 20px;
-        }
-
-        .container {
-            max-width: 800px;
-            margin: 0 auto;
-            background: transparent;
-            padding: 40px;
-        }
-
-        .navigation {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 40px;
-            padding-bottom: 20px;
-            border-bottom: 1px solid #e1e4e8;
-        }
-
-        button {
-            background: #0066cc;
-            color: white;
-            border: none;
-            padding: 12px 28px;
-            border-radius: 4px;
-            cursor: pointer;
-            font-size: 1em;
-            font-weight: 500;
-            transition: background 0.2s;
-        }
-
-        button:hover {
-            background: #0052a3;
-        }
-
-        button:disabled {
-            background: #ccc;
-            cursor: not-allowed;
-        }
-
-        .page-indicator {
-            color: #666;
-            font-size: 1em;
-        }
-
-        .page {
-            display: none;
-            min-height: 500px;
-        }
-
-        .page.active {
-            display: block;
-            animation: fadeIn 0.3s ease-in;
-        }
-
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(10px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-
-        h1 {
-            font-size: 1.8em;
-            font-weight: 600;
-            margin-bottom: 1em;
-            color: #1a1a1a;
-        }
-
-        .question-box {
-            background: #f8f9fa;
-            border-left: 3px solid #0066cc;
-            padding: 20px;
-            margin: 1.5em 0;
-            border-radius: 3px;
-        }
-
-        .answers {
-            margin-top: 1.5em;
-        }
-
-        .answer-option {
-            background: white;
-            border: 2px solid #e1e4e8;
-            padding: 15px 20px;
-            margin: 10px 0;
-            border-radius: 4px;
-            cursor: pointer;
-            transition: all 0.2s;
-            font-size: 1.05em;
-        }
-
-        .answer-option:hover {
-            border-color: #0066cc;
-            background: #f0f7ff;
-        }
-
-        .answer-option.selected {
-            border-color: #0066cc;
-            background: #e6f2ff;
-        }
-
-        .answer-option.correct {
-            border-color: #28a745;
-            background: #d4edda;
-        }
-
-        .answer-option.incorrect {
-            border-color: #dc3545;
-            background: #f8d7da;
-        }
-
-        .feedback {
-            margin-top: 1.5em;
-            padding: 15px 20px;
-            border-radius: 4px;
-            display: none;
-            font-size: 1.05em;
-        }
-
-        .feedback.show {
-            display: block;
-        }
-
-        .feedback.correct {
-            background: #d4edda;
-            border-left: 3px solid #28a745;
-            color: #155724;
-        }
-
-        .feedback.incorrect {
-            background: #f8d7da;
-            border-left: 3px solid #dc3545;
-            color: #721c24;
-        }
-
-        .check-button {
-            margin-top: 1.5em;
-            background: #28a745;
-        }
-
-        .check-button:hover:not(:disabled) {
-            background: #218838;
-        }
-
-        .check-button:disabled {
-            background: #ccc;
-        }
-
-        pre {
-            background: #f8f9fa;
-            border-left: 3px solid #0066cc;
-            padding: 18px;
-            margin: 1em 0;
-            overflow-x: auto;
-            border-radius: 3px;
-        }
-
-        code {
-            font-family: 'Courier New', monospace;
-            font-size: 0.95em;
-        }
-
-        .score-box {
-            background: #0066cc;
-            color: white;
-            padding: 20px;
-            border-radius: 4px;
-            text-align: center;
-            font-size: 1.2em;
-            margin-bottom: 2em;
-        }
-
-        .summary-item {
-            background: #f8f9fa;
-            padding: 15px;
-            margin: 10px 0;
-            border-radius: 4px;
-            border-left: 3px solid #ccc;
-        }
-
-        .summary-item.correct {
-            border-left-color: #28a745;
-        }
-
-        .summary-item.incorrect {
-            border-left-color: #dc3545;
-        }
+    * {
+                margin: 0;
+                padding: 0;
+                box-sizing: border-box;
+            }
+    
+            body {
+                font-family: 'Roboto', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+                font-size: 16px;
+                font-weight: 400;
+                line-height: 1.7;
+                color: #333;
+                background: transparent;
+                padding: 20px;
+            }
+    
+            .container {
+                max-width: 800px;
+                margin: 0 auto;
+                background: transparent;
+                padding: 40px;
+            }
+    
+            .navigation {
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                margin-bottom: 40px;
+                padding-bottom: 20px;
+                border-bottom: 1px solid #e1e4e8;
+            }
+    
+            button {
+                background: #6b1718;
+                color: white;
+                border: none;
+                padding: 12px 28px;
+                border-radius: 4px;
+                cursor: pointer;
+                font-size: 1em;
+                font-weight: 500;
+                transition: background 0.2s;
+            }
+    
+            button:hover {
+                background: #380c0c;
+            }
+    
+            button:disabled {
+                background: #ccc;
+                cursor: not-allowed;
+            }
+    
+            .page-indicator {
+                color: #666;
+                font-size: 1em;
+            }
+    
+            .page {
+                display: none;
+                min-height: 500px;
+            }
+    
+            .page.active {
+                display: block;
+                animation: fadeIn 0.3s ease-in;
+            }
+    
+            @keyframes fadeIn {
+                from { opacity: 0; transform: translateY(10px); }
+                to { opacity: 1; transform: translateY(0); }
+            }
+    
+            h1 {
+                font-size: 26px;
+                line-height: 36px;
+                font-weight: 600;
+                padding-top: 14px;
+                padding-bottom: 6px;
+                margin-bottom: 1em;
+                color: #6b1718;
+                border-bottom: 2px solid #6b1718;
+            }
+    
+            h2 {
+                font-size: 26px;
+                line-height: 36px;
+                font-weight: 600;
+                padding-top: 14px;
+                padding-bottom: 6px;
+                margin: 1.5em 0 0.8em 0;
+                color: #1a1a1a;
+                border-bottom: 2px solid #1a1a1a;
+            }
+    
+            .question-box {
+                background: #f8f9fa;
+                border-left: 3px solid #6b1718;
+                padding: 20px;
+                margin: 1.5em 0;
+                border-radius: 3px;
+            }
+    
+            .question-box p {
+                margin: 0;
+                font-size: 1.05em;
+                color: #1a1a1a;
+            }
+    
+            .answers {
+                margin-top: 1.5em;
+            }
+    
+            .answer-option {
+                background: white;
+                border: 2px solid #e1e4e8;
+                padding: 15px 20px;
+                margin: 10px 0;
+                border-radius: 4px;
+                cursor: pointer;
+                transition: all 0.2s;
+                font-size: 1.05em;
+            }
+    
+            .answer-option:hover {
+                border-color: #6b1718;
+                background: #fef5f5;
+            }
+    
+            .answer-option.selected {
+                border-color: #6b1718;
+                background: #ffe5e6;
+            }
+    
+            .answer-option.correct {
+                border-color: #ccc;
+                background: #d4edda;
+            }
+    
+            .answer-option.incorrect {
+                border-color: #b82b4e;
+                background: #f8d7da;
+            }
+    
+            .feedback {
+                margin-top: 1.5em;
+                padding: 15px 20px;
+                border-radius: 4px;
+                display: none;
+                font-size: 1.05em;
+            }
+    
+            .feedback.show {
+                display: block;
+            }
+    
+            .feedback.correct {
+                background: #d4edda;
+                border-left: 3px solid #28a745;
+                color: #155724;
+            }
+    
+            .feedback.incorrect {
+                background: #f8d7da;
+                border-left: 3px solid #b82b4e;
+                color: #721c24;
+            }
+    
+            .check-button {
+                margin-top: 1.5em;
+                background: #121212;
+            }
+    
+            .check-button:hover:not(:disabled) {
+                background: #111111;
+            }
+    
+            .check-button:disabled {
+                background: #ccc;
+            }
+    
+            pre {
+                background: #f8f9fa;
+                border-left: 3px solid #6b1718;
+                padding: 18px;
+                margin: 1em 0;
+                overflow-x: auto;
+                border-radius: 3px;
+            }
+    
+            code {
+                font-family: 'Fira Code', 'Courier New', monospace;
+                font-size: 0.95em;
+                color: #b82b4e;
+            }
+    
+            .score-box {
+                background: #6b1718;
+                color: white;
+                padding: 20px;
+                border-radius: 4px;
+                text-align: center;
+                font-size: 1.2em;
+                margin-bottom: 2em;
+            }
+    
+            .summary-item {
+                background: #f8f9fa;
+                padding: 15px;
+                margin: 10px 0;
+                border-radius: 4px;
+                border-left: 3px solid #ccc;
+            }
+    
+            .summary-item.correct {
+                border-left-color: #28a745;
+            }
+    
+            .summary-item.incorrect {
+                border-left-color: #b82b4e;
+            }
+    
+            strong {
+                font-weight: 700;
+                color: #1a1a1a;
+            }
+    
+            p {
+                margin-bottom: 1em;
+            }
     </style>
 </head>
 <body>
@@ -1732,7 +3973,7 @@ createOrReplace
     <div class='navigation'>
         <button id='prevBtn' onclick='changePage(-1)'>← Poprzednia</button>
         <span class='page-indicator'>
-            Pytanie <span id='currentPage'>1</span> z <span id='totalPages'>8</span>
+            Pytanie <span id='currentPage'>1</span> z <span id='totalPages'>7</span>
         </span>
         <button id='nextBtn' onclick='changePage(1)'>Następna →</button>
     </div>
@@ -1789,23 +4030,23 @@ createOrReplace
     <div class='page'>
         <h1>Pytanie 3</h1>
         <div class='question-box'>
-            <p><strong>Kiedy musisz użyć apostrofów w nazwach tabel/kolumn?</strong></p>
+            <p><strong>Jak odwołać się do miary (measure) w DAX?</strong></p>
         </div>
         <div class='answers'>
             <div class='answer-option' onclick='selectAnswer(2, 0)'>
-                A) Zawsze
+                A) Tabela[Miara]
             </div>
             <div class='answer-option' onclick='selectAnswer(2, 1)'>
-                B) Nigdy
+                B) [Miara]
             </div>
             <div class='answer-option' onclick='selectAnswer(2, 2)'>
-                C) Gdy nazwa zawiera spacje lub znaki specjalne
+                C) Miara()
             </div>
             <div class='answer-option' onclick='selectAnswer(2, 3)'>
-                D) Tylko dla kolumn liczbowych
+                D) Obie odpowiedzi A i B są poprawne
             </div>
         </div>
-        <button class='check-button' onclick='checkAnswer(2, 2)'>Sprawdź odpowiedź</button>
+        <button class='check-button' onclick='checkAnswer(2, 3)'>Sprawdź odpowiedź</button>
         <div class='feedback' id='feedback-2'></div>
     </div>
 
@@ -1813,23 +4054,23 @@ createOrReplace
     <div class='page'>
         <h1>Pytanie 4</h1>
         <div class='question-box'>
-            <p><strong>Jak odwołać się do miary (measure) w DAX?</strong></p>
+            <p><strong>Która funkcja sumuje wartości z kolumny?</strong></p>
         </div>
         <div class='answers'>
             <div class='answer-option' onclick='selectAnswer(3, 0)'>
-                A) Tabela[Miara]
+                A) SUMX()
             </div>
             <div class='answer-option' onclick='selectAnswer(3, 1)'>
-                B) [Miara]
+                B) SUM()
             </div>
             <div class='answer-option' onclick='selectAnswer(3, 2)'>
-                C) Miara()
+                C) TOTAL()
             </div>
             <div class='answer-option' onclick='selectAnswer(3, 3)'>
-                D) Obie odpowiedzi A i B są poprawne
+                D) AGGREGATE()
             </div>
         </div>
-        <button class='check-button' onclick='checkAnswer(3, 3)'>Sprawdź odpowiedź</button>
+        <button class='check-button' onclick='checkAnswer(3, 1)'>Sprawdź odpowiedź</button>
         <div class='feedback' id='feedback-3'></div>
     </div>
 
@@ -1837,20 +4078,20 @@ createOrReplace
     <div class='page'>
         <h1>Pytanie 5</h1>
         <div class='question-box'>
-            <p><strong>Która funkcja sumuje wartości z kolumny?</strong></p>
+            <p><strong>Czym różni się COUNT od COUNTROWS?</strong></p>
         </div>
         <div class='answers'>
             <div class='answer-option' onclick='selectAnswer(4, 0)'>
-                A) SUMX()
+                A) COUNT liczy kolumny, COUNTROWS liczy wiersze
             </div>
             <div class='answer-option' onclick='selectAnswer(4, 1)'>
-                B) SUM()
+                B) COUNT liczy niepuste wartości w kolumnie, COUNTROWS liczy wszystkie wiersze tabeli
             </div>
             <div class='answer-option' onclick='selectAnswer(4, 2)'>
-                C) TOTAL()
+                C) Nie ma różnicy
             </div>
             <div class='answer-option' onclick='selectAnswer(4, 3)'>
-                D) AGGREGATE()
+                D) COUNT jest szybsze niż COUNTROWS
             </div>
         </div>
         <button class='check-button' onclick='checkAnswer(4, 1)'>Sprawdź odpowiedź</button>
@@ -1861,75 +4102,50 @@ createOrReplace
     <div class='page'>
         <h1>Pytanie 6</h1>
         <div class='question-box'>
-            <p><strong>Czym różni się COUNT od COUNTROWS?</strong></p>
+            <p><strong>Co robi funkcja DISTINCTCOUNT?</strong></p>
         </div>
         <div class='answers'>
             <div class='answer-option' onclick='selectAnswer(5, 0)'>
-                A) COUNT liczy kolumny, COUNTROWS liczy wiersze
+                A) Liczy wszystkie wartości w kolumnie
             </div>
             <div class='answer-option' onclick='selectAnswer(5, 1)'>
-                B) COUNT liczy niepuste wartości w kolumnie, COUNTROWS liczy wszystkie wiersze tabeli
+                B) Liczy unikalne (niepowtarzające się) wartości
             </div>
             <div class='answer-option' onclick='selectAnswer(5, 2)'>
-                C) Nie ma różnicy
+                C) Usuwa duplikaty z tabeli
             </div>
             <div class='answer-option' onclick='selectAnswer(5, 3)'>
-                D) COUNT jest szybsze niż COUNTROWS
+                D) Zwraca liczbę różnych tabel
             </div>
         </div>
         <button class='check-button' onclick='checkAnswer(5, 1)'>Sprawdź odpowiedź</button>
         <div class='feedback' id='feedback-5'></div>
     </div>
 
-    <!-- Pytanie 7 -->
-    <div class='page'>
-        <h1>Pytanie 7</h1>
-        <div class='question-box'>
-            <p><strong>Co robi funkcja DISTINCTCOUNT?</strong></p>
-        </div>
-        <div class='answers'>
-            <div class='answer-option' onclick='selectAnswer(6, 0)'>
-                A) Liczy wszystkie wartości w kolumnie
-            </div>
-            <div class='answer-option' onclick='selectAnswer(6, 1)'>
-                B) Liczy unikalne (niepowtarzające się) wartości
-            </div>
-            <div class='answer-option' onclick='selectAnswer(6, 2)'>
-                C) Usuwa duplikaty z tabeli
-            </div>
-            <div class='answer-option' onclick='selectAnswer(6, 3)'>
-                D) Zwraca liczbę różnych tabel
-            </div>
-        </div>
-        <button class='check-button' onclick='checkAnswer(6, 1)'>Sprawdź odpowiedź</button>
-        <div class='feedback' id='feedback-6'></div>
-    </div>
-
     <!-- Podsumowanie quizu -->
     <div class='page'>
         <h1>Podsumowanie quizu</h1>
         <div class='score-box' id='finalScore'>
-            Twój wynik: <span id='scoreText'>0/7</span> (<span id='percentText'>0%</span>)
+            Twój wynik: <span id='scoreText'>0/6</span> (<span id='percentText'>0%</span>)
         </div>
         <div id='summaryContent'></div>
-        <button onclick='restartQuiz()' style='margin-top: 20px; width: 100%;'>🔄 Rozpocznij quiz od nowa</button>
+        <button onclick='restartQuiz()' style='margin-top: 20px; width: 100%;'> Rozpocznij quiz od nowa</button>
     </div>
 </div>
 
 <script>
     let currentPage = 1;
-    const totalPages = 8;
-    const totalQuestions = 7;
+    const totalPages = 7;
+    const totalQuestions = 6;
     
     const userAnswers = new Array(totalQuestions).fill(null);
     const answeredQuestions = new Array(totalQuestions).fill(false);
     
-    const correctAnswers = [0, 2, 2, 3, 1, 1, 1];
+    const correctAnswers = [0, 2, 3, 1, 1, 1];
     
     const explanations = [
         'Prawidłowa odpowiedź: A. DAX to skrót od Data Analysis Expressions - język formuł używany w Power BI, Excel Power Pivot i Analysis Services.',
         'Prawidłowa odpowiedź: C. W DAX zawsze używamy składni Tabela[Kolumna], gdzie nazwa tabeli jest przed nawiasem kwadratowym, a nazwa kolumny wewnątrz.',
-        'Prawidłowa odpowiedź: C. Apostrofy są wymagane gdy nazwa tabeli lub kolumny zawiera spacje, znaki specjalne (np. -, #, %) lub polskie znaki. Przykład: 'Tabela Sprzedaży'[Kwota Netto]',
         'Prawidłowa odpowiedź: D. Do miar można odwoływać się zarówno przez [Nazwa Miary] jak i przez Tabela[Nazwa Miary]. Pierwsza składnia jest częściej używana i krótsza.',
         'Prawidłowa odpowiedź: B. SUM(Tabela[Kolumna]) sumuje wszystkie wartości w kolumnie, pomijając wartości puste (BLANK) i uwzględniając aktualny kontekst filtrowania.',
         'Prawidłowa odpowiedź: B. COUNT liczy niepuste wartości numeryczne w konkretnej kolumnie, podczas gdy COUNTROWS liczy wszystkie wiersze w tabeli (nawet jeśli mają puste wartości).',
@@ -1937,133 +4153,133 @@ createOrReplace
     ];
     
     document.getElementById('totalPages').textContent = totalPages;
-
-    function selectAnswer(questionIndex, answerIndex) {
-        if (answeredQuestions[questionIndex]) return;
-
-        const answers = document.querySelectorAll('.page')[questionIndex].querySelectorAll('.answer-option');
-        answers.forEach(a => a.classList.remove('selected'));
-        answers[answerIndex].classList.add('selected');
-        userAnswers[questionIndex] = answerIndex;
-    }
-
-    function checkAnswer(questionIndex, correctIndex) {
-        if (answeredQuestions[questionIndex]) return;
-
-        const answers = document.querySelectorAll('.page')[questionIndex].querySelectorAll('.answer-option');
-        const feedback = document.getElementById('feedback-' + questionIndex);
-        const checkBtn = document.querySelectorAll('.page')[questionIndex].querySelector('.check-button');
-
-        if (userAnswers[questionIndex] === null) {
-            feedback.className = 'feedback show incorrect';
-            feedback.textContent = '⚠️ Proszę najpierw wybrać odpowiedź!';
-            return;
+    
+        function selectAnswer(questionIndex, answerIndex) {
+            if (answeredQuestions[questionIndex]) return;
+    
+            const answers = document.querySelectorAll('.page')[questionIndex].querySelectorAll('.answer-option');
+            answers.forEach(a => a.classList.remove('selected'));
+            answers[answerIndex].classList.add('selected');
+            userAnswers[questionIndex] = answerIndex;
         }
-
-        answeredQuestions[questionIndex] = true;
-        checkBtn.disabled = true;
-
-        const isCorrect = userAnswers[questionIndex] === correctIndex;
-
-        answers.forEach((answer, index) => {
-            answer.style.cursor = 'default';
-            if (index === correctIndex) {
-                answer.classList.add('correct');
-            } else if (index === userAnswers[questionIndex]) {
-                answer.classList.add('incorrect');
+    
+        function checkAnswer(questionIndex, correctIndex) {
+            if (answeredQuestions[questionIndex]) return;
+    
+            const answers = document.querySelectorAll('.page')[questionIndex].querySelectorAll('.answer-option');
+            const feedback = document.getElementById('feedback-' + questionIndex);
+            const checkBtn = document.querySelectorAll('.page')[questionIndex].querySelector('.check-button');
+    
+            if (userAnswers[questionIndex] === null) {
+                feedback.className = 'feedback show incorrect';
+                feedback.textContent = 'Proszę najpierw wybrać odpowiedź!';
+                return;
             }
+    
+            answeredQuestions[questionIndex] = true;
+            checkBtn.disabled = true;
+    
+            const isCorrect = userAnswers[questionIndex] === correctIndex;
+    
+            answers.forEach((answer, index) => {
+                answer.style.cursor = 'default';
+                if (index === correctIndex) {
+                    answer.classList.add('correct');
+                } else if (index === userAnswers[questionIndex]) {
+                    answer.classList.add('incorrect');
+                }
+            });
+    
+            feedback.className = 'feedback show ' + (isCorrect ? 'correct' : 'incorrect');
+            feedback.innerHTML = (isCorrect ? '✅ Świetnie! ' : '❌ Nieprawidłowo. ') + explanations[questionIndex];
+    
+            if (questionIndex < totalQuestions - 1) {
+                setTimeout(() => {
+                    changePage(1);
+                }, 2500);
+            } else {
+                setTimeout(() => {
+                    showSummary();
+                    changePage(1);
+                }, 2500);
+            }
+        }
+    
+        function showSummary() {
+            let correctCount = 0;
+            for (let i = 0; i < totalQuestions; i++) {
+                if (userAnswers[i] === correctAnswers[i]) {
+                    correctCount++;
+                }
+            }
+    
+            const percentage = Math.round((correctCount / totalQuestions) * 100);
+            document.getElementById('scoreText').textContent = correctCount + '/' + totalQuestions;
+            document.getElementById('percentText').textContent = percentage + '%';
+    
+            let summaryHTML = '<h2>Szczegóły odpowiedzi:</h2>';
+            for (let i = 0; i < totalQuestions; i++) {
+                const isCorrect = userAnswers[i] === correctAnswers[i];
+                summaryHTML += `
+                    <div class='summary-item ${isCorrect ? 'correct' : 'incorrect'}'>
+                        <strong>Pytanie ${i + 1}:</strong> ${isCorrect ? '✅ Poprawnie' : '❌ Niepoprawnie'}<br>
+                        <small>${explanations[i]}</small>
+                    </div>
+                `;
+            }
+    
+            document.getElementById('summaryContent').innerHTML = summaryHTML;
+        }
+    
+        function restartQuiz() {
+            userAnswers.fill(null);
+            answeredQuestions.fill(false);
+            currentPage = 1;
+    
+            document.querySelectorAll('.page').forEach((page, index) => {
+                if (index < totalQuestions) {
+                    const answers = page.querySelectorAll('.answer-option');
+                    answers.forEach(a => {
+                        a.className = 'answer-option';
+                        a.style.cursor = 'pointer';
+                    });
+                    const feedback = page.querySelector('.feedback');
+                    feedback.className = 'feedback';
+                    const checkBtn = page.querySelector('.check-button');
+                    checkBtn.disabled = false;
+                }
+            });
+    
+            showPage(1);
+        }
+    
+        function showPage(n) {
+            const pages = document.querySelectorAll('.page');
+    
+            if (n > totalPages) currentPage = totalPages;
+            if (n < 1) currentPage = 1;
+    
+            pages.forEach(page => page.classList.remove('active'));
+            pages[currentPage - 1].classList.add('active');
+    
+            document.getElementById('currentPage').textContent = currentPage;
+            document.getElementById('prevBtn').disabled = currentPage === 1;
+            document.getElementById('nextBtn').disabled = currentPage === totalPages;
+    
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+    
+        function changePage(n) {
+            currentPage += n;
+            showPage(currentPage);
+        }
+    
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'ArrowLeft') changePage(-1);
+            if (e.key === 'ArrowRight') changePage(1);
         });
-
-        feedback.className = 'feedback show ' + (isCorrect ? 'correct' : 'incorrect');
-        feedback.innerHTML = (isCorrect ? '✅ Świetnie! ' : '❌ Nieprawidłowo. ') + explanations[questionIndex];
-
-        if (questionIndex < totalQuestions - 1) {
-            setTimeout(() => {
-                changePage(1);
-            }, 2500);
-        } else {
-            setTimeout(() => {
-                showSummary();
-                changePage(1);
-            }, 2500);
-        }
-    }
-
-    function showSummary() {
-        let correctCount = 0;
-        for (let i = 0; i < totalQuestions; i++) {
-            if (userAnswers[i] === correctAnswers[i]) {
-                correctCount++;
-            }
-        }
-
-        const percentage = Math.round((correctCount / totalQuestions) * 100);
-        document.getElementById('scoreText').textContent = correctCount + '/' + totalQuestions;
-        document.getElementById('percentText').textContent = percentage + '%';
-
-        let summaryHTML = '<h2>Szczegóły odpowiedzi:</h2>';
-        for (let i = 0; i < totalQuestions; i++) {
-            const isCorrect = userAnswers[i] === correctAnswers[i];
-            summaryHTML += `
-                <div class='summary-item ${isCorrect ? 'correct' : 'incorrect'}'>
-                    <strong>Pytanie ${i + 1}:</strong> ${isCorrect ? '✅ Poprawnie' : '❌ Niepoprawnie'}<br>
-                    <small>${explanations[i]}</small>
-                </div>
-            `;
-        }
-
-        document.getElementById('summaryContent').innerHTML = summaryHTML;
-    }
-
-    function restartQuiz() {
-        userAnswers.fill(null);
-        answeredQuestions.fill(false);
-        currentPage = 1;
-
-        document.querySelectorAll('.page').forEach((page, index) => {
-            if (index < totalQuestions) {
-                const answers = page.querySelectorAll('.answer-option');
-                answers.forEach(a => {
-                    a.className = 'answer-option';
-                    a.style.cursor = 'pointer';
-                });
-                const feedback = page.querySelector('.feedback');
-                feedback.className = 'feedback';
-                const checkBtn = page.querySelector('.check-button');
-                checkBtn.disabled = false;
-            }
-        });
-
+    
         showPage(1);
-    }
-
-    function showPage(n) {
-        const pages = document.querySelectorAll('.page');
-
-        if (n > totalPages) currentPage = totalPages;
-        if (n < 1) currentPage = 1;
-
-        pages.forEach(page => page.classList.remove('active'));
-        pages[currentPage - 1].classList.add('active');
-
-        document.getElementById('currentPage').textContent = currentPage;
-        document.getElementById('prevBtn').disabled = currentPage === 1;
-        document.getElementById('nextBtn').disabled = currentPage === totalPages;
-
-        window.scrollTo({ top: 0, behavior: 'smooth' });
-    }
-
-    function changePage(n) {
-        currentPage += n;
-        showPage(currentPage);
-    }
-
-    document.addEventListener('keydown', function(e) {
-        if (e.key === 'ArrowLeft') changePage(-1);
-        if (e.key === 'ArrowRight') changePage(1);
-    });
-
-    showPage(1);
 </script>
 
 </body>
@@ -2071,7 +4287,7 @@ createOrReplace
 
 "
 ```
-            lineageTag: 3fd91597-5746-4760-960d-4b120725b651
+            lineageTag: 683ccb15-a8c1-40a7-b1ec-5876e423c1c2
 
         measure '02. Miary vs Kolumny kalkulowane - Kolumny vs. Miary' = ```
 "
@@ -2082,6 +4298,224 @@ createOrReplace
     <meta charset='UTF-8'>
     <meta name='viewport' content='width=device-width, initial-scale=1.0'>
     <title>Kolumny vs. Miary</title>
+    <style>
+            * {
+                margin: 0;
+                padding: 0;
+                box-sizing: border-box;
+            }
+    
+            body {
+                font-family: 'Roboto', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+                font-size: 16px;
+                font-weight: 400;
+                line-height: 1.7;
+                color: #333;
+                background: transparent;
+                padding: 20px;
+            }
+    
+            .container {
+                max-width: 800px;
+                margin: 0 auto;
+                background: transparent;
+                padding: 40px;
+            }
+    
+            .navigation {
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                margin-bottom: 40px;
+                padding-bottom: 20px;
+                border-bottom: 1px solid #e1e4e8;
+            }
+    
+            button {
+                background: #6b1718;
+                color: white;
+                border: none;
+                padding: 12px 28px;
+                border-radius: 4px;
+                cursor: pointer;
+                font-size: 1em;
+                font-weight: 500;
+                transition: background 0.2s;
+            }
+    
+            button:hover {
+                background: #380c0c;
+            }
+    
+            button:disabled {
+                background: #ccc;
+                cursor: not-allowed;
+            }
+    
+            .page-indicator {
+                color: #666;
+                font-size: 1em;
+            }
+    
+            .page {
+                display: none;
+                min-height: 500px;
+            }
+    
+            .page.active {
+                display: block;
+                animation: fadeIn 0.3s ease-in;
+            }
+    
+            @keyframes fadeIn {
+                from { opacity: 0; transform: translateY(10px); }
+                to { opacity: 1; transform: translateY(0); }
+            }
+    
+            h1 {
+                font-size: 26px;
+                line-height: 36px;
+                font-weight: 600;
+                padding-top: 14px;
+                padding-bottom: 6px;
+                margin-bottom: 1em;
+                color: #6b1718;
+                border-bottom: 2px solid #6b1718;
+            }
+    
+            h2 {
+                font-size: 26px;
+                line-height: 36px;
+                font-weight: 600;
+                padding-top: 14px;
+                padding-bottom: 6px;
+                margin: 1.5em 0 0.8em 0;
+                color: #1a1a1a;
+                border-bottom: 2px solid #1a1a1a;
+            }
+    
+            h3 {
+                font-size: 1.1em;
+                font-weight: 600;
+                margin: 1.2em 0 0.6em 0;
+                padding-bottom: 5px;
+                color: #444;
+                border-bottom: 1px solid #999;
+            }
+    
+            p {
+                margin-bottom: 1em;
+                font-size: 1.05em;
+            }
+    
+            strong {
+                font-weight: 700;
+                color: #1a1a1a;
+            }
+    
+            code {
+                background: #f5f5f5;
+                padding: 3px 7px;
+                border-radius: 3px;
+                font-family: 'Fira Code', 'Courier New', monospace;
+                font-size: 0.95em;
+                color: #b82b4e;
+            }
+    
+            pre {
+                background: #f8f9fa;
+                border-left: 3px solid #6b1718;
+                padding: 18px;
+                margin: 1em 0;
+                overflow-x: auto;
+                border-radius: 3px;
+            }
+    
+            pre code {
+                background: none;
+                padding: 0;
+                color: #24292e;
+                font-size: 1em;
+                line-height: 1.6;
+            }
+    
+            .dax-keyword {
+                color: #6b1718;
+                font-weight: 600;
+            }
+    
+            .dax-function {
+                color: #6f42c1;
+            }
+    
+            .dax-number {
+                color: #005cc5;
+            }
+    
+            .dax-comment {
+                color: #6a737d;
+                font-style: italic;
+            }
+    
+            ul, ol {
+                margin: 0.3em 0;
+                padding-left: 1.8em;
+            }
+    
+            li {
+                margin: 0;
+                padding-left: 0.2em;
+                font-size: 1.05em;
+                line-height: 1.6;
+            }
+    
+            ol {
+                list-style-type: decimal;
+            }
+    
+            ol li::marker {
+                color: #999;
+                font-weight: 400;
+            }
+    
+            ul li::marker {
+                color: #999;
+            }
+    
+            ul ul, ol ol, ul ol, ol ul {
+                margin: 0.2em 0;
+                padding-left: 1.5em;
+            }
+    
+            blockquote {
+                border-left: 3px solid #6b1718;
+                background: #f8f9fa;
+                padding: 14px 18px;
+                margin: 1em 0;
+                color: #555;
+                font-style: italic;
+            }
+    
+            blockquote p {
+                margin: 0;
+            }
+    
+            .iteration-box {
+                border-left: 3px solid #6b1718;
+                padding: 14px 18px;
+                margin: 0.8em 0;
+            }
+    
+            .result-box {
+                background: #f5f5f5;
+                border-left: 3px solid #999;
+                padding: 14px 18px;
+                margin: 0.8em 0;
+                font-weight: 500;
+                color: #555;
+                font-size: 1.05em;
+            }
+        </style>
 </head>
 <body>
 
@@ -2364,289 +4798,7 @@ createOrReplace
 
 "
 ```
-            lineageTag: c3a4f573-790a-43a8-a1ed-2068cbc7045e
-
-        measure '02. Miary vs Kolumny kalkulowane - Miary vs Kolumny kalkulowane' = ```
-"
-
-<!DOCTYPE html>
-<html lang='pl'>
-<head>
-    <meta charset='UTF-8'>
-    <meta name='viewport' content='width=device-width, initial-scale=1.0'>
-    <title>Miary vs Kolumny kalkulowane</title>
-</head>
-<body>
-
-<div class='container' id='viz_d56bda8b'>
-    <!-- Nawigacja na górze -->
-    <div class='navigation'>
-        <button id='prevBtn_d56bda8b' onclick='changePage_d56bda8b(-1)'>← Poprzednia</button>
-        <span class='page-indicator'>
-            Strona <span id='currentPage_d56bda8b'>1</span> z <span id='totalPages_d56bda8b'>6</span>
-        </span>
-        <button id='nextBtn_d56bda8b' onclick='changePage_d56bda8b(1)'>Następna →</button>
-    </div>
-
-    <!-- Strona 1 -->
-    <div class='page active'>
-        <p>Jedną z najważniejszych rzeczy do zrozumienia w DAX jest różnica między <strong>miarami</strong> a <strong>kolumnami kalkulowanymi</strong>. Choć obie używają formuł DAX, działają zupełnie inaczej.</p>
-        <h1>Kolumny kalkulowane (Calculated Columns)</h1>
-        <p><strong>Kolumna kalkulowana</strong> to nowa kolumna dodana do tabeli, której wartość jest obliczana <strong>wiersz po wierszu</strong> w momencie odświeżania danych.</p>
-        <h2>Charakterystyka kolumn kalkulowanych:</h2>
-        <ul>
-        <li>Obliczane <strong>podczas ładowania/odświeżania danych</strong></li>
-        <li>Wartość obliczana <strong>dla każdego wiersza</strong> w tabeli</li>
-        <li>Wynik jest <strong>przechowywany</strong> w modelu (zajmuje miejsce w pamięci)</li>
-        <li>Można ich używać do <strong>filtrowania</strong>, <strong>grupowania</strong> lub <strong>sortowania</strong></li>
-        <li>Używają <strong>kontekstu wiersza</strong> (row context)</li>
-        </ul>
-        <h2>Przykład kolumny kalkulowanej:</h2>
-        <pre><code>Cena Jednostkowa =
-        Sprzedaż[Wartość netto] / Sprzedaż[Ilość]</code></pre>
-        <p><strong>Co się dzieje:</strong></p>
-        <ul>
-        <li>Formuła jest obliczana <strong>dla każdego wiersza</strong> w tabeli Sprzedaż</li>
-        <li>Jeśli masz 1000 wierszy, otrzymasz 1000 wartości</li>
-        <li>Wartości są zapisane w modelu i widoczne w widoku danych</li>
-        <li>Możesz użyć tej kolumny w slicerach, filtrach lub do sortowania</li>
-        </ul>
-        <p><strong>Kiedy używać kolumn kalkulowanych:</strong></p>
-        <ul>
-        <li>Potrzebujesz wartości do <strong>filtrowania</strong> lub <strong>grupowania</strong></li>
-        <li>Chcesz <strong>posortować</strong> dane według obliczonej wartości</li>
-        <li>Wartość zależy <strong>tylko od danych w bieżącym wierszu</strong></li>
-        <li>Przykład: kategoria cenowa produktu, wiek klienta, dzień tygodnia</li>
-        </ul>
-
-    </div>
-
-    <!-- Strona 2 -->
-    <div class='page'>
-        <h1>Miary (Measures)</h1>
-        <p><strong>Miara</strong> to formuła, która oblicza się <strong>dynamicznie</strong> w zależności od kontekstu filtrów w raporcie.</p>
-        <h2>Charakterystyka miar:</h2>
-        <ul>
-        <li>Obliczane <strong>w momencie wyświetlania</strong> w wizualizacji</li>
-        <li>Nie są przechowywane w modelu (nie zajmują miejsca)</li>
-        <li>Wynik zależy od <strong>kontekstu filtrów</strong> na wizualizacji</li>
-        <li><strong>Nie można</strong> ich użyć do filtrowania wierszy</li>
-        <li>Używają <strong>kontekstu filtrów</strong> (filter context)</li>
-        </ul>
-        <h2>Przykład miary:</h2>
-        <pre><code>Sprzedaż Netto = <span class='dax-function'>SUM</span>(Sprzedaż[Wartość netto])</code></pre>
-        <p><strong>Co się dzieje:</strong></p>
-        <ul>
-        <li>Formuła oblicza sumę <strong>w zależności od kontekstu</strong></li>
-        <li>Na wykresie według kategorii: pokaże sumę dla każdej kategorii</li>
-        <li>Na wykresie według regionu: pokaże sumę dla każdego regionu</li>
-        <li>Bez filtrów: pokaże sumę całkowitą</li>
-        <li>Wartość <strong>nie jest przechowywana</strong>, tylko obliczana na żądanie</li>
-        </ul>
-        <p><strong>Kiedy używać miar:</strong></p>
-        <ul>
-        <li>Potrzebujesz <strong>agregacji</strong> (suma, średnia, liczba)</li>
-        <li>Wynik ma zależeć od <strong>filtrów w raporcie</strong></li>
-        <li>Chcesz <strong>dynamicznych obliczeń</strong> (procent udziału, porównania okresów)</li>
-        <li>Przykład: suma sprzedaży, średnia wartość, liczba transakcji</li>
-        </ul>
-
-    </div>
-
-    <!-- Strona 3 -->
-    <div class='page'>
-        <h1>Porównanie: Kolumna kalkulowana vs Miara</h1>
-        <table>
-          <thead>
-            <tr>
-              <th>Aspekt</th>
-              <th>Kolumna kalkulowana</th>
-              <th>Miara</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td><strong>Kiedy obliczana</strong></td>
-              <td>Podczas odświeżania danych</td>
-              <td>Podczas wyświetlania wizualizacji</td>
-            </tr>
-            <tr>
-              <td><strong>Kontekst</strong></td>
-              <td>Kontekst wiersza (row context)</td>
-              <td>Kontekst filtrów (filter context)</td>
-            </tr>
-            <tr>
-              <td><strong>Przechowywanie</strong></td>
-              <td>Tak - zajmuje miejsce w pamięci</td>
-              <td>Nie - obliczana na żądanie</td>
-            </tr>
-            <tr>
-              <td><strong>Użycie w slicerach</strong></td>
-              <td>Tak</td>
-              <td>Nie</td>
-            </tr>
-            <tr>
-              <td><strong>Użycie w wizualizacjach</strong></td>
-              <td>Jako pole do grupowania</td>
-              <td>Jako wartość do agregacji</td>
-            </tr>
-            <tr>
-              <td><strong>Ikona w Power BI</strong></td>
-              <td>Ikona tabeli (⚏)</td>
-              <td>Ikona kalkulatora (fx)</td>
-            </tr>
-          </tbody>
-        </table>
-
-    </div>
-
-    <!-- Strona 4 -->
-    <div class='page'>
-        <h1>Praktyczny przykład</h1>
-        <p>Mamy tabelę Sprzedaż z danymi o transakcjach. Zobaczmy różnicę:</p>
-        <h2>Kolumna kalkulowana - Wartość za sztukę</h2>
-        <pre><code>Wartość za Sztukę =
-        <span class='dax-function'>DIVIDE</span>(Sprzedaż[Wartość netto], Sprzedaż[Ilość], <span class='dax-number'>0</span>)</code></pre>
-        <p><strong>Wynik:</strong></p>
-        <ul>
-        <li>Obliczona dla każdego wiersza</li>
-        <li>W tabeli dane będziesz mieć kolumnę z wartością dla każdej transakcji</li>
-        <li>Możesz użyć do filtrowania: 'pokaż tylko transakcje gdzie Wartość za Sztukę > 50'</li>
-        </ul>
-        <h2>Miara - Średnia Wartość Transakcji</h2>
-        <pre><code>Średnia Wartość Transakcji =
-        <span class='dax-function'>AVERAGE</span>(Sprzedaż[Wartość netto])</code></pre>
-        <p><strong>Wynik:</strong></p>
-        <ul>
-        <li>Obliczana dynamicznie według kontekstu</li>
-        <li>Według kategorii: średnia dla każdej kategorii</li>
-        <li>Według regionu: średnia dla każdego regionu</li>
-        <li>W karcie: średnia dla wszystkich danych (lub wybranych w slicerze)</li>
-        </ul>
-
-    </div>
-
-    <!-- Strona 5 -->
-    <div class='page'>
-        <h1>Najczęstszy błąd początkujących</h1>
-        <p><strong>Błąd:</strong> Tworzenie kolumny kalkulowanej zamiast miary dla agregacji.</p>
-        <pre><code>// ❌ ZŁE - kolumna kalkulowana (niepotrzebnie zajmuje pamięć)
-        Suma Wartości Kolumna = <span class='dax-function'>SUM</span>(Sprzedaż[Wartość netto])
-
-        // ✅ DOBRE - miara (dynamiczna, nie zajmuje pamięci)
-        Suma Wartości Miara = <span class='dax-function'>SUM</span>(Sprzedaż[Wartość netto])</code></pre>
-        <p><strong>Zasada:</strong> Jeśli używasz funkcji agregującej (SUM, AVERAGE, COUNT, itp.), prawie zawsze powinieneś tworzyć <strong>miarę</strong>, nie kolumnę.</p>
-
-    </div>
-
-    <!-- Strona 6 -->
-    <div class='page'>
-        <h1>Kiedy używać czego? - Decyzja</h1>
-        <p><strong>Użyj kolumny kalkulowanej gdy:</strong></p>
-        <ul>
-        <li>✓ Potrzebujesz wartości do <strong>filtrowania</strong> (slicer, filtr)</li>
-        <li>✓ Chcesz <strong>grupować</strong> według obliczonej wartości</li>
-        <li>✓ Wartość zależy tylko od <strong>bieżącego wiersza</strong></li>
-        <li>✓ Przykład: 'Kategoria wiekowa klienta', 'Dzień tygodnia sprzedaży'</li>
-        </ul>
-        <p><strong>Użyj miary gdy:</strong></p>
-        <ul>
-        <li>✓ Potrzebujesz <strong>agregacji</strong> (suma, średnia, liczba)</li>
-        <li>✓ Wynik ma być <strong>dynamiczny</strong> (zależny od filtrów)</li>
-        <li>✓ Chcesz <strong>oszczędzić pamięć</strong> w modelu</li>
-        <li>✓ Przykład: 'Suma sprzedaży', 'Liczba transakcji', 'Średnia wartość'</li>
-        </ul>
-        <p>---</p>
-
-    </div>
-
-</div>
-
-<script>
-(function() {
-    // Unikalny ID dla tej wizualizacji (wstrzykiwany przez Python)
-    var vizId = 'd56bda8b';
-    var containerId = 'viz_' + vizId;
-
-    var currentPage_d56bda8b = 1;
-    var container = document.getElementById(containerId);
-
-    if (!container) return;
-
-    var pages = container.querySelectorAll('.page');
-    var totalPages = pages.length;
-
-    document.getElementById('totalPages_' + vizId).textContent = totalPages;
-
-    window['showPage_d56bda8b'] = function(n) {
-        if (n > totalPages) currentPage_d56bda8b = totalPages;
-        if (n < 1) currentPage_d56bda8b = 1;
-
-        for (var i = 0; i < pages.length; i++) {
-            pages[i].classList.remove('active');
-        }
-        pages[currentPage_d56bda8b - 1].classList.add('active');
-
-        document.getElementById('currentPage_' + vizId).textContent = currentPage_d56bda8b;
-        document.getElementById('prevBtn_' + vizId).disabled = (currentPage_d56bda8b === 1);
-        document.getElementById('nextBtn_' + vizId).disabled = (currentPage_d56bda8b === totalPages);
-    };
-
-    window['changePage_d56bda8b'] = function(n) {
-        currentPage_d56bda8b += n;
-        window['showPage_d56bda8b'](currentPage_d56bda8b);
-    };
-
-    // Inicjalizacja
-    window['showPage_d56bda8b'](1);
-
-    // Funkcjonalność powiększania obrazów
-    var images = container.querySelectorAll('img');
-    images.forEach(function(img) {
-        img.style.cursor = 'pointer';
-        img.style.transition = 'transform 0.3s ease';
-
-        img.addEventListener('click', function() {
-            if (this.classList.contains('zoomed')) {
-                // Pomniejsz obraz
-                this.classList.remove('zoomed');
-                this.style.position = '';
-                this.style.top = '';
-                this.style.left = '';
-                this.style.transform = '';
-                this.style.width = '100%';
-                this.style.maxWidth = '';
-                this.style.maxHeight = '';
-                this.style.zIndex = '';
-                this.style.backgroundColor = '';
-                this.style.padding = '';
-                this.style.boxShadow = '';
-            } else {
-                // Powiększ obraz
-                this.classList.add('zoomed');
-                this.style.position = 'fixed';
-                this.style.top = '50%';
-                this.style.left = '50%';
-                this.style.transform = 'translate(-50%, -50%)';
-                this.style.width = 'auto';
-                this.style.maxWidth = '95vw';
-                this.style.maxHeight = '95vh';
-                this.style.zIndex = '9999';
-                this.style.backgroundColor = 'rgba(255, 255, 255, 0.95)';
-                this.style.padding = '10px';
-                this.style.boxShadow = '0 4px 20px rgba(0, 0, 0, 0.3)';
-            }
-        });
-    });
-})();
-</script>
-
-</body>
-</html>
-
-"
-```
-            lineageTag: ae0e9585-95d5-4cbb-997f-9d31ee090564
+            lineageTag: 0f5a36b4-84a7-4ea0-aef4-b8791c63f69b
 
         measure '02. Miary vs Kolumny kalkulowane - Pułapki' = ```
 "
@@ -2657,6 +4809,224 @@ createOrReplace
     <meta charset='UTF-8'>
     <meta name='viewport' content='width=device-width, initial-scale=1.0'>
     <title>Pułapki</title>
+    <style>
+            * {
+                margin: 0;
+                padding: 0;
+                box-sizing: border-box;
+            }
+    
+            body {
+                font-family: 'Roboto', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+                font-size: 16px;
+                font-weight: 400;
+                line-height: 1.7;
+                color: #333;
+                background: transparent;
+                padding: 20px;
+            }
+    
+            .container {
+                max-width: 800px;
+                margin: 0 auto;
+                background: transparent;
+                padding: 40px;
+            }
+    
+            .navigation {
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                margin-bottom: 40px;
+                padding-bottom: 20px;
+                border-bottom: 1px solid #e1e4e8;
+            }
+    
+            button {
+                background: #6b1718;
+                color: white;
+                border: none;
+                padding: 12px 28px;
+                border-radius: 4px;
+                cursor: pointer;
+                font-size: 1em;
+                font-weight: 500;
+                transition: background 0.2s;
+            }
+    
+            button:hover {
+                background: #380c0c;
+            }
+    
+            button:disabled {
+                background: #ccc;
+                cursor: not-allowed;
+            }
+    
+            .page-indicator {
+                color: #666;
+                font-size: 1em;
+            }
+    
+            .page {
+                display: none;
+                min-height: 500px;
+            }
+    
+            .page.active {
+                display: block;
+                animation: fadeIn 0.3s ease-in;
+            }
+    
+            @keyframes fadeIn {
+                from { opacity: 0; transform: translateY(10px); }
+                to { opacity: 1; transform: translateY(0); }
+            }
+    
+            h1 {
+                font-size: 26px;
+                line-height: 36px;
+                font-weight: 600;
+                padding-top: 14px;
+                padding-bottom: 6px;
+                margin-bottom: 1em;
+                color: #6b1718;
+                border-bottom: 2px solid #6b1718;
+            }
+    
+            h2 {
+                font-size: 26px;
+                line-height: 36px;
+                font-weight: 600;
+                padding-top: 14px;
+                padding-bottom: 6px;
+                margin: 1.5em 0 0.8em 0;
+                color: #1a1a1a;
+                border-bottom: 2px solid #1a1a1a;
+            }
+    
+            h3 {
+                font-size: 1.1em;
+                font-weight: 600;
+                margin: 1.2em 0 0.6em 0;
+                padding-bottom: 5px;
+                color: #444;
+                border-bottom: 1px solid #999;
+            }
+    
+            p {
+                margin-bottom: 1em;
+                font-size: 1.05em;
+            }
+    
+            strong {
+                font-weight: 700;
+                color: #1a1a1a;
+            }
+    
+            code {
+                background: #f5f5f5;
+                padding: 3px 7px;
+                border-radius: 3px;
+                font-family: 'Fira Code', 'Courier New', monospace;
+                font-size: 0.95em;
+                color: #b82b4e;
+            }
+    
+            pre {
+                background: #f8f9fa;
+                border-left: 3px solid #6b1718;
+                padding: 18px;
+                margin: 1em 0;
+                overflow-x: auto;
+                border-radius: 3px;
+            }
+    
+            pre code {
+                background: none;
+                padding: 0;
+                color: #24292e;
+                font-size: 1em;
+                line-height: 1.6;
+            }
+    
+            .dax-keyword {
+                color: #6b1718;
+                font-weight: 600;
+            }
+    
+            .dax-function {
+                color: #6f42c1;
+            }
+    
+            .dax-number {
+                color: #005cc5;
+            }
+    
+            .dax-comment {
+                color: #6a737d;
+                font-style: italic;
+            }
+    
+            ul, ol {
+                margin: 0.3em 0;
+                padding-left: 1.8em;
+            }
+    
+            li {
+                margin: 0;
+                padding-left: 0.2em;
+                font-size: 1.05em;
+                line-height: 1.6;
+            }
+    
+            ol {
+                list-style-type: decimal;
+            }
+    
+            ol li::marker {
+                color: #999;
+                font-weight: 400;
+            }
+    
+            ul li::marker {
+                color: #999;
+            }
+    
+            ul ul, ol ol, ul ol, ol ul {
+                margin: 0.2em 0;
+                padding-left: 1.5em;
+            }
+    
+            blockquote {
+                border-left: 3px solid #6b1718;
+                background: #f8f9fa;
+                padding: 14px 18px;
+                margin: 1em 0;
+                color: #555;
+                font-style: italic;
+            }
+    
+            blockquote p {
+                margin: 0;
+            }
+    
+            .iteration-box {
+                border-left: 3px solid #6b1718;
+                padding: 14px 18px;
+                margin: 0.8em 0;
+            }
+    
+            .result-box {
+                background: #f5f5f5;
+                border-left: 3px solid #999;
+                padding: 14px 18px;
+                margin: 0.8em 0;
+                font-weight: 500;
+                color: #555;
+                font-size: 1.05em;
+            }
+        </style>
 </head>
 <body>
 
@@ -2825,7 +5195,7 @@ createOrReplace
 
 "
 ```
-            lineageTag: 4a2ce5fb-dd5d-4202-92e7-23b6c5154f55
+            lineageTag: e559d476-732f-4400-b140-d01443c28548
 
         measure '02. Miary vs Kolumny kalkulowane - Różnice podejśc' = ```
 "
@@ -2836,6 +5206,224 @@ createOrReplace
     <meta charset='UTF-8'>
     <meta name='viewport' content='width=device-width, initial-scale=1.0'>
     <title>Różnice podejśc</title>
+    <style>
+            * {
+                margin: 0;
+                padding: 0;
+                box-sizing: border-box;
+            }
+    
+            body {
+                font-family: 'Roboto', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+                font-size: 16px;
+                font-weight: 400;
+                line-height: 1.7;
+                color: #333;
+                background: transparent;
+                padding: 20px;
+            }
+    
+            .container {
+                max-width: 800px;
+                margin: 0 auto;
+                background: transparent;
+                padding: 40px;
+            }
+    
+            .navigation {
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                margin-bottom: 40px;
+                padding-bottom: 20px;
+                border-bottom: 1px solid #e1e4e8;
+            }
+    
+            button {
+                background: #6b1718;
+                color: white;
+                border: none;
+                padding: 12px 28px;
+                border-radius: 4px;
+                cursor: pointer;
+                font-size: 1em;
+                font-weight: 500;
+                transition: background 0.2s;
+            }
+    
+            button:hover {
+                background: #380c0c;
+            }
+    
+            button:disabled {
+                background: #ccc;
+                cursor: not-allowed;
+            }
+    
+            .page-indicator {
+                color: #666;
+                font-size: 1em;
+            }
+    
+            .page {
+                display: none;
+                min-height: 500px;
+            }
+    
+            .page.active {
+                display: block;
+                animation: fadeIn 0.3s ease-in;
+            }
+    
+            @keyframes fadeIn {
+                from { opacity: 0; transform: translateY(10px); }
+                to { opacity: 1; transform: translateY(0); }
+            }
+    
+            h1 {
+                font-size: 26px;
+                line-height: 36px;
+                font-weight: 600;
+                padding-top: 14px;
+                padding-bottom: 6px;
+                margin-bottom: 1em;
+                color: #6b1718;
+                border-bottom: 2px solid #6b1718;
+            }
+    
+            h2 {
+                font-size: 26px;
+                line-height: 36px;
+                font-weight: 600;
+                padding-top: 14px;
+                padding-bottom: 6px;
+                margin: 1.5em 0 0.8em 0;
+                color: #1a1a1a;
+                border-bottom: 2px solid #1a1a1a;
+            }
+    
+            h3 {
+                font-size: 1.1em;
+                font-weight: 600;
+                margin: 1.2em 0 0.6em 0;
+                padding-bottom: 5px;
+                color: #444;
+                border-bottom: 1px solid #999;
+            }
+    
+            p {
+                margin-bottom: 1em;
+                font-size: 1.05em;
+            }
+    
+            strong {
+                font-weight: 700;
+                color: #1a1a1a;
+            }
+    
+            code {
+                background: #f5f5f5;
+                padding: 3px 7px;
+                border-radius: 3px;
+                font-family: 'Fira Code', 'Courier New', monospace;
+                font-size: 0.95em;
+                color: #b82b4e;
+            }
+    
+            pre {
+                background: #f8f9fa;
+                border-left: 3px solid #6b1718;
+                padding: 18px;
+                margin: 1em 0;
+                overflow-x: auto;
+                border-radius: 3px;
+            }
+    
+            pre code {
+                background: none;
+                padding: 0;
+                color: #24292e;
+                font-size: 1em;
+                line-height: 1.6;
+            }
+    
+            .dax-keyword {
+                color: #6b1718;
+                font-weight: 600;
+            }
+    
+            .dax-function {
+                color: #6f42c1;
+            }
+    
+            .dax-number {
+                color: #005cc5;
+            }
+    
+            .dax-comment {
+                color: #6a737d;
+                font-style: italic;
+            }
+    
+            ul, ol {
+                margin: 0.3em 0;
+                padding-left: 1.8em;
+            }
+    
+            li {
+                margin: 0;
+                padding-left: 0.2em;
+                font-size: 1.05em;
+                line-height: 1.6;
+            }
+    
+            ol {
+                list-style-type: decimal;
+            }
+    
+            ol li::marker {
+                color: #999;
+                font-weight: 400;
+            }
+    
+            ul li::marker {
+                color: #999;
+            }
+    
+            ul ul, ol ol, ul ol, ol ul {
+                margin: 0.2em 0;
+                padding-left: 1.5em;
+            }
+    
+            blockquote {
+                border-left: 3px solid #6b1718;
+                background: #f8f9fa;
+                padding: 14px 18px;
+                margin: 1em 0;
+                color: #555;
+                font-style: italic;
+            }
+    
+            blockquote p {
+                margin: 0;
+            }
+    
+            .iteration-box {
+                border-left: 3px solid #6b1718;
+                padding: 14px 18px;
+                margin: 0.8em 0;
+            }
+    
+            .result-box {
+                background: #f5f5f5;
+                border-left: 3px solid #999;
+                padding: 14px 18px;
+                margin: 0.8em 0;
+                font-weight: 500;
+                color: #555;
+                font-size: 1.05em;
+            }
+        </style>
 </head>
 <body>
 
@@ -3060,7 +5648,7 @@ createOrReplace
 
 "
 ```
-            lineageTag: e9b71a5a-736f-486d-b7f7-47c2d084e8f2
+            lineageTag: 45cbdc73-252d-4b4c-a0c2-812c7928f91a
 
         measure '02. Quiz' = ```
 "
@@ -3072,204 +5660,236 @@ createOrReplace
     <meta name='viewport' content='width=device-width, initial-scale=1.0'>
     <title>Quiz: Miary vs Kolumny kalkulowane</title>
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        body {
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-            font-size: 16px;
-            line-height: 1.7;
-            color: #333;
-            background: transparent;
-            padding: 20px;
-        }
-
-        .container {
-            max-width: 800px;
-            margin: 0 auto;
-            background: transparent;
-            padding: 40px;
-        }
-
-        .navigation {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 40px;
-            padding-bottom: 20px;
-            border-bottom: 1px solid #e1e4e8;
-        }
-
-        button {
-            background: #0066cc;
-            color: white;
-            border: none;
-            padding: 12px 28px;
-            border-radius: 4px;
-            cursor: pointer;
-            font-size: 1em;
-            font-weight: 500;
-            transition: background 0.2s;
-        }
-
-        button:hover {
-            background: #0052a3;
-        }
-
-        button:disabled {
-            background: #ccc;
-            cursor: not-allowed;
-        }
-
-        .page-indicator {
-            color: #666;
-            font-size: 1em;
-        }
-
-        .page {
-            display: none;
-            min-height: 500px;
-        }
-
-        .page.active {
-            display: block;
-            animation: fadeIn 0.3s ease-in;
-        }
-
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(10px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-
-        h1 {
-            font-size: 1.8em;
-            font-weight: 600;
-            margin-bottom: 1em;
-            color: #1a1a1a;
-        }
-
-        .question-box {
-            background: #f8f9fa;
-            border-left: 3px solid #0066cc;
-            padding: 20px;
-            margin: 1.5em 0;
-            border-radius: 3px;
-        }
-
-        .answers {
-            margin-top: 1.5em;
-        }
-
-        .answer-option {
-            background: white;
-            border: 2px solid #e1e4e8;
-            padding: 15px 20px;
-            margin: 10px 0;
-            border-radius: 4px;
-            cursor: pointer;
-            transition: all 0.2s;
-            font-size: 1.05em;
-        }
-
-        .answer-option:hover {
-            border-color: #0066cc;
-            background: #f0f7ff;
-        }
-
-        .answer-option.selected {
-            border-color: #0066cc;
-            background: #e6f2ff;
-        }
-
-        .answer-option.correct {
-            border-color: #28a745;
-            background: #d4edda;
-        }
-
-        .answer-option.incorrect {
-            border-color: #dc3545;
-            background: #f8d7da;
-        }
-
-        .feedback {
-            margin-top: 1.5em;
-            padding: 15px 20px;
-            border-radius: 4px;
-            display: none;
-            font-size: 1.05em;
-        }
-
-        .feedback.show {
-            display: block;
-        }
-
-        .feedback.correct {
-            background: #d4edda;
-            border-left: 3px solid #28a745;
-            color: #155724;
-        }
-
-        .feedback.incorrect {
-            background: #f8d7da;
-            border-left: 3px solid #dc3545;
-            color: #721c24;
-        }
-
-        .check-button {
-            margin-top: 1.5em;
-            background: #28a745;
-        }
-
-        .check-button:hover:not(:disabled) {
-            background: #218838;
-        }
-
-        .check-button:disabled {
-            background: #ccc;
-        }
-
-        pre {
-            background: #f8f9fa;
-            border-left: 3px solid #0066cc;
-            padding: 18px;
-            margin: 1em 0;
-            overflow-x: auto;
-            border-radius: 3px;
-        }
-
-        code {
-            font-family: 'Courier New', monospace;
-            font-size: 0.95em;
-        }
-
-        .score-box {
-            background: #0066cc;
-            color: white;
-            padding: 20px;
-            border-radius: 4px;
-            text-align: center;
-            font-size: 1.2em;
-            margin-bottom: 2em;
-        }
-
-        .summary-item {
-            background: #f8f9fa;
-            padding: 15px;
-            margin: 10px 0;
-            border-radius: 4px;
-            border-left: 3px solid #ccc;
-        }
-
-        .summary-item.correct {
-            border-left-color: #28a745;
-        }
-
-        .summary-item.incorrect {
-            border-left-color: #dc3545;
-        }
+    * {
+                margin: 0;
+                padding: 0;
+                box-sizing: border-box;
+            }
+    
+            body {
+                font-family: 'Roboto', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+                font-size: 16px;
+                font-weight: 400;
+                line-height: 1.7;
+                color: #333;
+                background: transparent;
+                padding: 20px;
+            }
+    
+            .container {
+                max-width: 800px;
+                margin: 0 auto;
+                background: transparent;
+                padding: 40px;
+            }
+    
+            .navigation {
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                margin-bottom: 40px;
+                padding-bottom: 20px;
+                border-bottom: 1px solid #e1e4e8;
+            }
+    
+            button {
+                background: #6b1718;
+                color: white;
+                border: none;
+                padding: 12px 28px;
+                border-radius: 4px;
+                cursor: pointer;
+                font-size: 1em;
+                font-weight: 500;
+                transition: background 0.2s;
+            }
+    
+            button:hover {
+                background: #380c0c;
+            }
+    
+            button:disabled {
+                background: #ccc;
+                cursor: not-allowed;
+            }
+    
+            .page-indicator {
+                color: #666;
+                font-size: 1em;
+            }
+    
+            .page {
+                display: none;
+                min-height: 500px;
+            }
+    
+            .page.active {
+                display: block;
+                animation: fadeIn 0.3s ease-in;
+            }
+    
+            @keyframes fadeIn {
+                from { opacity: 0; transform: translateY(10px); }
+                to { opacity: 1; transform: translateY(0); }
+            }
+    
+            h1 {
+                font-size: 26px;
+                line-height: 36px;
+                font-weight: 600;
+                padding-top: 14px;
+                padding-bottom: 6px;
+                margin-bottom: 1em;
+                color: #6b1718;
+                border-bottom: 2px solid #6b1718;
+            }
+    
+            h2 {
+                font-size: 26px;
+                line-height: 36px;
+                font-weight: 600;
+                padding-top: 14px;
+                padding-bottom: 6px;
+                margin: 1.5em 0 0.8em 0;
+                color: #1a1a1a;
+                border-bottom: 2px solid #1a1a1a;
+            }
+    
+            .question-box {
+                background: #f8f9fa;
+                border-left: 3px solid #6b1718;
+                padding: 20px;
+                margin: 1.5em 0;
+                border-radius: 3px;
+            }
+    
+            .question-box p {
+                margin: 0;
+                font-size: 1.05em;
+                color: #1a1a1a;
+            }
+    
+            .answers {
+                margin-top: 1.5em;
+            }
+    
+            .answer-option {
+                background: white;
+                border: 2px solid #e1e4e8;
+                padding: 15px 20px;
+                margin: 10px 0;
+                border-radius: 4px;
+                cursor: pointer;
+                transition: all 0.2s;
+                font-size: 1.05em;
+            }
+    
+            .answer-option:hover {
+                border-color: #6b1718;
+                background: #fef5f5;
+            }
+    
+            .answer-option.selected {
+                border-color: #6b1718;
+                background: #ffe5e6;
+            }
+    
+            .answer-option.correct {
+                border-color: #ccc;
+                background: #d4edda;
+            }
+    
+            .answer-option.incorrect {
+                border-color: #b82b4e;
+                background: #f8d7da;
+            }
+    
+            .feedback {
+                margin-top: 1.5em;
+                padding: 15px 20px;
+                border-radius: 4px;
+                display: none;
+                font-size: 1.05em;
+            }
+    
+            .feedback.show {
+                display: block;
+            }
+    
+            .feedback.correct {
+                background: #d4edda;
+                border-left: 3px solid #28a745;
+                color: #155724;
+            }
+    
+            .feedback.incorrect {
+                background: #f8d7da;
+                border-left: 3px solid #b82b4e;
+                color: #721c24;
+            }
+    
+            .check-button {
+                margin-top: 1.5em;
+                background: #121212;
+            }
+    
+            .check-button:hover:not(:disabled) {
+                background: #111111;
+            }
+    
+            .check-button:disabled {
+                background: #ccc;
+            }
+    
+            pre {
+                background: #f8f9fa;
+                border-left: 3px solid #6b1718;
+                padding: 18px;
+                margin: 1em 0;
+                overflow-x: auto;
+                border-radius: 3px;
+            }
+    
+            code {
+                font-family: 'Fira Code', 'Courier New', monospace;
+                font-size: 0.95em;
+                color: #b82b4e;
+            }
+    
+            .score-box {
+                background: #6b1718;
+                color: white;
+                padding: 20px;
+                border-radius: 4px;
+                text-align: center;
+                font-size: 1.2em;
+                margin-bottom: 2em;
+            }
+    
+            .summary-item {
+                background: #f8f9fa;
+                padding: 15px;
+                margin: 10px 0;
+                border-radius: 4px;
+                border-left: 3px solid #ccc;
+            }
+    
+            .summary-item.correct {
+                border-left-color: #28a745;
+            }
+    
+            .summary-item.incorrect {
+                border-left-color: #b82b4e;
+            }
+    
+            strong {
+                font-weight: 700;
+                color: #1a1a1a;
+            }
+    
+            p {
+                margin-bottom: 1em;
+            }
     </style>
 </head>
 <body>
@@ -3459,7 +6079,7 @@ createOrReplace
             Twój wynik: <span id='scoreText'>0/7</span> (<span id='percentText'>0%</span>)
         </div>
         <div id='summaryContent'></div>
-        <button onclick='restartQuiz()' style='margin-top: 20px; width: 100%;'>🔄 Rozpocznij quiz od nowa</button>
+        <button onclick='restartQuiz()' style='margin-top: 20px; width: 100%;'> Rozpocznij quiz od nowa</button>
     </div>
 </div>
 
@@ -3484,133 +6104,133 @@ createOrReplace
     ];
     
     document.getElementById('totalPages').textContent = totalPages;
-
-    function selectAnswer(questionIndex, answerIndex) {
-        if (answeredQuestions[questionIndex]) return;
-
-        const answers = document.querySelectorAll('.page')[questionIndex].querySelectorAll('.answer-option');
-        answers.forEach(a => a.classList.remove('selected'));
-        answers[answerIndex].classList.add('selected');
-        userAnswers[questionIndex] = answerIndex;
-    }
-
-    function checkAnswer(questionIndex, correctIndex) {
-        if (answeredQuestions[questionIndex]) return;
-
-        const answers = document.querySelectorAll('.page')[questionIndex].querySelectorAll('.answer-option');
-        const feedback = document.getElementById('feedback-' + questionIndex);
-        const checkBtn = document.querySelectorAll('.page')[questionIndex].querySelector('.check-button');
-
-        if (userAnswers[questionIndex] === null) {
-            feedback.className = 'feedback show incorrect';
-            feedback.textContent = '⚠️ Proszę najpierw wybrać odpowiedź!';
-            return;
+    
+        function selectAnswer(questionIndex, answerIndex) {
+            if (answeredQuestions[questionIndex]) return;
+    
+            const answers = document.querySelectorAll('.page')[questionIndex].querySelectorAll('.answer-option');
+            answers.forEach(a => a.classList.remove('selected'));
+            answers[answerIndex].classList.add('selected');
+            userAnswers[questionIndex] = answerIndex;
         }
-
-        answeredQuestions[questionIndex] = true;
-        checkBtn.disabled = true;
-
-        const isCorrect = userAnswers[questionIndex] === correctIndex;
-
-        answers.forEach((answer, index) => {
-            answer.style.cursor = 'default';
-            if (index === correctIndex) {
-                answer.classList.add('correct');
-            } else if (index === userAnswers[questionIndex]) {
-                answer.classList.add('incorrect');
+    
+        function checkAnswer(questionIndex, correctIndex) {
+            if (answeredQuestions[questionIndex]) return;
+    
+            const answers = document.querySelectorAll('.page')[questionIndex].querySelectorAll('.answer-option');
+            const feedback = document.getElementById('feedback-' + questionIndex);
+            const checkBtn = document.querySelectorAll('.page')[questionIndex].querySelector('.check-button');
+    
+            if (userAnswers[questionIndex] === null) {
+                feedback.className = 'feedback show incorrect';
+                feedback.textContent = 'Proszę najpierw wybrać odpowiedź!';
+                return;
             }
+    
+            answeredQuestions[questionIndex] = true;
+            checkBtn.disabled = true;
+    
+            const isCorrect = userAnswers[questionIndex] === correctIndex;
+    
+            answers.forEach((answer, index) => {
+                answer.style.cursor = 'default';
+                if (index === correctIndex) {
+                    answer.classList.add('correct');
+                } else if (index === userAnswers[questionIndex]) {
+                    answer.classList.add('incorrect');
+                }
+            });
+    
+            feedback.className = 'feedback show ' + (isCorrect ? 'correct' : 'incorrect');
+            feedback.innerHTML = (isCorrect ? '✅ Świetnie! ' : '❌ Nieprawidłowo. ') + explanations[questionIndex];
+    
+            if (questionIndex < totalQuestions - 1) {
+                setTimeout(() => {
+                    changePage(1);
+                }, 2500);
+            } else {
+                setTimeout(() => {
+                    showSummary();
+                    changePage(1);
+                }, 2500);
+            }
+        }
+    
+        function showSummary() {
+            let correctCount = 0;
+            for (let i = 0; i < totalQuestions; i++) {
+                if (userAnswers[i] === correctAnswers[i]) {
+                    correctCount++;
+                }
+            }
+    
+            const percentage = Math.round((correctCount / totalQuestions) * 100);
+            document.getElementById('scoreText').textContent = correctCount + '/' + totalQuestions;
+            document.getElementById('percentText').textContent = percentage + '%';
+    
+            let summaryHTML = '<h2>Szczegóły odpowiedzi:</h2>';
+            for (let i = 0; i < totalQuestions; i++) {
+                const isCorrect = userAnswers[i] === correctAnswers[i];
+                summaryHTML += `
+                    <div class='summary-item ${isCorrect ? 'correct' : 'incorrect'}'>
+                        <strong>Pytanie ${i + 1}:</strong> ${isCorrect ? '✅ Poprawnie' : '❌ Niepoprawnie'}<br>
+                        <small>${explanations[i]}</small>
+                    </div>
+                `;
+            }
+    
+            document.getElementById('summaryContent').innerHTML = summaryHTML;
+        }
+    
+        function restartQuiz() {
+            userAnswers.fill(null);
+            answeredQuestions.fill(false);
+            currentPage = 1;
+    
+            document.querySelectorAll('.page').forEach((page, index) => {
+                if (index < totalQuestions) {
+                    const answers = page.querySelectorAll('.answer-option');
+                    answers.forEach(a => {
+                        a.className = 'answer-option';
+                        a.style.cursor = 'pointer';
+                    });
+                    const feedback = page.querySelector('.feedback');
+                    feedback.className = 'feedback';
+                    const checkBtn = page.querySelector('.check-button');
+                    checkBtn.disabled = false;
+                }
+            });
+    
+            showPage(1);
+        }
+    
+        function showPage(n) {
+            const pages = document.querySelectorAll('.page');
+    
+            if (n > totalPages) currentPage = totalPages;
+            if (n < 1) currentPage = 1;
+    
+            pages.forEach(page => page.classList.remove('active'));
+            pages[currentPage - 1].classList.add('active');
+    
+            document.getElementById('currentPage').textContent = currentPage;
+            document.getElementById('prevBtn').disabled = currentPage === 1;
+            document.getElementById('nextBtn').disabled = currentPage === totalPages;
+    
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+    
+        function changePage(n) {
+            currentPage += n;
+            showPage(currentPage);
+        }
+    
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'ArrowLeft') changePage(-1);
+            if (e.key === 'ArrowRight') changePage(1);
         });
-
-        feedback.className = 'feedback show ' + (isCorrect ? 'correct' : 'incorrect');
-        feedback.innerHTML = (isCorrect ? '✅ Świetnie! ' : '❌ Nieprawidłowo. ') + explanations[questionIndex];
-
-        if (questionIndex < totalQuestions - 1) {
-            setTimeout(() => {
-                changePage(1);
-            }, 2500);
-        } else {
-            setTimeout(() => {
-                showSummary();
-                changePage(1);
-            }, 2500);
-        }
-    }
-
-    function showSummary() {
-        let correctCount = 0;
-        for (let i = 0; i < totalQuestions; i++) {
-            if (userAnswers[i] === correctAnswers[i]) {
-                correctCount++;
-            }
-        }
-
-        const percentage = Math.round((correctCount / totalQuestions) * 100);
-        document.getElementById('scoreText').textContent = correctCount + '/' + totalQuestions;
-        document.getElementById('percentText').textContent = percentage + '%';
-
-        let summaryHTML = '<h2>Szczegóły odpowiedzi:</h2>';
-        for (let i = 0; i < totalQuestions; i++) {
-            const isCorrect = userAnswers[i] === correctAnswers[i];
-            summaryHTML += `
-                <div class='summary-item ${isCorrect ? 'correct' : 'incorrect'}'>
-                    <strong>Pytanie ${i + 1}:</strong> ${isCorrect ? '✅ Poprawnie' : '❌ Niepoprawnie'}<br>
-                    <small>${explanations[i]}</small>
-                </div>
-            `;
-        }
-
-        document.getElementById('summaryContent').innerHTML = summaryHTML;
-    }
-
-    function restartQuiz() {
-        userAnswers.fill(null);
-        answeredQuestions.fill(false);
-        currentPage = 1;
-
-        document.querySelectorAll('.page').forEach((page, index) => {
-            if (index < totalQuestions) {
-                const answers = page.querySelectorAll('.answer-option');
-                answers.forEach(a => {
-                    a.className = 'answer-option';
-                    a.style.cursor = 'pointer';
-                });
-                const feedback = page.querySelector('.feedback');
-                feedback.className = 'feedback';
-                const checkBtn = page.querySelector('.check-button');
-                checkBtn.disabled = false;
-            }
-        });
-
+    
         showPage(1);
-    }
-
-    function showPage(n) {
-        const pages = document.querySelectorAll('.page');
-
-        if (n > totalPages) currentPage = totalPages;
-        if (n < 1) currentPage = 1;
-
-        pages.forEach(page => page.classList.remove('active'));
-        pages[currentPage - 1].classList.add('active');
-
-        document.getElementById('currentPage').textContent = currentPage;
-        document.getElementById('prevBtn').disabled = currentPage === 1;
-        document.getElementById('nextBtn').disabled = currentPage === totalPages;
-
-        window.scrollTo({ top: 0, behavior: 'smooth' });
-    }
-
-    function changePage(n) {
-        currentPage += n;
-        showPage(currentPage);
-    }
-
-    document.addEventListener('keydown', function(e) {
-        if (e.key === 'ArrowLeft') changePage(-1);
-        if (e.key === 'ArrowRight') changePage(1);
-    });
-
-    showPage(1);
 </script>
 
 </body>
@@ -3618,7 +6238,7 @@ createOrReplace
 
 "
 ```
-            lineageTag: a60bc581-cccc-42c9-93db-ff73bb13dd79
+            lineageTag: 0dd80320-f0bc-4bba-8727-00bf33b991b4
 
         measure '03. Quiz' = ```
 "
@@ -3630,204 +6250,236 @@ createOrReplace
     <meta name='viewport' content='width=device-width, initial-scale=1.0'>
     <title>Quiz: Wprowadzenie do CALCULATE</title>
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        body {
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-            font-size: 16px;
-            line-height: 1.7;
-            color: #333;
-            background: transparent;
-            padding: 20px;
-        }
-
-        .container {
-            max-width: 800px;
-            margin: 0 auto;
-            background: transparent;
-            padding: 40px;
-        }
-
-        .navigation {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 40px;
-            padding-bottom: 20px;
-            border-bottom: 1px solid #e1e4e8;
-        }
-
-        button {
-            background: #0066cc;
-            color: white;
-            border: none;
-            padding: 12px 28px;
-            border-radius: 4px;
-            cursor: pointer;
-            font-size: 1em;
-            font-weight: 500;
-            transition: background 0.2s;
-        }
-
-        button:hover {
-            background: #0052a3;
-        }
-
-        button:disabled {
-            background: #ccc;
-            cursor: not-allowed;
-        }
-
-        .page-indicator {
-            color: #666;
-            font-size: 1em;
-        }
-
-        .page {
-            display: none;
-            min-height: 500px;
-        }
-
-        .page.active {
-            display: block;
-            animation: fadeIn 0.3s ease-in;
-        }
-
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(10px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-
-        h1 {
-            font-size: 1.8em;
-            font-weight: 600;
-            margin-bottom: 1em;
-            color: #1a1a1a;
-        }
-
-        .question-box {
-            background: #f8f9fa;
-            border-left: 3px solid #0066cc;
-            padding: 20px;
-            margin: 1.5em 0;
-            border-radius: 3px;
-        }
-
-        .answers {
-            margin-top: 1.5em;
-        }
-
-        .answer-option {
-            background: white;
-            border: 2px solid #e1e4e8;
-            padding: 15px 20px;
-            margin: 10px 0;
-            border-radius: 4px;
-            cursor: pointer;
-            transition: all 0.2s;
-            font-size: 1.05em;
-        }
-
-        .answer-option:hover {
-            border-color: #0066cc;
-            background: #f0f7ff;
-        }
-
-        .answer-option.selected {
-            border-color: #0066cc;
-            background: #e6f2ff;
-        }
-
-        .answer-option.correct {
-            border-color: #28a745;
-            background: #d4edda;
-        }
-
-        .answer-option.incorrect {
-            border-color: #dc3545;
-            background: #f8d7da;
-        }
-
-        .feedback {
-            margin-top: 1.5em;
-            padding: 15px 20px;
-            border-radius: 4px;
-            display: none;
-            font-size: 1.05em;
-        }
-
-        .feedback.show {
-            display: block;
-        }
-
-        .feedback.correct {
-            background: #d4edda;
-            border-left: 3px solid #28a745;
-            color: #155724;
-        }
-
-        .feedback.incorrect {
-            background: #f8d7da;
-            border-left: 3px solid #dc3545;
-            color: #721c24;
-        }
-
-        .check-button {
-            margin-top: 1.5em;
-            background: #28a745;
-        }
-
-        .check-button:hover:not(:disabled) {
-            background: #218838;
-        }
-
-        .check-button:disabled {
-            background: #ccc;
-        }
-
-        pre {
-            background: #f8f9fa;
-            border-left: 3px solid #0066cc;
-            padding: 18px;
-            margin: 1em 0;
-            overflow-x: auto;
-            border-radius: 3px;
-        }
-
-        code {
-            font-family: 'Courier New', monospace;
-            font-size: 0.95em;
-        }
-
-        .score-box {
-            background: #0066cc;
-            color: white;
-            padding: 20px;
-            border-radius: 4px;
-            text-align: center;
-            font-size: 1.2em;
-            margin-bottom: 2em;
-        }
-
-        .summary-item {
-            background: #f8f9fa;
-            padding: 15px;
-            margin: 10px 0;
-            border-radius: 4px;
-            border-left: 3px solid #ccc;
-        }
-
-        .summary-item.correct {
-            border-left-color: #28a745;
-        }
-
-        .summary-item.incorrect {
-            border-left-color: #dc3545;
-        }
+    * {
+                margin: 0;
+                padding: 0;
+                box-sizing: border-box;
+            }
+    
+            body {
+                font-family: 'Roboto', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+                font-size: 16px;
+                font-weight: 400;
+                line-height: 1.7;
+                color: #333;
+                background: transparent;
+                padding: 20px;
+            }
+    
+            .container {
+                max-width: 800px;
+                margin: 0 auto;
+                background: transparent;
+                padding: 40px;
+            }
+    
+            .navigation {
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                margin-bottom: 40px;
+                padding-bottom: 20px;
+                border-bottom: 1px solid #e1e4e8;
+            }
+    
+            button {
+                background: #6b1718;
+                color: white;
+                border: none;
+                padding: 12px 28px;
+                border-radius: 4px;
+                cursor: pointer;
+                font-size: 1em;
+                font-weight: 500;
+                transition: background 0.2s;
+            }
+    
+            button:hover {
+                background: #380c0c;
+            }
+    
+            button:disabled {
+                background: #ccc;
+                cursor: not-allowed;
+            }
+    
+            .page-indicator {
+                color: #666;
+                font-size: 1em;
+            }
+    
+            .page {
+                display: none;
+                min-height: 500px;
+            }
+    
+            .page.active {
+                display: block;
+                animation: fadeIn 0.3s ease-in;
+            }
+    
+            @keyframes fadeIn {
+                from { opacity: 0; transform: translateY(10px); }
+                to { opacity: 1; transform: translateY(0); }
+            }
+    
+            h1 {
+                font-size: 26px;
+                line-height: 36px;
+                font-weight: 600;
+                padding-top: 14px;
+                padding-bottom: 6px;
+                margin-bottom: 1em;
+                color: #6b1718;
+                border-bottom: 2px solid #6b1718;
+            }
+    
+            h2 {
+                font-size: 26px;
+                line-height: 36px;
+                font-weight: 600;
+                padding-top: 14px;
+                padding-bottom: 6px;
+                margin: 1.5em 0 0.8em 0;
+                color: #1a1a1a;
+                border-bottom: 2px solid #1a1a1a;
+            }
+    
+            .question-box {
+                background: #f8f9fa;
+                border-left: 3px solid #6b1718;
+                padding: 20px;
+                margin: 1.5em 0;
+                border-radius: 3px;
+            }
+    
+            .question-box p {
+                margin: 0;
+                font-size: 1.05em;
+                color: #1a1a1a;
+            }
+    
+            .answers {
+                margin-top: 1.5em;
+            }
+    
+            .answer-option {
+                background: white;
+                border: 2px solid #e1e4e8;
+                padding: 15px 20px;
+                margin: 10px 0;
+                border-radius: 4px;
+                cursor: pointer;
+                transition: all 0.2s;
+                font-size: 1.05em;
+            }
+    
+            .answer-option:hover {
+                border-color: #6b1718;
+                background: #fef5f5;
+            }
+    
+            .answer-option.selected {
+                border-color: #6b1718;
+                background: #ffe5e6;
+            }
+    
+            .answer-option.correct {
+                border-color: #ccc;
+                background: #d4edda;
+            }
+    
+            .answer-option.incorrect {
+                border-color: #b82b4e;
+                background: #f8d7da;
+            }
+    
+            .feedback {
+                margin-top: 1.5em;
+                padding: 15px 20px;
+                border-radius: 4px;
+                display: none;
+                font-size: 1.05em;
+            }
+    
+            .feedback.show {
+                display: block;
+            }
+    
+            .feedback.correct {
+                background: #d4edda;
+                border-left: 3px solid #28a745;
+                color: #155724;
+            }
+    
+            .feedback.incorrect {
+                background: #f8d7da;
+                border-left: 3px solid #b82b4e;
+                color: #721c24;
+            }
+    
+            .check-button {
+                margin-top: 1.5em;
+                background: #121212;
+            }
+    
+            .check-button:hover:not(:disabled) {
+                background: #111111;
+            }
+    
+            .check-button:disabled {
+                background: #ccc;
+            }
+    
+            pre {
+                background: #f8f9fa;
+                border-left: 3px solid #6b1718;
+                padding: 18px;
+                margin: 1em 0;
+                overflow-x: auto;
+                border-radius: 3px;
+            }
+    
+            code {
+                font-family: 'Fira Code', 'Courier New', monospace;
+                font-size: 0.95em;
+                color: #b82b4e;
+            }
+    
+            .score-box {
+                background: #6b1718;
+                color: white;
+                padding: 20px;
+                border-radius: 4px;
+                text-align: center;
+                font-size: 1.2em;
+                margin-bottom: 2em;
+            }
+    
+            .summary-item {
+                background: #f8f9fa;
+                padding: 15px;
+                margin: 10px 0;
+                border-radius: 4px;
+                border-left: 3px solid #ccc;
+            }
+    
+            .summary-item.correct {
+                border-left-color: #28a745;
+            }
+    
+            .summary-item.incorrect {
+                border-left-color: #b82b4e;
+            }
+    
+            strong {
+                font-weight: 700;
+                color: #1a1a1a;
+            }
+    
+            p {
+                margin-bottom: 1em;
+            }
     </style>
 </head>
 <body>
@@ -4017,7 +6669,7 @@ createOrReplace
             Twój wynik: <span id='scoreText'>0/7</span> (<span id='percentText'>0%</span>)
         </div>
         <div id='summaryContent'></div>
-        <button onclick='restartQuiz()' style='margin-top: 20px; width: 100%;'>🔄 Rozpocznij quiz od nowa</button>
+        <button onclick='restartQuiz()' style='margin-top: 20px; width: 100%;'> Rozpocznij quiz od nowa</button>
     </div>
 </div>
 
@@ -4042,133 +6694,133 @@ createOrReplace
     ];
     
     document.getElementById('totalPages').textContent = totalPages;
-
-    function selectAnswer(questionIndex, answerIndex) {
-        if (answeredQuestions[questionIndex]) return;
-
-        const answers = document.querySelectorAll('.page')[questionIndex].querySelectorAll('.answer-option');
-        answers.forEach(a => a.classList.remove('selected'));
-        answers[answerIndex].classList.add('selected');
-        userAnswers[questionIndex] = answerIndex;
-    }
-
-    function checkAnswer(questionIndex, correctIndex) {
-        if (answeredQuestions[questionIndex]) return;
-
-        const answers = document.querySelectorAll('.page')[questionIndex].querySelectorAll('.answer-option');
-        const feedback = document.getElementById('feedback-' + questionIndex);
-        const checkBtn = document.querySelectorAll('.page')[questionIndex].querySelector('.check-button');
-
-        if (userAnswers[questionIndex] === null) {
-            feedback.className = 'feedback show incorrect';
-            feedback.textContent = '⚠️ Proszę najpierw wybrać odpowiedź!';
-            return;
+    
+        function selectAnswer(questionIndex, answerIndex) {
+            if (answeredQuestions[questionIndex]) return;
+    
+            const answers = document.querySelectorAll('.page')[questionIndex].querySelectorAll('.answer-option');
+            answers.forEach(a => a.classList.remove('selected'));
+            answers[answerIndex].classList.add('selected');
+            userAnswers[questionIndex] = answerIndex;
         }
-
-        answeredQuestions[questionIndex] = true;
-        checkBtn.disabled = true;
-
-        const isCorrect = userAnswers[questionIndex] === correctIndex;
-
-        answers.forEach((answer, index) => {
-            answer.style.cursor = 'default';
-            if (index === correctIndex) {
-                answer.classList.add('correct');
-            } else if (index === userAnswers[questionIndex]) {
-                answer.classList.add('incorrect');
+    
+        function checkAnswer(questionIndex, correctIndex) {
+            if (answeredQuestions[questionIndex]) return;
+    
+            const answers = document.querySelectorAll('.page')[questionIndex].querySelectorAll('.answer-option');
+            const feedback = document.getElementById('feedback-' + questionIndex);
+            const checkBtn = document.querySelectorAll('.page')[questionIndex].querySelector('.check-button');
+    
+            if (userAnswers[questionIndex] === null) {
+                feedback.className = 'feedback show incorrect';
+                feedback.textContent = 'Proszę najpierw wybrać odpowiedź!';
+                return;
             }
+    
+            answeredQuestions[questionIndex] = true;
+            checkBtn.disabled = true;
+    
+            const isCorrect = userAnswers[questionIndex] === correctIndex;
+    
+            answers.forEach((answer, index) => {
+                answer.style.cursor = 'default';
+                if (index === correctIndex) {
+                    answer.classList.add('correct');
+                } else if (index === userAnswers[questionIndex]) {
+                    answer.classList.add('incorrect');
+                }
+            });
+    
+            feedback.className = 'feedback show ' + (isCorrect ? 'correct' : 'incorrect');
+            feedback.innerHTML = (isCorrect ? '✅ Świetnie! ' : '❌ Nieprawidłowo. ') + explanations[questionIndex];
+    
+            if (questionIndex < totalQuestions - 1) {
+                setTimeout(() => {
+                    changePage(1);
+                }, 2500);
+            } else {
+                setTimeout(() => {
+                    showSummary();
+                    changePage(1);
+                }, 2500);
+            }
+        }
+    
+        function showSummary() {
+            let correctCount = 0;
+            for (let i = 0; i < totalQuestions; i++) {
+                if (userAnswers[i] === correctAnswers[i]) {
+                    correctCount++;
+                }
+            }
+    
+            const percentage = Math.round((correctCount / totalQuestions) * 100);
+            document.getElementById('scoreText').textContent = correctCount + '/' + totalQuestions;
+            document.getElementById('percentText').textContent = percentage + '%';
+    
+            let summaryHTML = '<h2>Szczegóły odpowiedzi:</h2>';
+            for (let i = 0; i < totalQuestions; i++) {
+                const isCorrect = userAnswers[i] === correctAnswers[i];
+                summaryHTML += `
+                    <div class='summary-item ${isCorrect ? 'correct' : 'incorrect'}'>
+                        <strong>Pytanie ${i + 1}:</strong> ${isCorrect ? '✅ Poprawnie' : '❌ Niepoprawnie'}<br>
+                        <small>${explanations[i]}</small>
+                    </div>
+                `;
+            }
+    
+            document.getElementById('summaryContent').innerHTML = summaryHTML;
+        }
+    
+        function restartQuiz() {
+            userAnswers.fill(null);
+            answeredQuestions.fill(false);
+            currentPage = 1;
+    
+            document.querySelectorAll('.page').forEach((page, index) => {
+                if (index < totalQuestions) {
+                    const answers = page.querySelectorAll('.answer-option');
+                    answers.forEach(a => {
+                        a.className = 'answer-option';
+                        a.style.cursor = 'pointer';
+                    });
+                    const feedback = page.querySelector('.feedback');
+                    feedback.className = 'feedback';
+                    const checkBtn = page.querySelector('.check-button');
+                    checkBtn.disabled = false;
+                }
+            });
+    
+            showPage(1);
+        }
+    
+        function showPage(n) {
+            const pages = document.querySelectorAll('.page');
+    
+            if (n > totalPages) currentPage = totalPages;
+            if (n < 1) currentPage = 1;
+    
+            pages.forEach(page => page.classList.remove('active'));
+            pages[currentPage - 1].classList.add('active');
+    
+            document.getElementById('currentPage').textContent = currentPage;
+            document.getElementById('prevBtn').disabled = currentPage === 1;
+            document.getElementById('nextBtn').disabled = currentPage === totalPages;
+    
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+    
+        function changePage(n) {
+            currentPage += n;
+            showPage(currentPage);
+        }
+    
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'ArrowLeft') changePage(-1);
+            if (e.key === 'ArrowRight') changePage(1);
         });
-
-        feedback.className = 'feedback show ' + (isCorrect ? 'correct' : 'incorrect');
-        feedback.innerHTML = (isCorrect ? '✅ Świetnie! ' : '❌ Nieprawidłowo. ') + explanations[questionIndex];
-
-        if (questionIndex < totalQuestions - 1) {
-            setTimeout(() => {
-                changePage(1);
-            }, 2500);
-        } else {
-            setTimeout(() => {
-                showSummary();
-                changePage(1);
-            }, 2500);
-        }
-    }
-
-    function showSummary() {
-        let correctCount = 0;
-        for (let i = 0; i < totalQuestions; i++) {
-            if (userAnswers[i] === correctAnswers[i]) {
-                correctCount++;
-            }
-        }
-
-        const percentage = Math.round((correctCount / totalQuestions) * 100);
-        document.getElementById('scoreText').textContent = correctCount + '/' + totalQuestions;
-        document.getElementById('percentText').textContent = percentage + '%';
-
-        let summaryHTML = '<h2>Szczegóły odpowiedzi:</h2>';
-        for (let i = 0; i < totalQuestions; i++) {
-            const isCorrect = userAnswers[i] === correctAnswers[i];
-            summaryHTML += `
-                <div class='summary-item ${isCorrect ? 'correct' : 'incorrect'}'>
-                    <strong>Pytanie ${i + 1}:</strong> ${isCorrect ? '✅ Poprawnie' : '❌ Niepoprawnie'}<br>
-                    <small>${explanations[i]}</small>
-                </div>
-            `;
-        }
-
-        document.getElementById('summaryContent').innerHTML = summaryHTML;
-    }
-
-    function restartQuiz() {
-        userAnswers.fill(null);
-        answeredQuestions.fill(false);
-        currentPage = 1;
-
-        document.querySelectorAll('.page').forEach((page, index) => {
-            if (index < totalQuestions) {
-                const answers = page.querySelectorAll('.answer-option');
-                answers.forEach(a => {
-                    a.className = 'answer-option';
-                    a.style.cursor = 'pointer';
-                });
-                const feedback = page.querySelector('.feedback');
-                feedback.className = 'feedback';
-                const checkBtn = page.querySelector('.check-button');
-                checkBtn.disabled = false;
-            }
-        });
-
+    
         showPage(1);
-    }
-
-    function showPage(n) {
-        const pages = document.querySelectorAll('.page');
-
-        if (n > totalPages) currentPage = totalPages;
-        if (n < 1) currentPage = 1;
-
-        pages.forEach(page => page.classList.remove('active'));
-        pages[currentPage - 1].classList.add('active');
-
-        document.getElementById('currentPage').textContent = currentPage;
-        document.getElementById('prevBtn').disabled = currentPage === 1;
-        document.getElementById('nextBtn').disabled = currentPage === totalPages;
-
-        window.scrollTo({ top: 0, behavior: 'smooth' });
-    }
-
-    function changePage(n) {
-        currentPage += n;
-        showPage(currentPage);
-    }
-
-    document.addEventListener('keydown', function(e) {
-        if (e.key === 'ArrowLeft') changePage(-1);
-        if (e.key === 'ArrowRight') changePage(1);
-    });
-
-    showPage(1);
 </script>
 
 </body>
@@ -4176,7 +6828,7 @@ createOrReplace
 
 "
 ```
-            lineageTag: 4e3eae91-9b66-4168-972e-83b144e840d8
+            lineageTag: e4457495-9f6b-4436-a094-081ace39018a
 
         measure '03. Wprowadzenie do CALCULATE - Operatory logiczne w `CALCULATE`' = ```
 "
@@ -4187,6 +6839,224 @@ createOrReplace
     <meta charset='UTF-8'>
     <meta name='viewport' content='width=device-width, initial-scale=1.0'>
     <title>Operatory logiczne w `CALCULATE`</title>
+    <style>
+            * {
+                margin: 0;
+                padding: 0;
+                box-sizing: border-box;
+            }
+    
+            body {
+                font-family: 'Roboto', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+                font-size: 16px;
+                font-weight: 400;
+                line-height: 1.7;
+                color: #333;
+                background: transparent;
+                padding: 20px;
+            }
+    
+            .container {
+                max-width: 800px;
+                margin: 0 auto;
+                background: transparent;
+                padding: 40px;
+            }
+    
+            .navigation {
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                margin-bottom: 40px;
+                padding-bottom: 20px;
+                border-bottom: 1px solid #e1e4e8;
+            }
+    
+            button {
+                background: #6b1718;
+                color: white;
+                border: none;
+                padding: 12px 28px;
+                border-radius: 4px;
+                cursor: pointer;
+                font-size: 1em;
+                font-weight: 500;
+                transition: background 0.2s;
+            }
+    
+            button:hover {
+                background: #380c0c;
+            }
+    
+            button:disabled {
+                background: #ccc;
+                cursor: not-allowed;
+            }
+    
+            .page-indicator {
+                color: #666;
+                font-size: 1em;
+            }
+    
+            .page {
+                display: none;
+                min-height: 500px;
+            }
+    
+            .page.active {
+                display: block;
+                animation: fadeIn 0.3s ease-in;
+            }
+    
+            @keyframes fadeIn {
+                from { opacity: 0; transform: translateY(10px); }
+                to { opacity: 1; transform: translateY(0); }
+            }
+    
+            h1 {
+                font-size: 26px;
+                line-height: 36px;
+                font-weight: 600;
+                padding-top: 14px;
+                padding-bottom: 6px;
+                margin-bottom: 1em;
+                color: #6b1718;
+                border-bottom: 2px solid #6b1718;
+            }
+    
+            h2 {
+                font-size: 26px;
+                line-height: 36px;
+                font-weight: 600;
+                padding-top: 14px;
+                padding-bottom: 6px;
+                margin: 1.5em 0 0.8em 0;
+                color: #1a1a1a;
+                border-bottom: 2px solid #1a1a1a;
+            }
+    
+            h3 {
+                font-size: 1.1em;
+                font-weight: 600;
+                margin: 1.2em 0 0.6em 0;
+                padding-bottom: 5px;
+                color: #444;
+                border-bottom: 1px solid #999;
+            }
+    
+            p {
+                margin-bottom: 1em;
+                font-size: 1.05em;
+            }
+    
+            strong {
+                font-weight: 700;
+                color: #1a1a1a;
+            }
+    
+            code {
+                background: #f5f5f5;
+                padding: 3px 7px;
+                border-radius: 3px;
+                font-family: 'Fira Code', 'Courier New', monospace;
+                font-size: 0.95em;
+                color: #b82b4e;
+            }
+    
+            pre {
+                background: #f8f9fa;
+                border-left: 3px solid #6b1718;
+                padding: 18px;
+                margin: 1em 0;
+                overflow-x: auto;
+                border-radius: 3px;
+            }
+    
+            pre code {
+                background: none;
+                padding: 0;
+                color: #24292e;
+                font-size: 1em;
+                line-height: 1.6;
+            }
+    
+            .dax-keyword {
+                color: #6b1718;
+                font-weight: 600;
+            }
+    
+            .dax-function {
+                color: #6f42c1;
+            }
+    
+            .dax-number {
+                color: #005cc5;
+            }
+    
+            .dax-comment {
+                color: #6a737d;
+                font-style: italic;
+            }
+    
+            ul, ol {
+                margin: 0.3em 0;
+                padding-left: 1.8em;
+            }
+    
+            li {
+                margin: 0;
+                padding-left: 0.2em;
+                font-size: 1.05em;
+                line-height: 1.6;
+            }
+    
+            ol {
+                list-style-type: decimal;
+            }
+    
+            ol li::marker {
+                color: #999;
+                font-weight: 400;
+            }
+    
+            ul li::marker {
+                color: #999;
+            }
+    
+            ul ul, ol ol, ul ol, ol ul {
+                margin: 0.2em 0;
+                padding-left: 1.5em;
+            }
+    
+            blockquote {
+                border-left: 3px solid #6b1718;
+                background: #f8f9fa;
+                padding: 14px 18px;
+                margin: 1em 0;
+                color: #555;
+                font-style: italic;
+            }
+    
+            blockquote p {
+                margin: 0;
+            }
+    
+            .iteration-box {
+                border-left: 3px solid #6b1718;
+                padding: 14px 18px;
+                margin: 0.8em 0;
+            }
+    
+            .result-box {
+                background: #f5f5f5;
+                border-left: 3px solid #999;
+                padding: 14px 18px;
+                margin: 0.8em 0;
+                font-weight: 500;
+                color: #555;
+                font-size: 1.05em;
+            }
+        </style>
 </head>
 <body>
 
@@ -4443,7 +7313,7 @@ createOrReplace
 
 "
 ```
-            lineageTag: 2b222c80-1ea1-450d-b4a9-51e1a89f2196
+            lineageTag: 99f14afd-1713-4dc4-b8b8-c8a280f2b270
 
         measure '03. Wprowadzenie do CALCULATE - PODSUMOWANIE' = ```
 "
@@ -4454,6 +7324,224 @@ createOrReplace
     <meta charset='UTF-8'>
     <meta name='viewport' content='width=device-width, initial-scale=1.0'>
     <title>PODSUMOWANIE</title>
+    <style>
+            * {
+                margin: 0;
+                padding: 0;
+                box-sizing: border-box;
+            }
+    
+            body {
+                font-family: 'Roboto', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+                font-size: 16px;
+                font-weight: 400;
+                line-height: 1.7;
+                color: #333;
+                background: transparent;
+                padding: 20px;
+            }
+    
+            .container {
+                max-width: 800px;
+                margin: 0 auto;
+                background: transparent;
+                padding: 40px;
+            }
+    
+            .navigation {
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                margin-bottom: 40px;
+                padding-bottom: 20px;
+                border-bottom: 1px solid #e1e4e8;
+            }
+    
+            button {
+                background: #6b1718;
+                color: white;
+                border: none;
+                padding: 12px 28px;
+                border-radius: 4px;
+                cursor: pointer;
+                font-size: 1em;
+                font-weight: 500;
+                transition: background 0.2s;
+            }
+    
+            button:hover {
+                background: #380c0c;
+            }
+    
+            button:disabled {
+                background: #ccc;
+                cursor: not-allowed;
+            }
+    
+            .page-indicator {
+                color: #666;
+                font-size: 1em;
+            }
+    
+            .page {
+                display: none;
+                min-height: 500px;
+            }
+    
+            .page.active {
+                display: block;
+                animation: fadeIn 0.3s ease-in;
+            }
+    
+            @keyframes fadeIn {
+                from { opacity: 0; transform: translateY(10px); }
+                to { opacity: 1; transform: translateY(0); }
+            }
+    
+            h1 {
+                font-size: 26px;
+                line-height: 36px;
+                font-weight: 600;
+                padding-top: 14px;
+                padding-bottom: 6px;
+                margin-bottom: 1em;
+                color: #6b1718;
+                border-bottom: 2px solid #6b1718;
+            }
+    
+            h2 {
+                font-size: 26px;
+                line-height: 36px;
+                font-weight: 600;
+                padding-top: 14px;
+                padding-bottom: 6px;
+                margin: 1.5em 0 0.8em 0;
+                color: #1a1a1a;
+                border-bottom: 2px solid #1a1a1a;
+            }
+    
+            h3 {
+                font-size: 1.1em;
+                font-weight: 600;
+                margin: 1.2em 0 0.6em 0;
+                padding-bottom: 5px;
+                color: #444;
+                border-bottom: 1px solid #999;
+            }
+    
+            p {
+                margin-bottom: 1em;
+                font-size: 1.05em;
+            }
+    
+            strong {
+                font-weight: 700;
+                color: #1a1a1a;
+            }
+    
+            code {
+                background: #f5f5f5;
+                padding: 3px 7px;
+                border-radius: 3px;
+                font-family: 'Fira Code', 'Courier New', monospace;
+                font-size: 0.95em;
+                color: #b82b4e;
+            }
+    
+            pre {
+                background: #f8f9fa;
+                border-left: 3px solid #6b1718;
+                padding: 18px;
+                margin: 1em 0;
+                overflow-x: auto;
+                border-radius: 3px;
+            }
+    
+            pre code {
+                background: none;
+                padding: 0;
+                color: #24292e;
+                font-size: 1em;
+                line-height: 1.6;
+            }
+    
+            .dax-keyword {
+                color: #6b1718;
+                font-weight: 600;
+            }
+    
+            .dax-function {
+                color: #6f42c1;
+            }
+    
+            .dax-number {
+                color: #005cc5;
+            }
+    
+            .dax-comment {
+                color: #6a737d;
+                font-style: italic;
+            }
+    
+            ul, ol {
+                margin: 0.3em 0;
+                padding-left: 1.8em;
+            }
+    
+            li {
+                margin: 0;
+                padding-left: 0.2em;
+                font-size: 1.05em;
+                line-height: 1.6;
+            }
+    
+            ol {
+                list-style-type: decimal;
+            }
+    
+            ol li::marker {
+                color: #999;
+                font-weight: 400;
+            }
+    
+            ul li::marker {
+                color: #999;
+            }
+    
+            ul ul, ol ol, ul ol, ol ul {
+                margin: 0.2em 0;
+                padding-left: 1.5em;
+            }
+    
+            blockquote {
+                border-left: 3px solid #6b1718;
+                background: #f8f9fa;
+                padding: 14px 18px;
+                margin: 1em 0;
+                color: #555;
+                font-style: italic;
+            }
+    
+            blockquote p {
+                margin: 0;
+            }
+    
+            .iteration-box {
+                border-left: 3px solid #6b1718;
+                padding: 14px 18px;
+                margin: 0.8em 0;
+            }
+    
+            .result-box {
+                background: #f5f5f5;
+                border-left: 3px solid #999;
+                padding: 14px 18px;
+                margin: 0.8em 0;
+                font-weight: 500;
+                color: #555;
+                font-size: 1.05em;
+            }
+        </style>
 </head>
 <body>
 
@@ -4567,7 +7655,7 @@ createOrReplace
 
 "
 ```
-            lineageTag: 744c7fef-b1e6-40a5-b34c-15645d77234b
+            lineageTag: 474e01b0-b0f2-4583-b472-9c11f6c2b0b4
 
         measure '03. Wprowadzenie do CALCULATE - Użycie `CALCULATE`' = ```
 "
@@ -4578,6 +7666,224 @@ createOrReplace
     <meta charset='UTF-8'>
     <meta name='viewport' content='width=device-width, initial-scale=1.0'>
     <title>Użycie `CALCULATE`</title>
+    <style>
+            * {
+                margin: 0;
+                padding: 0;
+                box-sizing: border-box;
+            }
+    
+            body {
+                font-family: 'Roboto', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+                font-size: 16px;
+                font-weight: 400;
+                line-height: 1.7;
+                color: #333;
+                background: transparent;
+                padding: 20px;
+            }
+    
+            .container {
+                max-width: 800px;
+                margin: 0 auto;
+                background: transparent;
+                padding: 40px;
+            }
+    
+            .navigation {
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                margin-bottom: 40px;
+                padding-bottom: 20px;
+                border-bottom: 1px solid #e1e4e8;
+            }
+    
+            button {
+                background: #6b1718;
+                color: white;
+                border: none;
+                padding: 12px 28px;
+                border-radius: 4px;
+                cursor: pointer;
+                font-size: 1em;
+                font-weight: 500;
+                transition: background 0.2s;
+            }
+    
+            button:hover {
+                background: #380c0c;
+            }
+    
+            button:disabled {
+                background: #ccc;
+                cursor: not-allowed;
+            }
+    
+            .page-indicator {
+                color: #666;
+                font-size: 1em;
+            }
+    
+            .page {
+                display: none;
+                min-height: 500px;
+            }
+    
+            .page.active {
+                display: block;
+                animation: fadeIn 0.3s ease-in;
+            }
+    
+            @keyframes fadeIn {
+                from { opacity: 0; transform: translateY(10px); }
+                to { opacity: 1; transform: translateY(0); }
+            }
+    
+            h1 {
+                font-size: 26px;
+                line-height: 36px;
+                font-weight: 600;
+                padding-top: 14px;
+                padding-bottom: 6px;
+                margin-bottom: 1em;
+                color: #6b1718;
+                border-bottom: 2px solid #6b1718;
+            }
+    
+            h2 {
+                font-size: 26px;
+                line-height: 36px;
+                font-weight: 600;
+                padding-top: 14px;
+                padding-bottom: 6px;
+                margin: 1.5em 0 0.8em 0;
+                color: #1a1a1a;
+                border-bottom: 2px solid #1a1a1a;
+            }
+    
+            h3 {
+                font-size: 1.1em;
+                font-weight: 600;
+                margin: 1.2em 0 0.6em 0;
+                padding-bottom: 5px;
+                color: #444;
+                border-bottom: 1px solid #999;
+            }
+    
+            p {
+                margin-bottom: 1em;
+                font-size: 1.05em;
+            }
+    
+            strong {
+                font-weight: 700;
+                color: #1a1a1a;
+            }
+    
+            code {
+                background: #f5f5f5;
+                padding: 3px 7px;
+                border-radius: 3px;
+                font-family: 'Fira Code', 'Courier New', monospace;
+                font-size: 0.95em;
+                color: #b82b4e;
+            }
+    
+            pre {
+                background: #f8f9fa;
+                border-left: 3px solid #6b1718;
+                padding: 18px;
+                margin: 1em 0;
+                overflow-x: auto;
+                border-radius: 3px;
+            }
+    
+            pre code {
+                background: none;
+                padding: 0;
+                color: #24292e;
+                font-size: 1em;
+                line-height: 1.6;
+            }
+    
+            .dax-keyword {
+                color: #6b1718;
+                font-weight: 600;
+            }
+    
+            .dax-function {
+                color: #6f42c1;
+            }
+    
+            .dax-number {
+                color: #005cc5;
+            }
+    
+            .dax-comment {
+                color: #6a737d;
+                font-style: italic;
+            }
+    
+            ul, ol {
+                margin: 0.3em 0;
+                padding-left: 1.8em;
+            }
+    
+            li {
+                margin: 0;
+                padding-left: 0.2em;
+                font-size: 1.05em;
+                line-height: 1.6;
+            }
+    
+            ol {
+                list-style-type: decimal;
+            }
+    
+            ol li::marker {
+                color: #999;
+                font-weight: 400;
+            }
+    
+            ul li::marker {
+                color: #999;
+            }
+    
+            ul ul, ol ol, ul ol, ol ul {
+                margin: 0.2em 0;
+                padding-left: 1.5em;
+            }
+    
+            blockquote {
+                border-left: 3px solid #6b1718;
+                background: #f8f9fa;
+                padding: 14px 18px;
+                margin: 1em 0;
+                color: #555;
+                font-style: italic;
+            }
+    
+            blockquote p {
+                margin: 0;
+            }
+    
+            .iteration-box {
+                border-left: 3px solid #6b1718;
+                padding: 14px 18px;
+                margin: 0.8em 0;
+            }
+    
+            .result-box {
+                background: #f5f5f5;
+                border-left: 3px solid #999;
+                padding: 14px 18px;
+                margin: 0.8em 0;
+                font-weight: 500;
+                color: #555;
+                font-size: 1.05em;
+            }
+        </style>
 </head>
 <body>
 
@@ -4738,7 +8044,7 @@ createOrReplace
 
 "
 ```
-            lineageTag: acfdeddb-0f32-46ae-a440-84e7f8be8d59
+            lineageTag: 6606c062-96d2-4634-b775-3101dafa64de
 
         measure '03. Wprowadzenie do CALCULATE - Wprowadzenie do CALCULATE' = ```
 "
@@ -4749,6 +8055,224 @@ createOrReplace
     <meta charset='UTF-8'>
     <meta name='viewport' content='width=device-width, initial-scale=1.0'>
     <title>Wprowadzenie do CALCULATE</title>
+    <style>
+            * {
+                margin: 0;
+                padding: 0;
+                box-sizing: border-box;
+            }
+    
+            body {
+                font-family: 'Roboto', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+                font-size: 16px;
+                font-weight: 400;
+                line-height: 1.7;
+                color: #333;
+                background: transparent;
+                padding: 20px;
+            }
+    
+            .container {
+                max-width: 800px;
+                margin: 0 auto;
+                background: transparent;
+                padding: 40px;
+            }
+    
+            .navigation {
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                margin-bottom: 40px;
+                padding-bottom: 20px;
+                border-bottom: 1px solid #e1e4e8;
+            }
+    
+            button {
+                background: #6b1718;
+                color: white;
+                border: none;
+                padding: 12px 28px;
+                border-radius: 4px;
+                cursor: pointer;
+                font-size: 1em;
+                font-weight: 500;
+                transition: background 0.2s;
+            }
+    
+            button:hover {
+                background: #380c0c;
+            }
+    
+            button:disabled {
+                background: #ccc;
+                cursor: not-allowed;
+            }
+    
+            .page-indicator {
+                color: #666;
+                font-size: 1em;
+            }
+    
+            .page {
+                display: none;
+                min-height: 500px;
+            }
+    
+            .page.active {
+                display: block;
+                animation: fadeIn 0.3s ease-in;
+            }
+    
+            @keyframes fadeIn {
+                from { opacity: 0; transform: translateY(10px); }
+                to { opacity: 1; transform: translateY(0); }
+            }
+    
+            h1 {
+                font-size: 26px;
+                line-height: 36px;
+                font-weight: 600;
+                padding-top: 14px;
+                padding-bottom: 6px;
+                margin-bottom: 1em;
+                color: #6b1718;
+                border-bottom: 2px solid #6b1718;
+            }
+    
+            h2 {
+                font-size: 26px;
+                line-height: 36px;
+                font-weight: 600;
+                padding-top: 14px;
+                padding-bottom: 6px;
+                margin: 1.5em 0 0.8em 0;
+                color: #1a1a1a;
+                border-bottom: 2px solid #1a1a1a;
+            }
+    
+            h3 {
+                font-size: 1.1em;
+                font-weight: 600;
+                margin: 1.2em 0 0.6em 0;
+                padding-bottom: 5px;
+                color: #444;
+                border-bottom: 1px solid #999;
+            }
+    
+            p {
+                margin-bottom: 1em;
+                font-size: 1.05em;
+            }
+    
+            strong {
+                font-weight: 700;
+                color: #1a1a1a;
+            }
+    
+            code {
+                background: #f5f5f5;
+                padding: 3px 7px;
+                border-radius: 3px;
+                font-family: 'Fira Code', 'Courier New', monospace;
+                font-size: 0.95em;
+                color: #b82b4e;
+            }
+    
+            pre {
+                background: #f8f9fa;
+                border-left: 3px solid #6b1718;
+                padding: 18px;
+                margin: 1em 0;
+                overflow-x: auto;
+                border-radius: 3px;
+            }
+    
+            pre code {
+                background: none;
+                padding: 0;
+                color: #24292e;
+                font-size: 1em;
+                line-height: 1.6;
+            }
+    
+            .dax-keyword {
+                color: #6b1718;
+                font-weight: 600;
+            }
+    
+            .dax-function {
+                color: #6f42c1;
+            }
+    
+            .dax-number {
+                color: #005cc5;
+            }
+    
+            .dax-comment {
+                color: #6a737d;
+                font-style: italic;
+            }
+    
+            ul, ol {
+                margin: 0.3em 0;
+                padding-left: 1.8em;
+            }
+    
+            li {
+                margin: 0;
+                padding-left: 0.2em;
+                font-size: 1.05em;
+                line-height: 1.6;
+            }
+    
+            ol {
+                list-style-type: decimal;
+            }
+    
+            ol li::marker {
+                color: #999;
+                font-weight: 400;
+            }
+    
+            ul li::marker {
+                color: #999;
+            }
+    
+            ul ul, ol ol, ul ol, ol ul {
+                margin: 0.2em 0;
+                padding-left: 1.5em;
+            }
+    
+            blockquote {
+                border-left: 3px solid #6b1718;
+                background: #f8f9fa;
+                padding: 14px 18px;
+                margin: 1em 0;
+                color: #555;
+                font-style: italic;
+            }
+    
+            blockquote p {
+                margin: 0;
+            }
+    
+            .iteration-box {
+                border-left: 3px solid #6b1718;
+                padding: 14px 18px;
+                margin: 0.8em 0;
+            }
+    
+            .result-box {
+                background: #f5f5f5;
+                border-left: 3px solid #999;
+                padding: 14px 18px;
+                margin: 0.8em 0;
+                font-weight: 500;
+                color: #555;
+                font-size: 1.05em;
+            }
+        </style>
 </head>
 <body>
 
@@ -4884,7 +8408,7 @@ createOrReplace
 
 "
 ```
-            lineageTag: e843288f-4639-4bce-8503-242bb837806b
+            lineageTag: bb7a0523-0fce-4327-af36-876a60a978b9
 
         measure '04. Modyfikowanie Kontekstu - ALL i REMOVEFILTERS - usuwanie filtrów' = ```
 "
@@ -4895,6 +8419,224 @@ createOrReplace
     <meta charset='UTF-8'>
     <meta name='viewport' content='width=device-width, initial-scale=1.0'>
     <title>ALL i REMOVEFILTERS - usuwanie filtrów</title>
+    <style>
+            * {
+                margin: 0;
+                padding: 0;
+                box-sizing: border-box;
+            }
+    
+            body {
+                font-family: 'Roboto', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+                font-size: 16px;
+                font-weight: 400;
+                line-height: 1.7;
+                color: #333;
+                background: transparent;
+                padding: 20px;
+            }
+    
+            .container {
+                max-width: 800px;
+                margin: 0 auto;
+                background: transparent;
+                padding: 40px;
+            }
+    
+            .navigation {
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                margin-bottom: 40px;
+                padding-bottom: 20px;
+                border-bottom: 1px solid #e1e4e8;
+            }
+    
+            button {
+                background: #6b1718;
+                color: white;
+                border: none;
+                padding: 12px 28px;
+                border-radius: 4px;
+                cursor: pointer;
+                font-size: 1em;
+                font-weight: 500;
+                transition: background 0.2s;
+            }
+    
+            button:hover {
+                background: #380c0c;
+            }
+    
+            button:disabled {
+                background: #ccc;
+                cursor: not-allowed;
+            }
+    
+            .page-indicator {
+                color: #666;
+                font-size: 1em;
+            }
+    
+            .page {
+                display: none;
+                min-height: 500px;
+            }
+    
+            .page.active {
+                display: block;
+                animation: fadeIn 0.3s ease-in;
+            }
+    
+            @keyframes fadeIn {
+                from { opacity: 0; transform: translateY(10px); }
+                to { opacity: 1; transform: translateY(0); }
+            }
+    
+            h1 {
+                font-size: 26px;
+                line-height: 36px;
+                font-weight: 600;
+                padding-top: 14px;
+                padding-bottom: 6px;
+                margin-bottom: 1em;
+                color: #6b1718;
+                border-bottom: 2px solid #6b1718;
+            }
+    
+            h2 {
+                font-size: 26px;
+                line-height: 36px;
+                font-weight: 600;
+                padding-top: 14px;
+                padding-bottom: 6px;
+                margin: 1.5em 0 0.8em 0;
+                color: #1a1a1a;
+                border-bottom: 2px solid #1a1a1a;
+            }
+    
+            h3 {
+                font-size: 1.1em;
+                font-weight: 600;
+                margin: 1.2em 0 0.6em 0;
+                padding-bottom: 5px;
+                color: #444;
+                border-bottom: 1px solid #999;
+            }
+    
+            p {
+                margin-bottom: 1em;
+                font-size: 1.05em;
+            }
+    
+            strong {
+                font-weight: 700;
+                color: #1a1a1a;
+            }
+    
+            code {
+                background: #f5f5f5;
+                padding: 3px 7px;
+                border-radius: 3px;
+                font-family: 'Fira Code', 'Courier New', monospace;
+                font-size: 0.95em;
+                color: #b82b4e;
+            }
+    
+            pre {
+                background: #f8f9fa;
+                border-left: 3px solid #6b1718;
+                padding: 18px;
+                margin: 1em 0;
+                overflow-x: auto;
+                border-radius: 3px;
+            }
+    
+            pre code {
+                background: none;
+                padding: 0;
+                color: #24292e;
+                font-size: 1em;
+                line-height: 1.6;
+            }
+    
+            .dax-keyword {
+                color: #6b1718;
+                font-weight: 600;
+            }
+    
+            .dax-function {
+                color: #6f42c1;
+            }
+    
+            .dax-number {
+                color: #005cc5;
+            }
+    
+            .dax-comment {
+                color: #6a737d;
+                font-style: italic;
+            }
+    
+            ul, ol {
+                margin: 0.3em 0;
+                padding-left: 1.8em;
+            }
+    
+            li {
+                margin: 0;
+                padding-left: 0.2em;
+                font-size: 1.05em;
+                line-height: 1.6;
+            }
+    
+            ol {
+                list-style-type: decimal;
+            }
+    
+            ol li::marker {
+                color: #999;
+                font-weight: 400;
+            }
+    
+            ul li::marker {
+                color: #999;
+            }
+    
+            ul ul, ol ol, ul ol, ol ul {
+                margin: 0.2em 0;
+                padding-left: 1.5em;
+            }
+    
+            blockquote {
+                border-left: 3px solid #6b1718;
+                background: #f8f9fa;
+                padding: 14px 18px;
+                margin: 1em 0;
+                color: #555;
+                font-style: italic;
+            }
+    
+            blockquote p {
+                margin: 0;
+            }
+    
+            .iteration-box {
+                border-left: 3px solid #6b1718;
+                padding: 14px 18px;
+                margin: 0.8em 0;
+            }
+    
+            .result-box {
+                background: #f5f5f5;
+                border-left: 3px solid #999;
+                padding: 14px 18px;
+                margin: 0.8em 0;
+                font-weight: 500;
+                color: #555;
+                font-size: 1.05em;
+            }
+        </style>
 </head>
 <body>
 
@@ -5100,7 +8842,7 @@ createOrReplace
 
 "
 ```
-            lineageTag: 3f24c259-e290-4338-8f30-40628d1d1649
+            lineageTag: aeaf2097-77e7-4653-a79c-324c8c6038c8
 
         measure '04. Modyfikowanie Kontekstu - ALLEXCEPT' = ```
 "
@@ -5111,6 +8853,224 @@ createOrReplace
     <meta charset='UTF-8'>
     <meta name='viewport' content='width=device-width, initial-scale=1.0'>
     <title>ALLEXCEPT</title>
+    <style>
+            * {
+                margin: 0;
+                padding: 0;
+                box-sizing: border-box;
+            }
+    
+            body {
+                font-family: 'Roboto', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+                font-size: 16px;
+                font-weight: 400;
+                line-height: 1.7;
+                color: #333;
+                background: transparent;
+                padding: 20px;
+            }
+    
+            .container {
+                max-width: 800px;
+                margin: 0 auto;
+                background: transparent;
+                padding: 40px;
+            }
+    
+            .navigation {
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                margin-bottom: 40px;
+                padding-bottom: 20px;
+                border-bottom: 1px solid #e1e4e8;
+            }
+    
+            button {
+                background: #6b1718;
+                color: white;
+                border: none;
+                padding: 12px 28px;
+                border-radius: 4px;
+                cursor: pointer;
+                font-size: 1em;
+                font-weight: 500;
+                transition: background 0.2s;
+            }
+    
+            button:hover {
+                background: #380c0c;
+            }
+    
+            button:disabled {
+                background: #ccc;
+                cursor: not-allowed;
+            }
+    
+            .page-indicator {
+                color: #666;
+                font-size: 1em;
+            }
+    
+            .page {
+                display: none;
+                min-height: 500px;
+            }
+    
+            .page.active {
+                display: block;
+                animation: fadeIn 0.3s ease-in;
+            }
+    
+            @keyframes fadeIn {
+                from { opacity: 0; transform: translateY(10px); }
+                to { opacity: 1; transform: translateY(0); }
+            }
+    
+            h1 {
+                font-size: 26px;
+                line-height: 36px;
+                font-weight: 600;
+                padding-top: 14px;
+                padding-bottom: 6px;
+                margin-bottom: 1em;
+                color: #6b1718;
+                border-bottom: 2px solid #6b1718;
+            }
+    
+            h2 {
+                font-size: 26px;
+                line-height: 36px;
+                font-weight: 600;
+                padding-top: 14px;
+                padding-bottom: 6px;
+                margin: 1.5em 0 0.8em 0;
+                color: #1a1a1a;
+                border-bottom: 2px solid #1a1a1a;
+            }
+    
+            h3 {
+                font-size: 1.1em;
+                font-weight: 600;
+                margin: 1.2em 0 0.6em 0;
+                padding-bottom: 5px;
+                color: #444;
+                border-bottom: 1px solid #999;
+            }
+    
+            p {
+                margin-bottom: 1em;
+                font-size: 1.05em;
+            }
+    
+            strong {
+                font-weight: 700;
+                color: #1a1a1a;
+            }
+    
+            code {
+                background: #f5f5f5;
+                padding: 3px 7px;
+                border-radius: 3px;
+                font-family: 'Fira Code', 'Courier New', monospace;
+                font-size: 0.95em;
+                color: #b82b4e;
+            }
+    
+            pre {
+                background: #f8f9fa;
+                border-left: 3px solid #6b1718;
+                padding: 18px;
+                margin: 1em 0;
+                overflow-x: auto;
+                border-radius: 3px;
+            }
+    
+            pre code {
+                background: none;
+                padding: 0;
+                color: #24292e;
+                font-size: 1em;
+                line-height: 1.6;
+            }
+    
+            .dax-keyword {
+                color: #6b1718;
+                font-weight: 600;
+            }
+    
+            .dax-function {
+                color: #6f42c1;
+            }
+    
+            .dax-number {
+                color: #005cc5;
+            }
+    
+            .dax-comment {
+                color: #6a737d;
+                font-style: italic;
+            }
+    
+            ul, ol {
+                margin: 0.3em 0;
+                padding-left: 1.8em;
+            }
+    
+            li {
+                margin: 0;
+                padding-left: 0.2em;
+                font-size: 1.05em;
+                line-height: 1.6;
+            }
+    
+            ol {
+                list-style-type: decimal;
+            }
+    
+            ol li::marker {
+                color: #999;
+                font-weight: 400;
+            }
+    
+            ul li::marker {
+                color: #999;
+            }
+    
+            ul ul, ol ol, ul ol, ol ul {
+                margin: 0.2em 0;
+                padding-left: 1.5em;
+            }
+    
+            blockquote {
+                border-left: 3px solid #6b1718;
+                background: #f8f9fa;
+                padding: 14px 18px;
+                margin: 1em 0;
+                color: #555;
+                font-style: italic;
+            }
+    
+            blockquote p {
+                margin: 0;
+            }
+    
+            .iteration-box {
+                border-left: 3px solid #6b1718;
+                padding: 14px 18px;
+                margin: 0.8em 0;
+            }
+    
+            .result-box {
+                background: #f5f5f5;
+                border-left: 3px solid #999;
+                padding: 14px 18px;
+                margin: 0.8em 0;
+                font-weight: 500;
+                color: #555;
+                font-size: 1.05em;
+            }
+        </style>
 </head>
 <body>
 
@@ -5322,7 +9282,7 @@ createOrReplace
 
 "
 ```
-            lineageTag: 6aba61a2-72ae-4e1e-8099-44873e87b04b
+            lineageTag: 76ddcef3-cb82-429c-a660-342ee2f9572c
 
         measure '04. Modyfikowanie Kontekstu - ALLSELECTED' = ```
 "
@@ -5333,6 +9293,224 @@ createOrReplace
     <meta charset='UTF-8'>
     <meta name='viewport' content='width=device-width, initial-scale=1.0'>
     <title>ALLSELECTED</title>
+    <style>
+            * {
+                margin: 0;
+                padding: 0;
+                box-sizing: border-box;
+            }
+    
+            body {
+                font-family: 'Roboto', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+                font-size: 16px;
+                font-weight: 400;
+                line-height: 1.7;
+                color: #333;
+                background: transparent;
+                padding: 20px;
+            }
+    
+            .container {
+                max-width: 800px;
+                margin: 0 auto;
+                background: transparent;
+                padding: 40px;
+            }
+    
+            .navigation {
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                margin-bottom: 40px;
+                padding-bottom: 20px;
+                border-bottom: 1px solid #e1e4e8;
+            }
+    
+            button {
+                background: #6b1718;
+                color: white;
+                border: none;
+                padding: 12px 28px;
+                border-radius: 4px;
+                cursor: pointer;
+                font-size: 1em;
+                font-weight: 500;
+                transition: background 0.2s;
+            }
+    
+            button:hover {
+                background: #380c0c;
+            }
+    
+            button:disabled {
+                background: #ccc;
+                cursor: not-allowed;
+            }
+    
+            .page-indicator {
+                color: #666;
+                font-size: 1em;
+            }
+    
+            .page {
+                display: none;
+                min-height: 500px;
+            }
+    
+            .page.active {
+                display: block;
+                animation: fadeIn 0.3s ease-in;
+            }
+    
+            @keyframes fadeIn {
+                from { opacity: 0; transform: translateY(10px); }
+                to { opacity: 1; transform: translateY(0); }
+            }
+    
+            h1 {
+                font-size: 26px;
+                line-height: 36px;
+                font-weight: 600;
+                padding-top: 14px;
+                padding-bottom: 6px;
+                margin-bottom: 1em;
+                color: #6b1718;
+                border-bottom: 2px solid #6b1718;
+            }
+    
+            h2 {
+                font-size: 26px;
+                line-height: 36px;
+                font-weight: 600;
+                padding-top: 14px;
+                padding-bottom: 6px;
+                margin: 1.5em 0 0.8em 0;
+                color: #1a1a1a;
+                border-bottom: 2px solid #1a1a1a;
+            }
+    
+            h3 {
+                font-size: 1.1em;
+                font-weight: 600;
+                margin: 1.2em 0 0.6em 0;
+                padding-bottom: 5px;
+                color: #444;
+                border-bottom: 1px solid #999;
+            }
+    
+            p {
+                margin-bottom: 1em;
+                font-size: 1.05em;
+            }
+    
+            strong {
+                font-weight: 700;
+                color: #1a1a1a;
+            }
+    
+            code {
+                background: #f5f5f5;
+                padding: 3px 7px;
+                border-radius: 3px;
+                font-family: 'Fira Code', 'Courier New', monospace;
+                font-size: 0.95em;
+                color: #b82b4e;
+            }
+    
+            pre {
+                background: #f8f9fa;
+                border-left: 3px solid #6b1718;
+                padding: 18px;
+                margin: 1em 0;
+                overflow-x: auto;
+                border-radius: 3px;
+            }
+    
+            pre code {
+                background: none;
+                padding: 0;
+                color: #24292e;
+                font-size: 1em;
+                line-height: 1.6;
+            }
+    
+            .dax-keyword {
+                color: #6b1718;
+                font-weight: 600;
+            }
+    
+            .dax-function {
+                color: #6f42c1;
+            }
+    
+            .dax-number {
+                color: #005cc5;
+            }
+    
+            .dax-comment {
+                color: #6a737d;
+                font-style: italic;
+            }
+    
+            ul, ol {
+                margin: 0.3em 0;
+                padding-left: 1.8em;
+            }
+    
+            li {
+                margin: 0;
+                padding-left: 0.2em;
+                font-size: 1.05em;
+                line-height: 1.6;
+            }
+    
+            ol {
+                list-style-type: decimal;
+            }
+    
+            ol li::marker {
+                color: #999;
+                font-weight: 400;
+            }
+    
+            ul li::marker {
+                color: #999;
+            }
+    
+            ul ul, ol ol, ul ol, ol ul {
+                margin: 0.2em 0;
+                padding-left: 1.5em;
+            }
+    
+            blockquote {
+                border-left: 3px solid #6b1718;
+                background: #f8f9fa;
+                padding: 14px 18px;
+                margin: 1em 0;
+                color: #555;
+                font-style: italic;
+            }
+    
+            blockquote p {
+                margin: 0;
+            }
+    
+            .iteration-box {
+                border-left: 3px solid #6b1718;
+                padding: 14px 18px;
+                margin: 0.8em 0;
+            }
+    
+            .result-box {
+                background: #f5f5f5;
+                border-left: 3px solid #999;
+                padding: 14px 18px;
+                margin: 0.8em 0;
+                font-weight: 500;
+                color: #555;
+                font-size: 1.05em;
+            }
+        </style>
 </head>
 <body>
 
@@ -5599,7 +9777,7 @@ createOrReplace
 
 "
 ```
-            lineageTag: 649cab88-60c7-4444-be72-91c84c0dd054
+            lineageTag: 4ff32c9c-5965-462b-8d3f-162b4497873e
 
         measure '04. Modyfikowanie Kontekstu - CROSSFILTER' = ```
 "
@@ -5610,6 +9788,224 @@ createOrReplace
     <meta charset='UTF-8'>
     <meta name='viewport' content='width=device-width, initial-scale=1.0'>
     <title>CROSSFILTER</title>
+    <style>
+            * {
+                margin: 0;
+                padding: 0;
+                box-sizing: border-box;
+            }
+    
+            body {
+                font-family: 'Roboto', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+                font-size: 16px;
+                font-weight: 400;
+                line-height: 1.7;
+                color: #333;
+                background: transparent;
+                padding: 20px;
+            }
+    
+            .container {
+                max-width: 800px;
+                margin: 0 auto;
+                background: transparent;
+                padding: 40px;
+            }
+    
+            .navigation {
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                margin-bottom: 40px;
+                padding-bottom: 20px;
+                border-bottom: 1px solid #e1e4e8;
+            }
+    
+            button {
+                background: #6b1718;
+                color: white;
+                border: none;
+                padding: 12px 28px;
+                border-radius: 4px;
+                cursor: pointer;
+                font-size: 1em;
+                font-weight: 500;
+                transition: background 0.2s;
+            }
+    
+            button:hover {
+                background: #380c0c;
+            }
+    
+            button:disabled {
+                background: #ccc;
+                cursor: not-allowed;
+            }
+    
+            .page-indicator {
+                color: #666;
+                font-size: 1em;
+            }
+    
+            .page {
+                display: none;
+                min-height: 500px;
+            }
+    
+            .page.active {
+                display: block;
+                animation: fadeIn 0.3s ease-in;
+            }
+    
+            @keyframes fadeIn {
+                from { opacity: 0; transform: translateY(10px); }
+                to { opacity: 1; transform: translateY(0); }
+            }
+    
+            h1 {
+                font-size: 26px;
+                line-height: 36px;
+                font-weight: 600;
+                padding-top: 14px;
+                padding-bottom: 6px;
+                margin-bottom: 1em;
+                color: #6b1718;
+                border-bottom: 2px solid #6b1718;
+            }
+    
+            h2 {
+                font-size: 26px;
+                line-height: 36px;
+                font-weight: 600;
+                padding-top: 14px;
+                padding-bottom: 6px;
+                margin: 1.5em 0 0.8em 0;
+                color: #1a1a1a;
+                border-bottom: 2px solid #1a1a1a;
+            }
+    
+            h3 {
+                font-size: 1.1em;
+                font-weight: 600;
+                margin: 1.2em 0 0.6em 0;
+                padding-bottom: 5px;
+                color: #444;
+                border-bottom: 1px solid #999;
+            }
+    
+            p {
+                margin-bottom: 1em;
+                font-size: 1.05em;
+            }
+    
+            strong {
+                font-weight: 700;
+                color: #1a1a1a;
+            }
+    
+            code {
+                background: #f5f5f5;
+                padding: 3px 7px;
+                border-radius: 3px;
+                font-family: 'Fira Code', 'Courier New', monospace;
+                font-size: 0.95em;
+                color: #b82b4e;
+            }
+    
+            pre {
+                background: #f8f9fa;
+                border-left: 3px solid #6b1718;
+                padding: 18px;
+                margin: 1em 0;
+                overflow-x: auto;
+                border-radius: 3px;
+            }
+    
+            pre code {
+                background: none;
+                padding: 0;
+                color: #24292e;
+                font-size: 1em;
+                line-height: 1.6;
+            }
+    
+            .dax-keyword {
+                color: #6b1718;
+                font-weight: 600;
+            }
+    
+            .dax-function {
+                color: #6f42c1;
+            }
+    
+            .dax-number {
+                color: #005cc5;
+            }
+    
+            .dax-comment {
+                color: #6a737d;
+                font-style: italic;
+            }
+    
+            ul, ol {
+                margin: 0.3em 0;
+                padding-left: 1.8em;
+            }
+    
+            li {
+                margin: 0;
+                padding-left: 0.2em;
+                font-size: 1.05em;
+                line-height: 1.6;
+            }
+    
+            ol {
+                list-style-type: decimal;
+            }
+    
+            ol li::marker {
+                color: #999;
+                font-weight: 400;
+            }
+    
+            ul li::marker {
+                color: #999;
+            }
+    
+            ul ul, ol ol, ul ol, ol ul {
+                margin: 0.2em 0;
+                padding-left: 1.5em;
+            }
+    
+            blockquote {
+                border-left: 3px solid #6b1718;
+                background: #f8f9fa;
+                padding: 14px 18px;
+                margin: 1em 0;
+                color: #555;
+                font-style: italic;
+            }
+    
+            blockquote p {
+                margin: 0;
+            }
+    
+            .iteration-box {
+                border-left: 3px solid #6b1718;
+                padding: 14px 18px;
+                margin: 0.8em 0;
+            }
+    
+            .result-box {
+                background: #f5f5f5;
+                border-left: 3px solid #999;
+                padding: 14px 18px;
+                margin: 0.8em 0;
+                font-weight: 500;
+                color: #555;
+                font-size: 1.05em;
+            }
+        </style>
 </head>
 <body>
 
@@ -5746,7 +10142,7 @@ createOrReplace
 
 "
 ```
-            lineageTag: 1dcb4513-d57b-4525-a9de-6ef3423b946c
+            lineageTag: c4bcab3d-693e-46e3-aa88-61c68a14502f
 
         measure '04. Modyfikowanie Kontekstu - KEEPFILTERS' = ```
 "
@@ -5757,6 +10153,224 @@ createOrReplace
     <meta charset='UTF-8'>
     <meta name='viewport' content='width=device-width, initial-scale=1.0'>
     <title>KEEPFILTERS</title>
+    <style>
+            * {
+                margin: 0;
+                padding: 0;
+                box-sizing: border-box;
+            }
+    
+            body {
+                font-family: 'Roboto', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+                font-size: 16px;
+                font-weight: 400;
+                line-height: 1.7;
+                color: #333;
+                background: transparent;
+                padding: 20px;
+            }
+    
+            .container {
+                max-width: 800px;
+                margin: 0 auto;
+                background: transparent;
+                padding: 40px;
+            }
+    
+            .navigation {
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                margin-bottom: 40px;
+                padding-bottom: 20px;
+                border-bottom: 1px solid #e1e4e8;
+            }
+    
+            button {
+                background: #6b1718;
+                color: white;
+                border: none;
+                padding: 12px 28px;
+                border-radius: 4px;
+                cursor: pointer;
+                font-size: 1em;
+                font-weight: 500;
+                transition: background 0.2s;
+            }
+    
+            button:hover {
+                background: #380c0c;
+            }
+    
+            button:disabled {
+                background: #ccc;
+                cursor: not-allowed;
+            }
+    
+            .page-indicator {
+                color: #666;
+                font-size: 1em;
+            }
+    
+            .page {
+                display: none;
+                min-height: 500px;
+            }
+    
+            .page.active {
+                display: block;
+                animation: fadeIn 0.3s ease-in;
+            }
+    
+            @keyframes fadeIn {
+                from { opacity: 0; transform: translateY(10px); }
+                to { opacity: 1; transform: translateY(0); }
+            }
+    
+            h1 {
+                font-size: 26px;
+                line-height: 36px;
+                font-weight: 600;
+                padding-top: 14px;
+                padding-bottom: 6px;
+                margin-bottom: 1em;
+                color: #6b1718;
+                border-bottom: 2px solid #6b1718;
+            }
+    
+            h2 {
+                font-size: 26px;
+                line-height: 36px;
+                font-weight: 600;
+                padding-top: 14px;
+                padding-bottom: 6px;
+                margin: 1.5em 0 0.8em 0;
+                color: #1a1a1a;
+                border-bottom: 2px solid #1a1a1a;
+            }
+    
+            h3 {
+                font-size: 1.1em;
+                font-weight: 600;
+                margin: 1.2em 0 0.6em 0;
+                padding-bottom: 5px;
+                color: #444;
+                border-bottom: 1px solid #999;
+            }
+    
+            p {
+                margin-bottom: 1em;
+                font-size: 1.05em;
+            }
+    
+            strong {
+                font-weight: 700;
+                color: #1a1a1a;
+            }
+    
+            code {
+                background: #f5f5f5;
+                padding: 3px 7px;
+                border-radius: 3px;
+                font-family: 'Fira Code', 'Courier New', monospace;
+                font-size: 0.95em;
+                color: #b82b4e;
+            }
+    
+            pre {
+                background: #f8f9fa;
+                border-left: 3px solid #6b1718;
+                padding: 18px;
+                margin: 1em 0;
+                overflow-x: auto;
+                border-radius: 3px;
+            }
+    
+            pre code {
+                background: none;
+                padding: 0;
+                color: #24292e;
+                font-size: 1em;
+                line-height: 1.6;
+            }
+    
+            .dax-keyword {
+                color: #6b1718;
+                font-weight: 600;
+            }
+    
+            .dax-function {
+                color: #6f42c1;
+            }
+    
+            .dax-number {
+                color: #005cc5;
+            }
+    
+            .dax-comment {
+                color: #6a737d;
+                font-style: italic;
+            }
+    
+            ul, ol {
+                margin: 0.3em 0;
+                padding-left: 1.8em;
+            }
+    
+            li {
+                margin: 0;
+                padding-left: 0.2em;
+                font-size: 1.05em;
+                line-height: 1.6;
+            }
+    
+            ol {
+                list-style-type: decimal;
+            }
+    
+            ol li::marker {
+                color: #999;
+                font-weight: 400;
+            }
+    
+            ul li::marker {
+                color: #999;
+            }
+    
+            ul ul, ol ol, ul ol, ol ul {
+                margin: 0.2em 0;
+                padding-left: 1.5em;
+            }
+    
+            blockquote {
+                border-left: 3px solid #6b1718;
+                background: #f8f9fa;
+                padding: 14px 18px;
+                margin: 1em 0;
+                color: #555;
+                font-style: italic;
+            }
+    
+            blockquote p {
+                margin: 0;
+            }
+    
+            .iteration-box {
+                border-left: 3px solid #6b1718;
+                padding: 14px 18px;
+                margin: 0.8em 0;
+            }
+    
+            .result-box {
+                background: #f5f5f5;
+                border-left: 3px solid #999;
+                padding: 14px 18px;
+                margin: 0.8em 0;
+                font-weight: 500;
+                color: #555;
+                font-size: 1.05em;
+            }
+        </style>
 </head>
 <body>
 
@@ -5963,7 +10577,7 @@ createOrReplace
 
 "
 ```
-            lineageTag: b12cb3ab-f8fa-432e-932f-5669731ad47d
+            lineageTag: 338f87e6-773d-4d35-8c67-445eb11a8dfa
 
         measure '04. Modyfikowanie Kontekstu - USERELATIONSHIP' = ```
 "
@@ -5974,6 +10588,224 @@ createOrReplace
     <meta charset='UTF-8'>
     <meta name='viewport' content='width=device-width, initial-scale=1.0'>
     <title>USERELATIONSHIP</title>
+    <style>
+            * {
+                margin: 0;
+                padding: 0;
+                box-sizing: border-box;
+            }
+    
+            body {
+                font-family: 'Roboto', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+                font-size: 16px;
+                font-weight: 400;
+                line-height: 1.7;
+                color: #333;
+                background: transparent;
+                padding: 20px;
+            }
+    
+            .container {
+                max-width: 800px;
+                margin: 0 auto;
+                background: transparent;
+                padding: 40px;
+            }
+    
+            .navigation {
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                margin-bottom: 40px;
+                padding-bottom: 20px;
+                border-bottom: 1px solid #e1e4e8;
+            }
+    
+            button {
+                background: #6b1718;
+                color: white;
+                border: none;
+                padding: 12px 28px;
+                border-radius: 4px;
+                cursor: pointer;
+                font-size: 1em;
+                font-weight: 500;
+                transition: background 0.2s;
+            }
+    
+            button:hover {
+                background: #380c0c;
+            }
+    
+            button:disabled {
+                background: #ccc;
+                cursor: not-allowed;
+            }
+    
+            .page-indicator {
+                color: #666;
+                font-size: 1em;
+            }
+    
+            .page {
+                display: none;
+                min-height: 500px;
+            }
+    
+            .page.active {
+                display: block;
+                animation: fadeIn 0.3s ease-in;
+            }
+    
+            @keyframes fadeIn {
+                from { opacity: 0; transform: translateY(10px); }
+                to { opacity: 1; transform: translateY(0); }
+            }
+    
+            h1 {
+                font-size: 26px;
+                line-height: 36px;
+                font-weight: 600;
+                padding-top: 14px;
+                padding-bottom: 6px;
+                margin-bottom: 1em;
+                color: #6b1718;
+                border-bottom: 2px solid #6b1718;
+            }
+    
+            h2 {
+                font-size: 26px;
+                line-height: 36px;
+                font-weight: 600;
+                padding-top: 14px;
+                padding-bottom: 6px;
+                margin: 1.5em 0 0.8em 0;
+                color: #1a1a1a;
+                border-bottom: 2px solid #1a1a1a;
+            }
+    
+            h3 {
+                font-size: 1.1em;
+                font-weight: 600;
+                margin: 1.2em 0 0.6em 0;
+                padding-bottom: 5px;
+                color: #444;
+                border-bottom: 1px solid #999;
+            }
+    
+            p {
+                margin-bottom: 1em;
+                font-size: 1.05em;
+            }
+    
+            strong {
+                font-weight: 700;
+                color: #1a1a1a;
+            }
+    
+            code {
+                background: #f5f5f5;
+                padding: 3px 7px;
+                border-radius: 3px;
+                font-family: 'Fira Code', 'Courier New', monospace;
+                font-size: 0.95em;
+                color: #b82b4e;
+            }
+    
+            pre {
+                background: #f8f9fa;
+                border-left: 3px solid #6b1718;
+                padding: 18px;
+                margin: 1em 0;
+                overflow-x: auto;
+                border-radius: 3px;
+            }
+    
+            pre code {
+                background: none;
+                padding: 0;
+                color: #24292e;
+                font-size: 1em;
+                line-height: 1.6;
+            }
+    
+            .dax-keyword {
+                color: #6b1718;
+                font-weight: 600;
+            }
+    
+            .dax-function {
+                color: #6f42c1;
+            }
+    
+            .dax-number {
+                color: #005cc5;
+            }
+    
+            .dax-comment {
+                color: #6a737d;
+                font-style: italic;
+            }
+    
+            ul, ol {
+                margin: 0.3em 0;
+                padding-left: 1.8em;
+            }
+    
+            li {
+                margin: 0;
+                padding-left: 0.2em;
+                font-size: 1.05em;
+                line-height: 1.6;
+            }
+    
+            ol {
+                list-style-type: decimal;
+            }
+    
+            ol li::marker {
+                color: #999;
+                font-weight: 400;
+            }
+    
+            ul li::marker {
+                color: #999;
+            }
+    
+            ul ul, ol ol, ul ol, ol ul {
+                margin: 0.2em 0;
+                padding-left: 1.5em;
+            }
+    
+            blockquote {
+                border-left: 3px solid #6b1718;
+                background: #f8f9fa;
+                padding: 14px 18px;
+                margin: 1em 0;
+                color: #555;
+                font-style: italic;
+            }
+    
+            blockquote p {
+                margin: 0;
+            }
+    
+            .iteration-box {
+                border-left: 3px solid #6b1718;
+                padding: 14px 18px;
+                margin: 0.8em 0;
+            }
+    
+            .result-box {
+                background: #f5f5f5;
+                border-left: 3px solid #999;
+                padding: 14px 18px;
+                margin: 0.8em 0;
+                font-weight: 500;
+                color: #555;
+                font-size: 1.05em;
+            }
+        </style>
 </head>
 <body>
 
@@ -6116,7 +10948,7 @@ createOrReplace
 
 "
 ```
-            lineageTag: c06eeb2d-1853-4d21-8cdb-0bee07b2b636
+            lineageTag: d3858557-0c2f-46c0-adce-9ba915efd4d4
 
         measure '04. Quiz' = ```
 "
@@ -6128,204 +10960,236 @@ createOrReplace
     <meta name='viewport' content='width=device-width, initial-scale=1.0'>
     <title>Quiz: Modyfikowanie Kontekstu</title>
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        body {
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-            font-size: 16px;
-            line-height: 1.7;
-            color: #333;
-            background: transparent;
-            padding: 20px;
-        }
-
-        .container {
-            max-width: 800px;
-            margin: 0 auto;
-            background: transparent;
-            padding: 40px;
-        }
-
-        .navigation {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 40px;
-            padding-bottom: 20px;
-            border-bottom: 1px solid #e1e4e8;
-        }
-
-        button {
-            background: #0066cc;
-            color: white;
-            border: none;
-            padding: 12px 28px;
-            border-radius: 4px;
-            cursor: pointer;
-            font-size: 1em;
-            font-weight: 500;
-            transition: background 0.2s;
-        }
-
-        button:hover {
-            background: #0052a3;
-        }
-
-        button:disabled {
-            background: #ccc;
-            cursor: not-allowed;
-        }
-
-        .page-indicator {
-            color: #666;
-            font-size: 1em;
-        }
-
-        .page {
-            display: none;
-            min-height: 500px;
-        }
-
-        .page.active {
-            display: block;
-            animation: fadeIn 0.3s ease-in;
-        }
-
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(10px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-
-        h1 {
-            font-size: 1.8em;
-            font-weight: 600;
-            margin-bottom: 1em;
-            color: #1a1a1a;
-        }
-
-        .question-box {
-            background: #f8f9fa;
-            border-left: 3px solid #0066cc;
-            padding: 20px;
-            margin: 1.5em 0;
-            border-radius: 3px;
-        }
-
-        .answers {
-            margin-top: 1.5em;
-        }
-
-        .answer-option {
-            background: white;
-            border: 2px solid #e1e4e8;
-            padding: 15px 20px;
-            margin: 10px 0;
-            border-radius: 4px;
-            cursor: pointer;
-            transition: all 0.2s;
-            font-size: 1.05em;
-        }
-
-        .answer-option:hover {
-            border-color: #0066cc;
-            background: #f0f7ff;
-        }
-
-        .answer-option.selected {
-            border-color: #0066cc;
-            background: #e6f2ff;
-        }
-
-        .answer-option.correct {
-            border-color: #28a745;
-            background: #d4edda;
-        }
-
-        .answer-option.incorrect {
-            border-color: #dc3545;
-            background: #f8d7da;
-        }
-
-        .feedback {
-            margin-top: 1.5em;
-            padding: 15px 20px;
-            border-radius: 4px;
-            display: none;
-            font-size: 1.05em;
-        }
-
-        .feedback.show {
-            display: block;
-        }
-
-        .feedback.correct {
-            background: #d4edda;
-            border-left: 3px solid #28a745;
-            color: #155724;
-        }
-
-        .feedback.incorrect {
-            background: #f8d7da;
-            border-left: 3px solid #dc3545;
-            color: #721c24;
-        }
-
-        .check-button {
-            margin-top: 1.5em;
-            background: #28a745;
-        }
-
-        .check-button:hover:not(:disabled) {
-            background: #218838;
-        }
-
-        .check-button:disabled {
-            background: #ccc;
-        }
-
-        pre {
-            background: #f8f9fa;
-            border-left: 3px solid #0066cc;
-            padding: 18px;
-            margin: 1em 0;
-            overflow-x: auto;
-            border-radius: 3px;
-        }
-
-        code {
-            font-family: 'Courier New', monospace;
-            font-size: 0.95em;
-        }
-
-        .score-box {
-            background: #0066cc;
-            color: white;
-            padding: 20px;
-            border-radius: 4px;
-            text-align: center;
-            font-size: 1.2em;
-            margin-bottom: 2em;
-        }
-
-        .summary-item {
-            background: #f8f9fa;
-            padding: 15px;
-            margin: 10px 0;
-            border-radius: 4px;
-            border-left: 3px solid #ccc;
-        }
-
-        .summary-item.correct {
-            border-left-color: #28a745;
-        }
-
-        .summary-item.incorrect {
-            border-left-color: #dc3545;
-        }
+    * {
+                margin: 0;
+                padding: 0;
+                box-sizing: border-box;
+            }
+    
+            body {
+                font-family: 'Roboto', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+                font-size: 16px;
+                font-weight: 400;
+                line-height: 1.7;
+                color: #333;
+                background: transparent;
+                padding: 20px;
+            }
+    
+            .container {
+                max-width: 800px;
+                margin: 0 auto;
+                background: transparent;
+                padding: 40px;
+            }
+    
+            .navigation {
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                margin-bottom: 40px;
+                padding-bottom: 20px;
+                border-bottom: 1px solid #e1e4e8;
+            }
+    
+            button {
+                background: #6b1718;
+                color: white;
+                border: none;
+                padding: 12px 28px;
+                border-radius: 4px;
+                cursor: pointer;
+                font-size: 1em;
+                font-weight: 500;
+                transition: background 0.2s;
+            }
+    
+            button:hover {
+                background: #380c0c;
+            }
+    
+            button:disabled {
+                background: #ccc;
+                cursor: not-allowed;
+            }
+    
+            .page-indicator {
+                color: #666;
+                font-size: 1em;
+            }
+    
+            .page {
+                display: none;
+                min-height: 500px;
+            }
+    
+            .page.active {
+                display: block;
+                animation: fadeIn 0.3s ease-in;
+            }
+    
+            @keyframes fadeIn {
+                from { opacity: 0; transform: translateY(10px); }
+                to { opacity: 1; transform: translateY(0); }
+            }
+    
+            h1 {
+                font-size: 26px;
+                line-height: 36px;
+                font-weight: 600;
+                padding-top: 14px;
+                padding-bottom: 6px;
+                margin-bottom: 1em;
+                color: #6b1718;
+                border-bottom: 2px solid #6b1718;
+            }
+    
+            h2 {
+                font-size: 26px;
+                line-height: 36px;
+                font-weight: 600;
+                padding-top: 14px;
+                padding-bottom: 6px;
+                margin: 1.5em 0 0.8em 0;
+                color: #1a1a1a;
+                border-bottom: 2px solid #1a1a1a;
+            }
+    
+            .question-box {
+                background: #f8f9fa;
+                border-left: 3px solid #6b1718;
+                padding: 20px;
+                margin: 1.5em 0;
+                border-radius: 3px;
+            }
+    
+            .question-box p {
+                margin: 0;
+                font-size: 1.05em;
+                color: #1a1a1a;
+            }
+    
+            .answers {
+                margin-top: 1.5em;
+            }
+    
+            .answer-option {
+                background: white;
+                border: 2px solid #e1e4e8;
+                padding: 15px 20px;
+                margin: 10px 0;
+                border-radius: 4px;
+                cursor: pointer;
+                transition: all 0.2s;
+                font-size: 1.05em;
+            }
+    
+            .answer-option:hover {
+                border-color: #6b1718;
+                background: #fef5f5;
+            }
+    
+            .answer-option.selected {
+                border-color: #6b1718;
+                background: #ffe5e6;
+            }
+    
+            .answer-option.correct {
+                border-color: #ccc;
+                background: #d4edda;
+            }
+    
+            .answer-option.incorrect {
+                border-color: #b82b4e;
+                background: #f8d7da;
+            }
+    
+            .feedback {
+                margin-top: 1.5em;
+                padding: 15px 20px;
+                border-radius: 4px;
+                display: none;
+                font-size: 1.05em;
+            }
+    
+            .feedback.show {
+                display: block;
+            }
+    
+            .feedback.correct {
+                background: #d4edda;
+                border-left: 3px solid #28a745;
+                color: #155724;
+            }
+    
+            .feedback.incorrect {
+                background: #f8d7da;
+                border-left: 3px solid #b82b4e;
+                color: #721c24;
+            }
+    
+            .check-button {
+                margin-top: 1.5em;
+                background: #121212;
+            }
+    
+            .check-button:hover:not(:disabled) {
+                background: #111111;
+            }
+    
+            .check-button:disabled {
+                background: #ccc;
+            }
+    
+            pre {
+                background: #f8f9fa;
+                border-left: 3px solid #6b1718;
+                padding: 18px;
+                margin: 1em 0;
+                overflow-x: auto;
+                border-radius: 3px;
+            }
+    
+            code {
+                font-family: 'Fira Code', 'Courier New', monospace;
+                font-size: 0.95em;
+                color: #b82b4e;
+            }
+    
+            .score-box {
+                background: #6b1718;
+                color: white;
+                padding: 20px;
+                border-radius: 4px;
+                text-align: center;
+                font-size: 1.2em;
+                margin-bottom: 2em;
+            }
+    
+            .summary-item {
+                background: #f8f9fa;
+                padding: 15px;
+                margin: 10px 0;
+                border-radius: 4px;
+                border-left: 3px solid #ccc;
+            }
+    
+            .summary-item.correct {
+                border-left-color: #28a745;
+            }
+    
+            .summary-item.incorrect {
+                border-left-color: #b82b4e;
+            }
+    
+            strong {
+                font-weight: 700;
+                color: #1a1a1a;
+            }
+    
+            p {
+                margin-bottom: 1em;
+            }
     </style>
 </head>
 <body>
@@ -6515,7 +11379,7 @@ createOrReplace
             Twój wynik: <span id='scoreText'>0/7</span> (<span id='percentText'>0%</span>)
         </div>
         <div id='summaryContent'></div>
-        <button onclick='restartQuiz()' style='margin-top: 20px; width: 100%;'>🔄 Rozpocznij quiz od nowa</button>
+        <button onclick='restartQuiz()' style='margin-top: 20px; width: 100%;'> Rozpocznij quiz od nowa</button>
     </div>
 </div>
 
@@ -6540,133 +11404,133 @@ createOrReplace
     ];
     
     document.getElementById('totalPages').textContent = totalPages;
-
-    function selectAnswer(questionIndex, answerIndex) {
-        if (answeredQuestions[questionIndex]) return;
-
-        const answers = document.querySelectorAll('.page')[questionIndex].querySelectorAll('.answer-option');
-        answers.forEach(a => a.classList.remove('selected'));
-        answers[answerIndex].classList.add('selected');
-        userAnswers[questionIndex] = answerIndex;
-    }
-
-    function checkAnswer(questionIndex, correctIndex) {
-        if (answeredQuestions[questionIndex]) return;
-
-        const answers = document.querySelectorAll('.page')[questionIndex].querySelectorAll('.answer-option');
-        const feedback = document.getElementById('feedback-' + questionIndex);
-        const checkBtn = document.querySelectorAll('.page')[questionIndex].querySelector('.check-button');
-
-        if (userAnswers[questionIndex] === null) {
-            feedback.className = 'feedback show incorrect';
-            feedback.textContent = '⚠️ Proszę najpierw wybrać odpowiedź!';
-            return;
+    
+        function selectAnswer(questionIndex, answerIndex) {
+            if (answeredQuestions[questionIndex]) return;
+    
+            const answers = document.querySelectorAll('.page')[questionIndex].querySelectorAll('.answer-option');
+            answers.forEach(a => a.classList.remove('selected'));
+            answers[answerIndex].classList.add('selected');
+            userAnswers[questionIndex] = answerIndex;
         }
-
-        answeredQuestions[questionIndex] = true;
-        checkBtn.disabled = true;
-
-        const isCorrect = userAnswers[questionIndex] === correctIndex;
-
-        answers.forEach((answer, index) => {
-            answer.style.cursor = 'default';
-            if (index === correctIndex) {
-                answer.classList.add('correct');
-            } else if (index === userAnswers[questionIndex]) {
-                answer.classList.add('incorrect');
+    
+        function checkAnswer(questionIndex, correctIndex) {
+            if (answeredQuestions[questionIndex]) return;
+    
+            const answers = document.querySelectorAll('.page')[questionIndex].querySelectorAll('.answer-option');
+            const feedback = document.getElementById('feedback-' + questionIndex);
+            const checkBtn = document.querySelectorAll('.page')[questionIndex].querySelector('.check-button');
+    
+            if (userAnswers[questionIndex] === null) {
+                feedback.className = 'feedback show incorrect';
+                feedback.textContent = 'Proszę najpierw wybrać odpowiedź!';
+                return;
             }
+    
+            answeredQuestions[questionIndex] = true;
+            checkBtn.disabled = true;
+    
+            const isCorrect = userAnswers[questionIndex] === correctIndex;
+    
+            answers.forEach((answer, index) => {
+                answer.style.cursor = 'default';
+                if (index === correctIndex) {
+                    answer.classList.add('correct');
+                } else if (index === userAnswers[questionIndex]) {
+                    answer.classList.add('incorrect');
+                }
+            });
+    
+            feedback.className = 'feedback show ' + (isCorrect ? 'correct' : 'incorrect');
+            feedback.innerHTML = (isCorrect ? '✅ Świetnie! ' : '❌ Nieprawidłowo. ') + explanations[questionIndex];
+    
+            if (questionIndex < totalQuestions - 1) {
+                setTimeout(() => {
+                    changePage(1);
+                }, 2500);
+            } else {
+                setTimeout(() => {
+                    showSummary();
+                    changePage(1);
+                }, 2500);
+            }
+        }
+    
+        function showSummary() {
+            let correctCount = 0;
+            for (let i = 0; i < totalQuestions; i++) {
+                if (userAnswers[i] === correctAnswers[i]) {
+                    correctCount++;
+                }
+            }
+    
+            const percentage = Math.round((correctCount / totalQuestions) * 100);
+            document.getElementById('scoreText').textContent = correctCount + '/' + totalQuestions;
+            document.getElementById('percentText').textContent = percentage + '%';
+    
+            let summaryHTML = '<h2>Szczegóły odpowiedzi:</h2>';
+            for (let i = 0; i < totalQuestions; i++) {
+                const isCorrect = userAnswers[i] === correctAnswers[i];
+                summaryHTML += `
+                    <div class='summary-item ${isCorrect ? 'correct' : 'incorrect'}'>
+                        <strong>Pytanie ${i + 1}:</strong> ${isCorrect ? '✅ Poprawnie' : '❌ Niepoprawnie'}<br>
+                        <small>${explanations[i]}</small>
+                    </div>
+                `;
+            }
+    
+            document.getElementById('summaryContent').innerHTML = summaryHTML;
+        }
+    
+        function restartQuiz() {
+            userAnswers.fill(null);
+            answeredQuestions.fill(false);
+            currentPage = 1;
+    
+            document.querySelectorAll('.page').forEach((page, index) => {
+                if (index < totalQuestions) {
+                    const answers = page.querySelectorAll('.answer-option');
+                    answers.forEach(a => {
+                        a.className = 'answer-option';
+                        a.style.cursor = 'pointer';
+                    });
+                    const feedback = page.querySelector('.feedback');
+                    feedback.className = 'feedback';
+                    const checkBtn = page.querySelector('.check-button');
+                    checkBtn.disabled = false;
+                }
+            });
+    
+            showPage(1);
+        }
+    
+        function showPage(n) {
+            const pages = document.querySelectorAll('.page');
+    
+            if (n > totalPages) currentPage = totalPages;
+            if (n < 1) currentPage = 1;
+    
+            pages.forEach(page => page.classList.remove('active'));
+            pages[currentPage - 1].classList.add('active');
+    
+            document.getElementById('currentPage').textContent = currentPage;
+            document.getElementById('prevBtn').disabled = currentPage === 1;
+            document.getElementById('nextBtn').disabled = currentPage === totalPages;
+    
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+    
+        function changePage(n) {
+            currentPage += n;
+            showPage(currentPage);
+        }
+    
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'ArrowLeft') changePage(-1);
+            if (e.key === 'ArrowRight') changePage(1);
         });
-
-        feedback.className = 'feedback show ' + (isCorrect ? 'correct' : 'incorrect');
-        feedback.innerHTML = (isCorrect ? '✅ Świetnie! ' : '❌ Nieprawidłowo. ') + explanations[questionIndex];
-
-        if (questionIndex < totalQuestions - 1) {
-            setTimeout(() => {
-                changePage(1);
-            }, 2500);
-        } else {
-            setTimeout(() => {
-                showSummary();
-                changePage(1);
-            }, 2500);
-        }
-    }
-
-    function showSummary() {
-        let correctCount = 0;
-        for (let i = 0; i < totalQuestions; i++) {
-            if (userAnswers[i] === correctAnswers[i]) {
-                correctCount++;
-            }
-        }
-
-        const percentage = Math.round((correctCount / totalQuestions) * 100);
-        document.getElementById('scoreText').textContent = correctCount + '/' + totalQuestions;
-        document.getElementById('percentText').textContent = percentage + '%';
-
-        let summaryHTML = '<h2>Szczegóły odpowiedzi:</h2>';
-        for (let i = 0; i < totalQuestions; i++) {
-            const isCorrect = userAnswers[i] === correctAnswers[i];
-            summaryHTML += `
-                <div class='summary-item ${isCorrect ? 'correct' : 'incorrect'}'>
-                    <strong>Pytanie ${i + 1}:</strong> ${isCorrect ? '✅ Poprawnie' : '❌ Niepoprawnie'}<br>
-                    <small>${explanations[i]}</small>
-                </div>
-            `;
-        }
-
-        document.getElementById('summaryContent').innerHTML = summaryHTML;
-    }
-
-    function restartQuiz() {
-        userAnswers.fill(null);
-        answeredQuestions.fill(false);
-        currentPage = 1;
-
-        document.querySelectorAll('.page').forEach((page, index) => {
-            if (index < totalQuestions) {
-                const answers = page.querySelectorAll('.answer-option');
-                answers.forEach(a => {
-                    a.className = 'answer-option';
-                    a.style.cursor = 'pointer';
-                });
-                const feedback = page.querySelector('.feedback');
-                feedback.className = 'feedback';
-                const checkBtn = page.querySelector('.check-button');
-                checkBtn.disabled = false;
-            }
-        });
-
+    
         showPage(1);
-    }
-
-    function showPage(n) {
-        const pages = document.querySelectorAll('.page');
-
-        if (n > totalPages) currentPage = totalPages;
-        if (n < 1) currentPage = 1;
-
-        pages.forEach(page => page.classList.remove('active'));
-        pages[currentPage - 1].classList.add('active');
-
-        document.getElementById('currentPage').textContent = currentPage;
-        document.getElementById('prevBtn').disabled = currentPage === 1;
-        document.getElementById('nextBtn').disabled = currentPage === totalPages;
-
-        window.scrollTo({ top: 0, behavior: 'smooth' });
-    }
-
-    function changePage(n) {
-        currentPage += n;
-        showPage(currentPage);
-    }
-
-    document.addEventListener('keydown', function(e) {
-        if (e.key === 'ArrowLeft') changePage(-1);
-        if (e.key === 'ArrowRight') changePage(1);
-    });
-
-    showPage(1);
 </script>
 
 </body>
@@ -6674,7 +11538,7 @@ createOrReplace
 
 "
 ```
-            lineageTag: 3adf328d-7052-43d1-8187-b9b97b68c8e9
+            lineageTag: c9be0bf9-2482-4614-afbe-6cc74bfcbb21
 
         measure '05. Quiz' = ```
 "
@@ -6686,204 +11550,236 @@ createOrReplace
     <meta name='viewport' content='width=device-width, initial-scale=1.0'>
     <title>Quiz: Tworzenie zestawień tabelarycznych</title>
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        body {
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-            font-size: 16px;
-            line-height: 1.7;
-            color: #333;
-            background: transparent;
-            padding: 20px;
-        }
-
-        .container {
-            max-width: 800px;
-            margin: 0 auto;
-            background: transparent;
-            padding: 40px;
-        }
-
-        .navigation {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 40px;
-            padding-bottom: 20px;
-            border-bottom: 1px solid #e1e4e8;
-        }
-
-        button {
-            background: #0066cc;
-            color: white;
-            border: none;
-            padding: 12px 28px;
-            border-radius: 4px;
-            cursor: pointer;
-            font-size: 1em;
-            font-weight: 500;
-            transition: background 0.2s;
-        }
-
-        button:hover {
-            background: #0052a3;
-        }
-
-        button:disabled {
-            background: #ccc;
-            cursor: not-allowed;
-        }
-
-        .page-indicator {
-            color: #666;
-            font-size: 1em;
-        }
-
-        .page {
-            display: none;
-            min-height: 500px;
-        }
-
-        .page.active {
-            display: block;
-            animation: fadeIn 0.3s ease-in;
-        }
-
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(10px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-
-        h1 {
-            font-size: 1.8em;
-            font-weight: 600;
-            margin-bottom: 1em;
-            color: #1a1a1a;
-        }
-
-        .question-box {
-            background: #f8f9fa;
-            border-left: 3px solid #0066cc;
-            padding: 20px;
-            margin: 1.5em 0;
-            border-radius: 3px;
-        }
-
-        .answers {
-            margin-top: 1.5em;
-        }
-
-        .answer-option {
-            background: white;
-            border: 2px solid #e1e4e8;
-            padding: 15px 20px;
-            margin: 10px 0;
-            border-radius: 4px;
-            cursor: pointer;
-            transition: all 0.2s;
-            font-size: 1.05em;
-        }
-
-        .answer-option:hover {
-            border-color: #0066cc;
-            background: #f0f7ff;
-        }
-
-        .answer-option.selected {
-            border-color: #0066cc;
-            background: #e6f2ff;
-        }
-
-        .answer-option.correct {
-            border-color: #28a745;
-            background: #d4edda;
-        }
-
-        .answer-option.incorrect {
-            border-color: #dc3545;
-            background: #f8d7da;
-        }
-
-        .feedback {
-            margin-top: 1.5em;
-            padding: 15px 20px;
-            border-radius: 4px;
-            display: none;
-            font-size: 1.05em;
-        }
-
-        .feedback.show {
-            display: block;
-        }
-
-        .feedback.correct {
-            background: #d4edda;
-            border-left: 3px solid #28a745;
-            color: #155724;
-        }
-
-        .feedback.incorrect {
-            background: #f8d7da;
-            border-left: 3px solid #dc3545;
-            color: #721c24;
-        }
-
-        .check-button {
-            margin-top: 1.5em;
-            background: #28a745;
-        }
-
-        .check-button:hover:not(:disabled) {
-            background: #218838;
-        }
-
-        .check-button:disabled {
-            background: #ccc;
-        }
-
-        pre {
-            background: #f8f9fa;
-            border-left: 3px solid #0066cc;
-            padding: 18px;
-            margin: 1em 0;
-            overflow-x: auto;
-            border-radius: 3px;
-        }
-
-        code {
-            font-family: 'Courier New', monospace;
-            font-size: 0.95em;
-        }
-
-        .score-box {
-            background: #0066cc;
-            color: white;
-            padding: 20px;
-            border-radius: 4px;
-            text-align: center;
-            font-size: 1.2em;
-            margin-bottom: 2em;
-        }
-
-        .summary-item {
-            background: #f8f9fa;
-            padding: 15px;
-            margin: 10px 0;
-            border-radius: 4px;
-            border-left: 3px solid #ccc;
-        }
-
-        .summary-item.correct {
-            border-left-color: #28a745;
-        }
-
-        .summary-item.incorrect {
-            border-left-color: #dc3545;
-        }
+    * {
+                margin: 0;
+                padding: 0;
+                box-sizing: border-box;
+            }
+    
+            body {
+                font-family: 'Roboto', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+                font-size: 16px;
+                font-weight: 400;
+                line-height: 1.7;
+                color: #333;
+                background: transparent;
+                padding: 20px;
+            }
+    
+            .container {
+                max-width: 800px;
+                margin: 0 auto;
+                background: transparent;
+                padding: 40px;
+            }
+    
+            .navigation {
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                margin-bottom: 40px;
+                padding-bottom: 20px;
+                border-bottom: 1px solid #e1e4e8;
+            }
+    
+            button {
+                background: #6b1718;
+                color: white;
+                border: none;
+                padding: 12px 28px;
+                border-radius: 4px;
+                cursor: pointer;
+                font-size: 1em;
+                font-weight: 500;
+                transition: background 0.2s;
+            }
+    
+            button:hover {
+                background: #380c0c;
+            }
+    
+            button:disabled {
+                background: #ccc;
+                cursor: not-allowed;
+            }
+    
+            .page-indicator {
+                color: #666;
+                font-size: 1em;
+            }
+    
+            .page {
+                display: none;
+                min-height: 500px;
+            }
+    
+            .page.active {
+                display: block;
+                animation: fadeIn 0.3s ease-in;
+            }
+    
+            @keyframes fadeIn {
+                from { opacity: 0; transform: translateY(10px); }
+                to { opacity: 1; transform: translateY(0); }
+            }
+    
+            h1 {
+                font-size: 26px;
+                line-height: 36px;
+                font-weight: 600;
+                padding-top: 14px;
+                padding-bottom: 6px;
+                margin-bottom: 1em;
+                color: #6b1718;
+                border-bottom: 2px solid #6b1718;
+            }
+    
+            h2 {
+                font-size: 26px;
+                line-height: 36px;
+                font-weight: 600;
+                padding-top: 14px;
+                padding-bottom: 6px;
+                margin: 1.5em 0 0.8em 0;
+                color: #1a1a1a;
+                border-bottom: 2px solid #1a1a1a;
+            }
+    
+            .question-box {
+                background: #f8f9fa;
+                border-left: 3px solid #6b1718;
+                padding: 20px;
+                margin: 1.5em 0;
+                border-radius: 3px;
+            }
+    
+            .question-box p {
+                margin: 0;
+                font-size: 1.05em;
+                color: #1a1a1a;
+            }
+    
+            .answers {
+                margin-top: 1.5em;
+            }
+    
+            .answer-option {
+                background: white;
+                border: 2px solid #e1e4e8;
+                padding: 15px 20px;
+                margin: 10px 0;
+                border-radius: 4px;
+                cursor: pointer;
+                transition: all 0.2s;
+                font-size: 1.05em;
+            }
+    
+            .answer-option:hover {
+                border-color: #6b1718;
+                background: #fef5f5;
+            }
+    
+            .answer-option.selected {
+                border-color: #6b1718;
+                background: #ffe5e6;
+            }
+    
+            .answer-option.correct {
+                border-color: #ccc;
+                background: #d4edda;
+            }
+    
+            .answer-option.incorrect {
+                border-color: #b82b4e;
+                background: #f8d7da;
+            }
+    
+            .feedback {
+                margin-top: 1.5em;
+                padding: 15px 20px;
+                border-radius: 4px;
+                display: none;
+                font-size: 1.05em;
+            }
+    
+            .feedback.show {
+                display: block;
+            }
+    
+            .feedback.correct {
+                background: #d4edda;
+                border-left: 3px solid #28a745;
+                color: #155724;
+            }
+    
+            .feedback.incorrect {
+                background: #f8d7da;
+                border-left: 3px solid #b82b4e;
+                color: #721c24;
+            }
+    
+            .check-button {
+                margin-top: 1.5em;
+                background: #121212;
+            }
+    
+            .check-button:hover:not(:disabled) {
+                background: #111111;
+            }
+    
+            .check-button:disabled {
+                background: #ccc;
+            }
+    
+            pre {
+                background: #f8f9fa;
+                border-left: 3px solid #6b1718;
+                padding: 18px;
+                margin: 1em 0;
+                overflow-x: auto;
+                border-radius: 3px;
+            }
+    
+            code {
+                font-family: 'Fira Code', 'Courier New', monospace;
+                font-size: 0.95em;
+                color: #b82b4e;
+            }
+    
+            .score-box {
+                background: #6b1718;
+                color: white;
+                padding: 20px;
+                border-radius: 4px;
+                text-align: center;
+                font-size: 1.2em;
+                margin-bottom: 2em;
+            }
+    
+            .summary-item {
+                background: #f8f9fa;
+                padding: 15px;
+                margin: 10px 0;
+                border-radius: 4px;
+                border-left: 3px solid #ccc;
+            }
+    
+            .summary-item.correct {
+                border-left-color: #28a745;
+            }
+    
+            .summary-item.incorrect {
+                border-left-color: #b82b4e;
+            }
+    
+            strong {
+                font-weight: 700;
+                color: #1a1a1a;
+            }
+    
+            p {
+                margin-bottom: 1em;
+            }
     </style>
 </head>
 <body>
@@ -7073,7 +11969,7 @@ createOrReplace
             Twój wynik: <span id='scoreText'>0/7</span> (<span id='percentText'>0%</span>)
         </div>
         <div id='summaryContent'></div>
-        <button onclick='restartQuiz()' style='margin-top: 20px; width: 100%;'>🔄 Rozpocznij quiz od nowa</button>
+        <button onclick='restartQuiz()' style='margin-top: 20px; width: 100%;'> Rozpocznij quiz od nowa</button>
     </div>
 </div>
 
@@ -7098,133 +11994,133 @@ createOrReplace
     ];
     
     document.getElementById('totalPages').textContent = totalPages;
-
-    function selectAnswer(questionIndex, answerIndex) {
-        if (answeredQuestions[questionIndex]) return;
-
-        const answers = document.querySelectorAll('.page')[questionIndex].querySelectorAll('.answer-option');
-        answers.forEach(a => a.classList.remove('selected'));
-        answers[answerIndex].classList.add('selected');
-        userAnswers[questionIndex] = answerIndex;
-    }
-
-    function checkAnswer(questionIndex, correctIndex) {
-        if (answeredQuestions[questionIndex]) return;
-
-        const answers = document.querySelectorAll('.page')[questionIndex].querySelectorAll('.answer-option');
-        const feedback = document.getElementById('feedback-' + questionIndex);
-        const checkBtn = document.querySelectorAll('.page')[questionIndex].querySelector('.check-button');
-
-        if (userAnswers[questionIndex] === null) {
-            feedback.className = 'feedback show incorrect';
-            feedback.textContent = '⚠️ Proszę najpierw wybrać odpowiedź!';
-            return;
+    
+        function selectAnswer(questionIndex, answerIndex) {
+            if (answeredQuestions[questionIndex]) return;
+    
+            const answers = document.querySelectorAll('.page')[questionIndex].querySelectorAll('.answer-option');
+            answers.forEach(a => a.classList.remove('selected'));
+            answers[answerIndex].classList.add('selected');
+            userAnswers[questionIndex] = answerIndex;
         }
-
-        answeredQuestions[questionIndex] = true;
-        checkBtn.disabled = true;
-
-        const isCorrect = userAnswers[questionIndex] === correctIndex;
-
-        answers.forEach((answer, index) => {
-            answer.style.cursor = 'default';
-            if (index === correctIndex) {
-                answer.classList.add('correct');
-            } else if (index === userAnswers[questionIndex]) {
-                answer.classList.add('incorrect');
+    
+        function checkAnswer(questionIndex, correctIndex) {
+            if (answeredQuestions[questionIndex]) return;
+    
+            const answers = document.querySelectorAll('.page')[questionIndex].querySelectorAll('.answer-option');
+            const feedback = document.getElementById('feedback-' + questionIndex);
+            const checkBtn = document.querySelectorAll('.page')[questionIndex].querySelector('.check-button');
+    
+            if (userAnswers[questionIndex] === null) {
+                feedback.className = 'feedback show incorrect';
+                feedback.textContent = 'Proszę najpierw wybrać odpowiedź!';
+                return;
             }
+    
+            answeredQuestions[questionIndex] = true;
+            checkBtn.disabled = true;
+    
+            const isCorrect = userAnswers[questionIndex] === correctIndex;
+    
+            answers.forEach((answer, index) => {
+                answer.style.cursor = 'default';
+                if (index === correctIndex) {
+                    answer.classList.add('correct');
+                } else if (index === userAnswers[questionIndex]) {
+                    answer.classList.add('incorrect');
+                }
+            });
+    
+            feedback.className = 'feedback show ' + (isCorrect ? 'correct' : 'incorrect');
+            feedback.innerHTML = (isCorrect ? '✅ Świetnie! ' : '❌ Nieprawidłowo. ') + explanations[questionIndex];
+    
+            if (questionIndex < totalQuestions - 1) {
+                setTimeout(() => {
+                    changePage(1);
+                }, 2500);
+            } else {
+                setTimeout(() => {
+                    showSummary();
+                    changePage(1);
+                }, 2500);
+            }
+        }
+    
+        function showSummary() {
+            let correctCount = 0;
+            for (let i = 0; i < totalQuestions; i++) {
+                if (userAnswers[i] === correctAnswers[i]) {
+                    correctCount++;
+                }
+            }
+    
+            const percentage = Math.round((correctCount / totalQuestions) * 100);
+            document.getElementById('scoreText').textContent = correctCount + '/' + totalQuestions;
+            document.getElementById('percentText').textContent = percentage + '%';
+    
+            let summaryHTML = '<h2>Szczegóły odpowiedzi:</h2>';
+            for (let i = 0; i < totalQuestions; i++) {
+                const isCorrect = userAnswers[i] === correctAnswers[i];
+                summaryHTML += `
+                    <div class='summary-item ${isCorrect ? 'correct' : 'incorrect'}'>
+                        <strong>Pytanie ${i + 1}:</strong> ${isCorrect ? '✅ Poprawnie' : '❌ Niepoprawnie'}<br>
+                        <small>${explanations[i]}</small>
+                    </div>
+                `;
+            }
+    
+            document.getElementById('summaryContent').innerHTML = summaryHTML;
+        }
+    
+        function restartQuiz() {
+            userAnswers.fill(null);
+            answeredQuestions.fill(false);
+            currentPage = 1;
+    
+            document.querySelectorAll('.page').forEach((page, index) => {
+                if (index < totalQuestions) {
+                    const answers = page.querySelectorAll('.answer-option');
+                    answers.forEach(a => {
+                        a.className = 'answer-option';
+                        a.style.cursor = 'pointer';
+                    });
+                    const feedback = page.querySelector('.feedback');
+                    feedback.className = 'feedback';
+                    const checkBtn = page.querySelector('.check-button');
+                    checkBtn.disabled = false;
+                }
+            });
+    
+            showPage(1);
+        }
+    
+        function showPage(n) {
+            const pages = document.querySelectorAll('.page');
+    
+            if (n > totalPages) currentPage = totalPages;
+            if (n < 1) currentPage = 1;
+    
+            pages.forEach(page => page.classList.remove('active'));
+            pages[currentPage - 1].classList.add('active');
+    
+            document.getElementById('currentPage').textContent = currentPage;
+            document.getElementById('prevBtn').disabled = currentPage === 1;
+            document.getElementById('nextBtn').disabled = currentPage === totalPages;
+    
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+    
+        function changePage(n) {
+            currentPage += n;
+            showPage(currentPage);
+        }
+    
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'ArrowLeft') changePage(-1);
+            if (e.key === 'ArrowRight') changePage(1);
         });
-
-        feedback.className = 'feedback show ' + (isCorrect ? 'correct' : 'incorrect');
-        feedback.innerHTML = (isCorrect ? '✅ Świetnie! ' : '❌ Nieprawidłowo. ') + explanations[questionIndex];
-
-        if (questionIndex < totalQuestions - 1) {
-            setTimeout(() => {
-                changePage(1);
-            }, 2500);
-        } else {
-            setTimeout(() => {
-                showSummary();
-                changePage(1);
-            }, 2500);
-        }
-    }
-
-    function showSummary() {
-        let correctCount = 0;
-        for (let i = 0; i < totalQuestions; i++) {
-            if (userAnswers[i] === correctAnswers[i]) {
-                correctCount++;
-            }
-        }
-
-        const percentage = Math.round((correctCount / totalQuestions) * 100);
-        document.getElementById('scoreText').textContent = correctCount + '/' + totalQuestions;
-        document.getElementById('percentText').textContent = percentage + '%';
-
-        let summaryHTML = '<h2>Szczegóły odpowiedzi:</h2>';
-        for (let i = 0; i < totalQuestions; i++) {
-            const isCorrect = userAnswers[i] === correctAnswers[i];
-            summaryHTML += `
-                <div class='summary-item ${isCorrect ? 'correct' : 'incorrect'}'>
-                    <strong>Pytanie ${i + 1}:</strong> ${isCorrect ? '✅ Poprawnie' : '❌ Niepoprawnie'}<br>
-                    <small>${explanations[i]}</small>
-                </div>
-            `;
-        }
-
-        document.getElementById('summaryContent').innerHTML = summaryHTML;
-    }
-
-    function restartQuiz() {
-        userAnswers.fill(null);
-        answeredQuestions.fill(false);
-        currentPage = 1;
-
-        document.querySelectorAll('.page').forEach((page, index) => {
-            if (index < totalQuestions) {
-                const answers = page.querySelectorAll('.answer-option');
-                answers.forEach(a => {
-                    a.className = 'answer-option';
-                    a.style.cursor = 'pointer';
-                });
-                const feedback = page.querySelector('.feedback');
-                feedback.className = 'feedback';
-                const checkBtn = page.querySelector('.check-button');
-                checkBtn.disabled = false;
-            }
-        });
-
+    
         showPage(1);
-    }
-
-    function showPage(n) {
-        const pages = document.querySelectorAll('.page');
-
-        if (n > totalPages) currentPage = totalPages;
-        if (n < 1) currentPage = 1;
-
-        pages.forEach(page => page.classList.remove('active'));
-        pages[currentPage - 1].classList.add('active');
-
-        document.getElementById('currentPage').textContent = currentPage;
-        document.getElementById('prevBtn').disabled = currentPage === 1;
-        document.getElementById('nextBtn').disabled = currentPage === totalPages;
-
-        window.scrollTo({ top: 0, behavior: 'smooth' });
-    }
-
-    function changePage(n) {
-        currentPage += n;
-        showPage(currentPage);
-    }
-
-    document.addEventListener('keydown', function(e) {
-        if (e.key === 'ArrowLeft') changePage(-1);
-        if (e.key === 'ArrowRight') changePage(1);
-    });
-
-    showPage(1);
 </script>
 
 </body>
@@ -7232,7 +12128,7 @@ createOrReplace
 
 "
 ```
-            lineageTag: c21cdbb4-c582-4690-8106-edacd1169dc1
+            lineageTag: f9701c62-03cf-47ee-b948-0ca2a977e6ea
 
         measure '05. Tworzenie zestawień tabelarycznych - Tworzenie Tabeli' = ```
 "
@@ -7243,6 +12139,224 @@ createOrReplace
     <meta charset='UTF-8'>
     <meta name='viewport' content='width=device-width, initial-scale=1.0'>
     <title>Tworzenie Tabeli</title>
+    <style>
+            * {
+                margin: 0;
+                padding: 0;
+                box-sizing: border-box;
+            }
+    
+            body {
+                font-family: 'Roboto', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+                font-size: 16px;
+                font-weight: 400;
+                line-height: 1.7;
+                color: #333;
+                background: transparent;
+                padding: 20px;
+            }
+    
+            .container {
+                max-width: 800px;
+                margin: 0 auto;
+                background: transparent;
+                padding: 40px;
+            }
+    
+            .navigation {
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                margin-bottom: 40px;
+                padding-bottom: 20px;
+                border-bottom: 1px solid #e1e4e8;
+            }
+    
+            button {
+                background: #6b1718;
+                color: white;
+                border: none;
+                padding: 12px 28px;
+                border-radius: 4px;
+                cursor: pointer;
+                font-size: 1em;
+                font-weight: 500;
+                transition: background 0.2s;
+            }
+    
+            button:hover {
+                background: #380c0c;
+            }
+    
+            button:disabled {
+                background: #ccc;
+                cursor: not-allowed;
+            }
+    
+            .page-indicator {
+                color: #666;
+                font-size: 1em;
+            }
+    
+            .page {
+                display: none;
+                min-height: 500px;
+            }
+    
+            .page.active {
+                display: block;
+                animation: fadeIn 0.3s ease-in;
+            }
+    
+            @keyframes fadeIn {
+                from { opacity: 0; transform: translateY(10px); }
+                to { opacity: 1; transform: translateY(0); }
+            }
+    
+            h1 {
+                font-size: 26px;
+                line-height: 36px;
+                font-weight: 600;
+                padding-top: 14px;
+                padding-bottom: 6px;
+                margin-bottom: 1em;
+                color: #6b1718;
+                border-bottom: 2px solid #6b1718;
+            }
+    
+            h2 {
+                font-size: 26px;
+                line-height: 36px;
+                font-weight: 600;
+                padding-top: 14px;
+                padding-bottom: 6px;
+                margin: 1.5em 0 0.8em 0;
+                color: #1a1a1a;
+                border-bottom: 2px solid #1a1a1a;
+            }
+    
+            h3 {
+                font-size: 1.1em;
+                font-weight: 600;
+                margin: 1.2em 0 0.6em 0;
+                padding-bottom: 5px;
+                color: #444;
+                border-bottom: 1px solid #999;
+            }
+    
+            p {
+                margin-bottom: 1em;
+                font-size: 1.05em;
+            }
+    
+            strong {
+                font-weight: 700;
+                color: #1a1a1a;
+            }
+    
+            code {
+                background: #f5f5f5;
+                padding: 3px 7px;
+                border-radius: 3px;
+                font-family: 'Fira Code', 'Courier New', monospace;
+                font-size: 0.95em;
+                color: #b82b4e;
+            }
+    
+            pre {
+                background: #f8f9fa;
+                border-left: 3px solid #6b1718;
+                padding: 18px;
+                margin: 1em 0;
+                overflow-x: auto;
+                border-radius: 3px;
+            }
+    
+            pre code {
+                background: none;
+                padding: 0;
+                color: #24292e;
+                font-size: 1em;
+                line-height: 1.6;
+            }
+    
+            .dax-keyword {
+                color: #6b1718;
+                font-weight: 600;
+            }
+    
+            .dax-function {
+                color: #6f42c1;
+            }
+    
+            .dax-number {
+                color: #005cc5;
+            }
+    
+            .dax-comment {
+                color: #6a737d;
+                font-style: italic;
+            }
+    
+            ul, ol {
+                margin: 0.3em 0;
+                padding-left: 1.8em;
+            }
+    
+            li {
+                margin: 0;
+                padding-left: 0.2em;
+                font-size: 1.05em;
+                line-height: 1.6;
+            }
+    
+            ol {
+                list-style-type: decimal;
+            }
+    
+            ol li::marker {
+                color: #999;
+                font-weight: 400;
+            }
+    
+            ul li::marker {
+                color: #999;
+            }
+    
+            ul ul, ol ol, ul ol, ol ul {
+                margin: 0.2em 0;
+                padding-left: 1.5em;
+            }
+    
+            blockquote {
+                border-left: 3px solid #6b1718;
+                background: #f8f9fa;
+                padding: 14px 18px;
+                margin: 1em 0;
+                color: #555;
+                font-style: italic;
+            }
+    
+            blockquote p {
+                margin: 0;
+            }
+    
+            .iteration-box {
+                border-left: 3px solid #6b1718;
+                padding: 14px 18px;
+                margin: 0.8em 0;
+            }
+    
+            .result-box {
+                background: #f5f5f5;
+                border-left: 3px solid #999;
+                padding: 14px 18px;
+                margin: 0.8em 0;
+                font-weight: 500;
+                color: #555;
+                font-size: 1.05em;
+            }
+        </style>
 </head>
 <body>
 
@@ -7465,240 +12579,7 @@ createOrReplace
 
 "
 ```
-            lineageTag: 6875f4b6-0aa0-48f8-a777-9023fe9239f5
-
-        measure '05. Tworzenie zestawień tabelarycznych' = ```
-"
-
-<!DOCTYPE html>
-<html lang='pl'>
-<head>
-    <meta charset='UTF-8'>
-    <meta name='viewport' content='width=device-width, initial-scale=1.0'>
-    <title>05. Tworzenie zestawień tabelarycznych</title>
-</head>
-<body>
-
-<div class='container' id='viz_378ba8cb'>
-    <!-- Nawigacja na górze -->
-    <div class='navigation'>
-        <button id='prevBtn_378ba8cb' onclick='changePage_378ba8cb(-1)'>← Poprzednia</button>
-        <span class='page-indicator'>
-            Strona <span id='currentPage_378ba8cb'>1</span> z <span id='totalPages_378ba8cb'>3</span>
-        </span>
-        <button id='nextBtn_378ba8cb' onclick='changePage_378ba8cb(1)'>Następna →</button>
-    </div>
-
-    <!-- Strona 1 -->
-    <div class='page active'>
-        <h2>SUMMARIZE vs SUMMARIZECOLUMNS</h2>
-        <p><strong>Podejście legacy (<code>SUMMARIZE</code>):</strong></p>
-        <ul>
-        <li>Wymaga dodatkowego <code>ADDCOLUMNS</code> do obliczenia miar</li>
-        <li>Trzeba ręcznie filtrować puste wiersze przez <code>FILTER</code> + <code>NOT</code> <code>ISBLANK</code></li>
-        <li>Bardziej rozwlekłe i podatne na błędy kontekstowe</li>
-        <li><code>SUMMARIZE</code> może dać niespodziewane wyniki bez <code>ADDCOLUMNS</code></li>
-        </ul>
-        <p><strong>Podejście modern (SUMMARIZECOLUMNS):</strong></p>
-        <ul>
-        <li>Łączy grupowanie, dodawanie obliczeń i usuwanie pustych wierszy w jednej funkcji</li>
-        <li>Krótsze, czytelniejsze, bezpieczniejsze</li>
-        <li>Obecnie zalecany standard do raportów i zapytań w DAX</li>
-        </ul>
-        <pre><code><span class='dax-comment'>------- LEGACY  </span>
-        EVALUATE  
-            <span class='dax-function'>FILTER</span> (  
-                <span class='dax-function'>ADDCOLUMNS</span> (  
-                    <span class='dax-function'>SUMMARIZE</span> ( Sales, 'Product'[Brand], 'Date'[Year] ),  
-                    'Sales', <span class='dax-function'>CALCULATE</span> ( <span class='dax-function'>SUMX</span> ( Sales, Sales[Quantity] * Sales[Unit Price] ) )  
-                ),  
-                NOT <span class='dax-function'>ISBLANK</span> ( [Sales] )  
-            )  
-
-        <span class='dax-comment'>------- MODERN  </span>
-        EVALUATE  
-            <span class='dax-function'>SUMMARIZECOLUMNS</span> (  
-                'Product'[Brand], 'Date'[Year],  
-                'Sales', <span class='dax-function'>CALCULATE</span> ( <span class='dax-function'>SUMX</span> ( Sales, Sales[Quantity] * Sales[Unit Price] ) )  
-            )</code></pre>
-
-    </div>
-
-    <!-- Strona 2 -->
-    <div class='page'>
-        <h2>Praca z wieloma tabelami faktów</h2>
-        <p><strong>Zalety SUMMARIZECOLUMNS:</strong></p>
-        <ul>
-        <li>Rozumie kontekst całego modelu danych</li>
-        <li>Działa spójnie z modelem gwiazdy – automatycznie obsługuje kombinacje wymiarów</li>
-        <li>Pozwala w jednym wyrażeniu pobierać dane z różnych tabel faktów</li>
-        <li>Zwraca kompletny wynik w jednej tabeli</li>
-        </ul>
-        <p><strong>Problemy z SUMMARIZE:</strong></p>
-        <ul>
-        <li>Ogranicza się do jednej tabeli faktów</li>
-        <li>Wymaga ręcznego tworzenia siatki kombinacji przez <code>CROSSJOIN</code></li>
-        <li>Trzeba łączyć wyniki przez <code>NATURALLEFTOUTERJOIN</code></li>
-        <li>Bardziej skomplikowane, mniej czytelne i podatne na błędy</li>
-        </ul>
-        <pre><code><span class='dax-comment'>------- RECOMMENDED  </span>
-        EVALUATE  
-            <span class='dax-function'>SUMMARIZECOLUMNS</span> (  
-                'Product'[Category],  
-                Store[Country],  
-                'Sales', <span class='dax-function'>CALCULATE</span> ( <span class='dax-function'>SUMX</span> ( Sales, Sales[Quantity] * Sales[Net Price] ) ),  
-                'Purchases', <span class='dax-function'>CALCULATE</span> ( <span class='dax-function'>SUMX</span> ( Purchase, Purchase[Quantity] * Purchase[Unit Cost] ) )   
-            )  
-
-        <span class='dax-comment'>------- PROBLEMATIC  </span>
-        EVALUATE  
-            <span class='dax-keyword'>VAR</span> S =   
-                <span class='dax-function'>ADDCOLUMNS</span> (  
-                    <span class='dax-function'>SUMMARIZE</span> ( Sales, 'Product'[Category], Store[Country] ),  
-                    'Sales', <span class='dax-function'>CALCULATE</span> ( <span class='dax-function'>SUMX</span> ( Sales, Sales[Quantity] * Sales[Net Price] ) )   
-                )  
-            <span class='dax-keyword'>VAR</span> P =   
-                <span class='dax-function'>ADDCOLUMNS</span> (  
-                    <span class='dax-function'>SUMMARIZE</span> ( Purchase, 'Product'[Category], Store[Country] ),  
-                    'Purchase', <span class='dax-function'>CALCULATE</span> ( <span class='dax-function'>SUMX</span> ( Purchase, Purchase[Quantity] * Purchase[Unit Cost] ) )   
-                )  
-            <span class='dax-keyword'>VAR</span> G =   
-                <span class='dax-function'>CROSSJOIN</span>( <span class='dax-function'>VALUES</span> ( 'Product'[Category] ), <span class='dax-function'>VALUES</span> ( Store[Country] ) )  
-        <span class='dax-keyword'>RETURN</span>  
-            <span class='dax-function'>NATURALLEFTOUTERJOIN</span> ( <span class='dax-function'>NATURALLEFTOUTERJOIN</span> ( G, P ), S )</code></pre>
-
-    </div>
-
-    <!-- Strona 3 -->
-    <div class='page'>
-        <h1>Kiedy używać SUMMARIZE zamiast SUMMARIZECOLUMNS</h1>
-        <p><strong>Gdy potrzebujesz tylko istniejących kombinacji:</strong></p>
-        <ul>
-        <li><code>SUMMARIZE</code> z tabelą źródłową zwraca tylko kombinacje występujące w danych faktycznych</li>
-        <li>Filtruje automatycznie do rzeczywistych relacji w tabeli Sales</li>
-        <li>To najczęściej oczekiwane zachowanie w raportach</li>
-        </ul>
-        <p><strong>Problem z SUMMARIZECOLUMNS bez miar:</strong></p>
-        <ul>
-        <li>Bez tabeli źródłowej generuje wszystkie możliwe kombinacje (jak <code>CROSSJOIN</code>)</li>
-        <li>Może zwrócić wiele pustych kombinacji, które nie istnieją w danych</li>
-        <li>Nie jest to zwykle pożądane zachowanie</li>
-        </ul>
-        <pre><code><span class='dax-comment'>------- RECOMMENDED  </span>
-        EVALUATE  
-            <span class='dax-function'>SUMMARIZE</span> (  
-                'Sales',  
-                'Product'[Brand],  
-                Customer[Continent],  
-                'Date'[Date]  
-            )  
-
-        <span class='dax-comment'>------- PROBLEMATIC  </span>
-        EVALUATE  
-            <span class='dax-function'>SUMMARIZECOLUMNS</span> (  
-                'Product'[Brand],  
-                Customer[Continent],  
-                'Date'[Date]  
-            )  
-
-        <span class='dax-comment'>-- Równoważne z:  </span>
-        EVALUATE  
-            <span class='dax-function'>CROSSJOIN</span> (  
-                <span class='dax-function'>VALUES</span> ( 'Product'[Brand] ),  
-                <span class='dax-function'>VALUES</span> ( Customer[Continent] ),  
-                <span class='dax-function'>VALUES</span> ( 'Date'[Date] )   
-            )</code></pre>
-        <p><strong>Zasada:</strong> Do samego grupowania bez miar używaj <code>SUMMARIZE</code> z tabelą źródłową. Do grupowania z miarami używaj <code>SUMMARIZECOLUMNS</code>.</p>
-
-    </div>
-
-</div>
-
-<script>
-(function() {
-    // Unikalny ID dla tej wizualizacji (wstrzykiwany przez Python)
-    var vizId = '378ba8cb';
-    var containerId = 'viz_' + vizId;
-
-    var currentPage_378ba8cb = 1;
-    var container = document.getElementById(containerId);
-
-    if (!container) return;
-
-    var pages = container.querySelectorAll('.page');
-    var totalPages = pages.length;
-
-    document.getElementById('totalPages_' + vizId).textContent = totalPages;
-
-    window['showPage_378ba8cb'] = function(n) {
-        if (n > totalPages) currentPage_378ba8cb = totalPages;
-        if (n < 1) currentPage_378ba8cb = 1;
-
-        for (var i = 0; i < pages.length; i++) {
-            pages[i].classList.remove('active');
-        }
-        pages[currentPage_378ba8cb - 1].classList.add('active');
-
-        document.getElementById('currentPage_' + vizId).textContent = currentPage_378ba8cb;
-        document.getElementById('prevBtn_' + vizId).disabled = (currentPage_378ba8cb === 1);
-        document.getElementById('nextBtn_' + vizId).disabled = (currentPage_378ba8cb === totalPages);
-    };
-
-    window['changePage_378ba8cb'] = function(n) {
-        currentPage_378ba8cb += n;
-        window['showPage_378ba8cb'](currentPage_378ba8cb);
-    };
-
-    // Inicjalizacja
-    window['showPage_378ba8cb'](1);
-
-    // Funkcjonalność powiększania obrazów
-    var images = container.querySelectorAll('img');
-    images.forEach(function(img) {
-        img.style.cursor = 'pointer';
-        img.style.transition = 'transform 0.3s ease';
-
-        img.addEventListener('click', function() {
-            if (this.classList.contains('zoomed')) {
-                // Pomniejsz obraz
-                this.classList.remove('zoomed');
-                this.style.position = '';
-                this.style.top = '';
-                this.style.left = '';
-                this.style.transform = '';
-                this.style.width = '100%';
-                this.style.maxWidth = '';
-                this.style.maxHeight = '';
-                this.style.zIndex = '';
-                this.style.backgroundColor = '';
-                this.style.padding = '';
-                this.style.boxShadow = '';
-            } else {
-                // Powiększ obraz
-                this.classList.add('zoomed');
-                this.style.position = 'fixed';
-                this.style.top = '50%';
-                this.style.left = '50%';
-                this.style.transform = 'translate(-50%, -50%)';
-                this.style.width = 'auto';
-                this.style.maxWidth = '95vw';
-                this.style.maxHeight = '95vh';
-                this.style.zIndex = '9999';
-                this.style.backgroundColor = 'rgba(255, 255, 255, 0.95)';
-                this.style.padding = '10px';
-                this.style.boxShadow = '0 4px 20px rgba(0, 0, 0, 0.3)';
-            }
-        });
-    });
-})();
-</script>
-
-</body>
-</html>
-
-"
-```
-            lineageTag: ce9a7237-b059-40c5-8984-edce802ca1aa
+            lineageTag: 2cb5bd66-d847-411e-8700-7c146cbaae46
 
         measure '06. DAX - Zaawansowane Kwerendy - Query View' = ```
 "
@@ -7709,6 +12590,224 @@ createOrReplace
     <meta charset='UTF-8'>
     <meta name='viewport' content='width=device-width, initial-scale=1.0'>
     <title>Query View</title>
+    <style>
+            * {
+                margin: 0;
+                padding: 0;
+                box-sizing: border-box;
+            }
+    
+            body {
+                font-family: 'Roboto', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+                font-size: 16px;
+                font-weight: 400;
+                line-height: 1.7;
+                color: #333;
+                background: transparent;
+                padding: 20px;
+            }
+    
+            .container {
+                max-width: 800px;
+                margin: 0 auto;
+                background: transparent;
+                padding: 40px;
+            }
+    
+            .navigation {
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                margin-bottom: 40px;
+                padding-bottom: 20px;
+                border-bottom: 1px solid #e1e4e8;
+            }
+    
+            button {
+                background: #6b1718;
+                color: white;
+                border: none;
+                padding: 12px 28px;
+                border-radius: 4px;
+                cursor: pointer;
+                font-size: 1em;
+                font-weight: 500;
+                transition: background 0.2s;
+            }
+    
+            button:hover {
+                background: #380c0c;
+            }
+    
+            button:disabled {
+                background: #ccc;
+                cursor: not-allowed;
+            }
+    
+            .page-indicator {
+                color: #666;
+                font-size: 1em;
+            }
+    
+            .page {
+                display: none;
+                min-height: 500px;
+            }
+    
+            .page.active {
+                display: block;
+                animation: fadeIn 0.3s ease-in;
+            }
+    
+            @keyframes fadeIn {
+                from { opacity: 0; transform: translateY(10px); }
+                to { opacity: 1; transform: translateY(0); }
+            }
+    
+            h1 {
+                font-size: 26px;
+                line-height: 36px;
+                font-weight: 600;
+                padding-top: 14px;
+                padding-bottom: 6px;
+                margin-bottom: 1em;
+                color: #6b1718;
+                border-bottom: 2px solid #6b1718;
+            }
+    
+            h2 {
+                font-size: 26px;
+                line-height: 36px;
+                font-weight: 600;
+                padding-top: 14px;
+                padding-bottom: 6px;
+                margin: 1.5em 0 0.8em 0;
+                color: #1a1a1a;
+                border-bottom: 2px solid #1a1a1a;
+            }
+    
+            h3 {
+                font-size: 1.1em;
+                font-weight: 600;
+                margin: 1.2em 0 0.6em 0;
+                padding-bottom: 5px;
+                color: #444;
+                border-bottom: 1px solid #999;
+            }
+    
+            p {
+                margin-bottom: 1em;
+                font-size: 1.05em;
+            }
+    
+            strong {
+                font-weight: 700;
+                color: #1a1a1a;
+            }
+    
+            code {
+                background: #f5f5f5;
+                padding: 3px 7px;
+                border-radius: 3px;
+                font-family: 'Fira Code', 'Courier New', monospace;
+                font-size: 0.95em;
+                color: #b82b4e;
+            }
+    
+            pre {
+                background: #f8f9fa;
+                border-left: 3px solid #6b1718;
+                padding: 18px;
+                margin: 1em 0;
+                overflow-x: auto;
+                border-radius: 3px;
+            }
+    
+            pre code {
+                background: none;
+                padding: 0;
+                color: #24292e;
+                font-size: 1em;
+                line-height: 1.6;
+            }
+    
+            .dax-keyword {
+                color: #6b1718;
+                font-weight: 600;
+            }
+    
+            .dax-function {
+                color: #6f42c1;
+            }
+    
+            .dax-number {
+                color: #005cc5;
+            }
+    
+            .dax-comment {
+                color: #6a737d;
+                font-style: italic;
+            }
+    
+            ul, ol {
+                margin: 0.3em 0;
+                padding-left: 1.8em;
+            }
+    
+            li {
+                margin: 0;
+                padding-left: 0.2em;
+                font-size: 1.05em;
+                line-height: 1.6;
+            }
+    
+            ol {
+                list-style-type: decimal;
+            }
+    
+            ol li::marker {
+                color: #999;
+                font-weight: 400;
+            }
+    
+            ul li::marker {
+                color: #999;
+            }
+    
+            ul ul, ol ol, ul ol, ol ul {
+                margin: 0.2em 0;
+                padding-left: 1.5em;
+            }
+    
+            blockquote {
+                border-left: 3px solid #6b1718;
+                background: #f8f9fa;
+                padding: 14px 18px;
+                margin: 1em 0;
+                color: #555;
+                font-style: italic;
+            }
+    
+            blockquote p {
+                margin: 0;
+            }
+    
+            .iteration-box {
+                border-left: 3px solid #6b1718;
+                padding: 14px 18px;
+                margin: 0.8em 0;
+            }
+    
+            .result-box {
+                background: #f5f5f5;
+                border-left: 3px solid #999;
+                padding: 14px 18px;
+                margin: 0.8em 0;
+                font-weight: 500;
+                color: #555;
+                font-size: 1.05em;
+            }
+        </style>
 </head>
 <body>
 
@@ -7901,7 +13000,7 @@ createOrReplace
 
 "
 ```
-            lineageTag: 3e65f0e2-d722-43e5-a1d8-82d34d2a0035
+            lineageTag: cc2020d4-c6eb-4ba8-92cc-d6383b493a8c
 
         measure '06. DAX - Zaawansowane Kwerendy' = ```
 "
@@ -7912,6 +13011,224 @@ createOrReplace
     <meta charset='UTF-8'>
     <meta name='viewport' content='width=device-width, initial-scale=1.0'>
     <title>06. DAX - Zaawansowane Kwerendy</title>
+    <style>
+            * {
+                margin: 0;
+                padding: 0;
+                box-sizing: border-box;
+            }
+    
+            body {
+                font-family: 'Roboto', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+                font-size: 16px;
+                font-weight: 400;
+                line-height: 1.7;
+                color: #333;
+                background: transparent;
+                padding: 20px;
+            }
+    
+            .container {
+                max-width: 800px;
+                margin: 0 auto;
+                background: transparent;
+                padding: 40px;
+            }
+    
+            .navigation {
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                margin-bottom: 40px;
+                padding-bottom: 20px;
+                border-bottom: 1px solid #e1e4e8;
+            }
+    
+            button {
+                background: #6b1718;
+                color: white;
+                border: none;
+                padding: 12px 28px;
+                border-radius: 4px;
+                cursor: pointer;
+                font-size: 1em;
+                font-weight: 500;
+                transition: background 0.2s;
+            }
+    
+            button:hover {
+                background: #380c0c;
+            }
+    
+            button:disabled {
+                background: #ccc;
+                cursor: not-allowed;
+            }
+    
+            .page-indicator {
+                color: #666;
+                font-size: 1em;
+            }
+    
+            .page {
+                display: none;
+                min-height: 500px;
+            }
+    
+            .page.active {
+                display: block;
+                animation: fadeIn 0.3s ease-in;
+            }
+    
+            @keyframes fadeIn {
+                from { opacity: 0; transform: translateY(10px); }
+                to { opacity: 1; transform: translateY(0); }
+            }
+    
+            h1 {
+                font-size: 26px;
+                line-height: 36px;
+                font-weight: 600;
+                padding-top: 14px;
+                padding-bottom: 6px;
+                margin-bottom: 1em;
+                color: #6b1718;
+                border-bottom: 2px solid #6b1718;
+            }
+    
+            h2 {
+                font-size: 26px;
+                line-height: 36px;
+                font-weight: 600;
+                padding-top: 14px;
+                padding-bottom: 6px;
+                margin: 1.5em 0 0.8em 0;
+                color: #1a1a1a;
+                border-bottom: 2px solid #1a1a1a;
+            }
+    
+            h3 {
+                font-size: 1.1em;
+                font-weight: 600;
+                margin: 1.2em 0 0.6em 0;
+                padding-bottom: 5px;
+                color: #444;
+                border-bottom: 1px solid #999;
+            }
+    
+            p {
+                margin-bottom: 1em;
+                font-size: 1.05em;
+            }
+    
+            strong {
+                font-weight: 700;
+                color: #1a1a1a;
+            }
+    
+            code {
+                background: #f5f5f5;
+                padding: 3px 7px;
+                border-radius: 3px;
+                font-family: 'Fira Code', 'Courier New', monospace;
+                font-size: 0.95em;
+                color: #b82b4e;
+            }
+    
+            pre {
+                background: #f8f9fa;
+                border-left: 3px solid #6b1718;
+                padding: 18px;
+                margin: 1em 0;
+                overflow-x: auto;
+                border-radius: 3px;
+            }
+    
+            pre code {
+                background: none;
+                padding: 0;
+                color: #24292e;
+                font-size: 1em;
+                line-height: 1.6;
+            }
+    
+            .dax-keyword {
+                color: #6b1718;
+                font-weight: 600;
+            }
+    
+            .dax-function {
+                color: #6f42c1;
+            }
+    
+            .dax-number {
+                color: #005cc5;
+            }
+    
+            .dax-comment {
+                color: #6a737d;
+                font-style: italic;
+            }
+    
+            ul, ol {
+                margin: 0.3em 0;
+                padding-left: 1.8em;
+            }
+    
+            li {
+                margin: 0;
+                padding-left: 0.2em;
+                font-size: 1.05em;
+                line-height: 1.6;
+            }
+    
+            ol {
+                list-style-type: decimal;
+            }
+    
+            ol li::marker {
+                color: #999;
+                font-weight: 400;
+            }
+    
+            ul li::marker {
+                color: #999;
+            }
+    
+            ul ul, ol ol, ul ol, ol ul {
+                margin: 0.2em 0;
+                padding-left: 1.5em;
+            }
+    
+            blockquote {
+                border-left: 3px solid #6b1718;
+                background: #f8f9fa;
+                padding: 14px 18px;
+                margin: 1em 0;
+                color: #555;
+                font-style: italic;
+            }
+    
+            blockquote p {
+                margin: 0;
+            }
+    
+            .iteration-box {
+                border-left: 3px solid #6b1718;
+                padding: 14px 18px;
+                margin: 0.8em 0;
+            }
+    
+            .result-box {
+                background: #f5f5f5;
+                border-left: 3px solid #999;
+                padding: 14px 18px;
+                margin: 0.8em 0;
+                font-weight: 500;
+                color: #555;
+                font-size: 1.05em;
+            }
+        </style>
 </head>
 <body>
 
@@ -8148,7 +13465,7 @@ createOrReplace
 
 "
 ```
-            lineageTag: 7f17e585-21f8-4fe8-8819-ba980d4b2a57
+            lineageTag: 29f4ee8f-baf5-41e6-9eb7-893d3bfdbcd9
 
         measure '06. Quiz' = ```
 "
@@ -8160,7 +13477,590 @@ createOrReplace
     <meta name='viewport' content='width=device-width, initial-scale=1.0'>
     <title>Quiz: DAX - Zaawansowane Kwerendy (VAR i RETURN)</title>
     <style>
-        * {
+    * {
+                margin: 0;
+                padding: 0;
+                box-sizing: border-box;
+            }
+    
+            body {
+                font-family: 'Roboto', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+                font-size: 16px;
+                font-weight: 400;
+                line-height: 1.7;
+                color: #333;
+                background: transparent;
+                padding: 20px;
+            }
+    
+            .container {
+                max-width: 800px;
+                margin: 0 auto;
+                background: transparent;
+                padding: 40px;
+            }
+    
+            .navigation {
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                margin-bottom: 40px;
+                padding-bottom: 20px;
+                border-bottom: 1px solid #e1e4e8;
+            }
+    
+            button {
+                background: #6b1718;
+                color: white;
+                border: none;
+                padding: 12px 28px;
+                border-radius: 4px;
+                cursor: pointer;
+                font-size: 1em;
+                font-weight: 500;
+                transition: background 0.2s;
+            }
+    
+            button:hover {
+                background: #380c0c;
+            }
+    
+            button:disabled {
+                background: #ccc;
+                cursor: not-allowed;
+            }
+    
+            .page-indicator {
+                color: #666;
+                font-size: 1em;
+            }
+    
+            .page {
+                display: none;
+                min-height: 500px;
+            }
+    
+            .page.active {
+                display: block;
+                animation: fadeIn 0.3s ease-in;
+            }
+    
+            @keyframes fadeIn {
+                from { opacity: 0; transform: translateY(10px); }
+                to { opacity: 1; transform: translateY(0); }
+            }
+    
+            h1 {
+                font-size: 26px;
+                line-height: 36px;
+                font-weight: 600;
+                padding-top: 14px;
+                padding-bottom: 6px;
+                margin-bottom: 1em;
+                color: #6b1718;
+                border-bottom: 2px solid #6b1718;
+            }
+    
+            h2 {
+                font-size: 26px;
+                line-height: 36px;
+                font-weight: 600;
+                padding-top: 14px;
+                padding-bottom: 6px;
+                margin: 1.5em 0 0.8em 0;
+                color: #1a1a1a;
+                border-bottom: 2px solid #1a1a1a;
+            }
+    
+            .question-box {
+                background: #f8f9fa;
+                border-left: 3px solid #6b1718;
+                padding: 20px;
+                margin: 1.5em 0;
+                border-radius: 3px;
+            }
+    
+            .question-box p {
+                margin: 0;
+                font-size: 1.05em;
+                color: #1a1a1a;
+            }
+    
+            .answers {
+                margin-top: 1.5em;
+            }
+    
+            .answer-option {
+                background: white;
+                border: 2px solid #e1e4e8;
+                padding: 15px 20px;
+                margin: 10px 0;
+                border-radius: 4px;
+                cursor: pointer;
+                transition: all 0.2s;
+                font-size: 1.05em;
+            }
+    
+            .answer-option:hover {
+                border-color: #6b1718;
+                background: #fef5f5;
+            }
+    
+            .answer-option.selected {
+                border-color: #6b1718;
+                background: #ffe5e6;
+            }
+    
+            .answer-option.correct {
+                border-color: #ccc;
+                background: #d4edda;
+            }
+    
+            .answer-option.incorrect {
+                border-color: #b82b4e;
+                background: #f8d7da;
+            }
+    
+            .feedback {
+                margin-top: 1.5em;
+                padding: 15px 20px;
+                border-radius: 4px;
+                display: none;
+                font-size: 1.05em;
+            }
+    
+            .feedback.show {
+                display: block;
+            }
+    
+            .feedback.correct {
+                background: #d4edda;
+                border-left: 3px solid #28a745;
+                color: #155724;
+            }
+    
+            .feedback.incorrect {
+                background: #f8d7da;
+                border-left: 3px solid #b82b4e;
+                color: #721c24;
+            }
+    
+            .check-button {
+                margin-top: 1.5em;
+                background: #121212;
+            }
+    
+            .check-button:hover:not(:disabled) {
+                background: #111111;
+            }
+    
+            .check-button:disabled {
+                background: #ccc;
+            }
+    
+            pre {
+                background: #f8f9fa;
+                border-left: 3px solid #6b1718;
+                padding: 18px;
+                margin: 1em 0;
+                overflow-x: auto;
+                border-radius: 3px;
+            }
+    
+            code {
+                font-family: 'Fira Code', 'Courier New', monospace;
+                font-size: 0.95em;
+                color: #b82b4e;
+            }
+    
+            .score-box {
+                background: #6b1718;
+                color: white;
+                padding: 20px;
+                border-radius: 4px;
+                text-align: center;
+                font-size: 1.2em;
+                margin-bottom: 2em;
+            }
+    
+            .summary-item {
+                background: #f8f9fa;
+                padding: 15px;
+                margin: 10px 0;
+                border-radius: 4px;
+                border-left: 3px solid #ccc;
+            }
+    
+            .summary-item.correct {
+                border-left-color: #28a745;
+            }
+    
+            .summary-item.incorrect {
+                border-left-color: #b82b4e;
+            }
+    
+            strong {
+                font-weight: 700;
+                color: #1a1a1a;
+            }
+    
+            p {
+                margin-bottom: 1em;
+            }
+    </style>
+</head>
+<body>
+
+<div class='container'>
+    <!-- Nawigacja na górze -->
+    <div class='navigation'>
+        <button id='prevBtn' onclick='changePage(-1)'>← Poprzednia</button>
+        <span class='page-indicator'>
+            Pytanie <span id='currentPage'>1</span> z <span id='totalPages'>8</span>
+        </span>
+        <button id='nextBtn' onclick='changePage(1)'>Następna →</button>
+    </div>
+
+    <!-- Pytanie 1 -->
+    <div class='page active'>
+        <h1>Pytanie 1</h1>
+        <div class='question-box'>
+            <p><strong>Do czego służy słowo kluczowe VAR w DAX?</strong></p>
+        </div>
+        <div class='answers'>
+            <div class='answer-option' onclick='selectAnswer(0, 0)'>
+                A) Do zwracania wyniku miary
+            </div>
+            <div class='answer-option' onclick='selectAnswer(0, 1)'>
+                B) Do deklarowania zmiennych i przechowywania wartości
+            </div>
+            <div class='answer-option' onclick='selectAnswer(0, 2)'>
+                C) Do iteracji po wierszach tabeli
+            </div>
+            <div class='answer-option' onclick='selectAnswer(0, 3)'>
+                D) Do filtrowania danych
+            </div>
+        </div>
+        <button class='check-button' onclick='checkAnswer(0, 1)'>Sprawdź odpowiedź</button>
+        <div class='feedback' id='feedback-0'></div>
+    </div>
+
+    <!-- Pytanie 2 -->
+    <div class='page'>
+        <h1>Pytanie 2</h1>
+        <div class='question-box'>
+            <p><strong>Ile razy może wystąpić słowo RETURN w jednej mierze DAX?</strong></p>
+        </div>
+        <div class='answers'>
+            <div class='answer-option' onclick='selectAnswer(1, 0)'>
+                A) Dowolnie wiele razy
+            </div>
+            <div class='answer-option' onclick='selectAnswer(1, 1)'>
+                B) Tylko raz
+            </div>
+            <div class='answer-option' onclick='selectAnswer(1, 2)'>
+                C) Co najmniej dwa razy
+            </div>
+            <div class='answer-option' onclick='selectAnswer(1, 3)'>
+                D) RETURN nie jest wymagane w miarach
+            </div>
+        </div>
+        <button class='check-button' onclick='checkAnswer(1, 1)'>Sprawdź odpowiedź</button>
+        <div class='feedback' id='feedback-1'></div>
+    </div>
+
+    <!-- Pytanie 3 -->
+    <div class='page'>
+        <h1>Pytanie 3</h1>
+        <div class='question-box'>
+            <p><strong>Co się stanie ze zmiennymi VAR wewnątrz funkcji iteracyjnej jak SUMX?</strong></p>
+        </div>
+        <div class='answers'>
+            <div class='answer-option' onclick='selectAnswer(2, 0)'>
+                A) Są obliczane tylko raz przed rozpoczęciem iteracji
+            </div>
+            <div class='answer-option' onclick='selectAnswer(2, 1)'>
+                B) Są obliczane na nowo w każdej iteracji dla aktualnego wiersza
+            </div>
+            <div class='answer-option' onclick='selectAnswer(2, 2)'>
+                C) Nie można używać VAR wewnątrz funkcji iteracyjnych
+            </div>
+            <div class='answer-option' onclick='selectAnswer(2, 3)'>
+                D) Zachowują wartość z poprzedniej iteracji
+            </div>
+        </div>
+        <button class='check-button' onclick='checkAnswer(2, 1)'>Sprawdź odpowiedź</button>
+        <div class='feedback' id='feedback-2'></div>
+    </div>
+
+    <!-- Pytanie 4 -->
+    <div class='page'>
+        <h1>Pytanie 4</h1>
+        <div class='question-box'>
+            <p><strong>Jaki będzie wynik tego kodu?</strong></p>
+        </div>
+        <div class='answers'>
+            <div class='answer-option' onclick='selectAnswer(3, 0)'>
+                A) 9
+            </div>
+            <div class='answer-option' onclick='selectAnswer(3, 1)'>
+                B) 24
+            </div>
+            <div class='answer-option' onclick='selectAnswer(3, 2)'>
+                C) 29
+            </div>
+            <div class='answer-option' onclick='selectAnswer(3, 3)'>
+                D) 16
+            </div>
+        </div>
+        <button class='check-button' onclick='checkAnswer(3, 2)'>Sprawdź odpowiedź</button>
+        <div class='feedback' id='feedback-3'></div>
+    </div>
+
+    <!-- Pytanie 5 -->
+    <div class='page'>
+        <h1>Pytanie 5</h1>
+        <div class='question-box'>
+            <p><strong>Jakie są główne zalety używania zmiennych VAR?</strong></p>
+        </div>
+        <div class='answers'>
+            <div class='answer-option' onclick='selectAnswer(4, 0)'>
+                A) Tylko poprawa czytelności kodu
+            </div>
+            <div class='answer-option' onclick='selectAnswer(4, 1)'>
+                B) Unikanie powtarzania kodu, poprawa czytelności i wydajności
+            </div>
+            <div class='answer-option' onclick='selectAnswer(4, 2)'>
+                C) Tylko poprawa wydajności
+            </div>
+            <div class='answer-option' onclick='selectAnswer(4, 3)'>
+                D) Zmienne są wymagane przez DAX
+            </div>
+        </div>
+        <button class='check-button' onclick='checkAnswer(4, 1)'>Sprawdź odpowiedź</button>
+        <div class='feedback' id='feedback-4'></div>
+    </div>
+
+    <!-- Pytanie 6 -->
+    <div class='page'>
+        <h1>Pytanie 6</h1>
+        <div class='question-box'>
+            <p><strong>Kiedy zmienna zadeklarowana PRZED funkcją iteracyjną jest obliczana?</strong></p>
+        </div>
+        <div class='answers'>
+            <div class='answer-option' onclick='selectAnswer(5, 0)'>
+                A) W każdej iteracji na nowo
+            </div>
+            <div class='answer-option' onclick='selectAnswer(5, 1)'>
+                B) Tylko raz przed rozpoczęciem iteracji
+            </div>
+            <div class='answer-option' onclick='selectAnswer(5, 2)'>
+                C) Po zakończeniu wszystkich iteracji
+            </div>
+            <div class='answer-option' onclick='selectAnswer(5, 3)'>
+                D) Nigdy, jest to błąd składni
+            </div>
+        </div>
+        <button class='check-button' onclick='checkAnswer(5, 1)'>Sprawdź odpowiedź</button>
+        <div class='feedback' id='feedback-5'></div>
+    </div>
+
+    <!-- Pytanie 7 -->
+    <div class='page'>
+        <h1>Pytanie 7</h1>
+        <div class='question-box'>
+            <p><strong>Co może zawierać zmienna VAR?</strong></p>
+        </div>
+        <div class='answers'>
+            <div class='answer-option' onclick='selectAnswer(6, 0)'>
+                A) Tylko liczby
+            </div>
+            <div class='answer-option' onclick='selectAnswer(6, 1)'>
+                B) Tylko teksty i liczby
+            </div>
+            <div class='answer-option' onclick='selectAnswer(6, 2)'>
+                C) Liczby, teksty, tabele i wyniki obliczeń
+            </div>
+            <div class='answer-option' onclick='selectAnswer(6, 3)'>
+                D) Tylko wyniki funkcji agregujących
+            </div>
+        </div>
+        <button class='check-button' onclick='checkAnswer(6, 2)'>Sprawdź odpowiedź</button>
+        <div class='feedback' id='feedback-6'></div>
+    </div>
+
+    <!-- Podsumowanie quizu -->
+    <div class='page'>
+        <h1>Podsumowanie quizu</h1>
+        <div class='score-box' id='finalScore'>
+            Twój wynik: <span id='scoreText'>0/7</span> (<span id='percentText'>0%</span>)
+        </div>
+        <div id='summaryContent'></div>
+        <button onclick='restartQuiz()' style='margin-top: 20px; width: 100%;'> Rozpocznij quiz od nowa</button>
+    </div>
+</div>
+
+<script>
+    let currentPage = 1;
+    const totalPages = 8;
+    const totalQuestions = 7;
+    
+    const userAnswers = new Array(totalQuestions).fill(null);
+    const answeredQuestions = new Array(totalQuestions).fill(false);
+    
+    const correctAnswers = [1, 1, 1, 2, 1, 1, 2];
+    
+    const explanations = [
+        'Prawidłowa odpowiedź: B. VAR służy do deklarowania zmiennych i przechowywania w nich wartości (liczb, tekstów, tabel, wyników obliczeń).',
+        'Prawidłowa odpowiedź: B. W jednej mierze może być tylko jedno RETURN, które zwraca końcowy wynik miary.',
+        'Prawidłowa odpowiedź: B. Zmienne VAR wewnątrz funkcji iteracyjnych są obliczane na nowo w każdej iteracji, dostosowując się do aktualnego wiersza.',
+        'Prawidłowa odpowiedź: C (29). Obliczenia: 2²=4, 3²=9, 4²=16. Suma: 4+9+16=29.',
+        'Prawidłowa odpowiedź: B. VAR pomaga unikać powtarzania kodu, poprawia czytelność i wydajność miar (wartość obliczana tylko raz).',
+        'Prawidłowa odpowiedź: B. Zmienna zadeklarowana przed funkcją iteracyjną jest obliczana tylko raz i jej wartość jest używana we wszystkich iteracjach.',
+        'Prawidłowa odpowiedź: C. Zmienna VAR może zawierać liczby, teksty, tabele i wyniki obliczeń - jest bardzo wszechstronna.'
+    ];
+    
+    document.getElementById('totalPages').textContent = totalPages;
+    
+        function selectAnswer(questionIndex, answerIndex) {
+            if (answeredQuestions[questionIndex]) return;
+    
+            const answers = document.querySelectorAll('.page')[questionIndex].querySelectorAll('.answer-option');
+            answers.forEach(a => a.classList.remove('selected'));
+            answers[answerIndex].classList.add('selected');
+            userAnswers[questionIndex] = answerIndex;
+        }
+    
+        function checkAnswer(questionIndex, correctIndex) {
+            if (answeredQuestions[questionIndex]) return;
+    
+            const answers = document.querySelectorAll('.page')[questionIndex].querySelectorAll('.answer-option');
+            const feedback = document.getElementById('feedback-' + questionIndex);
+            const checkBtn = document.querySelectorAll('.page')[questionIndex].querySelector('.check-button');
+    
+            if (userAnswers[questionIndex] === null) {
+                feedback.className = 'feedback show incorrect';
+                feedback.textContent = 'Proszę najpierw wybrać odpowiedź!';
+                return;
+            }
+    
+            answeredQuestions[questionIndex] = true;
+            checkBtn.disabled = true;
+    
+            const isCorrect = userAnswers[questionIndex] === correctIndex;
+    
+            answers.forEach((answer, index) => {
+                answer.style.cursor = 'default';
+                if (index === correctIndex) {
+                    answer.classList.add('correct');
+                } else if (index === userAnswers[questionIndex]) {
+                    answer.classList.add('incorrect');
+                }
+            });
+    
+            feedback.className = 'feedback show ' + (isCorrect ? 'correct' : 'incorrect');
+            feedback.innerHTML = (isCorrect ? '✅ Świetnie! ' : '❌ Nieprawidłowo. ') + explanations[questionIndex];
+    
+            if (questionIndex < totalQuestions - 1) {
+                setTimeout(() => {
+                    changePage(1);
+                }, 2500);
+            } else {
+                setTimeout(() => {
+                    showSummary();
+                    changePage(1);
+                }, 2500);
+            }
+        }
+    
+        function showSummary() {
+            let correctCount = 0;
+            for (let i = 0; i < totalQuestions; i++) {
+                if (userAnswers[i] === correctAnswers[i]) {
+                    correctCount++;
+                }
+            }
+    
+            const percentage = Math.round((correctCount / totalQuestions) * 100);
+            document.getElementById('scoreText').textContent = correctCount + '/' + totalQuestions;
+            document.getElementById('percentText').textContent = percentage + '%';
+    
+            let summaryHTML = '<h2>Szczegóły odpowiedzi:</h2>';
+            for (let i = 0; i < totalQuestions; i++) {
+                const isCorrect = userAnswers[i] === correctAnswers[i];
+                summaryHTML += `
+                    <div class='summary-item ${isCorrect ? 'correct' : 'incorrect'}'>
+                        <strong>Pytanie ${i + 1}:</strong> ${isCorrect ? '✅ Poprawnie' : '❌ Niepoprawnie'}<br>
+                        <small>${explanations[i]}</small>
+                    </div>
+                `;
+            }
+    
+            document.getElementById('summaryContent').innerHTML = summaryHTML;
+        }
+    
+        function restartQuiz() {
+            userAnswers.fill(null);
+            answeredQuestions.fill(false);
+            currentPage = 1;
+    
+            document.querySelectorAll('.page').forEach((page, index) => {
+                if (index < totalQuestions) {
+                    const answers = page.querySelectorAll('.answer-option');
+                    answers.forEach(a => {
+                        a.className = 'answer-option';
+                        a.style.cursor = 'pointer';
+                    });
+                    const feedback = page.querySelector('.feedback');
+                    feedback.className = 'feedback';
+                    const checkBtn = page.querySelector('.check-button');
+                    checkBtn.disabled = false;
+                }
+            });
+    
+            showPage(1);
+        }
+    
+        function showPage(n) {
+            const pages = document.querySelectorAll('.page');
+    
+            if (n > totalPages) currentPage = totalPages;
+            if (n < 1) currentPage = 1;
+    
+            pages.forEach(page => page.classList.remove('active'));
+            pages[currentPage - 1].classList.add('active');
+    
+            document.getElementById('currentPage').textContent = currentPage;
+            document.getElementById('prevBtn').disabled = currentPage === 1;
+            document.getElementById('nextBtn').disabled = currentPage === totalPages;
+    
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+    
+        function changePage(n) {
+            currentPage += n;
+            showPage(currentPage);
+        }
+    
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'ArrowLeft') changePage(-1);
+            if (e.key === 'ArrowRight') changePage(1);
+        });
+    
+        showPage(1);
+</script>
+
+</body>
+</html>
+
+"
+```
+            lineageTag: f45d271a-ddbb-4721-a7af-12d3e83980c4
+
+        measure 'CSS - Quiz - Blue' = ```
+"
+<style>
+* {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
@@ -8358,361 +14258,15 @@ createOrReplace
         .summary-item.incorrect {
             border-left-color: #dc3545;
         }
-    </style>
-</head>
-<body>
-
-<div class='container'>
-    <!-- Nawigacja na górze -->
-    <div class='navigation'>
-        <button id='prevBtn' onclick='changePage(-1)'>← Poprzednia</button>
-        <span class='page-indicator'>
-            Pytanie <span id='currentPage'>1</span> z <span id='totalPages'>8</span>
-        </span>
-        <button id='nextBtn' onclick='changePage(1)'>Następna →</button>
-    </div>
-
-    <!-- Pytanie 1 -->
-    <div class='page active'>
-        <h1>Pytanie 1</h1>
-        <div class='question-box'>
-            <p><strong>Do czego służy słowo kluczowe VAR w DAX?</strong></p>
-        </div>
-        <div class='answers'>
-            <div class='answer-option' onclick='selectAnswer(0, 0)'>
-                A) Do zwracania wyniku miary
-            </div>
-            <div class='answer-option' onclick='selectAnswer(0, 1)'>
-                B) Do deklarowania zmiennych i przechowywania wartości
-            </div>
-            <div class='answer-option' onclick='selectAnswer(0, 2)'>
-                C) Do iteracji po wierszach tabeli
-            </div>
-            <div class='answer-option' onclick='selectAnswer(0, 3)'>
-                D) Do filtrowania danych
-            </div>
-        </div>
-        <button class='check-button' onclick='checkAnswer(0, 1)'>Sprawdź odpowiedź</button>
-        <div class='feedback' id='feedback-0'></div>
-    </div>
-
-    <!-- Pytanie 2 -->
-    <div class='page'>
-        <h1>Pytanie 2</h1>
-        <div class='question-box'>
-            <p><strong>Ile razy może wystąpić słowo RETURN w jednej mierze DAX?</strong></p>
-        </div>
-        <div class='answers'>
-            <div class='answer-option' onclick='selectAnswer(1, 0)'>
-                A) Dowolnie wiele razy
-            </div>
-            <div class='answer-option' onclick='selectAnswer(1, 1)'>
-                B) Tylko raz
-            </div>
-            <div class='answer-option' onclick='selectAnswer(1, 2)'>
-                C) Co najmniej dwa razy
-            </div>
-            <div class='answer-option' onclick='selectAnswer(1, 3)'>
-                D) RETURN nie jest wymagane w miarach
-            </div>
-        </div>
-        <button class='check-button' onclick='checkAnswer(1, 1)'>Sprawdź odpowiedź</button>
-        <div class='feedback' id='feedback-1'></div>
-    </div>
-
-    <!-- Pytanie 3 -->
-    <div class='page'>
-        <h1>Pytanie 3</h1>
-        <div class='question-box'>
-            <p><strong>Co się stanie ze zmiennymi VAR wewnątrz funkcji iteracyjnej jak SUMX?</strong></p>
-        </div>
-        <div class='answers'>
-            <div class='answer-option' onclick='selectAnswer(2, 0)'>
-                A) Są obliczane tylko raz przed rozpoczęciem iteracji
-            </div>
-            <div class='answer-option' onclick='selectAnswer(2, 1)'>
-                B) Są obliczane na nowo w każdej iteracji dla aktualnego wiersza
-            </div>
-            <div class='answer-option' onclick='selectAnswer(2, 2)'>
-                C) Nie można używać VAR wewnątrz funkcji iteracyjnych
-            </div>
-            <div class='answer-option' onclick='selectAnswer(2, 3)'>
-                D) Zachowują wartość z poprzedniej iteracji
-            </div>
-        </div>
-        <button class='check-button' onclick='checkAnswer(2, 1)'>Sprawdź odpowiedź</button>
-        <div class='feedback' id='feedback-2'></div>
-    </div>
-
-    <!-- Pytanie 4 -->
-    <div class='page'>
-        <h1>Pytanie 4</h1>
-        <div class='question-box'>
-            <p><strong>Jaki będzie wynik tego kodu?</strong></p>
-        </div>
-        <div class='answers'>
-            <div class='answer-option' onclick='selectAnswer(3, 0)'>
-                A) 9
-            </div>
-            <div class='answer-option' onclick='selectAnswer(3, 1)'>
-                B) 24
-            </div>
-            <div class='answer-option' onclick='selectAnswer(3, 2)'>
-                C) 29
-            </div>
-            <div class='answer-option' onclick='selectAnswer(3, 3)'>
-                D) 16
-            </div>
-        </div>
-        <button class='check-button' onclick='checkAnswer(3, 2)'>Sprawdź odpowiedź</button>
-        <div class='feedback' id='feedback-3'></div>
-    </div>
-
-    <!-- Pytanie 5 -->
-    <div class='page'>
-        <h1>Pytanie 5</h1>
-        <div class='question-box'>
-            <p><strong>Jakie są główne zalety używania zmiennych VAR?</strong></p>
-        </div>
-        <div class='answers'>
-            <div class='answer-option' onclick='selectAnswer(4, 0)'>
-                A) Tylko poprawa czytelności kodu
-            </div>
-            <div class='answer-option' onclick='selectAnswer(4, 1)'>
-                B) Unikanie powtarzania kodu, poprawa czytelności i wydajności
-            </div>
-            <div class='answer-option' onclick='selectAnswer(4, 2)'>
-                C) Tylko poprawa wydajności
-            </div>
-            <div class='answer-option' onclick='selectAnswer(4, 3)'>
-                D) Zmienne są wymagane przez DAX
-            </div>
-        </div>
-        <button class='check-button' onclick='checkAnswer(4, 1)'>Sprawdź odpowiedź</button>
-        <div class='feedback' id='feedback-4'></div>
-    </div>
-
-    <!-- Pytanie 6 -->
-    <div class='page'>
-        <h1>Pytanie 6</h1>
-        <div class='question-box'>
-            <p><strong>Kiedy zmienna zadeklarowana PRZED funkcją iteracyjną jest obliczana?</strong></p>
-        </div>
-        <div class='answers'>
-            <div class='answer-option' onclick='selectAnswer(5, 0)'>
-                A) W każdej iteracji na nowo
-            </div>
-            <div class='answer-option' onclick='selectAnswer(5, 1)'>
-                B) Tylko raz przed rozpoczęciem iteracji
-            </div>
-            <div class='answer-option' onclick='selectAnswer(5, 2)'>
-                C) Po zakończeniu wszystkich iteracji
-            </div>
-            <div class='answer-option' onclick='selectAnswer(5, 3)'>
-                D) Nigdy, jest to błąd składni
-            </div>
-        </div>
-        <button class='check-button' onclick='checkAnswer(5, 1)'>Sprawdź odpowiedź</button>
-        <div class='feedback' id='feedback-5'></div>
-    </div>
-
-    <!-- Pytanie 7 -->
-    <div class='page'>
-        <h1>Pytanie 7</h1>
-        <div class='question-box'>
-            <p><strong>Co może zawierać zmienna VAR?</strong></p>
-        </div>
-        <div class='answers'>
-            <div class='answer-option' onclick='selectAnswer(6, 0)'>
-                A) Tylko liczby
-            </div>
-            <div class='answer-option' onclick='selectAnswer(6, 1)'>
-                B) Tylko teksty i liczby
-            </div>
-            <div class='answer-option' onclick='selectAnswer(6, 2)'>
-                C) Liczby, teksty, tabele i wyniki obliczeń
-            </div>
-            <div class='answer-option' onclick='selectAnswer(6, 3)'>
-                D) Tylko wyniki funkcji agregujących
-            </div>
-        </div>
-        <button class='check-button' onclick='checkAnswer(6, 2)'>Sprawdź odpowiedź</button>
-        <div class='feedback' id='feedback-6'></div>
-    </div>
-
-    <!-- Podsumowanie quizu -->
-    <div class='page'>
-        <h1>Podsumowanie quizu</h1>
-        <div class='score-box' id='finalScore'>
-            Twój wynik: <span id='scoreText'>0/7</span> (<span id='percentText'>0%</span>)
-        </div>
-        <div id='summaryContent'></div>
-        <button onclick='restartQuiz()' style='margin-top: 20px; width: 100%;'>🔄 Rozpocznij quiz od nowa</button>
-    </div>
-</div>
-
-<script>
-    let currentPage = 1;
-    const totalPages = 8;
-    const totalQuestions = 7;
-    
-    const userAnswers = new Array(totalQuestions).fill(null);
-    const answeredQuestions = new Array(totalQuestions).fill(false);
-    
-    const correctAnswers = [1, 1, 1, 2, 1, 1, 2];
-    
-    const explanations = [
-        'Prawidłowa odpowiedź: B. VAR służy do deklarowania zmiennych i przechowywania w nich wartości (liczb, tekstów, tabel, wyników obliczeń).',
-        'Prawidłowa odpowiedź: B. W jednej mierze może być tylko jedno RETURN, które zwraca końcowy wynik miary.',
-        'Prawidłowa odpowiedź: B. Zmienne VAR wewnątrz funkcji iteracyjnych są obliczane na nowo w każdej iteracji, dostosowując się do aktualnego wiersza.',
-        'Prawidłowa odpowiedź: C (29). Obliczenia: 2²=4, 3²=9, 4²=16. Suma: 4+9+16=29.',
-        'Prawidłowa odpowiedź: B. VAR pomaga unikać powtarzania kodu, poprawia czytelność i wydajność miar (wartość obliczana tylko raz).',
-        'Prawidłowa odpowiedź: B. Zmienna zadeklarowana przed funkcją iteracyjną jest obliczana tylko raz i jej wartość jest używana we wszystkich iteracjach.',
-        'Prawidłowa odpowiedź: C. Zmienna VAR może zawierać liczby, teksty, tabele i wyniki obliczeń - jest bardzo wszechstronna.'
-    ];
-    
-    document.getElementById('totalPages').textContent = totalPages;
-
-    function selectAnswer(questionIndex, answerIndex) {
-        if (answeredQuestions[questionIndex]) return;
-
-        const answers = document.querySelectorAll('.page')[questionIndex].querySelectorAll('.answer-option');
-        answers.forEach(a => a.classList.remove('selected'));
-        answers[answerIndex].classList.add('selected');
-        userAnswers[questionIndex] = answerIndex;
-    }
-
-    function checkAnswer(questionIndex, correctIndex) {
-        if (answeredQuestions[questionIndex]) return;
-
-        const answers = document.querySelectorAll('.page')[questionIndex].querySelectorAll('.answer-option');
-        const feedback = document.getElementById('feedback-' + questionIndex);
-        const checkBtn = document.querySelectorAll('.page')[questionIndex].querySelector('.check-button');
-
-        if (userAnswers[questionIndex] === null) {
-            feedback.className = 'feedback show incorrect';
-            feedback.textContent = '⚠️ Proszę najpierw wybrać odpowiedź!';
-            return;
-        }
-
-        answeredQuestions[questionIndex] = true;
-        checkBtn.disabled = true;
-
-        const isCorrect = userAnswers[questionIndex] === correctIndex;
-
-        answers.forEach((answer, index) => {
-            answer.style.cursor = 'default';
-            if (index === correctIndex) {
-                answer.classList.add('correct');
-            } else if (index === userAnswers[questionIndex]) {
-                answer.classList.add('incorrect');
-            }
-        });
-
-        feedback.className = 'feedback show ' + (isCorrect ? 'correct' : 'incorrect');
-        feedback.innerHTML = (isCorrect ? '✅ Świetnie! ' : '❌ Nieprawidłowo. ') + explanations[questionIndex];
-
-        if (questionIndex < totalQuestions - 1) {
-            setTimeout(() => {
-                changePage(1);
-            }, 2500);
-        } else {
-            setTimeout(() => {
-                showSummary();
-                changePage(1);
-            }, 2500);
-        }
-    }
-
-    function showSummary() {
-        let correctCount = 0;
-        for (let i = 0; i < totalQuestions; i++) {
-            if (userAnswers[i] === correctAnswers[i]) {
-                correctCount++;
-            }
-        }
-
-        const percentage = Math.round((correctCount / totalQuestions) * 100);
-        document.getElementById('scoreText').textContent = correctCount + '/' + totalQuestions;
-        document.getElementById('percentText').textContent = percentage + '%';
-
-        let summaryHTML = '<h2>Szczegóły odpowiedzi:</h2>';
-        for (let i = 0; i < totalQuestions; i++) {
-            const isCorrect = userAnswers[i] === correctAnswers[i];
-            summaryHTML += `
-                <div class='summary-item ${isCorrect ? 'correct' : 'incorrect'}'>
-                    <strong>Pytanie ${i + 1}:</strong> ${isCorrect ? '✅ Poprawnie' : '❌ Niepoprawnie'}<br>
-                    <small>${explanations[i]}</small>
-                </div>
-            `;
-        }
-
-        document.getElementById('summaryContent').innerHTML = summaryHTML;
-    }
-
-    function restartQuiz() {
-        userAnswers.fill(null);
-        answeredQuestions.fill(false);
-        currentPage = 1;
-
-        document.querySelectorAll('.page').forEach((page, index) => {
-            if (index < totalQuestions) {
-                const answers = page.querySelectorAll('.answer-option');
-                answers.forEach(a => {
-                    a.className = 'answer-option';
-                    a.style.cursor = 'pointer';
-                });
-                const feedback = page.querySelector('.feedback');
-                feedback.className = 'feedback';
-                const checkBtn = page.querySelector('.check-button');
-                checkBtn.disabled = false;
-            }
-        });
-
-        showPage(1);
-    }
-
-    function showPage(n) {
-        const pages = document.querySelectorAll('.page');
-
-        if (n > totalPages) currentPage = totalPages;
-        if (n < 1) currentPage = 1;
-
-        pages.forEach(page => page.classList.remove('active'));
-        pages[currentPage - 1].classList.add('active');
-
-        document.getElementById('currentPage').textContent = currentPage;
-        document.getElementById('prevBtn').disabled = currentPage === 1;
-        document.getElementById('nextBtn').disabled = currentPage === totalPages;
-
-        window.scrollTo({ top: 0, behavior: 'smooth' });
-    }
-
-    function changePage(n) {
-        currentPage += n;
-        showPage(currentPage);
-    }
-
-    document.addEventListener('keydown', function(e) {
-        if (e.key === 'ArrowLeft') changePage(-1);
-        if (e.key === 'ArrowRight') changePage(1);
-    });
-
-    showPage(1);
-</script>
-
-</body>
-</html>
-
+</style>
 "
 ```
-            lineageTag: 9d537576-c8f5-4600-8523-9f89058f5bbe
+            lineageTag: 9dcc2fa7-b16e-4576-b79c-c27c5fd52035
 
-        measure 'CSS - Czerwony' = ```
+        measure 'CSS - Quiz - Cherry' = ```
 "
 <style>
-<style>
-        * {
+* {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
@@ -8807,32 +14361,90 @@ createOrReplace
             border-bottom: 2px solid #1a1a1a;
         }
 
-        h3 {
-            font-size: 1.1em;
-            font-weight: 600;
-            margin: 1.2em 0 0.6em 0;
-            padding-bottom: 5px;
-            color: #444;
-            border-bottom: 1px solid #999;
+        .question-box {
+            background: #f8f9fa;
+            border-left: 3px solid #6b1718;
+            padding: 20px;
+            margin: 1.5em 0;
+            border-radius: 3px;
         }
 
-        p {
-            margin-bottom: 1em;
+        .question-box p {
+            margin: 0;
             font-size: 1.05em;
-        }
-
-        strong {
-            font-weight: 700;
             color: #1a1a1a;
         }
 
-        code {
-            background: #f5f5f5;
-            padding: 3px 7px;
-            border-radius: 3px;
-            font-family: 'Fira Code', 'Courier New', monospace;
-            font-size: 0.95em;
-            color: #b82b4e;
+        .answers {
+            margin-top: 1.5em;
+        }
+
+        .answer-option {
+            background: white;
+            border: 2px solid #e1e4e8;
+            padding: 15px 20px;
+            margin: 10px 0;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: all 0.2s;
+            font-size: 1.05em;
+        }
+
+        .answer-option:hover {
+            border-color: #6b1718;
+            background: #fef5f5;
+        }
+
+        .answer-option.selected {
+            border-color: #6b1718;
+            background: #ffe5e6;
+        }
+
+        .answer-option.correct {
+            border-color: #ccc;
+            background: #d4edda;
+        }
+
+        .answer-option.incorrect {
+            border-color: #b82b4e;
+            background: #f8d7da;
+        }
+
+        .feedback {
+            margin-top: 1.5em;
+            padding: 15px 20px;
+            border-radius: 4px;
+            display: none;
+            font-size: 1.05em;
+        }
+
+        .feedback.show {
+            display: block;
+        }
+
+        .feedback.correct {
+            background: #d4edda;
+            border-left: 3px solid #28a745;
+            color: #155724;
+        }
+
+        .feedback.incorrect {
+            background: #f8d7da;
+            border-left: 3px solid #b82b4e;
+            color: #721c24;
+        }
+
+        .check-button {
+            margin-top: 1.5em;
+            background: #121212;
+        }
+
+        .check-button:hover:not(:disabled) {
+            background: #111111;
+        }
+
+        .check-button:disabled {
+            background: #ccc;
         }
 
         pre {
@@ -8844,97 +14456,290 @@ createOrReplace
             border-radius: 3px;
         }
 
-        pre code {
-            background: none;
-            padding: 0;
-            color: #24292e;
-            font-size: 1em;
-            line-height: 1.6;
+        code {
+            font-family: 'Fira Code', 'Courier New', monospace;
+            font-size: 0.95em;
+            color: #b82b4e;
         }
 
-        .dax-keyword {
-            color: #6b1718;
-            font-weight: 600;
+        .score-box {
+            background: #6b1718;
+            color: white;
+            padding: 20px;
+            border-radius: 4px;
+            text-align: center;
+            font-size: 1.2em;
+            margin-bottom: 2em;
         }
 
-        .dax-function {
-            color: #6f42c1;
-        }
-
-        .dax-number {
-            color: #005cc5;
-        }
-
-        .dax-comment {
-            color: #6a737d;
-            font-style: italic;
-        }
-
-        ul, ol {
-            margin: 0.3em 0;
-            padding-left: 1.8em;
-        }
-
-        li {
-            margin: 0;
-            padding-left: 0.2em;
-            font-size: 1.05em;
-            line-height: 1.6;
-        }
-
-        ol {
-            list-style-type: decimal;
-        }
-
-        ol li::marker {
-            color: #999;
-            font-weight: 400;
-        }
-
-        ul li::marker {
-            color: #999;
-        }
-
-        ul ul, ol ol, ul ol, ol ul {
-            margin: 0.2em 0;
-            padding-left: 1.5em;
-        }
-
-        blockquote {
-            border-left: 3px solid #6b1718;
+        .summary-item {
             background: #f8f9fa;
-            padding: 14px 18px;
-            margin: 1em 0;
-            color: #555;
-            font-style: italic;
+            padding: 15px;
+            margin: 10px 0;
+            border-radius: 4px;
+            border-left: 3px solid #ccc;
         }
 
-        blockquote p {
-            margin: 0;
+        .summary-item.correct {
+            border-left-color: #28a745;
         }
 
-        .iteration-box {
-            border-left: 3px solid #6b1718;
-            padding: 14px 18px;
-            margin: 0.8em 0;
+        .summary-item.incorrect {
+            border-left-color: #b82b4e;
         }
 
-        .result-box {
-            background: #f5f5f5;
-            border-left: 3px solid #999;
-            padding: 14px 18px;
-            margin: 0.8em 0;
-            font-weight: 500;
-            color: #555;
-            font-size: 1.05em;
+        strong {
+            font-weight: 700;
+            color: #1a1a1a;
         }
-    </style>
+
+        p {
+            margin-bottom: 1em;
+        }
 </style>
 "
 ```
-            lineageTag: 22b09692-3d62-43e6-ab9a-3ce6697c178b
+            lineageTag: 53e24cfe-d111-4fa9-b915-4d7ffe5f0b2f
 
-        measure 'CSS - Niebieski' = ```
+        measure 'CSS - Quiz- Cherry' = ```
+"
+<style>
+* {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Roboto', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            font-size: 16px;
+            font-weight: 400;
+            line-height: 1.7;
+            color: #333;
+            background: transparent;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            background: transparent;
+            padding: 40px;
+        }
+
+        .navigation {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 40px;
+            padding-bottom: 20px;
+            border-bottom: 1px solid #e1e4e8;
+        }
+
+        button {
+            background: #6b1718;
+            color: white;
+            border: none;
+            padding: 12px 28px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 1em;
+            font-weight: 500;
+            transition: background 0.2s;
+        }
+
+        button:hover {
+            background: #380c0c;
+        }
+
+        button:disabled {
+            background: #ccc;
+            cursor: not-allowed;
+        }
+
+        .page-indicator {
+            color: #666;
+            font-size: 1em;
+        }
+
+        .page {
+            display: none;
+            min-height: 500px;
+        }
+
+        .page.active {
+            display: block;
+            animation: fadeIn 0.3s ease-in;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        h1 {
+            font-size: 26px;
+            line-height: 36px;
+            font-weight: 600;
+            padding-top: 14px;
+            padding-bottom: 6px;
+            margin-bottom: 1em;
+            color: #6b1718;
+            border-bottom: 2px solid #6b1718;
+        }
+
+        h2 {
+            font-size: 26px;
+            line-height: 36px;
+            font-weight: 600;
+            padding-top: 14px;
+            padding-bottom: 6px;
+            margin: 1.5em 0 0.8em 0;
+            color: #1a1a1a;
+            border-bottom: 2px solid #1a1a1a;
+        }
+
+        .question-box {
+            background: #f8f9fa;
+            border-left: 3px solid #6b1718;
+            padding: 20px;
+            margin: 1.5em 0;
+            border-radius: 3px;
+        }
+
+        .question-box p {
+            margin: 0;
+            font-size: 1.05em;
+            color: #1a1a1a;
+        }
+
+        .answers {
+            margin-top: 1.5em;
+        }
+
+        .answer-option {
+            background: white;
+            border: 2px solid #e1e4e8;
+            padding: 15px 20px;
+            margin: 10px 0;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: all 0.2s;
+            font-size: 1.05em;
+        }
+
+        .answer-option:hover {
+            border-color: #6b1718;
+            background: #fef5f5;
+        }
+
+        .answer-option.selected {
+            border-color: #6b1718;
+            background: #ffe5e6;
+        }
+
+        .answer-option.correct {
+            border-color: #ccc;
+            background: #d4edda;
+        }
+
+        .answer-option.incorrect {
+            border-color: #b82b4e;
+            background: #f8d7da;
+        }
+
+        .feedback {
+            margin-top: 1.5em;
+            padding: 15px 20px;
+            border-radius: 4px;
+            display: none;
+            font-size: 1.05em;
+        }
+
+        .feedback.show {
+            display: block;
+        }
+
+        .feedback.correct {
+            background: #d4edda;
+            border-left: 3px solid #28a745;
+            color: #155724;
+        }
+
+        .feedback.incorrect {
+            background: #f8d7da;
+            border-left: 3px solid #b82b4e;
+            color: #721c24;
+        }
+
+        .check-button {
+            margin-top: 1.5em;
+            background: #121212;
+        }
+
+        .check-button:hover:not(:disabled) {
+            background: #111111;
+        }
+
+        .check-button:disabled {
+            background: #ccc;
+        }
+
+        pre {
+            background: #f8f9fa;
+            border-left: 3px solid #6b1718;
+            padding: 18px;
+            margin: 1em 0;
+            overflow-x: auto;
+            border-radius: 3px;
+        }
+
+        code {
+            font-family: 'Fira Code', 'Courier New', monospace;
+            font-size: 0.95em;
+            color: #b82b4e;
+        }
+
+        .score-box {
+            background: #6b1718;
+            color: white;
+            padding: 20px;
+            border-radius: 4px;
+            text-align: center;
+            font-size: 1.2em;
+            margin-bottom: 2em;
+        }
+
+        .summary-item {
+            background: #f8f9fa;
+            padding: 15px;
+            margin: 10px 0;
+            border-radius: 4px;
+            border-left: 3px solid #ccc;
+        }
+
+        .summary-item.correct {
+            border-left-color: #28a745;
+        }
+
+        .summary-item.incorrect {
+            border-left-color: #b82b4e;
+        }
+
+        strong {
+            font-weight: 700;
+            color: #1a1a1a;
+        }
+
+        p {
+            margin-bottom: 1em;
+        }
+</style>
+"
+```
+            lineageTag: ccaf3b99-7287-447b-9d0b-653fc06e1fd1
+
+        measure 'CSS - Teoria - Blue' = ```
 "
 <style>
 <style>
@@ -9158,7 +14963,233 @@ createOrReplace
 </style>
 "
 ```
-            lineageTag: d2187592-c775-4967-a0be-f613743e1267
+            lineageTag: 6cf67cc6-849f-4ac6-8c08-8708f6a869bd
+
+        measure 'CSS - Teoria - Cherry' = ```
+"
+<style>
+<style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Roboto', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            font-size: 16px;
+            font-weight: 400;
+            line-height: 1.7;
+            color: #333;
+            background: transparent;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            background: transparent;
+            padding: 40px;
+        }
+
+        .navigation {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 40px;
+            padding-bottom: 20px;
+            border-bottom: 1px solid #e1e4e8;
+        }
+
+        button {
+            background: #6b1718;
+            color: white;
+            border: none;
+            padding: 12px 28px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 1em;
+            font-weight: 500;
+            transition: background 0.2s;
+        }
+
+        button:hover {
+            background: #380c0c;
+        }
+
+        button:disabled {
+            background: #ccc;
+            cursor: not-allowed;
+        }
+
+        .page-indicator {
+            color: #666;
+            font-size: 1em;
+        }
+
+        .page {
+            display: none;
+            min-height: 500px;
+        }
+
+        .page.active {
+            display: block;
+            animation: fadeIn 0.3s ease-in;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        h1 {
+            font-size: 26px;
+            line-height: 36px;
+            font-weight: 600;
+            padding-top: 14px;
+            padding-bottom: 6px;
+            margin-bottom: 1em;
+            color: #6b1718;
+            border-bottom: 2px solid #6b1718;
+        }
+
+        h2 {
+            font-size: 26px;
+            line-height: 36px;
+            font-weight: 600;
+            padding-top: 14px;
+            padding-bottom: 6px;
+            margin: 1.5em 0 0.8em 0;
+            color: #1a1a1a;
+            border-bottom: 2px solid #1a1a1a;
+        }
+
+        h3 {
+            font-size: 1.1em;
+            font-weight: 600;
+            margin: 1.2em 0 0.6em 0;
+            padding-bottom: 5px;
+            color: #444;
+            border-bottom: 1px solid #999;
+        }
+
+        p {
+            margin-bottom: 1em;
+            font-size: 1.05em;
+        }
+
+        strong {
+            font-weight: 700;
+            color: #1a1a1a;
+        }
+
+        code {
+            background: #f5f5f5;
+            padding: 3px 7px;
+            border-radius: 3px;
+            font-family: 'Fira Code', 'Courier New', monospace;
+            font-size: 0.95em;
+            color: #b82b4e;
+        }
+
+        pre {
+            background: #f8f9fa;
+            border-left: 3px solid #6b1718;
+            padding: 18px;
+            margin: 1em 0;
+            overflow-x: auto;
+            border-radius: 3px;
+        }
+
+        pre code {
+            background: none;
+            padding: 0;
+            color: #24292e;
+            font-size: 1em;
+            line-height: 1.6;
+        }
+
+        .dax-keyword {
+            color: #6b1718;
+            font-weight: 600;
+        }
+
+        .dax-function {
+            color: #6f42c1;
+        }
+
+        .dax-number {
+            color: #005cc5;
+        }
+
+        .dax-comment {
+            color: #6a737d;
+            font-style: italic;
+        }
+
+        ul, ol {
+            margin: 0.3em 0;
+            padding-left: 1.8em;
+        }
+
+        li {
+            margin: 0;
+            padding-left: 0.2em;
+            font-size: 1.05em;
+            line-height: 1.6;
+        }
+
+        ol {
+            list-style-type: decimal;
+        }
+
+        ol li::marker {
+            color: #999;
+            font-weight: 400;
+        }
+
+        ul li::marker {
+            color: #999;
+        }
+
+        ul ul, ol ol, ul ol, ol ul {
+            margin: 0.2em 0;
+            padding-left: 1.5em;
+        }
+
+        blockquote {
+            border-left: 3px solid #6b1718;
+            background: #f8f9fa;
+            padding: 14px 18px;
+            margin: 1em 0;
+            color: #555;
+            font-style: italic;
+        }
+
+        blockquote p {
+            margin: 0;
+        }
+
+        .iteration-box {
+            border-left: 3px solid #6b1718;
+            padding: 14px 18px;
+            margin: 0.8em 0;
+        }
+
+        .result-box {
+            background: #f5f5f5;
+            border-left: 3px solid #999;
+            padding: 14px 18px;
+            margin: 0.8em 0;
+            font-weight: 500;
+            color: #555;
+            font-size: 1.05em;
+        }
+    </style>
+</style>
+"
+```
+            lineageTag: b2c18e2e-043e-494d-a3aa-f5f0c6187453
 
         partition _HTML = m
             mode: import

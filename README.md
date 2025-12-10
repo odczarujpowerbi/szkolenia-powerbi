@@ -12,11 +12,8 @@ Zautomatyzowany pipeline, który:
 	- AI musi przygotować tekst do wersji strawnej dla HTML
 	- Krok do zastąpienia - efektywność pracy AI jest niska i może zostać zalgorytmizowana (pandoc?)
 3. **Generuje HTML** - konwertuje do formatu HTML z gotowym CSS i JS
-	- Template znajduje się odpowiednio w [[CSS - Niebieski|Template/CSS]] i [[JS|Template/JS]]
+	- Template znajduje się odpowiednio w [[CSS - Teoria - Blue|Template/CSS]] i [[JS - Teoria|Template/JS]]
 	- Znak `---` Symbolizuje oddzielną stronę, która jest paginowana przez `JS`
 4. **Integruje z Power BI** - tworzy miary w tabeli `_HTML`, a następnie wyświetla na wizualizacji interpretującej wartości dokumentów html
 	- Gotowe miary trafiają do folder **Output**, przykładowo [[1. Podstawy DAX.html]]
 
-
-
-# szkolenia-powerbi

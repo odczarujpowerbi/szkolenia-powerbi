@@ -4,19 +4,22 @@
     "type": "split",
     "children": [
       {
-        "id": "04e6d62b73b78730",
+        "id": "7aaecd8a23084fc1",
         "type": "tabs",
         "children": [
           {
-            "id": "c6a8ca1a0082a34f",
+            "id": "f2dae88ff2e85d32",
             "type": "leaf",
             "state": {
-              "type": "html-view",
+              "type": "markdown",
               "state": {
-                "file": "00. DRAFT/Test.html"
+                "file": "README.md",
+                "mode": "source",
+                "source": false,
+                "backlinks": false
               },
-              "icon": "code-glyph",
-              "title": "Test"
+              "icon": "lucide-file",
+              "title": "README"
             }
           }
         ],
@@ -104,13 +107,13 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "00. DRAFT/Test.html",
+                "file": "02. OUTPUT/00. Quiz - test.html",
                 "followCursor": true,
                 "showSearch": false,
                 "searchQuery": ""
               },
               "icon": "lucide-list",
-              "title": "Outline of Test"
+              "title": "Outline of 00. Quiz - test"
             }
           }
         ],
@@ -127,7 +130,7 @@
             "state": {
               "type": "localgraph",
               "state": {
-                "file": "00. DRAFT/Test.html",
+                "file": "02. OUTPUT/00. Quiz - test.html",
                 "options": {
                   "collapse-filter": true,
                   "search": "",
@@ -155,7 +158,7 @@
                 }
               },
               "icon": "lucide-git-fork",
-              "title": "Graph of Test"
+              "title": "Graph of 00. Quiz - test"
             }
           }
         ]
@@ -180,44 +183,44 @@
       "hide-folders:Show hidden folders": false
     }
   },
-  "active": "c6a8ca1a0082a34f",
+  "active": "f2dae88ff2e85d32",
   "lastOpenFiles": [
-    "01. THEORY/00. Quiz - test.md",
-    "00. DRAFT/Test.html",
-    "03. TEMPLATE/Markdown/Quiz.md",
-    "00. DRAFT/Test.md",
-    "03. TEMPLATE/Markdown/Teoria.md",
-    "03. TEMPLATE/Markdown/Gaps Complete.md",
-    "01. THEORY/05. Quiz.md",
-    "01. THEORY/01. Quiz.md",
-    "01. THEORY/01. Podstawy DAX.md",
-    "02. OUTPUT/04. Modyfikowanie Kontekstu - CROSSFILTER.html",
     "config.md",
-    "02. OUTPUT/03. Quiz.html",
+    "01. THEORY/01. Quiz.md",
     "02. OUTPUT/01. Quiz.html",
-    "01. THEORY/02. Quiz.md",
-    "01. THEORY/03. Quiz.md",
-    "02. OUTPUT/06. Quiz.html",
-    "02. OUTPUT/05. Quiz.html",
-    "02. OUTPUT/04. Quiz.html",
     "02. OUTPUT/02. Quiz.html",
-    "01. THEORY/06. Quiz.md",
-    "01. THEORY/04. Quiz.md",
-    "01. THEORY/06. DAX - Zaawansowane Kwerendy.md",
-    "02. OUTPUT/05. Tworzenie zestawień tabelarycznych - Tworzenie Tabeli.html",
     "02. OUTPUT/03. Wprowadzenie do CALCULATE - PODSUMOWANIE.html",
-    "01. THEORY/05. Tworzenie zestawień tabelarycznych.md",
-    "01. THEORY/04. Modyfikowanie Kontekstu.md",
-    "bin/Pasted image 20251210001950.png",
-    "01. THEORY/03. Wprowadzenie do CALCULATE.md",
-    "01. THEORY/02. Miary vs Kolumny kalkulowane.md",
-    "03. TEMPLATE/CSS - Czerwony.md",
-    "01. THEORY/00. Konfiguracja Power BI.md",
-    "02. OUTPUT/TMDL/_HTML.md",
+    "02. OUTPUT/03. Quiz.html",
+    "02. OUTPUT/04. Modyfikowanie Kontekstu - KEEPFILTERS.html",
+    "02. OUTPUT/CSS - Quiz - Cherry.html",
+    "03. TEMPLATE/JS - Teoria.md",
+    "03. TEMPLATE/JS - Quiz.md",
+    "03. TEMPLATE/CSS - Quiz - Cherry.md",
+    "02. OUTPUT/00. Quiz - test.html",
+    "02. OUTPUT/01. Podstawy DAX - Funkcje agregujące.html",
+    "02. OUTPUT/04. Modyfikowanie Kontekstu - ALLEXCEPT.html",
+    "02. OUTPUT/04. Modyfikowanie Kontekstu - CROSSFILTER.html",
     "02. OUTPUT/TMDL/_Parametr.md",
-    "00. DRAFT/02. Wstęp do Calculate.md",
-    "00. DRAFT/00. Przygotowanie środowiska.md",
-    "00. DRAFT/03. Kontekst Filtra.md",
+    "02. OUTPUT/TMDL/_HTML.md",
+    "01. THEORY/02. Quiz.md",
+    "01. THEORY/00. Quiz - test.md",
+    "01. THEORY/01. Podstawy DAX.md",
+    "README.md",
+    "03. TEMPLATE/Template.md",
+    "03. TEMPLATE/CSS - Teoria - Blue.md",
+    "03. TEMPLATE/CSS - Quiz - Blue.md",
+    "03. TEMPLATE/CSS - Teoria - Cherry.md",
+    "03. TEMPLATE/Markdown/Quiz.md",
+    "03. TEMPLATE/Markdown/Teoria.md",
+    "01. THEORY/05. Quiz.md",
+    "01. THEORY/04. Quiz.md",
+    "USAGE.md",
+    "config.example.md",
+    "00. DRAFT/Test.md",
+    "03. TEMPLATE/Markdown/Gaps Complete.md",
+    "01. THEORY/03. Quiz.md",
+    "01. THEORY/06. Quiz.md",
+    "bin/Pasted image 20251210001950.png",
     "bin/Pasted image 20251209193536.png",
     "bin/Pasted image 20251209181932.png",
     "bin/Pasted image 20251209173843.png",

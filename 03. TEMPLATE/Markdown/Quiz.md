@@ -10,7 +10,7 @@ type: quiz
 - C) POPRAWNA
 - D) ZŁA
 ---
-correct: 3
+correct: 2
 explanation: wyjaśnienie
 
 ---
@@ -22,7 +22,7 @@ explanation: wyjaśnienie
 - C) ZŁA
 - D) ZŁA
 ---
-correct: 1
+correct: 0
 explanation: wyjaśnienie
 
 ---

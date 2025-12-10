@@ -1,0 +1,638 @@
+Query View = 
+
+"
+
+<!DOCTYPE html>
+<html lang='pl'>
+<head>
+    <meta charset='UTF-8'>
+    <meta name='viewport' content='width=device-width, initial-scale=1.0'>
+    <title>Query View</title>
+    <style>
+            * {
+                margin: 0;
+                padding: 0;
+                box-sizing: border-box;
+            }
+    
+            body {
+                font-family: 'Roboto', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+                font-size: 16px;
+                font-weight: 400;
+                line-height: 1.7;
+                color: #333;
+                background: transparent;
+                padding: 20px;
+            }
+    
+            .container {
+                max-width: 800px;
+                margin: 0 auto;
+                background: transparent;
+                padding: 40px;
+            }
+    
+            .navigation {
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                margin-bottom: 40px;
+                padding-bottom: 20px;
+                border-bottom: 1px solid #e1e4e8;
+            }
+    
+            button {
+                background: #6b1718;
+                color: white;
+                border: none;
+                padding: 12px 28px;
+                border-radius: 4px;
+                cursor: pointer;
+                font-size: 1em;
+                font-weight: 500;
+                transition: background 0.2s;
+            }
+    
+            button:hover {
+                background: #380c0c;
+            }
+    
+            button:disabled {
+                background: #ccc;
+                cursor: not-allowed;
+            }
+    
+            .page-indicator {
+                color: #666;
+                font-size: 1em;
+            }
+    
+            .page {
+                display: none;
+                min-height: 500px;
+            }
+    
+            .page.active {
+                display: block;
+                animation: fadeIn 0.3s ease-in;
+            }
+    
+            @keyframes fadeIn {
+                from { opacity: 0; transform: translateY(10px); }
+                to { opacity: 1; transform: translateY(0); }
+            }
+    
+            h1 {
+                font-size: 26px;
+                line-height: 36px;
+                font-weight: 600;
+                padding-top: 14px;
+                padding-bottom: 6px;
+                margin-bottom: 1em;
+                color: #6b1718;
+                border-bottom: 2px solid #6b1718;
+            }
+    
+            h2 {
+                font-size: 26px;
+                line-height: 36px;
+                font-weight: 600;
+                padding-top: 14px;
+                padding-bottom: 6px;
+                margin: 1.5em 0 0.8em 0;
+                color: #1a1a1a;
+                border-bottom: 2px solid #1a1a1a;
+            }
+    
+            h3 {
+                font-size: 1.1em;
+                font-weight: 600;
+                margin: 1.2em 0 0.6em 0;
+                padding-bottom: 5px;
+                color: #444;
+                border-bottom: 1px solid #999;
+            }
+    
+            p {
+                margin-bottom: 1em;
+                font-size: 1.05em;
+            }
+    
+            strong {
+                font-weight: 700;
+                color: #1a1a1a;
+            }
+    
+            code {
+                background: #f5f5f5;
+                padding: 3px 7px;
+                border-radius: 3px;
+                font-family: 'Fira Code', 'Courier New', monospace;
+                font-size: 0.95em;
+                color: #b82b4e;
+            }
+    
+            pre {
+                background: #f8f9fa;
+                border-left: 3px solid #6b1718;
+                padding: 18px;
+                margin: 1em 0;
+                overflow-x: auto;
+                border-radius: 3px;
+            }
+    
+            pre code {
+                background: none;
+                padding: 0;
+                color: #24292e;
+                font-size: 1em;
+                line-height: 1.6;
+            }
+    
+            .dax-keyword {
+                color: #6b1718;
+                font-weight: 600;
+            }
+    
+            .dax-function {
+                color: #6f42c1;
+            }
+    
+            .dax-number {
+                color: #005cc5;
+            }
+    
+            .dax-comment {
+                color: #6a737d;
+                font-style: italic;
+            }
+    
+            ul, ol {
+                margin: 0.3em 0;
+                padding-left: 1.8em;
+            }
+    
+            li {
+                margin: 0;
+                padding-left: 0.2em;
+                font-size: 1.05em;
+                line-height: 1.6;
+            }
+    
+            ol {
+                list-style-type: decimal;
+            }
+    
+            ol li::marker {
+                color: #999;
+                font-weight: 400;
+            }
+    
+            ul li::marker {
+                color: #999;
+            }
+    
+            ul ul, ol ol, ul ol, ol ul {
+                margin: 0.2em 0;
+                padding-left: 1.5em;
+            }
+    
+            blockquote {
+                border-left: 3px solid #6b1718;
+                background: #f8f9fa;
+                padding: 14px 18px;
+                margin: 1em 0;
+                color: #555;
+                font-style: italic;
+            }
+    
+            blockquote p {
+                margin: 0;
+            }
+    
+            .iteration-box {
+                border-left: 3px solid #6b1718;
+                padding: 14px 18px;
+                margin: 0.8em 0;
+            }
+    
+            .result-box {
+                background: #f5f5f5;
+                border-left: 3px solid #999;
+                padding: 14px 18px;
+                margin: 0.8em 0;
+                font-weight: 500;
+                color: #555;
+                font-size: 1.05em;
+            }
+        </style>
+    
+    <style>
+            * {
+                margin: 0;
+                padding: 0;
+                box-sizing: border-box;
+            }
+            
+            body {
+                font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+                font-size: 16px;
+                font-weight: 400;
+                line-height: 1.7;
+                color: #333;
+                background: transparent;
+                padding: 20px;
+            }
+            
+            .container {
+                max-width: 800px;
+                margin: 0 auto;
+                background: transparent;
+                padding: 40px;
+            }
+            
+            .navigation {
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                margin-bottom: 40px;
+                padding-bottom: 20px;
+                border-bottom: 1px solid #e1e4e8;
+            }
+            
+            button {
+                background: #0066cc;
+                color: white;
+                border: none;
+                padding: 12px 28px;
+                border-radius: 4px;
+                cursor: pointer;
+                font-size: 1em;
+                font-weight: 500;
+                transition: background 0.2s;
+            }
+            
+            button:hover {
+                background: #0052a3;
+            }
+            
+            button:disabled {
+                background: #ccc;
+                cursor: not-allowed;
+            }
+            
+            .page-indicator {
+                color: #666;
+                font-size: 1em;
+            }
+            
+            .page {
+                display: none;
+                min-height: 500px;
+            }
+            
+            .page.active {
+                display: block;
+                animation: fadeIn 0.3s ease-in;
+            }
+            
+            @keyframes fadeIn {
+                from { opacity: 0; transform: translateY(10px); }
+                to { opacity: 1; transform: translateY(0); }
+            }
+            
+            h1 {
+                font-size: 26px;
+                line-height: 36px;
+                font-weight: 600;
+                padding-top: 14px;
+                padding-bottom: 6px;
+                margin-bottom: 1em;
+                color: #1a1a1a;
+                border-bottom: 2px solid #1a1a1a;
+            }
+    
+            h2 {
+                font-size: 26px;
+                line-height: 36px;
+                font-weight: 600;
+                padding-top: 14px;
+                padding-bottom: 6px;
+                margin: 1.5em 0 0.8em 0;
+                color: #1a1a1a;
+                border-bottom: 2px solid #1a1a1a;
+            }
+            
+            h3 {
+                font-size: 1.1em;
+                font-weight: 600;
+                margin: 1.2em 0 0.6em 0;
+                padding-bottom: 5px;
+                color: #444;
+                border-bottom: 1px solid #999;
+            }
+            
+            p {
+                margin-bottom: 1em;
+                font-size: 1.05em;
+            }
+            
+            strong {
+                font-weight: 700;
+                color: #1a1a1a;
+            }
+            
+            code {
+                background: #f5f5f5;
+                padding: 3px 7px;
+                border-radius: 3px;
+                font-family: 'Courier New', monospace;
+                font-size: 0.95em;
+                color: #d73a49;
+            }
+            
+            pre {
+                background: #f8f9fa;
+                border-left: 3px solid #0066cc;
+                padding: 18px;
+                margin: 1em 0;
+                overflow-x: auto;
+                border-radius: 3px;
+            }
+            
+            pre code {
+                background: none;
+                padding: 0;
+                color: #24292e;
+                font-size: 1em;
+                line-height: 1.6;
+            }
+            
+            .dax-keyword {
+                color: #0066cc;
+                font-weight: 600;
+            }
+            
+            .dax-function {
+                color: #6f42c1;
+            }
+            
+            .dax-number {
+                color: #005cc5;
+            }
+            
+            .dax-comment {
+                color: #6a737d;
+                font-style: italic;
+            }
+            
+            ul, ol {
+                margin: 0.3em 0;
+                padding-left: 1.8em;
+            }
+    
+            li {
+                margin: 0;
+                padding-left: 0.2em;
+                font-size: 1.05em;
+                line-height: 1.6;
+            }
+    
+            ol {
+                list-style-type: decimal;
+            }
+    
+            ol li::marker {
+                color: #999;
+                font-weight: 400;
+            }
+    
+            ul li::marker {
+                color: #999;
+            }
+    
+            ul ul, ol ol, ul ol, ol ul {
+                margin: 0.2em 0;
+                padding-left: 1.5em;
+            }
+    
+            blockquote {
+                border-left: 3px solid #0066cc;
+                background: #f8f9fa;
+                padding: 14px 18px;
+                margin: 1em 0;
+                color: #555;
+                font-style: italic;
+            }
+    
+            blockquote p {
+                margin: 0;
+            }
+            
+            .iteration-box {
+                border-left: 3px solid #0066cc;
+                padding: 14px 18px;
+                margin: 0.8em 0;
+            }
+            
+            .result-box {
+                background: #f5f5f5;
+                border-left: 3px solid #999;
+                padding: 14px 18px;
+                margin: 0.8em 0;
+                font-weight: 500;
+                color: #555;
+                font-size: 1.05em;
+            }
+        </style>
+</head>
+<body>
+
+<div class='container' id='viz_69087c0f'>
+    <!-- Nawigacja na górze -->
+    <div class='navigation'>
+        <button id='prevBtn_69087c0f' onclick='changePage_69087c0f(-1)'>← Poprzednia</button>
+        <span class='page-indicator'>
+            Strona <span id='currentPage_69087c0f'>1</span> z <span id='totalPages_69087c0f'>4</span>
+        </span>
+        <button id='nextBtn_69087c0f' onclick='changePage_69087c0f(1)'>Następna →</button>
+    </div>
+
+    <!-- Strona 1 -->
+    <div class='page active'>
+        <p><strong>Query View</strong> to specjalny tryb w Power BI Desktop (dostępny w External Tools lub przez DAX Studio), który pozwala wykonywać zapytania DAX bezpośrednio na modelu danych. W przeciwieństwie do zwykłych miar, które działają w kontekście wizualizacji, Query View umożliwia pisanie zapytań tabelarycznych z użyciem słowa kluczowego <code>EVALUATE</code> oraz definiowanie tymczasowych miar i zmiennych za pomocą <code>DEFINE</code>. Jest to narzędzie programistyczne do testowania logiki DAX, debugowania obliczeń i eksploracji danych bez konieczności tworzenia wizualizacji.</p>
+        <h2>VAR bez RETURN (błąd składniowy)</h2>
+        <pre><code><span class='dax-keyword'>VAR</span> A = <span class='dax-number'>1</span>
+        <span class='dax-keyword'>VAR</span> B = <span class='dax-number'>5</span>
+        A + B</code></pre>
+        <p><strong>Status:</strong> ❌ <strong>To jest niepoprawne!</strong></p>
+        <ul>
+        <li>Zmienne <code>VAR</code> <strong>zawsze muszą być zakończone słowem kluczowym <code>RETURN</code></strong></li>
+        <li>DAX nie wie, co ma zwrócić jako wynik</li>
+        <li>Ten kod spowoduje błąd składniowy</li>
+        </ul>
+        <pre><code>EVALUATE
+            <span class='dax-keyword'>VAR</span> A = <span class='dax-number'>1</span>
+            <span class='dax-keyword'>VAR</span> B = <span class='dax-number'>5</span>
+        <span class='dax-keyword'>RETURN</span>
+        A + B</code></pre>
+        <p><strong>Status:</strong> ❌ <strong>Blisko, ale wciąż źle!</strong></p>
+        <ul>
+        <li>DAX potrafi zwracać wyłącznie wartości tabelaryczne. A + B zwraca pojedynczą wartość</li>
+        <li>Należy utworzyć 'sztuczną' tabelę (np. z funkcją <code>ROW()</code>), albo podsumować według istniejących kolumn za pomocą <code>SUMMARIZECOLUMNS()</code> ``</li>
+        </ul>
+
+    </div>
+
+    <!-- Strona 2 -->
+    <div class='page'>
+        <h2>VAR z RETURN w zapytaniu EVALUATE</h2>
+        <pre><code>EVALUATE
+            <span class='dax-keyword'>VAR</span> A = <span class='dax-number'>1</span>
+            <span class='dax-keyword'>VAR</span> B = <span class='dax-number'>5</span>
+        <span class='dax-keyword'>RETURN</span>
+            <span class='dax-function'>ROW</span>('Test', A + B)</code></pre>
+        <p><strong>Status:</strong> ✅ <strong>Poprawne</strong></p>
+        <ul>
+        <li>Zmienne <code>A</code> i <code>B</code> są tworzone <strong>przed</strong> wykonaniem właściwego zapytania</li>
+        <li><code>RETURN</code> zwraca tabelę z jednym wierszem i jedną kolumną o nazwie 'Test'</li>
+        <li>Wartość w kolumnie to wynik <code>A + B</code> = 6</li>
+        </ul>
+        <p><strong>Wynik zapytania:</strong></p>
+        <table>
+          <thead>
+            <tr>
+              <th>Test</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>6</td>
+            </tr>
+          </tbody>
+        </table>
+
+    </div>
+
+    <!-- Strona 3 -->
+    <div class='page'>
+        <h2>VAR wewnątrz definicji miary</h2>
+        <pre><code>DEFINE MEASURE _Measures[Test] = 
+            <span class='dax-keyword'>VAR</span> A = <span class='dax-number'>1</span>
+            <span class='dax-keyword'>VAR</span> B = <span class='dax-number'>5</span>
+        <span class='dax-keyword'>RETURN</span>
+            A + B
+
+        EVALUATE
+            <span class='dax-function'>ROW</span>('Test', [Test])</code></pre>
+        <p><strong>Status:</strong> ✅ <strong>Poprawne</strong></p>
+        <ul>
+        <li>Zmienne <code>VAR</code> są zdefiniowane <strong>wewnątrz miary</strong> <code>[Test]</code></li>
+        <li>Za każdym razem gdy miara jest wywoływana, zmienne są tworzone na nowo</li>
+        <li>Miara zwraca wartość <code>A + B</code> = 6</li>
+        <li><code>EVALUATE</code> wywołuje miarę i wyświetla jej wynik w tabeli</li>
+        </ul>
+
+    </div>
+
+    <!-- Strona 4 -->
+    <div class='page'>
+        <h1>Zastosowanie</h1>
+        <p>Query View i zapytania DAX znajdują zastosowanie w kilku kluczowych scenariuszach:</p>
+        <ul>
+        <li><strong>Testowanie i debugowanie</strong> – szybkie sprawdzanie logiki DAX bez tworzenia wizualizacji</li>
+        <li><strong>Eksploracja modelu danych</strong> – przeglądanie zawartości tabel, relacji i wyników obliczeń</li>
+        <li><strong>Prototypowanie miar</strong> – testowanie skomplikowanych formuł przed wdrożeniem do raportu</li>
+        <li><strong>Analiza wydajności</strong> – mierzenie czasu wykonania zapytań i optymalizacja modelu</li>
+        <li><strong>Eksport danych</strong> – pobieranie wyników zapytań do dalszej analizy w innych narzędziach</li>
+        <li><strong>Dokumentacja</strong> – tworzenie przykładów działania miar dla zespołu lub klientów</li>
+        </ul>
+        <img src='https://github.com/odczarujpowerbi/szkolenia-powerbi/blob/main/bin/Pasted%20image%2020251209181932.png?raw=true' width='100%'>
+
+    </div>
+
+</div>
+
+<script>
+(function() {
+    // Unikalny ID dla tej wizualizacji (wstrzykiwany przez Python)
+    var vizId = '69087c0f';
+    var containerId = 'viz_' + vizId;
+
+    var currentPage_69087c0f = 1;
+    var container = document.getElementById(containerId);
+
+    if (!container) return;
+
+    var pages = container.querySelectorAll('.page');
+    var totalPages = pages.length;
+
+    document.getElementById('totalPages_' + vizId).textContent = totalPages;
+
+    window['showPage_69087c0f'] = function(n) {
+        if (n > totalPages) currentPage_69087c0f = totalPages;
+        if (n < 1) currentPage_69087c0f = 1;
+
+        for (var i = 0; i < pages.length; i++) {
+            pages[i].classList.remove('active');
+        }
+        pages[currentPage_69087c0f - 1].classList.add('active');
+
+        document.getElementById('currentPage_' + vizId).textContent = currentPage_69087c0f;
+        document.getElementById('prevBtn_' + vizId).disabled = (currentPage_69087c0f === 1);
+        document.getElementById('nextBtn_' + vizId).disabled = (currentPage_69087c0f === totalPages);
+    };
+
+    window['changePage_69087c0f'] = function(n) {
+        currentPage_69087c0f += n;
+        window['showPage_69087c0f'](currentPage_69087c0f);
+    };
+
+    // Inicjalizacja
+    window['showPage_69087c0f'](1);
+
+    // Funkcjonalność powiększania obrazów
+    var images = container.querySelectorAll('img');
+    images.forEach(function(img) {
+        img.style.cursor = 'pointer';
+        img.style.transition = 'transform 0.3s ease';
+
+        img.addEventListener('click', function() {
+            if (this.classList.contains('zoomed')) {
+                // Pomniejsz obraz
+                this.classList.remove('zoomed');
+                this.style.position = '';
+                this.style.top = '';
+                this.style.left = '';
+                this.style.transform = '';
+                this.style.width = '100%';
+                this.style.maxWidth = '';
+                this.style.maxHeight = '';
+                this.style.zIndex = '';
+                this.style.backgroundColor = '';
+                this.style.padding = '';
+                this.style.boxShadow = '';
+            } else {
+                // Powiększ obraz
+                this.classList.add('zoomed');
+                this.style.position = 'fixed';
+                this.style.top = '50%';
+                this.style.left = '50%';
+                this.style.transform = 'translate(-50%, -50%)';
+                this.style.width = 'auto';
+                this.style.maxWidth = '95vw';
+                this.style.maxHeight = '95vh';
+                this.style.zIndex = '9999';
+                this.style.backgroundColor = 'rgba(255, 255, 255, 0.95)';
+                this.style.padding = '10px';
+                this.style.boxShadow = '0 4px 20px rgba(0, 0, 0, 0.3)';
+            }
+        });
+    });
+})();
+</script>
+
+</body>
+</html>
+
+"

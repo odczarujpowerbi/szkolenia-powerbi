@@ -1,0 +1,649 @@
+Główne widoki Power BI Desktop = 
+
+"
+
+<!DOCTYPE html>
+<html lang='pl'>
+<head>
+    <meta charset='UTF-8'>
+    <meta name='viewport' content='width=device-width, initial-scale=1.0'>
+    <title>Główne widoki Power BI Desktop</title>
+    <style>
+            * {
+                margin: 0;
+                padding: 0;
+                box-sizing: border-box;
+            }
+    
+            body {
+                font-family: 'Roboto', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+                font-size: 16px;
+                font-weight: 400;
+                line-height: 1.7;
+                color: #333;
+                background: transparent;
+                padding: 20px;
+            }
+    
+            .container {
+                max-width: 800px;
+                margin: 0 auto;
+                background: transparent;
+                padding: 40px;
+            }
+    
+            .navigation {
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                margin-bottom: 40px;
+                padding-bottom: 20px;
+                border-bottom: 1px solid #e1e4e8;
+            }
+    
+            button {
+                background: #6b1718;
+                color: white;
+                border: none;
+                padding: 12px 28px;
+                border-radius: 4px;
+                cursor: pointer;
+                font-size: 1em;
+                font-weight: 500;
+                transition: background 0.2s;
+            }
+    
+            button:hover {
+                background: #380c0c;
+            }
+    
+            button:disabled {
+                background: #ccc;
+                cursor: not-allowed;
+            }
+    
+            .page-indicator {
+                color: #666;
+                font-size: 1em;
+            }
+    
+            .page {
+                display: none;
+                min-height: 500px;
+            }
+    
+            .page.active {
+                display: block;
+                animation: fadeIn 0.3s ease-in;
+            }
+    
+            @keyframes fadeIn {
+                from { opacity: 0; transform: translateY(10px); }
+                to { opacity: 1; transform: translateY(0); }
+            }
+    
+            h1 {
+                font-size: 26px;
+                line-height: 36px;
+                font-weight: 600;
+                padding-top: 14px;
+                padding-bottom: 6px;
+                margin-bottom: 1em;
+                color: #6b1718;
+                border-bottom: 2px solid #6b1718;
+            }
+    
+            h2 {
+                font-size: 26px;
+                line-height: 36px;
+                font-weight: 600;
+                padding-top: 14px;
+                padding-bottom: 6px;
+                margin: 1.5em 0 0.8em 0;
+                color: #1a1a1a;
+                border-bottom: 2px solid #1a1a1a;
+            }
+    
+            h3 {
+                font-size: 1.1em;
+                font-weight: 600;
+                margin: 1.2em 0 0.6em 0;
+                padding-bottom: 5px;
+                color: #444;
+                border-bottom: 1px solid #999;
+            }
+    
+            p {
+                margin-bottom: 1em;
+                font-size: 1.05em;
+            }
+    
+            strong {
+                font-weight: 700;
+                color: #1a1a1a;
+            }
+    
+            code {
+                background: #f5f5f5;
+                padding: 3px 7px;
+                border-radius: 3px;
+                font-family: 'Fira Code', 'Courier New', monospace;
+                font-size: 0.95em;
+                color: #b82b4e;
+            }
+    
+            pre {
+                background: #f8f9fa;
+                border-left: 3px solid #6b1718;
+                padding: 18px;
+                margin: 1em 0;
+                overflow-x: auto;
+                border-radius: 3px;
+            }
+    
+            pre code {
+                background: none;
+                padding: 0;
+                color: #24292e;
+                font-size: 1em;
+                line-height: 1.6;
+            }
+    
+            .dax-keyword {
+                color: #6b1718;
+                font-weight: 600;
+            }
+    
+            .dax-function {
+                color: #6f42c1;
+            }
+    
+            .dax-number {
+                color: #005cc5;
+            }
+    
+            .dax-comment {
+                color: #6a737d;
+                font-style: italic;
+            }
+    
+            ul, ol {
+                margin: 0.3em 0;
+                padding-left: 1.8em;
+            }
+    
+            li {
+                margin: 0;
+                padding-left: 0.2em;
+                font-size: 1.05em;
+                line-height: 1.6;
+            }
+    
+            ol {
+                list-style-type: decimal;
+            }
+    
+            ol li::marker {
+                color: #999;
+                font-weight: 400;
+            }
+    
+            ul li::marker {
+                color: #999;
+            }
+    
+            ul ul, ol ol, ul ol, ol ul {
+                margin: 0.2em 0;
+                padding-left: 1.5em;
+            }
+    
+            blockquote {
+                border-left: 3px solid #6b1718;
+                background: #f8f9fa;
+                padding: 14px 18px;
+                margin: 1em 0;
+                color: #555;
+                font-style: italic;
+            }
+    
+            blockquote p {
+                margin: 0;
+            }
+    
+            .iteration-box {
+                border-left: 3px solid #6b1718;
+                padding: 14px 18px;
+                margin: 0.8em 0;
+            }
+    
+            .result-box {
+                background: #f5f5f5;
+                border-left: 3px solid #999;
+                padding: 14px 18px;
+                margin: 0.8em 0;
+                font-weight: 500;
+                color: #555;
+                font-size: 1.05em;
+            }
+        </style>
+    
+    <style>
+            * {
+                margin: 0;
+                padding: 0;
+                box-sizing: border-box;
+            }
+            
+            body {
+                font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+                font-size: 16px;
+                font-weight: 400;
+                line-height: 1.7;
+                color: #333;
+                background: transparent;
+                padding: 20px;
+            }
+            
+            .container {
+                max-width: 800px;
+                margin: 0 auto;
+                background: transparent;
+                padding: 40px;
+            }
+            
+            .navigation {
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                margin-bottom: 40px;
+                padding-bottom: 20px;
+                border-bottom: 1px solid #e1e4e8;
+            }
+            
+            button {
+                background: #0066cc;
+                color: white;
+                border: none;
+                padding: 12px 28px;
+                border-radius: 4px;
+                cursor: pointer;
+                font-size: 1em;
+                font-weight: 500;
+                transition: background 0.2s;
+            }
+            
+            button:hover {
+                background: #0052a3;
+            }
+            
+            button:disabled {
+                background: #ccc;
+                cursor: not-allowed;
+            }
+            
+            .page-indicator {
+                color: #666;
+                font-size: 1em;
+            }
+            
+            .page {
+                display: none;
+                min-height: 500px;
+            }
+            
+            .page.active {
+                display: block;
+                animation: fadeIn 0.3s ease-in;
+            }
+            
+            @keyframes fadeIn {
+                from { opacity: 0; transform: translateY(10px); }
+                to { opacity: 1; transform: translateY(0); }
+            }
+            
+            h1 {
+                font-size: 26px;
+                line-height: 36px;
+                font-weight: 600;
+                padding-top: 14px;
+                padding-bottom: 6px;
+                margin-bottom: 1em;
+                color: #1a1a1a;
+                border-bottom: 2px solid #1a1a1a;
+            }
+    
+            h2 {
+                font-size: 26px;
+                line-height: 36px;
+                font-weight: 600;
+                padding-top: 14px;
+                padding-bottom: 6px;
+                margin: 1.5em 0 0.8em 0;
+                color: #1a1a1a;
+                border-bottom: 2px solid #1a1a1a;
+            }
+            
+            h3 {
+                font-size: 1.1em;
+                font-weight: 600;
+                margin: 1.2em 0 0.6em 0;
+                padding-bottom: 5px;
+                color: #444;
+                border-bottom: 1px solid #999;
+            }
+            
+            p {
+                margin-bottom: 1em;
+                font-size: 1.05em;
+            }
+            
+            strong {
+                font-weight: 700;
+                color: #1a1a1a;
+            }
+            
+            code {
+                background: #f5f5f5;
+                padding: 3px 7px;
+                border-radius: 3px;
+                font-family: 'Courier New', monospace;
+                font-size: 0.95em;
+                color: #d73a49;
+            }
+            
+            pre {
+                background: #f8f9fa;
+                border-left: 3px solid #0066cc;
+                padding: 18px;
+                margin: 1em 0;
+                overflow-x: auto;
+                border-radius: 3px;
+            }
+            
+            pre code {
+                background: none;
+                padding: 0;
+                color: #24292e;
+                font-size: 1em;
+                line-height: 1.6;
+            }
+            
+            .dax-keyword {
+                color: #0066cc;
+                font-weight: 600;
+            }
+            
+            .dax-function {
+                color: #6f42c1;
+            }
+            
+            .dax-number {
+                color: #005cc5;
+            }
+            
+            .dax-comment {
+                color: #6a737d;
+                font-style: italic;
+            }
+            
+            ul, ol {
+                margin: 0.3em 0;
+                padding-left: 1.8em;
+            }
+    
+            li {
+                margin: 0;
+                padding-left: 0.2em;
+                font-size: 1.05em;
+                line-height: 1.6;
+            }
+    
+            ol {
+                list-style-type: decimal;
+            }
+    
+            ol li::marker {
+                color: #999;
+                font-weight: 400;
+            }
+    
+            ul li::marker {
+                color: #999;
+            }
+    
+            ul ul, ol ol, ul ol, ol ul {
+                margin: 0.2em 0;
+                padding-left: 1.5em;
+            }
+    
+            blockquote {
+                border-left: 3px solid #0066cc;
+                background: #f8f9fa;
+                padding: 14px 18px;
+                margin: 1em 0;
+                color: #555;
+                font-style: italic;
+            }
+    
+            blockquote p {
+                margin: 0;
+            }
+            
+            .iteration-box {
+                border-left: 3px solid #0066cc;
+                padding: 14px 18px;
+                margin: 0.8em 0;
+            }
+            
+            .result-box {
+                background: #f5f5f5;
+                border-left: 3px solid #999;
+                padding: 14px 18px;
+                margin: 0.8em 0;
+                font-weight: 500;
+                color: #555;
+                font-size: 1.05em;
+            }
+        </style>
+</head>
+<body>
+
+<div class='container' id='viz_5dc96cd3'>
+    <!-- Nawigacja na górze -->
+    <div class='navigation'>
+        <button id='prevBtn_5dc96cd3' onclick='changePage_5dc96cd3(-1)'>← Poprzednia</button>
+        <span class='page-indicator'>
+            Strona <span id='currentPage_5dc96cd3'>1</span> z <span id='totalPages_5dc96cd3'>6</span>
+        </span>
+        <button id='nextBtn_5dc96cd3' onclick='changePage_5dc96cd3(1)'>Następna →</button>
+    </div>
+
+    <!-- Strona 1 -->
+    <div class='page active'>
+        <h1>Widoki Power BI Desktop</h1>
+        <p>Power BI Desktop oferuje pięć głównych widoków, z których każdy służy do różnych celów. Znajomość tych widoków jest kluczowa dla efektywnej pracy z narzędziem.</p>
+        <h2>1. Widok Raport (Report View)</h2>
+        <img src='https://github.com/odczarujpowerbi/szkolenia-powerbi/blob/main/bin/Pasted%20image%2020251209155301.png?raw=true' width='100%'>
+        <p><strong>Zastosowanie:</strong> Tworzenie i projektowanie wizualizacji danych.</p>
+        <p>W tym widoku:</p>
+        <ul>
+        <li>Tworzysz wykresy, tabele, karty i inne wizualizacje</li>
+        <li>Układasz elementy na stronach raportu</li>
+        <li>Konfigurujesz formatowanie wizualizacji</li>
+        <li>Ustawiasz interakcje między obiektami</li>
+        </ul>
+        <p><strong>Przykład użycia:</strong></p>
+        <p>Stworzenie wykresu słupkowego pokazującego sumę sprzedaży (Price × Quantity) według kategorii z tabeli fDemo.</p>
+
+    </div>
+
+    <!-- Strona 2 -->
+    <div class='page'>
+        <h2>2. Widok Dane (Data View)</h2>
+        <img src='https://github.com/odczarujpowerbi/szkolenia-powerbi/blob/main/bin/Pasted%20image%2020251209155324.png?raw=true' width='100%'>
+        <p><strong>Zastosowanie:</strong> Podgląd i weryfikacja danych w tabelach.</p>
+        <p>W tym widoku:</p>
+        <ul>
+        <li>Przeglądasz zawartość tabel</li>
+        <li>Weryfikujesz poprawność danych</li>
+        <li>Tworzysz kolumny kalkulowane</li>
+        <li>Sprawdzasz wyniki transformacji</li>
+        </ul>
+        <p><strong>Przykład użycia:</strong></p>
+        <p>Sprawdzenie, czy wszystkie produkty z tabeli fDemo mają przypisane wartości w kolumnach Price, Quantity i Category.</p>
+
+    </div>
+
+    <!-- Strona 3 -->
+    <div class='page'>
+        <h2>3. Widok Model (Model View)</h2>
+        <img src='https://github.com/odczarujpowerbi/szkolenia-powerbi/blob/main/bin/Pasted%20image%2020251209155620.png?raw=true' width='100%'>
+        <p><strong>Zastosowanie:</strong> Zarządzanie relacjami między tabelami i strukturą modelu danych.</p>
+        <p>W tym widoku:</p>
+        <ul>
+        <li>Tworzysz relacje między tabelami</li>
+        <li>Zarządzasz kluczami głównymi i obcymi</li>
+        <li>Organizujesz tabele w grupy tematyczne</li>
+        <li>Definiujesz hierarchie wymiarów</li>
+        </ul>
+        <p><strong>Przykład użycia:</strong></p>
+        <p>W przypadku rozbudowy modelu o tabelę wymiarową 'DimCategory' można by tutaj utworzyć relację między fDemo[Category] a DimCategory[CategoryName].</p>
+
+    </div>
+
+    <!-- Strona 4 -->
+    <div class='page'>
+        <h2>4. Widok DAX Query (DAX Query View)</h2>
+        <img src='https://github.com/odczarujpowerbi/szkolenia-powerbi/blob/main/bin/Pasted%20image%2020251209155746.png?raw=true' width='100%'>
+        <p><strong>Zastosowanie:</strong> Testowanie zapytań DAX bez tworzenia miar w modelu.</p>
+        <p>W tym widoku:</p>
+        <ul>
+        <li>Piszesz i testujesz zapytania DAX (podobnie jak SQL)</li>
+        <li>Szybko weryfikujesz wyniki wyrażeń</li>
+        <li>Eksplorujesz dane bez wpływu na model</li>
+        <li>Uczysz się składni DAX</li>
+        </ul>
+        <p><strong>Przykład zapytania:</strong></p>
+        <pre><code>EVALUATE
+        <span class='dax-function'>SUMMARIZECOLUMNS</span>(
+            fDemo[Category],
+            'Total Sales', <span class='dax-function'>SUMX</span>(fDemo, fDemo[Price] * fDemo[Quantity])
+        )
+        ORDER BY [Total Sales] DESC</code></pre>
+        <p>To zapytanie zwróci zestawienie sprzedaży według kategorii, posortowane malejąco.</p>
+
+    </div>
+
+    <!-- Strona 5 -->
+    <div class='page'>
+        <h2>5. Widok TMDL (Tabular Model Definition Language)</h2>
+        <img src='https://github.com/odczarujpowerbi/szkolenia-powerbi/blob/main/bin/Pasted%20image%2020251209161608.png?raw=true' width='100%'>
+        <p><strong>Zastosowanie:</strong> Edycja modelu danych w formie tekstowej (dla zaawansowanych użytkowników).</p>
+        <p>W tym widoku:</p>
+        <ul>
+        <li>Przeglądasz definicję modelu w postaci kodu</li>
+        <li>Możesz edytować właściwości obiektów</li>
+        <li>Przydatne do wersjonowania modelu (Git)</li>
+        <li>Umożliwia zaawansowane operacje masowe</li>
+        </ul>
+        <p><strong>Uwaga:</strong> Ten widok jest przeznaczony dla zaawansowanych użytkowników i programistów, którzy chcą zarządzać modelem jako kodem.</p>
+
+    </div>
+
+    <!-- Strona 6 -->
+    <div class='page'>
+        <h1>Podsumowanie</h1>
+        <p>Prawidłowe przygotowanie środowiska Power BI to fundament efektywnej pracy:</p>
+        <p>✓ Włącz niezbędne funkcje w wersji zapoznawczej</p>
+        <p>✓ Skonfiguruj ustawienia Power Query (wyłącz auto-detekcję typów)</p>
+        <p>✓ Ustaw właściwą wersję językową</p>
+        <p>✓ Poznaj wszystkie pięć widoków Power BI Desktop</p>
+        <p>Znajomość tych elementów pozwoli Ci sprawnie poruszać się po środowisku i skupić się na budowaniu efektywnych rozwiązań analitycznych.</p>
+
+    </div>
+
+</div>
+
+<script>
+(function() {
+    // Unikalny ID dla tej wizualizacji (wstrzykiwany przez Python)
+    var vizId = '5dc96cd3';
+    var containerId = 'viz_' + vizId;
+
+    var currentPage_5dc96cd3 = 1;
+    var container = document.getElementById(containerId);
+
+    if (!container) return;
+
+    var pages = container.querySelectorAll('.page');
+    var totalPages = pages.length;
+
+    document.getElementById('totalPages_' + vizId).textContent = totalPages;
+
+    window['showPage_5dc96cd3'] = function(n) {
+        if (n > totalPages) currentPage_5dc96cd3 = totalPages;
+        if (n < 1) currentPage_5dc96cd3 = 1;
+
+        for (var i = 0; i < pages.length; i++) {
+            pages[i].classList.remove('active');
+        }
+        pages[currentPage_5dc96cd3 - 1].classList.add('active');
+
+        document.getElementById('currentPage_' + vizId).textContent = currentPage_5dc96cd3;
+        document.getElementById('prevBtn_' + vizId).disabled = (currentPage_5dc96cd3 === 1);
+        document.getElementById('nextBtn_' + vizId).disabled = (currentPage_5dc96cd3 === totalPages);
+    };
+
+    window['changePage_5dc96cd3'] = function(n) {
+        currentPage_5dc96cd3 += n;
+        window['showPage_5dc96cd3'](currentPage_5dc96cd3);
+    };
+
+    // Inicjalizacja
+    window['showPage_5dc96cd3'](1);
+
+    // Funkcjonalność powiększania obrazów
+    var images = container.querySelectorAll('img');
+    images.forEach(function(img) {
+        img.style.cursor = 'pointer';
+        img.style.transition = 'transform 0.3s ease';
+
+        img.addEventListener('click', function() {
+            if (this.classList.contains('zoomed')) {
+                // Pomniejsz obraz
+                this.classList.remove('zoomed');
+                this.style.position = '';
+                this.style.top = '';
+                this.style.left = '';
+                this.style.transform = '';
+                this.style.width = '100%';
+                this.style.maxWidth = '';
+                this.style.maxHeight = '';
+                this.style.zIndex = '';
+                this.style.backgroundColor = '';
+                this.style.padding = '';
+                this.style.boxShadow = '';
+            } else {
+                // Powiększ obraz
+                this.classList.add('zoomed');
+                this.style.position = 'fixed';
+                this.style.top = '50%';
+                this.style.left = '50%';
+                this.style.transform = 'translate(-50%, -50%)';
+                this.style.width = 'auto';
+                this.style.maxWidth = '95vw';
+                this.style.maxHeight = '95vh';
+                this.style.zIndex = '9999';
+                this.style.backgroundColor = 'rgba(255, 255, 255, 0.95)';
+                this.style.padding = '10px';
+                this.style.boxShadow = '0 4px 20px rgba(0, 0, 0, 0.3)';
+            }
+        });
+    });
+})();
+</script>
+
+</body>
+</html>
+
+"

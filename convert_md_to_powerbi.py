@@ -86,6 +86,41 @@ def load_templates(template_dir, css_files=None, js_files=None):
     return css, js
 
 
+def load_all_assets(template_dir, assets_config):
+    """Wczytuje wszystkie pliki CSS i JS dla wszystkich typów z konfiguracji
+
+    Args:
+        template_dir: Path - folder z templateami
+        assets_config: dict - konfiguracja assetów w formacie:
+            {
+                'teoria': {'css': ['CSS.md'], 'js': ['JS.md']},
+                'quiz': {'css': ['CSS - Quiz.md'], 'js': ['JS - Quiz.md']}
+            }
+
+    Returns:
+        dict: słownik mapujący typy na assety:
+            {
+                'teoria': {'css': str, 'js': str},
+                'quiz': {'css': str, 'js': str}
+            }
+    """
+    result = {}
+
+    for content_type, files in assets_config.items():
+        css_files = files.get('css', [])
+        js_files = files.get('js', [])
+
+        # Wczytaj CSS i JS dla tego typu
+        css_content, js_content = load_templates(template_dir, css_files, js_files)
+
+        result[content_type] = {
+            'css': css_content,
+            'js': js_content
+        }
+
+    return result
+
+
 def highlight_dax_syntax(code):
     """Dodaje podświetlanie składni DAX"""
     lines = code.split('\n')
@@ -536,17 +571,20 @@ def create_powerbi_measure(title, pages, css, js):
     return measure
 
 
-def create_quiz_html(title, questions):
+def create_quiz_html(title, questions, css='', js=''):
     """Tworzy interaktywny quiz w formacie HTML
 
     Args:
         title: str - tytuł quizu
         questions: list[dict] - lista pytań z odpowiedziami
             [{'question': str, 'answers': [str], 'correct': int, 'explanation': str}]
+        css: str - opcjonalny zewnętrzny CSS (jeśli pusty, używa wbudowanych stylów)
+        js: str - opcjonalny zewnętrzny JS (jeśli pusty, używa wbudowanego)
 
     Returns:
         str: kompletny HTML z quizem (gotowy do osadzenia w miarze Power BI)
     """
+    use_inline_styles = not css  # Jeśli nie ma zewnętrznego CSS, użyj wbudowanego
     total_questions = len(questions)
     total_pages = total_questions + 1  # pytania + strona podsumowania
 
@@ -560,9 +598,17 @@ def create_quiz_html(title, questions):
     html_parts.append("    <meta name='viewport' content='width=device-width, initial-scale=1.0'>\n")
     html_parts.append(f"    <title>{title}</title>\n")
 
-    # Inline CSS (skopiowany ze wzoru)
-    html_parts.append("    <style>\n")
-    html_parts.append("""        * {
+    # CSS - zewnętrzny z konfiguracji lub wbudowany
+    if css:
+        # Użyj zewnętrznego CSS z szablonu
+        html_parts.append("    <style>\n")
+        for line in css.split('\n'):
+            html_parts.append(f"    {line}\n")
+        html_parts.append("    </style>\n")
+    elif use_inline_styles:
+        # Użyj wbudowanych stylów (inline)
+        html_parts.append("    <style>\n")
+        html_parts.append("""        * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
@@ -761,7 +807,8 @@ def create_quiz_html(title, questions):
             border-left-color: #dc3545;
         }
 """)
-    html_parts.append("    </style>\n")
+        html_parts.append("    </style>\n")
+
     html_parts.append("</head>\n")
     html_parts.append("<body>\n\n")
 
@@ -808,12 +855,14 @@ def create_quiz_html(title, questions):
     html_parts.append(f"            Twój wynik: <span id='scoreText'>0/{total_questions}</span> (<span id='percentText'>0%</span>)\n")
     html_parts.append("        </div>\n")
     html_parts.append("        <div id='summaryContent'></div>\n")
-    html_parts.append("        <button onclick='restartQuiz()' style='margin-top: 20px; width: 100%;'>🔄 Rozpocznij quiz od nowa</button>\n")
+    html_parts.append("        <button onclick='restartQuiz()' style='margin-top: 20px; width: 100%;'> Rozpocznij quiz od nowa</button>\n")
     html_parts.append("    </div>\n")
     html_parts.append("</div>\n\n")
 
     # JavaScript
     html_parts.append("<script>\n")
+
+    # Część 1: Dynamiczne dane specyficzne dla tego quizu
     html_parts.append(f"    let currentPage = 1;\n")
     html_parts.append(f"    const totalPages = {total_pages};\n")
     html_parts.append(f"    const totalQuestions = {total_questions};\n")
@@ -836,8 +885,14 @@ def create_quiz_html(title, questions):
     html_parts.append("    ];\n")
     html_parts.append("    \n")
 
-    # Reszta JavaScript (skopiowana ze wzoru)
-    html_parts.append("""    document.getElementById('totalPages').textContent = totalPages;
+    # Część 2: Funkcje - z template lub inline
+    if js:
+        # Użyj zewnętrznego JS z szablonu
+        for line in js.split('\n'):
+            html_parts.append(f"    {line}\n")
+    else:
+        # Użyj wbudowanego JS (inline)
+        html_parts.append("""    document.getElementById('totalPages').textContent = totalPages;
 
     function selectAnswer(questionIndex, answerIndex) {
         if (answeredQuestions[questionIndex]) return;
@@ -966,6 +1021,7 @@ def create_quiz_html(title, questions):
 
     showPage(1);
 """)
+
     html_parts.append("</script>\n\n")
     html_parts.append("</body>\n")
     html_parts.append("</html>\n")
@@ -1168,12 +1224,18 @@ def split_by_h1(content):
     return sections
 
 
-def convert_file(input_path, output_dir, css, js):
+def convert_file(input_path, output_dir, assets_dict):
     """Konwertuje pojedynczy plik markdown do miar Power BI
 
     Obsługuje dwa typy plików:
     - type='teoria': tradycyjny format z sekcjami i stronami (split by H1)
     - type='quiz': interaktywny quiz z pytaniami
+
+    Args:
+        input_path: Path - ścieżka do pliku źródłowego
+        output_dir: Path - folder wyjściowy
+        assets_dict: dict - słownik assetów dla typów:
+            {'teoria': {'css': str, 'js': str}, 'quiz': {'css': str, 'js': str}}
 
     Returns:
         int - liczba wygenerowanych plików HTML
@@ -1189,6 +1251,11 @@ def convert_file(input_path, output_dir, css, js):
     properties, content_without_frontmatter = parse_frontmatter(content)
     file_type = properties.get('type', 'teoria')  # Domyślnie 'teoria'
 
+    # Pobierz CSS i JS dla tego typu
+    assets = assets_dict.get(file_type, assets_dict.get('teoria', {'css': '', 'js': ''}))
+    css = assets.get('css', '')
+    js = assets.get('js', '')
+
     # Pobierz bazową nazwę pliku (bez rozszerzenia)
     base_name = Path(input_path).stem
 
@@ -1201,8 +1268,8 @@ def convert_file(input_path, output_dir, css, js):
             print(f"[WARNING] Brak pytań w quizie: {input_path.name}")
             return 0
 
-        # Generuj HTML quizu
-        quiz_html = create_quiz_html(quiz_title, questions)
+        # Generuj HTML quizu (z CSS z konfiguracji lub inline)
+        quiz_html = create_quiz_html(quiz_title, questions, css, js)
 
         # Escapuj cudzysłowy dla DAX
         quiz_html = escape_quotes_for_dax(quiz_html)
@@ -1336,27 +1403,39 @@ Przykłady użycia:
 def load_config(config_path):
     """Wczytuje konfigurację z pliku .md zawierającego blok JSON lub z pliku .json
 
-    Format pliku .md:
+    Nowy format z mapowaniem CSS/JS dla typów:
     ```json
     {
-        "css_files": ["CSS.md", "theme.css"],
-        "js_files": ["JS.md"],
+        "assets": {
+            "teoria": {
+                "css": ["CSS.md"],
+                "js": ["JS.md"]
+            },
+            "quiz": {
+                "css": ["CSS - Quiz.md"],
+                "js": ["JS - Quiz.md"]
+            }
+        },
         "generate_css_measures": true
     }
     ```
 
-    Lub plik .json:
+    Stary format (backward compatible):
+    ```json
     {
         "css_files": ["CSS.md"],
         "js_files": ["JS.md"],
         "generate_css_measures": true
     }
+    ```
 
     Args:
         config_path: str - ścieżka do pliku .md lub .json
 
     Returns:
-        dict: słownik z kluczami 'css_files', 'js_files', 'generate_css_measures'
+        dict: słownik z kluczami:
+            - 'assets': dict mapujący typy -> {'css': [...], 'js': [...]}
+            - 'generate_css_measures': bool
     """
     # Konwertuj na Path jeśli to string
     if isinstance(config_path, str):
@@ -1377,11 +1456,26 @@ def load_config(config_path):
         # Plik .json - parsuj bezpośrednio
         config = json.loads(content)
 
-    return {
-        'css_files': config.get('css_files', ['CSS.md']),
-        'js_files': config.get('js_files', ['JS.md']),
-        'generate_css_measures': config.get('generate_css_measures', True)
-    }
+    # Sprawdź czy to nowy format (z 'assets') czy stary (z 'css_files')
+    if 'assets' in config:
+        # Nowy format - zwróć bezpośrednio
+        return {
+            'assets': config.get('assets', {}),
+            'generate_css_measures': config.get('generate_css_measures', True)
+        }
+    else:
+        # Stary format - konwertuj na nowy dla backward compatibility
+        css_files = config.get('css_files', ['CSS.md'])
+        js_files = config.get('js_files', ['JS.md'])
+
+        # Wszystkie typy dostają te same pliki CSS/JS
+        return {
+            'assets': {
+                'teoria': {'css': css_files, 'js': js_files},
+                'quiz': {'css': css_files, 'js': js_files}
+            },
+            'generate_css_measures': config.get('generate_css_measures', True)
+        }
 
 
 def generate_css_measures(template_dir, output_dir):
@@ -1459,28 +1553,48 @@ def main():
     # Utwórz folder output jeśli nie istnieje
     output_dir.mkdir(exist_ok=True)
 
-    # Ustal które pliki CSS/JS wczytać i czy generować miary CSS
-    css_files = None  # None = domyślne ['CSS.md']
-    js_files = None   # None = domyślne ['JS.md']
+    # Ustal konfigurację assetów
+    assets_config = None
     should_generate_css_measures = True  # Domyślnie włączone
 
-    # Sprawdź czy podano plik konfiguracyjny
+    # Sprawdź czy podano plik konfiguracyjny, jeśli nie - szukaj domyślnego config.md
+    config_path_to_use = None
     if args.config:
-        config_path = Path(args.config)
-        if not config_path.exists():
-            print(f"[ERROR] Plik konfiguracyjny nie istnieje: {args.config}")
+        config_path_to_use = Path(args.config)
+    else:
+        # Auto-detect config.md w folderze skryptu
+        default_config = script_dir / 'config.md'
+        if default_config.exists():
+            config_path_to_use = default_config
+
+    if config_path_to_use:
+        if not config_path_to_use.exists():
+            print(f"[ERROR] Plik konfiguracyjny nie istnieje: {config_path_to_use}")
             return
-        print(f"\n[INFO] Wczytuję konfigurację z: {args.config}\n")
-        config = load_config(config_path)
-        css_files = config.get('css_files')
-        js_files = config.get('js_files')
+        print(f"\n[INFO] Wczytuję konfigurację z: {config_path_to_use}\n")
+        config = load_config(config_path_to_use)
+        assets_config = config.get('assets', {})
         should_generate_css_measures = config.get('generate_css_measures', True)
     else:
-        # Argumenty linii poleceń nadpisują domyślne wartości
+        # Argumenty linii poleceń - stary format (backward compatibility)
+        css_files = None  # None = domyślne ['CSS.md']
+        js_files = None   # None = domyślne ['JS.md']
+
         if args.css is not None:
             css_files = args.css if args.css else []  # pusta lista = pomiń CSS
         if args.js is not None:
             js_files = args.js if args.js else []  # pusta lista = pomiń JS
+
+        # Konwertuj na nowy format
+        if css_files is None:
+            css_files = ['CSS.md']
+        if js_files is None:
+            js_files = ['JS.md']
+
+        assets_config = {
+            'teoria': {'css': css_files, 'js': js_files},
+            'quiz': {'css': css_files, 'js': js_files}
+        }
 
     # Generuj osobne miary CSS (jeśli włączone)
     css_measures_count = 0
@@ -1490,8 +1604,8 @@ def main():
     else:
         print(f"\n[INFO] Generowanie miar CSS wyłączone w konfiguracji\n")
 
-    # Wczytaj templates
-    css, js = load_templates(template_dir, css_files, js_files)
+    # Wczytaj wszystkie assety dla wszystkich typów
+    assets_dict = load_all_assets(template_dir, assets_config)
 
     # Przetwórz wszystkie pliki .md w 01. THEORY
     md_files = list(theory_dir.glob('*.md'))
@@ -1507,7 +1621,7 @@ def main():
     total_generated = 0
     for md_file in md_files:
         try:
-            count = convert_file(md_file, output_dir, css, js)
+            count = convert_file(md_file, output_dir, assets_dict)
             total_generated += count
         except Exception as e:
             print(f"[ERROR] Blad przy konwersji {md_file.name}: {e}")

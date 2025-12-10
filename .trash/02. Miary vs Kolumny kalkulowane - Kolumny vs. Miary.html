@@ -1,0 +1,728 @@
+Kolumny vs. Miary = 
+
+"
+
+<!DOCTYPE html>
+<html lang='pl'>
+<head>
+    <meta charset='UTF-8'>
+    <meta name='viewport' content='width=device-width, initial-scale=1.0'>
+    <title>Kolumny vs. Miary</title>
+    <style>
+            * {
+                margin: 0;
+                padding: 0;
+                box-sizing: border-box;
+            }
+    
+            body {
+                font-family: 'Roboto', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+                font-size: 16px;
+                font-weight: 400;
+                line-height: 1.7;
+                color: #333;
+                background: transparent;
+                padding: 20px;
+            }
+    
+            .container {
+                max-width: 800px;
+                margin: 0 auto;
+                background: transparent;
+                padding: 40px;
+            }
+    
+            .navigation {
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                margin-bottom: 40px;
+                padding-bottom: 20px;
+                border-bottom: 1px solid #e1e4e8;
+            }
+    
+            button {
+                background: #6b1718;
+                color: white;
+                border: none;
+                padding: 12px 28px;
+                border-radius: 4px;
+                cursor: pointer;
+                font-size: 1em;
+                font-weight: 500;
+                transition: background 0.2s;
+            }
+    
+            button:hover {
+                background: #380c0c;
+            }
+    
+            button:disabled {
+                background: #ccc;
+                cursor: not-allowed;
+            }
+    
+            .page-indicator {
+                color: #666;
+                font-size: 1em;
+            }
+    
+            .page {
+                display: none;
+                min-height: 500px;
+            }
+    
+            .page.active {
+                display: block;
+                animation: fadeIn 0.3s ease-in;
+            }
+    
+            @keyframes fadeIn {
+                from { opacity: 0; transform: translateY(10px); }
+                to { opacity: 1; transform: translateY(0); }
+            }
+    
+            h1 {
+                font-size: 26px;
+                line-height: 36px;
+                font-weight: 600;
+                padding-top: 14px;
+                padding-bottom: 6px;
+                margin-bottom: 1em;
+                color: #6b1718;
+                border-bottom: 2px solid #6b1718;
+            }
+    
+            h2 {
+                font-size: 26px;
+                line-height: 36px;
+                font-weight: 600;
+                padding-top: 14px;
+                padding-bottom: 6px;
+                margin: 1.5em 0 0.8em 0;
+                color: #1a1a1a;
+                border-bottom: 2px solid #1a1a1a;
+            }
+    
+            h3 {
+                font-size: 1.1em;
+                font-weight: 600;
+                margin: 1.2em 0 0.6em 0;
+                padding-bottom: 5px;
+                color: #444;
+                border-bottom: 1px solid #999;
+            }
+    
+            p {
+                margin-bottom: 1em;
+                font-size: 1.05em;
+            }
+    
+            strong {
+                font-weight: 700;
+                color: #1a1a1a;
+            }
+    
+            code {
+                background: #f5f5f5;
+                padding: 3px 7px;
+                border-radius: 3px;
+                font-family: 'Fira Code', 'Courier New', monospace;
+                font-size: 0.95em;
+                color: #b82b4e;
+            }
+    
+            pre {
+                background: #f8f9fa;
+                border-left: 3px solid #6b1718;
+                padding: 18px;
+                margin: 1em 0;
+                overflow-x: auto;
+                border-radius: 3px;
+            }
+    
+            pre code {
+                background: none;
+                padding: 0;
+                color: #24292e;
+                font-size: 1em;
+                line-height: 1.6;
+            }
+    
+            .dax-keyword {
+                color: #6b1718;
+                font-weight: 600;
+            }
+    
+            .dax-function {
+                color: #6f42c1;
+            }
+    
+            .dax-number {
+                color: #005cc5;
+            }
+    
+            .dax-comment {
+                color: #6a737d;
+                font-style: italic;
+            }
+    
+            ul, ol {
+                margin: 0.3em 0;
+                padding-left: 1.8em;
+            }
+    
+            li {
+                margin: 0;
+                padding-left: 0.2em;
+                font-size: 1.05em;
+                line-height: 1.6;
+            }
+    
+            ol {
+                list-style-type: decimal;
+            }
+    
+            ol li::marker {
+                color: #999;
+                font-weight: 400;
+            }
+    
+            ul li::marker {
+                color: #999;
+            }
+    
+            ul ul, ol ol, ul ol, ol ul {
+                margin: 0.2em 0;
+                padding-left: 1.5em;
+            }
+    
+            blockquote {
+                border-left: 3px solid #6b1718;
+                background: #f8f9fa;
+                padding: 14px 18px;
+                margin: 1em 0;
+                color: #555;
+                font-style: italic;
+            }
+    
+            blockquote p {
+                margin: 0;
+            }
+    
+            .iteration-box {
+                border-left: 3px solid #6b1718;
+                padding: 14px 18px;
+                margin: 0.8em 0;
+            }
+    
+            .result-box {
+                background: #f5f5f5;
+                border-left: 3px solid #999;
+                padding: 14px 18px;
+                margin: 0.8em 0;
+                font-weight: 500;
+                color: #555;
+                font-size: 1.05em;
+            }
+        </style>
+    
+    <style>
+            * {
+                margin: 0;
+                padding: 0;
+                box-sizing: border-box;
+            }
+            
+            body {
+                font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+                font-size: 16px;
+                font-weight: 400;
+                line-height: 1.7;
+                color: #333;
+                background: transparent;
+                padding: 20px;
+            }
+            
+            .container {
+                max-width: 800px;
+                margin: 0 auto;
+                background: transparent;
+                padding: 40px;
+            }
+            
+            .navigation {
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                margin-bottom: 40px;
+                padding-bottom: 20px;
+                border-bottom: 1px solid #e1e4e8;
+            }
+            
+            button {
+                background: #0066cc;
+                color: white;
+                border: none;
+                padding: 12px 28px;
+                border-radius: 4px;
+                cursor: pointer;
+                font-size: 1em;
+                font-weight: 500;
+                transition: background 0.2s;
+            }
+            
+            button:hover {
+                background: #0052a3;
+            }
+            
+            button:disabled {
+                background: #ccc;
+                cursor: not-allowed;
+            }
+            
+            .page-indicator {
+                color: #666;
+                font-size: 1em;
+            }
+            
+            .page {
+                display: none;
+                min-height: 500px;
+            }
+            
+            .page.active {
+                display: block;
+                animation: fadeIn 0.3s ease-in;
+            }
+            
+            @keyframes fadeIn {
+                from { opacity: 0; transform: translateY(10px); }
+                to { opacity: 1; transform: translateY(0); }
+            }
+            
+            h1 {
+                font-size: 26px;
+                line-height: 36px;
+                font-weight: 600;
+                padding-top: 14px;
+                padding-bottom: 6px;
+                margin-bottom: 1em;
+                color: #1a1a1a;
+                border-bottom: 2px solid #1a1a1a;
+            }
+    
+            h2 {
+                font-size: 26px;
+                line-height: 36px;
+                font-weight: 600;
+                padding-top: 14px;
+                padding-bottom: 6px;
+                margin: 1.5em 0 0.8em 0;
+                color: #1a1a1a;
+                border-bottom: 2px solid #1a1a1a;
+            }
+            
+            h3 {
+                font-size: 1.1em;
+                font-weight: 600;
+                margin: 1.2em 0 0.6em 0;
+                padding-bottom: 5px;
+                color: #444;
+                border-bottom: 1px solid #999;
+            }
+            
+            p {
+                margin-bottom: 1em;
+                font-size: 1.05em;
+            }
+            
+            strong {
+                font-weight: 700;
+                color: #1a1a1a;
+            }
+            
+            code {
+                background: #f5f5f5;
+                padding: 3px 7px;
+                border-radius: 3px;
+                font-family: 'Courier New', monospace;
+                font-size: 0.95em;
+                color: #d73a49;
+            }
+            
+            pre {
+                background: #f8f9fa;
+                border-left: 3px solid #0066cc;
+                padding: 18px;
+                margin: 1em 0;
+                overflow-x: auto;
+                border-radius: 3px;
+            }
+            
+            pre code {
+                background: none;
+                padding: 0;
+                color: #24292e;
+                font-size: 1em;
+                line-height: 1.6;
+            }
+            
+            .dax-keyword {
+                color: #0066cc;
+                font-weight: 600;
+            }
+            
+            .dax-function {
+                color: #6f42c1;
+            }
+            
+            .dax-number {
+                color: #005cc5;
+            }
+            
+            .dax-comment {
+                color: #6a737d;
+                font-style: italic;
+            }
+            
+            ul, ol {
+                margin: 0.3em 0;
+                padding-left: 1.8em;
+            }
+    
+            li {
+                margin: 0;
+                padding-left: 0.2em;
+                font-size: 1.05em;
+                line-height: 1.6;
+            }
+    
+            ol {
+                list-style-type: decimal;
+            }
+    
+            ol li::marker {
+                color: #999;
+                font-weight: 400;
+            }
+    
+            ul li::marker {
+                color: #999;
+            }
+    
+            ul ul, ol ol, ul ol, ol ul {
+                margin: 0.2em 0;
+                padding-left: 1.5em;
+            }
+    
+            blockquote {
+                border-left: 3px solid #0066cc;
+                background: #f8f9fa;
+                padding: 14px 18px;
+                margin: 1em 0;
+                color: #555;
+                font-style: italic;
+            }
+    
+            blockquote p {
+                margin: 0;
+            }
+            
+            .iteration-box {
+                border-left: 3px solid #0066cc;
+                padding: 14px 18px;
+                margin: 0.8em 0;
+            }
+            
+            .result-box {
+                background: #f5f5f5;
+                border-left: 3px solid #999;
+                padding: 14px 18px;
+                margin: 0.8em 0;
+                font-weight: 500;
+                color: #555;
+                font-size: 1.05em;
+            }
+        </style>
+</head>
+<body>
+
+<div class='container' id='viz_cd2ce545'>
+    <!-- Nawigacja na górze -->
+    <div class='navigation'>
+        <button id='prevBtn_cd2ce545' onclick='changePage_cd2ce545(-1)'>← Poprzednia</button>
+        <span class='page-indicator'>
+            Strona <span id='currentPage_cd2ce545'>1</span> z <span id='totalPages_cd2ce545'>3</span>
+        </span>
+        <button id='nextBtn_cd2ce545' onclick='changePage_cd2ce545(1)'>Następna →</button>
+    </div>
+
+    <!-- Strona 1 -->
+    <div class='page active'>
+        <h1>Dwa podejścia do DAX</h1>
+        <p>Jedną z najważniejszych rzeczy do zrozumienia w DAX jest różnica między <strong>miarami</strong> a <strong>kolumnami kalkulowanymi</strong>. Choć obie używają formuł DAX, działają zupełnie inaczej i wymagają <strong>odmiennego podejścia do pisania kodu</strong>.</p>
+        <h1>Kolumny kalkulowane (Calculated Columns)</h1>
+        <p><strong>Kolumna kalkulowana</strong> to nowa kolumna dodana do tabeli, której wartość jest obliczana <strong>wiersz po wierszu</strong> (tzw. kontekst wiersza) w momencie odświeżania danych.</p>
+        <h2>Charakterystyka kolumn kalkulowanych:</h2>
+        <ul>
+        <li>Obliczane <strong>podczas ładowania/odświeżania danych</strong></li>
+        <li>Wartość obliczana <strong>dla każdego wiersza</strong> w tabeli</li>
+        <li>Wynik jest <strong>przechowywany</strong> w modelu (zajmuje miejsce w pamięci)</li>
+        <li>Można ich używać do <strong>filtrowania</strong>, <strong>grupowania</strong> lub <strong>sortowania</strong></li>
+        <li>Używają <strong>kontekstu wiersza</strong> (row context)</li>
+        </ul>
+        <h2>Przykład kolumny kalkulowanej:</h2>
+        <pre><code>Cena Jednostkowa =
+        Sprzedaż[Wartość netto] / Sprzedaż[Ilość]</code></pre>
+        <p><strong>Co się dzieje:</strong></p>
+        <ul>
+        <li>Formuła jest obliczana <strong>dla każdego wiersza</strong> w tabeli Sprzedaż</li>
+        <li>Jeśli masz 1000 wierszy, otrzymasz 1000 wartości</li>
+        <li>Wartości są zapisane w modelu i widoczne w widoku danych</li>
+        <li>Możesz użyć tej kolumny w slicerach, filtrach lub do sortowania</li>
+        </ul>
+        <h2>Podejście do pisania DAX w kolumnach</h2>
+        <p><strong>W kolumnach możesz operować na kolumnach jak na zmiennych:</strong></p>
+        <pre><code>// ✅ W KOLUMNACH - bezpośrednie odwołania do kolumn
+        Marża PLN = Sprzedaż[Wartość netto] - Sprzedaż[Koszt]
+
+        Marża % = 
+        <span class='dax-function'>DIVIDE</span>(
+            Sprzedaż[Wartość netto] - Sprzedaż[Koszt],
+            Sprzedaż[Wartość netto]
+        )
+
+        Cena z VAT = Sprzedaż[Cena netto] * <span class='dax-number'>1.23</span>
+
+        Kategoria cenowa = 
+        <span class='dax-function'>IF</span>(
+            Sprzedaż[Wartość netto] &gt; <span class='dax-number'>1000</span>,
+            'Premium',
+            'Standard'
+        )</code></pre>
+        <p><strong>Możesz:</strong></p>
+        <ul>
+        <li>✓ Odwoływać się bezpośrednio do kolumn: <code>Tabela[Kolumna]</code></li>
+        <li>✓ Używać standardowych operatorów: <code>+</code>, <code>-</code>, <code>*</code>, <code>/</code></li>
+        <li>✓ Mnożyć, dzielić, dodawać kolumny jak w Excelu</li>
+        <li>✓ Używać funkcji logicznych: <code>IF</code>, <code>SWITCH</code></li>
+        <li>✓ Odwoływać się do innych kolumn kalkulowanych w tej samej tabeli</li>
+        </ul>
+        <p><strong>Kiedy używać kolumn kalkulowanych:</strong></p>
+        <ul>
+        <li>Potrzebujesz wartości do <strong>filtrowania</strong> lub <strong>grupowania</strong></li>
+        <li>Chcesz <strong>posortować</strong> dane według obliczonej wartości</li>
+        <li>Wartość zależy <strong>tylko od danych w bieżącym wierszu</strong></li>
+        <li>Przykład: kategoria cenowa produktu, wiek klienta, dzień tygodnia, rabat procentowy</li>
+        </ul>
+
+    </div>
+
+    <!-- Strona 2 -->
+    <div class='page'>
+        <h1>Miary (Measures)</h1>
+        <p><strong>Miara</strong> to formuła, która oblicza się <strong>dynamicznie</strong> w zależności od kontekstu filtrów w raporcie.</p>
+        <h2>Charakterystyka miar:</h2>
+        <ul>
+        <li>Obliczane <strong>w momencie wyświetlania</strong> w wizualizacji</li>
+        <li>Nie są przechowywane w modelu (nie zajmują miejsca)</li>
+        <li>Wynik zależy od <strong>kontekstu filtrów</strong> na wizualizacji</li>
+        <li><strong>Nie można</strong> ich użyć do filtrowania wierszy</li>
+        <li>Używają <strong>kontekstu filtrów</strong> (filter context)</li>
+        </ul>
+        <h2>Przykład miary:</h2>
+        <pre><code>Sprzedaż Netto = <span class='dax-function'>SUM</span>(Sprzedaż[Wartość netto])</code></pre>
+        <p><strong>Co się dzieje:</strong></p>
+        <ul>
+        <li>Formuła oblicza sumę <strong>w zależności od kontekstu</strong></li>
+        <li>Na wykresie według kategorii: pokaże sumę dla każdej kategorii</li>
+        <li>Na wykresie według regionu: pokaże sumę dla każdego regionu</li>
+        <li>Bez filtrów: pokaże sumę całkowitą</li>
+        <li>Wartość <strong>nie jest przechowywana</strong>, tylko obliczana na żądanie</li>
+        </ul>
+        <h2>Podejście do pisania DAX w miarach</h2>
+        <p><strong>W miarach MUSISZ używać funkcji agregujących:</strong></p>
+        <pre><code>// ❌ ZŁE - nie zadziała w miarze
+        Marża PLN = Sprzedaż[Wartość netto] - Sprzedaż[Koszt]
+
+        // ✅ DOBRE - w miarach używamy funkcji agregujących
+        Marża PLN = 
+        <span class='dax-function'>SUM</span>(Sprzedaż[Wartość netto]) - <span class='dax-function'>SUM</span>(Sprzedaż[Koszt])
+
+        // ❌ ZŁE - próba mnożenia kolumn
+        Wartość z VAT = Sprzedaż[Wartość netto] * <span class='dax-number'>1.23</span>
+
+        // ✅ DOBRE - suma z mnożnikiem
+        Wartość z VAT = <span class='dax-function'>SUM</span>(Sprzedaż[Wartość netto]) * <span class='dax-number'>1.23</span>
+
+        // ❌ ZŁE - bezpośrednie dzielenie kolumn
+        Marża % = 
+        (Sprzedaż[Wartość netto] - Sprzedaż[Koszt]) / Sprzedaż[Wartość netto]
+
+        // ✅ DOBRE - dzielenie zagregowanych wartości
+        Marża % = 
+        <span class='dax-function'>DIVIDE</span>(
+            <span class='dax-function'>SUM</span>(Sprzedaż[Wartość netto]) - <span class='dax-function'>SUM</span>(Sprzedaż[Koszt]),
+            <span class='dax-function'>SUM</span>(Sprzedaż[Wartość netto])
+        )</code></pre>
+        <p><strong>W miarach:</strong></p>
+        <ul>
+        <li>❌ <strong>NIE MOŻESZ</strong> bezpośrednio mnożyć/dzielić kolumn</li>
+        <li>❌ <strong>NIE MOŻESZ</strong> używać <code>Tabela[Kolumna]</code> bez funkcji agregującej</li>
+        <li>✅ <strong>MUSISZ</strong> najpierw zagregować: <code>SUM()</code>, <code>AVERAGE()</code>, <code>COUNT()</code>, itp.</li>
+        <li>✅ Dopiero <strong>zagregowane wartości</strong> możesz mnożyć, dzielić, dodawać</li>
+        </ul>
+        <p><strong>Kiedy używać miar:</strong></p>
+        <ul>
+        <li>Potrzebujesz <strong>agregacji</strong> (suma, średnia, liczba)</li>
+        <li>Wynik ma zależeć od <strong>filtrów w raporcie</strong></li>
+        <li>Chcesz <strong>dynamicznych obliczeń</strong> (procent udziału, porównania okresów)</li>
+        <li>Przykład: suma sprzedaży, średnia wartość, liczba transakcji</li>
+        </ul>
+
+    </div>
+
+    <!-- Strona 3 -->
+    <div class='page'>
+        <h1>Porównanie: Kolumna kalkulowana vs Miara</h1>
+        <table>
+          <thead>
+            <tr>
+              <th>Aspekt</th>
+              <th>Kolumna kalkulowana</th>
+              <th>Miara</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>Kiedy obliczana</strong></td>
+              <td>Podczas odświeżania danych</td>
+              <td>Podczas wyświetlania wizualizacji</td>
+            </tr>
+            <tr>
+              <td><strong>Kontekst</strong></td>
+              <td>Kontekst wiersza (row context)</td>
+              <td>Kontekst filtrów (filter context)</td>
+            </tr>
+            <tr>
+              <td><strong>Składnia DAX</strong></td>
+              <td>Bezpośrednie odwołania do kolumn</td>
+              <td>Wymagane funkcje agregujące</td>
+            </tr>
+            <tr>
+              <td><strong>Operacje na kolumnach</strong></td>
+              <td>Możesz mnożyć/dzielić kolumny bezpośrednio</td>
+              <td>Musisz najpierw zagregować, potem mnożyć/dzielić</td>
+            </tr>
+            <tr>
+              <td><strong>Przechowywanie</strong></td>
+              <td>Tak - zajmuje miejsce w pamięci</td>
+              <td>Nie - obliczana na żądanie</td>
+            </tr>
+            <tr>
+              <td><strong>Użycie w slicerach</strong></td>
+              <td>Tak</td>
+              <td>Nie</td>
+            </tr>
+            <tr>
+              <td><strong>Użycie w wizualizacjach</strong></td>
+              <td>Jako pole do grupowania</td>
+              <td>Jako wartość do agregacji</td>
+            </tr>
+            <tr>
+              <td><strong>Ikona w Power BI</strong></td>
+              <td>Ikona tabeli (⚏)</td>
+              <td>Ikona kalkulatora (fx)</td>
+            </tr>
+          </tbody>
+        </table>
+        <p>---</p>
+
+    </div>
+
+</div>
+
+<script>
+(function() {
+    // Unikalny ID dla tej wizualizacji (wstrzykiwany przez Python)
+    var vizId = 'cd2ce545';
+    var containerId = 'viz_' + vizId;
+
+    var currentPage_cd2ce545 = 1;
+    var container = document.getElementById(containerId);
+
+    if (!container) return;
+
+    var pages = container.querySelectorAll('.page');
+    var totalPages = pages.length;
+
+    document.getElementById('totalPages_' + vizId).textContent = totalPages;
+
+    window['showPage_cd2ce545'] = function(n) {
+        if (n > totalPages) currentPage_cd2ce545 = totalPages;
+        if (n < 1) currentPage_cd2ce545 = 1;
+
+        for (var i = 0; i < pages.length; i++) {
+            pages[i].classList.remove('active');
+        }
+        pages[currentPage_cd2ce545 - 1].classList.add('active');
+
+        document.getElementById('currentPage_' + vizId).textContent = currentPage_cd2ce545;
+        document.getElementById('prevBtn_' + vizId).disabled = (currentPage_cd2ce545 === 1);
+        document.getElementById('nextBtn_' + vizId).disabled = (currentPage_cd2ce545 === totalPages);
+    };
+
+    window['changePage_cd2ce545'] = function(n) {
+        currentPage_cd2ce545 += n;
+        window['showPage_cd2ce545'](currentPage_cd2ce545);
+    };
+
+    // Inicjalizacja
+    window['showPage_cd2ce545'](1);
+
+    // Funkcjonalność powiększania obrazów
+    var images = container.querySelectorAll('img');
+    images.forEach(function(img) {
+        img.style.cursor = 'pointer';
+        img.style.transition = 'transform 0.3s ease';
+
+        img.addEventListener('click', function() {
+            if (this.classList.contains('zoomed')) {
+                // Pomniejsz obraz
+                this.classList.remove('zoomed');
+                this.style.position = '';
+                this.style.top = '';
+                this.style.left = '';
+                this.style.transform = '';
+                this.style.width = '100%';
+                this.style.maxWidth = '';
+                this.style.maxHeight = '';
+                this.style.zIndex = '';
+                this.style.backgroundColor = '';
+                this.style.padding = '';
+                this.style.boxShadow = '';
+            } else {
+                // Powiększ obraz
+                this.classList.add('zoomed');
+                this.style.position = 'fixed';
+                this.style.top = '50%';
+                this.style.left = '50%';
+                this.style.transform = 'translate(-50%, -50%)';
+                this.style.width = 'auto';
+                this.style.maxWidth = '95vw';
+                this.style.maxHeight = '95vh';
+                this.style.zIndex = '9999';
+                this.style.backgroundColor = 'rgba(255, 255, 255, 0.95)';
+                this.style.padding = '10px';
+                this.style.boxShadow = '0 4px 20px rgba(0, 0, 0, 0.3)';
+            }
+        });
+    });
+})();
+</script>
+
+</body>
+</html>
+
+"
