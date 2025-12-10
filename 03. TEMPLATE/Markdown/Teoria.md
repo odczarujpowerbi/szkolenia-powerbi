@@ -1,4 +1,6 @@
-
+---
+type: teoria
+---
 # Rozdział - to będzie osobna miara
 
 ## Sekcja 1 - to będzie osobna sekcja w miarze

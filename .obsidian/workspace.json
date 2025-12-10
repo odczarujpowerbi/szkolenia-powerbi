@@ -79,7 +79,8 @@
       }
     ],
     "direction": "horizontal",
-    "width": 305.5
+    "width": 305.5,
+    "collapsed": true
   },
   "right": {
     "id": "a3e901ef3e57a84e",
@@ -164,7 +165,8 @@
       }
     ],
     "direction": "horizontal",
-    "width": 416.5
+    "width": 416.5,
+    "collapsed": true
   },
   "left-ribbon": {
     "hiddenItems": {
@@ -183,9 +185,12 @@
   },
   "active": "c6a8ca1a0082a34f",
   "lastOpenFiles": [
-    "03. TEMPLATE/Markdown/Gaps Complete.md",
+    "01. THEORY/00. Quiz - test.md",
     "03. TEMPLATE/Markdown/Quiz.md",
+    "03. TEMPLATE/Markdown/Teoria.md",
+    "03. TEMPLATE/Markdown/Gaps Complete.md",
     "01. THEORY/05. Quiz.md",
+    "01. THEORY/01. Quiz.md",
     "01. THEORY/01. Podstawy DAX.md",
     "02. OUTPUT/04. Modyfikowanie Kontekstu - CROSSFILTER.html",
     "config.md",
@@ -193,7 +198,6 @@
     "02. OUTPUT/01. Quiz.html",
     "01. THEORY/02. Quiz.md",
     "01. THEORY/03. Quiz.md",
-    "01. THEORY/01. Quiz.md",
     "02. OUTPUT/06. Quiz.html",
     "02. OUTPUT/05. Quiz.html",
     "02. OUTPUT/04. Quiz.html",
@@ -227,8 +231,6 @@
     "bin/Pasted image 20251209172007.png",
     "bin/Pasted image 20251209172001.png",
     "bin/Pasted image 20251209171436.png",
-    "03. TEMPLATE/Markdown/Board.md",
-    "03. TEMPLATE/Markdown/Teoria.md",
     "Generator.canvas"
   ]
 }
