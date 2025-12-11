@@ -1,0 +1,454 @@
+DATESYTD = 
+
+"
+
+<!DOCTYPE html>
+<html lang='pl'>
+<head>
+    <meta charset='UTF-8'>
+    <meta name='viewport' content='width=device-width, initial-scale=1.0'>
+    <title>DATESYTD</title>
+    <style>
+            * {
+                margin: 0;
+                padding: 0;
+                box-sizing: border-box;
+            }
+    
+            body {
+                font-family: 'Roboto', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+                font-size: 16px;
+                font-weight: 400;
+                line-height: 1.7;
+                color: #333;
+                background: transparent;
+                padding: 20px;
+            }
+    
+            .container {
+                max-width: 800px;
+                margin: 0 auto;
+                background: transparent;
+                padding: 40px;
+            }
+    
+            .navigation {
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                margin-bottom: 40px;
+                padding-bottom: 20px;
+                border-bottom: 1px solid #e1e4e8;
+            }
+    
+            button {
+                background: #6b1718;
+                color: white;
+                border: none;
+                padding: 12px 28px;
+                border-radius: 4px;
+                cursor: pointer;
+                font-size: 1em;
+                font-weight: 500;
+                transition: background 0.2s;
+            }
+    
+            button:hover {
+                background: #380c0c;
+            }
+    
+            button:disabled {
+                background: #ccc;
+                cursor: not-allowed;
+            }
+    
+            .page-indicator {
+                color: #666;
+                font-size: 1em;
+            }
+    
+            .page {
+                display: none;
+                min-height: 500px;
+            }
+    
+            .page.active {
+                display: block;
+                animation: fadeIn 0.3s ease-in;
+            }
+    
+            @keyframes fadeIn {
+                from { opacity: 0; transform: translateY(10px); }
+                to { opacity: 1; transform: translateY(0); }
+            }
+    
+            h1 {
+                font-size: 26px;
+                line-height: 36px;
+                font-weight: 600;
+                padding-top: 14px;
+                padding-bottom: 6px;
+                margin-bottom: 1em;
+                color: #6b1718;
+                border-bottom: 2px solid #6b1718;
+            }
+    
+            h2 {
+                font-size: 26px;
+                line-height: 36px;
+                font-weight: 600;
+                padding-top: 14px;
+                padding-bottom: 6px;
+                margin: 1.5em 0 0.8em 0;
+                color: #1a1a1a;
+                border-bottom: 2px solid #1a1a1a;
+            }
+    
+            h3 {
+                font-size: 1.1em;
+                font-weight: 600;
+                margin: 1.2em 0 0.6em 0;
+                padding-bottom: 5px;
+                color: #444;
+                border-bottom: 1px solid #999;
+            }
+    
+            p {
+                margin-bottom: 1em;
+                font-size: 1.05em;
+            }
+    
+            strong {
+                font-weight: 700;
+                color: #1a1a1a;
+            }
+    
+            code {
+                background: #f5f5f5;
+                padding: 3px 7px;
+                border-radius: 3px;
+                font-family: 'Fira Code', 'Courier New', monospace;
+                font-size: 0.95em;
+                color: #b82b4e;
+            }
+    
+            pre {
+                background: #f8f9fa;
+                border-left: 3px solid #6b1718;
+                padding: 18px;
+                margin: 1em 0;
+                overflow-x: auto;
+                border-radius: 3px;
+            }
+    
+            pre code {
+                background: none;
+                padding: 0;
+                color: #24292e;
+                font-size: 1em;
+                line-height: 1.6;
+            }
+    
+            .dax-keyword {
+                color: #6b1718;
+                font-weight: 600;
+            }
+    
+            .dax-function {
+                color: #6f42c1;
+            }
+    
+            .dax-number {
+                color: #005cc5;
+            }
+    
+            .dax-comment {
+                color: #6a737d;
+                font-style: italic;
+            }
+    
+            ul, ol {
+                margin: 0.3em 0;
+                padding-left: 1.8em;
+            }
+    
+            li {
+                margin: 0;
+                padding-left: 0.2em;
+                font-size: 1.05em;
+                line-height: 1.6;
+            }
+    
+            ol {
+                list-style-type: decimal;
+            }
+    
+            ol li::marker {
+                color: #999;
+                font-weight: 400;
+            }
+    
+            ul li::marker {
+                color: #999;
+            }
+    
+            ul ul, ol ol, ul ol, ol ul {
+                margin: 0.2em 0;
+                padding-left: 1.5em;
+            }
+    
+            blockquote {
+                border-left: 3px solid #6b1718;
+                background: #f8f9fa;
+                padding: 14px 18px;
+                margin: 1em 0;
+                color: #555;
+                font-style: italic;
+            }
+    
+            blockquote p {
+                margin: 0;
+            }
+    
+            .iteration-box {
+                border-left: 3px solid #6b1718;
+                padding: 14px 18px;
+                margin: 0.8em 0;
+            }
+    
+            .result-box {
+                background: #f5f5f5;
+                border-left: 3px solid #999;
+                padding: 14px 18px;
+                margin: 0.8em 0;
+                font-weight: 500;
+                color: #555;
+                font-size: 1.05em;
+            }
+        </style>
+</head>
+<body>
+
+<div class='container' id='viz_21ff4c70'>
+    <!-- Nawigacja na górze -->
+    <div class='navigation'>
+        <button id='prevBtn_21ff4c70' onclick='changePage_21ff4c70(-1)'>← Poprzednia</button>
+        <span class='page-indicator'>
+            Strona <span id='currentPage_21ff4c70'>1</span> z <span id='totalPages_21ff4c70'>3</span>
+        </span>
+        <button id='nextBtn_21ff4c70' onclick='changePage_21ff4c70(1)'>Następna →</button>
+    </div>
+
+    <!-- Strona 1 -->
+    <div class='page active'>
+        <h1>Definicja</h1>
+        <pre><code><span class='dax-function'>DATESYTD</span>(&lt;dates&gt;, [&lt;year_end_date&gt;])</code></pre>
+        <p>Zwraca wszystkie daty od <strong>początku roku</strong> do ostatniej daty w bieżącym kontekście filtra. Służy do tworzenia kumulacji rocznej (YTD - Year to Date).</p>
+
+    </div>
+
+    <!-- Strona 2 -->
+    <div class='page'>
+        <h1>Zastosowanie</h1>
+        <p><strong>Tabela źródłowa:</strong></p>
+        <table>
+          <thead>
+            <tr>
+              <th>Data</th>
+              <th>Wartość</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>2023-12-30</td>
+              <td>3000</td>
+            </tr>
+            <tr>
+              <td>2024-01-02</td>
+              <td>500</td>
+            </tr>
+            <tr>
+              <td>2024-01-03</td>
+              <td>2400</td>
+            </tr>
+            <tr>
+              <td>2024-01-04</td>
+              <td>750</td>
+            </tr>
+            <tr>
+              <td>2024-02-05</td>
+              <td>100</td>
+            </tr>
+          </tbody>
+        </table>
+        <h2>Przykład 1: Sprzedaż YTD</h2>
+        <pre><code>Sprzedaż YTD = 
+        <span class='dax-function'>CALCULATE</span>(
+            <span class='dax-function'>SUM</span>(fSprzedaz[Wartość]),
+            <span class='dax-function'>DATESYTD</span>(Kalendarz[Data])
+        )</code></pre>
+        <p><strong>Proces kumulacji</strong></p>
+        <table>
+          <thead>
+            <tr>
+              <th>Data</th>
+              <th>Wartość</th>
+              <th>W zakresie YTD?</th>
+              <th>Kumulacja YTD</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>2023-12-30</td>
+              <td>3000</td>
+              <td>❌ Przeszłość</td>
+              <td>0</td>
+            </tr>
+            <tr>
+              <td>2024-01-02</td>
+              <td>500</td>
+              <td>✅</td>
+              <td>500</td>
+            </tr>
+            <tr>
+              <td>2024-01-03</td>
+              <td>2400</td>
+              <td>✅</td>
+              <td>2900</td>
+            </tr>
+            <tr>
+              <td>2024-01-04</td>
+              <td>750</td>
+              <td>✅</td>
+              <td>3650</td>
+            </tr>
+            <tr>
+              <td>2024-01-05</td>
+              <td>100</td>
+              <td>✅ <strong>← Dziś</strong></td>
+              <td><strong>3750</strong></td>
+            </tr>
+          </tbody>
+        </table>
+
+    </div>
+
+    <!-- Strona 3 -->
+    <div class='page'>
+        <h2>Przykład 2: Porównanie bieżący vs poprzedni YTD</h2>
+        <pre><code>Różnica YTD vs RR = 
+        [Sprzedaż YTD] - [Sprzedaż YTD RR]</code></pre>
+        <p><strong>Wyniki:</strong></p>
+        <table>
+          <thead>
+            <tr>
+              <th>Data analizy</th>
+              <th>YTD bieżący</th>
+              <th>YTD rok temu</th>
+              <th>Różnica</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>31.01.2024</td>
+              <td>3500</td>
+              <td>2800</td>
+              <td>+700</td>
+            </tr>
+            <tr>
+              <td>29.02.2024</td>
+              <td>6650</td>
+              <td>5000</td>
+              <td>+1650</td>
+            </tr>
+          </tbody>
+        </table>
+        <p>---</p>
+
+    </div>
+
+</div>
+
+<script>
+(function() {
+    // Unikalny ID dla tej wizualizacji (wstrzykiwany przez Python)
+    var vizId = '21ff4c70';
+    var containerId = 'viz_' + vizId;
+
+    var currentPage_21ff4c70 = 1;
+    var container = document.getElementById(containerId);
+
+    if (!container) return;
+
+    var pages = container.querySelectorAll('.page');
+    var totalPages = pages.length;
+
+    document.getElementById('totalPages_' + vizId).textContent = totalPages;
+
+    window['showPage_21ff4c70'] = function(n) {
+        if (n > totalPages) currentPage_21ff4c70 = totalPages;
+        if (n < 1) currentPage_21ff4c70 = 1;
+
+        for (var i = 0; i < pages.length; i++) {
+            pages[i].classList.remove('active');
+        }
+        pages[currentPage_21ff4c70 - 1].classList.add('active');
+
+        document.getElementById('currentPage_' + vizId).textContent = currentPage_21ff4c70;
+        document.getElementById('prevBtn_' + vizId).disabled = (currentPage_21ff4c70 === 1);
+        document.getElementById('nextBtn_' + vizId).disabled = (currentPage_21ff4c70 === totalPages);
+    };
+
+    window['changePage_21ff4c70'] = function(n) {
+        currentPage_21ff4c70 += n;
+        window['showPage_21ff4c70'](currentPage_21ff4c70);
+    };
+
+    // Inicjalizacja
+    window['showPage_21ff4c70'](1);
+
+    // Funkcjonalność powiększania obrazów
+    var images = container.querySelectorAll('img');
+    images.forEach(function(img) {
+        img.style.cursor = 'pointer';
+        img.style.transition = 'transform 0.3s ease';
+
+        img.addEventListener('click', function() {
+            if (this.classList.contains('zoomed')) {
+                // Pomniejsz obraz
+                this.classList.remove('zoomed');
+                this.style.position = '';
+                this.style.top = '';
+                this.style.left = '';
+                this.style.transform = '';
+                this.style.width = '100%';
+                this.style.maxWidth = '';
+                this.style.maxHeight = '';
+                this.style.zIndex = '';
+                this.style.backgroundColor = '';
+                this.style.padding = '';
+                this.style.boxShadow = '';
+            } else {
+                // Powiększ obraz
+                this.classList.add('zoomed');
+                this.style.position = 'fixed';
+                this.style.top = '50%';
+                this.style.left = '50%';
+                this.style.transform = 'translate(-50%, -50%)';
+                this.style.width = 'auto';
+                this.style.maxWidth = '95vw';
+                this.style.maxHeight = '95vh';
+                this.style.zIndex = '9999';
+                this.style.backgroundColor = 'rgba(255, 255, 255, 0.95)';
+                this.style.padding = '10px';
+                this.style.boxShadow = '0 4px 20px rgba(0, 0, 0, 0.3)';
+            }
+        });
+    });
+})();
+</script>
+
+</body>
+</html>
+
+"

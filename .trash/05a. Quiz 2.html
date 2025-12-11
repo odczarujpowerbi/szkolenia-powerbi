@@ -1,0 +1,588 @@
+05a. Quiz = 
+
+"
+
+<!DOCTYPE html>
+<html lang='pl'>
+<head>
+    <meta charset='UTF-8'>
+    <meta name='viewport' content='width=device-width, initial-scale=1.0'>
+    <title>Quiz: Tworzenie zestawień tabelarycznych</title>
+    <style>
+    * {
+                margin: 0;
+                padding: 0;
+                box-sizing: border-box;
+            }
+    
+            body {
+                font-family: 'Roboto', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+                font-size: 16px;
+                font-weight: 400;
+                line-height: 1.7;
+                color: #333;
+                background: transparent;
+                padding: 20px;
+            }
+    
+            .container {
+                max-width: 800px;
+                margin: 0 auto;
+                background: transparent;
+                padding: 40px;
+            }
+    
+            .navigation {
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                margin-bottom: 40px;
+                padding-bottom: 20px;
+                border-bottom: 1px solid #e1e4e8;
+            }
+    
+            button {
+                background: #6b1718;
+                color: white;
+                border: none;
+                padding: 12px 28px;
+                border-radius: 4px;
+                cursor: pointer;
+                font-size: 1em;
+                font-weight: 500;
+                transition: background 0.2s;
+            }
+    
+            button:hover {
+                background: #380c0c;
+            }
+    
+            button:disabled {
+                background: #ccc;
+                cursor: not-allowed;
+            }
+    
+            .page-indicator {
+                color: #666;
+                font-size: 1em;
+            }
+    
+            .page {
+                display: none;
+                min-height: 500px;
+            }
+    
+            .page.active {
+                display: block;
+                animation: fadeIn 0.3s ease-in;
+            }
+    
+            @keyframes fadeIn {
+                from { opacity: 0; transform: translateY(10px); }
+                to { opacity: 1; transform: translateY(0); }
+            }
+    
+            h1 {
+                font-size: 26px;
+                line-height: 36px;
+                font-weight: 600;
+                padding-top: 14px;
+                padding-bottom: 6px;
+                margin-bottom: 1em;
+                color: #6b1718;
+                border-bottom: 2px solid #6b1718;
+            }
+    
+            h2 {
+                font-size: 26px;
+                line-height: 36px;
+                font-weight: 600;
+                padding-top: 14px;
+                padding-bottom: 6px;
+                margin: 1.5em 0 0.8em 0;
+                color: #1a1a1a;
+                border-bottom: 2px solid #1a1a1a;
+            }
+    
+            .question-box {
+                background: #f8f9fa;
+                border-left: 3px solid #6b1718;
+                padding: 20px;
+                margin: 1.5em 0;
+                border-radius: 3px;
+            }
+    
+            .question-box p {
+                margin: 0;
+                font-size: 1.05em;
+                color: #1a1a1a;
+            }
+    
+            .answers {
+                margin-top: 1.5em;
+            }
+    
+            .answer-option {
+                background: white;
+                border: 2px solid #e1e4e8;
+                padding: 15px 20px;
+                margin: 10px 0;
+                border-radius: 4px;
+                cursor: pointer;
+                transition: all 0.2s;
+                font-size: 1.05em;
+            }
+    
+            .answer-option:hover {
+                border-color: #6b1718;
+                background: #fef5f5;
+            }
+    
+            .answer-option.selected {
+                border-color: #6b1718;
+                background: #ffe5e6;
+            }
+    
+            .answer-option.correct {
+                border-color: #ccc;
+                background: #d4edda;
+            }
+    
+            .answer-option.incorrect {
+                border-color: #b82b4e;
+                background: #f8d7da;
+            }
+    
+            .feedback {
+                margin-top: 1.5em;
+                padding: 15px 20px;
+                border-radius: 4px;
+                display: none;
+                font-size: 1.05em;
+            }
+    
+            .feedback.show {
+                display: block;
+            }
+    
+            .feedback.correct {
+                background: #d4edda;
+                border-left: 3px solid #28a745;
+                color: #155724;
+            }
+    
+            .feedback.incorrect {
+                background: #f8d7da;
+                border-left: 3px solid #b82b4e;
+                color: #721c24;
+            }
+    
+            .check-button {
+                margin-top: 1.5em;
+                background: #121212;
+            }
+    
+            .check-button:hover:not(:disabled) {
+                background: #111111;
+            }
+    
+            .check-button:disabled {
+                background: #ccc;
+            }
+    
+            pre {
+                background: #f8f9fa;
+                border-left: 3px solid #6b1718;
+                padding: 18px;
+                margin: 1em 0;
+                overflow-x: auto;
+                border-radius: 3px;
+            }
+    
+            code {
+                font-family: 'Fira Code', 'Courier New', monospace;
+                font-size: 0.95em;
+                color: #b82b4e;
+            }
+    
+            .score-box {
+                background: #6b1718;
+                color: white;
+                padding: 20px;
+                border-radius: 4px;
+                text-align: center;
+                font-size: 1.2em;
+                margin-bottom: 2em;
+            }
+    
+            .summary-item {
+                background: #f8f9fa;
+                padding: 15px;
+                margin: 10px 0;
+                border-radius: 4px;
+                border-left: 3px solid #ccc;
+            }
+    
+            .summary-item.correct {
+                border-left-color: #28a745;
+            }
+    
+            .summary-item.incorrect {
+                border-left-color: #b82b4e;
+            }
+    
+            strong {
+                font-weight: 700;
+                color: #1a1a1a;
+            }
+    
+            p {
+                margin-bottom: 1em;
+            }
+    </style>
+</head>
+<body>
+
+<div class='container'>
+    <!-- Nawigacja na górze -->
+    <div class='navigation'>
+        <button id='prevBtn' onclick='changePage(-1)'>← Poprzednia</button>
+        <span class='page-indicator'>
+            Pytanie <span id='currentPage'>1</span> z <span id='totalPages'>8</span>
+        </span>
+        <button id='nextBtn' onclick='changePage(1)'>Następna →</button>
+    </div>
+
+    <!-- Pytanie 1 -->
+    <div class='page active'>
+        <h1>Pytanie 1</h1>
+        <div class='question-box'>
+            <p><strong>Która funkcja jest zalecana do tworzenia zestawień tabelarycznych?</strong></p>
+        </div>
+        <div class='answers'>
+            <div class='answer-option' onclick='selectAnswer(0, 0)'>
+                A) SUMMARIZE
+            </div>
+            <div class='answer-option' onclick='selectAnswer(0, 1)'>
+                B) SUMMARIZECOLUMNS
+            </div>
+            <div class='answer-option' onclick='selectAnswer(0, 2)'>
+                C) GROUPBY
+            </div>
+            <div class='answer-option' onclick='selectAnswer(0, 3)'>
+                D) AGGREGATE
+            </div>
+        </div>
+        <button class='check-button' onclick='checkAnswer(0, 1)'>Sprawdź odpowiedź</button>
+        <div class='feedback' id='feedback-0'></div>
+    </div>
+
+    <!-- Pytanie 2 -->
+    <div class='page'>
+        <h1>Pytanie 2</h1>
+        <div class='question-box'>
+            <p><strong>Co zwraca funkcja SUMMARIZECOLUMNS?</strong></p>
+        </div>
+        <div class='answers'>
+            <div class='answer-option' onclick='selectAnswer(1, 0)'>
+                A) Liczbę wierszy w tabeli
+            </div>
+            <div class='answer-option' onclick='selectAnswer(1, 1)'>
+                B) Tabelę z unikalnymi kombinacjami kolumn i opcjonalnymi agregacjami
+            </div>
+            <div class='answer-option' onclick='selectAnswer(1, 2)'>
+                C) Tylko unikalne wartości z jednej kolumny
+            </div>
+            <div class='answer-option' onclick='selectAnswer(1, 3)'>
+                D) Posortowaną tabelę
+            </div>
+        </div>
+        <button class='check-button' onclick='checkAnswer(1, 1)'>Sprawdź odpowiedź</button>
+        <div class='feedback' id='feedback-1'></div>
+    </div>
+
+    <!-- Pytanie 3 -->
+    <div class='page'>
+        <h1>Pytanie 3</h1>
+        <div class='question-box'>
+            <p><strong>Jaka jest podstawowa składnia SUMMARIZECOLUMNS?</strong></p>
+        </div>
+        <div class='answers'>
+            <div class='answer-option' onclick='selectAnswer(2, 0)'>
+                A) SUMMARIZECOLUMNS(kolumna1, kolumna2, miara1, miara2)
+            </div>
+            <div class='answer-option' onclick='selectAnswer(2, 1)'>
+                B) SUMMARIZECOLUMNS(tabela, kolumny, miary)
+            </div>
+            <div class='answer-option' onclick='selectAnswer(2, 2)'>
+                C) SUMMARIZECOLUMNS(kolumna1, kolumna2, 'Nazwa', miara)
+            </div>
+            <div class='answer-option' onclick='selectAnswer(2, 3)'>
+                D) SUMMARIZECOLUMNS(grupa, agregacja)
+            </div>
+        </div>
+        <button class='check-button' onclick='checkAnswer(2, 2)'>Sprawdź odpowiedź</button>
+        <div class='feedback' id='feedback-2'></div>
+    </div>
+
+    <!-- Pytanie 4 -->
+    <div class='page'>
+        <h1>Pytanie 4</h1>
+        <div class='question-box'>
+            <p><strong>Dlaczego SUMMARIZE jest uznawana za legacy (przestarzałą)?</strong></p>
+        </div>
+        <div class='answers'>
+            <div class='answer-option' onclick='selectAnswer(3, 0)'>
+                A) Jest wolniejsza i ma nieoczywistą składnię
+            </div>
+            <div class='answer-option' onclick='selectAnswer(3, 1)'>
+                B) Nie działa w nowych wersjach Power BI
+            </div>
+            <div class='answer-option' onclick='selectAnswer(3, 2)'>
+                C) Została całkowicie usunięta z DAX
+            </div>
+            <div class='answer-option' onclick='selectAnswer(3, 3)'>
+                D) Wymaga licencji Premium
+            </div>
+        </div>
+        <button class='check-button' onclick='checkAnswer(3, 0)'>Sprawdź odpowiedź</button>
+        <div class='feedback' id='feedback-3'></div>
+    </div>
+
+    <!-- Pytanie 5 -->
+    <div class='page'>
+        <h1>Pytanie 5</h1>
+        <div class='question-box'>
+            <p><strong>Czy w SUMMARIZECOLUMNS możesz dodać wiele miar?</strong></p>
+        </div>
+        <div class='answers'>
+            <div class='answer-option' onclick='selectAnswer(4, 0)'>
+                A) Nie, tylko jedną miarę
+            </div>
+            <div class='answer-option' onclick='selectAnswer(4, 1)'>
+                B) Tak, maksymalnie 3 miary
+            </div>
+            <div class='answer-option' onclick='selectAnswer(4, 2)'>
+                C) Tak, dowolną liczbę miar (jako pary: nazwa, wyrażenie)
+            </div>
+            <div class='answer-option' onclick='selectAnswer(4, 3)'>
+                D) Tylko jeśli używasz funkcji ADDCOLUMNS
+            </div>
+        </div>
+        <button class='check-button' onclick='checkAnswer(4, 2)'>Sprawdź odpowiedź</button>
+        <div class='feedback' id='feedback-4'></div>
+    </div>
+
+    <!-- Pytanie 6 -->
+    <div class='page'>
+        <h1>Pytanie 6</h1>
+        <div class='question-box'>
+            <p><strong>Do czego służy funkcja ADDCOLUMNS?</strong></p>
+        </div>
+        <div class='answers'>
+            <div class='answer-option' onclick='selectAnswer(5, 0)'>
+                A) Do dodawania kolumn do istniejącej tabeli na podstawie obliczeń
+            </div>
+            <div class='answer-option' onclick='selectAnswer(5, 1)'>
+                B) Do sumowania kolumn
+            </div>
+            <div class='answer-option' onclick='selectAnswer(5, 2)'>
+                C) Do łączenia tabel
+            </div>
+            <div class='answer-option' onclick='selectAnswer(5, 3)'>
+                D) Do filtrowania kolumn
+            </div>
+        </div>
+        <button class='check-button' onclick='checkAnswer(5, 0)'>Sprawdź odpowiedź</button>
+        <div class='feedback' id='feedback-5'></div>
+    </div>
+
+    <!-- Pytanie 7 -->
+    <div class='page'>
+        <h1>Pytanie 7</h1>
+        <div class='question-box'>
+            <p><strong>Jaki jest wynik: SUMMARIZECOLUMNS(Produkty[Kategoria], 'Suma', [Sprzedaż])?</strong></p>
+        </div>
+        <div class='answers'>
+            <div class='answer-option' onclick='selectAnswer(6, 0)'>
+                A) Listę wszystkich kategorii
+            </div>
+            <div class='answer-option' onclick='selectAnswer(6, 1)'>
+                B) Tabelę z unikalnymi kategoriami i sumą sprzedaży dla każdej
+            </div>
+            <div class='answer-option' onclick='selectAnswer(6, 2)'>
+                C) Sumę sprzedaży dla wszystkich kategorii
+            </div>
+            <div class='answer-option' onclick='selectAnswer(6, 3)'>
+                D) Błąd składni
+            </div>
+        </div>
+        <button class='check-button' onclick='checkAnswer(6, 1)'>Sprawdź odpowiedź</button>
+        <div class='feedback' id='feedback-6'></div>
+    </div>
+
+    <!-- Podsumowanie quizu -->
+    <div class='page'>
+        <h1>Podsumowanie quizu</h1>
+        <div class='score-box' id='finalScore'>
+            Twój wynik: <span id='scoreText'>0/7</span> (<span id='percentText'>0%</span>)
+        </div>
+        <div id='summaryContent'></div>
+        <button onclick='restartQuiz()' style='margin-top: 20px; width: 100%;'> Rozpocznij quiz od nowa</button>
+    </div>
+</div>
+
+<script>
+    let currentPage = 1;
+    const totalPages = 8;
+    const totalQuestions = 7;
+    
+    const userAnswers = new Array(totalQuestions).fill(null);
+    const answeredQuestions = new Array(totalQuestions).fill(false);
+    
+    const correctAnswers = [1, 1, 2, 0, 2, 0, 1];
+    
+    const explanations = [
+        'Prawidłowa odpowiedź: B. SUMMARIZECOLUMNS to nowoczesne podejście zalecane przez Microsoft. Jest bardziej wydajna i łatwiejsza w użyciu niż legacy SUMMARIZE.',
+        'Prawidłowa odpowiedź: B. SUMMARIZECOLUMNS zwraca tabelę zawierającą unikalne kombinacje wartości z wybranych kolumn oraz opcjonalnie obliczone agregacje dla każdej kombinacji.',
+        'Prawidłowa odpowiedź: C. Składnia to: SUMMARIZECOLUMNS(kolumna1, kolumna2, ..., 'Nazwa Miary', [Wyrażenie], ...). Najpierw kolumny grupujące, potem pary: nazwa i wyrażenie miary.',
+        'Prawidłowa odpowiedź: A. SUMMARIZE ma nieoczywistą składnię i może dawać nieoczekiwane wyniki. SUMMARIZECOLUMNS jest szybsza, bardziej czytelna i zalecana przez Microsoft.',
+        'Prawidłowa odpowiedź: C. SUMMARIZECOLUMNS może zawierać dowolną liczbę miar. Każda miara to para: 'Nazwa Miary', [Wyrażenie Miary].',
+        'Prawidłowa odpowiedź: A. ADDCOLUMNS przyjmuje tabelę i dodaje do niej nowe kolumny kalkulowane. Składnia: ADDCOLUMNS(tabela, 'Nowa Kolumna', [Wyrażenie], ...).',
+        'Prawidłowa odpowiedź: B. Funkcja zwróci tabelę z kolumną Kategoria (unikalne wartości) oraz kolumną Suma (sprzedaż zagregowana dla każdej kategorii).'
+    ];
+    
+    document.getElementById('totalPages').textContent = totalPages;
+    
+        function selectAnswer(questionIndex, answerIndex) {
+            if (answeredQuestions[questionIndex]) return;
+    
+            const answers = document.querySelectorAll('.page')[questionIndex].querySelectorAll('.answer-option');
+            answers.forEach(a => a.classList.remove('selected'));
+            answers[answerIndex].classList.add('selected');
+            userAnswers[questionIndex] = answerIndex;
+        }
+    
+        function checkAnswer(questionIndex, correctIndex) {
+            if (answeredQuestions[questionIndex]) return;
+    
+            const answers = document.querySelectorAll('.page')[questionIndex].querySelectorAll('.answer-option');
+            const feedback = document.getElementById('feedback-' + questionIndex);
+            const checkBtn = document.querySelectorAll('.page')[questionIndex].querySelector('.check-button');
+    
+            if (userAnswers[questionIndex] === null) {
+                feedback.className = 'feedback show incorrect';
+                feedback.textContent = 'Proszę najpierw wybrać odpowiedź!';
+                return;
+            }
+    
+            answeredQuestions[questionIndex] = true;
+            checkBtn.disabled = true;
+    
+            const isCorrect = userAnswers[questionIndex] === correctIndex;
+    
+            answers.forEach((answer, index) => {
+                answer.style.cursor = 'default';
+                if (index === correctIndex) {
+                    answer.classList.add('correct');
+                } else if (index === userAnswers[questionIndex]) {
+                    answer.classList.add('incorrect');
+                }
+            });
+    
+            feedback.className = 'feedback show ' + (isCorrect ? 'correct' : 'incorrect');
+            feedback.innerHTML = (isCorrect ? '✅ Świetnie! ' : '❌ Nieprawidłowo. ') + explanations[questionIndex];
+    
+            if (questionIndex < totalQuestions - 1) {
+                setTimeout(() => {
+                    changePage(1);
+                }, 2500);
+            } else {
+                setTimeout(() => {
+                    showSummary();
+                    changePage(1);
+                }, 2500);
+            }
+        }
+    
+        function showSummary() {
+            let correctCount = 0;
+            for (let i = 0; i < totalQuestions; i++) {
+                if (userAnswers[i] === correctAnswers[i]) {
+                    correctCount++;
+                }
+            }
+    
+            const percentage = Math.round((correctCount / totalQuestions) * 100);
+            document.getElementById('scoreText').textContent = correctCount + '/' + totalQuestions;
+            document.getElementById('percentText').textContent = percentage + '%';
+    
+            let summaryHTML = '<h2>Szczegóły odpowiedzi:</h2>';
+            for (let i = 0; i < totalQuestions; i++) {
+                const isCorrect = userAnswers[i] === correctAnswers[i];
+                summaryHTML += `
+                    <div class='summary-item ${isCorrect ? 'correct' : 'incorrect'}'>
+                        <strong>Pytanie ${i + 1}:</strong> ${isCorrect ? '✅ Poprawnie' : '❌ Niepoprawnie'}<br>
+                        <small>${explanations[i]}</small>
+                    </div>
+                `;
+            }
+    
+            document.getElementById('summaryContent').innerHTML = summaryHTML;
+        }
+    
+        function restartQuiz() {
+            userAnswers.fill(null);
+            answeredQuestions.fill(false);
+            currentPage = 1;
+    
+            document.querySelectorAll('.page').forEach((page, index) => {
+                if (index < totalQuestions) {
+                    const answers = page.querySelectorAll('.answer-option');
+                    answers.forEach(a => {
+                        a.className = 'answer-option';
+                        a.style.cursor = 'pointer';
+                    });
+                    const feedback = page.querySelector('.feedback');
+                    feedback.className = 'feedback';
+                    const checkBtn = page.querySelector('.check-button');
+                    checkBtn.disabled = false;
+                }
+            });
+    
+            showPage(1);
+        }
+    
+        function showPage(n) {
+            const pages = document.querySelectorAll('.page');
+    
+            if (n > totalPages) currentPage = totalPages;
+            if (n < 1) currentPage = 1;
+    
+            pages.forEach(page => page.classList.remove('active'));
+            pages[currentPage - 1].classList.add('active');
+    
+            document.getElementById('currentPage').textContent = currentPage;
+            document.getElementById('prevBtn').disabled = currentPage === 1;
+            document.getElementById('nextBtn').disabled = currentPage === totalPages;
+    
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+    
+        function changePage(n) {
+            currentPage += n;
+            showPage(currentPage);
+        }
+    
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'ArrowLeft') changePage(-1);
+            if (e.key === 'ArrowRight') changePage(1);
+        });
+    
+        showPage(1);
+</script>
+
+</body>
+</html>
+
+"

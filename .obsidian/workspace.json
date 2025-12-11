@@ -4,22 +4,22 @@
     "type": "split",
     "children": [
       {
-        "id": "7aaecd8a23084fc1",
+        "id": "1ab09419bf4bd450",
         "type": "tabs",
         "children": [
           {
-            "id": "f2dae88ff2e85d32",
+            "id": "00f6dc5425fbb109",
             "type": "leaf",
             "state": {
               "type": "markdown",
               "state": {
-                "file": "README.md",
+                "file": "Todo.md",
                 "mode": "source",
                 "source": false,
                 "backlinks": false
               },
               "icon": "lucide-file",
-              "title": "README"
+              "title": "Todo"
             }
           }
         ],
@@ -55,11 +55,11 @@
             "state": {
               "type": "search",
               "state": {
-                "query": "",
+                "query": "Dostepne",
                 "matchingCase": false,
-                "explainSearch": false,
-                "collapseAll": false,
-                "extraContext": false,
+                "explainSearch": true,
+                "collapseAll": true,
+                "extraContext": true,
                 "sortOrder": "alphabetical"
               },
               "icon": "lucide-search",
@@ -80,7 +80,7 @@
       }
     ],
     "direction": "horizontal",
-    "width": 305.5
+    "width": 335.5
   },
   "right": {
     "id": "a3e901ef3e57a84e",
@@ -107,13 +107,27 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "02. OUTPUT/00. Quiz - test.html",
+                "file": "Todo.md",
                 "followCursor": true,
                 "showSearch": false,
                 "searchQuery": ""
               },
               "icon": "lucide-list",
-              "title": "Outline of 00. Quiz - test"
+              "title": "Outline of Todo"
+            }
+          },
+          {
+            "id": "5223e4231e5fa517",
+            "type": "leaf",
+            "state": {
+              "type": "all-properties",
+              "state": {
+                "sortOrder": "frequency",
+                "showSearch": false,
+                "searchQuery": ""
+              },
+              "icon": "lucide-archive",
+              "title": "All properties"
             }
           }
         ],
@@ -130,7 +144,7 @@
             "state": {
               "type": "localgraph",
               "state": {
-                "file": "02. OUTPUT/00. Quiz - test.html",
+                "file": "Todo.md",
                 "options": {
                   "collapse-filter": true,
                   "search": "",
@@ -153,19 +167,19 @@
                   "repelStrength": 10,
                   "linkStrength": 1,
                   "linkDistance": 250,
-                  "scale": 1,
+                  "scale": 0.6254472580599035,
                   "close": true
                 }
               },
               "icon": "lucide-git-fork",
-              "title": "Graph of 00. Quiz - test"
+              "title": "Graph of Todo"
             }
           }
         ]
       }
     ],
     "direction": "horizontal",
-    "width": 416.5,
+    "width": 310.5,
     "collapsed": true
   },
   "left-ribbon": {
@@ -177,59 +191,58 @@
       "command-palette:Open command palette": false,
       "bases:Create new base": false,
       "obsidian-shellcommands:Shell commands: Custom variables": false,
-      "webpage-html-export:Export as HTML": false,
       "obsidian-excalidraw-plugin:New drawing": false,
       "obsidian-git:Open Git source control": false,
       "hide-folders:Show hidden folders": false
     }
   },
-  "active": "f2dae88ff2e85d32",
+  "active": "00f6dc5425fbb109",
   "lastOpenFiles": [
+    "Untitled.md",
+    "bin/Pasted Image 20251211193432_248.png",
+    "bin/Pasted Image 20251211193344_966.png",
+    "bin/Pasted Image 20251211193253_443.png",
+    "bin/Pasted image 20251211193244.png",
+    "Todo.md",
     "config.md",
-    "01. THEORY/01. Quiz.md",
-    "02. OUTPUT/01. Quiz.html",
-    "02. OUTPUT/02. Quiz.html",
-    "02. OUTPUT/03. Wprowadzenie do CALCULATE - PODSUMOWANIE.html",
-    "02. OUTPUT/03. Quiz.html",
-    "02. OUTPUT/04. Modyfikowanie Kontekstu - KEEPFILTERS.html",
-    "02. OUTPUT/CSS - Quiz - Cherry.html",
-    "03. TEMPLATE/JS - Teoria.md",
-    "03. TEMPLATE/JS - Quiz.md",
-    "03. TEMPLATE/CSS - Quiz - Cherry.md",
-    "02. OUTPUT/00. Quiz - test.html",
-    "02. OUTPUT/01. Podstawy DAX - Funkcje agregujące.html",
-    "02. OUTPUT/04. Modyfikowanie Kontekstu - ALLEXCEPT.html",
-    "02. OUTPUT/04. Modyfikowanie Kontekstu - CROSSFILTER.html",
-    "02. OUTPUT/TMDL/_Parametr.md",
-    "02. OUTPUT/TMDL/_HTML.md",
-    "01. THEORY/02. Quiz.md",
-    "01. THEORY/00. Quiz - test.md",
-    "01. THEORY/01. Podstawy DAX.md",
-    "README.md",
-    "03. TEMPLATE/Template.md",
-    "03. TEMPLATE/CSS - Teoria - Blue.md",
-    "03. TEMPLATE/CSS - Quiz - Blue.md",
-    "03. TEMPLATE/CSS - Teoria - Cherry.md",
-    "03. TEMPLATE/Markdown/Quiz.md",
-    "03. TEMPLATE/Markdown/Teoria.md",
-    "01. THEORY/05. Quiz.md",
-    "01. THEORY/04. Quiz.md",
-    "USAGE.md",
-    "config.example.md",
-    "00. DRAFT/Test.md",
-    "03. TEMPLATE/Markdown/Gaps Complete.md",
-    "01. THEORY/03. Quiz.md",
-    "01. THEORY/06. Quiz.md",
+    "300. INPUTS/300. INPUTS.md",
+    "300. INPUTS/08. Time Intelligence.md",
+    "300. INPUTS/07. Iteratory.md",
+    "300. INPUTS/06. Tworzenie zestawień tabelarycznych.md",
+    "300. INPUTS/05. DAX - Zaawansowane Kwerendy.md",
+    "300. INPUTS/04. Modyfikowanie Kontekstu.md",
+    "300. INPUTS/03. Wprowadzenie do CALCULATE.md",
+    "400. OUTPUTS/TMDL/_HTML.md",
+    "300. INPUTS/99. Praktyczne.md",
+    "400. OUTPUTS/TMDL/_Parametr.md",
+    "400. OUTPUTS/99. Praktyczne - CALCULATEDGROUP.html",
+    "400. OUTPUTS/99. Praktyczne - USERELATIONSHIP.html",
+    "400. OUTPUTS/99. Praktyczne - USERALTIONSHIP.html",
+    "400. OUTPUTS/99. Praktyczne - Przewalutowanie.html",
+    "400. OUTPUTS/99. Praktyczne - Proporcjonalny podział celu.html",
+    "400. OUTPUTS/99. Praktyczne - Warunkowe kolorowanie.html",
+    "300. INPUTS/Untitled.md",
+    "300. INPUTS/06a. Quiz.md",
+    "400. OUTPUTS/Untitled.md",
+    "400. OUTPUTS/09. USERELATIONSHIP - USERELATIONSHIP.html",
+    "400. OUTPUTS/09. USERELATIONSHIP - Czym jest USERELATIONSHIP.html",
+    "300. INPUTS/07a. Gaps.md",
+    "400. OUTPUTS/TMDL",
+    "400. OUTPUTS/08. Time Intelligence - Tabela porównawcza funkcji.html",
+    "300. INPUTS/04a. Quiz.md",
+    "300. INPUTS/01a. Quiz.md",
+    "300. INPUTS/01a. Gaps.md",
+    "300. INPUTS/03a. Gaps.md",
+    "300. INPUTS/04a. Gaps.md",
+    "300. INPUTS/02a. Gaps.md",
+    "300. INPUTS/06a. Gaps.md",
+    "300. INPUTS/05a. Gaps.md",
     "bin/Pasted image 20251210001950.png",
     "bin/Pasted image 20251209193536.png",
     "bin/Pasted image 20251209181932.png",
     "bin/Pasted image 20251209173843.png",
     "bin/Pasted image 20251209173050.png",
     "bin/Pasted image 20251209172247.png",
-    "bin/Pasted image 20251209172231.png",
-    "bin/Pasted image 20251209172007.png",
-    "bin/Pasted image 20251209172001.png",
-    "bin/Pasted image 20251209171436.png",
     "Generator.canvas"
   ]
 }

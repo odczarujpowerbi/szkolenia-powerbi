@@ -1,0 +1,651 @@
+05a. Gaps = 
+
+"
+
+<!DOCTYPE html>
+<html lang='pl'>
+<head>
+    <meta charset='UTF-8'>
+    <meta name='viewport' content='width=device-width, initial-scale=1.0'>
+    <title>DAX Gaps</title>
+    <style>
+    * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+    }
+    
+    body {
+        font-family: 'Roboto', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+        font-size: 16px;
+        line-height: 1.6;
+        color: #333;
+        background: transparent;
+        padding: 20px;
+    }
+    
+    .container {
+        max-width: 900px;
+        margin: 0 auto;
+        background: transparent;
+        padding: 40px;
+    }
+    
+    h3 {
+        font-size: 26px;
+        line-height: 36px;
+        font-weight: 600;
+        padding-top: 14px;
+        padding-bottom: 6px;
+        margin-bottom: 1em;
+        color: #6b1718;
+        border-bottom: 2px solid #6b1718;
+    }
+    
+    .task-description {
+        font-size: 1.1em;
+        margin: 20px 0;
+    }
+    
+    .code-container {
+        background: #f8f9fa;
+        border: 2px solid #e1e4e8;
+        border-radius: 6px;
+        padding: 25px;
+        margin: 30px 0;
+        font-family: 'Courier New', monospace;
+        font-size: 1.05em;
+        line-height: 1.8;
+    }
+    
+    .drop-zone {
+        display: inline-block;
+        min-width: 180px;
+        height: 36px;
+        background: white;
+        border: 2px dashed #6b1718;
+        border-radius: 4px;
+        padding: 6px 12px;
+        margin: 0 4px;
+        vertical-align: middle;
+        text-align: center;
+        transition: all 0.2s;
+    }
+    
+    .drop-zone.drag-over {
+        background: #ffe6e6;
+        border-color: #380c0c;
+    }
+    
+    .drop-zone.filled {
+        background: #d4edda;
+        border: 2px solid #28a745;
+        border-style: solid;
+    }
+    
+    .functions-title {
+        font-size: 1em;
+        margin: 30px 0 15px 0;
+        color: #333;
+    }
+    
+    .function-chip {
+        display: inline-block;
+        background: #6b1718;
+        color: white;
+        padding: 10px 20px;
+        margin: 8px;
+        border-radius: 20px;
+        cursor: grab;
+        font-family: 'Courier New', monospace;
+        font-size: 1em;
+        font-weight: 500;
+        transition: all 0.2s;
+        user-select: none;
+    }
+    
+    .function-chip:hover {
+        background: #380c0c;
+        transform: translateY(-2px);
+        box-shadow: 0 4px 8px rgba(107, 23, 24, 0.3);
+    }
+    
+    .function-chip:active {
+        cursor: grabbing;
+    }
+    
+    .function-chip.used {
+        opacity: 0.3;
+        cursor: not-allowed;
+        pointer-events: none;
+    }
+    
+    .button-group {
+        margin-top: 30px;
+        display: flex;
+        gap: 15px;
+        align-items: center;
+    }
+    
+    button {
+        background: #6b1718;
+        color: white;
+        border: none;
+        padding: 14px 32px;
+        border-radius: 6px;
+        cursor: pointer;
+        font-size: 1.05em;
+        font-weight: 600;
+        transition: all 0.2s;
+    }
+    
+    button:hover {
+        background: #380c0c;
+        transform: translateY(-1px);
+    }
+    
+    button.reset-btn {
+        background: #6b1718;
+        padding: 8px 16px;
+        font-size: 0.9em;
+    }
+    
+    button.reset-btn:hover {
+        background: #380c0c;
+    }
+    
+    .feedback {
+        margin-top: 25px;
+        padding: 20px;
+        border-radius: 6px;
+        display: none;
+        font-size: 1.05em;
+    }
+    
+    .feedback.show {
+        display: block;
+        animation: slideDown 0.3s ease-out;
+    }
+    
+    @keyframes slideDown {
+        from {
+            opacity: 0;
+            transform: translateY(-10px);
+        }
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+    
+    .feedback.correct {
+        background: #d4edda;
+        border-left: 4px solid #28a745;
+        color: #155724;
+    }
+    
+    .feedback.incorrect {
+        background: #f8d7da;
+        border-left: 4px solid #dc3545;
+        color: #721c24;
+    }
+    
+    .hint-box {
+        background: #fafafa;
+        border-left: 4px solid #ccc;
+        padding: 15px;
+        margin: 20px 0;
+        border-radius: 4px;
+        color: #121212;
+        font-size: 0.95em;
+    }
+    .pagination {
+        display: flex;
+        align-items: center;
+        justify-content: space-between; 
+        gap: 20px;
+        margin: 30px auto; 
+        padding: 20px;
+        border-radius: 6px;
+    	max-width: 900px;
+        border-bottom: 1px solid #e0e0e0;
+        width: 100%;
+    }
+    
+    .page-info {
+        font-weight: 600;
+        color: #666666; 
+    }
+    
+    .nav-button {
+        background: #6b1718;
+        color: white;
+        border: none;
+        padding: 10px 20px;
+        border-radius: 4px;
+        cursor: pointer;
+        font-size: 1em;
+        transition: all 0.2s;
+    }
+    
+    .nav-button:hover:not(:disabled) {
+        background: #380c0c;
+        transform: translateY(-1px);
+    }
+    
+    .nav-button:disabled {
+        background: #ccc;
+        cursor: not-allowed;
+        opacity: 0.5;
+    }
+    
+    
+    .nav-button:disabled {
+        background: #ccc;
+        cursor: not-allowed;
+        opacity: 0.5;
+    }
+    
+    
+    .page {
+        display: none;
+    }
+    
+    .page.active {
+        display: block;
+    }
+    </style>
+</head>
+<body>
+
+<div class='pagination'>
+    <button class='nav-button' id='prevBtn' onclick='prevPage()'>← Poprzednie</button>
+    <span class='page-info'>Zadanie <span id='currentPage'>1</span> z <span id='totalPages'>6</span></span>
+    <button class='nav-button' id='nextBtn' onclick='nextPage()'>Następne →</button>
+</div>
+
+<div class='page active' data-page='1'>
+<div class='container'>
+    <div class='task-description'>
+        <h3>Deklaracja zmiennej VAR</h3>
+        Chcesz utworzyć miarę z dwiema zmiennymi: Ilość i Cena, a następnie zwrócić ich iloczyn. Jak uzupełnić kod?
+    </div>
+
+    <div>
+        <span class='function-chip' draggable='true' ondragstart='drag(event)' data-function='VAR'>VAR</span>
+        <span class='function-chip' draggable='true' ondragstart='drag(event)' data-function='LET'>LET</span>
+        <span class='function-chip' draggable='true' ondragstart='drag(event)' data-function='DECLARE'>DECLARE</span>
+        <span class='function-chip' draggable='true' ondragstart='drag(event)' data-function='RETURN'>RETURN</span>
+    </div>
+
+    <div class='code-container'>
+        <div>DAX</div>
+        <div>Wartość =</div>
+        <div><div class='drop-zone' data-slot='0' ondrop='drop(event)' ondragover='allowDrop(event)' ondragleave='dragLeave(event)'></div> Ilość = 100</div>
+        <div>VAR Cena = 25</div>
+        <div><div class='drop-zone' data-slot='1' ondrop='drop(event)' ondragover='allowDrop(event)' ondragleave='dragLeave(event)'></div> Ilość * Cena</div>
+    </div>
+
+    <div class='button-group'>
+        <button onclick='checkSolution()'>Sprawdź rozwiązanie</button>
+        <button class='reset-btn' onclick='resetTask()'>Reset</button>
+    </div>
+
+    <div class='feedback' id='feedback'></div>
+</div>
+</div>
+
+<div class='page' data-page='2'>
+<div class='container'>
+    <div class='task-description'>
+        <h3>VAR w funkcjach iteracyjnych</h3>
+        Co się dzieje ze zmiennymi VAR wewnątrz funkcji SUMX?
+    </div>
+
+    <div>
+        <span class='function-chip' draggable='true' ondragstart='drag(event)' data-function='Są obliczane raz przed iteracją'>Są obliczane raz przed iteracją</span>
+        <span class='function-chip' draggable='true' ondragstart='drag(event)' data-function='Są obliczane na nowo dla każdego wiersza'>Są obliczane na nowo dla każdego wiersza</span>
+        <span class='function-chip' draggable='true' ondragstart='drag(event)' data-function='Są obliczane tylko dla pierwszego wiersza'>Są obliczane tylko dla pierwszego wiersza</span>
+        <span class='function-chip' draggable='true' ondragstart='drag(event)' data-function='Wywołują błąd - VAR nie może być w SUMX'>Wywołują błąd - VAR nie może być w SUMX</span>
+    </div>
+
+    <div class='code-container'>
+        <div>DAX</div>
+        <div>SUMX(</div>
+        <div>    {1, 2, 3},</div>
+        <div>    VAR Kwadrat = [Value] * [Value]</div>
+        <div>    RETURN Kwadrat</div>
+        <div>)</div>
+        <div></div>
+        <div>-- Zmienna Kwadrat jest: <div class='drop-zone' data-slot='0' ondrop='drop(event)' ondragover='allowDrop(event)' ondragleave='dragLeave(event)'></div></div>
+    </div>
+
+    <div class='button-group'>
+        <button onclick='checkSolution()'>Sprawdź rozwiązanie</button>
+        <button class='reset-btn' onclick='resetTask()'>Reset</button>
+    </div>
+
+    <div class='feedback' id='feedback'></div>
+</div>
+</div>
+
+<div class='page' data-page='3'>
+<div class='container'>
+    <div class='task-description'>
+        <h3>Zmienne VAR poza i wewnątrz iteracji</h3>
+        Masz zmienną Średnia zadeklarowaną PRZED SUMX i zmienną Wartość WEWNĄTRZ SUMX. Która jest obliczana wielokrotnie?
+    </div>
+
+    <div>
+        <span class='function-chip' draggable='true' ondragstart='drag(event)' data-function='Jednokrotnie'>Jednokrotnie</span>
+        <span class='function-chip' draggable='true' ondragstart='drag(event)' data-function='Per Wiersz'>Per Wiersz</span>
+        <span class='function-chip' draggable='true' ondragstart='drag(event)' data-function='Ani razu'>Ani razu</span>
+        <span class='function-chip' draggable='true' ondragstart='drag(event)' data-function='Dwa razy'>Dwa razy</span>
+    </div>
+
+    <div class='code-container'>
+        <div>DAX</div>
+        <div>Suma Odchyleń =</div>
+        <div>VAR Średnia = AVERAGE({1, 2, 3})  -- Obliczona: <div class='drop-zone' data-slot='0' ondrop='drop(event)' ondragover='allowDrop(event)' ondragleave='dragLeave(event)'></div></div>
+        <div>RETURN</div>
+        <div>    SUMX(</div>
+        <div>        {1, 2, 3},</div>
+        <div>        VAR Wartość = [Value]  -- Obliczona: <div class='drop-zone' data-slot='1' ondrop='drop(event)' ondragover='allowDrop(event)' ondragleave='dragLeave(event)'></div></div>
+        <div>        RETURN Wartość - Średnia</div>
+        <div>    )</div>
+    </div>
+
+    <div class='button-group'>
+        <button onclick='checkSolution()'>Sprawdź rozwiązanie</button>
+        <button class='reset-btn' onclick='resetTask()'>Reset</button>
+    </div>
+
+    <div class='feedback' id='feedback'></div>
+</div>
+</div>
+
+<div class='page' data-page='4'>
+<div class='container'>
+    <div class='task-description'>
+        <h3>Query View - słowo kluczowe EVALUATE</h3>
+        Co jest wymagane na początku zapytania w DAX Query View?
+    </div>
+
+    <div>
+        <span class='function-chip' draggable='true' ondragstart='drag(event)' data-function='EVALUATE'>EVALUATE</span>
+        <span class='function-chip' draggable='true' ondragstart='drag(event)' data-function='SELECT'>SELECT</span>
+        <span class='function-chip' draggable='true' ondragstart='drag(event)' data-function='QUERY'>QUERY</span>
+        <span class='function-chip' draggable='true' ondragstart='drag(event)' data-function='BEGIN'>BEGIN</span>
+    </div>
+
+    <div class='code-container'>
+        <div>DAX</div>
+        <div><div class='drop-zone' data-slot='0' ondrop='drop(event)' ondragover='allowDrop(event)' ondragleave='dragLeave(event)'></div></div>
+        <div>    ROW(Test, 1 + 1)</div>
+    </div>
+
+    <div class='button-group'>
+        <button onclick='checkSolution()'>Sprawdź rozwiązanie</button>
+        <button class='reset-btn' onclick='resetTask()'>Reset</button>
+    </div>
+
+    <div class='feedback' id='feedback'></div>
+</div>
+</div>
+
+<div class='page' data-page='5'>
+<div class='container'>
+    <div class='task-description'>
+        <h3>DEFINE MEASURE w Query View</h3>
+        Do czego służy DEFINE MEASURE w zapytaniu DAX?
+    </div>
+
+    <div>
+        <span class='function-chip' draggable='true' ondragstart='drag(event)' data-function='SET'>SET</span>
+        <span class='function-chip' draggable='true' ondragstart='drag(event)' data-function='DEFINE MEASURE'>DEFINE MEASURE</span>
+        <span class='function-chip' draggable='true' ondragstart='drag(event)' data-function='DEF'>DEF</span>
+        <span class='function-chip' draggable='true' ondragstart='drag(event)' data-function='EVALUATE'>EVALUATE</span>
+    </div>
+
+    <div class='code-container'>
+        <div>DAX</div>
+        <div><div class='drop-zone' data-slot='0' ondrop='drop(event)' ondragover='allowDrop(event)' ondragleave='dragLeave(event)'></div> _Measures[Test] =</div>
+        <div>    VAR A = 1</div>
+        <div>    VAR B = 5</div>
+        <div>    RETURN A + B</div>
+        <div></div>
+        <div>EVALUATE</div>
+        <div>    ROW(Wynik, [Test])</div>
+    </div>
+
+    <div class='button-group'>
+        <button onclick='checkSolution()'>Sprawdź rozwiązanie</button>
+        <button class='reset-btn' onclick='resetTask()'>Reset</button>
+    </div>
+
+    <div class='feedback' id='feedback'></div>
+</div>
+</div>
+
+<div class='page' data-page='6'>
+<div class='container'>
+    <div class='task-description'>
+        <h3>ROW - tworzenie jednoierszowej tabeli</h3>
+        Query View zwraca tylko tabele, co tworzy tabelę z jednego wiersza
+    </div>
+
+    <div>
+        <span class='function-chip' draggable='true' ondragstart='drag(event)' data-function='ROW'>ROW</span>
+        <span class='function-chip' draggable='true' ondragstart='drag(event)' data-function='EVALUATE'>EVALUATE</span>
+        <span class='function-chip' draggable='true' ondragstart='drag(event)' data-function='DEFINE'>DEFINE</span>
+    </div>
+
+    <div class='code-container'>
+        <div>DAX</div>
+        <div>EVALUATE</div>
+        <div>    VAR A = 1</div>
+        <div>    VAR B = 5</div>
+        <div>RETURN</div>
+        <div>    <div class='drop-zone' data-slot='0' ondrop='drop(event)' ondragover='allowDrop(event)' ondragleave='dragLeave(event)'></div>(Suma, A + B)</div>
+    </div>
+
+    <div class='button-group'>
+        <button onclick='checkSolution()'>Sprawdź rozwiązanie</button>
+        <button class='reset-btn' onclick='resetTask()'>Reset</button>
+    </div>
+
+    <div class='hint-box'>
+        Materiał wyjaśnia: DAX potrafi zwracać wyłącznie wartości tabelaryczne. A + B zwraca pojedynczą wartość.
+    </div>
+
+    <div class='feedback' id='feedback'></div>
+</div>
+</div>
+
+<script>
+    let currentPage = 1;
+    const totalPages = 6;
+    const slotsPerPage = [2, 1, 2, 1, 1, 1];
+    let slots = new Array(slotsPerPage[0]).fill('');
+    const correctSolutions = [['VAR', 'RETURN'], ['S\u0105 obliczane na nowo dla ka\u017cdego wiersza'], ['Jednokrotnie', 'Per Wiersz'], ['EVALUATE'], ['DEFINE MEASURE'], ['ROW']];
+    const correctFeedback = ['\u2705 Brawo! Rozwi\u0105zanie poprawne!\nW DAX zmienne deklarujesz s\u0142owem kluczowym `VAR`, a wynik zwracasz s\u0142owem `RETURN`. Ka\u017cda zmienna rozpoczyna si\u0119 od `VAR`. Sk\u0142adnia: `VAR nazwa = wyra\u017cenie`. Mo\u017ce by\u0107 wiele zmiennych VAR, ale tylko jedno RETURN na ko\u0144cu. RETURN okre\u015bla, co zostanie zwr\u00f3cone jako wynik miary.', '\u2705 Brawo! Rozwi\u0105zanie poprawne!\nW funkcjach iteracyjnych jak `SUMX`, `FILTER`, `ADDCOLUMNS` zmienne VAR s\u0105 **obliczane w ka\u017cdej iteracji** z warto\u015bciami z aktualnego wiersza. Dla ka\u017cdego wiersza tabeli zmienna jest tworzona od nowa. To oznacza, \u017ce zmienne VAR wewn\u0105trz iteracji s\u0105 dynamiczne i dostosowuj\u0105 si\u0119 do kontekstu wiersza. W przyk\u0142adzie: dla 1 zwr\u00f3ci 1, dla 2 zwr\u00f3ci 4, dla 3 zwr\u00f3ci 9.', '\u2705 Brawo! Rozwi\u0105zanie poprawne!\nZmienna `\u015arednia` jest PRZED SUMX, wi\u0119c obliczana **tylko raz** i ma sta\u0142\u0105 warto\u015b\u0107 (3). Zmienna `Warto\u015b\u0107` jest WEWN\u0104TRZ SUMX, wi\u0119c obliczana **dla ka\u017cdego wiersza** osobno (1, 2, 3). Zmienne poza iteracj\u0105 s\u0105 statyczne, zmienne wewn\u0105trz iteracji s\u0105 dynamiczne. To pozwala por\u00f3wnywa\u0107 ka\u017cdy wiersz (Warto\u015b\u0107) ze sta\u0142\u0105 (\u015arednia).', '\u2705 Brawo! Rozwi\u0105zanie poprawne!\nW Query View zapytania DAX musz\u0105 zaczyna\u0107 si\u0119 od s\u0142owa kluczowego `EVALUATE`. Po nim umieszczasz wyra\u017cenie zwracaj\u0105ce tabel\u0119 (np. `ROW()`, `SUMMARIZECOLUMNS()`, nazw\u0119 tabeli). Query View s\u0142u\u017cy do testowania zapyta\u0144 DAX bez tworzenia miar w modelu. `EVALUATE` m\u00f3wi silnikowi DAX: wykonaj to zapytanie i zwr\u00f3\u0107 wynik tabelaryczny.', '\u2705 Brawo! Rozwi\u0105zanie poprawne!\n`DEFINE MEASURE` tworzy **tymczasow\u0105 miar\u0119** dost\u0119pn\u0105 tylko w kontek\u015bcie tego zapytania - nie dodaje jej do modelu danych. To przydatne do testowania i prototypowania miar bez za\u015bmiecania modelu. Miara istnieje tylko podczas wykonywania zapytania i znika po jego zako\u0144czeniu. Po `DEFINE` nast\u0119puje `EVALUATE` z w\u0142a\u015bciwym zapytaniem u\u017cywaj\u0105cym zdefiniowanej miary.', '\u2705 Brawo! Rozwi\u0105zanie poprawne!\nDAX w Query View (po `EVALUATE`) mo\u017ce zwraca\u0107 **tylko warto\u015bci tabelaryczne**. Wyra\u017cenie `A + B` zwraca pojedyncz\u0105 warto\u015b\u0107 (skalar), nie tabel\u0119. Funkcja `ROW()` tworzy sztuczn\u0105 tabel\u0119 z jednym wierszem i jedn\u0105 kolumn\u0105, dzi\u0119ki czemu mo\u017cemy zwr\u00f3ci\u0107 wynik skalara jako tabel\u0119. Sk\u0142adnia: `ROW(nazwa kolumny, warto\u015b\u0107)`.'];
+    const incorrectFeedback = [{}, {}, {}, {}, {}, {}];
+
+    function drag(event) {
+            event.dataTransfer.setData('function', event.target.getAttribute('data-function'));
+        }
+    
+        function allowDrop(event) {
+            event.preventDefault();
+            event.target.classList.add('drag-over');
+        }
+    
+        function dragLeave(event) {
+            event.target.classList.remove('drag-over');
+        }
+    
+        function drop(event) {
+            event.preventDefault();
+            event.target.classList.remove('drag-over');
+    
+            const functionName = event.dataTransfer.getData('function');
+            const slotIndex = parseInt(event.target.getAttribute('data-slot'));
+    
+            const activePage = document.querySelector('.page.active');
+            if (!activePage) return;
+    
+            if (slots[slotIndex]) {
+                const chips = activePage.querySelectorAll('.function-chip');
+                for (let i = 0; i < chips.length; i++) {
+                    if (chips[i].getAttribute('data-function') === slots[slotIndex]) {
+                        chips[i].classList.remove('used');
+                        break;
+                    }
+                }
+            }
+    
+            slots[slotIndex] = functionName;
+            event.target.textContent = functionName;
+            event.target.classList.add('filled');
+    
+            const chips = activePage.querySelectorAll('.function-chip');
+            for (let i = 0; i < chips.length; i++) {
+                if (chips[i].getAttribute('data-function') === functionName) {
+                    chips[i].classList.add('used');
+                    break;
+                }
+            }
+    
+            const feedback = activePage.querySelector('.feedback');
+            if (feedback) {
+                feedback.classList.remove('show');
+            }
+        }
+    
+        function checkSolution() {
+            const activePage = document.querySelector('.page.active');
+            if (!activePage) return;
+    
+            const feedback = activePage.querySelector('.feedback');
+            if (!feedback) return;
+    
+            if (slots.includes('')) {
+                feedback.className = 'feedback show incorrect';
+                feedback.innerHTML = 'Niekompletne! Musisz wypełnić wszystkie miejsca w kodzie.';
+                return;
+            }
+    
+            const currentPageNum = parseInt(activePage.getAttribute('data-page'));
+            const pageIndex = currentPageNum - 1;
+            const isCorrect = checkCurrentPageSolution(pageIndex);
+    
+            if (isCorrect) {
+                feedback.className = 'feedback show correct';
+                feedback.innerHTML = correctFeedback[pageIndex];
+            } else {
+                const userAnswer = slots.join(',');
+                const incorrectMessages = incorrectFeedback[pageIndex];
+    
+                for (const pattern in incorrectMessages) {
+                    if (pattern === userAnswer) {
+                        feedback.className = 'feedback show incorrect';
+                        feedback.innerHTML = incorrectMessages[pattern];
+                        return;
+                    }
+    
+                    if (pattern.includes('*')) {
+                        const regexPattern = '^' + pattern.replace(/\*/g, '.*') + '$';
+                        const regex = new RegExp(regexPattern);
+                        if (regex.test(userAnswer)) {
+                            feedback.className = 'feedback show incorrect';
+                            feedback.innerHTML = incorrectMessages[pattern];
+                            return;
+                        }
+                    }
+                }
+    
+                const defaultMessage = incorrectMessages['default'];
+                feedback.className = 'feedback show incorrect';
+                feedback.innerHTML = defaultMessage || '❌ <strong>Niepoprawne rozwiązanie.</strong> Spróbuj ponownie!';
+            }
+        }
+    
+        function checkCurrentPageSolution(pageIndex) {
+            const solution = correctSolutions[pageIndex];
+            for (let i = 0; i < solution.length; i++) {
+                if (slots[i] !== solution[i]) {
+                    return false;
+                }
+            }
+            return true;
+        }
+    
+        function resetTask() {
+            slots.fill('');
+    
+            const activePage = document.querySelector('.page.active');
+            if (!activePage) return;
+    
+            const zones = activePage.querySelectorAll('.drop-zone');
+            for (let i = 0; i < zones.length; i++) {
+                zones[i].textContent = '';
+                zones[i].classList.remove('filled');
+            }
+    
+            const chips = activePage.querySelectorAll('.function-chip');
+            for (let i = 0; i < chips.length; i++) {
+                chips[i].classList.remove('used');
+            }
+    
+            const feedback = activePage.querySelector('.feedback');
+            if (feedback) {
+                feedback.classList.remove('show');
+            }
+        }
+    
+        function showPage(pageNumber) {
+            const pages = document.querySelectorAll('.page');
+            for (let i = 0; i < pages.length; i++) {
+                pages[i].classList.remove('active');
+            }
+    
+            for (let i = 0; i < pages.length; i++) {
+                if (parseInt(pages[i].getAttribute('data-page')) === pageNumber) {
+                    pages[i].classList.add('active');
+                    break;
+                }
+            }
+    
+            currentPage = pageNumber;
+            const pageIndex = currentPage - 1;
+            document.getElementById('currentPage').textContent = currentPage;
+    
+            document.getElementById('prevBtn').disabled = (currentPage === 1);
+            document.getElementById('nextBtn').disabled = (currentPage === totalPages);
+    
+            slots = new Array(slotsPerPage[pageIndex]).fill('');
+    
+            resetTask();
+        }
+    
+        function nextPage() {
+            if (currentPage < totalPages) {
+                showPage(currentPage + 1);
+            }
+        }
+    
+        function prevPage() {
+            if (currentPage > 1) {
+                showPage(currentPage - 1);
+            }
+        }
+    
+        document.addEventListener('DOMContentLoaded', function() {
+            showPage(1);
+        });
+</script>
+
+</body>
+</html>
+
+"

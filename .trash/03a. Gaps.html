@@ -1,0 +1,659 @@
+03a. Gaps = 
+
+"
+
+<!DOCTYPE html>
+<html lang='pl'>
+<head>
+    <meta charset='UTF-8'>
+    <meta name='viewport' content='width=device-width, initial-scale=1.0'>
+    <title>DAX Gaps</title>
+    <style>
+    * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+    }
+    
+    body {
+        font-family: 'Roboto', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+        font-size: 16px;
+        line-height: 1.6;
+        color: #333;
+        background: transparent;
+        padding: 20px;
+    }
+    
+    .container {
+        max-width: 900px;
+        margin: 0 auto;
+        background: transparent;
+        padding: 40px;
+    }
+    
+    h3 {
+        font-size: 26px;
+        line-height: 36px;
+        font-weight: 600;
+        padding-top: 14px;
+        padding-bottom: 6px;
+        margin-bottom: 1em;
+        color: #6b1718;
+        border-bottom: 2px solid #6b1718;
+    }
+    
+    .task-description {
+        font-size: 1.1em;
+        margin: 20px 0;
+    }
+    
+    .code-container {
+        background: #f8f9fa;
+        border: 2px solid #e1e4e8;
+        border-radius: 6px;
+        padding: 25px;
+        margin: 30px 0;
+        font-family: 'Courier New', monospace;
+        font-size: 1.05em;
+        line-height: 1.8;
+    }
+    
+    .drop-zone {
+        display: inline-block;
+        min-width: 180px;
+        height: 36px;
+        background: white;
+        border: 2px dashed #6b1718;
+        border-radius: 4px;
+        padding: 6px 12px;
+        margin: 0 4px;
+        vertical-align: middle;
+        text-align: center;
+        transition: all 0.2s;
+    }
+    
+    .drop-zone.drag-over {
+        background: #ffe6e6;
+        border-color: #380c0c;
+    }
+    
+    .drop-zone.filled {
+        background: #d4edda;
+        border: 2px solid #28a745;
+        border-style: solid;
+    }
+    
+    .functions-title {
+        font-size: 1em;
+        margin: 30px 0 15px 0;
+        color: #333;
+    }
+    
+    .function-chip {
+        display: inline-block;
+        background: #6b1718;
+        color: white;
+        padding: 10px 20px;
+        margin: 8px;
+        border-radius: 20px;
+        cursor: grab;
+        font-family: 'Courier New', monospace;
+        font-size: 1em;
+        font-weight: 500;
+        transition: all 0.2s;
+        user-select: none;
+    }
+    
+    .function-chip:hover {
+        background: #380c0c;
+        transform: translateY(-2px);
+        box-shadow: 0 4px 8px rgba(107, 23, 24, 0.3);
+    }
+    
+    .function-chip:active {
+        cursor: grabbing;
+    }
+    
+    .function-chip.used {
+        opacity: 0.3;
+        cursor: not-allowed;
+        pointer-events: none;
+    }
+    
+    .button-group {
+        margin-top: 30px;
+        display: flex;
+        gap: 15px;
+        align-items: center;
+    }
+    
+    button {
+        background: #6b1718;
+        color: white;
+        border: none;
+        padding: 14px 32px;
+        border-radius: 6px;
+        cursor: pointer;
+        font-size: 1.05em;
+        font-weight: 600;
+        transition: all 0.2s;
+    }
+    
+    button:hover {
+        background: #380c0c;
+        transform: translateY(-1px);
+    }
+    
+    button.reset-btn {
+        background: #6b1718;
+        padding: 8px 16px;
+        font-size: 0.9em;
+    }
+    
+    button.reset-btn:hover {
+        background: #380c0c;
+    }
+    
+    .feedback {
+        margin-top: 25px;
+        padding: 20px;
+        border-radius: 6px;
+        display: none;
+        font-size: 1.05em;
+    }
+    
+    .feedback.show {
+        display: block;
+        animation: slideDown 0.3s ease-out;
+    }
+    
+    @keyframes slideDown {
+        from {
+            opacity: 0;
+            transform: translateY(-10px);
+        }
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+    
+    .feedback.correct {
+        background: #d4edda;
+        border-left: 4px solid #28a745;
+        color: #155724;
+    }
+    
+    .feedback.incorrect {
+        background: #f8d7da;
+        border-left: 4px solid #dc3545;
+        color: #721c24;
+    }
+    
+    .hint-box {
+        background: #fafafa;
+        border-left: 4px solid #ccc;
+        padding: 15px;
+        margin: 20px 0;
+        border-radius: 4px;
+        color: #121212;
+        font-size: 0.95em;
+    }
+    
+    .pagination {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 20px;
+        margin: 30px 0;
+        padding: 20px;
+        background: #f8f9fa;
+        border-radius: 6px;
+    }
+    
+    .page-info {
+        font-weight: 600;
+        color: #6b1718;
+    }
+    
+    .nav-button {
+        background: #6b1718;
+        color: white;
+        border: none;
+        padding: 10px 20px;
+        border-radius: 4px;
+        cursor: pointer;
+        font-size: 1em;
+        transition: all 0.2s;
+    }
+    
+    .nav-button:hover:not(:disabled) {
+        background: #380c0c;
+        transform: translateY(-1px);
+    }
+    
+    .nav-button:disabled {
+        background: #ccc;
+        cursor: not-allowed;
+        opacity: 0.5;
+    }
+    
+    .page {
+        display: none;
+    }
+    
+    .page.active {
+        display: block;
+    }
+    </style>
+</head>
+<body>
+
+<div class='pagination'>
+    <button class='nav-button' id='prevBtn' onclick='prevPage()'>◄ Poprzednie</button>
+    <span class='page-info'>Zadanie <span id='currentPage'>1</span> z <span id='totalPages'>6</span></span>
+    <button class='nav-button' id='nextBtn' onclick='nextPage()'>Następne ►</button>
+</div>
+
+<div class='page active' data-page='1'>
+<div class='container'>
+    <div class='task-description'>
+        <h3>Podstawowa składnia CALCULATE</h3>
+        Chcesz obliczyć sprzedaż tylko dla kategorii NAPOJE. Jak uzupełnić funkcję CALCULATE?
+- CALCULATE, [Sprzedaż Netto], dKategorie[Kategoria] = NAPOJE
+- SUM, Sprzedaż[Wartość], WHERE Kategoria = NAPOJE
+- FILTER, [Sprzedaż Netto], NAPOJE
+- SUMIF, dKategorie[Kategoria], NAPOJE
+    </div>
+
+    <div>
+    </div>
+
+    <div class='code-container'>
+        <div>Sprzedaż Napoje =</div>
+        <div><div class='drop-zone' data-slot='0' ondrop='drop(event)' ondragover='allowDrop(event)' ondragleave='dragLeave(event)'></div>(</div>
+        <div>    <div class='drop-zone' data-slot='1' ondrop='drop(event)' ondragover='allowDrop(event)' ondragleave='dragLeave(event)'></div>,</div>
+        <div>    <div class='drop-zone' data-slot='2' ondrop='drop(event)' ondragover='allowDrop(event)' ondragleave='dragLeave(event)'></div></div>
+        <div>)</div>
+    </div>
+
+    <div class='button-group'>
+        <button onclick='checkSolution()'>Sprawdź rozwiązanie</button>
+        <button class='reset-btn' onclick='resetTask()'>Reset</button>
+    </div>
+
+    <div class='hint-box'>
+        Funkcja kluczowa w DAX do modyfikowania kontekstu ma w nazwie słowo oblicz (ang. calculate).
+    </div>
+
+    <div class='feedback' id='feedback'></div>
+</div>
+</div>
+
+<div class='page' data-page='2'>
+<div class='container'>
+    <div class='task-description'>
+        <h3>REMOVEFILTERS - usuwanie filtrów</h3>
+        Chcesz obliczyć sprzedaż dla całego okresu, ignorując filtry kalendarzowe nałożone na wizualizację. Jakiej funkcji użyć?
+- ALL
+- REMOVEFILTERS
+- CLEARFILTERS
+- Obie: ALL i REMOVEFILTERS
+    </div>
+
+    <div>
+    </div>
+
+    <div class='code-container'>
+        <div>Sprzedaż Cały Okres =</div>
+        <div>CALCULATE(</div>
+        <div>    [Sprzedaż Netto],</div>
+        <div>    <div class='drop-zone' data-slot='0' ondrop='drop(event)' ondragover='allowDrop(event)' ondragleave='dragLeave(event)'></div>(dKalendarz)</div>
+        <div>)</div>
+    </div>
+
+    <div class='button-group'>
+        <button onclick='checkSolution()'>Sprawdź rozwiązanie</button>
+        <button class='reset-btn' onclick='resetTask()'>Reset</button>
+    </div>
+
+    <div class='hint-box'>
+        Materiał wspomina, że funkcja ALL ma nowszy odpowiednik o bardziej czytelnej nazwie. Czy tylko jedna z nich jest poprawna?
+    </div>
+
+    <div class='feedback' id='feedback'></div>
+</div>
+</div>
+
+<div class='page' data-page='3'>
+<div class='container'>
+    <div class='task-description'>
+        <h3>Operator IN - wiele wartości</h3>
+        Chcesz policzyć sprzedaż dla kategorii NAPOJE lub SŁODYCZE. Jak najeleganciej to zapisać?
+- dKategorie[Kategoria] = NAPOJE || dKategorie[Kategoria] = SŁODYCZE
+- dKategorie[Kategoria] IN {NAPOJE, SŁODYCZE}
+- dKategorie[Kategoria] = {NAPOJE, SŁODYCZE}
+- OR(dKategorie[Kategoria] = NAPOJE, SŁODYCZE)
+    </div>
+
+    <div>
+    </div>
+
+    <div class='code-container'>
+        <div>Sprzedaż Napoje lub Słodycze =</div>
+        <div>CALCULATE(</div>
+        <div>    [Sprzedaż Netto],</div>
+        <div>    <div class='drop-zone' data-slot='0' ondrop='drop(event)' ondragover='allowDrop(event)' ondragleave='dragLeave(event)'></div></div>
+        <div>)</div>
+    </div>
+
+    <div class='button-group'>
+        <button onclick='checkSolution()'>Sprawdź rozwiązanie</button>
+        <button class='reset-btn' onclick='resetTask()'>Reset</button>
+    </div>
+
+    <div class='hint-box'>
+        Szukasz operatora, który w języku angielskim oznacza w (jako przynależność do zbioru). Wartości umieszczamy w nawiasach klamrowych.
+    </div>
+
+    <div class='feedback' id='feedback'></div>
+</div>
+</div>
+
+<div class='page' data-page='4'>
+<div class='container'>
+    <div class='task-description'>
+        <h3>Łączenie filtrów - operator AND</h3>
+        Chcesz policzyć sprzedaż dla kategorii NAPOJE tylko w dni robocze (DzienTygodnia od 1 do 5). Jak połączyć oba warunki?
+- &&
+- ||
+- AND()
+- Zarówno && jak i AND()
+    </div>
+
+    <div>
+    </div>
+
+    <div class='code-container'>
+        <div>Sprzedaż Napoje Dni Robocze =</div>
+        <div>CALCULATE(</div>
+        <div>    [Sprzedaż Netto],</div>
+        <div>    dKategorie[Kategoria] = NAPOJE <div class='drop-zone' data-slot='0' ondrop='drop(event)' ondragover='allowDrop(event)' ondragleave='dragLeave(event)'></div></div>
+        <div>    dKalendarz[DzienTygodnia] >= 1 <div class='drop-zone' data-slot='1' ondrop='drop(event)' ondragover='allowDrop(event)' ondragleave='dragLeave(event)'></div> dKalendarz[DzienTygodnia] <= 5</div>
+        <div>)</div>
+    </div>
+
+    <div class='button-group'>
+        <button onclick='checkSolution()'>Sprawdź rozwiązanie</button>
+        <button class='reset-btn' onclick='resetTask()'>Reset</button>
+    </div>
+
+    <div class='hint-box'>
+        Potrzebujesz operatora logicznego i - oba warunki muszą być prawdziwe. Szukasz dwóch znaków, które często w programowaniu oznaczają AND.
+    </div>
+
+    <div class='feedback' id='feedback'></div>
+</div>
+</div>
+
+<div class='page' data-page='5'>
+<div class='container'>
+    <div class='task-description'>
+        <h3>Udział w sprzedaży całkowitej</h3>
+        Chcesz obliczyć procent udziału sprzedaży w danym okresie w stosunku do całkowitej sprzedaży ze wszystkich okresów. Jaką funkcję użyć do usunięcia filtra daty?
+- ALLSELECTED(dKalendarz)
+- REMOVEFILTERS(dKalendarz)
+- FILTER(dKalendarz, TRUE())
+- CALCULATE(dKalendarz)
+    </div>
+
+    <div>
+    </div>
+
+    <div class='code-container'>
+        <div>Sprzedaż Cały Okres =</div>
+        <div>CALCULATE(</div>
+        <div>    [Sprzedaż Netto],</div>
+        <div>    <div class='drop-zone' data-slot='0' ondrop='drop(event)' ondragover='allowDrop(event)' ondragleave='dragLeave(event)'></div></div>
+        <div>)</div>
+        <div></div>
+        <div>Udział % =</div>
+        <div>DIVIDE(</div>
+        <div>    [Sprzedaż Netto],</div>
+        <div>    [Sprzedaż Cały Okres]</div>
+        <div>)</div>
+    </div>
+
+    <div class='button-group'>
+        <button onclick='checkSolution()'>Sprawdź rozwiązanie</button>
+        <button class='reset-btn' onclick='resetTask()'>Reset</button>
+    </div>
+
+    <div class='hint-box'>
+        Szukasz funkcji, która w nazwie ma usuń filtry lub wszystkie (ang. remove/all). Materiał wspomina dwie równoważne opcje.
+    </div>
+
+    <div class='feedback' id='feedback'></div>
+</div>
+</div>
+
+<div class='page' data-page='6'>
+<div class='container'>
+    <div class='task-description'>
+        <h3>Kontekst filtrowania</h3>
+        Co to jest kontekst filtrowania w Power BI?
+- Zbiór filtrów aktywnych w danym momencie obliczeń
+- Lista wszystkich tabel w modelu
+- Funkcja do filtrowania danych
+- Tryb edycji filtrów w wizualizacji
+    </div>
+
+    <div>
+    </div>
+
+    <div class='code-container'>
+        <div>-- Gdy na wykres nałożysz kolumnę Kategoria,</div>
+        <div>-- tworzy się <div class='drop-zone' data-slot='0' ondrop='drop(event)' ondragover='allowDrop(event)' ondragleave='dragLeave(event)'></div>, który określa</div>
+        <div>-- jakie wiersze są brane pod uwagę w obliczeniach</div>
+    </div>
+
+    <div class='button-group'>
+        <button onclick='checkSolution()'>Sprawdź rozwiązanie</button>
+        <button class='reset-btn' onclick='resetTask()'>Reset</button>
+    </div>
+
+    <div class='hint-box'>
+        Kontekst oznacza środowisko lub warunki. Kontekst filtrowania to warunki określające, które dane są aktualnie widoczne.
+    </div>
+
+    <div class='feedback' id='feedback'></div>
+</div>
+</div>
+
+<script>
+    let currentPage = 1;
+    const totalPages = 6;
+    const slotsPerPage = [3, 1, 2, 2, 1, 1];
+    let slots = new Array(slotsPerPage[0]).fill('');
+    const correctSolutions = [['CALCULATE', '[Sprzeda\u017c Netto]', 'dKategorie[Kategoria] = NAPOJE'], ['Obie: ALL i REMOVEFILTERS'], ['dKategorie[Kategoria] IN {NAPOJE', 'S\u0141ODYCZE}'], ['&&', '&&'], ['REMOVEFILTERS(dKalendarz)'], ['Zbi\u00f3r filtr\u00f3w aktywnych w danym momencie oblicze\u0144']];
+    const correctFeedback = ['\u2705 **Brawo! Rozwi\u0105zanie poprawne!**\nPodstawowa sk\u0142adnia CALCULATE to: `CALCULATE(<wyra\u017cenie/miara>, <filtr1>, <filtr2>, ...)`. W tym przypadku: `CALCULATE([Sprzeda\u017c Netto], dKategorie[Kategoria] = NAPOJE)`. Funkcja CALCULATE oblicza miar\u0119 z dodanym filtrem na kategori\u0119.', '\u2705 **Brawo! Rozwi\u0105zanie poprawne!**\nObie funkcje `ALL(dKalendarz)` i `REMOVEFILTERS(dKalendarz)` dzia\u0142aj\u0105 identycznie w kontek\u015bcie CALCULATE - usuwaj\u0105 filtry z tabeli. `REMOVEFILTERS()` jest nowsz\u0105, bardziej czyteln\u0105 wersj\u0105. Zaleca si\u0119 u\u017cywa\u0107 `REMOVEFILTERS()` ze wzgl\u0119du na jasno\u015b\u0107 nazwy, ale `ALL()` nadal dzia\u0142a.', '\u2705 **Brawo! Rozwi\u0105zanie poprawne!**\nOperator `IN` pozwala elegancko sprawdzi\u0107, czy warto\u015b\u0107 znajduje si\u0119 w zestawie: `dKategorie[Kategoria] IN {NAPOJE, S\u0141ODYCZE}`. To czytelniejsze i kr\u00f3tsze ni\u017c wielokrotne u\u017cycie operatora `||` (OR). Zestaw warto\u015bci ujmujemy w nawiasy klamrowe `{}`.', '\u2705 **Brawo! Rozwi\u0105zanie poprawne!**\nOperator `&&` \u0142\u0105czy warunki logiczne operatorem AND (i) - wszystkie musz\u0105 by\u0107 spe\u0142nione jednocze\u015bnie. Mo\u017cesz te\u017c u\u017cy\u0107 funkcji `AND()`, ale operator `&&` jest cz\u0119\u015bciej u\u017cywany i czytelniejszy w tego typu wyra\u017ceniach. Alternatywnie mo\u017cna te\u017c rozdzieli\u0107 filtry przecinkami w CALCULATE - dzia\u0142aj\u0105 wtedy jako AND.', '\u2705 **Brawo! Rozwi\u0105zanie poprawne!**\n`REMOVEFILTERS(dKalendarz)` usuwa wszystkie filtry z tabeli kalendarza, dzi\u0119ki czemu `[Sprzeda\u017c Ca\u0142y Okres]` pokazuje sum\u0119 dla wszystkich dat, niezale\u017cnie od kontekstu na\u0142o\u017conego na wizualizacj\u0119. Mo\u017cesz te\u017c u\u017cy\u0107 `ALL(dKalendarz)` - dzia\u0142a identycznie.', '\u2705 **Brawo! Rozwi\u0105zanie poprawne!**\nKontekst filtrowania (filter context) to zbi\u00f3r filtr\u00f3w aktywnych w danym momencie oblicze\u0144. Okre\u015bla on jakie wiersze z tabel s\u0105 brane pod uwag\u0119. Gdy naniesiesz kolumn\u0119 na wizualizacj\u0119, staje si\u0119 ona cz\u0119\u015bci\u0105 kontekstu filtrowania - miary s\u0105 obliczane osobno dla ka\u017cdej warto\u015bci tej kolumny.'];
+    const incorrectFeedback = [{'SUM, WHERE': '\u274c **Niepoprawne!**\nTo sk\u0142adnia SQL, nie DAX. W DAX u\u017cywamy funkcji `CALCULATE()` do modyfikowania kontekstu filtr\u00f3w. S\u0142owo kluczowe WHERE nie istnieje w DAX.', 'FILTER': '\u274c **Niepoprawne!**\nCho\u0107 funkcja `FILTER()` istnieje w DAX, to podstawowa sk\u0142adnia dla prostego filtrowania to `CALCULATE(<miara>, <warunek>)`. FILTER jest u\u017cywany w bardziej zaawansowanych scenariuszach.', 'SUMIF': '\u274c **Niepoprawne!**\n`SUMIF` to funkcja Excela, nie DAX. W DAX u\u017cywamy kombinacji `CALCULATE()` z filtrem lub `SUMX()` z `FILTER()`.'}, {'ALL': '\u274c **Niepoprawne cz\u0119\u015bciowo!**\n`ALL()` dzia\u0142a poprawnie, ale `REMOVEFILTERS()` te\u017c! To jest pu\u0142apka - obie funkcje s\u0105 prawid\u0142owe. `REMOVEFILTERS()` jest nowszym, bardziej czytelnym odpowiednikiem `ALL()` w kontek\u015bcie usuwania filtr\u00f3w.', 'REMOVEFILTERS': '\u274c **Niepoprawne cz\u0119\u015bciowo!**\n`REMOVEFILTERS()` dzia\u0142a poprawnie, ale `ALL()` te\u017c! To jest pu\u0142apka - obie funkcje s\u0105 prawid\u0142owe. Cho\u0107 `REMOVEFILTERS()` jest zalecane ze wzgl\u0119du na czytelno\u015b\u0107, `ALL()` nadal dzia\u0142a identycznie.', 'CLEARFILTERS': '\u274c **Niepoprawne!**\nNie ma funkcji `CLEARFILTERS()` w DAX. Do usuwania filtr\u00f3w u\u017cywamy `REMOVEFILTERS()` lub `ALL()`.'}, {'||': '\u274c **Niepoprawne!**\nSk\u0142adnia z `||` dzia\u0142a, ale jest rozwlek\u0142a i ma\u0142o czytelna, szczeg\u00f3lnie gdy masz wi\u0119cej ni\u017c 2 warto\u015bci. Operator `IN` jest bardziej elegancki: `dKategorie[Kategoria] IN {NAPOJE, S\u0141ODYCZE}`.', '=': '\u274c **Niepoprawne!**\nNie mo\u017cesz u\u017cy\u0107 operatora r\u00f3wno\u015bci `=` z zestawem warto\u015bci. To spowoduje b\u0142\u0105d. Do sprawdzania przynale\u017cno\u015bci do zestawu u\u017cywamy operatora `IN`.', 'OR': '\u274c **Niepoprawne!**\nTo niepoprawna sk\u0142adnia. Funkcja `OR()` przyjmuje warunki logiczne, a nie list\u0119 warto\u015bci. Poprawne rozwi\u0105zanie to operator `IN`: `kolumna IN {warto\u015b\u01071, warto\u015b\u01072}`.'}, {'||': '\u274c **Niepoprawne!**\nOperator `||` to OR (lub) - wystarczy \u017ce jeden warunek jest prawdziwy. Ty potrzebujesz AND - oba warunki musz\u0105 by\u0107 spe\u0142nione JEDNOCZE\u015aNIE. Do tego s\u0142u\u017cy operator `&&`.', 'AND()': '\u274c **Niepoprawne cz\u0119\u015bciowo!**\nFunkcja `AND()` dzia\u0142a, ale w tym kontek\u015bcie bardziej idiomatycznym rozwi\u0105zaniem jest operator `&&`. Obie opcje s\u0105 poprawne, ale `&&` jest cz\u0119\u015bciej u\u017cywany w tego typu wyra\u017ceniach.', 'Zar\u00f3wno && jak i AND()': '\u274c **Zbyt szerokie!**\nW kontek\u015bcie tego konkretnego kodu potrzebujemy operatora `&&` mi\u0119dzy warunkami. Cho\u0107 funkcja `AND()` te\u017c istnieje w DAX, nie jest w\u0142a\u015bciwa w tej konkretnej sk\u0142adni.'}, {'ALLSELECTED': '\u274c **Niepoprawne!**\n`ALLSELECTED()` usuwa filtry z wizualizacji, ale ZACHOWUJE filtry z slicer\u00f3w. Je\u015bli u\u017cytkownik wybierze konkretne daty w slicerze, `ALLSELECTED` je zachowa. Do pe\u0142nego usuni\u0119cia filtr\u00f3w u\u017cywamy `REMOVEFILTERS()` lub `ALL()`.', 'FILTER': '\u274c **Niepoprawne!**\n`FILTER(dKalendarz, TRUE())` to skomplikowany i niew\u0142a\u015bciwy spos\u00f3b. Do usuwania filtr\u00f3w s\u0142u\u017c\u0105 dedykowane funkcje: `REMOVEFILTERS()` lub `ALL()`.', 'CALCULATE': '\u274c **Niepoprawne!**\n`CALCULATE()` to funkcja nadrz\u0119dna do modyfikowania kontekstu, ale sama w sobie nie usuwa filtr\u00f3w. Potrzebujesz funkcji modyfikuj\u0105cej filtr, np. `REMOVEFILTERS()`, kt\u00f3r\u0105 umieszczasz WEWN\u0104TRZ `CALCULATE()`.'}, {'Lista wszystkich tabel': '\u274c **Niepoprawne!**\nTo nie jest lista tabel. Kontekst filtrowania to zestaw aktywnych filtr\u00f3w (warunk\u00f3w), kt\u00f3re okre\u015blaj\u0105 jakie dane s\u0105 widoczne w danym momencie oblicze\u0144.', 'Funkcja': '\u274c **Niepoprawne!**\nKontekst filtrowania to nie funkcja, ale **stan** - zbi\u00f3r aktywnych filtr\u00f3w w danym momencie. Funkcje jak `CALCULATE()` pozwalaj\u0105 ten kontekst modyfikowa\u0107.', 'Tryb edycji': '\u274c **Niepoprawne!**\nTo nie jest tryb edycji ani element interfejsu. Kontekst filtrowania to koncepcja zwi\u0105zana z silnikiem oblicze\u0144 DAX - okre\u015bla jakie dane s\u0105 aktywne podczas obliczania miar.'}];
+
+    function drag(event) {
+            event.dataTransfer.setData('function', event.target.getAttribute('data-function'));
+        }
+    
+        function allowDrop(event) {
+            event.preventDefault();
+            event.target.classList.add('drag-over');
+        }
+    
+        function dragLeave(event) {
+            event.target.classList.remove('drag-over');
+        }
+    
+        function drop(event) {
+            event.preventDefault();
+            event.target.classList.remove('drag-over');
+    
+            const functionName = event.dataTransfer.getData('function');
+            const slotIndex = parseInt(event.target.getAttribute('data-slot'));
+    
+            const activePage = document.querySelector('.page.active');
+            if (!activePage) return;
+    
+            if (slots[slotIndex]) {
+                const chips = activePage.querySelectorAll('.function-chip');
+                for (let i = 0; i < chips.length; i++) {
+                    if (chips[i].getAttribute('data-function') === slots[slotIndex]) {
+                        chips[i].classList.remove('used');
+                        break;
+                    }
+                }
+            }
+    
+            slots[slotIndex] = functionName;
+            event.target.textContent = functionName;
+            event.target.classList.add('filled');
+    
+            const chips = activePage.querySelectorAll('.function-chip');
+            for (let i = 0; i < chips.length; i++) {
+                if (chips[i].getAttribute('data-function') === functionName) {
+                    chips[i].classList.add('used');
+                    break;
+                }
+            }
+    
+            const feedback = activePage.querySelector('.feedback');
+            if (feedback) {
+                feedback.classList.remove('show');
+            }
+        }
+    
+        function checkSolution() {
+            const activePage = document.querySelector('.page.active');
+            if (!activePage) return;
+    
+            const feedback = activePage.querySelector('.feedback');
+            if (!feedback) return;
+    
+            if (slots.includes('')) {
+                feedback.className = 'feedback show incorrect';
+                feedback.innerHTML = 'Niekompletne! Musisz wypełnić wszystkie miejsca w kodzie.';
+                return;
+            }
+    
+            const currentPageNum = parseInt(activePage.getAttribute('data-page'));
+            const pageIndex = currentPageNum - 1;
+            const isCorrect = checkCurrentPageSolution(pageIndex);
+    
+            if (isCorrect) {
+                feedback.className = 'feedback show correct';
+                feedback.innerHTML = correctFeedback[pageIndex];
+            } else {
+                const userAnswer = slots.join(',');
+                const incorrectMessages = incorrectFeedback[pageIndex];
+    
+                for (const pattern in incorrectMessages) {
+                    if (pattern === userAnswer) {
+                        feedback.className = 'feedback show incorrect';
+                        feedback.innerHTML = incorrectMessages[pattern];
+                        return;
+                    }
+    
+                    if (pattern.includes('*')) {
+                        const regexPattern = '^' + pattern.replace(/\*/g, '.*') + '$';
+                        const regex = new RegExp(regexPattern);
+                        if (regex.test(userAnswer)) {
+                            feedback.className = 'feedback show incorrect';
+                            feedback.innerHTML = incorrectMessages[pattern];
+                            return;
+                        }
+                    }
+                }
+    
+                const defaultMessage = incorrectMessages['default'];
+                feedback.className = 'feedback show incorrect';
+                feedback.innerHTML = defaultMessage || '❌ <strong>Niepoprawne rozwiązanie.</strong> Spróbuj ponownie!';
+            }
+        }
+    
+        function checkCurrentPageSolution(pageIndex) {
+            const solution = correctSolutions[pageIndex];
+            for (let i = 0; i < solution.length; i++) {
+                if (slots[i] !== solution[i]) {
+                    return false;
+                }
+            }
+            return true;
+        }
+    
+        function resetTask() {
+            slots.fill('');
+    
+            const activePage = document.querySelector('.page.active');
+            if (!activePage) return;
+    
+            const zones = activePage.querySelectorAll('.drop-zone');
+            for (let i = 0; i < zones.length; i++) {
+                zones[i].textContent = '';
+                zones[i].classList.remove('filled');
+            }
+    
+            const chips = activePage.querySelectorAll('.function-chip');
+            for (let i = 0; i < chips.length; i++) {
+                chips[i].classList.remove('used');
+            }
+    
+            const feedback = activePage.querySelector('.feedback');
+            if (feedback) {
+                feedback.classList.remove('show');
+            }
+        }
+    
+        function showPage(pageNumber) {
+            const pages = document.querySelectorAll('.page');
+            for (let i = 0; i < pages.length; i++) {
+                pages[i].classList.remove('active');
+            }
+    
+            for (let i = 0; i < pages.length; i++) {
+                if (parseInt(pages[i].getAttribute('data-page')) === pageNumber) {
+                    pages[i].classList.add('active');
+                    break;
+                }
+            }
+    
+            currentPage = pageNumber;
+            const pageIndex = currentPage - 1;
+            document.getElementById('currentPage').textContent = currentPage;
+    
+            document.getElementById('prevBtn').disabled = (currentPage === 1);
+            document.getElementById('nextBtn').disabled = (currentPage === totalPages);
+    
+            slots = new Array(slotsPerPage[pageIndex]).fill('');
+    
+            resetTask();
+        }
+    
+        function nextPage() {
+            if (currentPage < totalPages) {
+                showPage(currentPage + 1);
+            }
+        }
+    
+        function prevPage() {
+            if (currentPage > 1) {
+                showPage(currentPage - 1);
+            }
+        }
+    
+        document.addEventListener('DOMContentLoaded', function() {
+            showPage(1);
+        });
+</script>
+
+</body>
+</html>
+
+"

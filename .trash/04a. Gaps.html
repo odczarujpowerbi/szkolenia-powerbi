@@ -1,0 +1,696 @@
+04a. Gaps = 
+
+"
+
+<!DOCTYPE html>
+<html lang='pl'>
+<head>
+    <meta charset='UTF-8'>
+    <meta name='viewport' content='width=device-width, initial-scale=1.0'>
+    <title>DAX Gaps</title>
+    <style>
+    * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+    }
+    
+    body {
+        font-family: 'Roboto', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+        font-size: 16px;
+        line-height: 1.6;
+        color: #333;
+        background: transparent;
+        padding: 20px;
+    }
+    
+    .container {
+        max-width: 900px;
+        margin: 0 auto;
+        background: transparent;
+        padding: 40px;
+    }
+    
+    h3 {
+        font-size: 26px;
+        line-height: 36px;
+        font-weight: 600;
+        padding-top: 14px;
+        padding-bottom: 6px;
+        margin-bottom: 1em;
+        color: #6b1718;
+        border-bottom: 2px solid #6b1718;
+    }
+    
+    .task-description {
+        font-size: 1.1em;
+        margin: 20px 0;
+    }
+    
+    .code-container {
+        background: #f8f9fa;
+        border: 2px solid #e1e4e8;
+        border-radius: 6px;
+        padding: 25px;
+        margin: 30px 0;
+        font-family: 'Courier New', monospace;
+        font-size: 1.05em;
+        line-height: 1.8;
+    }
+    
+    .drop-zone {
+        display: inline-block;
+        min-width: 180px;
+        height: 36px;
+        background: white;
+        border: 2px dashed #6b1718;
+        border-radius: 4px;
+        padding: 6px 12px;
+        margin: 0 4px;
+        vertical-align: middle;
+        text-align: center;
+        transition: all 0.2s;
+    }
+    
+    .drop-zone.drag-over {
+        background: #ffe6e6;
+        border-color: #380c0c;
+    }
+    
+    .drop-zone.filled {
+        background: #d4edda;
+        border: 2px solid #28a745;
+        border-style: solid;
+    }
+    
+    .functions-title {
+        font-size: 1em;
+        margin: 30px 0 15px 0;
+        color: #333;
+    }
+    
+    .function-chip {
+        display: inline-block;
+        background: #6b1718;
+        color: white;
+        padding: 10px 20px;
+        margin: 8px;
+        border-radius: 20px;
+        cursor: grab;
+        font-family: 'Courier New', monospace;
+        font-size: 1em;
+        font-weight: 500;
+        transition: all 0.2s;
+        user-select: none;
+    }
+    
+    .function-chip:hover {
+        background: #380c0c;
+        transform: translateY(-2px);
+        box-shadow: 0 4px 8px rgba(107, 23, 24, 0.3);
+    }
+    
+    .function-chip:active {
+        cursor: grabbing;
+    }
+    
+    .function-chip.used {
+        opacity: 0.3;
+        cursor: not-allowed;
+        pointer-events: none;
+    }
+    
+    .button-group {
+        margin-top: 30px;
+        display: flex;
+        gap: 15px;
+        align-items: center;
+    }
+    
+    button {
+        background: #6b1718;
+        color: white;
+        border: none;
+        padding: 14px 32px;
+        border-radius: 6px;
+        cursor: pointer;
+        font-size: 1.05em;
+        font-weight: 600;
+        transition: all 0.2s;
+    }
+    
+    button:hover {
+        background: #380c0c;
+        transform: translateY(-1px);
+    }
+    
+    button.reset-btn {
+        background: #6b1718;
+        padding: 8px 16px;
+        font-size: 0.9em;
+    }
+    
+    button.reset-btn:hover {
+        background: #380c0c;
+    }
+    
+    .feedback {
+        margin-top: 25px;
+        padding: 20px;
+        border-radius: 6px;
+        display: none;
+        font-size: 1.05em;
+    }
+    
+    .feedback.show {
+        display: block;
+        animation: slideDown 0.3s ease-out;
+    }
+    
+    @keyframes slideDown {
+        from {
+            opacity: 0;
+            transform: translateY(-10px);
+        }
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+    
+    .feedback.correct {
+        background: #d4edda;
+        border-left: 4px solid #28a745;
+        color: #155724;
+    }
+    
+    .feedback.incorrect {
+        background: #f8d7da;
+        border-left: 4px solid #dc3545;
+        color: #721c24;
+    }
+    
+    .hint-box {
+        background: #fafafa;
+        border-left: 4px solid #ccc;
+        padding: 15px;
+        margin: 20px 0;
+        border-radius: 4px;
+        color: #121212;
+        font-size: 0.95em;
+    }
+    
+    .pagination {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 20px;
+        margin: 30px 0;
+        padding: 20px;
+        background: #f8f9fa;
+        border-radius: 6px;
+    }
+    
+    .page-info {
+        font-weight: 600;
+        color: #6b1718;
+    }
+    
+    .nav-button {
+        background: #6b1718;
+        color: white;
+        border: none;
+        padding: 10px 20px;
+        border-radius: 4px;
+        cursor: pointer;
+        font-size: 1em;
+        transition: all 0.2s;
+    }
+    
+    .nav-button:hover:not(:disabled) {
+        background: #380c0c;
+        transform: translateY(-1px);
+    }
+    
+    .nav-button:disabled {
+        background: #ccc;
+        cursor: not-allowed;
+        opacity: 0.5;
+    }
+    
+    .page {
+        display: none;
+    }
+    
+    .page.active {
+        display: block;
+    }
+    </style>
+</head>
+<body>
+
+<div class='pagination'>
+    <button class='nav-button' id='prevBtn' onclick='prevPage()'>◄ Poprzednie</button>
+    <span class='page-info'>Zadanie <span id='currentPage'>1</span> z <span id='totalPages'>7</span></span>
+    <button class='nav-button' id='nextBtn' onclick='nextPage()'>Następne ►</button>
+</div>
+
+<div class='page active' data-page='1'>
+<div class='container'>
+    <div class='task-description'>
+        <h3>ALL vs REMOVEFILTERS</h3>
+        Jaka jest różnica między ALL a REMOVEFILTERS w kontekście CALCULATE?
+- Brak różnicy - działają identycznie
+- ALL usuwa wszystkie filtry, REMOVEFILTERS tylko niektóre
+- REMOVEFILTERS jest szybsze
+- ALL działa tylko na tabelach, REMOVEFILTERS tylko na kolumnach
+    </div>
+
+    <div>
+    </div>
+
+    <div class='code-container'>
+        <div>-- Te dwie miary są:</div>
+        <div>CALCULATE([Sprzedaż], ALL(dProduct))</div>
+        <div>CALCULATE([Sprzedaż], REMOVEFILTERS(dProduct))</div>
+        <div></div>
+        <div>Odpowiedź: <div class='drop-zone' data-slot='0' ondrop='drop(event)' ondragover='allowDrop(event)' ondragleave='dragLeave(event)'></div></div>
+    </div>
+
+    <div class='button-group'>
+        <button onclick='checkSolution()'>Sprawdź rozwiązanie</button>
+        <button class='reset-btn' onclick='resetTask()'>Reset</button>
+    </div>
+
+    <div class='hint-box'>
+        Materiał wspomina, że REMOVEFILTERS to nowszy odpowiednik ALL. Co to sugeruje o ich funkcjonalności?
+    </div>
+
+    <div class='feedback' id='feedback'></div>
+</div>
+</div>
+
+<div class='page' data-page='2'>
+<div class='container'>
+    <div class='task-description'>
+        <h3>ALLEXCEPT - zachowanie wybranych filtrów</h3>
+        Chcesz usunąć wszystkie filtry z tabeli dProduct, OPRÓCZ filtra na ProductCategoryName. Jakiej funkcji użyć?
+- ALLEXCEPT
+- KEEPFILTERS
+- REMOVEFILTERSEXCEPT
+- ALLBUT
+    </div>
+
+    <div>
+    </div>
+
+    <div class='code-container'>
+        <div>Sprzedaż Total per Category =</div>
+        <div>CALCULATE(</div>
+        <div>    [Total Sprzedaż],</div>
+        <div>    <div class='drop-zone' data-slot='0' ondrop='drop(event)' ondragover='allowDrop(event)' ondragleave='dragLeave(event)'></div>(dProduct, dProduct[ProductCategoryName])</div>
+        <div>)</div>
+    </div>
+
+    <div class='button-group'>
+        <button onclick='checkSolution()'>Sprawdź rozwiązanie</button>
+        <button class='reset-btn' onclick='resetTask()'>Reset</button>
+    </div>
+
+    <div class='hint-box'>
+        Szukasz funkcji, która w nazwie ma wszystkie oprócz (ang. all except). Materiał pokazuje przykład z ProductCategoryName.
+    </div>
+
+    <div class='feedback' id='feedback'></div>
+</div>
+</div>
+
+<div class='page' data-page='3'>
+<div class='container'>
+    <div class='task-description'>
+        <h3>ALLSELECTED - filtry z slicerów</h3>
+        Tworzysz wykres z udziałem procentowym kategorii. Użytkownik wybiera w slicerze 3 kategorie. Chcesz, żeby procenty sumowały się do 100% dla tych 3 wybranych kategorii. Jakiej funkcji użyć?
+- ALL
+- ALLSELECTED
+- ALLEXCEPT
+- REMOVEFILTERS
+    </div>
+
+    <div>
+    </div>
+
+    <div class='code-container'>
+        <div>Sprzedaż % =</div>
+        <div>DIVIDE(</div>
+        <div>    [Total Sprzedaż],</div>
+        <div>    CALCULATE([Total Sprzedaż], <div class='drop-zone' data-slot='0' ondrop='drop(event)' ondragover='allowDrop(event)' ondragleave='dragLeave(event)'></div>(dProduct[ProductCategoryName]))</div>
+        <div>)</div>
+    </div>
+
+    <div class='button-group'>
+        <button onclick='checkSolution()'>Sprawdź rozwiązanie</button>
+        <button class='reset-btn' onclick='resetTask()'>Reset</button>
+    </div>
+
+    <div class='hint-box'>
+        Szukasz funkcji, która pamięta co użytkownik wybrał (selected) w slicerach, ale ignoruje filtry z samej wizualizacji.
+    </div>
+
+    <div class='feedback' id='feedback'></div>
+</div>
+</div>
+
+<div class='page' data-page='4'>
+<div class='container'>
+    <div class='task-description'>
+        <h3>KEEPFILTERS - przecięcie filtrów</h3>
+        Masz miarę ze stałym filtrem Computers. Chcesz, żeby gdy użytkownik wybierze Cameras w slicerze, miara zwróciła BLANK (bo nie ma przecięcia). Jakiej funkcji użyć?
+- KEEPFILTERS
+- INTERSECT
+- CROSSFILTER
+- FILTERINTERSECT
+    </div>
+
+    <div>
+    </div>
+
+    <div class='code-container'>
+        <div>Sprzedaż Computers Keep =</div>
+        <div>CALCULATE(</div>
+        <div>    [Total Sprzedaż],</div>
+        <div>    <div class='drop-zone' data-slot='0' ondrop='drop(event)' ondragover='allowDrop(event)' ondragleave='dragLeave(event)'></div>(dProduct[ProductCategoryName] = Computers)</div>
+        <div>)</div>
+    </div>
+
+    <div class='button-group'>
+        <button onclick='checkSolution()'>Sprawdź rozwiązanie</button>
+        <button class='reset-btn' onclick='resetTask()'>Reset</button>
+    </div>
+
+    <div class='hint-box'>
+        Szukasz funkcji, która mówi zachowaj (keep) istniejące filtry i znajdź część wspólną z nowym filtrem.
+    </div>
+
+    <div class='feedback' id='feedback'></div>
+</div>
+</div>
+
+<div class='page' data-page='5'>
+<div class='container'>
+    <div class='task-description'>
+        <h3>CROSSFILTER - kierunek relacji</h3>
+        Do czego służy funkcja CROSSFILTER?
+- Zmiany kierunku filtrowania relacji między tabelami
+- Tworzenia krzyżowego filtrowania w wizualizacjach
+- Filtrowania wielu kolumn jednocześnie
+- Usuwania filtrów krzyżowych
+    </div>
+
+    <div>
+    </div>
+
+    <div class='code-container'>
+        <div>Miara =</div>
+        <div>CALCULATE(</div>
+        <div>    [Count Products],</div>
+        <div>    <div class='drop-zone' data-slot='0' ondrop='drop(event)' ondragover='allowDrop(event)' ondragleave='dragLeave(event)'></div>(</div>
+        <div>        FactSales[ProductKey],</div>
+        <div>        DimProduct[ProductKey],</div>
+        <div>        Both</div>
+        <div>    )</div>
+        <div>)</div>
+    </div>
+
+    <div class='button-group'>
+        <button onclick='checkSolution()'>Sprawdź rozwiązanie</button>
+        <button class='reset-btn' onclick='resetTask()'>Reset</button>
+    </div>
+
+    <div class='hint-box'>
+        Materiał pokazuje opcje: Both, None, OneWay, OneWayReverse. To parametry określające kierunek czegoś. Czego?
+    </div>
+
+    <div class='feedback' id='feedback'></div>
+</div>
+</div>
+
+<div class='page' data-page='6'>
+<div class='container'>
+    <div class='task-description'>
+        <h3>USERELATIONSHIP - aktywacja relacji</h3>
+        Masz tabelę sprzedaży z trzema datami: Data Zamówienia (relacja aktywna), Data Wysyłki, Data Dostawy (relacje nieaktywne). Chcesz policzyć sprzedaż według daty wysyłki. Jakiej funkcji użyć?
+- USERELATIONSHIP
+- ACTIVATERELATIONSHIP
+- SWITCHRELATION
+- RELATEDTABLE
+    </div>
+
+    <div>
+    </div>
+
+    <div class='code-container'>
+        <div>Sprzedaż by Shipment =</div>
+        <div>CALCULATE(</div>
+        <div>    [Total Sprzedaż],</div>
+        <div>    <div class='drop-zone' data-slot='0' ondrop='drop(event)' ondragover='allowDrop(event)' ondragleave='dragLeave(event)'></div>(</div>
+        <div>        fSprzedaż[ShipmentDate],</div>
+        <div>        Calendar[Date]</div>
+        <div>    )</div>
+        <div>)</div>
+    </div>
+
+    <div class='button-group'>
+        <button onclick='checkSolution()'>Sprawdź rozwiązanie</button>
+        <button class='reset-btn' onclick='resetTask()'>Reset</button>
+    </div>
+
+    <div class='hint-box'>
+        Szukasz funkcji, która mówi użyj relacji (use relationship). Materiał pokazuje przykład z ShipmentDate i DeliveryDate.
+    </div>
+
+    <div class='feedback' id='feedback'></div>
+</div>
+</div>
+
+<div class='page' data-page='7'>
+<div class='container'>
+    <div class='task-description'>
+        <h3>ALL na całej tabeli vs kolumnie</h3>
+        Jaka jest różnica między ALL(dProduct) a ALL(dProduct[CategoryName])?
+- ALL(tabela) usuwa filtry ze wszystkich kolumn tabeli, ALL(kolumna) tylko z jednej kolumny
+- Brak różnicy - działają identycznie
+- ALL(tabela) jest szybsze
+- ALL(kolumna) usuwa też filtry z powiązanych tabel
+    </div>
+
+    <div>
+    </div>
+
+    <div class='code-container'>
+        <div>-- Usuwa filtr tylko z kategorii:</div>
+        <div>CALCULATE([Sprzedaż], <div class='drop-zone' data-slot='0' ondrop='drop(event)' ondragover='allowDrop(event)' ondragleave='dragLeave(event)'></div>)</div>
+        <div></div>
+        <div>-- Usuwa filtry z kategorii, marki, koloru, podkategorii itd.:</div>
+        <div>CALCULATE([Sprzedaż], <div class='drop-zone' data-slot='1' ondrop='drop(event)' ondragover='allowDrop(event)' ondragleave='dragLeave(event)'></div>)</div>
+    </div>
+
+    <div class='button-group'>
+        <button onclick='checkSolution()'>Sprawdź rozwiązanie</button>
+        <button class='reset-btn' onclick='resetTask()'>Reset</button>
+    </div>
+
+    <div class='hint-box'>
+        Materiał pokazuje przykład: Usuwa filtr TYLKO z kategorii vs Usuwa WSZYSTKIE filtry z tabeli dProduct. Co to sugeruje?
+    </div>
+
+    <div class='feedback' id='feedback'></div>
+</div>
+</div>
+
+<script>
+    let currentPage = 1;
+    const totalPages = 7;
+    const slotsPerPage = [1, 1, 1, 1, 1, 1, 2];
+    let slots = new Array(slotsPerPage[0]).fill('');
+    const correctSolutions = [['Brak r\u00f3\u017cnicy - dzia\u0142aj\u0105 identycznie'], ['ALLEXCEPT'], ['ALLSELECTED'], ['KEEPFILTERS'], ['Zmiany kierunku filtrowania relacji mi\u0119dzy tabelami'], ['USERELATIONSHIP'], ['ALL(dProduct[CategoryName])', 'ALL(dProduct)']];
+    const correctFeedback = ['\u2705 **Brawo! Rozwi\u0105zanie poprawne!**\nW kontek\u015bcie `CALCULATE` funkcje `ALL()` i `REMOVEFILTERS()` dzia\u0142aj\u0105 identycznie - obie usuwaj\u0105 filtry z tabeli lub kolumny. `REMOVEFILTERS()` zosta\u0142a wprowadzona w 2019 roku jako bardziej czytelna alternatywa. Zaleca si\u0119 u\u017cywa\u0107 `REMOVEFILTERS()` ze wzgl\u0119du na jasno\u015b\u0107 nazwy, ale `ALL()` nadal jest powszechnie stosowane. R\u00f3\u017cnica jest semantyczna, nie funkcjonalna.', '\u2705 **Brawo! Rozwi\u0105zanie poprawne!**\n`ALLEXCEPT()` usuwa wszystkie filtry z podanej tabeli OPR\u00d3CZ (except) wymienionych kolumn. Sk\u0142adnia: `ALLEXCEPT(tabela, kolumna1, kolumna2, ...)`. W tym przypadku `ALLEXCEPT(dProduct, dProduct[ProductCategoryName])` usuwa filtry ze wszystkich kolumn tabeli dProduct poza kategori\u0105 - dzi\u0119ki czemu mo\u017cesz policzy\u0107 sum\u0119 dla ca\u0142ej kategorii, ignoruj\u0105c filtry na produkty, marki, kolory itp.', '\u2705 **Brawo! Rozwi\u0105zanie poprawne!**\n`ALLSELECTED()` usuwa filtry z wizualizacji (wiersze/kolumny wykresu/tabeli), ale ZACHOWUJE filtry zewn\u0119trzne - slicery, filtry strony i raportu. Dzi\u0119ki temu mianownik uwzgl\u0119dnia tylko kategorie wybrane w slicerze, a procenty sumuj\u0105 si\u0119 do 100%. `ALL()` usun\u0119\u0142oby te\u017c filtr ze slicera, co da\u0142oby niepoprawne wyniki.', '\u2705 **Brawo! Rozwi\u0105zanie poprawne!**\n`KEEPFILTERS()` tworzy przeci\u0119cie (cz\u0119\u015b\u0107 wsp\u00f3ln\u0105) filtr\u00f3w zamiast nadpisywania. Gdy u\u017cytkownik wybierze Cameras w slicerze, a ty filtrujesz na Computers, przeci\u0119cie (Cameras) \u2229 (Computers) = \u2205 (zbi\u00f3r pusty) = BLANK. Bez `KEEPFILTERS()` filtr z CALCULATE nadpisa\u0142by wyb\u00f3r u\u017cytkownika i zawsze pokazywa\u0142by Computers.', '\u2705 **Brawo! Rozwi\u0105zanie poprawne!**\n`CROSSFILTER()` s\u0142u\u017cy do tymczasowej zmiany kierunku filtrowania relacji mi\u0119dzy tabelami w kontek\u015bcie danej miary. Mo\u017cliwe kierunki to: `Both` (dwukierunkowe), `None` (wy\u0142\u0105czone), `OneWay` (domy\u015blnie), `OneWayReverse` (odwr\u00f3cone). Pozwala to dynamicznie modyfikowa\u0107 przep\u0142yw filtr\u00f3w bez zmiany modelu danych.', '\u2705 **Brawo! Rozwi\u0105zanie poprawne!**\n`USERELATIONSHIP()` aktywuje nieaktywn\u0105 relacj\u0119 mi\u0119dzy tabelami na czas trwania obliczenia. Sk\u0142adnia: `USERELATIONSHIP(kolumna_z_tabeli_fakt\u00f3w, kolumna_z_tabeli_wymiaru)`. W modelu mo\u017ce by\u0107 wiele relacji mi\u0119dzy tymi samymi tabelami, ale tylko jedna aktywna domy\u015blnie. USERELATIONSHIP pozwala tymczasowo u\u017cy\u0107 innej relacji bez zmiany modelu.', '\u2705 **Brawo! Rozwi\u0105zanie poprawne!**\n`ALL(dProduct[CategoryName])` usuwa filtr TYLKO z kolumny CategoryName - pozosta\u0142e filtry na produkty, marki, kolory s\u0105 zachowane. `ALL(dProduct)` usuwa WSZYSTKIE filtry z ca\u0142ej tabeli dProduct - ignoruje filtry na wszystkich jej kolumnach. To wa\u017cna r\u00f3\u017cnica kontroluj\u0105ca zakres usuwania filtr\u00f3w.'];
+    const incorrectFeedback = [{'ALL usuwa wszystkie, REMOVEFILTERS tylko niekt\u00f3re': '\u274c **Niepoprawne!**\nObie funkcje usuwaj\u0105 filtry w identyczny spos\u00f3b. R\u00f3\u017cnica jest tylko w nazwie - `REMOVEFILTERS()` jest nowsz\u0105, bardziej czyteln\u0105 wersj\u0105 `ALL()`. Obie mog\u0105 dzia\u0142a\u0107 na ca\u0142ych tabelach lub wybranych kolumnach.', 'REMOVEFILTERS jest szybsze': '\u274c **Niepoprawne!**\nWydajno\u015b\u0107 jest identyczna - to praktycznie aliasy tej samej operacji. R\u00f3\u017cnica jest tylko w nazwie i czytelno\u015bci kodu.', 'R\u00f3\u017cne obiekty': '\u274c **Niepoprawne!**\nObie funkcje mog\u0105 dzia\u0142a\u0107 zar\u00f3wno na tabelach jak i na kolumnach. Sk\u0142adnia: `ALL(tabela)`, `ALL(kolumna)`, `REMOVEFILTERS(tabela)`, `REMOVEFILTERS(kolumna)`.'}, {'KEEPFILTERS': '\u274c **Niepoprawne!**\n`KEEPFILTERS()` s\u0142u\u017cy do tworzenia przeci\u0119cia filtr\u00f3w (zamiast nadpisywania), ale nie usuwa filtr\u00f3w z innych kolumn. Do usuwania wszystkich filtr\u00f3w opr\u00f3cz wybranych s\u0142u\u017cy `ALLEXCEPT()`.', 'REMOVEFILTERSEXCEPT': '\u274c **Niepoprawne!**\nNie ma takiej funkcji w DAX. Poprawna nazwa to `ALLEXCEPT()`.', 'ALLBUT': '\u274c **Niepoprawne!**\nNie ma takiej funkcji w DAX. Except w j\u0119zyku angielskim oznacza opr\u00f3cz - szukasz funkcji `ALLEXCEPT()`.'}, {'ALL': '\u274c **Niepoprawne!**\n`ALL()` usuwa WSZYSTKIE filtry, w\u0142\u0105cznie ze slicerami. Mianownik by\u0142by sum\u0105 dla wszystkich kategorii w bazie, nie tylko wybranych w slicerze. Procenty nie sumowa\u0142yby si\u0119 do 100%. Potrzebujesz `ALLSELECTED()`.', 'ALLEXCEPT': '\u274c **Niepoprawne!**\n`ALLEXCEPT()` zachowuje filtry na wybranych kolumnach tej samej tabeli, ale nie rozr\u00f3\u017cnia filtr\u00f3w z wizualizacji i slicer\u00f3w. Do tego celu s\u0142u\u017cy specjalnie `ALLSELECTED()`.', 'REMOVEFILTERS': '\u274c **Niepoprawne!**\n`REMOVEFILTERS()` dzia\u0142a jak `ALL()` - usuwa wszystkie filtry, w tym ze slicer\u00f3w. Nie rozr\u00f3\u017cnia \u017ar\u00f3d\u0142a filtr\u00f3w. Potrzebujesz `ALLSELECTED()`, kt\u00f3re zachowuje filtry zewn\u0119trzne.'}, {'INTERSECT': '\u274c **Niepoprawne!**\n`INTERSECT()` to funkcja tabelaryczna zwracaj\u0105ca przeci\u0119cie dw\u00f3ch tabel, nie modyfikator kontekstu. W `CALCULATE()` do tworzenia przeci\u0119cia filtr\u00f3w u\u017cywamy `KEEPFILTERS()`.', 'CROSSFILTER': '\u274c **Niepoprawne!**\n`CROSSFILTER()` s\u0142u\u017cy do zmiany kierunku filtrowania relacji mi\u0119dzy tabelami (jednokierunkowe, dwukierunkowe), nie do tworzenia przeci\u0119cia filtr\u00f3w. Szukasz `KEEPFILTERS()`.', 'FILTERINTERSECT': '\u274c **Niepoprawne!**\nNie ma takiej funkcji w DAX. Do tworzenia przeci\u0119cia filtr\u00f3w w `CALCULATE()` s\u0142u\u017cy `KEEPFILTERS()`.'}, {'Wizualizacje': '\u274c **Niepoprawne!**\n`CROSSFILTER()` nie dotyczy interakcji mi\u0119dzy wizualizacjami na stronie raportu. S\u0142u\u017cy do modyfikowania kierunku filtrowania **relacji mi\u0119dzy tabelami w modelu danych**.', 'Wiele kolumn': '\u274c **Niepoprawne!**\n`CROSSFILTER()` nie s\u0142u\u017cy do filtrowania wielu kolumn. Modyfikuje kierunek przep\u0142ywu filtru przez **relacj\u0119** mi\u0119dzy dwiema tabelami (przez klucze).', 'Usuwanie': '\u274c **Niepoprawne!**\n`CROSSFILTER()` mo\u017ce wy\u0142\u0105czy\u0107 filtrowanie (opcja `None`), ale to nie jest jego g\u0142\u00f3wne zastosowanie. S\u0142u\u017cy do **zmiany kierunku** filtrowania relacji.'}, {'ACTIVATERELATIONSHIP': '\u274c **Niepoprawne!**\nNie ma takiej funkcji w DAX. Do aktywacji nieaktywnej relacji s\u0142u\u017cy `USERELATIONSHIP()`.', 'SWITCHRELATION': '\u274c **Niepoprawne!**\nNie ma takiej funkcji w DAX. Szukasz `USERELATIONSHIP()`.', 'RELATEDTABLE': '\u274c **Niepoprawne!**\n`RELATEDTABLE()` to funkcja do pobierania powi\u0105zanych wierszy z tabeli po stronie wiele relacji, nie s\u0142u\u017cy do aktywacji nieaktywnych relacji. Potrzebujesz `USERELATIONSHIP()`.'}, {'Brak r\u00f3\u017cnicy': '\u274c **Niepoprawne!**\nJest znacz\u0105ca r\u00f3\u017cnica! `ALL(kolumna)` usuwa filtr tylko z tej jednej kolumny, podczas gdy `ALL(tabela)` usuwa filtry ze wszystkich kolumn w tabeli.', 'Szybko\u015b\u0107': '\u274c **Niepoprawne!**\nR\u00f3\u017cnica nie le\u017cy w wydajno\u015bci, ale w zakresie usuwania filtr\u00f3w. `ALL(tabela)` wp\u0142ywa na wszystkie kolumny, `ALL(kolumna)` tylko na jedn\u0105.', 'Powi\u0105zane tabele': '\u274c **Niepoprawne!**\n`ALL()` nie usuwa filtr\u00f3w z powi\u0105zanych tabel - tylko z podanej tabeli lub kolumny. Filtry na innych tabelach pozostaj\u0105 aktywne.'}];
+
+    function drag(event) {
+            event.dataTransfer.setData('function', event.target.getAttribute('data-function'));
+        }
+    
+        function allowDrop(event) {
+            event.preventDefault();
+            event.target.classList.add('drag-over');
+        }
+    
+        function dragLeave(event) {
+            event.target.classList.remove('drag-over');
+        }
+    
+        function drop(event) {
+            event.preventDefault();
+            event.target.classList.remove('drag-over');
+    
+            const functionName = event.dataTransfer.getData('function');
+            const slotIndex = parseInt(event.target.getAttribute('data-slot'));
+    
+            const activePage = document.querySelector('.page.active');
+            if (!activePage) return;
+    
+            if (slots[slotIndex]) {
+                const chips = activePage.querySelectorAll('.function-chip');
+                for (let i = 0; i < chips.length; i++) {
+                    if (chips[i].getAttribute('data-function') === slots[slotIndex]) {
+                        chips[i].classList.remove('used');
+                        break;
+                    }
+                }
+            }
+    
+            slots[slotIndex] = functionName;
+            event.target.textContent = functionName;
+            event.target.classList.add('filled');
+    
+            const chips = activePage.querySelectorAll('.function-chip');
+            for (let i = 0; i < chips.length; i++) {
+                if (chips[i].getAttribute('data-function') === functionName) {
+                    chips[i].classList.add('used');
+                    break;
+                }
+            }
+    
+            const feedback = activePage.querySelector('.feedback');
+            if (feedback) {
+                feedback.classList.remove('show');
+            }
+        }
+    
+        function checkSolution() {
+            const activePage = document.querySelector('.page.active');
+            if (!activePage) return;
+    
+            const feedback = activePage.querySelector('.feedback');
+            if (!feedback) return;
+    
+            if (slots.includes('')) {
+                feedback.className = 'feedback show incorrect';
+                feedback.innerHTML = 'Niekompletne! Musisz wypełnić wszystkie miejsca w kodzie.';
+                return;
+            }
+    
+            const currentPageNum = parseInt(activePage.getAttribute('data-page'));
+            const pageIndex = currentPageNum - 1;
+            const isCorrect = checkCurrentPageSolution(pageIndex);
+    
+            if (isCorrect) {
+                feedback.className = 'feedback show correct';
+                feedback.innerHTML = correctFeedback[pageIndex];
+            } else {
+                const userAnswer = slots.join(',');
+                const incorrectMessages = incorrectFeedback[pageIndex];
+    
+                for (const pattern in incorrectMessages) {
+                    if (pattern === userAnswer) {
+                        feedback.className = 'feedback show incorrect';
+                        feedback.innerHTML = incorrectMessages[pattern];
+                        return;
+                    }
+    
+                    if (pattern.includes('*')) {
+                        const regexPattern = '^' + pattern.replace(/\*/g, '.*') + '$';
+                        const regex = new RegExp(regexPattern);
+                        if (regex.test(userAnswer)) {
+                            feedback.className = 'feedback show incorrect';
+                            feedback.innerHTML = incorrectMessages[pattern];
+                            return;
+                        }
+                    }
+                }
+    
+                const defaultMessage = incorrectMessages['default'];
+                feedback.className = 'feedback show incorrect';
+                feedback.innerHTML = defaultMessage || '❌ <strong>Niepoprawne rozwiązanie.</strong> Spróbuj ponownie!';
+            }
+        }
+    
+        function checkCurrentPageSolution(pageIndex) {
+            const solution = correctSolutions[pageIndex];
+            for (let i = 0; i < solution.length; i++) {
+                if (slots[i] !== solution[i]) {
+                    return false;
+                }
+            }
+            return true;
+        }
+    
+        function resetTask() {
+            slots.fill('');
+    
+            const activePage = document.querySelector('.page.active');
+            if (!activePage) return;
+    
+            const zones = activePage.querySelectorAll('.drop-zone');
+            for (let i = 0; i < zones.length; i++) {
+                zones[i].textContent = '';
+                zones[i].classList.remove('filled');
+            }
+    
+            const chips = activePage.querySelectorAll('.function-chip');
+            for (let i = 0; i < chips.length; i++) {
+                chips[i].classList.remove('used');
+            }
+    
+            const feedback = activePage.querySelector('.feedback');
+            if (feedback) {
+                feedback.classList.remove('show');
+            }
+        }
+    
+        function showPage(pageNumber) {
+            const pages = document.querySelectorAll('.page');
+            for (let i = 0; i < pages.length; i++) {
+                pages[i].classList.remove('active');
+            }
+    
+            for (let i = 0; i < pages.length; i++) {
+                if (parseInt(pages[i].getAttribute('data-page')) === pageNumber) {
+                    pages[i].classList.add('active');
+                    break;
+                }
+            }
+    
+            currentPage = pageNumber;
+            const pageIndex = currentPage - 1;
+            document.getElementById('currentPage').textContent = currentPage;
+    
+            document.getElementById('prevBtn').disabled = (currentPage === 1);
+            document.getElementById('nextBtn').disabled = (currentPage === totalPages);
+    
+            slots = new Array(slotsPerPage[pageIndex]).fill('');
+    
+            resetTask();
+        }
+    
+        function nextPage() {
+            if (currentPage < totalPages) {
+                showPage(currentPage + 1);
+            }
+        }
+    
+        function prevPage() {
+            if (currentPage > 1) {
+                showPage(currentPage - 1);
+            }
+        }
+    
+        document.addEventListener('DOMContentLoaded', function() {
+            showPage(1);
+        });
+</script>
+
+</body>
+</html>
+
+"

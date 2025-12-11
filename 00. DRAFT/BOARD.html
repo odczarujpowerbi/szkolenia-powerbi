@@ -1,0 +1,1165 @@
+<!DOCTYPE html>
+<html lang='pl'>
+<head>
+<meta charset='UTF-8'>
+<style>
+    :root {
+        --primary: #6b1718;
+        --secondary: #8e2b2c;
+        --accent: #d4573a;
+        --bg: #f4f4f4;
+        --card-bg: #ffffff;
+        --text: #333;
+        --code-bg: #f8f9fa;
+        --border: #e1e4e8;
+        --success: #28a745;
+        --warning: #ffc107;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    
+    body {
+        font-family: 'Segoe UI', -apple-system, sans-serif;
+        background: linear-gradient(135deg, #f5f7fa 0%, #f4f4f4 100%);
+        color: var(--text);
+        padding: 20px;
+        line-height: 1.5;
+    }
+
+    /* ===== NAGŁÓWEK ===== */
+    .header { 
+        text-align: center; 
+        margin-bottom: 40px;
+        animation: slideDown 0.6s ease;
+    }
+    .header h1 { 
+        color: var(--primary); 
+        font-size: 2.8rem; 
+        margin-bottom: 5px; 
+        text-transform: uppercase; 
+        letter-spacing: 2px;
+        font-weight: 400;
+    }
+    .header p { 
+        color: #666; 
+        font-size: 1.1rem;
+        margin-bottom: 5px;
+    }
+    .header .subtitle {
+        color: #666;
+        font-size: 1.1rem;
+        font-weight: 300;
+    }
+
+    /* ===== SIATKA 4x4 ===== */
+    .grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+        gap: 20px;
+        max-width: 1400px;
+        margin: 0 auto;
+    }
+
+    /* ===== KAFELKI ===== */
+    .card {
+        background: var(--card-bg);
+        border-radius: 12px;
+        padding: 25px 20px;
+        text-align: center;
+        border: 2px solid rgba(0,0,0,0.05);
+        box-shadow: 0 4px 8px rgba(0,0,0,0.08);
+        cursor: pointer;
+        transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+        position: relative;
+        overflow: hidden;
+    }
+    .card:hover {
+        transform: translateY(-8px);
+        box-shadow: 0 16px 32px rgba(107, 23, 24, 0.2);
+        border-color: var(--primary);
+    }
+    .card::before {
+        content: ''; 
+        position: absolute; 
+        top: 0; 
+        left: -100%; 
+        width: 100%; 
+        height: 3px;
+        background: linear-gradient(90deg, transparent, var(--primary), transparent);
+        transition: left 0.5s;
+    }
+    .card:hover::before { left: 100%; }
+
+    .icon { 
+        width: 52px; 
+        height: 52px; 
+        margin-bottom: 15px; 
+        fill: none; 
+        stroke: var(--primary); 
+        stroke-width: 1.8; 
+        stroke-linecap: round; 
+        stroke-linejoin: round; 
+        display: inline-block;
+        transition: transform 0.3s;
+    }
+    .card:hover .icon { transform: scale(1.1) rotate(5deg); }
+    
+    .card h2 { 
+        font-size: 1.3rem; 
+        margin-bottom: 8px; 
+        color: #222;
+        font-weight: 700;
+    }
+    .card p { 
+        font-size: 0.9rem; 
+        color: #777;
+        line-height: 1.4;
+    }
+
+    /* ===== MODAL ===== */
+    .modal-overlay {
+        position: fixed; 
+        top: 0; 
+        left: 0; 
+        width: 100%; 
+        height: 100%;
+        background: rgba(0,0,0,0.6); 
+        backdrop-filter: blur(4px);
+        display: none; 
+        align-items: center; 
+        justify-content: center; 
+        z-index: 1000;
+        opacity: 0; 
+        transition: opacity 0.3s;
+    }
+    .modal-overlay.active { 
+        display: flex; 
+        opacity: 1; 
+    }
+
+    .modal {
+        background: #fff; 
+        width: 95%; 
+        max-width: 900px; 
+        max-height: 85vh;
+        border-radius: 16px; 
+        display: flex; 
+        flex-direction: column;
+        box-shadow: 0 30px 60px rgba(0,0,0,0.3);
+        animation: modalSlideIn 0.3s ease;
+    }
+
+    @keyframes modalSlideIn {
+        from { transform: scale(0.9) translateY(20px); opacity: 0; }
+        to { transform: scale(1) translateY(0); opacity: 1; }
+    }
+
+    .modal-header {
+        padding: 25px 30px; 
+        border-bottom: 2px solid var(--border);
+        display: flex; 
+        justify-content: space-between; 
+        align-items: center;
+        background: linear-gradient(135deg, #fafafa 0%, #f5f5f5 100%);
+        border-radius: 16px 16px 0 0;
+    }
+    .modal-header h2 { 
+        color: var(--primary); 
+        font-size: 1.8rem; 
+        margin: 0;
+        font-weight: 800;
+    }
+    .close { 
+        background: none; 
+        border: none; 
+        font-size: 2.2rem; 
+        color: #999; 
+        cursor: pointer; 
+        line-height: 1;
+        transition: color 0.2s;
+    }
+    .close:hover { 
+        color: var(--primary); 
+    }
+
+    .modal-content { 
+        padding: 30px; 
+        overflow-y: auto;
+        flex: 1;
+    }
+    .modal-content::-webkit-scrollbar {
+        width: 8px;
+    }
+    .modal-content::-webkit-scrollbar-track {
+        background: #f1f1f1;
+    }
+    .modal-content::-webkit-scrollbar-thumb {
+        background: var(--primary);
+        border-radius: 4px;
+    }
+
+    /* ===== TREŚĆ FUNKCJI ===== */
+    .section-title {
+        font-size: 1.15rem; 
+        font-weight: 800; 
+        color: var(--primary); 
+        margin: 25px 0 15px 0;
+        border-left: 5px solid var(--accent); 
+        padding-left: 12px;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+    }
+    .section-title:first-child { 
+        margin-top: 0; 
+    }
+    
+    .func-row { 
+        margin-bottom: 18px; 
+        padding-bottom: 15px;
+        border-bottom: 1px dashed #eee;
+    }
+    .func-row:last-child {
+        border-bottom: none;
+    }
+
+    .func-name { 
+        font-family: 'Consolas', 'Monaco', monospace; 
+        color: #d4573a; 
+        font-weight: 800; 
+        background: #fafafa; 
+        padding: 4px 8px; 
+        border-radius: 4px; 
+        font-size: 0.96rem;
+        display: inline-block;
+        margin-bottom: 6px;
+    }
+    .func-desc { 
+        margin: 6px 0; 
+        font-size: 0.95rem; 
+        color: #555;
+        line-height: 1.5;
+    }
+    .func-example {
+        font-size: 0.85rem;
+        color: #666;
+        margin-top: 4px;
+        font-style: italic;
+    }
+    
+    pre {
+        background: #fafafa; 
+        color: #121212; 
+        padding: 14px 16px; 
+        border-radius: 6px;
+        overflow-x: auto; 
+        font-family: 'Consolas', 'Monaco', monospace; 
+        font-size: 0.9rem; 
+        margin: 8px 0 0 0;
+        border-left: 4px solid var(--accent);
+        line-height: 1.4;
+    }
+
+    .kwd { color: #ff79c6; font-weight: bold; }
+    .func { color: #a00e09; font-weight: bold; }
+    .str { color: #a00e09; }
+    .comment { color: #75715e; font-style: italic; }
+    .num { color: #ae81ff; }
+
+    /* ===== TIP BOX ===== */
+    .tip {
+        background: #e8f5e9;
+        border-left: 4px solid #4caf50;
+        padding: 12px 14px;
+        margin: 12px 0;
+        border-radius: 4px;
+        font-size: 0.9rem;
+        color: #2e7d32;
+    }
+    .tip strong { color: #1b5e20; }
+
+    .warning {
+        background: #fff3cd;
+        border-left: 4px solid #ffc107;
+        padding: 12px 14px;
+        margin: 12px 0;
+        border-radius: 4px;
+        font-size: 0.9rem;
+        color: #856404;
+    }
+
+    /* ===== ANIMACJA ===== */
+    @keyframes slideDown {
+        from { opacity: 0; transform: translateY(-20px); }
+        to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* ===== RESPONSYWNOŚĆ ===== */
+    @media (max-width: 768px) {
+        .grid { grid-template-columns: repeat(2, 1fr); gap: 15px; }
+        .header h1 { font-size: 2rem; }
+        .modal { width: 98%; max-height: 90vh; }
+        .modal-header h2 { font-size: 1.3rem; }
+        .modal-content { padding: 20px; }
+    }
+
+    @media (max-width: 480px) {
+        .grid { grid-template-columns: 1fr; }
+        .header h1 { font-size: 1.6rem; }
+    }
+</style>
+</head>
+<body>
+
+<div class='header'>
+    <h1> DAX Master Board</h1>
+    <p class='subtitle'>Kompletny przewodnik po funkcjach DAX z praktycznymi przykładami</p>
+</div>
+
+<div class='grid'>
+    <div class='card' onclick='openModal("agg")'>
+        <svg class='icon' viewBox='0 0 24 24'><line x1='12' y1='20' x2='12' y2='10'></line><line x1='18' y1='20' x2='18' y2='4'></line><line x1='6' y1='20' x2='6' y2='16'></line></svg>
+        <h2>Agregacje</h2>
+        <p>SUM, AVG, COUNT, DISTINCT, Iteratory</p>
+    </div>
+    <div class='card' onclick='openModal("filter")'>
+        <svg class='icon' viewBox='0 0 24 24'><polygon points='22 3 2 3 10 12.46 10 19 14 21 14 12.46 22 3'></polygon></svg>
+        <h2>Filtry i Logika</h2>
+        <p>CALCULATE, ALL, KEEPFILTERS, REMOVEFILTERS</p>
+    </div>
+    <div class='card' onclick='openModal("time")'>
+        <svg class='icon' viewBox='0 0 24 24'><circle cx='12' cy='12' r='10'></circle><polyline points='12 6 12 12 16 14'></polyline></svg>
+        <h2>Time Intelligence</h2>
+        <p>YTD, TOTALYTD, DATEADD, DATESINYEAR</p>
+    </div>
+    <div class='card' onclick='openModal("date")'>
+        <svg class='icon' viewBox='0 0 24 24'><rect x='3' y='4' width='18' height='18' rx='2' ry='2'></rect><line x1='16' y1='2' x2='16' y2='6'></line><line x1='8' y1='2' x2='8' y2='6'></line></svg>
+        <h2>Data i Czas</h2>
+        <p>TODAY, YEAR, MONTH, DATEDIFF, EOMONTH</p>
+    </div>
+    <div class='card' onclick='openModal("text")'>
+        <svg class='icon' viewBox='0 0 24 24'><polyline points='4 7 4 4 20 4 20 7'></polyline><line x1='9' y1='20' x2='15' y2='20'></line><line x1='12' y1='4' x2='12' y2='20'></line></svg>
+        <h2>Tekst</h2>
+        <p>FORMAT, LEFT, SEARCH, SUBSTITUTE, UNICHAR</p>
+    </div>
+    <div class='card' onclick='openModal("logic")'>
+        <svg class='icon' viewBox='0 0 24 24'><path d='M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z'></path></svg>
+        <h2>Logika (IF)</h2>
+        <p>IF, SWITCH, AND, OR, NOT</p>
+    </div>
+    <div class='card' onclick='openModal("numbers")'>
+        <svg class='icon' viewBox='0 0 24 24'><circle cx='9' cy='9' r='7'></circle><circle cx='9' cy='9' r='4'></circle><line x1='16' y1='16' x2='20' y2='20'></line></svg>
+        <h2>Liczby i Zaokrągl.</h2>
+        <p>ROUND, INT, ABS, POWER, SQRT, MOD</p>
+    </div>
+    <div class='card' onclick='openModal("tables")'>
+        <svg class='icon' viewBox='0 0 24 24'><rect x='3' y='3' width='18' height='18' rx='2' ry='2'></rect><line x1='3' y1='9' x2='21' y2='9'></line><line x1='9' y1='3' x2='9' y2='21'></line></svg>
+        <h2>Tabele i Relacje</h2>
+        <p>RELATED, RELATEDTABLE, VALUES, DISTINCT</p>
+    </div>
+    <div class='card' onclick='openModal("stats")'>
+        <svg class='icon' viewBox='0 0 24 24'><polyline points='23 6 13.5 15.5 8.5 10.5 1 17'></polyline><polyline points='17 6 23 6 23 12'></polyline></svg>
+        <h2>Statystyka</h2>
+        <p>STDEV, VAR, PERCENTILE, MEDIAN</p>
+    </div>
+    <div class='card' onclick='openModal("currency")'>
+        <svg class='icon' viewBox='0 0 24 24'><line x1='12' y1='1' x2='12' y2='23'></line><path d='M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6'></path></svg>
+        <h2>Waluta i Format</h2>
+        <p>TEXT, FORMAT, FIXED, GENERATESERIES</p>
+    </div>
+    <div class='card' onclick='openModal("context")'>
+        <svg class='icon' viewBox='0 0 24 24'><circle cx='12' cy='12' r='1'></circle><circle cx='19' cy='12' r='1'></circle><circle cx='5' cy='12' r='1'></circle></svg>
+        <h2>Nawiasy i Kontekst</h2>
+        <p>ALLEXCEPT, ALLSELECTED, ISINSCOPE, TREATAS</p>
+    </div>
+    <div class='card' onclick='openModal("errors")'>
+        <svg class='icon' viewBox='0 0 24 24'><circle cx='12' cy='12' r='10'></circle><line x1='12' y1='8' x2='12' y2='12'></line><line x1='12' y1='16' x2='12.01' y2='16'></line></svg>
+        <h2>Błędy i Walidacja</h2>
+        <p>IFERROR, IFNA, ISERROR, ISBLANK, ERROR</p>
+    </div>
+    <div class='card' onclick='openModal("collections")'>
+        <svg class='icon' viewBox='0 0 24 24'><path d='M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7'></path><path d='M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z'></path></svg>
+        <h2>Kolekcje i Iteracja</h2>
+        <p>GENERATE, UNION, EXCEPT, INTERSECT, CROSSJOIN</p>
+    </div>
+    <div class='card' onclick='openModal("window")'>
+        <svg class='icon' viewBox='0 0 24 24'><polyline points='3 3 21 3 21 21 3 21 3 3'></polyline><line x1='3' y1='9' x2='21' y2='9'></line><line x1='9' y1='3' x2='9' y2='21'></line></svg>
+        <h2>Window Functions</h2>
+        <p>OFFSET, WINDOW, INDEX, RANK</p>
+    </div>
+    <div class='card' onclick='openModal("advanced")'>
+        <svg class='icon' viewBox='0 0 24 24'><path d='M12 2L2 7l10 5 10-5-10-5z'></path><path d='M2 17l10 5 10-5'></path><path d='M2 12l10 5 10-5'></path></svg>
+        <h2>Zaawansowany CALCULATE</h2>
+        <p>USERELATIONSHIP, CROSSFILTER, Filter Arguments</p>
+    </div>
+    <div class='card' onclick='openModal("best")'>
+        <svg class='icon' viewBox='0 0 24 24'><path d='M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z'></path></svg>
+        <h2>Best Practices</h2>
+        <p>Wskazówki, optymalizacja, pułapki, wzorce</p>
+    </div>
+</div>
+
+<!-- ================= MODALE ================= -->
+
+<!-- MODAL 1: AGREGACJE -->
+<div id='modal-agg' class='modal-overlay' onclick='closeModal(event)'>
+    <div class='modal'>
+        <div class='modal-header'><h2> Agregacje</h2><button class='close' onclick='closeById("agg")'>&times;</button></div>
+        <div class='modal-content'>
+            <div class='section-title'>Podstawowe Funkcje Aggregate</div>
+            <div class='func-row'>
+                <span class='func-name'>SUM(kolumna)</span>
+                <div class='func-desc'>Sumuje wszystkie wartości numeryczne w kolumnie.</div>
+                <pre><span class='func'>SUM</span>(Sales[Amount])</pre>
+                <div class='tip'><strong> Tip:</strong> SUM automatycznie ignoruje BLANKi. To najwydajniejsza funkcja do sum.</div>
+            </div>
+            <div class='func-row'>
+                <span class='func-name'>AVERAGE(kolumna)</span>
+                <div class='func-desc'>Oblicza średnią arytmetyczną wartości (ignoruje BLANK i FALSE).</div>
+                <pre><span class='func'>AVERAGE</span>(Sales[Amount])</pre>
+            </div>
+            <div class='func-row'>
+                <span class='func-name'>MIN / MAX</span>
+                <div class='func-desc'>Zwraca najmniejszą lub największą wartość z kolumny.</div>
+                <pre>Min Price = <span class='func'>MIN</span>(Products[Price])
+Max Price = <span class='func'>MAX</span>(Products[Price])</pre>
+            </div>
+            <div class='section-title'>Liczenie (Counting)</div>
+            <div class='func-row'>
+                <span class='func-name'>COUNT(kolumna)</span>
+                <div class='func-desc'>Liczy liczby całkowite i dziesiętne. Ignoruje BLANK i TRUE/FALSE.</div>
+                <pre>Rows = <span class='func'>COUNT</span>(Sales[Amount])</pre>
+            </div>
+            <div class='func-row'>
+                <span class='func-name'>COUNTA(kolumna)</span>
+                <div class='func-desc'>Liczy wszystkie niepuste wartości (teksty, liczby, logika, błędy).</div>
+            </div>
+            <div class='func-row'>
+                <span class='func-name'>COUNTROWS(tabela)</span>
+                <div class='func-desc'>Liczy wszystkie wiersze w tabeli. NAJWYDAJNIEJSZA dla liczenia wierszy.</div>
+                <pre>Total Transactions = <span class='func'>COUNTROWS</span>(Sales)</pre>
+                <div class='tip'><strong> Best Practice:</strong> Zawsze używaj COUNTROWS zamiast COUNT(*) lub COUNT(kolumna) do liczenia wierszy!</div>
+            </div>
+            <div class='section-title'>Unikalne Wartości</div>
+            <div class='func-row'>
+                <span class='func-name'>DISTINCTCOUNT(kolumna)</span>
+                <div class='func-desc'>Liczy unikalne (distinct) wartości w kolumnie. BLANK liczony oddzielnie.</div>
+                <pre>Unique Customers = <span class='func'>DISTINCTCOUNT</span>(Sales[CustomerKey])</pre>
+            </div>
+            <div class='func-row'>
+                <span class='func-name'>DISTINCTCOUNTNOBLANK(kolumna)</span>
+                <div class='func-desc'>Jak DISTINCTCOUNT, ale ignoruje BLANK wartości.</div>
+            </div>
+            <div class='section-title'>Funkcje Iteracyjne (Funkcje X)</div>
+            <div class='func-row'>
+                <span class='func-name'>SUMX(tabela, wyrażenie)</span>
+                <div class='func-desc'>Iteruje po każdym wierszu tabeli, oblicza wyrażenie, sumuje wyniki.</div>
+                <pre>Margin = <span class='func'>SUMX</span>(Sales, 
+    Sales[Qty] * (Sales[Price] - Sales[Cost]))</pre>
+                <div class='warning'><strong> Uwaga:</strong> SUMX może być wolny dla dużych zbiorów danych. Preferuj obliczenia w Power Query.</div>
+            </div>
+            <div class='func-row'>
+                <span class='func-name'>AVERAGEX / MINX / MAXX</span>
+                <div class='func-desc'>Jak SUMX, ale oblicza średnią, minimum lub maksimum po iteracji.</div>
+                <pre>Avg Margin % = <span class='func'>AVERAGEX</span>(Sales,
+    (Sales[Price] - Sales[Cost]) / Sales[Price])</pre>
+            </div>
+            <div class='func-row'>
+                <span class='func-name'>RANKX(tabela, wyrażenie, [wartość], [porządek])</span>
+                <div class='func-desc'>Ranguje wartości wyrażenia w kontekście tabeli.</div>
+                <pre>Sales Rank = <span class='func'>RANKX</span>(<span class='func'>ALL</span>(Customers), [Sales], , 0)</pre>
+                <div class='tip'><strong> Parametry:</strong> 0 = malejący (duże pierwsze), 1 = rosnący (małe pierwsze).</div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- MODAL 2: FILTRY I LOGIKA -->
+<div id='modal-filter' class='modal-overlay' onclick='closeModal(event)'>
+    <div class='modal'>
+        <div class='modal-header'><h2> Filtry i Logika</h2><button class='close' onclick='closeById("filter")'>&times;</button></div>
+        <div class='modal-content'>
+            <div class='section-title'>CALCULATE - Królem DAX</div>
+            <div class='func-row'>
+                <span class='func-name'>CALCULATE(wyrażenie, [filtr1], [filtr2], ...)</span>
+                <div class='func-desc'>Zmienia kontekst filtra dla wyrażenia. Jedyna funkcja (poza CALCULATETABLE) która to robi.</div>
+                <pre>Red Sales = <span class='func'>CALCULATE</span>(
+    [Sales],
+    Products[Color] = <span class='str'>"Red"</span>
+)</pre>
+                <div class='tip'><strong> Wskazówka:</strong> CALCULATE to 80% składni każdej zaawansowanej miary DAX.</div>
+            </div>
+            <div class='section-title'>Usuwanie Filtrów</div>
+            <div class='func-row'>
+                <span class='func-name'>ALL([tabela], [kolumna1], [kolumna2], ...)</span>
+                <div class='func-desc'>Usuwa wszystkie filtry z wymienionych kolumn. Zwraca tabelę bez filtrów.</div>
+                <pre>% of Total = [Sales] / <span class='func'>CALCULATE</span>([Sales], <span class='func'>ALL</span>(Sales))</pre>
+            </div>
+            <div class='func-row'>
+                <span class='func-name'>ALLEXCEPT(tabela, [kolumna1], [kolumna2], ...)</span>
+                <div class='func-desc'>Usuwa filtry ze WSZYSTKIEGO OPRÓCZ wymienionych kolumn.</div>
+                <pre>Sales by Category = <span class='func'>CALCULATE</span>(
+    [Sales],
+    <span class='func'>ALLEXCEPT</span>(Products, Products[Category])
+)</pre>
+            </div>
+            <div class='func-row'>
+                <span class='func-name'>REMOVEFILTERS()</span>
+                <div class='func-desc'>Alias dla ALL, używany jako modyfikator wewnątrz CALCULATE. Nie zwraca tabeli.</div>
+            </div>
+            <div class='section-title'>Zachowanie Kontekstu Filtra</div>
+            <div class='func-row'>
+                <span class='func-name'>ALLSELECTED([kolumna])</span>
+                <div class='func-desc'>Zwraca wszystkie wiersze WIDOCZNE w bieżącym zapytaniu (respektuje slicery i filtry zewnętrzne).</div>
+                <pre>% of Selected = [Sales] / <span class='func'>CALCULATE</span>(
+    [Sales], 
+    <span class='func'>ALLSELECTED</span>(Sales[Date])
+)</pre>
+            </div>
+            <div class='func-row'>
+                <span class='func-name'>KEEPFILTERS(filter_argument)</span>
+                <div class='func-desc'>Dodaje filtr do kontekstu zamiast go nadpisywać. Bardzo rzadko używane.</div>
+            </div>
+            <div class='section-title'>Relacje</div>
+            <div class='func-row'>
+                <span class='func-name'>USERELATIONSHIP(col1, col2)</span>
+                <div class='func-desc'>Aktywuje NIEAKTYWNĄ relację na czas tego obliczenia.</div>
+                <pre>Ship Sales = <span class='func'>CALCULATE</span>([Sales],
+    <span class='func'>USERELATIONSHIP</span>(Sales[ShipDate], 
+        Dates[Date]))</pre>
+            </div>
+            <div class='func-row'>
+                <span class='func-name'>CROSSFILTER(col1, col2, direction)</span>
+                <div class='func-desc'>Zmienia kierunek filtrowania: Both, Single (domyślnie), None.</div>
+                <pre><span class='func'>CALCULATE</span>([Sales],
+    <span class='func'>CROSSFILTER</span>(Sales[Date], 
+        Dates[Date], Both))</pre>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- MODAL 3: TIME INTELLIGENCE -->
+<div id='modal-time' class='modal-overlay' onclick='closeModal(event)'>
+    <div class='modal'>
+        <div class='modal-header'><h2> Time Intelligence</h2><button class='close' onclick='closeById("time")'>&times;</button></div>
+        <div class='modal-content'>
+            <div class='section-title'>YTD, QTD, MTD Sumy</div>
+            <div class='func-row'>
+                <span class='func-name'>TOTALYTD(wyrażenie, <date>, [filter])</span>
+                <div class='func-desc'>Sumuje wartość od 1 stycznia bieżącego roku do wybranej daty.</div>
+                <pre>YTD Sales = <span class='func'>TOTALYTD</span>([Sales], 
+    <span class='func'>MAX</span>(Dates[Date]))</pre>
+            </div>
+            <div class='func-row'>
+                <span class='func-name'>TOTALQTD / TOTALMTD</span>
+                <div class='func-desc'>Jak TOTALYTD, ale od początku kwartału / miesiąca.</div>
+            </div>
+            <div class='section-title'>Przesunięcia w Czasie</div>
+            <div class='func-row'>
+                <span class='func-name'>SAMEPERIODLASTYEAR(<date_kolumna>)</span>
+                <div class='func-desc'>Zwraca ten sam zbiór dat przesunięty o rok wstecz.</div>
+                <pre>Prior Year = <span class='func'>CALCULATE</span>([Sales],
+    <span class='func'>SAMEPERIODLASTYEAR</span>(Dates[Date]))</pre>
+            </div>
+            <div class='func-row'>
+                <span class='func-name'>DATEADD(<date_kolumna>, liczba, interwał)</span>
+                <div class='func-desc'>NAJWYDAJNIEJSZA. Przesuwa daty o N interwałów (DAY, MONTH, QUARTER, YEAR).</div>
+                <pre>Prev Month = <span class='func'>CALCULATE</span>([Sales],
+    <span class='func'>DATEADD</span>(Dates[Date], -1, MONTH))</pre>
+                <div class='tip'><strong> Best Practice:</strong> Użyj DATEADD zamiast SAMEPERIODLASTYEAR - jest szybsza!</div>
+            </div>
+            <div class='func-row'>
+                <span class='func-name'>PARALLELPERIOD(<date_kolumna>, liczba, interwał)</span>
+                <div class='func-desc'>Zwraca PEŁNY okres (całe miesiące), nawet jeśli filtr zawiera tylko część miesiąca.</div>
+            </div>
+            <div class='section-title'>Okresy Niestandardowe</div>
+            <div class='func-row'>
+                <span class='func-name'>DATESINPERIOD(<date_kolumna>, data_początkowa, liczba, interwał)</span>
+                <div class='func-desc'>Zwraca tabelę dat z określonego przedziału. Idealne do średnich ruchomych 3M.</div>
+                <pre>Rolling 3M = <span class='func'>CALCULATE</span>([Sales],
+    <span class='func'>DATESINPERIOD</span>(Dates[Date], 
+        <span class='func'>MAX</span>(Dates[Date]), -3, MONTH))</pre>
+            </div>
+            <div class='func-row'>
+                <span class='func-name'>DATESYTD / DATESQTD / DATESMTD</span>
+                <div class='func-desc'>Zwracają tabelę dat od początku roku/kwartału/miesiąca do wybranej daty.</div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- MODAL 4: DATA I CZAS -->
+<div id='modal-date' class='modal-overlay' onclick='closeModal(event)'>
+    <div class='modal'>
+        <div class='modal-header'><h2> Data i Czas (Podstawowe)</h2><button class='close' onclick='closeById("date")'>&times;</button></div>
+        <div class='modal-content'>
+            <div class='section-title'>Bieżąca Data i Godzina</div>
+            <div class='func-row'>
+                <span class='func-name'>TODAY()</span>
+                <div class='func-desc'>Zwraca bieżącą datę (bez godziny) w momencie odświeżania raportu.</div>
+                <pre>Days Ago = <span class='func'>DATEDIFF</span>(TODAY(), Sales[Date], DAY)</pre>
+            </div>
+            <div class='func-row'>
+                <span class='func-name'>NOW()</span>
+                <div class='func-desc'>Zwraca bieżącą datę Z GODZINĄ w momencie odświeżania.</div>
+            </div>
+            <div class='section-title'>Tworzenie Daty</div>
+            <div class='func-row'>
+                <span class='func-name'>DATE(rok, miesiąc, dzień)</span>
+                <div class='func-desc'>Tworzy datę ze składników (liczby całkowite).</div>
+                <pre>Year End = <span class='func'>DATE</span>(YEAR(TODAY()), 12, 31)</pre>
+            </div>
+            <div class='section-title'>Ekstrakcja Składników</div>
+            <div class='func-row'>
+                <span class='func-name'>YEAR / MONTH / DAY(data)</span>
+                <div class='func-desc'>Pobiera rok, miesiąc lub dzień z daty.</div>
+                <pre>Year = <span class='func'>YEAR</span>(Sales[Date])
+Month = <span class='func'>MONTH</span>(Sales[Date])
+Day = <span class='func'>DAY</span>(Sales[Date])</pre>
+            </div>
+            <div class='func-row'>
+                <span class='func-name'>WEEKNUM(data, [return_type])</span>
+                <div class='func-desc'>Zwraca numer tygodnia w roku (1-53).</div>
+            </div>
+            <div class='func-row'>
+                <span class='func-name'>WEEKDAY(data, [return_type])</span>
+                <div class='func-desc'>Zwraca dzień tygodnia (1=niedziela, 7=sobota, domyślnie).</div>
+            </div>
+            <div class='section-title'>Obliczenia na Datach</div>
+            <div class='func-row'>
+                <span class='func-name'>DATEDIFF(data1, data2, interwał)</span>
+                <div class='func-desc'>Liczy różnicę między dwiema datami. Interwały: DAY, MONTH, YEAR, HOUR, MINUTE, SECOND.</div>
+                <pre>Days Late = <span class='func'>DATEDIFF</span>(Sales[OrderDate], 
+    Sales[ShipDate], DAY)</pre>
+            </div>
+            <div class='func-row'>
+                <span class='func-name'>EOMONTH(data, [liczba_miesięcy])</span>
+                <div class='func-desc'>Zwraca ostatni dzień miesiąca, przesunięty opcjonalnie o N miesięcy.</div>
+                <pre>End Next Month = <span class='func'>EOMONTH</span>(TODAY(), 1)</pre>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- MODAL 5: TEKST -->
+<div id='modal-text' class='modal-overlay' onclick='closeModal(event)'>
+    <div class='modal'>
+        <div class='modal-header'><h2>Funkcje Tekstowe</h2><button class='close' onclick='closeById("text")'>&times;</button></div>
+        <div class='modal-content'>
+            <div class='section-title'>Manipulacja Ciągu</div>
+            <div class='func-row'>
+                <span class='func-name'>LEFT(tekst, liczba_znaków)</span>
+                <div class='func-desc'>Wycina N znaków z LEWEJ strony ciągu.</div>
+                <pre>Code = <span class='func'>LEFT</span>([FullCode], 3)  <span class='comment'>// np "ABC123" → "ABC"</span></pre>
+            </div>
+            <div class='func-row'>
+                <span class='func-name'>RIGHT(tekst, liczba_znaków)</span>
+                <div class='func-desc'>Wycina N znaków z PRAWEJ strony ciągu.</div>
+            </div>
+            <div class='func-row'>
+                <span class='func-name'>MID(tekst, początek, liczba_znaków)</span>
+                <div class='func-desc'>Wycina N znaków ze ŚRODKA, zaczynając od pozycji początek.</div>
+                <pre>Area = <span class='func'>MID</span>([Code], 4, 2)</pre>
+            </div>
+            <div class='func-row'>
+                <span class='func-name'>LEN(tekst)</span>
+                <div class='func-desc'>Zwraca długość tekstu (liczbę znaków).</div>
+            </div>
+            <div class='section-title'>Konkatenacja</div>
+            <div class='func-row'>
+                <span class='func-name'>CONCATENATE(tekst1, tekst2, ...)</span>
+                <div class='func-desc'>Łączy teksty. Rzadko używane - lepiej użyj operatora &.</div>
+                <pre>Full = [First] & <span class='str'>"  "</span> & [Last]</pre>
+            </div>
+            <div class='section-title'>Szukanie i Zamiana</div>
+            <div class='func-row'>
+                <span class='func-name'>SEARCH(szukany_tekst, tekst, [początek])</span>
+                <div class='func-desc'>Szuka tekstu i zwraca pozycję. NIE rozróżnia wielkości liter.</div>
+                <pre>Has Email = <span class='func'>SEARCH</span>(<span class='str'>"@"</span>, [Email]) <> <span class='num'>0</span></pre>
+            </div>
+            <div class='func-row'>
+                <span class='func-name'>FIND(szukany_tekst, tekst, [początek])</span>
+                <div class='func-desc'>Jak SEARCH, ale ROZRÓŻNIA wielkość liter.</div>
+            </div>
+            <div class='func-row'>
+                <span class='func-name'>SUBSTITUTE(tekst, stary, nowy, [liczba_wystąpień])</span>
+                <div class='func-desc'>Podmienia wszystkie (lub N-te) wystąpienia starego tekstu na nowy.</div>
+                <pre>Clean Phone = <span class='func'>SUBSTITUTE</span>([Phone], <span class='str'>"("</span>, <span class='str'>""</span>)</pre>
+            </div>
+            <div class='section-title'>Formatowanie Tekstu</div>
+            <div class='func-row'>
+                <span class='func-name'>FORMAT(wartość, format_ciąg)</span>
+                <div class='func-desc'>Konwertuje wartość (datę, liczbę) na tekst w wybranym formacie.</div>
+                <pre>Month Label = <span class='func'>FORMAT</span>([Date], <span class='str'>"YYYY-MM"</span>)</pre>
+            </div>
+            <div class='func-row'>
+                <span class='func-name'>UPPER / LOWER(tekst)</span>
+                <div class='func-desc'>Konwertuje tekst na WIELKIE / małe litery.</div>
+            </div>
+            <div class='func-row'>
+                <span class='func-name'>TRIM(tekst)</span>
+                <div class='func-desc'>Usuwa spacje z początku i końca tekstu.</div>
+            </div>
+            <div class='func-row'>
+                <span class='func-name'>UNICHAR(liczba)</span>
+                <div class='func-desc'>Zwraca znak Unicode o danym numerze (np. strzałki, symbole).</div>
+                <pre>Trend = <span class='func'>IF</span>([Change]>0, 
+    <span class='func'>UNICHAR</span>(9650), <span class='comment'>// ▲</span>
+    <span class='func'>UNICHAR</span>(9660))  <span class='comment'>// ▼</span></pre>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- MODAL 6: LOGIKA IF -->
+<div id='modal-logic' class='modal-overlay' onclick='closeModal(event)'>
+    <div class='modal'>
+        <div class='modal-header'><h2>Logika (IF)</h2><button class='close' onclick='closeById("logic")'>&times;</button></div>
+        <div class='modal-content'>
+            <div class='section-title'>Instrukcja Warunkowa</div>
+            <div class='func-row'>
+                <span class='func-name'>IF(warunek, wartość_jeśli_prawda, wartość_jeśli_fałsz)</span>
+                <div class='func-desc'>Zwraca jedną z dwóch wartości w zależności od warunku.</div>
+                <pre>Status = <span class='func'>IF</span>([Sales] > 1000, 
+    <span class='str'>"High"</span>, 
+    <span class='str'>"Low"</span>)</pre>
+            </div>
+            <div class='func-row'>
+                <span class='func-name'>SWITCH(wyrażenie, wartość1, wynik1, wartość2, wynik2, ..., [domyślnie])</span>
+                <div class='func-desc'>Wybiera wynik na podstawie dopasowania wyrażenia do wielu wartości. Lepsze od zagnieżdżonych IF.</div>
+                <pre>Category = <span class='func'>SWITCH</span>([Region],
+    <span class='str'>"North"</span>, <span class='str'>"PL-North"</span>,
+    <span class='str'>"South"</span>, <span class='str'>"PL-South"</span>,
+    <span class='str'>"Unknown"</span>)</pre>
+                <div class='tip'><strong> Best Practice:</strong> SWITCH jest bardziej czytelny niż zagnieżdżone IF.</div>
+            </div>
+            <div class='section-title'>Operatory Logiczne</div>
+            <div class='func-row'>
+                <span class='func-name'>AND(logika1, logika2, ...)</span>
+                <div class='func-desc'>Zwraca TRUE jeśli WSZYSTKIE warunki są PRAWDZIWE.</div>
+                <pre>Big Order = <span class='func'>IF</span>(
+    <span class='func'>AND</span>([Qty] > 100, [Value] > 5000),
+    <span class='str'>"Yes"</span>, <span class='str'>"No"</span>)</pre>
+            </div>
+            <div class='func-row'>
+                <span class='func-name'>OR(logika1, logika2, ...)</span>
+                <div class='func-desc'>Zwraca TRUE jeśli PRZYNAJMNIEJ JEDEN warunek jest PRAWDZIWY.</div>
+            </div>
+            <div class='func-row'>
+                <span class='func-name'>NOT(logika)</span>
+                <div class='func-desc'>Odwraca logikę: TRUE → FALSE, FALSE → TRUE.</div>
+                <pre>Not USA = <span class='func'>NOT</span>([Country] = <span class='str'>"USA"</span>)</pre>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- MODAL 7: LICZBY -->
+<div id='modal-numbers' class='modal-overlay' onclick='closeModal(event)'>
+    <div class='modal'>
+        <div class='modal-header'><h2>Liczby i Zaokrąglenie</h2><button class='close' onclick='closeById("numbers")'>&times;</button></div>
+        <div class='modal-content'>
+            <div class='section-title'>Zaokrąglenie</div>
+            <div class='func-row'>
+                <span class='func-name'>ROUND(liczba, liczba_miejsc_dziesiętnych)</span>
+                <div class='func-desc'>Zaokrągla do N miejsc dziesiętnych (standardowe reguły zaokrąglania).</div>
+                <pre>Price = <span class='func'>ROUND</span>([Cost] * 1.3, 2)</pre>
+            </div>
+            <div class='func-row'>
+                <span class='func-name'>ROUNDUP / ROUNDDOWN(liczba, liczba_miejsc)</span>
+                <div class='func-desc'>Zaokrągla ZAWSZE w górę lub w dół.</div>
+            </div>
+            <div class='func-row'>
+                <span class='func-name'>INT(liczba)</span>
+                <div class='func-desc'>Obcina część dziesiętną (zaokrąglanie w dół dla liczb dodatnich).</div>
+                <pre>Full Years = <span class='func'>INT</span>(<span class='func'>DATEDIFF</span>(Birth, TODAY(), DAY) / 365.25)</pre>
+            </div>
+            <div class='section-title'>Wartość Bezwzględna</div>
+            <div class='func-row'>
+                <span class='func-name'>ABS(liczba)</span>
+                <div class='func-desc'>Zwraca wartość bezwzględną (zawsze dodatnia).</div>
+                <pre>Variance = <span class='func'>ABS</span>([Budget] - [Actual])</pre>
+            </div>
+            <div class='section-title'>Potęga i Pierwiastek</div>
+            <div class='func-row'>
+                <span class='func-name'>POWER(liczba, potęga)</span>
+                <div class='func-desc'>Podnosi liczbę do potęgi.</div>
+                <pre>Compound = [Principal] * <span class='func'>POWER</span>(1 + [Rate], [Years])</pre>
+            </div>
+            <div class='func-row'>
+                <span class='func-name'>SQRT(liczba)</span>
+                <div class='func-desc'>Zwraca pierwiastek kwadratowy.</div>
+            </div>
+            <div class='section-title'>Pozostałe</div>
+            <div class='func-row'>
+                <span class='func-name'>MOD(liczba, dzielnik)</span>
+                <div class='func-desc'>Zwraca resztę z dzielenia.</div>
+                <pre>Is Even = <span class='func'>MOD</span>([Number], 2) = 0</pre>
+            </div>
+            <div class='func-row'>
+                <span class='func-name'>SIGN(liczba)</span>
+                <div class='func-desc'>Zwraca -1 (ujemna), 0 (zero) lub 1 (dodatnia).</div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- MODAL 8: TABELE I RELACJE -->
+<div id='modal-tables' class='modal-overlay' onclick='closeModal(event)'>
+    <div class='modal'>
+        <div class='modal-header'><h2>Tabele i Relacje</h2><button class='close' onclick='closeById("tables")'>&times;</button></div>
+        <div class='modal-content'>
+            <div class='section-title'>Pobieranie Wartości ze Связаного Wiersza</div>
+            <div class='func-row'>
+                <span class='func-name'>RELATED(kolumna_z_innej_tabeli)</span>
+                <div class='func-desc'>Zwraca wartość z wiersza POWIĄZANEJ tabeli (po relacji 1-do-wielu).</div>
+                <pre>Category = <span class='func'>RELATED</span>(Products[Category])</pre>
+                <div class='warning'><strong> Uwaga:</strong> RELATED działa tylko w kierunku relacji (od Many do One). Dla kierunku odwrotnego użyj RELATEDTABLE.</div>
+            </div>
+            <div class='func-row'>
+                <span class='func-name'>RELATEDTABLE(tabela)</span>
+                <div class='func-desc'>Zwraca TABELĘ powiązanych wierszy z drugiej strony relacji (One-do-Many).</div>
+                <pre>Total Orders = <span class='func'>SUMX</span>(
+    <span class='func'>RELATEDTABLE</span>(Orders),
+    Orders[Amount])</pre>
+            </div>
+            <div class='section-title'>Unikalne Wartości</div>
+            <div class='func-row'>
+                <span class='func-name'>VALUES(kolumna)</span>
+                <div class='func-desc'>Zwraca tabelę UNIKATOWYCH wartości z kolumny w bieżącym kontekście filtra.</div>
+                <pre>Unique = <span class='func'>COUNTROWS</span>(<span class='func'>VALUES</span>([Product]))</pre>
+            </div>
+            <div class='func-row'>
+                <span class='func-name'>DISTINCT(kolumna)</span>
+                <div class='func-desc'>Zwraca tabelę UNIKATOWYCH wartości (ignoruje BLANK).</div>
+            </div>
+            <div class='section-title'>Pobieranie Tabel</div>
+            <div class='func-row'>
+                <span class='func-name'>SELECTEDVALUE(kolumna, [wartość_domyślna])</span>
+                <div class='func-desc'>Zwraca jedyną wybraną wartość lub wartość domyślną (jeśli 0 lub wiele zaznaczonych).</div>
+                <pre>Current Category = <span class='func'>SELECTEDVALUE</span>(
+    Products[Category], 
+    <span class='str'>"All"</span>)</pre>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- MODAL 9: STATYSTYKA -->
+<div id='modal-stats' class='modal-overlay' onclick='closeModal(event)'>
+    <div class='modal'>
+        <div class='modal-header'><h2>Statystyka</h2><button class='close' onclick='closeById("stats")'>&times;</button></div>
+        <div class='modal-content'>
+            <div class='section-title'>Odchylenie Standardowe i Wariancja</div>
+            <div class='func-row'>
+                <span class='func-name'>STDEV.S / STDEV.P(kolumna)</span>
+                <div class='func-desc'>Odchylenie standardowe: S = próba, P = populacja.</div>
+                <pre>StdDev = <span class='func'>STDEV.S</span>(Sales[Amount])</pre>
+            </div>
+            <div class='func-row'>
+                <span class='func-name'>VAR.S / VAR.P(kolumna)</span>
+                <div class='func-desc'>Wariancja (kwadrat odchylenia standardowego).</div>
+            </div>
+            <div class='section-title'>Percentyle i Mediana</div>
+            <div class='func-row'>
+                <span class='func-name'>PERCENTILE.INC(kolumna, k)</span>
+                <div class='func-desc'>Zwraca k-ty percentyl (0-1). 0.5 = mediana, 0.25 = Q1, 0.75 = Q3.</div>
+                <pre>Median = <span class='func'>PERCENTILE.INC</span>(Sales[Amount], 0.5)</pre>
+            </div>
+            <div class='func-row'>
+                <span class='func-name'>PERCENTILE.EXC(kolumna, k)</span>
+                <div class='func-desc'>Jak PERCENTILE.INC, ale wyłączając wartości graniczne (zamiast je włączać).</div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- MODAL 10: WALUTA I FORMAT -->
+<div id='modal-currency' class='modal-overlay' onclick='closeModal(event)'>
+    <div class='modal'>
+        <div class='modal-header'><h2>Waluta i Format</h2><button class='close' onclick='closeById("currency")'>&times;</button></div>
+        <div class='modal-content'>
+            <div class='section-title'>TEXT vs FORMAT</div>
+            <div class='func-row'>
+                <span class='func-name'>TEXT(wartość, format_ciąg)</span>
+                <div class='func-desc'>Konwertuje wartość na tekst w formacie Excel/VBA (.NET style).</div>
+                <pre>Revenue = <span class='func'>TEXT</span>([Sales], <span class='str'>"$#,##0.00"</span>)</pre>
+            </div>
+            <div class='func-row'>
+                <span class='func-name'>FORMAT(wartość, format_ciąg)</span>
+                <div class='func-desc'>Konwertuje wartość na tekst. Wspiera bardziej nowoczesne formaty (C# .NET).</div>
+                <pre>Date = <span class='func'>FORMAT</span>([Date], <span class='str'>"yyyy-MM-dd HH:mm:ss"</span>)</pre>
+            </div>
+            <div class='section-title'>Fixed Point</div>
+            <div class='func-row'>
+                <span class='func-name'>FIXED(liczba, [liczba_miejsc], [bez_separatorów])</span>
+                <div class='func-desc'>Konwertuje liczbę na tekst z określoną liczbą miejsc dziesiętnych.</div>
+                <pre>Formatted = <span class='func'>FIXED</span>([Amount], 2)</pre>
+            </div>
+            <div class='section-title'>Generowanie Serii</div>
+            <div class='func-row'>
+                <span class='func-name'>GENERATESERIES(początek, koniec, [krok])</span>
+                <div class='func-desc'>Generuje tabelę liczb od początek do koniec z opcjonalnym krokiem.</div>
+                <pre>Numbers = <span class='func'>GENERATESERIES</span>(1, 100, 5)</pre>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- MODAL 11: NAWIASY I KONTEKST -->
+<div id='modal-context' class='modal-overlay' onclick='closeModal(event)'>
+    <div class='modal'>
+        <div class='modal-header'><h2>⟨ ⟩ Nawiasy i Kontekst</h2><button class='close' onclick='closeById("context")'>&times;</button></div>
+        <div class='modal-content'>
+            <div class='section-title'>Zaawansowane Usuwanie Filtrów</div>
+            <div class='func-row'>
+                <span class='func-name'>ALLEXCEPT(tabela, [kolumna1], [kolumna2], ...)</span>
+                <div class='func-desc'>Usuwa wszystkie filtry OPRÓCZ wymienionych.</div>
+                <pre>Total by Cat = <span class='func'>CALCULATE</span>([Sales],
+    <span class='func'>ALLEXCEPT</span>(Products, Products[Category]))</pre>
+            </div>
+            <div class='func-row'>
+                <span class='func-name'>ALLSELECTED([kolumna])</span>
+                <div class='func-desc'>Respektuje bieżące zaznaczenia i filtry slicerów (bardziej subtelne niż ALL).</div>
+            </div>
+            <div class='section-title'>Zakresy Filtrów</div>
+            <div class='func-row'>
+                <span class='func-name'>ISINSCOPE(kolumna)</span>
+                <div class='func-desc'>Zwraca TRUE jeśli kolumna jest w bieżącym zakresie (hierarchii wizualizacji).</div>
+                <pre>Show Detail = <span class='func'>IF</span>(
+    <span class='func'>ISINSCOPE</span>(Products[Category]), 1, 0)</pre>
+            </div>
+            <div class='section-title'>Mapowanie Kolumn</div>
+            <div class='func-row'>
+                <span class='func-name'>TREATAS(kolumna1, kolumna2)</span>
+                <div class='func-desc'>Mapuje wartości z jednej kolumny na wartości innej (zaawansowany - rzadko).</div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- MODAL 12: BŁĘDY I WALIDACJA -->
+<div id='modal-errors' class='modal-overlay' onclick='closeModal(event)'>
+    <div class='modal'>
+        <div class='modal-header'><h2>Błędy i Walidacja</h2><button class='close' onclick='closeById("errors")'>&times;</button></div>
+        <div class='modal-content'>
+            <div class='section-title'>Obsługa Błędów</div>
+            <div class='func-row'>
+                <span class='func-name'>IFERROR(wyrażenie, wartość_jeśli_błąd)</span>
+                <div class='func-desc'>Zwraca wyrażenie, jeśli jest poprawne; w przeciwnym razie zwraca wartość zastępczą.</div>
+                <pre>Ratio = <span class='func'>IFERROR</span>([Amount] / [Cost], 0)</pre>
+                <div class='tip'><strong> Wskazówka:</strong> Używaj IFERROR zamiast IF z ISERROR - jest bardziej czytelny.</div>
+            </div>
+            <div class='func-row'>
+                <span class='func-name'>IFNA(wyrażenie, wartość_jeśli_na)</span>
+                <div class='func-desc'>Jak IFERROR, ale reaguje TYLKO na #N/A (nie na inne błędy).</div>
+            </div>
+            <div class='section-title'>Sprawdzenie Błędu</div>
+            <div class='func-row'>
+                <span class='func-name'>ISERROR(wyrażenie)</span>
+                <div class='func-desc'>Zwraca TRUE jeśli wyrażenie generuje błąd, FALSE w przeciwnym razie.</div>
+            </div>
+            <div class='func-row'>
+                <span class='func-name'>ISBLANK(wyrażenie)</span>
+                <div class='func-desc'>Zwraca TRUE jeśli wyrażenie to BLANK (brak wartości).</div>
+                <pre>Has Data = <span class='func'>NOT</span>(<span class='func'>ISBLANK</span>([Amount]))</pre>
+            </div>
+            <div class='section-title'>Generowanie Błędu</div>
+            <div class='func-row'>
+                <span class='func-name'>ERROR(tekst_błędu)</span>
+                <div class='func-desc'>Generuje błąd z podanym komunikatem (zaawansowane, rzadko).</div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- MODAL 13: KOLEKCJE I ITERACJA -->
+<div id='modal-collections' class='modal-overlay' onclick='closeModal(event)'>
+    <div class='modal'>
+        <div class='modal-header'><h2>Kolekcje i Iteracja</h2><button class='close' onclick='closeById("collections")'>&times;</button></div>
+        <div class='modal-content'>
+            <div class='section-title'>Operacje na Tabelach</div>
+            <div class='func-row'>
+                <span class='func-name'>GENERATE(tabela1, tabela2)</span>
+                <div class='func-desc'>Iteruje po wiersza tabeli1 i dla każdego wiersza oblicza tabelę2 w tym kontekście.</div>
+                <pre>Product Sales = <span class='func'>GENERATE</span>(
+    Products,
+    <span class='func'>CALCULATETABLE</span>(Sales,
+        Products[ID] = EARLIER(Products[ID])))</pre>
+            </div>
+            <div class='section-title'>Operacje Zbiorowe</div>
+            <div class='func-row'>
+                <span class='func-name'>UNION(tabela1, tabela2, ...)</span>
+                <div class='func-desc'>Łączy wiele tabel w jedną (zwraca UNIKALNE wiersze).</div>
+            </div>
+            <div class='func-row'>
+                <span class='func-name'>EXCEPT(tabela1, tabela2)</span>
+                <div class='func-desc'>Zwraca wiersze z tabeli1, które nie są w tabeli2.</div>
+            </div>
+            <div class='func-row'>
+                <span class='func-name'>INTERSECT(tabela1, tabela2)</span>
+                <div class='func-desc'>Zwraca WSPÓLNE wiersze z obu tabel.</div>
+            </div>
+            <div class='section-title'>Iloczyn Kartezjański</div>
+            <div class='func-row'>
+                <span class='func-name'>CROSSJOIN(tabela1, tabela2, ...)</span>
+                <div class='func-desc'>Zwraca WSZYSTKIE kombinacje wierszy (iloczyn kartezjański).</div>
+                <pre>All Combos = <span class='func'>CROSSJOIN</span>(Products, Dates)</pre>
+                <div class='warning'><strong> Uwaga:</strong> Może generować bardzo duże tabele! 1000 × 1000 = 1M wierszy.</div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- MODAL 14: WINDOW FUNCTIONS -->
+<div id='modal-window' class='modal-overlay' onclick='closeModal(event)'>
+    <div class='modal'>
+        <div class='modal-header'><h2>Window Functions (DAX 2021+)</h2><button class='close' onclick='closeById("window")'>&times;</button></div>
+        <div class='modal-content'>
+            <div class='section-title'>Window Functions (Nowsze Wersje)</div>
+            <div class='func-row'>
+                <span class='func-name'>WINDOW(wyrażenie, od, do, [sorty], [przesunięcie])</span>
+                <div class='func-desc'>Zaawansowana funkcja. Pozwala na okna dynamiczne (np. poprzednie 3 wiersze).</div>
+                <pre><span class='comment'>// Wymaga DAX 2021+ i Power BI Desktop 2021+</span>
+Prev = <span class='func'>WINDOW</span>(1, -1, 0)</pre>
+            </div>
+            <div class='func-row'>
+                <span class='func-name'>INDEX(wyrażenie, pozycja, [sorty])</span>
+                <div class='func-desc'>Zwraca wartość wyrażenia z określonej pozycji w oknie.</div>
+            </div>
+            <div class='func-row'>
+                <span class='func-name'>OFFSET(wyrażenie, liczba_wierszy, [sorty])</span>
+                <div class='func-desc'>Przesunięcie o N wierszy względem bieżącego wiersza.</div>
+            </div>
+            <div class='tip'><strong>ℹ️ Info:</strong> Funkcje Window wymagają Power BI Desktop z kwietnia 2021 lub nowszego. Zaawansowane!</div>
+        </div>
+    </div>
+</div>
+
+<!-- MODAL 15: ZAAWANSOWANY CALCULATE -->
+<div id='modal-advanced' class='modal-overlay' onclick='closeModal(event)'>
+    <div class='modal'>
+        <div class='modal-header'><h2>Zaawansowany CALCULATE</h2><button class='close' onclick='closeById("advanced")'>&times;</button></div>
+        <div class='modal-content'>
+            <div class='section-title'>Modyfikatory Filtrów</div>
+            <div class='func-row'>
+                <span class='func-name'>CALCULATE([wyrażenie], kolumna = wartość)</span>
+                <div class='func-desc'>Podstawowy modyfikator: filtruj kolumnę na jedną wartość.</div>
+                <pre>Red Sales = <span class='func'>CALCULATE</span>([Sales], Products[Color] = <span class='str'>"Red"</span>)</pre>
+            </div>
+            <div class='func-row'>
+                <span class='func-name'>CALCULATE([wyrażenie], kolumna IN {...})</span>
+                <div class='func-desc'>Filtruj na wielu wartościach naraz.</div>
+                <pre>Top Colors = <span class='func'>CALCULATE</span>([Sales],
+    Products[Color] IN {<span class='str'>"Red"</span>, <span class='str'>"Blue"</span>, <span class='str'>"Green"</span>})</pre>
+            </div>
+            <div class='section-title'>Zaawansowane Techniki</div>
+            <div class='func-row'>
+                <span class='func-name'>USERELATIONSHIP + CALCULATE</span>
+                <div class='func-desc'>Aktywuj nieaktywną relację tylko dla tego obliczenia.</div>
+                <pre>Ship Date Sales = <span class='func'>CALCULATE</span>([Sales],
+    <span class='func'>USERELATIONSHIP</span>(Sales[ShipDate], Dates[Date]))</pre>
+            </div>
+            <div class='func-row'>
+                <span class='func-name'>CROSSFILTER + CALCULATE</span>
+                <div class='func-desc'>Zmień kierunek filtrowania relacji (Both, Single, None).</div>
+                <pre>Bidirectional = <span class='func'>CALCULATE</span>([Sales],
+    <span class='func'>CROSSFILTER</span>(Sales[DateKey], Dates[DateKey], Both))</pre>
+            </div>
+            <div class='section-title'>Kontekst Wiersza</div>
+            <div class='func-row'>
+                <span class='func-name'>EARLIER(kolumna, [liczba_poziomów])</span>
+                <div class='func-desc'>Zwraca wartość kolumny z zewnętrznego kontekstu (przydatne w iteratorach).</div>
+                <pre>Outer = <span class='func'>SUMX</span>(Table,
+    <span class='func'>EARLIER</span>([Value], 1))</pre>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- MODAL 16: BEST PRACTICES -->
+<div id='modal-best' class='modal-overlay' onclick='closeModal(event)'>
+    <div class='modal'>
+        <div class='modal-header'><h2>Best Practices</h2><button class='close' onclick='closeById("best")'>&times;</button></div>
+        <div class='modal-content'>
+            <div class='section-title'>Performance Tips</div>
+            <div class='func-row'>
+                <div class='func-desc'><strong>1. Unikaj X-Functions w dużych tabelach</strong></div>
+                <pre>❌ <span class='func'>SUMX</span>(Sales, Sales[Qty] * Sales[Price])</pre>
+                <pre> Zamiast tego utwórz kolumnę w Power Query</pre>
+                <div class='warning'><strong>:</strong> SUMX iteruje - wolne dla milionów wierszy!</div>
+            </div>
+            <div class='func-row'>
+                <div class='func-desc'><strong>2. Użyj ALL zamiast REMOVEFILTERS w CALCULATE</strong></div>
+                <pre> <span class='func'>CALCULATE</span>([Sales], <span class='func'>ALL</span>(Date))</pre>
+                <pre>❌ Unikaj: <span class='func'>CALCULATE</span>([Sales], <span class='func'>REMOVEFILTERS</span>(Date))</pre>
+            </div>
+            <div class='func-row'>
+                <div class='func-desc'><strong>3. Preferuj COUNTROWS zamiast COUNT</strong></div>
+                <pre> <span class='func'>COUNTROWS</span>(Sales)  <span class='comment'>// szybko</span>
+❌ <span class='func'>COUNT</span>(Sales[Amount])  <span class='comment'>// wolniej</span></pre>
+            </div>
+            <div class='section-title'>Kod i Czystość</div>
+            <div class='func-row'>
+                <div class='func-desc'><strong>4. Nazwy miar: PascalCase, opisowe</strong></div>
+                <pre> Total Sales by Region
+❌ ts, Sales2, x</pre>
+            </div>
+            <div class='func-row'>
+                <div class='func-desc'><strong>5. Komentarze dla złożonych wyrażeń</strong></div>
+                <pre><span class='comment'>// YTD calculation with specific date column</span>
+YTD Sales = <span class='func'>TOTALYTD</span>([Sales], MAX(Dates[Date]))</pre>
+            </div>
+            <div class='func-row'>
+                <div class='func-desc'><strong>6. Formatowanie: wcięcia, nawiasy, spacje</strong></div>
+                <pre> Czytelne:
+<span class='func'>CALCULATE</span>(
+    [Sales],
+    Products[Color] = <span class='str'>"Red"</span>,
+    <span class='func'>ALL</span>(Date)
+)</pre>
+            </div>
+            <div class='section-title'>Pułapki do Unikania</div>
+            <div class='func-row'>
+                <div class='func-desc'><strong>7. BLANK vs 0</strong></div>
+                <div class='warning'><strong>Pamiętaj:</strong> BLANK ≠ 0. W sumach BLANK jest ignorowany, 0 jest dodawany!</div>
+            </div>
+            <div class='func-row'>
+                <div class='func-desc'><strong>8. Kontekst Wiersza vs Filtra</strong></div>
+                <div class='tip'><strong>:</strong> Row context = w kolumnach; Filter context = w miarach. CALCULATE przechodzi między nimi!</div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    function openModal(id) {
+        var el = document.getElementById('modal-' + id);
+        if(el) {
+            el.classList.add('active');
+            document.body.style.overflow = 'hidden'; 
+        }
+    }
+    function closeById(id) {
+        var el = document.getElementById('modal-' + id);
+        if(el) {
+            el.classList.remove('active');
+            document.body.style.overflow = '';
+        }
+    }
+    function closeModal(e) {
+        if (e.target.classList.contains('modal-overlay')) {
+            e.target.classList.remove('active');
+            document.body.style.overflow = '';
+        }
+    }
+    document.addEventListener('keydown', function(e) {
+        if (e.key === 'Escape') {
+            var active = document.querySelectorAll('.modal-overlay.active');
+            active.forEach(function(m){ m.classList.remove('active'); });
+            document.body.style.overflow = '';
+        }
+    });
+</script>
+
+</body>
+</html>

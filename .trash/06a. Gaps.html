@@ -1,0 +1,697 @@
+06a. Gaps = 
+
+"
+
+<!DOCTYPE html>
+<html lang='pl'>
+<head>
+    <meta charset='UTF-8'>
+    <meta name='viewport' content='width=device-width, initial-scale=1.0'>
+    <title>DAX Gaps</title>
+    <style>
+    * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+    }
+    
+    body {
+        font-family: 'Roboto', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+        font-size: 16px;
+        line-height: 1.6;
+        color: #333;
+        background: transparent;
+        padding: 20px;
+    }
+    
+    .container {
+        max-width: 900px;
+        margin: 0 auto;
+        background: transparent;
+        padding: 40px;
+    }
+    
+    h3 {
+        font-size: 26px;
+        line-height: 36px;
+        font-weight: 600;
+        padding-top: 14px;
+        padding-bottom: 6px;
+        margin-bottom: 1em;
+        color: #6b1718;
+        border-bottom: 2px solid #6b1718;
+    }
+    
+    .task-description {
+        font-size: 1.1em;
+        margin: 20px 0;
+    }
+    
+    .code-container {
+        background: #f8f9fa;
+        border: 2px solid #e1e4e8;
+        border-radius: 6px;
+        padding: 25px;
+        margin: 30px 0;
+        font-family: 'Courier New', monospace;
+        font-size: 1.05em;
+        line-height: 1.8;
+    }
+    
+    .drop-zone {
+        display: inline-block;
+        min-width: 180px;
+        height: 36px;
+        background: white;
+        border: 2px dashed #6b1718;
+        border-radius: 4px;
+        padding: 6px 12px;
+        margin: 0 4px;
+        vertical-align: middle;
+        text-align: center;
+        transition: all 0.2s;
+    }
+    
+    .drop-zone.drag-over {
+        background: #ffe6e6;
+        border-color: #380c0c;
+    }
+    
+    .drop-zone.filled {
+        background: #d4edda;
+        border: 2px solid #28a745;
+        border-style: solid;
+    }
+    
+    .functions-title {
+        font-size: 1em;
+        margin: 30px 0 15px 0;
+        color: #333;
+    }
+    
+    .function-chip {
+        display: inline-block;
+        background: #6b1718;
+        color: white;
+        padding: 10px 20px;
+        margin: 8px;
+        border-radius: 20px;
+        cursor: grab;
+        font-family: 'Courier New', monospace;
+        font-size: 1em;
+        font-weight: 500;
+        transition: all 0.2s;
+        user-select: none;
+    }
+    
+    .function-chip:hover {
+        background: #380c0c;
+        transform: translateY(-2px);
+        box-shadow: 0 4px 8px rgba(107, 23, 24, 0.3);
+    }
+    
+    .function-chip:active {
+        cursor: grabbing;
+    }
+    
+    .function-chip.used {
+        opacity: 0.3;
+        cursor: not-allowed;
+        pointer-events: none;
+    }
+    
+    .button-group {
+        margin-top: 30px;
+        display: flex;
+        gap: 15px;
+        align-items: center;
+    }
+    
+    button {
+        background: #6b1718;
+        color: white;
+        border: none;
+        padding: 14px 32px;
+        border-radius: 6px;
+        cursor: pointer;
+        font-size: 1.05em;
+        font-weight: 600;
+        transition: all 0.2s;
+    }
+    
+    button:hover {
+        background: #380c0c;
+        transform: translateY(-1px);
+    }
+    
+    button.reset-btn {
+        background: #6b1718;
+        padding: 8px 16px;
+        font-size: 0.9em;
+    }
+    
+    button.reset-btn:hover {
+        background: #380c0c;
+    }
+    
+    .feedback {
+        margin-top: 25px;
+        padding: 20px;
+        border-radius: 6px;
+        display: none;
+        font-size: 1.05em;
+    }
+    
+    .feedback.show {
+        display: block;
+        animation: slideDown 0.3s ease-out;
+    }
+    
+    @keyframes slideDown {
+        from {
+            opacity: 0;
+            transform: translateY(-10px);
+        }
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+    
+    .feedback.correct {
+        background: #d4edda;
+        border-left: 4px solid #28a745;
+        color: #155724;
+    }
+    
+    .feedback.incorrect {
+        background: #f8d7da;
+        border-left: 4px solid #dc3545;
+        color: #721c24;
+    }
+    
+    .hint-box {
+        background: #fafafa;
+        border-left: 4px solid #ccc;
+        padding: 15px;
+        margin: 20px 0;
+        border-radius: 4px;
+        color: #121212;
+        font-size: 0.95em;
+    }
+    
+    .pagination {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 20px;
+        margin: 30px 0;
+        padding: 20px;
+        background: #f8f9fa;
+        border-radius: 6px;
+    }
+    
+    .page-info {
+        font-weight: 600;
+        color: #6b1718;
+    }
+    
+    .nav-button {
+        background: #6b1718;
+        color: white;
+        border: none;
+        padding: 10px 20px;
+        border-radius: 4px;
+        cursor: pointer;
+        font-size: 1em;
+        transition: all 0.2s;
+    }
+    
+    .nav-button:hover:not(:disabled) {
+        background: #380c0c;
+        transform: translateY(-1px);
+    }
+    
+    .nav-button:disabled {
+        background: #ccc;
+        cursor: not-allowed;
+        opacity: 0.5;
+    }
+    
+    .page {
+        display: none;
+    }
+    
+    .page.active {
+        display: block;
+    }
+    </style>
+</head>
+<body>
+
+<div class='pagination'>
+    <button class='nav-button' id='prevBtn' onclick='prevPage()'>◄ Poprzednie</button>
+    <span class='page-info'>Zadanie <span id='currentPage'>1</span> z <span id='totalPages'>7</span></span>
+    <button class='nav-button' id='nextBtn' onclick='nextPage()'>Następne ►</button>
+</div>
+
+<div class='page active' data-page='1'>
+<div class='container'>
+    <div class='task-description'>
+        <h3>SUMMARIZECOLUMNS vs SUMMARIZE</h3>
+        Które podejście jest zalecane do tworzenia zestawień z miarami?
+- SUMMARIZE z ADDCOLUMNS i FILTER
+- SUMMARIZECOLUMNS
+- CROSSJOIN z NATURALLEFTOUTERJOIN
+- VALUES z CALCULATE
+    </div>
+
+    <div>
+    </div>
+
+    <div class='code-container'>
+        <div>-- Podejście modern (zalecane):</div>
+        <div>EVALUATE</div>
+        <div>    <div class='drop-zone' data-slot='0' ondrop='drop(event)' ondragover='allowDrop(event)' ondragleave='dragLeave(event)'></div>(</div>
+        <div>        Product[Brand], Date[Year],</div>
+        <div>        Sales, [Total Sales]</div>
+        <div>    )</div>
+    </div>
+
+    <div class='button-group'>
+        <button onclick='checkSolution()'>Sprawdź rozwiązanie</button>
+        <button class='reset-btn' onclick='resetTask()'>Reset</button>
+    </div>
+
+    <div class='hint-box'>
+        Materiał wyraźnie nazywa jedno podejście MODERN a drugie LEGACY. Które jest zalecane?
+    </div>
+
+    <div class='feedback' id='feedback'></div>
+</div>
+</div>
+
+<div class='page' data-page='2'>
+<div class='container'>
+    <div class='task-description'>
+        <h3>SUMMARIZECOLUMNS - wiele tabel faktów</h3>
+        Jaka jest zaleta SUMMARIZECOLUMNS przy pracy z wieloma tabelami faktów?
+- Automatycznie obsługuje kombinacje wymiarów z różnych tabel faktów
+- Działa tylko z jedną tabelą faktów
+- Wymaga ręcznego CROSSJOIN
+- Jest szybsze od SUMMARIZE
+    </div>
+
+    <div>
+    </div>
+
+    <div class='code-container'>
+        <div>EVALUATE</div>
+        <div>    SUMMARIZECOLUMNS(</div>
+        <div>        Product[Category],</div>
+        <div>        Store[Country],</div>
+        <div>        Sales, <div class='drop-zone' data-slot='0' ondrop='drop(event)' ondragover='allowDrop(event)' ondragleave='dragLeave(event)'></div>,</div>
+        <div>        Purchases, <div class='drop-zone' data-slot='1' ondrop='drop(event)' ondragover='allowDrop(event)' ondragleave='dragLeave(event)'></div></div>
+        <div>    )</div>
+        <div></div>
+        <div>-- Ta funkcja <div class='drop-zone' data-slot='2' ondrop='drop(event)' ondragover='allowDrop(event)' ondragleave='dragLeave(event)'></div> pobiera dane z różnych tabel faktów</div>
+    </div>
+
+    <div class='button-group'>
+        <button onclick='checkSolution()'>Sprawdź rozwiązanie</button>
+        <button class='reset-btn' onclick='resetTask()'>Reset</button>
+    </div>
+
+    <div class='hint-box'>
+        Materiał pokazuje przykład z Sales i Purchases - to dwie różne tabele faktów w jednym zapytaniu. Która funkcja to umożliwia?
+    </div>
+
+    <div class='feedback' id='feedback'></div>
+</div>
+</div>
+
+<div class='page' data-page='3'>
+<div class='container'>
+    <div class='task-description'>
+        <h3>SUMMARIZE bez miar - istniejące kombinacje</h3>
+        Kiedy powinieneś użyć SUMMARIZE zamiast SUMMARIZECOLUMNS?
+- Gdy potrzebujesz tylko istniejących kombinacji bez miar
+- Gdy potrzebujesz obliczyć miary
+- Gdy pracujesz z wieloma tabelami faktów
+- Nigdy - zawsze używaj SUMMARIZECOLUMNS
+    </div>
+
+    <div>
+    </div>
+
+    <div class='code-container'>
+        <div>-- Zwraca tylko kombinacje rzeczywiście występujące w Sales:</div>
+        <div>EVALUATE</div>
+        <div>    <div class='drop-zone' data-slot='0' ondrop='drop(event)' ondragover='allowDrop(event)' ondragleave='dragLeave(event)'></div>(</div>
+        <div>        Sales,</div>
+        <div>        Product[Brand],</div>
+        <div>        Customer[Continent]</div>
+        <div>    )</div>
+    </div>
+
+    <div class='button-group'>
+        <button onclick='checkSolution()'>Sprawdź rozwiązanie</button>
+        <button class='reset-btn' onclick='resetTask()'>Reset</button>
+    </div>
+
+    <div class='hint-box'>
+        Materiał wyraźnie rozróżnia gdy potrzebujesz tylko istniejących kombinacji vs gdy potrzebujesz grupowania z miarami. Która funkcja do czego?
+    </div>
+
+    <div class='feedback' id='feedback'></div>
+</div>
+</div>
+
+<div class='page' data-page='4'>
+<div class='container'>
+    <div class='task-description'>
+        <h3>SUMMARIZECOLUMNS - automatyczne usuwanie pustych</h3>
+        Co SUMMARIZECOLUMNS robi automatycznie, czego SUMMARIZE nie robi?
+- Usuwa wiersze z pustymi wartościami miar
+- Sortuje wyniki alfabetycznie
+- Tworzy indeksy na kolumnach
+- Konwertuje typy danych
+    </div>
+
+    <div>
+    </div>
+
+    <div class='code-container'>
+        <div>-- LEGACY: wymaga ręcznego filtrowania</div>
+        <div>FILTER(</div>
+        <div>    ADDCOLUMNS(SUMMARIZE(...), Sales, [Total]),</div>
+        <div>    NOT ISBLANK([Sales])</div>
+        <div>)</div>
+        <div></div>
+        <div>-- MODERN: <div class='drop-zone' data-slot='0' ondrop='drop(event)' ondragover='allowDrop(event)' ondragleave='dragLeave(event)'></div> usuwa puste wiersze</div>
+        <div>SUMMARIZECOLUMNS(..., Sales, [Total])</div>
+    </div>
+
+    <div class='button-group'>
+        <button onclick='checkSolution()'>Sprawdź rozwiązanie</button>
+        <button class='reset-btn' onclick='resetTask()'>Reset</button>
+    </div>
+
+    <div class='hint-box'>
+        Materiał pokazuje, że LEGACY wymaga `FILTER(..., NOT ISBLANK(...))`, a MODERN nie. Co to mówi o automatyce?
+    </div>
+
+    <div class='feedback' id='feedback'></div>
+</div>
+</div>
+
+<div class='page' data-page='5'>
+<div class='container'>
+    <div class='task-description'>
+        <h3>SUMMARIZE z tabelą źródłową</h3>
+        Co się stanie gdy użyjesz SUMMARIZE z tabelą źródłową jako pierwszy parametr?
+- Zwróci tylko kombinacje istniejące w tej tabeli
+- Zwróci wszystkie możliwe kombinacje (jak CROSSJOIN)
+- Spowoduje błąd
+- Zwróci pustą tabelę
+    </div>
+
+    <div>
+    </div>
+
+    <div class='code-container'>
+        <div>EVALUATE</div>
+        <div>    SUMMARIZE(</div>
+        <div>        Sales,  -- <div class='drop-zone' data-slot='0' ondrop='drop(event)' ondragover='allowDrop(event)' ondragleave='dragLeave(event)'></div></div>
+        <div>        Product[Brand],</div>
+        <div>        Customer[Continent]</div>
+        <div>    )</div>
+    </div>
+
+    <div class='button-group'>
+        <button onclick='checkSolution()'>Sprawdź rozwiązanie</button>
+        <button class='reset-btn' onclick='resetTask()'>Reset</button>
+    </div>
+
+    <div class='hint-box'>
+        Materiał mówi: zwraca tylko kombinacje występujące w danych faktycznych. Co to oznacza dla wyniku?
+    </div>
+
+    <div class='feedback' id='feedback'></div>
+</div>
+</div>
+
+<div class='page' data-page='6'>
+<div class='container'>
+    <div class='task-description'>
+        <h3>Zalecenia - SUMMARIZE vs SUMMARIZECOLUMNS</h3>
+        Która zasada jest prawidłowa według materiału?
+- Grupowanie bez miar: SUMMARIZE z tabelą źródłową; z miarami: SUMMARIZECOLUMNS
+- Zawsze używaj SUMMARIZECOLUMNS
+- Zawsze używaj SUMMARIZE
+- Zależy od wydajności zapytania
+    </div>
+
+    <div>
+    </div>
+
+    <div class='code-container'>
+        <div>-- Zasada decyzyjna:</div>
+        <div><div class='drop-zone' data-slot='0' ondrop='drop(event)' ondragover='allowDrop(event)' ondragleave='dragLeave(event)'></div></div>
+    </div>
+
+    <div class='button-group'>
+        <button onclick='checkSolution()'>Sprawdź rozwiązanie</button>
+        <button class='reset-btn' onclick='resetTask()'>Reset</button>
+    </div>
+
+    <div class='hint-box'>
+        Materiał kończy się sekcją Zasada: która jasno to definiuje. Co tam jest napisane?
+    </div>
+
+    <div class='feedback' id='feedback'></div>
+</div>
+</div>
+
+<div class='page' data-page='7'>
+<div class='container'>
+    <div class='task-description'>
+        <h3>CROSSJOIN problem</h3>
+        Dlaczego materiał nazywa podejście z CROSSJOIN problematic?
+- Jest skomplikowane i wymaga ręcznego łączenia wyników
+- Jest zbyt wolne
+- Nie działa z wieloma tabelami
+- Jest przestarzałe i nieobsługiwane
+    </div>
+
+    <div>
+    </div>
+
+    <div class='code-container'>
+        <div>-- To podejście wymaga:</div>
+        <div>VAR G = CROSSJOIN(...)  -- <div class='drop-zone' data-slot='0' ondrop='drop(event)' ondragover='allowDrop(event)' ondragleave='dragLeave(event)'></div></div>
+        <div>VAR P = ADDCOLUMNS(SUMMARIZE(...))  -- <div class='drop-zone' data-slot='1' ondrop='drop(event)' ondragover='allowDrop(event)' ondragleave='dragLeave(event)'></div></div>
+        <div>VAR S = ADDCOLUMNS(SUMMARIZE(...))  -- <div class='drop-zone' data-slot='2' ondrop='drop(event)' ondragover='allowDrop(event)' ondragleave='dragLeave(event)'></div></div>
+        <div>RETURN NATURALLEFTOUTERJOIN(...)  -- <div class='drop-zone' data-slot='3' ondrop='drop(event)' ondragover='allowDrop(event)' ondragleave='dragLeave(event)'></div></div>
+    </div>
+
+    <div class='button-group'>
+        <button onclick='checkSolution()'>Sprawdź rozwiązanie</button>
+        <button class='reset-btn' onclick='resetTask()'>Reset</button>
+    </div>
+
+    <div class='hint-box'>
+        Policz ile linii kodu i funkcji wymaga approach z CROSSJOIN vs SUMMARIZECOLUMNS. Co to mówi o złożoności?
+    </div>
+
+    <div class='feedback' id='feedback'></div>
+</div>
+</div>
+
+<script>
+    let currentPage = 1;
+    const totalPages = 7;
+    const slotsPerPage = [1, 3, 1, 1, 1, 1, 3];
+    let slots = new Array(slotsPerPage[0]).fill('');
+    const correctSolutions = [['SUMMARIZECOLUMNS'], ['[Total Sales]', '[Total Purchases]', 'automatycznie'], ['SUMMARIZE'], ['Usuwa wiersze z pustymi warto\u015bciami miar'], ['Zwr\u00f3ci tylko kombinacje istniej\u0105ce w tej tabeli'], ['Grupowanie bez miar: SUMMARIZE z tabel\u0105 \u017ar\u00f3d\u0142ow\u0105; z miarami: SUMMARIZECOLUMNS'], ['Wszystkie kroki', 'R\u0119czne \u0142\u0105czenie', 'Jest skomplikowane']];
+    const correctFeedback = ['\u2705 **Brawo! Rozwi\u0105zanie poprawne!**\n`SUMMARIZECOLUMNS` to obecnie zalecany standard do tworzenia zestawie\u0144 tabelarycznych z miarami. \u0141\u0105czy grupowanie, obliczenia i automatyczne usuwanie pustych wierszy w jednej funkcji. Jest kr\u00f3tsze, czytelniejsze i bezpieczniejsze ni\u017c legacy approach z `SUMMARIZE` + `ADDCOLUMNS` + `FILTER`. Rozumie kontekst ca\u0142ego modelu danych i poprawnie obs\u0142uguje relacje.', '\u2705 **Brawo! Rozwi\u0105zanie poprawne!**\n`SUMMARIZECOLUMNS` rozumie kontekst ca\u0142ego modelu danych i automatycznie obs\u0142uguje kombinacje wymiar\u00f3w z r\u00f3\u017cnych tabel fakt\u00f3w. Mo\u017cesz w jednym wyra\u017ceniu pobiera\u0107 miary z Sales, Purchases i innych tabel - funkcja zwraca kompletny wynik w jednej tabeli. Legacy approach z `SUMMARIZE` wymaga r\u0119cznego tworzenia siatki przez `CROSSJOIN` i \u0142\u0105czenia wynik\u00f3w przez `NATURALLEFTOUTERJOIN`.', '\u2705 **Brawo! Rozwi\u0105zanie poprawne!**\n`SUMMARIZE` z tabel\u0105 \u017ar\u00f3d\u0142ow\u0105 (pierwszy parametr to tabela fakt\u00f3w) zwraca tylko kombinacje wyst\u0119puj\u0105ce w rzeczywistych danych. `SUMMARIZECOLUMNS` bez miar generuje wszystkie mo\u017cliwe kombinacje (jak `CROSSJOIN`), co mo\u017ce zwr\u00f3ci\u0107 wiele pustych kombinacji nieistniej\u0105cych w danych. Zasada: do samego grupowania bez miar u\u017cywaj `SUMMARIZE` z tabel\u0105 \u017ar\u00f3d\u0142ow\u0105, do grupowania z miarami u\u017cywaj `SUMMARIZECOLUMNS`.', '\u2705 **Brawo! Rozwi\u0105zanie poprawne!**\n`SUMMARIZECOLUMNS` automatycznie usuwa wiersze gdzie wszystkie miary maj\u0105 warto\u015bci puste (BLANK). W legacy approach z `SUMMARIZE` musisz r\u0119cznie doda\u0107 `FILTER(..., NOT ISBLANK(...))`. To kolejna zaleta czyni\u0105ca `SUMMARIZECOLUMNS` prostszym i bezpieczniejszym - mniej kodu, mniej miejsca na b\u0142\u0119dy.', '\u2705 **Brawo! Rozwi\u0105zanie poprawne!**\nGdy pierwszy parametr `SUMMARIZE` to tabela fakt\u00f3w (np. Sales), funkcja zwraca tylko kombinacje wymiar\u00f3w rzeczywi\u015bcie wyst\u0119puj\u0105ce w tej tabeli. Filtruje automatycznie do istniej\u0105cych relacji. To jest po\u017c\u0105dane zachowanie - nie dostaniesz pustych kombinacji Brand-Continent, kt\u00f3re nie maj\u0105 transakcji. To g\u0142\u00f3wny przypadek u\u017cycia `SUMMARIZE` - proste grupowanie bez miar.', '\u2705 **Brawo! Rozwi\u0105zanie poprawne!**\nTo kluczowa zasada z materia\u0142u: **Do samego grupowania bez miar u\u017cywaj `SUMMARIZE` z tabel\u0105 \u017ar\u00f3d\u0142ow\u0105. Do grupowania z miarami u\u017cywaj `SUMMARIZECOLUMNS`.** SUMMARIZE z tabel\u0105 zwraca tylko istniej\u0105ce kombinacje (unika pustych wierszy). SUMMARIZECOLUMNS jest lepsze gdy dodajesz obliczenia - automatycznie usuwa puste wiersze i obs\u0142uguje wiele tabel fakt\u00f3w.', '\u2705 **Brawo! Rozwi\u0105zanie poprawne!**\nMateria\u0142 nazywa ten approach problematic bo jest **skomplikowany, ma\u0142o czytelny i podatny na b\u0142\u0119dy**. Wymaga: 1) r\u0119cznego utworzenia siatki wszystkich kombinacji (`CROSSJOIN`), 2) osobnych zestawie\u0144 dla ka\u017cdej tabeli fakt\u00f3w (`SUMMARIZE`), 3) r\u0119cznego \u0142\u0105czenia wynik\u00f3w (`NATURALLEFTOUTERJOIN`). `SUMMARIZECOLUMNS` robi to wszystko automatycznie w jednej funkcji.'];
+    const incorrectFeedback = [{'SUMMARIZE z ADDCOLUMNS': '\u274c **Niepoprawne!**\nTo legacy approach - wymaga dodatkowego `ADDCOLUMNS` do obliczenia miar i `FILTER` + `NOT ISBLANK` do usuni\u0119cia pustych wierszy. Jest bardziej rozwlek\u0142e i podatne na b\u0142\u0119dy. `SUMMARIZECOLUMNS` to nowoczesna, zalecana alternatywa.', 'CROSSJOIN': '\u274c **Niepoprawne!**\nTo bardzo skomplikowane podej\u015bcie potrzebne tylko w specyficznych przypadkach z wieloma tabelami fakt\u00f3w w legacy approach. `SUMMARIZECOLUMNS` radzi sobie z tym automatycznie.', 'VALUES z CALCULATE': '\u274c **Niepoprawne!**\nTo nie jest standardowe podej\u015bcie do tworzenia zestawie\u0144 tabelarycznych. Do tego celu s\u0142u\u017cy specjalnie `SUMMARIZECOLUMNS`.'}, {'Tylko jedna tabela': '\u274c **Niepoprawne!**\nTo ograniczenie `SUMMARIZE`, nie `SUMMARIZECOLUMNS`. `SUMMARIZECOLUMNS` mo\u017ce pracowa\u0107 z wieloma tabelami fakt\u00f3w jednocze\u015bnie - to jedna z jego g\u0142\u00f3wnych zalet.', 'Wymaga CROSSJOIN': '\u274c **Niepoprawne!**\nTo wymaganie legacy approach z `SUMMARIZE`. `SUMMARIZECOLUMNS` automatycznie radzi sobie z kombinacjami wymiar\u00f3w - nie musisz r\u0119cznie tworzy\u0107 CROSSJOIN.', 'Szybsze': '\u274c **Niepoprawne cz\u0119\u015bciowo!**\nCho\u0107 wydajno\u015b\u0107 mo\u017ce by\u0107 lepsza, g\u0142\u00f3wn\u0105 zalet\u0105 jest automatyczna obs\u0142uga wielu tabel fakt\u00f3w i prostota sk\u0142adni, nie sama szybko\u015b\u0107.'}, {'Z miarami': '\u274c **Niepoprawne!**\nDo grupowania z miarami u\u017cywaj `SUMMARIZECOLUMNS`, nie `SUMMARIZE`. `SUMMARIZE` jest lepsze gdy potrzebujesz tylko kombinacji bez oblicze\u0144.', 'Wiele tabel fakt\u00f3w': '\u274c **Niepoprawne!**\nDo wielu tabel fakt\u00f3w lepsze jest `SUMMARIZECOLUMNS`. `SUMMARIZE` jest ograniczone do jednej tabeli \u017ar\u00f3d\u0142owej.', 'Nigdy': '\u274c **Niepoprawne!**\n`SUMMARIZE` ma swoje zastosowanie - gdy potrzebujesz tylko istniej\u0105cych kombinacji wymiar\u00f3w bez miar i oblicze\u0144. Wtedy jest prostsze i bardziej odpowiednie ni\u017c `SUMMARIZECOLUMNS`.'}, {'Sortowanie': '\u274c **Niepoprawne!**\n`SUMMARIZECOLUMNS` nie sortuje automatycznie wynik\u00f3w - zwraca je w kolejno\u015bci wynikaj\u0105cej z modelu. Do sortowania u\u017cywasz `ORDER BY` po `EVALUATE`.', 'Indeksy': '\u274c **Niepoprawne!**\n`SUMMARIZECOLUMNS` nie tworzy indeks\u00f3w - to funkcja zwracaj\u0105ca wyniki zapytania, nie modyfikuj\u0105ca model danych.', 'Konwersja typ\u00f3w': '\u274c **Niepoprawne!**\n`SUMMARIZECOLUMNS` nie konwertuje typ\u00f3w danych. Automatycznie usuwa puste wiersze, co eliminuje potrzeb\u0119 r\u0119cznego filtrowania przez `NOT ISBLANK`.'}, {'Wszystkie kombinacje': '\u274c **Niepoprawne!**\nWszystkie mo\u017cliwe kombinacje (produkt kartezja\u0144ski) zwr\u00f3ci\u0142by `CROSSJOIN` lub `SUMMARIZECOLUMNS` bez tabeli \u017ar\u00f3d\u0142owej. `SUMMARIZE` z tabel\u0105 \u017ar\u00f3d\u0142ow\u0105 filtruje do istniej\u0105cych kombinacji.', 'B\u0142\u0105d': '\u274c **Niepoprawne!**\nTo poprawna i zalecana sk\u0142adnia dla `SUMMARIZE` - tabela \u017ar\u00f3d\u0142owa jako pierwszy parametr, potem kolumny do grupowania.', 'Pusta tabela': '\u274c **Niepoprawne!**\n`SUMMARIZE` zwr\u00f3ci wszystkie unikalne kombinacje wyst\u0119puj\u0105ce w tabeli Sales, nie pust\u0105 tabel\u0119.'}, {'Zawsze SUMMARIZECOLUMNS': '\u274c **Niepoprawne!**\nNie zawsze. Gdy potrzebujesz tylko grupowania bez miar, `SUMMARIZE` z tabel\u0105 \u017ar\u00f3d\u0142ow\u0105 jest prostsze i bardziej odpowiednie. `SUMMARIZECOLUMNS` bez miar generuje wszystkie mo\u017cliwe kombinacje.', 'Zawsze SUMMARIZE': '\u274c **Niepoprawne!**\nDo zestawie\u0144 z miarami lepsze jest `SUMMARIZECOLUMNS` - prostsze, automatycznie usuwa puste, obs\u0142uguje wiele tabel fakt\u00f3w. `SUMMARIZE` wymaga dodatkowego `ADDCOLUMNS` i `FILTER`.', 'Wydajno\u015b\u0107': '\u274c **Niepoprawne!**\nDecyzja nie powinna opiera\u0107 si\u0119 g\u0142\u00f3wnie na wydajno\u015bci, ale na obecno\u015bci miar i oczekiwanym wyniku (tylko istniej\u0105ce vs wszystkie kombinacje).'}, {'Wolne': '\u274c **Niepoprawne cz\u0119\u015bciowo!**\nCho\u0107 mo\u017ce by\u0107 mniej wydajne, g\u0142\u00f3wny problem to z\u0142o\u017cono\u015b\u0107 i podatno\u015b\u0107 na b\u0142\u0119dy, nie sama szybko\u015b\u0107. Materia\u0142 podkre\u015bla bardziej skomplikowane, mniej czytelne.', 'Nie dzia\u0142a z wieloma': '\u274c **Niepoprawne!**\nDzia\u0142a z wieloma tabelami, ale wymaga r\u0119cznego obs\u0142ugiwania ka\u017cdej osobno. To w\u0142a\u015bnie jest problemem - SUMMARIZECOLUMNS robi to automatycznie.', 'Przestarza\u0142e': '\u274c **Niepoprawne!**\nNadal dzia\u0142a i jest obs\u0142ugiwane, ale jest niepotrzebnie skomplikowane gdy mo\u017cna u\u017cy\u0107 `SUMMARIZECOLUMNS`.'}];
+
+    function drag(event) {
+            event.dataTransfer.setData('function', event.target.getAttribute('data-function'));
+        }
+    
+        function allowDrop(event) {
+            event.preventDefault();
+            event.target.classList.add('drag-over');
+        }
+    
+        function dragLeave(event) {
+            event.target.classList.remove('drag-over');
+        }
+    
+        function drop(event) {
+            event.preventDefault();
+            event.target.classList.remove('drag-over');
+    
+            const functionName = event.dataTransfer.getData('function');
+            const slotIndex = parseInt(event.target.getAttribute('data-slot'));
+    
+            const activePage = document.querySelector('.page.active');
+            if (!activePage) return;
+    
+            if (slots[slotIndex]) {
+                const chips = activePage.querySelectorAll('.function-chip');
+                for (let i = 0; i < chips.length; i++) {
+                    if (chips[i].getAttribute('data-function') === slots[slotIndex]) {
+                        chips[i].classList.remove('used');
+                        break;
+                    }
+                }
+            }
+    
+            slots[slotIndex] = functionName;
+            event.target.textContent = functionName;
+            event.target.classList.add('filled');
+    
+            const chips = activePage.querySelectorAll('.function-chip');
+            for (let i = 0; i < chips.length; i++) {
+                if (chips[i].getAttribute('data-function') === functionName) {
+                    chips[i].classList.add('used');
+                    break;
+                }
+            }
+    
+            const feedback = activePage.querySelector('.feedback');
+            if (feedback) {
+                feedback.classList.remove('show');
+            }
+        }
+    
+        function checkSolution() {
+            const activePage = document.querySelector('.page.active');
+            if (!activePage) return;
+    
+            const feedback = activePage.querySelector('.feedback');
+            if (!feedback) return;
+    
+            if (slots.includes('')) {
+                feedback.className = 'feedback show incorrect';
+                feedback.innerHTML = 'Niekompletne! Musisz wypełnić wszystkie miejsca w kodzie.';
+                return;
+            }
+    
+            const currentPageNum = parseInt(activePage.getAttribute('data-page'));
+            const pageIndex = currentPageNum - 1;
+            const isCorrect = checkCurrentPageSolution(pageIndex);
+    
+            if (isCorrect) {
+                feedback.className = 'feedback show correct';
+                feedback.innerHTML = correctFeedback[pageIndex];
+            } else {
+                const userAnswer = slots.join(',');
+                const incorrectMessages = incorrectFeedback[pageIndex];
+    
+                for (const pattern in incorrectMessages) {
+                    if (pattern === userAnswer) {
+                        feedback.className = 'feedback show incorrect';
+                        feedback.innerHTML = incorrectMessages[pattern];
+                        return;
+                    }
+    
+                    if (pattern.includes('*')) {
+                        const regexPattern = '^' + pattern.replace(/\*/g, '.*') + '$';
+                        const regex = new RegExp(regexPattern);
+                        if (regex.test(userAnswer)) {
+                            feedback.className = 'feedback show incorrect';
+                            feedback.innerHTML = incorrectMessages[pattern];
+                            return;
+                        }
+                    }
+                }
+    
+                const defaultMessage = incorrectMessages['default'];
+                feedback.className = 'feedback show incorrect';
+                feedback.innerHTML = defaultMessage || '❌ <strong>Niepoprawne rozwiązanie.</strong> Spróbuj ponownie!';
+            }
+        }
+    
+        function checkCurrentPageSolution(pageIndex) {
+            const solution = correctSolutions[pageIndex];
+            for (let i = 0; i < solution.length; i++) {
+                if (slots[i] !== solution[i]) {
+                    return false;
+                }
+            }
+            return true;
+        }
+    
+        function resetTask() {
+            slots.fill('');
+    
+            const activePage = document.querySelector('.page.active');
+            if (!activePage) return;
+    
+            const zones = activePage.querySelectorAll('.drop-zone');
+            for (let i = 0; i < zones.length; i++) {
+                zones[i].textContent = '';
+                zones[i].classList.remove('filled');
+            }
+    
+            const chips = activePage.querySelectorAll('.function-chip');
+            for (let i = 0; i < chips.length; i++) {
+                chips[i].classList.remove('used');
+            }
+    
+            const feedback = activePage.querySelector('.feedback');
+            if (feedback) {
+                feedback.classList.remove('show');
+            }
+        }
+    
+        function showPage(pageNumber) {
+            const pages = document.querySelectorAll('.page');
+            for (let i = 0; i < pages.length; i++) {
+                pages[i].classList.remove('active');
+            }
+    
+            for (let i = 0; i < pages.length; i++) {
+                if (parseInt(pages[i].getAttribute('data-page')) === pageNumber) {
+                    pages[i].classList.add('active');
+                    break;
+                }
+            }
+    
+            currentPage = pageNumber;
+            const pageIndex = currentPage - 1;
+            document.getElementById('currentPage').textContent = currentPage;
+    
+            document.getElementById('prevBtn').disabled = (currentPage === 1);
+            document.getElementById('nextBtn').disabled = (currentPage === totalPages);
+    
+            slots = new Array(slotsPerPage[pageIndex]).fill('');
+    
+            resetTask();
+        }
+    
+        function nextPage() {
+            if (currentPage < totalPages) {
+                showPage(currentPage + 1);
+            }
+        }
+    
+        function prevPage() {
+            if (currentPage > 1) {
+                showPage(currentPage - 1);
+            }
+        }
+    
+        document.addEventListener('DOMContentLoaded', function() {
+            showPage(1);
+        });
+</script>
+
+</body>
+</html>
+
+"

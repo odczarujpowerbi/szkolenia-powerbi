@@ -1,0 +1,652 @@
+02a. Gaps = 
+
+"
+
+<!DOCTYPE html>
+<html lang='pl'>
+<head>
+    <meta charset='UTF-8'>
+    <meta name='viewport' content='width=device-width, initial-scale=1.0'>
+    <title>DAX Gaps</title>
+    <style>
+    * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+    }
+    
+    body {
+        font-family: 'Roboto', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+        font-size: 16px;
+        line-height: 1.6;
+        color: #333;
+        background: transparent;
+        padding: 20px;
+    }
+    
+    .container {
+        max-width: 900px;
+        margin: 0 auto;
+        background: transparent;
+        padding: 40px;
+    }
+    
+    h3 {
+        font-size: 26px;
+        line-height: 36px;
+        font-weight: 600;
+        padding-top: 14px;
+        padding-bottom: 6px;
+        margin-bottom: 1em;
+        color: #6b1718;
+        border-bottom: 2px solid #6b1718;
+    }
+    
+    .task-description {
+        font-size: 1.1em;
+        margin: 20px 0;
+    }
+    
+    .code-container {
+        background: #f8f9fa;
+        border: 2px solid #e1e4e8;
+        border-radius: 6px;
+        padding: 25px;
+        margin: 30px 0;
+        font-family: 'Courier New', monospace;
+        font-size: 1.05em;
+        line-height: 1.8;
+    }
+    
+    .drop-zone {
+        display: inline-block;
+        min-width: 180px;
+        height: 36px;
+        background: white;
+        border: 2px dashed #6b1718;
+        border-radius: 4px;
+        padding: 6px 12px;
+        margin: 0 4px;
+        vertical-align: middle;
+        text-align: center;
+        transition: all 0.2s;
+    }
+    
+    .drop-zone.drag-over {
+        background: #ffe6e6;
+        border-color: #380c0c;
+    }
+    
+    .drop-zone.filled {
+        background: #d4edda;
+        border: 2px solid #28a745;
+        border-style: solid;
+    }
+    
+    .functions-title {
+        font-size: 1em;
+        margin: 30px 0 15px 0;
+        color: #333;
+    }
+    
+    .function-chip {
+        display: inline-block;
+        background: #6b1718;
+        color: white;
+        padding: 10px 20px;
+        margin: 8px;
+        border-radius: 20px;
+        cursor: grab;
+        font-family: 'Courier New', monospace;
+        font-size: 1em;
+        font-weight: 500;
+        transition: all 0.2s;
+        user-select: none;
+    }
+    
+    .function-chip:hover {
+        background: #380c0c;
+        transform: translateY(-2px);
+        box-shadow: 0 4px 8px rgba(107, 23, 24, 0.3);
+    }
+    
+    .function-chip:active {
+        cursor: grabbing;
+    }
+    
+    .function-chip.used {
+        opacity: 0.3;
+        cursor: not-allowed;
+        pointer-events: none;
+    }
+    
+    .button-group {
+        margin-top: 30px;
+        display: flex;
+        gap: 15px;
+        align-items: center;
+    }
+    
+    button {
+        background: #6b1718;
+        color: white;
+        border: none;
+        padding: 14px 32px;
+        border-radius: 6px;
+        cursor: pointer;
+        font-size: 1.05em;
+        font-weight: 600;
+        transition: all 0.2s;
+    }
+    
+    button:hover {
+        background: #380c0c;
+        transform: translateY(-1px);
+    }
+    
+    button.reset-btn {
+        background: #6b1718;
+        padding: 8px 16px;
+        font-size: 0.9em;
+    }
+    
+    button.reset-btn:hover {
+        background: #380c0c;
+    }
+    
+    .feedback {
+        margin-top: 25px;
+        padding: 20px;
+        border-radius: 6px;
+        display: none;
+        font-size: 1.05em;
+    }
+    
+    .feedback.show {
+        display: block;
+        animation: slideDown 0.3s ease-out;
+    }
+    
+    @keyframes slideDown {
+        from {
+            opacity: 0;
+            transform: translateY(-10px);
+        }
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+    
+    .feedback.correct {
+        background: #d4edda;
+        border-left: 4px solid #28a745;
+        color: #155724;
+    }
+    
+    .feedback.incorrect {
+        background: #f8d7da;
+        border-left: 4px solid #dc3545;
+        color: #721c24;
+    }
+    
+    .hint-box {
+        background: #fafafa;
+        border-left: 4px solid #ccc;
+        padding: 15px;
+        margin: 20px 0;
+        border-radius: 4px;
+        color: #121212;
+        font-size: 0.95em;
+    }
+    .pagination {
+        display: flex;
+        align-items: center;
+        justify-content: space-between; 
+        gap: 20px;
+        margin: 30px auto; 
+        padding: 20px;
+        border-radius: 6px;
+    	max-width: 900px;
+        border-bottom: 1px solid #e0e0e0;
+        width: 100%;
+    }
+    
+    .page-info {
+        font-weight: 600;
+        color: #666666; 
+    }
+    
+    .nav-button {
+        background: #6b1718;
+        color: white;
+        border: none;
+        padding: 10px 20px;
+        border-radius: 4px;
+        cursor: pointer;
+        font-size: 1em;
+        transition: all 0.2s;
+    }
+    
+    .nav-button:hover:not(:disabled) {
+        background: #380c0c;
+        transform: translateY(-1px);
+    }
+    
+    .nav-button:disabled {
+        background: #ccc;
+        cursor: not-allowed;
+        opacity: 0.5;
+    }
+    
+    
+    .nav-button:disabled {
+        background: #ccc;
+        cursor: not-allowed;
+        opacity: 0.5;
+    }
+    
+    
+    .page {
+        display: none;
+    }
+    
+    .page.active {
+        display: block;
+    }
+    </style>
+</head>
+<body>
+
+<div class='pagination'>
+    <button class='nav-button' id='prevBtn' onclick='prevPage()'>← Poprzednie</button>
+    <span class='page-info'>Zadanie <span id='currentPage'>1</span> z <span id='totalPages'>6</span></span>
+    <button class='nav-button' id='nextBtn' onclick='nextPage()'>Następne →</button>
+</div>
+
+<div class='page active' data-page='1'>
+<div class='container'>
+    <div class='task-description'>
+        <h3>Kolumna kalkulowana - kontekst</h3>
+        Tworzysz kolumnę kalkulowaną, która ma obliczyć marżę jako różnicę ceny i kosztu. Jak napisać formułę?
+    </div>
+
+    <div>
+        <span class='function-chip' draggable='true' ondragstart='drag(event)' data-function='SUM(Sprzedaż[Cena]) - SUM(Sprzedaż[Koszt])'>SUM(Sprzedaż[Cena]) - SUM(Sprzedaż[Koszt])</span>
+        <span class='function-chip' draggable='true' ondragstart='drag(event)' data-function='Sprzedaż[Cena] - Sprzedaż[Koszt]'>Sprzedaż[Cena] - Sprzedaż[Koszt]</span>
+        <span class='function-chip' draggable='true' ondragstart='drag(event)' data-function='CALCULATE(Sprzedaż[Cena] - Sprzedaż[Koszt])'>CALCULATE(Sprzedaż[Cena] - Sprzedaż[Koszt])</span>
+        <span class='function-chip' draggable='true' ondragstart='drag(event)' data-function='SUMX(Sprzedaż, Sprzedaż[Cena] - Sprzedaż[Koszt])'>SUMX(Sprzedaż, Sprzedaż[Cena] - Sprzedaż[Koszt])</span>
+    </div>
+
+    <div class='code-container'>
+        <div>DAX</div>
+        <div>Marża PLN = <div class='drop-zone' data-slot='0' ondrop='drop(event)' ondragover='allowDrop(event)' ondragleave='dragLeave(event)'></div></div>
+    </div>
+
+    <div class='button-group'>
+        <button onclick='checkSolution()'>Sprawdź rozwiązanie</button>
+        <button class='reset-btn' onclick='resetTask()'>Reset</button>
+    </div>
+
+    <div class='hint-box'>
+        W kolumnach kalkulowanych myślisz wierszami - możesz traktować kolumny jak zmienne i bezpośrednio je dodawać, odejmować, mnożyć.
+    </div>
+
+    <div class='feedback' id='feedback'></div>
+</div>
+</div>
+
+<div class='page' data-page='2'>
+<div class='container'>
+    <div class='task-description'>
+        <h3>Miara - funkcje agregujące</h3>
+        Chcesz utworzyć miarę obliczającą marżę (przychód minus koszt). Jak to zrobić?
+    </div>
+
+    <div>
+        <span class='function-chip' draggable='true' ondragstart='drag(event)' data-function='Sprzedaż[Wartość netto] - Sprzedaż[Koszt]'>Sprzedaż[Wartość netto] - Sprzedaż[Koszt]</span>
+        <span class='function-chip' draggable='true' ondragstart='drag(event)' data-function='SUM(Sprzedaż[Wartość netto]) - SUM(Sprzedaż[Koszt])'>SUM(Sprzedaż[Wartość netto]) - SUM(Sprzedaż[Koszt])</span>
+        <span class='function-chip' draggable='true' ondragstart='drag(event)' data-function='SUMX(Sprzedaż, [Wartość netto] - [Koszt])'>SUMX(Sprzedaż, [Wartość netto] - [Koszt])</span>
+        <span class='function-chip' draggable='true' ondragstart='drag(event)' data-function='AVERAGE(Sprzedaż[Wartość netto] - Sprzedaż[Koszt])'>AVERAGE(Sprzedaż[Wartość netto] - Sprzedaż[Koszt])</span>
+    </div>
+
+    <div class='code-container'>
+        <div>DAX</div>
+        <div>Marża PLN = <div class='drop-zone' data-slot='0' ondrop='drop(event)' ondragover='allowDrop(event)' ondragleave='dragLeave(event)'></div></div>
+    </div>
+
+    <div class='button-group'>
+        <button onclick='checkSolution()'>Sprawdź rozwiązanie</button>
+        <button class='reset-btn' onclick='resetTask()'>Reset</button>
+    </div>
+
+    <div class='hint-box'>
+        W miarach myślisz agregacją - musisz najpierw zsumować każdą kolumnę osobno, a dopiero potem odjąć te sumy od siebie.
+    </div>
+
+    <div class='feedback' id='feedback'></div>
+</div>
+</div>
+
+<div class='page' data-page='3'>
+<div class='container'>
+    <div class='task-description'>
+        <h3>Kiedy kolumna, a kiedy miara?</h3>
+        Chcesz utworzyć obliczenie Kategoria wiekowa klienta na podstawie daty urodzenia. Co powinieneś użyć?
+    </div>
+
+    <div>
+        <span class='function-chip' draggable='true' ondragstart='drag(event)' data-function='Kolumnę kalkulowaną'>Kolumnę kalkulowaną</span>
+        <span class='function-chip' draggable='true' ondragstart='drag(event)' data-function='Miarę'>Miarę</span>
+        <span class='function-chip' draggable='true' ondragstart='drag(event)' data-function='Tabelę kalkulowaną'>Tabelę kalkulowaną</span>
+        <span class='function-chip' draggable='true' ondragstart='drag(event)' data-function='ParametrWhat-If'>ParametrWhat-If</span>
+    </div>
+
+    <div class='code-container'>
+        <div>DAX</div>
+        <div>-- Chcę móc filtrować klientów według kategorii wiekowej w slicerze</div>
+        <div>-- Wartość ma być stała dla każdego klienta</div>
+        <div></div>
+        <div>Rozwiązanie: <div class='drop-zone' data-slot='0' ondrop='drop(event)' ondragover='allowDrop(event)' ondragleave='dragLeave(event)'></div></div>
+    </div>
+
+    <div class='button-group'>
+        <button onclick='checkSolution()'>Sprawdź rozwiązanie</button>
+        <button class='reset-btn' onclick='resetTask()'>Reset</button>
+    </div>
+
+    <div class='hint-box'>
+        Potrzebujesz wartości, którą można użyć do filtrowania i grupowania. Zastanów się: miary mogą być używane w slicerach?
+    </div>
+
+    <div class='feedback' id='feedback'></div>
+</div>
+</div>
+
+<div class='page' data-page='4'>
+<div class='container'>
+    <div class='task-description'>
+        <h3>Przechowywanie w pamięci</h3>
+        Które obliczenie NIE jest przechowywane w modelu i nie zajmuje miejsca w pamięci?
+    </div>
+
+    <div>
+        <span class='function-chip' draggable='true' ondragstart='drag(event)' data-function='Kolumna kalkulowana'>Kolumna kalkulowana</span>
+        <span class='function-chip' draggable='true' ondragstart='drag(event)' data-function='Miara'>Miara</span>
+        <span class='function-chip' draggable='true' ondragstart='drag(event)' data-function='Kolumna z Power Query'>Kolumna z Power Query</span>
+        <span class='function-chip' draggable='true' ondragstart='drag(event)' data-function='Tabela kalkulowana'>Tabela kalkulowana</span>
+    </div>
+
+    <div class='code-container'>
+        <div>DAX</div>
+        <div>-- To obliczenie jest wykonywane na żądanie podczas wyświetlania:</div>
+        <div>Odpowiedź: <div class='drop-zone' data-slot='0' ondrop='drop(event)' ondragover='allowDrop(event)' ondragleave='dragLeave(event)'></div></div>
+    </div>
+
+    <div class='button-group'>
+        <button onclick='checkSolution()'>Sprawdź rozwiązanie</button>
+        <button class='reset-btn' onclick='resetTask()'>Reset</button>
+    </div>
+
+    <div class='hint-box'>
+        Szukasz typu obliczeń, który reaguje dynamicznie na filtry i działa na żądanie podczas wyświetlania raportu.
+    </div>
+
+    <div class='feedback' id='feedback'></div>
+</div>
+</div>
+
+<div class='page' data-page='5'>
+<div class='container'>
+    <div class='task-description'>
+        <h3>Błąd - mnożenie kolumn w miarze</h3>
+        Próbujesz utworzyć miarę obliczającą wartość zamówień. Co jest nie tak z tym kodem?
+    </div>
+
+    <div>
+        <span class='function-chip' draggable='true' ondragstart='drag(event)' data-function='Brak funkcji agregującej'>Brak funkcji agregującej</span>
+        <span class='function-chip' draggable='true' ondragstart='drag(event)' data-function='Złe nazwy kolumn'>Złe nazwy kolumn</span>
+        <span class='function-chip' draggable='true' ondragstart='drag(event)' data-function='Brak operatora mnożenia'>Brak operatora mnożenia</span>
+        <span class='function-chip' draggable='true' ondragstart='drag(event)' data-function='Użyto CALCULATE zamiast SUMX'>Użyto CALCULATE zamiast SUMX</span>
+    </div>
+
+    <div class='code-container'>
+        <div>DAX</div>
+        <div>Wartość Zamówień = Sprzedaż[Ilość] * Sprzedaż[Cena]</div>
+        <div></div>
+        <div>Problem: <div class='drop-zone' data-slot='0' ondrop='drop(event)' ondragover='allowDrop(event)' ondragleave='dragLeave(event)'></div></div>
+    </div>
+
+    <div class='button-group'>
+        <button onclick='checkSolution()'>Sprawdź rozwiązanie</button>
+        <button class='reset-btn' onclick='resetTask()'>Reset</button>
+    </div>
+
+    <div class='hint-box'>
+        Zastanów się: w miarach możesz bezpośrednio wykonywać operacje na kolumnach jak w Excelu? Czego brakuje w porównaniu do składni kolumn kalkulowanych?
+    </div>
+
+    <div class='feedback' id='feedback'></div>
+</div>
+</div>
+
+<div class='page' data-page='6'>
+<div class='container'>
+    <div class='task-description'>
+        <h3>Złota zasada</h3>
+        Która zasada pomaga zdecydować, czy użyć kolumny czy miary?
+    </div>
+
+    <div>
+        <span class='function-chip' draggable='true' ondragstart='drag(event)' data-function='Jeśli używasz SUM/AVERAGE/COUNT → prawdopodobnie miara'>Jeśli używasz SUM/AVERAGE/COUNT → prawdopodobnie miara</span>
+        <span class='function-chip' draggable='true' ondragstart='drag(event)' data-function='Zawsze używaj miar dla oszczędności pamięci'>Zawsze używaj miar dla oszczędności pamięci</span>
+        <span class='function-chip' draggable='true' ondragstart='drag(event)' data-function='Zawsze używaj kolumn dla szybkości obliczeń'>Zawsze używaj kolumn dla szybkości obliczeń</span>
+        <span class='function-chip' draggable='true' ondragstart='drag(event)' data-function='Jeśli dane się zmieniają → użyj miary'>Jeśli dane się zmieniają → użyj miary</span>
+    </div>
+
+    <div class='code-container'>
+        <div>DAX</div>
+        <div>-- Zasada decyzyjna:</div>
+        <div><div class='drop-zone' data-slot='0' ondrop='drop(event)' ondragover='allowDrop(event)' ondragleave='dragLeave(event)'></div></div>
+    </div>
+
+    <div class='button-group'>
+        <button onclick='checkSolution()'>Sprawdź rozwiązanie</button>
+        <button class='reset-btn' onclick='resetTask()'>Reset</button>
+    </div>
+
+    <div class='hint-box'>
+        Kluczem jest obecność funkcji agregujących w formule. Zastanów się, czy w wyrażeniu pojawia się SUM(), AVERAGE(), COUNT() lub podobne.
+    </div>
+
+    <div class='feedback' id='feedback'></div>
+</div>
+</div>
+
+<script>
+    let currentPage = 1;
+    const totalPages = 6;
+    const slotsPerPage = [1, 1, 1, 1, 1, 1];
+    let slots = new Array(slotsPerPage[0]).fill('');
+    const correctSolutions = [['Sprzeda\u017c[Cena] - Sprzeda\u017c[Koszt]'], ['SUM(Sprzeda\u017c[Warto\u015b\u0107 netto]) - SUM(Sprzeda\u017c[Koszt])'], ['Kolumn\u0119 kalkulowan\u0105'], ['Miara'], ['Brak funkcji agreguj\u0105cej'], ['Je\u015bli u\u017cywasz SUM/AVERAGE/COUNT \u2192 prawdopodobnie miara']];
+    const correctFeedback = ['\u2705 **Brawo! Rozwi\u0105zanie poprawne!**\nW kolumnach kalkulowanych mo\u017cesz bezpo\u015brednio odwo\u0142ywa\u0107 si\u0119 do kolumn i wykonywa\u0107 operacje matematyczne jak w Excelu: `Sprzeda\u017c[Cena] - Sprzeda\u017c[Koszt]`. Kolumny dzia\u0142aj\u0105 w kontek\u015bcie wiersza - formu\u0142a oblicza si\u0119 dla ka\u017cdego wiersza osobno. Nie potrzebujesz funkcji agreguj\u0105cych.', '\u2705 **Brawo! Rozwi\u0105zanie poprawne!**\nW miarach MUSISZ najpierw zagregowa\u0107 kolumny funkcjami jak `SUM()`, `AVERAGE()`, `COUNT()`, a dopiero potem wykonywa\u0107 operacje matematyczne. Poprawnie: `SUM(Sprzeda\u017c[Warto\u015b\u0107 netto]) - SUM(Sprzeda\u017c[Koszt])`. Miary dzia\u0142aj\u0105 w kontek\u015bcie filtr\u00f3w, a nie kontek\u015bcie wiersza.', '\u2705 **Brawo! Rozwi\u0105zanie poprawne!**\nKategoria wiekowa to warto\u015b\u0107, kt\u00f3r\u0105 chcesz u\u017cywa\u0107 do filtrowania i grupowania - idealne zastosowanie dla kolumny kalkulowanej. Kolumna zostanie obliczona dla ka\u017cdego klienta osobno podczas od\u015bwie\u017cania danych i b\u0119dzie dost\u0119pna w slicerach. Warto\u015b\u0107 zale\u017cy tylko od danych w wierszu (data urodzenia), wi\u0119c kolumna jest w\u0142a\u015bciwym wyborem.', '\u2705 **Brawo! Rozwi\u0105zanie poprawne!**\nMiary NIE s\u0105 przechowywane w modelu - s\u0105 obliczane dynamicznie w momencie wy\u015bwietlania wizualizacji. To oszcz\u0119dza pami\u0119\u0107 i pozwala na elastyczne reagowanie na filtry. Kolumny kalkulowane, kolumny z Power Query i tabele kalkulowane s\u0105 wszystkie przechowywane w modelu i zajmuj\u0105 miejsce.', '\u2705 **Brawo! Rozwi\u0105zanie poprawne!**\nW miarach NIE MO\u017bESZ bezpo\u015brednio mno\u017cy\u0107 kolumn - brakuje funkcji agreguj\u0105cej. To cz\u0119sty b\u0142\u0105d pocz\u0105tkuj\u0105cych. Poprawne rozwi\u0105zania to:\n- `SUMX(Sprzeda\u017c, Sprzeda\u017c[Ilo\u015b\u0107] * Sprzeda\u017c[Cena])` - oblicz dla ka\u017cdego wiersza, potem zsumuj\n- Lub stw\u00f3rz kolumn\u0119 kalkulowan\u0105 z tym mno\u017ceniem i u\u017cyj `SUM()` na tej kolumnie', '\u2705 **Brawo! Rozwi\u0105zanie poprawne!**\nZ\u0142ota zasada: **Je\u015bli w formule u\u017cywasz funkcji agreguj\u0105cej (`SUM`, `AVERAGE`, `COUNT`, itp.), prawie zawsze powiniene\u015b tworzy\u0107 MIAR\u0118, nie kolumn\u0119.** Je\u015bli mo\u017cesz napisa\u0107 formu\u0142\u0119 bez agregacji, tylko prostym odwo\u0142aniem do kolumn (jak w Excelu), prawdopodobnie potrzebujesz KOLUMNY.'];
+    const incorrectFeedback = [{'SUM(Sprzeda\u017c[Cena]) - SUM(Sprzeda\u017c[Koszt])': '\u274c **Niepoprawne!**\nFunkcje agreguj\u0105ce jak `SUM()` s\u0105 dla miar, nie dla kolumn kalkulowanych. W kolumnie masz kontekst wiersza - pracujesz na pojedynczym wierszu, wi\u0119c bezpo\u015brednio odwo\u0142ujesz si\u0119 do kolumn bez agregacji.', 'CALCULATE': '\u274c **Niepoprawne!**\n`CALCULATE()` s\u0142u\u017cy do modyfikowania kontekstu filtr\u00f3w w miarach. W kolumnach kalkulowanych nie potrzebujesz tej funkcji - po prostu odwo\u0142ujesz si\u0119 bezpo\u015brednio do kolumn.', 'SUMX': '\u274c **Niepoprawne!**\n`SUMX()` to funkcja iteracyjna u\u017cywana g\u0142\u00f3wnie w miarach. W kolumnie kalkulowanej ju\u017c jeste\u015b w kontek\u015bcie wiersza, wi\u0119c nie musisz iterowa\u0107 - po prostu odwo\u0142aj si\u0119 do kolumn bezpo\u015brednio.'}, {'Sprzeda\u017c[Warto\u015b\u0107 netto] - Sprzeda\u017c[Koszt]': '\u274c **Niepoprawne!**\nTo sk\u0142adnia dla kolumn kalkulowanych, nie dla miar. W miarach NIE MO\u017bESZ bezpo\u015brednio odejmowa\u0107 kolumn - musisz najpierw je zagregowa\u0107: `SUM(Sprzeda\u017c[Warto\u015b\u0107 netto]) - SUM(Sprzeda\u017c[Koszt])`.', 'SUMX': '\u274c **Niepoprawne!**\nCho\u0107 `SUMX()` mo\u017ce dzia\u0142a\u0107, to w tym przypadku jest zb\u0119dna komplikacja. Wystarczy prosta agregacja: `SUM(kolumna1) - SUM(kolumna2)`. `SUMX()` jest potrzebna gdy obliczenia trzeba wykona\u0107 wiersz po wierszu przed sumowaniem.', 'AVERAGE': '\u274c **Niepoprawne!**\n`AVERAGE()` oblicza \u015bredni\u0105, a nie sum\u0119. Do obliczenia mar\u017cy (r\u00f3\u017cnicy sum) u\u017cywamy `SUM()`.'}, {'Miar\u0119': '\u274c **Niepoprawne!**\nMiar NIE MO\u017bNA u\u017cywa\u0107 w slicerach ani do filtrowania wierszy. Miary s\u0105 dynamiczne i zale\u017c\u0105 od kontekstu filtr\u00f3w, a Ty potrzebujesz sta\u0142ej warto\u015bci dla ka\u017cdego klienta do filtrowania. To zadanie dla kolumny kalkulowanej.', 'Tabel\u0119 kalkulowan\u0105': '\u274c **Niepoprawne!**\nTabela kalkulowana tworzy ca\u0142\u0105 now\u0105 tabel\u0119. Ty potrzebujesz tylko nowej kolumny w istniej\u0105cej tabeli klient\u00f3w. Kolumna kalkulowana to prostsze i w\u0142a\u015bciwe rozwi\u0105zanie.', 'Parametr What-If': '\u274c **Niepoprawne!**\nParametry What-If s\u0142u\u017c\u0105 do tworzenia interaktywnych scenariuszy analitycznych (np. symulacji), nie do kategoryzacji danych wed\u0142ug cech sta\u0142ych jak wiek klienta.'}, {'Kolumna kalkulowana': '\u274c **Niepoprawne!**\nKolumny kalkulowane s\u0105 obliczane podczas od\u015bwie\u017cania danych i PRZECHOWYWANE w modelu. Zajmuj\u0105 miejsce w pami\u0119ci. To miara jest obliczana na \u017c\u0105danie i nie zajmuje miejsca.', 'Kolumna z Power Query': '\u274c **Niepoprawne!**\nKolumny utworzone w Power Query (czy to \u017ar\u00f3d\u0142owe, czy przekszta\u0142cone) s\u0105 \u0142adowane do modelu i PRZECHOWYWANE w pami\u0119ci. Tylko miary s\u0105 obliczane dynamicznie bez przechowywania.', 'Tabela kalkulowana': '\u274c **Niepoprawne!**\nTabele kalkulowane s\u0105 generowane podczas od\u015bwie\u017cania i PRZECHOWYWANE w modelu razem ze wszystkimi swoimi danymi. Zajmuj\u0105 miejsce w pami\u0119ci.'}, {'Z\u0142e nazwy kolumn': '\u274c **Niepoprawne!**\nNazwy kolumn s\u0105 poprawnie zapisane (`Tabela[Kolumna]`). Problem nie le\u017cy w sk\u0142adni nazw, ale w braku agregacji wymaganej w miarach.', 'Brak operatora mno\u017cenia': '\u274c **Niepoprawne!**\nOperator mno\u017cenia `*` jest obecny w kodzie. Problem le\u017cy gdzie indziej - w braku funkcji agreguj\u0105cej, kt\u00f3ra jest wymagana w miarach.', 'U\u017cyto CALCULATE zamiast SUMX': '\u274c **Niepoprawne!**\nW tym kodzie nie u\u017cyto ani CALCULATE, ani SUMX. Problem jest bardziej fundamentalny - brak jakiejkolwiek funkcji agreguj\u0105cej. W miarach nie mo\u017cna bezpo\u015brednio mno\u017cy\u0107 kolumn.'}, {'Zawsze u\u017cywaj miar dla oszcz\u0119dno\u015bci pami\u0119ci': '\u274c **Niepoprawne!**\nCho\u0107 miary oszcz\u0119dzaj\u0105 pami\u0119\u0107, nie zawsze s\u0105 w\u0142a\u015bciwym wyborem. Nie mo\u017cesz u\u017cywa\u0107 miar do filtrowania czy grupowania. Z\u0142ota zasada to: je\u015bli u\u017cywasz funkcji agreguj\u0105cych \u2192 miara, je\u015bli nie \u2192 kolumna.', 'Zawsze u\u017cywaj kolumn dla szybko\u015bci': '\u274c **Niepoprawne!**\nTo nie jest z\u0142ota zasada. Kolumny s\u0105 obliczane raz podczas od\u015bwie\u017cania, ale zajmuj\u0105 pami\u0119\u0107. Decyzja zale\u017cy od tego, czy potrzebujesz agregacji i jak chcesz u\u017cywa\u0107 oblicze\u0144 (filtrowanie vs warto\u015bci na wykresach).', 'Je\u015bli dane si\u0119 zmieniaj\u0105': '\u274c **Niepoprawne!**\nZmiany danych nie s\u0105 kryterium wyboru mi\u0119dzy kolumn\u0105 a miar\u0105. Oba typy oblicze\u0144 od\u015bwie\u017caj\u0105 si\u0119 wraz z danymi. Kluczowa r\u00f3\u017cnica to: czy u\u017cywasz agregacji i czy potrzebujesz filtrowa\u0107 wed\u0142ug tej warto\u015bci.'}];
+
+    function drag(event) {
+            event.dataTransfer.setData('function', event.target.getAttribute('data-function'));
+        }
+    
+        function allowDrop(event) {
+            event.preventDefault();
+            event.target.classList.add('drag-over');
+        }
+    
+        function dragLeave(event) {
+            event.target.classList.remove('drag-over');
+        }
+    
+        function drop(event) {
+            event.preventDefault();
+            event.target.classList.remove('drag-over');
+    
+            const functionName = event.dataTransfer.getData('function');
+            const slotIndex = parseInt(event.target.getAttribute('data-slot'));
+    
+            const activePage = document.querySelector('.page.active');
+            if (!activePage) return;
+    
+            if (slots[slotIndex]) {
+                const chips = activePage.querySelectorAll('.function-chip');
+                for (let i = 0; i < chips.length; i++) {
+                    if (chips[i].getAttribute('data-function') === slots[slotIndex]) {
+                        chips[i].classList.remove('used');
+                        break;
+                    }
+                }
+            }
+    
+            slots[slotIndex] = functionName;
+            event.target.textContent = functionName;
+            event.target.classList.add('filled');
+    
+            const chips = activePage.querySelectorAll('.function-chip');
+            for (let i = 0; i < chips.length; i++) {
+                if (chips[i].getAttribute('data-function') === functionName) {
+                    chips[i].classList.add('used');
+                    break;
+                }
+            }
+    
+            const feedback = activePage.querySelector('.feedback');
+            if (feedback) {
+                feedback.classList.remove('show');
+            }
+        }
+    
+        function checkSolution() {
+            const activePage = document.querySelector('.page.active');
+            if (!activePage) return;
+    
+            const feedback = activePage.querySelector('.feedback');
+            if (!feedback) return;
+    
+            if (slots.includes('')) {
+                feedback.className = 'feedback show incorrect';
+                feedback.innerHTML = 'Niekompletne! Musisz wypełnić wszystkie miejsca w kodzie.';
+                return;
+            }
+    
+            const currentPageNum = parseInt(activePage.getAttribute('data-page'));
+            const pageIndex = currentPageNum - 1;
+            const isCorrect = checkCurrentPageSolution(pageIndex);
+    
+            if (isCorrect) {
+                feedback.className = 'feedback show correct';
+                feedback.innerHTML = correctFeedback[pageIndex];
+            } else {
+                const userAnswer = slots.join(',');
+                const incorrectMessages = incorrectFeedback[pageIndex];
+    
+                for (const pattern in incorrectMessages) {
+                    if (pattern === userAnswer) {
+                        feedback.className = 'feedback show incorrect';
+                        feedback.innerHTML = incorrectMessages[pattern];
+                        return;
+                    }
+    
+                    if (pattern.includes('*')) {
+                        const regexPattern = '^' + pattern.replace(/\*/g, '.*') + '$';
+                        const regex = new RegExp(regexPattern);
+                        if (regex.test(userAnswer)) {
+                            feedback.className = 'feedback show incorrect';
+                            feedback.innerHTML = incorrectMessages[pattern];
+                            return;
+                        }
+                    }
+                }
+    
+                const defaultMessage = incorrectMessages['default'];
+                feedback.className = 'feedback show incorrect';
+                feedback.innerHTML = defaultMessage || '❌ <strong>Niepoprawne rozwiązanie.</strong> Spróbuj ponownie!';
+            }
+        }
+    
+        function checkCurrentPageSolution(pageIndex) {
+            const solution = correctSolutions[pageIndex];
+            for (let i = 0; i < solution.length; i++) {
+                if (slots[i] !== solution[i]) {
+                    return false;
+                }
+            }
+            return true;
+        }
+    
+        function resetTask() {
+            slots.fill('');
+    
+            const activePage = document.querySelector('.page.active');
+            if (!activePage) return;
+    
+            const zones = activePage.querySelectorAll('.drop-zone');
+            for (let i = 0; i < zones.length; i++) {
+                zones[i].textContent = '';
+                zones[i].classList.remove('filled');
+            }
+    
+            const chips = activePage.querySelectorAll('.function-chip');
+            for (let i = 0; i < chips.length; i++) {
+                chips[i].classList.remove('used');
+            }
+    
+            const feedback = activePage.querySelector('.feedback');
+            if (feedback) {
+                feedback.classList.remove('show');
+            }
+        }
+    
+        function showPage(pageNumber) {
+            const pages = document.querySelectorAll('.page');
+            for (let i = 0; i < pages.length; i++) {
+                pages[i].classList.remove('active');
+            }
+    
+            for (let i = 0; i < pages.length; i++) {
+                if (parseInt(pages[i].getAttribute('data-page')) === pageNumber) {
+                    pages[i].classList.add('active');
+                    break;
+                }
+            }
+    
+            currentPage = pageNumber;
+            const pageIndex = currentPage - 1;
+            document.getElementById('currentPage').textContent = currentPage;
+    
+            document.getElementById('prevBtn').disabled = (currentPage === 1);
+            document.getElementById('nextBtn').disabled = (currentPage === totalPages);
+    
+            slots = new Array(slotsPerPage[pageIndex]).fill('');
+    
+            resetTask();
+        }
+    
+        function nextPage() {
+            if (currentPage < totalPages) {
+                showPage(currentPage + 1);
+            }
+        }
+    
+        function prevPage() {
+            if (currentPage > 1) {
+                showPage(currentPage - 1);
+            }
+        }
+    
+        document.addEventListener('DOMContentLoaded', function() {
+            showPage(1);
+        });
+</script>
+
+</body>
+</html>
+
+"

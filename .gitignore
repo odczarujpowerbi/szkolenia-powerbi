@@ -1,0 +1,27 @@
+# Obsidian artifacts - folder notes
+300. INPUTS.md
+000. TEMPLATES.md
+100. RESOURCES.md
+200. DRAFTS.md
+400. OUTPUTS.md
+500. ARCHIVE.md
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+
+# Virtual environments
+venv/
+env/
+ENV/
+
+# IDE
+.vscode/
+.idea/
+
+# OS
+.DS_Store
+Thumbs.db
