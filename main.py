@@ -33,47 +33,19 @@ def parse_arguments():
         epilog="""
 Przykłady użycia:
 
-  # Domyślnie (CSS.md i JS.md):
-  python main.py
-
-  # Bez CSS i JS:
-  python main.py --css --js
-
-  # Własne pliki CSS i JS:
-  python main.py --css custom.css --js custom.js
-
-  # Wiele plików CSS:
-  python main.py --css base.css theme.css --js app.js
-
-  # Tylko CSS, bez JS:
-  python main.py --css styles.css --js
-
-  # Z pliku konfiguracyjnego (.md lub .json):
+  # Z pliku konfiguracyjnego (wymagany):
   python main.py --config config.md
+
+  # Używa domyślnego config.md z folderu skryptu (jeśli istnieje):
+  python main.py
         """
-    )
-
-    parser.add_argument(
-        '--css',
-        nargs='*',
-        default=None,
-        metavar='FILE',
-        help='Pliki CSS do wczytania (bez argumentów = pomiń CSS, domyślnie: CSS.md)'
-    )
-
-    parser.add_argument(
-        '--js',
-        nargs='*',
-        default=None,
-        metavar='FILE',
-        help='Pliki JS do wczytania (bez argumentów = pomiń JS, domyślnie: JS.md)'
     )
 
     parser.add_argument(
         '--config',
         type=str,
         metavar='FILE',
-        help='Plik JSON z konfiguracją (nadpisuje --css i --js)'
+        help='Plik konfiguracyjny (.md lub .json) z ustawieniami CSS/JS'
     )
 
     return parser.parse_args()
@@ -120,34 +92,19 @@ def main():
         if default_config.exists():
             config_path_to_use = default_config
 
-    if config_path_to_use:
-        if not config_path_to_use.exists():
-            print(f"[ERROR] Plik konfiguracyjny nie istnieje: {config_path_to_use}")
-            return
-        print(f"\n[INFO] Wczytuję konfigurację z: {config_path_to_use}\n")
-        config = load_config(config_path_to_use)
-        assets_config = config.get('assets', {})
-        should_generate_css_measures = config.get('generate_css_measures', True)
-    else:
-        # Argumenty linii poleceń - stary format (backward compatibility)
-        css_files = None  # None = domyślne ['CSS.md']
-        js_files = None   # None = domyślne ['JS.md']
+    if not config_path_to_use:
+        print(f"[ERROR] Nie znaleziono pliku konfiguracyjnego!")
+        print(f"Utwórz plik config.md w folderze skryptu lub użyj: python main.py --config config.md")
+        return
 
-        if args.css is not None:
-            css_files = args.css if args.css else []  # pusta lista = pomiń CSS
-        if args.js is not None:
-            js_files = args.js if args.js else []  # pusta lista = pomiń JS
+    if not config_path_to_use.exists():
+        print(f"[ERROR] Plik konfiguracyjny nie istnieje: {config_path_to_use}")
+        return
 
-        # Konwertuj na nowy format
-        if css_files is None:
-            css_files = ['CSS.md']
-        if js_files is None:
-            js_files = ['JS.md']
-
-        assets_config = {
-            'teoria': {'css': css_files, 'js': js_files},
-            'quiz': {'css': css_files, 'js': js_files}
-        }
+    print(f"\n[INFO] Wczytuję konfigurację z: {config_path_to_use}\n")
+    config = load_config(config_path_to_use)
+    assets_config = config.get('assets', {})
+    should_generate_css_measures = config.get('generate_css_measures', True)
 
     # Generuj osobne miary CSS (jeśli włączone)
     css_measures_count = 0

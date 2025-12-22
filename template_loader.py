@@ -8,13 +8,11 @@ import re
 from pathlib import Path
 
 
-def read_template(template_path, start_marker, end_marker):
+def read_template(template_path):
     """Czyta template CSS lub JS z pliku markdown
 
     Args:
         template_path: ścieżka do pliku .md
-        start_marker: nieużywane (zachowane dla kompatybilności wstecznej)
-        end_marker: nieużywane (zachowane dla kompatybilności wstecznej)
 
     Returns:
         str: zawartość pierwszego bloku kodu z pliku markdown
@@ -52,7 +50,7 @@ def load_templates(template_dir, css_files=None, js_files=None):
             continue
         css_path = template_dir / css_file
         if css_path.exists():
-            content = read_template(css_path, '```css', '```')
+            content = read_template(css_path)
             if content:
                 css_parts.append(content)
                 print(f"[OK] Wczytano CSS: {css_file}")
@@ -66,7 +64,7 @@ def load_templates(template_dir, css_files=None, js_files=None):
             continue
         js_path = template_dir / js_file
         if js_path.exists():
-            content = read_template(js_path, '```js', '```')
+            content = read_template(js_path)
             if content:
                 js_parts.append(content)
                 print(f"[OK] Wczytano JS: {js_file}")

@@ -294,15 +294,6 @@ def load_config(config_path):
     }
     ```
 
-    Stary format (backward compatible):
-    ```json
-    {
-        "css_files": ["CSS.md"],
-        "js_files": ["JS.md"],
-        "generate_css_measures": true
-    }
-    ```
-
     Args:
         config_path: str - ścieżka do pliku .md lub .json
 
@@ -330,26 +321,14 @@ def load_config(config_path):
         # Plik .json - parsuj bezpośrednio
         config = json.loads(content)
 
-    # Sprawdź czy to nowy format (z 'assets') czy stary (z 'css_files')
-    if 'assets' in config:
-        # Nowy format - zwróć bezpośrednio
-        return {
-            'assets': config.get('assets', {}),
-            'generate_css_measures': config.get('generate_css_measures', True)
-        }
-    else:
-        # Stary format - konwertuj na nowy dla backward compatibility
-        css_files = config.get('css_files', ['CSS.md'])
-        js_files = config.get('js_files', ['JS.md'])
+    # Zwróć konfigurację (wymagany nowy format z 'assets')
+    if 'assets' not in config:
+        raise ValueError(f"Plik konfiguracyjny musi zawierać klucz 'assets'. Znaleziono: {list(config.keys())}")
 
-        # Wszystkie typy dostają te same pliki CSS/JS
-        return {
-            'assets': {
-                'teoria': {'css': css_files, 'js': js_files},
-                'quiz': {'css': css_files, 'js': js_files}
-            },
-            'generate_css_measures': config.get('generate_css_measures', True)
-        }
+    return {
+        'assets': config.get('assets', {}),
+        'generate_css_measures': config.get('generate_css_measures', True)
+    }
 
 
 def generate_css_measures(template_dir, output_dir):
@@ -373,7 +352,7 @@ def generate_css_measures(template_dir, output_dir):
 
     for css_file in css_files:
         # Wczytaj zawartość CSS
-        css_content = read_template(css_file, '```css', '```')
+        css_content = read_template(css_file)
 
         if not css_content:
             print(f"[WARNING] Pusty CSS w pliku: {css_file.name}")
