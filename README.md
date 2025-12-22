@@ -2,6 +2,23 @@
 
 Narzędzie CLI automatyzujące proces tworzenia eleganckiej dokumentacji technicznej dla prezentacji Power BI. Projekt rozwiązuje problem rozproszonych materiałów szkoleniowych, łącząc treści merytoryczne z interaktywnymi dashboardami w spójną całość.
 
+## Architektura
+
+Projekt wykorzystuje modularną architekturę składającą się z 7 wyspecjalizowanych modułów:
+- `main.py` - punkt wejścia, orchestracja procesu konwersji
+- `text_utils.py` - przetwarzanie Markdown→HTML, podświetlanie składni DAX
+- `template_loader.py` - ładowanie templateów CSS/JS z plików
+- `theory_processor.py` - obsługa treści teoretycznych
+- `quiz_processor.py` - generowanie interaktywnych quizów
+- `gaps_processor.py` - generowanie zadań z lukami (gap filler)
+- `utils.py` - funkcje pomocnicze, konfiguracja, generowanie TMDL
+
+## Wymagania
+
+- Python 3.x
+- Plik konfiguracyjny `config.md` w głównym folderze projektu
+- Struktura folderów: 100. RESOURCES, 300. INPUTS, 400. OUTPUTS
+
 ## Struktura projektu
 
 Zautomatyzowany pipeline, który:
@@ -11,8 +28,9 @@ Zautomatyzowany pipeline, który:
 	- Każdy plik posiada frontmatter z właściwością `type` (teoria/quiz/gaps)
 
 2. **Przetwarza algorytmicznie** - konwertuje Markdown do HTML z zachowaniem struktury
-	- Realizowane przez skrypt `convert_md_to_powerbi.py`
+	- Realizowane przez zmodularyzowany skrypt `main.py`
 	- Obsługa różnych typów treści (teoria/quiz/gaps) na podstawie frontmatter
+	- Wymagany plik konfiguracyjny `config.md` definiujący zasoby CSS/JS
 	- Możliwość uruchomienia z Obsidian przez plugin Shell Commands: `Execute: Py Convert`, skrót klawiszowy: `ctrl + shift + 2`
 
 3. **Generuje HTML** - konwertuje do formatu HTML z gotowym CSS i JS
@@ -42,7 +60,7 @@ Zautomatyzowany pipeline, który:
 - **[[100. RESOURCES/100. RESOURCES|100. RESOURCES]]** - zasoby CSS i JS dla różnych typów treści
 	- Pliki CSS: Teoria (Cherry, Blue), Quiz (Cherry, Blue), Gaps (Cherry)
 	- Pliki JS: Teoria, Quiz, Gaps
-	- Wykorzystywane przez `convert_md_to_powerbi.py` według konfiguracji w `config.md`
+	- Wykorzystywane przez `main.py` według konfiguracji w `config.md`
 
 - **[[200. DRAFTS/200. DRAFTS|200. DRAFTS]]** - wersje robocze materiałów
 	- Nieukończone materiały szkoleniowe
@@ -64,4 +82,46 @@ Zautomatyzowany pipeline, który:
 	- Stare wersje materiałów szkoleniowych
 	- Nieaktualne treści zachowane dla historii
 	- Backup poprzednich iteracji projektu
+
+## Użycie
+
+### Uruchomienie z linii poleceń
+
+```bash
+# Używa domyślnego config.md z folderu projektu
+python main.py
+
+# Lub wskaż konkretny plik konfiguracyjny
+python main.py --config config.md
+```
+
+### Uruchomienie z Obsidian
+
+Skrót klawiszowy: `ctrl + shift + 2` (komenda: `Execute: Py Convert`)
+
+### Format pliku konfiguracyjnego
+
+Plik `config.md` musi zawierać blok JSON z kluczem `assets`:
+
+```json
+{
+  "assets": {
+    "teoria": {
+      "css": ["CSS - Teoria - Cherry.md", "CSS - Teoria - Blue.md"],
+      "js": ["JS - Teoria.md"]
+    },
+    "quiz": {
+      "css": ["CSS - Quiz - Cherry.md"],
+      "js": ["JS - Quiz.md"]
+    },
+    "gaps": {
+      "css": ["CSS - Gaps - Cherry.md"],
+      "js": ["JS - Gaps.md"]
+    }
+  },
+  "generate_css_measures": true
+}
+```
+
+**Uwaga:** Stary format JSON (z kluczami `css_files` i `js_files`) nie jest już obsługiwany.
 
