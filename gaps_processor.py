@@ -11,7 +11,7 @@ Functions:
 
 import re
 import json
-from text_utils import escape_html, escape_quotes_for_dax, highlight_dax_syntax
+from text_utils import format_user_text, escape_html
 
 
 def parse_gaps_markdown(content):
@@ -233,8 +233,8 @@ def create_gaps_html(tasks, css='', js=''):
 
         # Opis zadania
         html_parts.append("    <div class='task-description'>\n")
-        html_parts.append(f"        <h3>{task['title']}</h3>\n")
-        html_parts.append(f"        {task['description']}\n")
+        html_parts.append(f"        <h3>{format_user_text(task['title'], 'html')}</h3>\n")
+        html_parts.append(f"        {format_user_text(task['description'], 'html')}\n")
         html_parts.append("    </div>\n\n")
 
         # Dostępne funkcje
@@ -271,7 +271,7 @@ def create_gaps_html(tasks, css='', js=''):
         # Wskazówka
         if task['hint']:
             html_parts.append("    <div class='hint-box'>\n")
-            html_parts.append(f"        {task['hint']}\n")
+            html_parts.append(f"        {format_user_text(task['hint'], 'html')}\n")
             html_parts.append("    </div>\n\n")
 
         # Feedback
@@ -300,21 +300,25 @@ def create_gaps_html(tasks, css='', js=''):
     correct_solutions = [task['solution'] for task in tasks]
     html_parts.append(f"    const correctSolutions = {json.dumps(correct_solutions)};\n")
 
-    # Feedback poprawny - escape apostrofy przed json.dumps
+    # Feedback poprawny - najpierw markdown, potem escape apostrofów
     correct_feedback = []
     for task in tasks:
-        # Zamień apostrofy na &#39; (HTML entity) aby nie powodować błędów po escape_quotes_for_dax
-        feedback_escaped = task['feedback_correct'].replace("'", "&#39;")
+        # KROK 1: Przetworz markdown na HTML (dla innerHTML w JS)
+        feedback_formatted = format_user_text(task['feedback_correct'], 'innerHTML')
+        # KROK 2: Zamień apostrofy na &#39; (HTML entity) dla json.dumps
+        feedback_escaped = feedback_formatted.replace("'", "&#39;")
         correct_feedback.append(feedback_escaped)
     html_parts.append(f"    const correctFeedback = {json.dumps(correct_feedback)};\n")
 
-    # Feedback błędny - escape apostrofy przed json.dumps
+    # Feedback błędny - najpierw markdown, potem escape apostrofów
     incorrect_feedback_list = []
     for task in tasks:
         feedback_dict = {}
         for pattern, message in task['feedback_incorrect'].items():
-            # Zamień apostrofy na &#39; (HTML entity)
-            message_escaped = message.replace("'", "&#39;")
+            # KROK 1: Przetworz markdown na HTML
+            message_formatted = format_user_text(message, 'innerHTML')
+            # KROK 2: Zamień apostrofy na &#39; (HTML entity)
+            message_escaped = message_formatted.replace("'", "&#39;")
             feedback_dict[pattern] = message_escaped
         incorrect_feedback_list.append(feedback_dict)
 

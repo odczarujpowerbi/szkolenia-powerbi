@@ -384,6 +384,47 @@ def escape_quotes_for_dax(text):
     return text.replace('"', "'")
 
 
+def format_user_text(text, context='html'):
+    """Formatuje tekst użytkownika z markdown na HTML
+
+    Konwertuje markdown (inline code, bold, images) na HTML, zachowując
+    prawidłową kolejność operacji (najpierw markdown, potem escape).
+
+    Args:
+        text: str - tekst wejściowy z markdown
+        context: str - kontekst użycia:
+            - 'html': dla bezpośredniego wstawienia do HTML (escape HTML po przetworzeniu)
+            - 'innerHTML': dla JavaScript innerHTML w DAX (escape cudzysłowów po przetworzeniu)
+            - 'raw': tylko konwersja markdown, bez escape
+
+    Returns:
+        str - sformatowany tekst HTML
+
+    Examples:
+        >>> format_user_text("To jest **bold** i `kod`", 'html')
+        'To jest <strong>bold</strong> i <code>kod</code>'
+
+        >>> format_user_text("Użyj `COUNT`", 'innerHTML')
+        'Użyj <code>COUNT</code>'
+    """
+    if not text:
+        return text
+
+    # KROK 1: Markdown → HTML (ZAWSZE PIERWSZY)
+    formatted = process_inline_markdown(text)
+
+    # KROK 2: Escape (zależnie od kontekstu, ZAWSZE DRUGI)
+    if context == 'html':
+        # Bezpośrednie wstawienie do HTML - escape < > &
+        formatted = escape_html(formatted)
+    elif context == 'innerHTML':
+        # Dla JavaScript innerHTML - tylko escape cudzysłowów dla DAX
+        formatted = escape_quotes_for_dax(formatted)
+    # context == 'raw': bez dodatkowego escape
+
+    return formatted
+
+
 def normalize_quotes(text):
     """Zamienia typograficzne cudzysłowy na zwykłe ASCII
 

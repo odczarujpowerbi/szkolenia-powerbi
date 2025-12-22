@@ -9,7 +9,7 @@ Functions:
     create_quiz_html: Generates interactive HTML quiz from parsed question data
 """
 
-from text_utils import escape_html, escape_quotes_for_dax
+from text_utils import format_user_text
 
 
 def create_quiz_html(title, questions, css='', js=''):
@@ -273,14 +273,14 @@ def create_quiz_html(title, questions, css='', js=''):
         html_parts.append(f"    <div class='{page_class}'>\n")
         html_parts.append(f"        <h1>Pytanie {idx + 1}</h1>\n")
         html_parts.append("        <div class='question-box'>\n")
-        html_parts.append(f"            <p><strong>{escape_html(q['question'])}</strong></p>\n")
+        html_parts.append(f"            <p><strong>{format_user_text(q['question'], 'html')}</strong></p>\n")
         html_parts.append("        </div>\n")
         html_parts.append("        <div class='answers'>\n")
 
         # Odpowiedzi
         for ans_idx, answer in enumerate(q['answers']):
             html_parts.append(f"            <div class='answer-option' onclick='selectAnswer({idx}, {ans_idx})'>\n")
-            html_parts.append(f"                {escape_html(answer)}\n")
+            html_parts.append(f"                {format_user_text(answer, 'html')}\n")
             html_parts.append("            </div>\n")
 
         html_parts.append("        </div>\n")
@@ -320,9 +320,10 @@ def create_quiz_html(title, questions, css='', js=''):
     # Array z wyjaśnieniami
     html_parts.append("    const explanations = [\n")
     for idx, q in enumerate(questions):
-        explanation_escaped = escape_quotes_for_dax(q['explanation'])
+        # Najpierw przetworz markdown, potem escape dla DAX/innerHTML
+        explanation_formatted = format_user_text(q['explanation'], 'innerHTML')
         comma = "," if idx < len(questions) - 1 else ""
-        html_parts.append(f"        '{explanation_escaped}'{comma}\n")
+        html_parts.append(f"        '{explanation_formatted}'{comma}\n")
     html_parts.append("    ];\n")
     html_parts.append("    \n")
 
