@@ -9,6 +9,7 @@ Functions:
     create_quiz_html: Generates interactive HTML quiz from parsed question data
 """
 
+import json
 from text_utils import format_user_text
 
 
@@ -273,14 +274,14 @@ def create_quiz_html(title, questions, css='', js=''):
         html_parts.append(f"    <div class='{page_class}'>\n")
         html_parts.append(f"        <h1>Pytanie {idx + 1}</h1>\n")
         html_parts.append("        <div class='question-box'>\n")
-        html_parts.append(f"            <p><strong>{format_user_text(q['question'], 'html')}</strong></p>\n")
+        html_parts.append(f"            <p><strong>{format_user_text(q['question'], 'raw')}</strong></p>\n")
         html_parts.append("        </div>\n")
         html_parts.append("        <div class='answers'>\n")
 
         # Odpowiedzi
         for ans_idx, answer in enumerate(q['answers']):
             html_parts.append(f"            <div class='answer-option' onclick='selectAnswer({idx}, {ans_idx})'>\n")
-            html_parts.append(f"                {format_user_text(answer, 'html')}\n")
+            html_parts.append(f"                {format_user_text(answer, 'raw')}\n")
             html_parts.append("            </div>\n")
 
         html_parts.append("        </div>\n")
@@ -318,13 +319,13 @@ def create_quiz_html(title, questions, css='', js=''):
     html_parts.append("    \n")
 
     # Array z wyjaśnieniami
-    html_parts.append("    const explanations = [\n")
-    for idx, q in enumerate(questions):
-        # Najpierw przetworz markdown, potem escape dla DAX/innerHTML
-        explanation_formatted = format_user_text(q['explanation'], 'innerHTML')
-        comma = "," if idx < len(questions) - 1 else ""
-        html_parts.append(f"        '{explanation_formatted}'{comma}\n")
-    html_parts.append("    ];\n")
+    explanations = []
+    for q in questions:
+        # Przetworz markdown na HTML (dla innerHTML w JS)
+        # json.dumps() automatycznie radzi sobie z apostrofami
+        explanation_formatted = format_user_text(q['explanation'], 'raw')
+        explanations.append(explanation_formatted)
+    html_parts.append(f"    const explanations = {json.dumps(explanations)};\n")
     html_parts.append("    \n")
 
     # Część 2: Funkcje - z template lub inline
