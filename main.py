@@ -62,7 +62,7 @@ def main():
     input_dir = script_dir / '300. INPUTS'
     resources_dir = script_dir / '100. RESOURCES'
     output_dir = script_dir / '400. OUTPUTS'  # Output HTML
-    tmdl_dir = output_dir / 'TMDL'  # Folder TMDL wewnątrz OUTPUTS
+    tmdl_dir = output_dir / '_Measures'  # Folder _Measures wewnątrz OUTPUTS
 
     # Sprawdź czy foldery istnieją
     if not input_dir.exists():
@@ -105,6 +105,7 @@ def main():
     config = load_config(config_path_to_use)
     assets_config = config.get('assets', {})
     should_generate_css_measures = config.get('generate_css_measures', True)
+    characters_config = config.get('characters', {})
 
     # Generuj osobne miary CSS (jeśli włączone)
     css_measures_count = 0
@@ -117,8 +118,8 @@ def main():
     # Wczytaj wszystkie assety dla wszystkich typów
     assets_dict = load_all_assets(resources_dir, assets_config)
 
-    # Przetwórz wszystkie pliki .md w 300. INPUTS
-    all_md_files = list(input_dir.glob('*.md'))
+    # Przetwórz wszystkie pliki .md w 300. INPUTS (włącznie z podfolderami)
+    all_md_files = list(input_dir.rglob('*.md'))
 
     # Pomiń pliki notes Obsidian (artefakty folder notes)
     obsidian_notes = {
@@ -142,7 +143,13 @@ def main():
     total_generated = 0
     for md_file in md_files:
         try:
-            count = convert_file(md_file, output_dir, assets_dict)
+            # Oblicz względną ścieżkę względem input_dir
+            relative_path = md_file.relative_to(input_dir)
+            # Utwórz odpowiednią strukturę folderów w output_dir
+            target_dir = output_dir / relative_path.parent
+            target_dir.mkdir(parents=True, exist_ok=True)
+
+            count = convert_file(md_file, target_dir, assets_dict, characters_config)
             total_generated += count
         except Exception as e:
             print(f"[ERROR] Blad przy konwersji {md_file.name}: {e}")
@@ -153,7 +160,7 @@ def main():
         print(f"Wygenerowano {css_measures_count} miar(y) CSS.")
     print()
 
-    # Generuj plik TMDL
+    # Generuj pliki miar (TMDL)
     print(f"\n=== Generowanie pliku TMDL ===\n")
     generate_tmdl(output_dir, tmdl_dir)
     print()

@@ -6,6 +6,8 @@
   "enableCompatQuickExplorer": false,
   "attachmentFolderNames": [
     "bin",
-    "convert_md_to_powerbi.py"
+    "endsWith::.py",
+    "__pycache__",
+    ""
   ]
 }

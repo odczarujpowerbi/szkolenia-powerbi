@@ -45,17 +45,29 @@ def clean_output_directory(output_dir):
 
     print(f"[INFO] Czyszczenie folderu: {output_dir}\n")
 
-    # Usuń folder TMDL jeśli istnieje (najpierw, bo zawiera pliki)
-    tmdl_dir = output_dir / 'TMDL'
-    if tmdl_dir.exists():
+    import shutil
+
+    # Usuń folder _Measures jeśli istnieje (najpierw, bo zawiera pliki)
+    measures_dir = output_dir / '_Measures'
+    if measures_dir.exists():
         try:
-            import shutil
-            shutil.rmtree(tmdl_dir)
-            print(f"[OK] Usunięto folder TMDL")
+            shutil.rmtree(measures_dir)
+            print(f"[OK] Usunięto folder _Measures")
         except PermissionError:
-            print(f"[WARNING] Folder TMDL jest zablokowany (prawdopodobnie otwarty w eksploratorze)")
+            print(f"[WARNING] Folder _Measures jest zablokowany (prawdopodobnie otwarty w eksploratorze)")
         except Exception as e:
-            print(f"[WARNING] Nie można usunąć folderu TMDL: {e}")
+            print(f"[WARNING] Nie można usunąć folderu _Measures: {e}")
+
+    # Usuń wszystkie podfoldery (poza _Measures który już został usunięty)
+    all_subdirs = [d for d in output_dir.iterdir() if d.is_dir() and d.name != '_Measures']
+    for subdir in all_subdirs:
+        try:
+            shutil.rmtree(subdir)
+            print(f"[OK] Usunięto podfolder: {subdir.name}")
+        except PermissionError:
+            print(f"[WARNING] Podfolder zablokowany: {subdir.name}")
+        except Exception as e:
+            print(f"[WARNING] Nie można usunąć podfolderu {subdir.name}: {e}")
 
     # Usuń wszystkie pliki z głównego folderu OUTPUT (wszystkie rozszerzenia)
     all_files = [f for f in output_dir.iterdir() if f.is_file()]
@@ -127,7 +139,7 @@ def parse_frontmatter(content):
     return properties, content_without_frontmatter
 
 
-def convert_file(input_path, output_dir, assets_dict):
+def convert_file(input_path, output_dir, assets_dict, characters_config=None):
     """Konwertuje pojedynczy plik markdown do miar Power BI
 
     Obsługuje trzy typy plików:
@@ -140,6 +152,7 @@ def convert_file(input_path, output_dir, assets_dict):
         output_dir: Path - folder wyjściowy
         assets_dict: dict - słownik assetów dla typów:
             {'teoria': {'css': str, 'js': str}, 'quiz': {'css': str, 'js': str}, 'gaps': {'css': str, 'js': str}}
+        characters_config: dict - konfiguracja zamian znaków (opcjonalnie)
 
     Returns:
         int - liczba wygenerowanych plików HTML
@@ -173,10 +186,8 @@ def convert_file(input_path, output_dir, assets_dict):
             return 0
 
         # Generuj HTML quizu (z CSS z konfiguracji lub inline)
-        quiz_html = create_quiz_html(quiz_title, questions, css, js)
-
-        # Escapuj cudzysłowy dla DAX
-        quiz_html = escape_quotes_for_dax(quiz_html)
+        # Przekaż characters_config - funkcja create_quiz_html obsługuje escape
+        quiz_html = create_quiz_html(quiz_title, questions, css, js, characters_config)
 
         # Formatuj jako miara Power BI
         measure = f'{base_name} = \n\n"\n\n{quiz_html}\n"\n'
@@ -201,10 +212,8 @@ def convert_file(input_path, output_dir, assets_dict):
             return 0
 
         # Generuj HTML gaps (z CSS z konfiguracji lub inline)
-        gaps_html = create_gaps_html(tasks, css, js)
-
-        # Escapuj cudzysłowy dla DAX
-        gaps_html = escape_quotes_for_dax(gaps_html)
+        # Przekaż characters_config - funkcja create_gaps_html obsługuje escape
+        gaps_html = create_gaps_html(tasks, css, js, characters_config)
 
         # Formatuj jako miara Power BI
         measure = f'{base_name} = \n\n"\n\n{gaps_html}\n"\n'
@@ -239,11 +248,11 @@ def convert_file(input_path, output_dir, assets_dict):
         # Podziel sekcję na strony po '---'
         pages_raw = section_content.split('\n---\n')
 
-        # Konwertuj każdą stronę
+        # Konwertuj każdą stronę (przekaż characters_config)
         pages_html = []
         for page_md in pages_raw:
             if page_md.strip():
-                page_html = convert_markdown_to_html(page_md)
+                page_html = convert_markdown_to_html(page_md, characters_config)
                 pages_html.append(page_html)
 
         if not pages_html:
@@ -261,8 +270,8 @@ def convert_file(input_path, output_dir, assets_dict):
 
         output_path = output_dir / output_filename
 
-        # Stwórz miarę Power BI
-        measure = create_powerbi_measure(title, pages_html, css, js)
+        # Stwórz miarę Power BI (przekaż characters_config)
+        measure = create_powerbi_measure(title, pages_html, css, js, characters_config)
 
         # Zapisz do pliku
         with open(output_path, 'w', encoding='utf-8') as f:
@@ -327,7 +336,8 @@ def load_config(config_path):
 
     return {
         'assets': config.get('assets', {}),
-        'generate_css_measures': config.get('generate_css_measures', True)
+        'generate_css_measures': config.get('generate_css_measures', True),
+        'characters': config.get('characters', {})
     }
 
 
@@ -489,17 +499,17 @@ def generate_tmdl(output_dir, tmdl_dir):
 
     Args:
         output_dir: Path - folder z plikami HTML (400. OUTPUTS)
-        tmdl_dir: Path - folder docelowy dla pliku TMDL (400. OUTPUTS/TMDL)
+        tmdl_dir: Path - folder docelowy dla pliku TMDL (400. OUTPUTS/_Measures)
     """
-    # Znajdź wszystkie pliki HTML
-    html_files = sorted(output_dir.glob('*.html'))
+    # Znajdź wszystkie pliki HTML (włącznie z podfolderami, ale pomiń folder _Measures)
+    html_files = sorted([f for f in output_dir.rglob('*.html') if '_Measures' not in f.parts])
 
     if not html_files:
         print("[WARNING] Brak plików HTML do wygenerowania TMDL")
         return
 
-    # Utwórz folder TMDL jeśli nie istnieje
-    tmdl_dir.mkdir(exist_ok=True)
+    # Utwórz folder _Measures jeśli nie istnieje
+    tmdl_dir.mkdir(parents=True, exist_ok=True)
 
     # Wczytaj wszystkie miary
     measures = []

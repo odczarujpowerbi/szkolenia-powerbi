@@ -1,0 +1,452 @@
+Tworzenie Tabeli = 
+
+"
+
+<!DOCTYPE html>
+<html lang='pl'>
+<head>
+    <meta charset='UTF-8'>
+    <meta name='viewport' content='width=device-width, initial-scale=1.0'>
+    <title>Tworzenie Tabeli</title>
+    <style>
+            * {
+                margin: 0;
+                padding: 0;
+                box-sizing: border-box;
+            }
+    
+            body {
+                font-family: 'Roboto', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+                font-size: 16px;
+                font-weight: 400;
+                line-height: 1.7;
+                color: #333;
+                background: transparent;
+                padding: 20px;
+            }
+    
+            .container {
+                max-width: 800px;
+                margin: 0 auto;
+                background: transparent;
+                padding: 40px;
+            }
+    
+            .navigation {
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                margin-bottom: 40px;
+                padding-bottom: 20px;
+                border-bottom: 1px solid #e1e4e8;
+            }
+    
+            button {
+                background: #6b1718;
+                color: white;
+                border: none;
+                padding: 12px 28px;
+                border-radius: 4px;
+                cursor: pointer;
+                font-size: 1em;
+                font-weight: 500;
+                transition: background 0.2s;
+            }
+    
+            button:hover {
+                background: #380c0c;
+            }
+    
+            button:disabled {
+                background: #ccc;
+                cursor: not-allowed;
+            }
+    
+            .page-indicator {
+                color: #666;
+                font-size: 1em;
+            }
+    
+            .page {
+                display: none;
+                min-height: 500px;
+            }
+    
+            .page.active {
+                display: block;
+                animation: fadeIn 0.3s ease-in;
+            }
+    
+            @keyframes fadeIn {
+                from { opacity: 0; transform: translateY(10px); }
+                to { opacity: 1; transform: translateY(0); }
+            }
+    
+            h1 {
+                font-size: 26px;
+                line-height: 36px;
+                font-weight: 600;
+                padding-top: 14px;
+                padding-bottom: 6px;
+                margin-bottom: 1em;
+                color: #6b1718;
+                border-bottom: 2px solid #6b1718;
+            }
+    
+            h2 {
+                font-size: 26px;
+                line-height: 36px;
+                font-weight: 600;
+                padding-top: 14px;
+                padding-bottom: 6px;
+                margin: 1.5em 0 0.8em 0;
+                color: #1a1a1a;
+                border-bottom: 2px solid #1a1a1a;
+            }
+    
+            h3 {
+                font-size: 1.1em;
+                font-weight: 600;
+                margin: 1.2em 0 0.6em 0;
+                padding-bottom: 5px;
+                color: #444;
+                border-bottom: 1px solid #999;
+            }
+    
+            p {
+                margin-bottom: 1em;
+                font-size: 1.05em;
+            }
+    
+            strong {
+                font-weight: 700;
+                color: #1a1a1a;
+            }
+    
+            code {
+                background: #f5f5f5;
+                padding: 3px 7px;
+                border-radius: 3px;
+                font-family: 'Fira Code', 'Courier New', monospace;
+                font-size: 0.95em;
+                color: #b82b4e;
+            }
+    
+            pre {
+                background: #f8f9fa;
+                border-left: 3px solid #6b1718;
+                padding: 18px;
+                margin: 1em 0;
+                overflow-x: auto;
+                border-radius: 3px;
+            }
+    
+            pre code {
+                background: none;
+                padding: 0;
+                color: #24292e;
+                font-size: 1em;
+                line-height: 1.6;
+            }
+    
+            .dax-keyword {
+                color: #6b1718;
+                font-weight: 600;
+            }
+    
+            .dax-function {
+                color: #6f42c1;
+            }
+    
+            .dax-number {
+                color: #005cc5;
+            }
+    
+            .dax-comment {
+                color: #6a737d;
+                font-style: italic;
+            }
+    
+            ul, ol {
+                margin: 0.3em 0;
+                padding-left: 1.8em;
+            }
+    
+            li {
+                margin: 0;
+                padding-left: 0.2em;
+                font-size: 1.05em;
+                line-height: 1.6;
+            }
+    
+            ol {
+                list-style-type: decimal;
+            }
+    
+            ol li::marker {
+                color: #999;
+                font-weight: 400;
+            }
+    
+            ul li::marker {
+                color: #999;
+            }
+    
+            ul ul, ol ol, ul ol, ol ul {
+                margin: 0.2em 0;
+                padding-left: 1.5em;
+            }
+    
+            blockquote {
+                border-left: 3px solid #6b1718;
+                background: #f8f9fa;
+                padding: 14px 18px;
+                margin: 1em 0;
+                color: #555;
+                font-style: italic;
+            }
+    
+            blockquote p {
+                margin: 0;
+            }
+    
+            .iteration-box {
+                border-left: 3px solid #6b1718;
+                padding: 14px 18px;
+                margin: 0.8em 0;
+            }
+    
+            .result-box {
+                background: #f5f5f5;
+                border-left: 3px solid #999;
+                padding: 14px 18px;
+                margin: 0.8em 0;
+                font-weight: 500;
+                color: #555;
+                font-size: 1.05em;
+            }
+        </style>
+</head>
+<body>
+
+<div class='container' id='viz_746dab9c'>
+    <!-- Nawigacja na górze -->
+    <div class='navigation'>
+        <button id='prevBtn_746dab9c' onclick='changePage_746dab9c(-1)'>← Poprzednia</button>
+        <span class='page-indicator'>
+            Strona <span id='currentPage_746dab9c'>1</span> z <span id='totalPages_746dab9c'>3</span>
+        </span>
+        <button id='nextBtn_746dab9c' onclick='changePage_746dab9c(1)'>Następna →</button>
+    </div>
+
+    <!-- Strona 1 -->
+    <div class='page active'>
+        <h1>SUMMARIZE vs SUMMARIZECOLUMNS</h1>
+        <p><strong>Podejście legacy (<code>SUMMARIZE</code>):</strong></p>
+        <ul>
+        <li>Wymaga dodatkowego <code>ADDCOLUMNS</code> do obliczenia miar</li>
+        <li>Trzeba ręcznie filtrować puste wiersze przez <code>FILTER</code> + <code>NOT</code> <code>ISBLANK</code></li>
+        <li>Bardziej rozwlekłe i podatne na błędy kontekstowe</li>
+        <li><code>SUMMARIZE</code> może dać niespodziewane wyniki bez <code>ADDCOLUMNS</code></li>
+        </ul>
+        <p><strong>Podejście modern (<code>SUMMARIZECOLUMNS</code>):</strong></p>
+        <ul>
+        <li>Łączy grupowanie, dodawanie obliczeń i usuwanie pustych wierszy w jednej funkcji</li>
+        <li>Krótsze, czytelniejsze, bezpieczniejsze</li>
+        <li>Obecnie zalecany standard do raportów i zapytań w DAX</li>
+        </ul>
+        <pre><code>DAX
+        <span class='dax-comment'>------- LEGACY  </span>
+        EVALUATE  
+            <span class='dax-function'>FILTER</span> (  
+                <span class='dax-function'>ADDCOLUMNS</span> (  
+                    <span class='dax-function'>SUMMARIZE</span> ( Sales, 'Product'[Brand], 'Date'[Year] ),  
+                    'Sales', <span class='dax-function'>CALCULATE</span> ( <span class='dax-function'>SUMX</span> ( Sales, Sales[Quantity] * Sales[Unit Price] ) )  
+                ),  
+                NOT <span class='dax-function'>ISBLANK</span> ( [Sales] )  
+            )  
+
+        <span class='dax-comment'>------- MODERN  </span>
+        EVALUATE  
+            <span class='dax-function'>SUMMARIZECOLUMNS</span> (  
+                'Product'[Brand], 'Date'[Year],  
+                'Sales', <span class='dax-function'>CALCULATE</span> ( <span class='dax-function'>SUMX</span> ( Sales, Sales[Quantity] * Sales[Unit Price] ) )  
+            )</code></pre>
+
+    </div>
+
+    <!-- Strona 2 -->
+    <div class='page'>
+        <h1>Praca z wieloma tabelami faktów</h1>
+        <p><strong>Zalety <code>SUMMARIZECOLUMNS</code>:</strong></p>
+        <ul>
+        <li>Rozumie kontekst całego modelu danych</li>
+        <li>Działa spójnie z modelem gwiazdy – automatycznie obsługuje kombinacje wymiarów</li>
+        <li>Pozwala w jednym wyrażeniu pobierać dane z różnych tabel faktów</li>
+        <li>Zwraca kompletny wynik w jednej tabeli</li>
+        </ul>
+        <p><strong>Problemy z <code>SUMMARIZE</code>:</strong></p>
+        <ul>
+        <li>Ogranicza się do jednej tabeli faktów</li>
+        <li>Wymaga ręcznego tworzenia siatki kombinacji przez <code>CROSSJOIN</code></li>
+        <li>Trzeba łączyć wyniki przez <code>NATURALLEFTOUTERJOIN</code></li>
+        <li>Bardziej skomplikowane, mniej czytelne i podatne na błędy</li>
+        </ul>
+        <pre><code>DAX
+        <span class='dax-comment'>------- RECOMMENDED  </span>
+        EVALUATE  
+            <span class='dax-function'>SUMMARIZECOLUMNS</span> (  
+                'Product'[Category],  
+                Store[Country],  
+                'Sales', <span class='dax-function'>CALCULATE</span> ( <span class='dax-function'>SUMX</span> ( Sales, Sales[Quantity] * Sales[Net Price] ) ),  
+                'Purchases', <span class='dax-function'>CALCULATE</span> ( <span class='dax-function'>SUMX</span> ( Purchase, Purchase[Quantity] * Purchase[Unit Cost] ) )   
+            )  
+
+        <span class='dax-comment'>------- PROBLEMATIC  </span>
+        EVALUATE  
+            <span class='dax-keyword'>VAR</span> S =   
+                <span class='dax-function'>ADDCOLUMNS</span> (  
+                    <span class='dax-function'>SUMMARIZE</span> ( Sales, 'Product'[Category], Store[Country] ),  
+                    'Sales', <span class='dax-function'>CALCULATE</span> ( <span class='dax-function'>SUMX</span> ( Sales, Sales[Quantity] * Sales[Net Price] ) )   
+                )  
+            <span class='dax-keyword'>VAR</span> P =   
+                <span class='dax-function'>ADDCOLUMNS</span> (  
+                    <span class='dax-function'>SUMMARIZE</span> ( Purchase, 'Product'[Category], Store[Country] ),  
+                    'Purchase', <span class='dax-function'>CALCULATE</span> ( <span class='dax-function'>SUMX</span> ( Purchase, Purchase[Quantity] * Purchase[Unit Cost] ) )   
+                )  
+            <span class='dax-keyword'>VAR</span> G =   
+                <span class='dax-function'>CROSSJOIN</span>( <span class='dax-function'>VALUES</span> ( 'Product'[Category] ), <span class='dax-function'>VALUES</span> ( Store[Country] ) )  
+        <span class='dax-keyword'>RETURN</span>  
+            <span class='dax-function'>NATURALLEFTOUTERJOIN</span> ( <span class='dax-function'>NATURALLEFTOUTERJOIN</span> ( G, P ), S )</code></pre>
+
+    </div>
+
+    <!-- Strona 3 -->
+    <div class='page'>
+        <h1>Kiedy używać SUMMARIZE zamiast SUMMARIZECOLUMNS</h1>
+        <p><strong>Gdy potrzebujesz tylko istniejących kombinacji:</strong></p>
+        <ul>
+        <li><code>SUMMARIZE</code> z tabelą źródłową zwraca tylko kombinacje występujące w danych faktycznych</li>
+        <li>Filtruje automatycznie do rzeczywistych relacji w tabeli Sales</li>
+        <li>To najczęściej oczekiwane zachowanie w raportach</li>
+        </ul>
+        <p><strong>Problem z <code>SUMMARIZECOLUMNS</code> bez miar:</strong></p>
+        <ul>
+        <li>Bez tabeli źródłowej generuje wszystkie możliwe kombinacje (jak <code>CROSSJOIN</code>)</li>
+        <li>Może zwrócić wiele pustych kombinacji, które nie istnieją w danych</li>
+        <li>Nie jest to zwykle pożądane zachowanie</li>
+        </ul>
+        <pre><code>DAX
+        <span class='dax-comment'>------- RECOMMENDED  </span>
+        EVALUATE  
+            <span class='dax-function'>SUMMARIZE</span> (  
+                'Sales',  
+                'Product'[Brand],  
+                Customer[Continent],  
+                'Date'[Date]  
+            )  
+
+        <span class='dax-comment'>------- PROBLEMATIC  </span>
+        EVALUATE  
+            <span class='dax-function'>SUMMARIZECOLUMNS</span> (  
+                'Product'[Brand],  
+                Customer[Continent],  
+                'Date'[Date]  
+            )  
+
+        <span class='dax-comment'>-- Równoważne z:  </span>
+        EVALUATE  
+            <span class='dax-function'>CROSSJOIN</span> (  
+                <span class='dax-function'>VALUES</span> ( 'Product'[Brand] ),  
+                <span class='dax-function'>VALUES</span> ( Customer[Continent] ),  
+                <span class='dax-function'>VALUES</span> ( 'Date'[Date] )   
+            )</code></pre>
+        <p><strong>Zasada:</strong> Do samego grupowania bez miar używaj <code>SUMMARIZE</code> z tabelą źródłową. Do grupowania z miarami używaj <code>SUMMARIZECOLUMNS</code>.</p>
+
+    </div>
+
+</div>
+
+<script>
+(function() {
+    // Unikalny ID dla tej wizualizacji (wstrzykiwany przez Python)
+    var vizId = '746dab9c';
+    var containerId = 'viz_' + vizId;
+
+    var currentPage_746dab9c = 1;
+    var container = document.getElementById(containerId);
+
+    if (!container) return;
+
+    var pages = container.querySelectorAll('.page');
+    var totalPages = pages.length;
+
+    document.getElementById('totalPages_' + vizId).textContent = totalPages;
+
+    window['showPage_746dab9c'] = function(n) {
+        if (n > totalPages) currentPage_746dab9c = totalPages;
+        if (n < 1) currentPage_746dab9c = 1;
+
+        for (var i = 0; i < pages.length; i++) {
+            pages[i].classList.remove('active');
+        }
+        pages[currentPage_746dab9c - 1].classList.add('active');
+
+        document.getElementById('currentPage_' + vizId).textContent = currentPage_746dab9c;
+        document.getElementById('prevBtn_' + vizId).disabled = (currentPage_746dab9c === 1);
+        document.getElementById('nextBtn_' + vizId).disabled = (currentPage_746dab9c === totalPages);
+    };
+
+    window['changePage_746dab9c'] = function(n) {
+        currentPage_746dab9c += n;
+        window['showPage_746dab9c'](currentPage_746dab9c);
+    };
+
+    // Inicjalizacja
+    window['showPage_746dab9c'](1);
+
+    // Funkcjonalność powiększania obrazów
+    var images = container.querySelectorAll('img');
+    images.forEach(function(img) {
+        img.style.cursor = 'pointer';
+        img.style.transition = 'transform 0.3s ease';
+
+        img.addEventListener('click', function() {
+            if (this.classList.contains('zoomed')) {
+                // Pomniejsz obraz
+                this.classList.remove('zoomed');
+                this.style.position = '';
+                this.style.top = '';
+                this.style.left = '';
+                this.style.transform = '';
+                this.style.width = '100%';
+                this.style.maxWidth = '';
+                this.style.maxHeight = '';
+                this.style.zIndex = '';
+                this.style.backgroundColor = '';
+                this.style.padding = '';
+                this.style.boxShadow = '';
+            } else {
+                // Powiększ obraz
+                this.classList.add('zoomed');
+                this.style.position = 'fixed';
+                this.style.top = '50%';
+                this.style.left = '50%';
+                this.style.transform = 'translate(-50%, -50%)';
+                this.style.width = 'auto';
+                this.style.maxWidth = '95vw';
+                this.style.maxHeight = '95vh';
+                this.style.zIndex = '9999';
+                this.style.backgroundColor = 'rgba(255, 255, 255, 0.95)';
+                this.style.padding = '10px';
+                this.style.boxShadow = '0 4px 20px rgba(0, 0, 0, 0.3)';
+            }
+        });
+    });
+})();
+</script>
+
+</body>
+</html>
+
+"

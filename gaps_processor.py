@@ -11,7 +11,7 @@ Functions:
 
 import re
 import json
-from text_utils import format_user_text, escape_html
+from text_utils import format_user_text, escape_html, apply_character_replacements, escape_quotes_for_dax
 
 
 def parse_gaps_markdown(content):
@@ -183,19 +183,21 @@ def parse_gaps_markdown(content):
     return tasks
 
 
-def create_gaps_html(tasks, css='', js=''):
+def create_gaps_html(tasks, css='', js='', characters_config=None):
     """Tworzy interaktywne zadania z lukami w formacie HTML
 
     Args:
         tasks: list[dict] - lista zadań z danymi
         css: str - opcjonalny zewnętrzny CSS
         js: str - opcjonalny zewnętrzny JS
+        characters_config: dict - konfiguracja zamian znaków (opcjonalnie)
 
     Returns:
         str: kompletny HTML z zadaniami (gotowy do osadzenia w miarze Power BI)
     """
     use_inline_styles = not css
-    total_pages = len(tasks)
+    total_tasks = len(tasks)
+    total_pages = total_tasks + 1  # zadania + strona podsumowania
 
     html_parts = []
 
@@ -218,10 +220,10 @@ def create_gaps_html(tasks, css='', js=''):
     html_parts.append("<body>\n\n")
 
     # Nawigacja paginacji (jeśli więcej niż 1 zadanie)
-    if total_pages > 1:
+    if total_tasks > 1:
         html_parts.append("<div class='pagination'>\n")
         html_parts.append("    <button class='nav-button' id='prevBtn' onclick='prevPage()'>← Poprzednie</button>\n")
-        html_parts.append("    <span class='page-info'>Zadanie <span id='currentPage'>1</span> z <span id='totalPages'>{}</span></span>\n".format(total_pages))
+        html_parts.append("    <span class='page-info'>Zadanie <span id='currentPage'>1</span> z <span id='totalPages'>{}</span></span>\n".format(total_tasks))
         html_parts.append("    <button class='nav-button' id='nextBtn' onclick='nextPage()'>Następne →</button>\n")
         html_parts.append("</div>\n\n")
 
@@ -233,8 +235,8 @@ def create_gaps_html(tasks, css='', js=''):
 
         # Opis zadania
         html_parts.append("    <div class='task-description'>\n")
-        html_parts.append(f"        <h3>{format_user_text(task['title'], 'raw')}</h3>\n")
-        html_parts.append(f"        {format_user_text(task['description'], 'raw')}\n")
+        html_parts.append(f"        <h3>{format_user_text(task['title'], 'raw', characters_config)}</h3>\n")
+        html_parts.append(f"        {format_user_text(task['description'], 'raw', characters_config)}\n")
         html_parts.append("    </div>\n\n")
 
         # Dostępne funkcje
@@ -271,7 +273,7 @@ def create_gaps_html(tasks, css='', js=''):
         # Wskazówka
         if task['hint']:
             html_parts.append("    <div class='hint-box'>\n")
-            html_parts.append(f"        {format_user_text(task['hint'], 'raw')}\n")
+            html_parts.append(f"        {format_user_text(task['hint'], 'raw', characters_config)}\n")
             html_parts.append("    </div>\n\n")
 
         # Feedback
@@ -280,12 +282,46 @@ def create_gaps_html(tasks, css='', js=''):
         html_parts.append("</div>\n")
         html_parts.append("</div>\n\n")
 
+    # Strona podsumowania
+    html_parts.append("<div class='page' data-page='{}'>\n".format(total_pages))
+    html_parts.append("<div class='container'>\n")
+    html_parts.append("    <h2>Podsumowanie wyników</h2>\n\n")
+
+    html_parts.append("    <div class='summary-stats'>\n")
+    html_parts.append("        <div class='stat-box'>\n")
+    html_parts.append("            <div class='stat-label'>Ukończone zadania</div>\n")
+    html_parts.append("            <div class='stat-value'><span id='completedCount'>0</span> / {}</div>\n".format(total_tasks))
+    html_parts.append("        </div>\n")
+    html_parts.append("        <div class='stat-box'>\n")
+    html_parts.append("            <div class='stat-label'>Wynik</div>\n")
+    html_parts.append("            <div class='stat-value'><span id='percentageScore'>0</span>%</div>\n")
+    html_parts.append("        </div>\n")
+    html_parts.append("    </div>\n\n")
+
+    html_parts.append("    <div class='summary-details'>\n")
+    html_parts.append("        <h3>Szczegóły zadań</h3>\n")
+    html_parts.append("        <div id='tasksSummary'></div>\n")
+    html_parts.append("    </div>\n\n")
+
+    html_parts.append("    <div class='button-group'>\n")
+    html_parts.append("        <button onclick='resetAllTasks()' style='width: 100%;'>🔄 Rozpocznij od nowa</button>\n")
+    html_parts.append("    </div>\n")
+
+    html_parts.append("</div>\n")
+    html_parts.append("</div>\n\n")
+
     # JavaScript
     html_parts.append("<script>\n")
 
     # Dane dynamiczne
     html_parts.append(f"    let currentPage = 1;\n")
-    html_parts.append(f"    const totalPages = {total_pages};\n")
+    html_parts.append(f"    const totalTasks = {total_tasks};\n")
+    html_parts.append(f"    const totalPages = {total_pages};\n\n")
+
+    # Tracking statystyk
+    html_parts.append(f"    const taskAttempts = new Array(totalTasks).fill(0);\n")
+    html_parts.append(f"    const taskCompleted = new Array(totalTasks).fill(false);\n")
+    html_parts.append(f"    const taskCorrect = new Array(totalTasks).fill(false);\n\n")
 
     # Liczba slotów dla każdego zadania
     slots_per_page = []
@@ -304,8 +340,8 @@ def create_gaps_html(tasks, css='', js=''):
     correct_feedback = []
     for task in tasks:
         # Przetworz markdown na HTML (dla innerHTML w JS)
-        # json.dumps() automatycznie radzi sobie z apostrofami
-        feedback_formatted = format_user_text(task['feedback_correct'], 'raw')
+        # Użyj 'innerHTML' context aby zastosować character replacements
+        feedback_formatted = format_user_text(task['feedback_correct'], 'innerHTML', characters_config)
         correct_feedback.append(feedback_formatted)
     html_parts.append(f"    const correctFeedback = {json.dumps(correct_feedback)};\n")
 
@@ -315,8 +351,8 @@ def create_gaps_html(tasks, css='', js=''):
         feedback_dict = {}
         for pattern, message in task['feedback_incorrect'].items():
             # Przetworz markdown na HTML (dla innerHTML w JS)
-            # json.dumps() automatycznie radzi sobie z apostrofami
-            message_formatted = format_user_text(message, 'raw')
+            # Użyj 'innerHTML' context aby zastosować character replacements
+            message_formatted = format_user_text(message, 'innerHTML', characters_config)
             feedback_dict[pattern] = message_formatted
         incorrect_feedback_list.append(feedback_dict)
 
@@ -331,4 +367,5 @@ def create_gaps_html(tasks, css='', js=''):
     html_parts.append("</body>\n")
     html_parts.append("</html>\n")
 
+    # Zwróć HTML (character replacements były już zastosowane w format_user_text)
     return ''.join(html_parts)

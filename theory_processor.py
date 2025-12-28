@@ -5,7 +5,7 @@ Obsługuje tradycyjny format z sekcjami H1 i stronami rozdzielonymi '---'
 """
 
 import hashlib
-from text_utils import escape_quotes_for_dax
+from text_utils import escape_quotes_for_dax, apply_character_replacements
 
 
 def split_by_h1(content):
@@ -43,7 +43,7 @@ def split_by_h1(content):
     return sections
 
 
-def create_powerbi_measure(title, pages, css, js):
+def create_powerbi_measure(title, pages, css, js, characters_config=None):
     """Tworzy miarę Power BI w formacie HTML
 
     Args:
@@ -51,6 +51,7 @@ def create_powerbi_measure(title, pages, css, js):
         pages: list[str] - lista stron HTML
         css: str - zawartość CSS (może być pusta)
         js: str - zawartość JS (może być pusta)
+        characters_config: dict - konfiguracja zamian znaków (opcjonalnie)
 
     Returns:
         str: kompletna miara Power BI w formacie DAX
@@ -119,12 +120,8 @@ def create_powerbi_measure(title, pages, css, js):
     html_parts.append("\n</body>\n")
     html_parts.append("</html>\n")
 
-    # Złóż HTML w całość
+    # Złóż HTML w całość (character replacements zostały już zastosowane w convert_markdown_to_html)
     html_content = ''.join(html_parts)
-
-    # KRYTYCZNE: Zamień wszystkie cudzysłowy " na apostrofy '
-    # W DAX string jest otoczony ", więc wewnętrzne " zamykają string przedwcześnie
-    html_content = escape_quotes_for_dax(html_content)
 
     # Formatuj jako miara Power BI (zachowaj pełną nazwę z numeracją)
     measure = f'{title} = \n\n"\n\n{html_content}\n"\n'

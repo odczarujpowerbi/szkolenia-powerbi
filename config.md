@@ -1,4 +1,4 @@
- *wystarczy edytować poniższy codeblock .json*
+ *wystarczy edytować poniższy codeblock w formacie JSON*
 ```json
 {
     "assets": {
@@ -15,7 +15,11 @@
             "js": ["JS - Gaps.md"]
         }
     },
-    "generate_css_measures": false
+    "generate_css_measures": false,
+    "characters": {
+	    "quote": "”",
+	    "single_quote": "‛"
+    }
 }
 ```
 

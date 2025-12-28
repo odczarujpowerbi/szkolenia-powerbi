@@ -10,10 +10,10 @@ Functions:
 """
 
 import json
-from text_utils import format_user_text
+from text_utils import format_user_text, apply_character_replacements, escape_quotes_for_dax
 
 
-def create_quiz_html(title, questions, css='', js=''):
+def create_quiz_html(title, questions, css='', js='', characters_config=None):
     """Tworzy interaktywny quiz w formacie HTML
 
     Args:
@@ -22,13 +22,14 @@ def create_quiz_html(title, questions, css='', js=''):
             [{'question': str, 'answers': [str], 'correct': int, 'explanation': str}]
         css: str - opcjonalny zewnętrzny CSS (jeśli pusty, używa wbudowanych stylów)
         js: str - opcjonalny zewnętrzny JS (jeśli pusty, używa wbudowanego)
+        characters_config: dict - konfiguracja zamian znaków (opcjonalnie)
 
     Returns:
         str: kompletny HTML z quizem (gotowy do osadzenia w miarze Power BI)
     """
     use_inline_styles = not css  # Jeśli nie ma zewnętrznego CSS, użyj wbudowanego
     total_questions = len(questions)
-    total_pages = total_questions + 1  # pytania + strona podsumowania
+    total_pages = total_questions + 1  # pytania + strona podsumowania (tylko dla nawigacji)
 
     html_parts = []
 
@@ -261,7 +262,7 @@ def create_quiz_html(title, questions, css='', js=''):
     html_parts.append("        <button id='prevBtn' onclick='changePage(-1)'>← Poprzednia</button>\n")
     html_parts.append("        <span class='page-indicator'>\n")
     html_parts.append("            Pytanie <span id='currentPage'>1</span> z <span id='totalPages'>")
-    html_parts.append(str(total_pages))
+    html_parts.append(str(total_questions))
     html_parts.append("</span>\n")
     html_parts.append("        </span>\n")
     html_parts.append("        <button id='nextBtn' onclick='changePage(1)'>Następna →</button>\n")
@@ -274,14 +275,14 @@ def create_quiz_html(title, questions, css='', js=''):
         html_parts.append(f"    <div class='{page_class}'>\n")
         html_parts.append(f"        <h1>Pytanie {idx + 1}</h1>\n")
         html_parts.append("        <div class='question-box'>\n")
-        html_parts.append(f"            <p><strong>{format_user_text(q['question'], 'raw')}</strong></p>\n")
+        html_parts.append(f"            <p>{format_user_text(q['question'], 'raw', characters_config)}</p>\n")
         html_parts.append("        </div>\n")
         html_parts.append("        <div class='answers'>\n")
 
         # Odpowiedzi
         for ans_idx, answer in enumerate(q['answers']):
             html_parts.append(f"            <div class='answer-option' onclick='selectAnswer({idx}, {ans_idx})'>\n")
-            html_parts.append(f"                {format_user_text(answer, 'raw')}\n")
+            html_parts.append(f"                {format_user_text(answer, 'raw', characters_config)}\n")
             html_parts.append("            </div>\n")
 
         html_parts.append("        </div>\n")
@@ -322,8 +323,8 @@ def create_quiz_html(title, questions, css='', js=''):
     explanations = []
     for q in questions:
         # Przetworz markdown na HTML (dla innerHTML w JS)
-        # json.dumps() automatycznie radzi sobie z apostrofami
-        explanation_formatted = format_user_text(q['explanation'], 'raw')
+        # Użyj 'innerHTML' context aby zastosować character replacements
+        explanation_formatted = format_user_text(q['explanation'], 'innerHTML', characters_config)
         explanations.append(explanation_formatted)
     html_parts.append(f"    const explanations = {json.dumps(explanations)};\n")
     html_parts.append("    \n")
@@ -335,7 +336,7 @@ def create_quiz_html(title, questions, css='', js=''):
             html_parts.append(f"    {line}\n")
     else:
         # Użyj wbudowanego JS (inline)
-        html_parts.append("""    document.getElementById('totalPages').textContent = totalPages;
+        html_parts.append("""    document.getElementById('totalPages').textContent = totalQuestions;
 
     function selectAnswer(questionIndex, answerIndex) {
         if (answeredQuestions[questionIndex]) return;
@@ -375,17 +376,6 @@ def create_quiz_html(title, questions, css='', js=''):
 
         feedback.className = 'feedback show ' + (isCorrect ? 'correct' : 'incorrect');
         feedback.innerHTML = (isCorrect ? '✅ Świetnie! ' : '❌ Nieprawidłowo. ') + explanations[questionIndex];
-
-        if (questionIndex < totalQuestions - 1) {
-            setTimeout(() => {
-                changePage(1);
-            }, 2500);
-        } else {
-            setTimeout(() => {
-                showSummary();
-                changePage(1);
-            }, 2500);
-        }
     }
 
     function showSummary() {
@@ -445,7 +435,29 @@ def create_quiz_html(title, questions, css='', js=''):
         pages.forEach(page => page.classList.remove('active'));
         pages[currentPage - 1].classList.add('active');
 
-        document.getElementById('currentPage').textContent = currentPage;
+        // Wyświetl numer pytania lub "Podsumowanie"
+        const pageIndicator = document.getElementById('currentPage');
+        if (currentPage <= totalQuestions) {
+            pageIndicator.textContent = currentPage;
+        } else {
+            pageIndicator.textContent = 'Podsumowanie';
+        }
+
+        // Zmień przycisk "Następna" na "Zakończ" przed ostatnim pytaniem
+        const nextBtn = document.getElementById('nextBtn');
+        if (currentPage === totalQuestions) {
+            nextBtn.textContent = 'Zakończ →';
+            nextBtn.onclick = function() {
+                showSummary();
+                changePage(1);
+            };
+        } else if (currentPage < totalPages) {
+            nextBtn.textContent = 'Następna →';
+            nextBtn.onclick = function() {
+                changePage(1);
+            };
+        }
+
         document.getElementById('prevBtn').disabled = currentPage === 1;
         document.getElementById('nextBtn').disabled = currentPage === totalPages;
 
@@ -469,6 +481,7 @@ def create_quiz_html(title, questions, css='', js=''):
     html_parts.append("</body>\n")
     html_parts.append("</html>\n")
 
+    # Zwróć HTML (character replacements były już zastosowane w format_user_text)
     return ''.join(html_parts)
 
 
@@ -545,9 +558,10 @@ def parse_quiz_markdown(content):
             i += 1
             continue
 
-        # Treść pytania (bold **text**)
-        if line.startswith('**') and line.endswith('**'):
-            current_question = line[2:-2]
+        # Treść pytania (dowolny tekst po ## Pytanie, który nie jest listą odpowiedzi)
+        # Akceptuj tylko jeśli jeszcze nie mamy pytania i linia nie jest listą
+        if current_question is None and line and not line.startswith('- ') and not line.startswith('#'):
+            current_question = line
             i += 1
             continue
 

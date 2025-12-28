@@ -4,22 +4,22 @@
     "type": "split",
     "children": [
       {
-        "id": "1ab09419bf4bd450",
+        "id": "3ff02ebadfdd3dce",
         "type": "tabs",
         "children": [
           {
-            "id": "00f6dc5425fbb109",
+            "id": "f1c696942fbe2a70",
             "type": "leaf",
             "state": {
               "type": "markdown",
               "state": {
-                "file": "Todo.md",
+                "file": "400. OUTPUTS/_Measures/_HTML.md",
                 "mode": "source",
                 "source": false,
                 "backlinks": false
               },
               "icon": "lucide-file",
-              "title": "Todo"
+              "title": "_HTML"
             }
           }
         ],
@@ -55,7 +55,7 @@
             "state": {
               "type": "search",
               "state": {
-                "query": "Dostepne",
+                "query": "",
                 "matchingCase": false,
                 "explainSearch": true,
                 "collapseAll": true,
@@ -80,7 +80,7 @@
       }
     ],
     "direction": "horizontal",
-    "width": 335.5
+    "width": 314.5
   },
   "right": {
     "id": "a3e901ef3e57a84e",
@@ -89,7 +89,7 @@
       {
         "id": "bad60d4cfca98621",
         "type": "tabs",
-        "dimension": 69.3103448275862,
+        "dimension": 56.657223796033996,
         "children": [
           {
             "id": "257cfe7088d8211a",
@@ -107,36 +107,21 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "Todo.md",
+                "file": "400. OUTPUTS/_Measures/_HTML.md",
                 "followCursor": true,
                 "showSearch": false,
                 "searchQuery": ""
               },
               "icon": "lucide-list",
-              "title": "Outline of Todo"
-            }
-          },
-          {
-            "id": "5223e4231e5fa517",
-            "type": "leaf",
-            "state": {
-              "type": "all-properties",
-              "state": {
-                "sortOrder": "frequency",
-                "showSearch": false,
-                "searchQuery": ""
-              },
-              "icon": "lucide-archive",
-              "title": "All properties"
+              "title": "Outline of _HTML"
             }
           }
-        ],
-        "currentTab": 1
+        ]
       },
       {
         "id": "a452d6d148f4c5b8",
         "type": "tabs",
-        "dimension": 30.689655172413794,
+        "dimension": 43.342776203966004,
         "children": [
           {
             "id": "792a46a7fb2f8591",
@@ -144,7 +129,7 @@
             "state": {
               "type": "localgraph",
               "state": {
-                "file": "Todo.md",
+                "file": "400. OUTPUTS/_Measures/_HTML.md",
                 "options": {
                   "collapse-filter": true,
                   "search": "",
@@ -172,15 +157,14 @@
                 }
               },
               "icon": "lucide-git-fork",
-              "title": "Graph of Todo"
+              "title": "Graph of _HTML"
             }
           }
         ]
       }
     ],
     "direction": "horizontal",
-    "width": 310.5,
-    "collapsed": true
+    "width": 310.5
   },
   "left-ribbon": {
     "hiddenItems": {
@@ -193,50 +177,52 @@
       "obsidian-shellcommands:Shell commands: Custom variables": false,
       "obsidian-excalidraw-plugin:New drawing": false,
       "obsidian-git:Open Git source control": false,
-      "hide-folders:Show hidden folders": false
+      "hide-folders:Show hidden folders": false,
+      "templater-obsidian:Templater": false,
+      "system3-relay:Relay": false
     }
   },
-  "active": "00f6dc5425fbb109",
+  "active": "f1c696942fbe2a70",
   "lastOpenFiles": [
-    "Untitled.md",
+    "README.md",
+    "400. OUTPUTS/Szkolenie 2025-12/00 - 02 Podstawy/02a. Gaps.html",
+    "400. OUTPUTS/Szkolenie 2025-12/00 - 02 Podstawy/02a. Quiz.html",
+    "300. INPUTS/Szkolenie 2025-12/03 - 06 Zaawansowany DAX/07. Iteratory.md",
+    "400. OUTPUTS/_Measures/_Parametr.md",
+    "400. OUTPUTS/_Measures/_HTML.md",
+    "400. OUTPUTS/_Measures",
+    "400. OUTPUTS/Szkolenie 2025-12/99. Dodatki/99. Praktyczne - Warunkowe kolorowanie.html",
+    "400. OUTPUTS/Szkolenie 2025-12/99. Dodatki/99. Praktyczne - USERELATIONSHIP.html",
+    "400. OUTPUTS/Szkolenie 2025-12/99. Dodatki/99. Praktyczne - Przewalutowanie.html",
+    "400. OUTPUTS/Szkolenie 2025-12/99. Dodatki/99. Praktyczne - Proporcjonalny podział celu.html",
+    "400. OUTPUTS/Szkolenie 2025-12/99. Dodatki/99. Praktyczne - CALCULATEDGROUP.html",
+    "400. OUTPUTS/Szkolenie 2025-12/99. Dodatki",
+    "400. OUTPUTS/Szkolenie 2025-12/03 - 06 Zaawansowany DAX/08a. Quiz.html",
+    "300. INPUTS/Szkolenie 2025-12/03 - 06 Zaawansowany DAX/03. Wprowadzenie do CALCULATE.md",
+    "300. INPUTS/Szkolenie 2025-12/00 - 02 Podstawy/01. Podstawy DAX.md",
+    "300. INPUTS/Szkolenie 2025-12/00 - 02 Podstawy/02. Miary vs Kolumny kalkulowane.md",
+    "300. INPUTS/Szkolenie 2025-12/00 - 02 Podstawy/00. Konfiguracja Power BI.md",
+    "300. INPUTS/300. INPUTS.md",
+    "300. INPUTS/02. Zaawansowane/Gaps.md",
+    "300. INPUTS/02. Zaawansowane/Quiz.md",
+    "Todo.md",
+    "300. INPUTS/01. Podstawy/Teoria.md",
+    "000. TEMPLATES/1. Teoria.md",
+    "000. TEMPLATES/2. Quiz.md",
+    "000. TEMPLATES/3. Gaps.md",
+    "000. TEMPLATES/4. Board.md",
+    "500. ARCHIVE/500. ARCHIVE.md",
+    "300. INPUTS/Gaps.md",
+    "300. INPUTS/Quiz.md",
+    "300. INPUTS/Teoria.md",
+    "400. OUTPUTS/400. OUTPUTS.md",
+    "config.md",
+    "400. OUTPUTS/TMDL/_Parametr.md",
+    "400. OUTPUTS/TMDL/_HTML.md",
     "bin/Pasted Image 20251211193432_248.png",
     "bin/Pasted Image 20251211193344_966.png",
     "bin/Pasted Image 20251211193253_443.png",
     "bin/Pasted image 20251211193244.png",
-    "Todo.md",
-    "config.md",
-    "300. INPUTS/300. INPUTS.md",
-    "300. INPUTS/08. Time Intelligence.md",
-    "300. INPUTS/07. Iteratory.md",
-    "300. INPUTS/06. Tworzenie zestawień tabelarycznych.md",
-    "300. INPUTS/05. DAX - Zaawansowane Kwerendy.md",
-    "300. INPUTS/04. Modyfikowanie Kontekstu.md",
-    "300. INPUTS/03. Wprowadzenie do CALCULATE.md",
-    "400. OUTPUTS/TMDL/_HTML.md",
-    "300. INPUTS/99. Praktyczne.md",
-    "400. OUTPUTS/TMDL/_Parametr.md",
-    "400. OUTPUTS/99. Praktyczne - CALCULATEDGROUP.html",
-    "400. OUTPUTS/99. Praktyczne - USERELATIONSHIP.html",
-    "400. OUTPUTS/99. Praktyczne - USERALTIONSHIP.html",
-    "400. OUTPUTS/99. Praktyczne - Przewalutowanie.html",
-    "400. OUTPUTS/99. Praktyczne - Proporcjonalny podział celu.html",
-    "400. OUTPUTS/99. Praktyczne - Warunkowe kolorowanie.html",
-    "300. INPUTS/Untitled.md",
-    "300. INPUTS/06a. Quiz.md",
-    "400. OUTPUTS/Untitled.md",
-    "400. OUTPUTS/09. USERELATIONSHIP - USERELATIONSHIP.html",
-    "400. OUTPUTS/09. USERELATIONSHIP - Czym jest USERELATIONSHIP.html",
-    "300. INPUTS/07a. Gaps.md",
-    "400. OUTPUTS/TMDL",
-    "400. OUTPUTS/08. Time Intelligence - Tabela porównawcza funkcji.html",
-    "300. INPUTS/04a. Quiz.md",
-    "300. INPUTS/01a. Quiz.md",
-    "300. INPUTS/01a. Gaps.md",
-    "300. INPUTS/03a. Gaps.md",
-    "300. INPUTS/04a. Gaps.md",
-    "300. INPUTS/02a. Gaps.md",
-    "300. INPUTS/06a. Gaps.md",
-    "300. INPUTS/05a. Gaps.md",
     "bin/Pasted image 20251210001950.png",
     "bin/Pasted image 20251209193536.png",
     "bin/Pasted image 20251209181932.png",

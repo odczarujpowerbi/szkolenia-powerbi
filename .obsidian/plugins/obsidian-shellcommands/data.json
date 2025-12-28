@@ -26,7 +26,7 @@
     {
       "id": "0zn4z85o53",
       "platform_specific_commands": {
-        "default": "python convert_md_to_powerbi.py --config config.md"
+        "default": "python main.py --config config.md"
       },
       "shells": {},
       "alias": "Py Convert",

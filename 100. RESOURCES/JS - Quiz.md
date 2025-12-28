@@ -1,5 +1,5 @@
 ```js
-    document.getElementById('totalPages').textContent = totalPages;
+    document.getElementById('totalPages').textContent = totalQuestions;
 
     function selectAnswer(questionIndex, answerIndex) {
         if (answeredQuestions[questionIndex]) return;
@@ -39,17 +39,6 @@
 
         feedback.className = 'feedback show ' + (isCorrect ? 'correct' : 'incorrect');
         feedback.innerHTML = (isCorrect ? '✅ Świetnie! ' : '❌ Nieprawidłowo. ') + explanations[questionIndex];
-
-        if (questionIndex < totalQuestions - 1) {
-            setTimeout(() => {
-                changePage(1);
-            }, 2500);
-        } else {
-            setTimeout(() => {
-                showSummary();
-                changePage(1);
-            }, 2500);
-        }
     }
 
     function showSummary() {
@@ -109,7 +98,29 @@
         pages.forEach(page => page.classList.remove('active'));
         pages[currentPage - 1].classList.add('active');
 
-        document.getElementById('currentPage').textContent = currentPage;
+        // Wyświetl numer pytania lub "Podsumowanie"
+        const pageIndicator = document.getElementById('currentPage');
+        if (currentPage <= totalQuestions) {
+            pageIndicator.textContent = currentPage;
+        } else {
+            pageIndicator.textContent = 'Podsumowanie';
+        }
+
+        // Zmień przycisk "Następna" na "Zakończ" przed ostatnim pytaniem
+        const nextBtn = document.getElementById('nextBtn');
+        if (currentPage === totalQuestions) {
+            nextBtn.textContent = 'Zakończ →';
+            nextBtn.onclick = function() {
+                showSummary();
+                changePage(1);
+            };
+        } else if (currentPage < totalPages) {
+            nextBtn.textContent = 'Następna →';
+            nextBtn.onclick = function() {
+                changePage(1);
+            };
+        }
+
         document.getElementById('prevBtn').disabled = currentPage === 1;
         document.getElementById('nextBtn').disabled = currentPage === totalPages;
 

@@ -1,0 +1,10 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(python temp_fix.py:*)",
+      "Bash(python:*)",
+      "Bash(grep:*)",
+      "Bash(echo:*)"
+    ]
+  }
+}

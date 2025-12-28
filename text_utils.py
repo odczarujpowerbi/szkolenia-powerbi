@@ -83,14 +83,27 @@ def process_inline_markdown(text):
     return text
 
 
-def convert_markdown_to_html(md_content):
-    """Konwertuje zawartość markdown pojedynczej strony na HTML"""
+def convert_markdown_to_html(md_content, characters_config=None):
+    """Konwertuje zawartość markdown pojedynczej strony na HTML
+
+    Args:
+        md_content: str - zawartość markdown do konwersji
+        characters_config: dict - konfiguracja zamian znaków (opcjonalnie)
+    """
     lines = md_content.strip().split('\n')
     html_lines = []
     in_code_block = False
     in_list = False
     code_block = []
     code_lang = None
+
+    # Pomocnicza funkcja do przetwarzania tekstu użytkownika z character replacements
+    def process_text(text):
+        """Przetwarza inline markdown i stosuje character replacements"""
+        result = process_inline_markdown(text)
+        if characters_config:
+            result = apply_character_replacements(result, characters_config)
+        return result
 
     i = 0
     while i < len(lines):
@@ -183,7 +196,7 @@ def convert_markdown_to_html(md_content):
                 headers = [cell.strip() for cell in table_lines[0].split('|')[1:-1]]
                 html_lines.append('  <thead>\n    <tr>\n')
                 for header in headers:
-                    html_lines.append(f'      <th>{process_inline_markdown(header)}</th>\n')
+                    html_lines.append(f'      <th>{process_text(header)}</th>\n')
                 html_lines.append('    </tr>\n  </thead>\n')
 
                 # Pomiń drugi wiersz (separator: | --- | --- |)
@@ -193,7 +206,7 @@ def convert_markdown_to_html(md_content):
                     cells = [cell.strip() for cell in row_line.split('|')[1:-1]]
                     html_lines.append('    <tr>\n')
                     for cell in cells:
-                        html_lines.append(f'      <td>{process_inline_markdown(cell)}</td>\n')
+                        html_lines.append(f'      <td>{process_text(cell)}</td>\n')
                     html_lines.append('    </tr>\n')
                 html_lines.append('  </tbody>\n')
                 html_lines.append('</table>\n')
@@ -204,7 +217,7 @@ def convert_markdown_to_html(md_content):
             if in_list:
                 html_lines.append(f'</{in_list}>\n')
                 in_list = False
-            html_lines.append(f"<h1>{process_inline_markdown(line[3:])}</h1>\n")
+            html_lines.append(f"<h1>{process_text(line[3:])}</h1>\n")
             i += 1
             continue
 
@@ -215,12 +228,12 @@ def convert_markdown_to_html(md_content):
                 in_list = False
 
             html_lines.append("<div class='result-box'>\n")
-            html_lines.append(f"<h3>{process_inline_markdown(line[4:])}</h3>\n")
+            html_lines.append(f"<h3>{process_text(line[4:])}</h3>\n")
             i += 1
 
             # Zbierz zawartość result-box
             while i < len(lines) and lines[i].strip() and not lines[i].startswith('#'):
-                html_lines.append(f"<p>{process_inline_markdown(lines[i])}</p>\n")
+                html_lines.append(f"<p>{process_text(lines[i])}</p>\n")
                 i += 1
 
             html_lines.append("</div>\n")
@@ -237,7 +250,7 @@ def convert_markdown_to_html(md_content):
             if 'Iteracja' in heading_text or 'Przed iteracją' in heading_text:
                 # Zbierz zawartość do następnego nagłówka ### lub końca
                 html_lines.append("<div class='iteration-box'>\n")
-                html_lines.append(f"<h3>{process_inline_markdown(heading_text)}</h3>\n")
+                html_lines.append(f"<h3>{process_text(heading_text)}</h3>\n")
 
                 i += 1
                 local_list_open = False
@@ -258,7 +271,7 @@ def convert_markdown_to_html(md_content):
                         if not local_list_open:
                             html_lines.append('<ul>\n')
                             local_list_open = True
-                        html_lines.append(f"<li>{process_inline_markdown(next_line[2:])}</li>\n")
+                        html_lines.append(f"<li>{process_text(next_line[2:])}</li>\n")
                         i += 1
                         continue
 
@@ -274,7 +287,7 @@ def convert_markdown_to_html(md_content):
                     if local_list_open:
                         html_lines.append('</ul>\n')
                         local_list_open = False
-                    html_lines.append(f"<p>{process_inline_markdown(next_line)}</p>\n")
+                    html_lines.append(f"<p>{process_text(next_line)}</p>\n")
                     i += 1
 
                 # Zamknij otwartą listę i box
@@ -284,7 +297,7 @@ def convert_markdown_to_html(md_content):
                 continue
             else:
                 # Zwykły nagłówek h2
-                html_lines.append(f"<h2>{process_inline_markdown(heading_text)}</h2>\n")
+                html_lines.append(f"<h2>{process_text(heading_text)}</h2>\n")
                 i += 1
                 continue
 
@@ -294,7 +307,7 @@ def convert_markdown_to_html(md_content):
                 html_lines.append(f'</{in_list}>\n')
                 in_list = False
 
-            html_lines.append(f"<div class='result-box'>\n{process_inline_markdown(line)}\n</div>\n")
+            html_lines.append(f"<div class='result-box'>\n{process_text(line)}\n</div>\n")
             i += 1
             continue
 
@@ -311,7 +324,7 @@ def convert_markdown_to_html(md_content):
 
             # Sprawdź czy następne linie to wcięte bullety (należące do tego <li>)
             content = numbered_match.group(2)
-            html_lines.append(f"<li>{process_inline_markdown(content)}")
+            html_lines.append(f"<li>{process_text(content)}")
 
             i += 1
             # Sprawdź czy następne linie są wcięte (rozpoczynają się od spacji lub tabulatora)
@@ -333,7 +346,7 @@ def convert_markdown_to_html(md_content):
             if nested_items:
                 html_lines.append('\n<ul>\n')
                 for nested_item in nested_items:
-                    html_lines.append(f"<li>{process_inline_markdown(nested_item)}</li>\n")
+                    html_lines.append(f"<li>{process_text(nested_item)}</li>\n")
                 html_lines.append('</ul>\n')
 
             html_lines.append("</li>\n")
@@ -348,7 +361,7 @@ def convert_markdown_to_html(md_content):
                 html_lines.append('</ol>\n')
                 html_lines.append('<ul>\n')
                 in_list = 'ul'
-            html_lines.append(f"<li>{process_inline_markdown(line[2:])}</li>\n")
+            html_lines.append(f"<li>{process_text(line[2:])}</li>\n")
             i += 1
             continue
 
@@ -365,7 +378,7 @@ def convert_markdown_to_html(md_content):
             html_lines.append(f'</{in_list}>\n')
             in_list = False
         if line.strip():
-            html_lines.append(f"<p>{process_inline_markdown(line)}</p>\n")
+            html_lines.append(f"<p>{process_text(line)}</p>\n")
         i += 1
 
     # Close any open lists
@@ -384,7 +397,36 @@ def escape_quotes_for_dax(text):
     return text.replace('"', "'")
 
 
-def format_user_text(text, context='html'):
+def apply_character_replacements(text, characters_config):
+    """Aplikuje zamianę znaków zgodnie z konfiguracją
+
+    Args:
+        text: str - tekst do przetworzenia
+        characters_config: dict - słownik z konfiguracją zamian:
+            {'quote': str, 'single_quote': str}
+            Przykład: {'quote': '"', 'single_quote': '‛'}
+
+    Returns:
+        str - tekst po zamianach znaków
+    """
+    if not characters_config:
+        # Jeśli brak konfiguracji, użyj domyślnego escape_quotes_for_dax
+        return escape_quotes_for_dax(text)
+
+    # Pobierz znaki z konfiguracji
+    quote_replacement = characters_config.get('quote', "'")
+    single_quote_replacement = characters_config.get('single_quote', "'")
+
+    # Zamień podwójne cudzysłowy
+    text = text.replace('"', quote_replacement)
+
+    # Zamień pojedyncze cudzysłowy (apostrofy)
+    text = text.replace("'", single_quote_replacement)
+
+    return text
+
+
+def format_user_text(text, context='html', characters_config=None):
     """Formatuje tekst użytkownika z markdown na HTML
 
     Konwertuje markdown (inline code, bold, images) na HTML, zachowując
@@ -396,6 +438,7 @@ def format_user_text(text, context='html'):
             - 'html': dla bezpośredniego wstawienia do HTML (escape HTML po przetworzeniu)
             - 'innerHTML': dla JavaScript innerHTML w DAX (escape cudzysłowów po przetworzeniu)
             - 'raw': tylko konwersja markdown, bez escape
+        characters_config: dict - konfiguracja zamian znaków (opcjonalnie)
 
     Returns:
         str - sformatowany tekst HTML
@@ -418,9 +461,17 @@ def format_user_text(text, context='html'):
         # Bezpośrednie wstawienie do HTML - escape < > &
         formatted = escape_html(formatted)
     elif context == 'innerHTML':
-        # Dla JavaScript innerHTML - tylko escape cudzysłowów dla DAX
-        formatted = escape_quotes_for_dax(formatted)
-    # context == 'raw': bez dodatkowego escape
+        # Dla JavaScript innerHTML - escape cudzysłowów dla DAX
+        if characters_config:
+            formatted = apply_character_replacements(formatted, characters_config)
+        else:
+            formatted = escape_quotes_for_dax(formatted)
+    elif context == 'raw':
+        # Raw - również zastosuj character replacements jeśli są dostępne
+        if characters_config:
+            formatted = apply_character_replacements(formatted, characters_config)
+        else:
+            formatted = escape_quotes_for_dax(formatted)
 
     return formatted
 
