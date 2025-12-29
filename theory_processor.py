@@ -5,7 +5,7 @@ Obsługuje tradycyjny format z sekcjami H1 i stronami rozdzielonymi '---'
 """
 
 import hashlib
-from text_utils import escape_quotes_for_dax, apply_character_replacements
+from text_utils import escape_quotes_for_dax, apply_character_replacements, escape_quotes_in_html_structure
 
 
 def split_by_h1(content):
@@ -122,6 +122,10 @@ def create_powerbi_measure(title, pages, css, js, characters_config=None):
 
     # Złóż HTML w całość (character replacements zostały już zastosowane w convert_markdown_to_html)
     html_content = ''.join(html_parts)
+
+    # KROK KOŃCOWY: Zamień wszystkie cudzysłowy w strukturze HTML/JS/CSS na apostrofy
+    # (treść użytkownika już ma znaki typograficzne z characters_config)
+    html_content = escape_quotes_in_html_structure(html_content)
 
     # Formatuj jako miara Power BI (zachowaj pełną nazwę z numeracją)
     measure = f'{title} = \n\n"\n\n{html_content}\n"\n'

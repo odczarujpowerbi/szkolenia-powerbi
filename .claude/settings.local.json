@@ -4,7 +4,12 @@
       "Bash(python temp_fix.py:*)",
       "Bash(python:*)",
       "Bash(grep:*)",
-      "Bash(echo:*)"
+      "Bash(echo:*)",
+      "Bash(find:*)",
+      "Bash(git checkout:*)",
+      "Bash(cat:*)",
+      "Bash(ls:*)",
+      "Bash(git restore:*)"
     ]
   }
 }

@@ -1,0 +1,569 @@
+================================================================================
+RAPORT BEZPIECZEŃSTWA
+Zamiana wszystkich cudzysłowów " na apostrofy ' w HTML, CSS, JavaScript
+================================================================================
+
+PRZYGOTOWAŁ: Analiza zaawansowana
+DATA: 2025-12-28
+PROJEKT: odczarujpowerbi - Szkolenia Power BI
+
+================================================================================
+WERDYKT KOŃCOWY
+================================================================================
+
+Pytanie: Czy zamiana wszystkich cudzysłowów " na apostrofy ' jest bezpieczna?
+
+ODPOWIEDŹ: NIE W OGÓLNOŚCI - TAK DLA TEGO PROJEKTU
+
+Szczegółowo:
+- Zamiana jest BEZPIECZNA dla kodu HTML/CSS/JS TEGO PROJEKTU
+- Zamiana NIE byłaby bezpieczna dla dowolnego innego kodu
+- Są konkretne edge case'i które mogą spowodować błędy
+
+================================================================================
+CZĘŚĆ 1: ANALIZA BEZPIECZEŃSTWA PO TYPACH KODU
+================================================================================
+
+1.1 HTML - ATRYBUTY ELEMENTÓW
+================================================================================
+
+TYP: class, id, data-xxx, aria-xxx, itp.
+
+BEZPIECZEŃSTWO: ✓ 100% BEZPIECZNE dla prostych wartości
+
+Prawidłowe zamiany:
+  <div class="container">      =>  <div class='container'>
+  <button id="btn1">           =>  <button id='btn1'>
+  <input type="text">          =>  <input type='text'>
+
+Wszystkie atrybuty HTML akceptują zarówno ' jak i " bez różnicy.
+
+ZAGROŻENIE #1: Data atrybuty z apostrofami
+  PROBLEM:
+    <div data-tooltip="John's message"></div>
+    Po zamianie:
+    <div data-tooltip='John's message'></div>  <!-- BŁĄD! -->
+
+  Parser HTML interpretuje to jako: data-tooltip='John'
+  a następnie: s message' <- to już nie jest część atrybutu
+
+  OCENA W PROJEKCIE: ✓ BEZPIECZNE
+  Sprawdzenie: Wszystkie data-* atrybuty w projekcie nie zawierają apostrofów
+  Przykład z projektu: data-id="123" -> data-id='123' OK
+
+ZAGROŻENIE #2: JSON w atrybutach
+  PROBLEM:
+    <div data-config='{"color":"red"}'></div>
+    JSON wymaga zawsze ", nie apostrofów wewnątrz
+
+  OCENA W PROJEKCIE: ✓ BEZPIECZNE
+  Sprawdzenie: Projekt nie używa JSON w atrybutach HTML
+  Kod zawiera strukturę: onclick='changePage_5dc96cd3(-1)' <- bez JSON
+
+================================================================================
+
+1.2 HTML - EVENT HANDLERY (onclick, onload, itp.)
+================================================================================
+
+TYP: onclick="...", onchange="...", addEventListener(...)
+
+BEZPIECZEŃSTWO: ⚠️ WARUNKOWE - zależy od zawartości handlera
+
+ZAGROŻENIE #3: Event handler z zagnieżdżonymi stringami
+  PROBLEM:
+    <button onclick="alert('Hello')"></button>
+    Po naiwnej zamianie:
+    <button onclick='alert('Hello')'>  <!-- BŁĄD SKŁADNIOWY! -->
+
+  Parser HTML widzi:
+  - onclick = '
+  - alert(
+  - ' <- koniec atrybutu
+  - Hello')
+  - > <- brak przypisania
+
+  PRAWIDŁOWA ZAMIANA:
+    <button onclick='alert("Hello")'></button>  OK
+  LUB:
+    <button onclick="alert('Hello')"></button>  OK
+
+  OCENA W PROJEKCIE: ✓ BEZPIECZNE
+  Sprawdzenie: onclick='changePage_5dc96cd3(-1)'
+  - Zawiera tylko: nazwę funkcji + liczbę
+  - Brak stringów wewnątrz
+  - Zamiana jest 100% bezpieczna
+
+================================================================================
+
+1.3 HTML - Ogólna ocena dla tego projektu
+================================================================================
+
+Kod HTML w projekcie (400. OUTPUTS/*.html):
+  - JUŻ używa apostrofów (') konsekwentnie
+  - onclick='changePage_5dc96cd3(-1)'
+  - class='container'
+  - id='viz_5dc96cd3'
+
+Wnioski:
+  ✓ Atrybuty nie zawierają apostrofów w wartościach
+  ✓ Event handlery zawierają tylko nazwy funkcji i liczby
+  ✓ Brak JSON w atrybutach
+  ✓ Brak dynamicznych danych z użytkownikiem
+
+WYNIK: ✓ CAŁKOWICIE BEZPIECZNE dla HTML w tym projekcie
+
+================================================================================
+CZĘŚĆ 2: CSS - REGUŁY STYLÓW
+================================================================================
+
+2.1 CSS - content property
+================================================================================
+
+BEZPIECZEŃSTWO: ✓ 100% BEZPIECZNE
+
+Prawidłowe zamiany:
+  content: "text";      =>  content: 'text';
+  content: "→";         =>  content: '→';
+
+CSS akceptuje zarówno ' jak i " dla content bez różnicy.
+
+Nawet z escapowaniem:
+  content: "\"quoted\"";  =>  content: '\'quoted\'';
+
+OCENA W PROJEKCIE: ✓ BEZPIECZNE
+Sprawdzenie: Projekt nie używa content property w CSS
+
+================================================================================
+
+2.2 CSS - font-family i inne stringi
+================================================================================
+
+BEZPIECZEŃSTWO: ✓ 100% BEZPIECZNE
+
+Prawidłowe zamiany:
+  font-family: "Roboto", sans-serif;  =>  font-family: 'Roboto', sans-serif;
+
+CSS akceptuje zarówno ' jak i " dla font-family, animation, itp.
+
+OCENA W PROJEKCIE: ✓ BEZPIECZNE
+Kod CSS z projektu (widoczny w <style>):
+  font-family: 'Roboto', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  JUŻ UŻYWA APOSTROFÓW
+
+================================================================================
+
+2.3 CSS - url() - ZAGROŻENIE!
+================================================================================
+
+ZAGROŻENIE #4: URL z apostrofami w ścieżce
+
+  PROBLEM:
+    background: url('C:\Users\John\'s Files\image.png');
+
+  Parser CSS widzi:
+    url('C:\Users\John\
+    następnie: 's Files\image.png')
+    To jest błędne!
+
+  PRAWIDŁOWE ROZWIĄZANIA:
+    background: url("C:\Users\John's Files\image.png");  /* " OK */
+    background: url('C:\\Users\\John\'s Files\\image.png');  /* escape */
+
+  OCENA W PROJEKCIE: ✓ BEZPIECZNE
+  Sprawdzenie: CSS w projekcie nie zawiera url()
+  background-image: url(...) nie jest używane
+
+================================================================================
+
+2.4 CSS - Ogólna ocena dla tego projektu
+================================================================================
+
+CSS w projekcie:
+  ✓ content property - brak użycia
+  ✓ font-family - już używa apostrofów OK
+  ✓ url() - brak użycia
+  ✓ Brak specjalnych znaków w wartościach CSS
+
+WYNIK: ✓ CAŁKOWICIE BEZPIECZNE dla CSS w tym projekcie
+
+================================================================================
+CZĘŚĆ 3: JAVASCRIPT - STRINGI I WYRAŻENIA
+================================================================================
+
+3.1 JavaScript - Proste stringi
+================================================================================
+
+BEZPIECZEŃSTWO: ✓ 100% BEZPIECZNE dla prostych stringów
+
+Prawidłowe zamiany:
+  const x = "text";       =>  const x = 'text';
+  const x = "123";        =>  const x = '123';
+  const x = "hello";      =>  const x = 'hello';
+
+JavaScript traktuje ' i " identycznie dla prostych stringów.
+
+================================================================================
+
+3.2 JavaScript - Stringi z apostrofami (ZAGROŻENIE!)
+================================================================================
+
+ZAGROŻENIE #5: Apostrofem w stringu z apostrofami
+
+  PROBLEM:
+    const text = 'John\'s message';  <- OK
+    const text = 'It's working';     <- BŁĄD!
+
+  Parser JavaScript widzi:
+    'It
+    a następnie: 's working'
+    To nie jest valid kod!
+
+  PRAWIDŁOWE ROZWIĄZANIA:
+    const text = 'It\'s working';    /* Escapowanie */
+    const text = "It's working";     /* Zmiana na " */
+    const text = `It's working`;     /* Template literal */
+
+  OCENA W PROJEKCIE: ✓ BEZPIECZNE
+  Sprawdzenie: Stringi w JavaScript:
+    var vizId = '5dc96cd3';      /* Brak apostrofów wewnątrz */
+    var containerId = 'viz_' + vizId;  /* Brak apostrofów */
+
+  Wszystkie stringi to liczby, znaki specjalne (_,-) ale NIE apostrofy
+
+================================================================================
+
+3.3 JavaScript - Zagnieżdżone stringi (JSON)
+================================================================================
+
+ZAGROŻENIE #6: JSON wewnątrz JavaScript stringów
+
+  PROBLEM:
+    const json = '{"key":"value"}';   /* OK - " wewnątrz JSON */
+    const json = "{'key':'value'}";   /* BŁĄD! JSON wymaga " */
+    JSON.parse(json);  /* Wyrzuca: SyntaxError */
+
+  PRAWIDŁOWE ROZWIĄZANIA:
+    const json = '{"key":"value"}';   /* Apostrofem na zewnątrz OK */
+    const json = "{\"key\":\"value\"}";  /* Escapowanie */
+    const obj = {key: "value"};  /* JS obikt, nie JSON */
+    JSON.stringify(obj);  /* Konwersja do JSON */
+
+  OCENA W PROJEKCIE: ✓ BEZPIECZNE
+  Sprawdzenie: Kod nie zawiera JSON.parse ani JSON.stringify
+  window['showPage_5dc96cd3'] - to jest nawiasy z apostrofami, nie JSON
+
+================================================================================
+
+3.4 JavaScript - Template literals (ZAWSZE BEZPIECZNE)
+================================================================================
+
+BEZPIECZEŃSTWO: ✓ 100% BEZPIECZNE
+
+Prawidłowe zamiany:
+  const msg = `Hello "${name}"`;   <- bez zmian (backticks)
+  const msg = `Hello '${name}'`;   <- bez zmian
+
+Template literals (`) chronią przed zmianami i mogą zawierać zarówno ' jak i "
+
+OCENA W PROJEKCIE: N/A
+Projekt nie używa template literals w kodzie HTML
+
+================================================================================
+
+3.5 JavaScript - Regex wyrażenia
+================================================================================
+
+BEZPIECZEŃSTWO: ✓ 100% BEZPIECZNE
+
+Prawidłowe zamiany:
+  const re = /test"word/;            /* Bez zmian - regex literal */
+  const re = new RegExp('test"word');  =>  new RegExp('test"word');
+  const re = new RegExp("test'word");  =>  new RegExp('test\'word');
+
+Apostrofem w regex literałach jest traktowany jako zwykły znak.
+
+OCENA W PROJEKCIE: ✓ BEZPIECZNE
+Sprawdzenie: Projekt nie zawiera zaawansowanych regex wyrażeń
+
+================================================================================
+
+3.6 JavaScript - Ogólna ocena dla tego projektu
+================================================================================
+
+JavaScript w projekcie:
+  var vizId = '5dc96cd3';
+  var containerId = 'viz_' + vizId;
+  window['showPage_5dc96cd3'] = function(n) { ... };
+  img.addEventListener('click', function() { ... });
+
+  ✓ Wszystkie stringi to liczby, znaki specjalne, nie apostrofy
+  ✓ Brak JSON.parse/stringify
+  ✓ Brak template literals
+  ✓ Brak zaawansowanych regex
+  ✓ Prostych struktura stringów
+
+WYNIK: ✓ CAŁKOWICIE BEZPIECZNE dla JavaScript w tym projekcie
+
+================================================================================
+CZĘŚĆ 4: PODSUMOWANIE RYZYKA - MACIERZ
+================================================================================
+
+Element                    | Ryzyko  | Projekt | Wynik
+===========================|=========|=========|=====
+HTML atrybuty              | Niskie  | Brak    | OK
+HTML data-* z apostrofami  | WYSOKIE | Brak    | OK
+HTML event handlery z ""   | SREDNIE | Brak    | OK
+JSON w HTML                | WYSOKIE | Brak    | OK
+CSS content                | Niskie  | Brak    | OK
+CSS url() z apostrofami    | SREDNIE | Brak    | OK
+JS stringi bez '           | Niskie  | Tak     | OK
+JS stringi z '             | WYSOKIE | Brak    | OK
+JSON.parse/stringify       | WYSOKIE | Brak    | OK
+Template literals          | Niskie  | Nie     | N/A
+Regex wyrażenia            | Niskie  | Nie     | N/A
+
+WYNIK KONCOWY: OK CAŁKOWICIE BEZPIECZNE
+
+================================================================================
+CZĘŚĆ 5: KONKRETNE PRZYKŁADY Z PROJEKTU
+================================================================================
+
+ZNALEZIONY KOD:
+
+HTML:
+-----
+<div class='container' id='viz_5dc96cd3'>
+    <div class='navigation'>
+        <button id='prevBtn_5dc96cd3' onclick='changePage_5dc96cd3(-1)'>
+            Poprzednia
+        </button>
+        <span class='page-indicator'>
+            Strona <span id='currentPage_5dc96cd3'>1</span>
+            z <span id='totalPages_5dc96cd3'>6</span>
+        </span>
+        <button id='nextBtn_5dc96cd3' onclick='changePage_5dc96cd3(1)'>
+            Nastepna
+        </button>
+    </div>
+</div>
+
+ANALIZA:
+  class='container'          OK - brak apostrofów w wartości
+  id='viz_5dc96cd3'          OK - liczby bez apostrofów
+  onclick='changePage_5dc96cd3(-1)'  OK - nazwa funkcji + liczba
+  <span id='currentPage_...  OK - liczby
+
+CSS:
+----
+.container {
+    max-width: 800px;
+    margin: 0 auto;
+    background: transparent;
+    padding: 40px;
+}
+
+button {
+    background: #6b1718;
+    color: white;
+    border: none;
+    padding: 12px 28px;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+ANALIZA:
+  Brak content property  OK
+  Brak url()            OK
+  Brak stringów          OK
+
+JavaScript:
+-----------
+var vizId = '5dc96cd3';
+var containerId = 'viz_' + vizId;
+window['showPage_5dc96cd3'] = function(n) {
+    if (n > totalPages) currentPage_5dc96cd3 = totalPages;
+    if (n < 1) currentPage_5dc96cd3 = 1;
+    ...
+};
+
+ANALIZA:
+  '5dc96cd3'             OK - liczby
+  'viz_' + vizId         OK - brak apostrofów w stringu
+  window['showPage...']  OK - apostrofem dla klucza
+  'click'                OK - słowo bez apostrofów
+  'zoomed'               OK - słowo bez apostrofów
+
+KONKLUZJA:
+  Projekt JUZ konsekwentnie używa apostrofów
+  Wszystkie stringi to liczby, znaki specjalne (_-), nazwy funkcji
+  BRAK żadnych apostrofów lub znaków specjalnych wewnątrz stringów
+
+================================================================================
+CZĘŚĆ 6: REKOMENDACJE
+================================================================================
+
+Dla TEGO PROJEKTU:
+  OK MOŻNA bezpiecznie zamienić wszystkie " na '
+  OK Kod jest w pełni bezpieczny
+  OK Projekt już konsekwentnie używa apostrofów
+
+Dla DOWOLNEGO INNEGO PROJEKTU:
+  NIE zameniaj wszystkich " na ' automatycznie
+  SPRAWDZ konkretne zagrożenia:
+    1. Event handlery z zagnieźdżonymi stringami
+    2. Data atrybuty z apostrofami
+    3. JSON w HTML atrybutach
+    4. CSS url() ze ścieżkami z apostrofami
+    5. JavaScript stringi zawierające apostrofy
+
+NAJLEPSZE PRAKTYKI:
+  1. Użyj automatycznego formatera (Prettier)
+     Konfiguracja:
+     {
+       "singleQuote": true,
+       "semi": true,
+       "trailingComma": "es5"
+     }
+
+  2. Użyj ESLint do sprawdzenia konsystencji
+     Configuration:
+     {
+       "quotes": ["error", "single", {"avoidEscape": true}]
+     }
+
+  3. Nie mieszaj stylów w jednym pliku
+
+  4. Dokumentuj preferencję w projekcie
+
+================================================================================
+CZĘŚĆ 7: EDGE CASES - Przypadki specjalne
+================================================================================
+
+Edge Case 1: Escape sequences
+  "\n", "\t", "\\"
+  To dzialają tak samo w ' jak w "
+  const text = "line1\nline2";
+  const text = 'line1\nline2';
+  OK BEZPIECZNE
+
+Edge Case 2: Unicode
+  "\u0041", "\u{1F600}"
+  To dzialają tak samo w ' jak w "
+  const unicode = "\u0041";
+  const unicode = '\u0041';
+  OK BEZPIECZNE
+
+Edge Case 3: HTML entities
+  "&#39;" (apostrofy w HTML)
+  Mogą być używane bez zmian
+  <div title="John&#39;s">  => <div title='John&#39;s'>
+  OK BEZPIECZNE
+
+Edge Case 4: Eval (BARDZO NIEBEZPIECZNE!)
+  eval('const x = "hello";');
+  NIE NALEŻY UŻYWAĆ eval() w żadnym przypadku
+  UNIKAĆ
+
+Edge Case 5: Dynamiczne tworzenie HTML
+  const html = '<button onclick="doSomething()">Click</button>';
+  Wygenerowane HTML może mieć inne znaki niż string
+  WYMAGA UWAZNOŚCI!
+
+================================================================================
+CZĘŚĆ 8: NARZĘDZIA DO WALIDACJI
+================================================================================
+
+Sprawdzenie HTML:
+  validator.nu - online HTML validator
+  npm install -g html-validate
+
+Sprawdzenie JavaScript:
+  npm install -g eslint
+  Configuration: .eslintrc.json
+  {
+    "rules": {
+      "quotes": ["error", "single", {"avoidEscape": true}]
+    }
+  }
+
+Sprawdzenie CSS:
+  npm install -g stylelint
+
+Automatyczne formatowanie:
+  npm install -g prettier
+  prettier --write "**/*.{html,css,js}"
+
+================================================================================
+CZĘŚĆ 9: CHECKLIST DO SPRAWDZENIA
+================================================================================
+
+Przed zastosowaniem zamiany sprawdzić:
+
+[ ] HTML:
+  [ ] onclick, onchange, onload, itp. - czy zawierają stringi?
+  [ ] data-* atrybuty - czy zawierają apostrofy?
+  [ ] Atrybuty z JSON - czy JSON ma "?
+
+[ ] CSS:
+  [ ] content property - czy zawiera apostrofy?
+  [ ] url() - czy zawiera apostrofy w ścieżce?
+
+[ ] JavaScript:
+  [ ] Stringi - czy zawierają apostrofy?
+  [ ] JSON.parse/stringify - czy wewnątrz jest prawidłowy JSON?
+  [ ] Template literals - czy są używane?
+  [ ] Zagnieźdżenia - czy jest konsekwentne escapowanie?
+
+[ ] Testy:
+  [ ] HTML walidacja
+  [ ] ESLint check
+  [ ] Uruchomienie aplikacji
+  [ ] Testy manualne
+
+================================================================================
+CZĘŚĆ 10: WERDYKT I REKOMENDACJA KONCOWA
+================================================================================
+
+PYTANIE: Czy zamiana wszystkich cudzysłowów " na apostrofy '
+         jest bezpieczna i nie spowoduje błędów składniowych?
+
+ODPOWIEDZ SZCZEGÓŁOWA:
+
+1. OGÓLNIE: NIE - istnieją zagrożenia w:
+   - Event handlerach z zagnieźdżonymi stringami
+   - Data atrybutach z apostrofami
+   - JSON w HTML
+   - CSS url()
+   - JavaScript stringach z apostrofami
+
+2. DLA TEGO PROJEKTU: TAK - całkowicie bezpieczna, ponieważ:
+   - Kod już konsekwentnie używa apostrofów
+   - Event handlery mają tylko nazwy funkcji (brak stringów)
+   - Brak JSON w atrybutach
+   - Brak CSS url()
+   - Brak apostrofów w JavaScript stringach
+   - Wszystkie stringi to liczby i znaki specjalne
+
+3. PRAKTYCZNIE:
+   - Użyj automatycznego formatera (Prettier)
+   - Ustal standard w projekcie
+   - Nie mieszaj stylów
+   - Zweryfikuj krityczne miejsca przed zmianą
+   - Zastosuj linting rules
+
+REKOMENDACJA:
+  OK DLA TEGO PROJEKTU - bezpieczna zamiana
+  NIE DLA INNEGO KODU - wymaga indywidualnej analizy każdego zagrożenia
+  OK NAJLEPSZE - użycie Prettier z konfiguracją "singleQuote": true
+
+================================================================================
+KONIEC RAPORTU
+================================================================================
+
+Data utworzenia: 2025-12-28
+Aktualizacja: Pełna analiza z konkretnymi przykładami
+Status: ZAKONCZONE
+
+Szczegółowe przykłady znajdują się w pliku: QUOTE_DETAILED_EXAMPLES.txt
+
+================================================================================

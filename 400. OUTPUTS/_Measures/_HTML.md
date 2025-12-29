@@ -1,7 +1,7 @@
 createOrReplace
 
     table _HTML
-        lineageTag: b6758995-e93b-42cc-b9a5-ae6a7f62dea8
+        lineageTag: db852a10-b9f7-4dc9-acc5-c8b6f5257410
 
         measure '00. Konfiguracja Power BI - Główne widoki Power BI Desktop' = ```
 "
@@ -313,7 +313,7 @@ createOrReplace
         EVALUATE
         <span class='dax-function'>SUMMARIZECOLUMNS</span>(
             fDemo[Category],
-            "Total Sales", <span class='dax-function'>SUMX</span>(fDemo, fDemo[Price] * fDemo[Quantity])
+            'Total Sales', <span class='dax-function'>SUMX</span>(fDemo, fDemo[Price] * fDemo[Quantity])
         )
         ORDER BY [Total Sales] DESC</code></pre>
         <p>To zapytanie zwróci zestawienie sprzedaży według kategorii, posortowane malejąco.</p>
@@ -434,7 +434,7 @@ createOrReplace
 
 "
 ```
-            lineageTag: 60ed1a02-9109-48b8-80aa-4998d9cbbc3c
+            lineageTag: 7a9f62aa-9628-4e38-81f8-cc22631e6fa5
 
         measure '00. Konfiguracja Power BI - Przygotowanie środowiska Power BI' = ```
 "
@@ -843,7 +843,7 @@ createOrReplace
 
 "
 ```
-            lineageTag: 6f921f27-1b4e-4b4f-8e5d-f55a094c6e40
+            lineageTag: ae88ea2a-ced9-485d-8fba-7cb849daade9
 
         measure '01. Podstawy DAX - Funkcje agregujące' = ```
 "
@@ -1253,7 +1253,7 @@ createOrReplace
 
 "
 ```
-            lineageTag: 4a0f3cf3-6352-4299-bfb7-0a5fc47c8090
+            lineageTag: 4b4ca2fa-98db-4134-823c-2f01260a6a89
 
         measure '01. Podstawy DAX - Funkcje dat' = ```
 "
@@ -1631,7 +1631,7 @@ createOrReplace
 
 "
 ```
-            lineageTag: 9fcb416b-27de-4ec6-a7ba-c084349b0396
+            lineageTag: 00a6e281-350b-4b29-a1ec-9d4d49b7314e
 
         measure '01. Podstawy DAX - Funkcje logiczne' = ```
 "
@@ -1884,8 +1884,8 @@ createOrReplace
         Kategoria Sprzedaży = 
         <span class='dax-function'>IF</span>(
             Sprzedaz[Wartość Netto] &gt; <span class='dax-number'>1000</span>,
-            "Wysoka",
-            "Niska"
+            'Wysoka',
+            'Niska'
         )</code></pre>
 
     </div>
@@ -1900,8 +1900,8 @@ createOrReplace
         Czy Duże Zamówienie = 
         <span class='dax-function'>IF</span>(
             <span class='dax-function'>AND</span>(Sprzedaż[Wartość Sprzedaży] &gt; <span class='dax-number'>1000</span>, Sprzedaż[Ilość] &gt; <span class='dax-number'>50</span>),
-            "TAK",
-            "NIE"
+            'TAK',
+            'NIE'
         )</code></pre>
 
     </div>
@@ -1915,9 +1915,9 @@ createOrReplace
         <pre><code>DAX
         Napoje w Centralnej Polsce = 
         <span class='dax-function'>IF</span>(
-            <span class='dax-function'>OR</span>(Sprzedaz[Kategoria] = "NAPOJE", Sprzedaz[Region] = "Centralna Polska"),
-            "TAK",
-            "NIE"
+            <span class='dax-function'>OR</span>(Sprzedaz[Kategoria] = 'NAPOJE', Sprzedaz[Region] = 'Centralna Polska'),
+            'TAK',
+            'NIE'
         )</code></pre>
 
     </div>
@@ -1931,9 +1931,9 @@ createOrReplace
         <pre><code>DAX
         Czy nie napój = 
         <span class='dax-function'>IF</span>(
-            <span class='dax-function'>NOT</span>(Sprzedaz[Kategoria] = "NAPOJE"),
-            "TAK",
-            "NIE"
+            <span class='dax-function'>NOT</span>(Sprzedaz[Kategoria] = 'NAPOJE'),
+            'TAK',
+            'NIE'
         )</code></pre>
         <p>---</p>
 
@@ -2025,7 +2025,7 @@ createOrReplace
 
 "
 ```
-            lineageTag: d52f5841-6b79-46ab-bc49-6681243e20d7
+            lineageTag: 512acf8b-a000-4d09-8edb-8a87920e784b
 
         measure '01. Podstawy DAX - Funkcje tekstowe' = ```
 "
@@ -2274,10 +2274,10 @@ createOrReplace
         <span class='dax-function'>CONCATENATE</span>(&lt;tekst1&gt;, &lt;tekst2&gt;)</code></pre>
         <p><strong>Przykład:</strong></p>
         <pre><code>DAX
-        Pełna Nazwa = <span class='dax-function'>CONCATENATE</span>(Sprzedaz[Kategoria], " - ", Sprzedaz[Nazwa Produktu])</code></pre>
+        Pełna Nazwa = <span class='dax-function'>CONCATENATE</span>(Sprzedaz[Kategoria], ' - ', Sprzedaz[Nazwa Produktu])</code></pre>
         <p><strong>Alternatywa</strong></p>
         <pre><code>DAX
-        Pełna Nazwa = Sprzedaz[Kategoria] & " - " & Sprzedaz[Nazwa Produktu]</code></pre>
+        Pełna Nazwa = Sprzedaz[Kategoria] & ' - ' & Sprzedaz[Nazwa Produktu]</code></pre>
 
     </div>
 
@@ -2405,7 +2405,7 @@ createOrReplace
 
 "
 ```
-            lineageTag: df1ac25d-15d6-425d-841c-44b27832d0ed
+            lineageTag: a252a6ca-4c9b-4a5a-b413-c18e7c80b573
 
         measure '01. Podstawy DAX' = ```
 "
@@ -2810,7 +2810,7 @@ createOrReplace
         <p><strong>Przykład:</strong></p>
         <pre><code>DAX
         Czy Premium = 
-        Sprzedaz[Kategoria] = "VIP" && Klienci[Przychód] &gt; <span class='dax-number'>10000</span></code></pre>
+        Sprzedaz[Kategoria] = 'VIP' && Klienci[Przychód] &gt; <span class='dax-number'>10000</span></code></pre>
 
     </div>
 
@@ -2822,7 +2822,7 @@ createOrReplace
         <p><strong>Przykład:</strong></p>
         <pre><code>DAX
         Pełna Nazwa = 
-        Sprzedaz[Kategoria] & " - " & Sprzedaz[Nazwa Produktu]</code></pre>
+        Sprzedaz[Kategoria] & ' - ' & Sprzedaz[Nazwa Produktu]</code></pre>
         <p>---</p>
 
     </div>
@@ -2913,7 +2913,7 @@ createOrReplace
 
 "
 ```
-            lineageTag: 639ab078-6ab6-43fc-ab39-0c49c4d2f00b
+            lineageTag: 28104880-a577-4242-afab-df9b28b278ca
 
         measure '01a. Gaps' = ```
 "
@@ -3500,8 +3500,8 @@ createOrReplace
 
     const slotsPerPage = [1, 1, 1, 3, 1, 1];
     let slots = new Array(slotsPerPage[0]).fill('');
-    const correctSolutions = [["Sprzedaz[Kwota]"], ["Tabela z apostrofem[Kwota Netto]"], ["SUM"], ["IF", "Wysoka", "Niska"], ["SUMX"], ["&"]];
-    const correctFeedback = ["\u2705 Brawo! Rozwi\u0105zanie poprawne!\nW DAX zawsze odwo\u0142ujesz si\u0119 do kolumn poprzez nazw\u0119 tabeli i nazw\u0119 kolumny w nawiasach kwadratowych: Tabela[Kolumna]. To zapobiega niejednoznaczno\u015bci gdy masz kolumny o tych samych nazwach w r\u00f3\u017cnych tabelach.", "\u2705 Brawo! Rozwi\u0105zanie poprawne!\nGdy nazwa tabeli lub kolumny zawiera spacje, znaki specjalne lub polskie znaki, musisz uj\u0105\u0107 j\u0105 w apostrofy. Poprawna sk\u0142adnia to: nazwa z apostrofem. Nazwa kolumny w tym przypadku nie wymaga apostrof\u00f3w, bo jest ju\u017c w nawiasach kwadratowych.", "\u2705 Brawo! Rozwi\u0105zanie poprawne!\nFunkcja SUM() sumuje wszystkie warto\u015bci w kolumnie. Pomija warto\u015bci puste (BLANK) i uwzgl\u0119dnia aktualny kontekst filtrowania. To podstawowa funkcja agreguj\u0105ca w DAX.", "\u2705 Brawo! Rozwi\u0105zanie poprawne!\nFunkcja IF() w DAX ma sk\u0142adni\u0119: <code>IF(warunek, warto\u015b\u0107_je\u015bli_prawda, warto\u015b\u0107_je\u015bli_fa\u0142sz).</code> W tym przypadku: <code>IF(Sprzedaz[Kwota] > 1000, \u2033Wysoka\u2033, \u2033Niska\u2033).</code>", "\u2705 Brawo! Rozwi\u0105zanie poprawne!\nSUMX() to funkcja iteracyjna, kt\u00f3ra dla ka\u017cdego wiersza tabeli oblicza wyra\u017cenie, a potem sumuje wyniki. Sk\u0142adnia: SUMX(tabela, wyra\u017cenie). W tym przypadku dla ka\u017cdego wiersza mno\u017cy Ilo\u015b\u0107 \u00d7 Cena, a nast\u0119pnie sumuje wszystkie wyniki.", "\u2705 Brawo! Rozwi\u0105zanie poprawne!\nOperator ampersand w DAX s\u0142u\u017cy do \u0142\u0105czenia (konkatenacji) tekst\u00f3w. Poprawna sk\u0142adnia: <code>Klienci[Imi\u0119] &  Klienci[Nazwisko].</code> Mo\u017cesz \u0142\u0105czy\u0107 dowoln\u0105 liczb\u0119 element\u00f3w tekstowych u\u017cywaj\u0105c tego operatora."];
+    const correctSolutions = [['Sprzedaz[Kwota]'], ['Tabela z apostrofem[Kwota Netto]'], ['SUM'], ['IF', 'Wysoka', 'Niska'], ['SUMX'], ['&']];
+    const correctFeedback = ['\u2705 Brawo! Rozwi\u0105zanie poprawne!\nW DAX zawsze odwo\u0142ujesz si\u0119 do kolumn poprzez nazw\u0119 tabeli i nazw\u0119 kolumny w nawiasach kwadratowych: Tabela[Kolumna]. To zapobiega niejednoznaczno\u015bci gdy masz kolumny o tych samych nazwach w r\u00f3\u017cnych tabelach.', '\u2705 Brawo! Rozwi\u0105zanie poprawne!\nGdy nazwa tabeli lub kolumny zawiera spacje, znaki specjalne lub polskie znaki, musisz uj\u0105\u0107 j\u0105 w apostrofy. Poprawna sk\u0142adnia to: nazwa z apostrofem. Nazwa kolumny w tym przypadku nie wymaga apostrof\u00f3w, bo jest ju\u017c w nawiasach kwadratowych.', '\u2705 Brawo! Rozwi\u0105zanie poprawne!\nFunkcja SUM() sumuje wszystkie warto\u015bci w kolumnie. Pomija warto\u015bci puste (BLANK) i uwzgl\u0119dnia aktualny kontekst filtrowania. To podstawowa funkcja agreguj\u0105ca w DAX.', '\u2705 Brawo! Rozwi\u0105zanie poprawne!\nFunkcja IF() w DAX ma sk\u0142adni\u0119: <code>IF(warunek, warto\u015b\u0107_je\u015bli_prawda, warto\u015b\u0107_je\u015bli_fa\u0142sz).</code> W tym przypadku: <code>IF(Sprzedaz[Kwota] > 1000, \u2033Wysoka\u2033, \u2033Niska\u2033).</code>', '\u2705 Brawo! Rozwi\u0105zanie poprawne!\nSUMX() to funkcja iteracyjna, kt\u00f3ra dla ka\u017cdego wiersza tabeli oblicza wyra\u017cenie, a potem sumuje wyniki. Sk\u0142adnia: SUMX(tabela, wyra\u017cenie). W tym przypadku dla ka\u017cdego wiersza mno\u017cy Ilo\u015b\u0107 \u00d7 Cena, a nast\u0119pnie sumuje wszystkie wyniki.', '\u2705 Brawo! Rozwi\u0105zanie poprawne!\nOperator ampersand w DAX s\u0142u\u017cy do \u0142\u0105czenia (konkatenacji) tekst\u00f3w. Poprawna sk\u0142adnia: <code>Klienci[Imi\u0119] &  Klienci[Nazwisko].</code> Mo\u017cesz \u0142\u0105czy\u0107 dowoln\u0105 liczb\u0119 element\u00f3w tekstowych u\u017cywaj\u0105c tego operatora.'];
     const incorrectFeedback = [{}, {}, {}, {}, {}, {}];
 
     function drag(event) {
@@ -3716,7 +3716,7 @@ createOrReplace
                 resetTask();
             }
     
-            // Zmień przycisk "Następne" na "Zakończ" przed ostatnim zadaniem
+            // Zmień przycisk 'Następne' na 'Zakończ' przed ostatnim zadaniem
             const nextBtn = document.getElementById('nextBtn');
             if (currentPage === totalTasks) {
                 nextBtn.textContent = 'Zakończ →';
@@ -3822,7 +3822,7 @@ createOrReplace
 
 "
 ```
-            lineageTag: 3d846dc9-7697-4430-b490-e296f724bfa0
+            lineageTag: df63e47b-4919-497b-bd08-e118b24ce880
 
         measure '01a. Quiz' = ```
 "
@@ -4243,7 +4243,7 @@ createOrReplace
     
     const correctAnswers = [0, 2, 3, 1, 1, 1];
     
-    const explanations = ["DAX to skr\u00f3t od Data Analysis Expressions - j\u0119zyk formu\u0142 u\u017cywany w Power BI, Excel Power Pivot i Analysis Services.", "W DAX zawsze u\u017cywamy sk\u0142adni <code>Tabela[Kolumna</code>], gdzie nazwa tabeli jest przed nawiasem kwadratowym, a nazwa kolumny wewn\u0105trz.", "Do miar mo\u017cna odwo\u0142ywa\u0107 si\u0119 zar\u00f3wno przez <code>[Nazwa Miary]</code> jak i przez <code>Tabela[Nazwa Miary]</code>. Pierwsza sk\u0142adnia jest cz\u0119\u015bciej u\u017cywana i kr\u00f3tsza.", "<code>SUM(Tabela[Kolumna])</code> sumuje wszystkie warto\u015bci w kolumnie, pomijaj\u0105c warto\u015bci puste (BLANK) i uwzgl\u0119dniaj\u0105c aktualny kontekst filtrowania.", "<code>COUNT</code> liczy niepuste warto\u015bci numeryczne w konkretnej kolumnie, podczas gdy <code>COUNTROWS</code> liczy wszystkie wiersze w tabeli (nawet je\u015bli maj\u0105 puste warto\u015bci).", "<code>DISTINCTCOUNT</code> liczy ile jest unikalnych (niepowtarzaj\u0105cych si\u0119) warto\u015bci. Np. dla {1, 2, 2, 3, 3, 3} zwr\u00f3ci 3."];
+    const explanations = ['DAX to skr\u00f3t od Data Analysis Expressions - j\u0119zyk formu\u0142 u\u017cywany w Power BI, Excel Power Pivot i Analysis Services.', 'W DAX zawsze u\u017cywamy sk\u0142adni <code>Tabela[Kolumna</code>], gdzie nazwa tabeli jest przed nawiasem kwadratowym, a nazwa kolumny wewn\u0105trz.', 'Do miar mo\u017cna odwo\u0142ywa\u0107 si\u0119 zar\u00f3wno przez <code>[Nazwa Miary]</code> jak i przez <code>Tabela[Nazwa Miary]</code>. Pierwsza sk\u0142adnia jest cz\u0119\u015bciej u\u017cywana i kr\u00f3tsza.', '<code>SUM(Tabela[Kolumna])</code> sumuje wszystkie warto\u015bci w kolumnie, pomijaj\u0105c warto\u015bci puste (BLANK) i uwzgl\u0119dniaj\u0105c aktualny kontekst filtrowania.', '<code>COUNT</code> liczy niepuste warto\u015bci numeryczne w konkretnej kolumnie, podczas gdy <code>COUNTROWS</code> liczy wszystkie wiersze w tabeli (nawet je\u015bli maj\u0105 puste warto\u015bci).', '<code>DISTINCTCOUNT</code> liczy ile jest unikalnych (niepowtarzaj\u0105cych si\u0119) warto\u015bci. Np. dla {1, 2, 2, 3, 3, 3} zwr\u00f3ci 3.'];
     
     document.getElementById('totalPages').textContent = totalQuestions;
     
@@ -4344,7 +4344,7 @@ createOrReplace
             pages.forEach(page => page.classList.remove('active'));
             pages[currentPage - 1].classList.add('active');
     
-            // Wyświetl numer pytania lub "Podsumowanie"
+            // Wyświetl numer pytania lub 'Podsumowanie'
             const pageIndicator = document.getElementById('currentPage');
             if (currentPage <= totalQuestions) {
                 pageIndicator.textContent = currentPage;
@@ -4352,7 +4352,7 @@ createOrReplace
                 pageIndicator.textContent = 'Podsumowanie';
             }
     
-            // Zmień przycisk "Następna" na "Zakończ" przed ostatnim pytaniem
+            // Zmień przycisk 'Następna' na 'Zakończ' przed ostatnim pytaniem
             const nextBtn = document.getElementById('nextBtn');
             if (currentPage === totalQuestions) {
                 nextBtn.textContent = 'Zakończ →';
@@ -4391,7 +4391,7 @@ createOrReplace
 
 "
 ```
-            lineageTag: 33f44a11-2081-4c76-b4d0-390982bd8f18
+            lineageTag: 106cd163-155e-4adb-ab53-8a3a8c486223
 
         measure '02. Miary vs Kolumny kalkulowane - Kolumny vs. Miary' = ```
 "
@@ -4675,8 +4675,8 @@ createOrReplace
         Kategoria cenowa = 
         <span class='dax-function'>IF</span>(
             Sprzedaż[Wartość netto] &gt; <span class='dax-number'>1000</span>,
-            "Premium",
-            "Standard"
+            'Premium',
+            'Standard'
         )</code></pre>
         <p><strong>Możesz:</strong></p>
         <ul>
@@ -4906,7 +4906,7 @@ createOrReplace
 
 "
 ```
-            lineageTag: 0224a1ae-c1a7-4fda-9bfa-3e4fc88aba79
+            lineageTag: ba0c3234-351f-46b0-bccf-519a69afec78
 
         measure '02. Miary vs Kolumny kalkulowane - Nazewnictwo' = ```
 "
@@ -5337,7 +5337,7 @@ createOrReplace
 
 "
 ```
-            lineageTag: b40f451d-109a-4172-93e6-63e5362c28f3
+            lineageTag: 1579ea4e-9b63-48b8-bf3f-4355b3686ab9
 
         measure '02. Miary vs Kolumny kalkulowane - Pułapki' = ```
 "
@@ -5733,7 +5733,7 @@ createOrReplace
 
 "
 ```
-            lineageTag: 06ecc040-6e5f-4e9a-82fd-0b7f5668c6ec
+            lineageTag: 08b14ebe-d3e1-4be7-92be-ad01114eb091
 
         measure '02. Miary vs Kolumny kalkulowane - Rola modelu' = ```
 "
@@ -6046,10 +6046,10 @@ createOrReplace
         <pre><code>Kalendarz = 
         <span class='dax-function'>ADDCOLUMNS</span>(
             <span class='dax-function'>CALENDAR</span>(<span class='dax-function'>DATE</span>(<span class='dax-number'>2020</span>,<span class='dax-number'>1</span>,<span class='dax-number'>1</span>), <span class='dax-function'>DATE</span>(<span class='dax-number'>2025</span>,<span class='dax-number'>12</span>,<span class='dax-number'>31</span>)),
-            "Rok", <span class='dax-function'>YEAR</span>([Date]),
-            "Miesiac", <span class='dax-function'>FORMAT</span>([Date], "YYYY-MM"),
-            "Kwartal", "Q" & <span class='dax-function'>QUARTER</span>([Date]),
-            "Dzien Tygodnia", <span class='dax-function'>FORMAT</span>([Date], "dddd", "pl-PL")
+            'Rok', <span class='dax-function'>YEAR</span>([Date]),
+            'Miesiac', <span class='dax-function'>FORMAT</span>([Date], 'YYYY-MM'),
+            'Kwartal', 'Q' & <span class='dax-function'>QUARTER</span>([Date]),
+            'Dzien Tygodnia', <span class='dax-function'>FORMAT</span>([Date], 'dddd', 'pl-PL')
         )</code></pre>
         <p><strong>Relacja:</strong></p>
         <pre><code>Kalendarz[Data] (<span class='dax-number'>1</span>) → (∞) Fakt_Sprzedaz[Data]</code></pre>
@@ -6072,7 +6072,7 @@ createOrReplace
         Typ danych: Liczba całkowita
 
         ❌ ZŁE:
-        ID_Produktu: "PROD001", "PROD002"
+        ID_Produktu: 'PROD001', 'PROD002'
         Typ danych: Tekst (wolniejsze złączenia)</code></pre>
         <h2>5. Usuń zbędne kolumny</h2>
         <p><strong>W Power Query przed załadowaniem:</strong></p>
@@ -6183,7 +6183,7 @@ createOrReplace
 
 "
 ```
-            lineageTag: 719a1f35-a6e7-489b-941f-aa59a750348e
+            lineageTag: 5da89198-bb57-44a7-b881-ba7ba685bc30
 
         measure '02. Miary vs Kolumny kalkulowane - Różnice podejśc' = ```
 "
@@ -6440,9 +6440,9 @@ createOrReplace
         Kategoria = 
         <span class='dax-function'>SWITCH</span>(
             <span class='dax-function'>TRUE</span>(),
-            Sprzedaż[Wartość] &lt; <span class='dax-number'>100</span>, "Niska",
-            Sprzedaż[Wartość] &lt; <span class='dax-number'>500</span>, "Średnia",
-            "Wysoka"
+            Sprzedaż[Wartość] &lt; <span class='dax-number'>100</span>, 'Niska',
+            Sprzedaż[Wartość] &lt; <span class='dax-number'>500</span>, 'Średnia',
+            'Wysoka'
         )</code></pre>
         <h2>W miarach: ”Myśl agregacją”</h2>
         <p>Najprościej mówiąc, w miarach:</p>
@@ -6643,7 +6643,7 @@ createOrReplace
 
 "
 ```
-            lineageTag: 1945a0b0-74f5-42a9-afd3-7c4fe55ba232
+            lineageTag: 64ed2ede-6861-4167-9992-fb4ef3f8cc08
 
         measure '02. Miary vs Kolumny kalkulowane - Tipy' = ```
 "
@@ -6890,7 +6890,7 @@ createOrReplace
         <h1>Wydajność modelu</h1>
         <h2>Optymalizacja pamięci</h2>
         <p><strong>1. Zmień typy danych:</strong></p>
-        <pre><code>❌ Tekst: "<span class='dax-number'>123</span>" (<span class='dax-number'>8</span> bajtów)
+        <pre><code>❌ Tekst: '<span class='dax-number'>123</span>' (<span class='dax-number'>8</span> bajtów)
         ✅ Liczba całkowita: <span class='dax-number'>123</span> (<span class='dax-number'>2</span>-<span class='dax-number'>4</span> bajty)</code></pre>
         <p><strong>2. Usuń zbędne kolumny:</strong></p>
         <ul>
@@ -7053,7 +7053,7 @@ createOrReplace
 
 "
 ```
-            lineageTag: 9280e8fd-8f0a-4a93-83d2-0b852c07993f
+            lineageTag: 3c4a3ff2-1645-498d-9119-9367f9bc9702
 
         measure '02a. Gaps' = ```
 "
@@ -7641,9 +7641,9 @@ createOrReplace
 
     const slotsPerPage = [1, 1, 1, 1, 1, 1];
     let slots = new Array(slotsPerPage[0]).fill('');
-    const correctSolutions = [["Sprzeda\u017c[Cena] - Sprzeda\u017c[Koszt]"], ["SUM(Sprzeda\u017c[Warto\u015b\u0107 netto]) - SUM(Sprzeda\u017c[Koszt])"], ["Kolumn\u0119 kalkulowan\u0105"], ["Miara"], ["Brak funkcji agreguj\u0105cej"], ["Je\u015bli u\u017cywasz SUM/AVERAGE/COUNT \u2192 prawdopodobnie miara"]];
-    const correctFeedback = ["\u2705 Brawo! Rozwi\u0105zanie poprawne!\nW kolumnach kalkulowanych mo\u017cesz bezpo\u015brednio odwo\u0142ywa\u0107 si\u0119 do kolumn i wykonywa\u0107 operacje matematyczne jak w Excelu: <code>Sprzeda\u017c[Cena] - Sprzeda\u017c[Koszt]</code>. Kolumny dzia\u0142aj\u0105 w kontek\u015bcie wiersza - formu\u0142a oblicza si\u0119 dla ka\u017cdego wiersza osobno. Nie potrzebujesz funkcji agreguj\u0105cych.", "\u2705 Brawo! Rozwi\u0105zanie poprawne!\nW miarach MUSISZ najpierw zagregowa\u0107 kolumny funkcjami jak <code>SUM()</code>, <code>AVERAGE()</code>, <code>COUNT()</code>, a dopiero potem wykonywa\u0107 operacje matematyczne. Poprawnie: <code>SUM(Sprzeda\u017c[Warto\u015b\u0107 netto]) - SUM(Sprzeda\u017c[Koszt])</code>. Miary dzia\u0142aj\u0105 w kontek\u015bcie filtr\u00f3w, a nie kontek\u015bcie wiersza.", "\u2705 Brawo! Rozwi\u0105zanie poprawne!\nKategoria wiekowa to warto\u015b\u0107, kt\u00f3r\u0105 chcesz u\u017cywa\u0107 do filtrowania i grupowania - idealne zastosowanie dla kolumny kalkulowanej. Kolumna zostanie obliczona dla ka\u017cdego klienta osobno podczas od\u015bwie\u017cania danych i b\u0119dzie dost\u0119pna w slicerach. Warto\u015b\u0107 zale\u017cy tylko od danych w wierszu (data urodzenia), wi\u0119c kolumna jest w\u0142a\u015bciwym wyborem.", "\u2705 Brawo! Rozwi\u0105zanie poprawne!\nMiary NIE s\u0105 przechowywane w modelu - s\u0105 obliczane dynamicznie w momencie wy\u015bwietlania wizualizacji. To oszcz\u0119dza pami\u0119\u0107 i pozwala na elastyczne reagowanie na filtry. Kolumny kalkulowane, kolumny z Power Query i tabele kalkulowane s\u0105 wszystkie przechowywane w modelu i zajmuj\u0105 miejsce.", "\u2705 Brawo! Rozwi\u0105zanie poprawne!\nW miarach NIE MO\u017bESZ bezpo\u015brednio mno\u017cy\u0107 kolumn - brakuje funkcji agreguj\u0105cej. To cz\u0119sty b\u0142\u0105d pocz\u0105tkuj\u0105cych. Poprawne rozwi\u0105zania to:\n- <code>SUMX(Sprzeda\u017c, Sprzeda\u017c[Ilo\u015b\u0107] * Sprzeda\u017c[Cena])</code> - oblicz dla ka\u017cdego wiersza, potem zsumuj\n- Lub stw\u00f3rz kolumn\u0119 kalkulowan\u0105 z tym mno\u017ceniem i u\u017cyj <code>SUM()</code> na tej kolumnie", "\u2705 Brawo! Rozwi\u0105zanie poprawne!\nZ\u0142ota zasada: <strong>Je\u015bli w formule u\u017cywasz funkcji agreguj\u0105cej (<code>SUM</code>, <code>AVERAGE</code>, <code>COUNT</code>, itp.), prawie zawsze powiniene\u015b tworzy\u0107 MIAR\u0118, nie kolumn\u0119.</strong> Je\u015bli mo\u017cesz napisa\u0107 formu\u0142\u0119 bez agregacji, tylko prostym odwo\u0142aniem do kolumn (jak w Excelu), prawdopodobnie potrzebujesz KOLUMNY."];
-    const incorrectFeedback = [{"SUM(Sprzeda\u017c[Cena]) - SUM(Sprzeda\u017c[Koszt])": "\u274c <strong>Niepoprawne!</strong>\nFunkcje agreguj\u0105ce jak <code>SUM()</code> s\u0105 dla miar, nie dla kolumn kalkulowanych. W kolumnie masz kontekst wiersza - pracujesz na pojedynczym wierszu, wi\u0119c bezpo\u015brednio odwo\u0142ujesz si\u0119 do kolumn bez agregacji.", "CALCULATE": "\u274c <strong>Niepoprawne!</strong>\n<code>CALCULATE()</code> s\u0142u\u017cy do modyfikowania kontekstu filtr\u00f3w w miarach. W kolumnach kalkulowanych nie potrzebujesz tej funkcji - po prostu odwo\u0142ujesz si\u0119 bezpo\u015brednio do kolumn.", "SUMX": "\u274c <strong>Niepoprawne!</strong>\n<code>SUMX()</code> to funkcja iteracyjna u\u017cywana g\u0142\u00f3wnie w miarach. W kolumnie kalkulowanej ju\u017c jeste\u015b w kontek\u015bcie wiersza, wi\u0119c nie musisz iterowa\u0107 - po prostu odwo\u0142aj si\u0119 do kolumn bezpo\u015brednio."}, {"Sprzeda\u017c[Warto\u015b\u0107 netto] - Sprzeda\u017c[Koszt]": "\u274c <strong>Niepoprawne!</strong>\nTo sk\u0142adnia dla kolumn kalkulowanych, nie dla miar. W miarach NIE MO\u017bESZ bezpo\u015brednio odejmowa\u0107 kolumn - musisz najpierw je zagregowa\u0107: <code>SUM(Sprzeda\u017c[Warto\u015b\u0107 netto]) - SUM(Sprzeda\u017c[Koszt])</code>.", "SUMX": "\u274c <strong>Niepoprawne!</strong>\nCho\u0107 <code>SUMX()</code> mo\u017ce dzia\u0142a\u0107, to w tym przypadku jest zb\u0119dna komplikacja. Wystarczy prosta agregacja: <code>SUM(kolumna1) - SUM(kolumna2)</code>. <code>SUMX()</code> jest potrzebna gdy obliczenia trzeba wykona\u0107 wiersz po wierszu przed sumowaniem.", "AVERAGE": "\u274c <strong>Niepoprawne!</strong>\n<code>AVERAGE()</code> oblicza \u015bredni\u0105, a nie sum\u0119. Do obliczenia mar\u017cy (r\u00f3\u017cnicy sum) u\u017cywamy <code>SUM()</code>."}, {"Miar\u0119": "\u274c <strong>Niepoprawne!</strong>\nMiar NIE MO\u017bNA u\u017cywa\u0107 w slicerach ani do filtrowania wierszy. Miary s\u0105 dynamiczne i zale\u017c\u0105 od kontekstu filtr\u00f3w, a Ty potrzebujesz sta\u0142ej warto\u015bci dla ka\u017cdego klienta do filtrowania. To zadanie dla kolumny kalkulowanej.", "Tabel\u0119 kalkulowan\u0105": "\u274c <strong>Niepoprawne!</strong>\nTabela kalkulowana tworzy ca\u0142\u0105 now\u0105 tabel\u0119. Ty potrzebujesz tylko nowej kolumny w istniej\u0105cej tabeli klient\u00f3w. Kolumna kalkulowana to prostsze i w\u0142a\u015bciwe rozwi\u0105zanie.", "Parametr What-If": "\u274c <strong>Niepoprawne!</strong>\nParametry What-If s\u0142u\u017c\u0105 do tworzenia interaktywnych scenariuszy analitycznych (np. symulacji), nie do kategoryzacji danych wed\u0142ug cech sta\u0142ych jak wiek klienta."}, {"Kolumna kalkulowana": "\u274c <strong>Niepoprawne!</strong>\nKolumny kalkulowane s\u0105 obliczane podczas od\u015bwie\u017cania danych i PRZECHOWYWANE w modelu. Zajmuj\u0105 miejsce w pami\u0119ci. To miara jest obliczana na \u017c\u0105danie i nie zajmuje miejsca.", "Kolumna z Power Query": "\u274c <strong>Niepoprawne!</strong>\nKolumny utworzone w Power Query (czy to \u017ar\u00f3d\u0142owe, czy przekszta\u0142cone) s\u0105 \u0142adowane do modelu i PRZECHOWYWANE w pami\u0119ci. Tylko miary s\u0105 obliczane dynamicznie bez przechowywania.", "Tabela kalkulowana": "\u274c <strong>Niepoprawne!</strong>\nTabele kalkulowane s\u0105 generowane podczas od\u015bwie\u017cania i PRZECHOWYWANE w modelu razem ze wszystkimi swoimi danymi. Zajmuj\u0105 miejsce w pami\u0119ci."}, {"Z\u0142e nazwy kolumn": "\u274c <strong>Niepoprawne!</strong>\nNazwy kolumn s\u0105 poprawnie zapisane (<code>Tabela[Kolumna]</code>). Problem nie le\u017cy w sk\u0142adni nazw, ale w braku agregacji wymaganej w miarach.", "Brak operatora mno\u017cenia": "\u274c <strong>Niepoprawne!</strong>\nOperator mno\u017cenia <code>*</code> jest obecny w kodzie. Problem le\u017cy gdzie indziej - w braku funkcji agreguj\u0105cej, kt\u00f3ra jest wymagana w miarach.", "U\u017cyto CALCULATE zamiast SUMX": "\u274c <strong>Niepoprawne!</strong>\nW tym kodzie nie u\u017cyto ani CALCULATE, ani SUMX. Problem jest bardziej fundamentalny - brak jakiejkolwiek funkcji agreguj\u0105cej. W miarach nie mo\u017cna bezpo\u015brednio mno\u017cy\u0107 kolumn."}, {"Zawsze u\u017cywaj miar dla oszcz\u0119dno\u015bci pami\u0119ci": "\u274c <strong>Niepoprawne!</strong>\nCho\u0107 miary oszcz\u0119dzaj\u0105 pami\u0119\u0107, nie zawsze s\u0105 w\u0142a\u015bciwym wyborem. Nie mo\u017cesz u\u017cywa\u0107 miar do filtrowania czy grupowania. Z\u0142ota zasada to: je\u015bli u\u017cywasz funkcji agreguj\u0105cych \u2192 miara, je\u015bli nie \u2192 kolumna.", "Zawsze u\u017cywaj kolumn dla szybko\u015bci": "\u274c <strong>Niepoprawne!</strong>\nTo nie jest z\u0142ota zasada. Kolumny s\u0105 obliczane raz podczas od\u015bwie\u017cania, ale zajmuj\u0105 pami\u0119\u0107. Decyzja zale\u017cy od tego, czy potrzebujesz agregacji i jak chcesz u\u017cywa\u0107 oblicze\u0144 (filtrowanie vs warto\u015bci na wykresach).", "Je\u015bli dane si\u0119 zmieniaj\u0105": "\u274c <strong>Niepoprawne!</strong>\nZmiany danych nie s\u0105 kryterium wyboru mi\u0119dzy kolumn\u0105 a miar\u0105. Oba typy oblicze\u0144 od\u015bwie\u017caj\u0105 si\u0119 wraz z danymi. Kluczowa r\u00f3\u017cnica to: czy u\u017cywasz agregacji i czy potrzebujesz filtrowa\u0107 wed\u0142ug tej warto\u015bci."}];
+    const correctSolutions = [['Sprzeda\u017c[Cena] - Sprzeda\u017c[Koszt]'], ['SUM(Sprzeda\u017c[Warto\u015b\u0107 netto]) - SUM(Sprzeda\u017c[Koszt])'], ['Kolumn\u0119 kalkulowan\u0105'], ['Miara'], ['Brak funkcji agreguj\u0105cej'], ['Je\u015bli u\u017cywasz SUM/AVERAGE/COUNT \u2192 prawdopodobnie miara']];
+    const correctFeedback = ['\u2705 Brawo! Rozwi\u0105zanie poprawne!\nW kolumnach kalkulowanych mo\u017cesz bezpo\u015brednio odwo\u0142ywa\u0107 si\u0119 do kolumn i wykonywa\u0107 operacje matematyczne jak w Excelu: <code>Sprzeda\u017c[Cena] - Sprzeda\u017c[Koszt]</code>. Kolumny dzia\u0142aj\u0105 w kontek\u015bcie wiersza - formu\u0142a oblicza si\u0119 dla ka\u017cdego wiersza osobno. Nie potrzebujesz funkcji agreguj\u0105cych.', '\u2705 Brawo! Rozwi\u0105zanie poprawne!\nW miarach MUSISZ najpierw zagregowa\u0107 kolumny funkcjami jak <code>SUM()</code>, <code>AVERAGE()</code>, <code>COUNT()</code>, a dopiero potem wykonywa\u0107 operacje matematyczne. Poprawnie: <code>SUM(Sprzeda\u017c[Warto\u015b\u0107 netto]) - SUM(Sprzeda\u017c[Koszt])</code>. Miary dzia\u0142aj\u0105 w kontek\u015bcie filtr\u00f3w, a nie kontek\u015bcie wiersza.', '\u2705 Brawo! Rozwi\u0105zanie poprawne!\nKategoria wiekowa to warto\u015b\u0107, kt\u00f3r\u0105 chcesz u\u017cywa\u0107 do filtrowania i grupowania - idealne zastosowanie dla kolumny kalkulowanej. Kolumna zostanie obliczona dla ka\u017cdego klienta osobno podczas od\u015bwie\u017cania danych i b\u0119dzie dost\u0119pna w slicerach. Warto\u015b\u0107 zale\u017cy tylko od danych w wierszu (data urodzenia), wi\u0119c kolumna jest w\u0142a\u015bciwym wyborem.', '\u2705 Brawo! Rozwi\u0105zanie poprawne!\nMiary NIE s\u0105 przechowywane w modelu - s\u0105 obliczane dynamicznie w momencie wy\u015bwietlania wizualizacji. To oszcz\u0119dza pami\u0119\u0107 i pozwala na elastyczne reagowanie na filtry. Kolumny kalkulowane, kolumny z Power Query i tabele kalkulowane s\u0105 wszystkie przechowywane w modelu i zajmuj\u0105 miejsce.', '\u2705 Brawo! Rozwi\u0105zanie poprawne!\nW miarach NIE MO\u017bESZ bezpo\u015brednio mno\u017cy\u0107 kolumn - brakuje funkcji agreguj\u0105cej. To cz\u0119sty b\u0142\u0105d pocz\u0105tkuj\u0105cych. Poprawne rozwi\u0105zania to:\n- <code>SUMX(Sprzeda\u017c, Sprzeda\u017c[Ilo\u015b\u0107] * Sprzeda\u017c[Cena])</code> - oblicz dla ka\u017cdego wiersza, potem zsumuj\n- Lub stw\u00f3rz kolumn\u0119 kalkulowan\u0105 z tym mno\u017ceniem i u\u017cyj <code>SUM()</code> na tej kolumnie', '\u2705 Brawo! Rozwi\u0105zanie poprawne!\nZ\u0142ota zasada: <strong>Je\u015bli w formule u\u017cywasz funkcji agreguj\u0105cej (<code>SUM</code>, <code>AVERAGE</code>, <code>COUNT</code>, itp.), prawie zawsze powiniene\u015b tworzy\u0107 MIAR\u0118, nie kolumn\u0119.</strong> Je\u015bli mo\u017cesz napisa\u0107 formu\u0142\u0119 bez agregacji, tylko prostym odwo\u0142aniem do kolumn (jak w Excelu), prawdopodobnie potrzebujesz KOLUMNY.'];
+    const incorrectFeedback = [{'SUM(Sprzeda\u017c[Cena]) - SUM(Sprzeda\u017c[Koszt])': '\u274c <strong>Niepoprawne!</strong>\nFunkcje agreguj\u0105ce jak <code>SUM()</code> s\u0105 dla miar, nie dla kolumn kalkulowanych. W kolumnie masz kontekst wiersza - pracujesz na pojedynczym wierszu, wi\u0119c bezpo\u015brednio odwo\u0142ujesz si\u0119 do kolumn bez agregacji.', 'CALCULATE': '\u274c <strong>Niepoprawne!</strong>\n<code>CALCULATE()</code> s\u0142u\u017cy do modyfikowania kontekstu filtr\u00f3w w miarach. W kolumnach kalkulowanych nie potrzebujesz tej funkcji - po prostu odwo\u0142ujesz si\u0119 bezpo\u015brednio do kolumn.', 'SUMX': '\u274c <strong>Niepoprawne!</strong>\n<code>SUMX()</code> to funkcja iteracyjna u\u017cywana g\u0142\u00f3wnie w miarach. W kolumnie kalkulowanej ju\u017c jeste\u015b w kontek\u015bcie wiersza, wi\u0119c nie musisz iterowa\u0107 - po prostu odwo\u0142aj si\u0119 do kolumn bezpo\u015brednio.'}, {'Sprzeda\u017c[Warto\u015b\u0107 netto] - Sprzeda\u017c[Koszt]': '\u274c <strong>Niepoprawne!</strong>\nTo sk\u0142adnia dla kolumn kalkulowanych, nie dla miar. W miarach NIE MO\u017bESZ bezpo\u015brednio odejmowa\u0107 kolumn - musisz najpierw je zagregowa\u0107: <code>SUM(Sprzeda\u017c[Warto\u015b\u0107 netto]) - SUM(Sprzeda\u017c[Koszt])</code>.', 'SUMX': '\u274c <strong>Niepoprawne!</strong>\nCho\u0107 <code>SUMX()</code> mo\u017ce dzia\u0142a\u0107, to w tym przypadku jest zb\u0119dna komplikacja. Wystarczy prosta agregacja: <code>SUM(kolumna1) - SUM(kolumna2)</code>. <code>SUMX()</code> jest potrzebna gdy obliczenia trzeba wykona\u0107 wiersz po wierszu przed sumowaniem.', 'AVERAGE': '\u274c <strong>Niepoprawne!</strong>\n<code>AVERAGE()</code> oblicza \u015bredni\u0105, a nie sum\u0119. Do obliczenia mar\u017cy (r\u00f3\u017cnicy sum) u\u017cywamy <code>SUM()</code>.'}, {'Miar\u0119': '\u274c <strong>Niepoprawne!</strong>\nMiar NIE MO\u017bNA u\u017cywa\u0107 w slicerach ani do filtrowania wierszy. Miary s\u0105 dynamiczne i zale\u017c\u0105 od kontekstu filtr\u00f3w, a Ty potrzebujesz sta\u0142ej warto\u015bci dla ka\u017cdego klienta do filtrowania. To zadanie dla kolumny kalkulowanej.', 'Tabel\u0119 kalkulowan\u0105': '\u274c <strong>Niepoprawne!</strong>\nTabela kalkulowana tworzy ca\u0142\u0105 now\u0105 tabel\u0119. Ty potrzebujesz tylko nowej kolumny w istniej\u0105cej tabeli klient\u00f3w. Kolumna kalkulowana to prostsze i w\u0142a\u015bciwe rozwi\u0105zanie.', 'Parametr What-If': '\u274c <strong>Niepoprawne!</strong>\nParametry What-If s\u0142u\u017c\u0105 do tworzenia interaktywnych scenariuszy analitycznych (np. symulacji), nie do kategoryzacji danych wed\u0142ug cech sta\u0142ych jak wiek klienta.'}, {'Kolumna kalkulowana': '\u274c <strong>Niepoprawne!</strong>\nKolumny kalkulowane s\u0105 obliczane podczas od\u015bwie\u017cania danych i PRZECHOWYWANE w modelu. Zajmuj\u0105 miejsce w pami\u0119ci. To miara jest obliczana na \u017c\u0105danie i nie zajmuje miejsca.', 'Kolumna z Power Query': '\u274c <strong>Niepoprawne!</strong>\nKolumny utworzone w Power Query (czy to \u017ar\u00f3d\u0142owe, czy przekszta\u0142cone) s\u0105 \u0142adowane do modelu i PRZECHOWYWANE w pami\u0119ci. Tylko miary s\u0105 obliczane dynamicznie bez przechowywania.', 'Tabela kalkulowana': '\u274c <strong>Niepoprawne!</strong>\nTabele kalkulowane s\u0105 generowane podczas od\u015bwie\u017cania i PRZECHOWYWANE w modelu razem ze wszystkimi swoimi danymi. Zajmuj\u0105 miejsce w pami\u0119ci.'}, {'Z\u0142e nazwy kolumn': '\u274c <strong>Niepoprawne!</strong>\nNazwy kolumn s\u0105 poprawnie zapisane (<code>Tabela[Kolumna]</code>). Problem nie le\u017cy w sk\u0142adni nazw, ale w braku agregacji wymaganej w miarach.', 'Brak operatora mno\u017cenia': '\u274c <strong>Niepoprawne!</strong>\nOperator mno\u017cenia <code>*</code> jest obecny w kodzie. Problem le\u017cy gdzie indziej - w braku funkcji agreguj\u0105cej, kt\u00f3ra jest wymagana w miarach.', 'U\u017cyto CALCULATE zamiast SUMX': '\u274c <strong>Niepoprawne!</strong>\nW tym kodzie nie u\u017cyto ani CALCULATE, ani SUMX. Problem jest bardziej fundamentalny - brak jakiejkolwiek funkcji agreguj\u0105cej. W miarach nie mo\u017cna bezpo\u015brednio mno\u017cy\u0107 kolumn.'}, {'Zawsze u\u017cywaj miar dla oszcz\u0119dno\u015bci pami\u0119ci': '\u274c <strong>Niepoprawne!</strong>\nCho\u0107 miary oszcz\u0119dzaj\u0105 pami\u0119\u0107, nie zawsze s\u0105 w\u0142a\u015bciwym wyborem. Nie mo\u017cesz u\u017cywa\u0107 miar do filtrowania czy grupowania. Z\u0142ota zasada to: je\u015bli u\u017cywasz funkcji agreguj\u0105cych \u2192 miara, je\u015bli nie \u2192 kolumna.', 'Zawsze u\u017cywaj kolumn dla szybko\u015bci': '\u274c <strong>Niepoprawne!</strong>\nTo nie jest z\u0142ota zasada. Kolumny s\u0105 obliczane raz podczas od\u015bwie\u017cania, ale zajmuj\u0105 pami\u0119\u0107. Decyzja zale\u017cy od tego, czy potrzebujesz agregacji i jak chcesz u\u017cywa\u0107 oblicze\u0144 (filtrowanie vs warto\u015bci na wykresach).', 'Je\u015bli dane si\u0119 zmieniaj\u0105': '\u274c <strong>Niepoprawne!</strong>\nZmiany danych nie s\u0105 kryterium wyboru mi\u0119dzy kolumn\u0105 a miar\u0105. Oba typy oblicze\u0144 od\u015bwie\u017caj\u0105 si\u0119 wraz z danymi. Kluczowa r\u00f3\u017cnica to: czy u\u017cywasz agregacji i czy potrzebujesz filtrowa\u0107 wed\u0142ug tej warto\u015bci.'}];
 
     function drag(event) {
             event.dataTransfer.setData('function', event.target.getAttribute('data-function'));
@@ -7857,7 +7857,7 @@ createOrReplace
                 resetTask();
             }
     
-            // Zmień przycisk "Następne" na "Zakończ" przed ostatnim zadaniem
+            // Zmień przycisk 'Następne' na 'Zakończ' przed ostatnim zadaniem
             const nextBtn = document.getElementById('nextBtn');
             if (currentPage === totalTasks) {
                 nextBtn.textContent = 'Zakończ →';
@@ -7963,7 +7963,7 @@ createOrReplace
 
 "
 ```
-            lineageTag: 0f646997-b46c-43c1-80e3-b4a2f165b391
+            lineageTag: 3e3be740-320a-40b1-90a1-d133f182fee3
 
         measure '02a. Quiz' = ```
 "
@@ -8408,7 +8408,7 @@ createOrReplace
     
     const correctAnswers = [1, 1, 1, 2, 1, 2, 1];
     
-    const explanations = ["Kolumny kalkulowane s\u0105 obliczane tylko raz - podczas \u0142adowania lub od\u015bwie\u017cania danych. Ich warto\u015bci s\u0105 przechowywane w modelu danych.", "Miary s\u0105 obliczane dynamicznie przy ka\u017cdym od\u015bwie\u017ceniu wizualizacji, reaguj\u0105c na aktualny kontekst filtr\u00f3w i wyboru u\u017cytkownika.", "Kolumny kalkulowane przechowuj\u0105 warto\u015b\u0107 dla ka\u017cdego wiersza w tabeli, co zajmuje pami\u0119\u0107. Miary nie przechowuj\u0105 danych - obliczaj\u0105 wyniki na \u017c\u0105danie.", "W kolumnach kalkulowanych musisz u\u017cywa\u0107 funkcji iteracyjnych (<code>SUMX</code>, <code>AVERAGEX</code>) zamiast zwyk\u0142ych funkcji agreguj\u0105cych (<code>SUM</code>, <code>AVERAGE</code>), poniewa\u017c kontekst wiersza wymaga iteracji.", "Miary domy\u015blnie dzia\u0142aj\u0105 w kontek\u015bcie filtru, reaguj\u0105c na filtry na\u0142o\u017cone przez wizualizacje, slicery i inne filtry w raporcie.", "Mo\u017cesz u\u017cy\u0107 miary w kolumnie kalkulowanej, ale miara b\u0119dzie obliczona w kontek\u015bcie wiersza dla ka\u017cdego wiersza osobno.", "Miary s\u0105 dynamiczne i automatycznie reaguj\u0105 na zmiany filtr\u00f3w, co czyni je idealnym wyborem dla oblicze\u0144 zale\u017cnych od kontekstu u\u017cytkownika."];
+    const explanations = ['Kolumny kalkulowane s\u0105 obliczane tylko raz - podczas \u0142adowania lub od\u015bwie\u017cania danych. Ich warto\u015bci s\u0105 przechowywane w modelu danych.', 'Miary s\u0105 obliczane dynamicznie przy ka\u017cdym od\u015bwie\u017ceniu wizualizacji, reaguj\u0105c na aktualny kontekst filtr\u00f3w i wyboru u\u017cytkownika.', 'Kolumny kalkulowane przechowuj\u0105 warto\u015b\u0107 dla ka\u017cdego wiersza w tabeli, co zajmuje pami\u0119\u0107. Miary nie przechowuj\u0105 danych - obliczaj\u0105 wyniki na \u017c\u0105danie.', 'W kolumnach kalkulowanych musisz u\u017cywa\u0107 funkcji iteracyjnych (<code>SUMX</code>, <code>AVERAGEX</code>) zamiast zwyk\u0142ych funkcji agreguj\u0105cych (<code>SUM</code>, <code>AVERAGE</code>), poniewa\u017c kontekst wiersza wymaga iteracji.', 'Miary domy\u015blnie dzia\u0142aj\u0105 w kontek\u015bcie filtru, reaguj\u0105c na filtry na\u0142o\u017cone przez wizualizacje, slicery i inne filtry w raporcie.', 'Mo\u017cesz u\u017cy\u0107 miary w kolumnie kalkulowanej, ale miara b\u0119dzie obliczona w kontek\u015bcie wiersza dla ka\u017cdego wiersza osobno.', 'Miary s\u0105 dynamiczne i automatycznie reaguj\u0105 na zmiany filtr\u00f3w, co czyni je idealnym wyborem dla oblicze\u0144 zale\u017cnych od kontekstu u\u017cytkownika.'];
     
     document.getElementById('totalPages').textContent = totalQuestions;
     
@@ -8509,7 +8509,7 @@ createOrReplace
             pages.forEach(page => page.classList.remove('active'));
             pages[currentPage - 1].classList.add('active');
     
-            // Wyświetl numer pytania lub "Podsumowanie"
+            // Wyświetl numer pytania lub 'Podsumowanie'
             const pageIndicator = document.getElementById('currentPage');
             if (currentPage <= totalQuestions) {
                 pageIndicator.textContent = currentPage;
@@ -8517,7 +8517,7 @@ createOrReplace
                 pageIndicator.textContent = 'Podsumowanie';
             }
     
-            // Zmień przycisk "Następna" na "Zakończ" przed ostatnim pytaniem
+            // Zmień przycisk 'Następna' na 'Zakończ' przed ostatnim pytaniem
             const nextBtn = document.getElementById('nextBtn');
             if (currentPage === totalQuestions) {
                 nextBtn.textContent = 'Zakończ →';
@@ -8556,7 +8556,7 @@ createOrReplace
 
 "
 ```
-            lineageTag: 92b941a4-57a5-400a-b1f0-6a02cce7d3d0
+            lineageTag: e5463f87-859d-4631-b8b8-712a03b020e0
 
         measure '03. Wprowadzenie do CALCULATE - Operatory logiczne w `CALCULATE`' = ```
 "
@@ -8923,8 +8923,8 @@ createOrReplace
         Sprzedaż Napoje lub Słodycze =
         <span class='dax-function'>CALCULATE</span>(
             [Sprzedaż Netto],
-            dKategorie[Kategoria] = "NAPOJE" ||
-            dKategorie[Kategoria] = "SŁODYCZE"
+            dKategorie[Kategoria] = 'NAPOJE' ||
+            dKategorie[Kategoria] = 'SŁODYCZE'
         )
 
         // ✓ Eleganckie
@@ -8932,7 +8932,7 @@ createOrReplace
         <span class='dax-function'>CALCULATE</span>(
             [Sprzedaż Netto],
             dKategorie[Kategoria] IN
-             {"NAPOJE", "SŁODYCZE"}
+             {'NAPOJE', 'SŁODYCZE'}
         )</code></pre>
         <p><strong>Operator IN</strong> sprawdza, czy wartość znajduje się w podanym zestawie.</p>
 
@@ -8946,7 +8946,7 @@ createOrReplace
         Sprzedaż Napojów od <span class='dax-number'>2</span> do <span class='dax-number'>10</span> = 
         <span class='dax-function'>CALCULATE</span>(
             [Sprzedaż Netto],
-            'fSprzedaż'[Kategoria] = "NAPOJE" ||
+            'fSprzedaż'[Kategoria] = 'NAPOJE' ||
             'fSprzedaż'[Wartość netto] &gt;= <span class='dax-number'>2</span> &&  'fSprzedaż'[Wartość netto]  &lt; <span class='dax-number'>10</span>
         )</code></pre>
         <p><strong>Warunek:</strong> Kategoria = ”NAPOJE” || Cena >= 2 && Cena < 10</p>
@@ -9040,7 +9040,7 @@ createOrReplace
 
 "
 ```
-            lineageTag: 1bcd47f1-ed96-4844-bb2c-d298d9711255
+            lineageTag: dbd6ec3c-831d-4a66-a2f3-7b4fdb40425d
 
         measure '03. Wprowadzenie do CALCULATE - PODSUMOWANIE' = ```
 "
@@ -9382,7 +9382,7 @@ createOrReplace
 
 "
 ```
-            lineageTag: 0fa14a05-a94e-42f1-8846-e48ad46adbb2
+            lineageTag: 386a152e-29d0-4cb5-9a73-70c49cbce319
 
         measure '03. Wprowadzenie do CALCULATE - Użycie `CALCULATE`' = ```
 "
@@ -9631,7 +9631,7 @@ createOrReplace
         Sprzedaż Netto - Napoje =
         <span class='dax-function'>CALCULATE</span>(
             [Sprzedaż Netto],
-            dKategorie[Kategoria] = "NAPOJE"
+            dKategorie[Kategoria] = 'NAPOJE'
         )</code></pre>
         <p><strong>Co się dzieje:</strong></p>
         <ul>
@@ -9649,7 +9649,7 @@ createOrReplace
         Sprzedaż VIP w <span class='dax-number'>2024</span> = 
         <span class='dax-function'>CALCULATE</span>(
             [Sprzedaż Netto],
-            dKlienci[Kategoria] = "VIP",
+            dKlienci[Kategoria] = 'VIP',
             <span class='dax-function'>YEAR</span>(dKalendarz[Data]) = <span class='dax-number'>2024</span>
         )</code></pre>
         <p><strong>Filtry są łączone operatorem AND</strong> – muszą być <strong>oba</strong> spełnione.</p>
@@ -9775,7 +9775,7 @@ createOrReplace
 
 "
 ```
-            lineageTag: 08a379af-3b21-4c54-a9f2-cfd046d4036a
+            lineageTag: 5d832999-8686-4e98-aa1d-d3e77381ae88
 
         measure '03. Wprowadzenie do CALCULATE - Wprowadzenie do CALCULATE' = ```
 "
@@ -10139,7 +10139,7 @@ createOrReplace
 
 "
 ```
-            lineageTag: 1018ce5d-c7cd-4fd4-9777-6d238c14285c
+            lineageTag: 011c5052-a961-4141-8db9-18c6ebc5af84
 
         measure '03a. Gaps' = ```
 "
@@ -10749,8 +10749,8 @@ createOrReplace
 
     const slotsPerPage = [3, 1, 2, 2, 1, 1];
     let slots = new Array(slotsPerPage[0]).fill('');
-    const correctSolutions = [["CALCULATE", "[Sprzeda\u017c Netto]", "dKategorie[Kategoria]"], ["Obie: ALL i REMOVEFILTERS"], ["dKategorie[Kategoria] IN {NAPOJE", "S\u0141ODYCZE}"], ["&&", "&&"], ["REMOVEFILTERS(dKalendarz)"], ["Zbi\u00f3r filtr\u00f3w aktywnych w danym momencie oblicze\u0144"]];
-    const correctFeedback = ["\u2705 Brawo! Rozwi\u0105zanie poprawne!\nPodstawowa sk\u0142adnia CALCULATE to: <code>CALCULATE(<wyra\u017cenie/miara>, <filtr1>, <filtr2>, ...)</code>. W tym przypadku: <code>CALCULATE([Sprzeda\u017c Netto], dKategorie[Kategoria] = NAPOJE)</code>. Funkcja CALCULATE oblicza miar\u0119 z dodanym filtrem na kategori\u0119.", "\u2705 <strong>Brawo! Rozwi\u0105zanie poprawne!</strong>\nObie funkcje <code>ALL(dKalendarz)</code> i <code>REMOVEFILTERS(dKalendarz)</code> dzia\u0142aj\u0105 identycznie w kontek\u015bcie CALCULATE - usuwaj\u0105 filtry z tabeli. <code>REMOVEFILTERS()</code> jest nowsz\u0105, bardziej czyteln\u0105 wersj\u0105. Zaleca si\u0119 u\u017cywa\u0107 <code>REMOVEFILTERS()</code> ze wzgl\u0119du na jasno\u015b\u0107 nazwy, ale <code>ALL()</code> nadal dzia\u0142a.", "\u2705 <strong>Brawo! Rozwi\u0105zanie poprawne!</strong>\nOperator <code>IN</code> pozwala elegancko sprawdzi\u0107, czy warto\u015b\u0107 znajduje si\u0119 w zestawie: <code>dKategorie[Kategoria] IN {NAPOJE, S\u0141ODYCZE}</code>. To czytelniejsze i kr\u00f3tsze ni\u017c wielokrotne u\u017cycie operatora <code>||</code> (OR). Zestaw warto\u015bci ujmujemy w nawiasy klamrowe <code>{}</code>.", "\u2705 <strong>Brawo! Rozwi\u0105zanie poprawne!</strong>\nOperator <code>&&</code> \u0142\u0105czy warunki logiczne operatorem AND (i) - wszystkie musz\u0105 by\u0107 spe\u0142nione jednocze\u015bnie. Mo\u017cesz te\u017c u\u017cy\u0107 funkcji <code>AND()</code>, ale operator <code>&&</code> jest cz\u0119\u015bciej u\u017cywany i czytelniejszy w tego typu wyra\u017ceniach. Alternatywnie mo\u017cna te\u017c rozdzieli\u0107 filtry przecinkami w CALCULATE - dzia\u0142aj\u0105 wtedy jako AND.", "\u2705 <strong>Brawo! Rozwi\u0105zanie poprawne!</strong>\n<code>REMOVEFILTERS(dKalendarz)</code> usuwa wszystkie filtry z tabeli kalendarza, dzi\u0119ki czemu <code>[Sprzeda\u017c Ca\u0142y Okres]</code> pokazuje sum\u0119 dla wszystkich dat, niezale\u017cnie od kontekstu na\u0142o\u017conego na wizualizacj\u0119. Mo\u017cesz te\u017c u\u017cy\u0107 <code>ALL(dKalendarz)</code> - dzia\u0142a identycznie.", "\u2705 <strong>Brawo! Rozwi\u0105zanie poprawne!</strong>\nKontekst filtrowania (filter context) to zbi\u00f3r filtr\u00f3w aktywnych w danym momencie oblicze\u0144. Okre\u015bla on jakie wiersze z tabel s\u0105 brane pod uwag\u0119. Gdy naniesiesz kolumn\u0119 na wizualizacj\u0119, staje si\u0119 ona cz\u0119\u015bci\u0105 kontekstu filtrowania - miary s\u0105 obliczane osobno dla ka\u017cdej warto\u015bci tej kolumny."];
+    const correctSolutions = [['CALCULATE', '[Sprzeda\u017c Netto]', 'dKategorie[Kategoria]'], ['Obie: ALL i REMOVEFILTERS'], ['dKategorie[Kategoria] IN {NAPOJE', 'S\u0141ODYCZE}'], ['&&', '&&'], ['REMOVEFILTERS(dKalendarz)'], ['Zbi\u00f3r filtr\u00f3w aktywnych w danym momencie oblicze\u0144']];
+    const correctFeedback = ['\u2705 Brawo! Rozwi\u0105zanie poprawne!\nPodstawowa sk\u0142adnia CALCULATE to: <code>CALCULATE(<wyra\u017cenie/miara>, <filtr1>, <filtr2>, ...)</code>. W tym przypadku: <code>CALCULATE([Sprzeda\u017c Netto], dKategorie[Kategoria] = NAPOJE)</code>. Funkcja CALCULATE oblicza miar\u0119 z dodanym filtrem na kategori\u0119.', '\u2705 <strong>Brawo! Rozwi\u0105zanie poprawne!</strong>\nObie funkcje <code>ALL(dKalendarz)</code> i <code>REMOVEFILTERS(dKalendarz)</code> dzia\u0142aj\u0105 identycznie w kontek\u015bcie CALCULATE - usuwaj\u0105 filtry z tabeli. <code>REMOVEFILTERS()</code> jest nowsz\u0105, bardziej czyteln\u0105 wersj\u0105. Zaleca si\u0119 u\u017cywa\u0107 <code>REMOVEFILTERS()</code> ze wzgl\u0119du na jasno\u015b\u0107 nazwy, ale <code>ALL()</code> nadal dzia\u0142a.', '\u2705 <strong>Brawo! Rozwi\u0105zanie poprawne!</strong>\nOperator <code>IN</code> pozwala elegancko sprawdzi\u0107, czy warto\u015b\u0107 znajduje si\u0119 w zestawie: <code>dKategorie[Kategoria] IN {NAPOJE, S\u0141ODYCZE}</code>. To czytelniejsze i kr\u00f3tsze ni\u017c wielokrotne u\u017cycie operatora <code>||</code> (OR). Zestaw warto\u015bci ujmujemy w nawiasy klamrowe <code>{}</code>.', '\u2705 <strong>Brawo! Rozwi\u0105zanie poprawne!</strong>\nOperator <code>&&</code> \u0142\u0105czy warunki logiczne operatorem AND (i) - wszystkie musz\u0105 by\u0107 spe\u0142nione jednocze\u015bnie. Mo\u017cesz te\u017c u\u017cy\u0107 funkcji <code>AND()</code>, ale operator <code>&&</code> jest cz\u0119\u015bciej u\u017cywany i czytelniejszy w tego typu wyra\u017ceniach. Alternatywnie mo\u017cna te\u017c rozdzieli\u0107 filtry przecinkami w CALCULATE - dzia\u0142aj\u0105 wtedy jako AND.', '\u2705 <strong>Brawo! Rozwi\u0105zanie poprawne!</strong>\n<code>REMOVEFILTERS(dKalendarz)</code> usuwa wszystkie filtry z tabeli kalendarza, dzi\u0119ki czemu <code>[Sprzeda\u017c Ca\u0142y Okres]</code> pokazuje sum\u0119 dla wszystkich dat, niezale\u017cnie od kontekstu na\u0142o\u017conego na wizualizacj\u0119. Mo\u017cesz te\u017c u\u017cy\u0107 <code>ALL(dKalendarz)</code> - dzia\u0142a identycznie.', '\u2705 <strong>Brawo! Rozwi\u0105zanie poprawne!</strong>\nKontekst filtrowania (filter context) to zbi\u00f3r filtr\u00f3w aktywnych w danym momencie oblicze\u0144. Okre\u015bla on jakie wiersze z tabel s\u0105 brane pod uwag\u0119. Gdy naniesiesz kolumn\u0119 na wizualizacj\u0119, staje si\u0119 ona cz\u0119\u015bci\u0105 kontekstu filtrowania - miary s\u0105 obliczane osobno dla ka\u017cdej warto\u015bci tej kolumny.'];
     const incorrectFeedback = [{}, {}, {}, {}, {}, {}];
 
     function drag(event) {
@@ -10965,7 +10965,7 @@ createOrReplace
                 resetTask();
             }
     
-            // Zmień przycisk "Następne" na "Zakończ" przed ostatnim zadaniem
+            // Zmień przycisk 'Następne' na 'Zakończ' przed ostatnim zadaniem
             const nextBtn = document.getElementById('nextBtn');
             if (currentPage === totalTasks) {
                 nextBtn.textContent = 'Zakończ →';
@@ -11071,7 +11071,7 @@ createOrReplace
 
 "
 ```
-            lineageTag: eaa17455-bd66-45d3-b50f-fa801440673c
+            lineageTag: a2d85ffa-8fc1-44bf-b29f-c55c1f24210d
 
         measure '03a. Quiz' = ```
 "
@@ -11516,7 +11516,7 @@ createOrReplace
     
     const correctAnswers = [1, 0, 1, 0, 1, 1, 2];
     
-    const explanations = ["<code>CALCULATE</code> to najpot\u0119\u017cniejsza funkcja w DAX, kt\u00f3ra pozwala modyfikowa\u0107 kontekst filtr\u00f3w, w kt\u00f3rym obliczana jest miara.", "Sk\u0142adnia to <code>CALCULATE</code> , gdzie wyra\u017cenie to obliczana miara, a nast\u0119pne argumenty to filtry modyfikuj\u0105ce kontekst.", "<code>CALCULATE</code> bez dodatkowych filtr\u00f3w zwr\u00f3ci t\u0119 sam\u0105 warto\u015b\u0107 co samo wyra\u017cenie. Jednak jest to przydatne, gdy chcemy przekszta\u0142ci\u0107 kontekst wiersza w kontekst filtru.", "Sk\u0142adnia to <code>CALCULATE([Miara], Tabela[Kolumna] = warto\u015b\u0107).</code> Mo\u017cemy te\u017c u\u017cy\u0107 <code>FILTER</code>, ale prostsza sk\u0142adnia jest bardziej czytelna dla pojedynczych warunk\u00f3w.", "CALCULATE mo\u017ce przyjmowa\u0107 wiele filtr\u00f3w oddzielonych przecinkami. Wszystkie filtry s\u0105 \u0142\u0105czone operatorem AND (musz\u0105 by\u0107 spe\u0142nione jednocze\u015bnie).", "<code>FILTER</code> zwraca tabel\u0119 zawieraj\u0105c\u0105 tylko te wiersze, kt\u00f3re spe\u0142niaj\u0105 podany warunek. W <code>CALCULATE</code> u\u017cywamy jej do bardziej z\u0142o\u017conych warunk\u00f3w filtrowania.", "Oba filtry s\u0105 \u0142\u0105czone operatorem <code>AND</code>, wi\u0119c wynik to sprzeda\u017c produkt\u00f3w spe\u0142niaj\u0105cych OBA warunki: kategoria = AGD ORAZ cena > 100."];
+    const explanations = ['<code>CALCULATE</code> to najpot\u0119\u017cniejsza funkcja w DAX, kt\u00f3ra pozwala modyfikowa\u0107 kontekst filtr\u00f3w, w kt\u00f3rym obliczana jest miara.', 'Sk\u0142adnia to <code>CALCULATE</code> , gdzie wyra\u017cenie to obliczana miara, a nast\u0119pne argumenty to filtry modyfikuj\u0105ce kontekst.', '<code>CALCULATE</code> bez dodatkowych filtr\u00f3w zwr\u00f3ci t\u0119 sam\u0105 warto\u015b\u0107 co samo wyra\u017cenie. Jednak jest to przydatne, gdy chcemy przekszta\u0142ci\u0107 kontekst wiersza w kontekst filtru.', 'Sk\u0142adnia to <code>CALCULATE([Miara], Tabela[Kolumna] = warto\u015b\u0107).</code> Mo\u017cemy te\u017c u\u017cy\u0107 <code>FILTER</code>, ale prostsza sk\u0142adnia jest bardziej czytelna dla pojedynczych warunk\u00f3w.', 'CALCULATE mo\u017ce przyjmowa\u0107 wiele filtr\u00f3w oddzielonych przecinkami. Wszystkie filtry s\u0105 \u0142\u0105czone operatorem AND (musz\u0105 by\u0107 spe\u0142nione jednocze\u015bnie).', '<code>FILTER</code> zwraca tabel\u0119 zawieraj\u0105c\u0105 tylko te wiersze, kt\u00f3re spe\u0142niaj\u0105 podany warunek. W <code>CALCULATE</code> u\u017cywamy jej do bardziej z\u0142o\u017conych warunk\u00f3w filtrowania.', 'Oba filtry s\u0105 \u0142\u0105czone operatorem <code>AND</code>, wi\u0119c wynik to sprzeda\u017c produkt\u00f3w spe\u0142niaj\u0105cych OBA warunki: kategoria = AGD ORAZ cena > 100.'];
     
     document.getElementById('totalPages').textContent = totalQuestions;
     
@@ -11617,7 +11617,7 @@ createOrReplace
             pages.forEach(page => page.classList.remove('active'));
             pages[currentPage - 1].classList.add('active');
     
-            // Wyświetl numer pytania lub "Podsumowanie"
+            // Wyświetl numer pytania lub 'Podsumowanie'
             const pageIndicator = document.getElementById('currentPage');
             if (currentPage <= totalQuestions) {
                 pageIndicator.textContent = currentPage;
@@ -11625,7 +11625,7 @@ createOrReplace
                 pageIndicator.textContent = 'Podsumowanie';
             }
     
-            // Zmień przycisk "Następna" na "Zakończ" przed ostatnim pytaniem
+            // Zmień przycisk 'Następna' na 'Zakończ' przed ostatnim pytaniem
             const nextBtn = document.getElementById('nextBtn');
             if (currentPage === totalQuestions) {
                 nextBtn.textContent = 'Zakończ →';
@@ -11664,7 +11664,7 @@ createOrReplace
 
 "
 ```
-            lineageTag: afc8d483-006e-4caf-af1e-fa98144da884
+            lineageTag: 9512ce53-865f-4f5f-9d41-3b69ca6d0227
 
         measure '04. Modyfikowanie Kontekstu - ALL i REMOVEFILTERS - usuwanie filtrów' = ```
 "
@@ -12104,7 +12104,7 @@ createOrReplace
 
 "
 ```
-            lineageTag: 4cf9b0ad-97fa-4387-9a86-1956e57526af
+            lineageTag: 5fccdb3c-1e4b-4b39-8684-6aa9cd210a95
 
         measure '04. Modyfikowanie Kontekstu - ALLEXCEPT' = ```
 "
@@ -12547,7 +12547,7 @@ createOrReplace
 
 "
 ```
-            lineageTag: f8eeaafe-870f-4c28-a0fe-e2dcb3c4f616
+            lineageTag: b3183076-bd5d-4651-90ea-301ee973853d
 
         measure '04. Modyfikowanie Kontekstu - ALLSELECTED' = ```
 "
@@ -13047,7 +13047,7 @@ createOrReplace
 
 "
 ```
-            lineageTag: e7b3276f-e835-4e3e-a456-74fa8f59cd14
+            lineageTag: 3a790682-c7c5-402b-ba35-fd536c4e58e1
 
         measure '04. Modyfikowanie Kontekstu - CROSSFILTER' = ```
 "
@@ -13414,7 +13414,7 @@ createOrReplace
 
 "
 ```
-            lineageTag: 5ec06d20-9a2d-450e-8b0d-2c97de53f253
+            lineageTag: ee65c378-aec2-4a27-a715-a9ef1ba63ccb
 
         measure '04. Modyfikowanie Kontekstu - KEEPFILTERS' = ```
 "
@@ -13664,7 +13664,7 @@ createOrReplace
         fSprzedaż Computers =
         <span class='dax-function'>CALCULATE</span>(
             [Sprzedaż Netto],
-            dKategorie[Kategoria] = "Computers"
+            dKategorie[Kategoria] = 'Computers'
         )</code></pre>
         <p>Co się stanie, gdy użytkownik wybierze w slicerze ”Cameras”?</p>
         <table>
@@ -13705,7 +13705,7 @@ createOrReplace
         fSprzedaż Computers Keep =
         <span class='dax-function'>CALCULATE</span>(
             [Sprzedaż Netto],
-            <span class='dax-function'>KEEPFILTERS</span>(dKategorie[Kategoria] = "Computers")
+            <span class='dax-function'>KEEPFILTERS</span>(dKategorie[Kategoria] = 'Computers')
         )</code></pre>
         <p>Teraz:</p>
         <table>
@@ -13743,13 +13743,13 @@ createOrReplace
         <h2>Praktyczny przypadek dla KEEPFILTERS</h2>
         <p>Masz raport z podziałem na segmenty klientów. Chcesz pokazać sprzedaż ”Premium” tylko gdy użytkownik patrzy na segment Premium (nie na siłę):</p>
         <pre><code>DAX
-        // Bez KEEPFILTERS - zawsze pokazuje Premium, nawet gdy wybrano "Standard"
+        // Bez KEEPFILTERS - zawsze pokazuje Premium, nawet gdy wybrano 'Standard'
         fSprzedaż Premium - Wrong =
-        	<span class='dax-function'>CALCULATE</span>([Sprzedaż Netto], dCustomer[Segment] = "Premium")
+        	<span class='dax-function'>CALCULATE</span>([Sprzedaż Netto], dCustomer[Segment] = 'Premium')
 
         // Z KEEPFILTERS - pokazuje Premium tylko gdy kontekst to Premium
         fSprzedaż Premium - Correct =
-        <span class='dax-function'>CALCULATE</span>([Sprzedaż Netto], <span class='dax-function'>KEEPFILTERS</span>(dCustomer[Segment] = "Premium"))</code></pre>
+        <span class='dax-function'>CALCULATE</span>([Sprzedaż Netto], <span class='dax-function'>KEEPFILTERS</span>(dCustomer[Segment] = 'Premium'))</code></pre>
 
     </div>
 
@@ -13852,7 +13852,7 @@ createOrReplace
 
 "
 ```
-            lineageTag: 2a7496f8-640a-43ec-a569-dc1b3f763296
+            lineageTag: e670c3d3-4953-4f01-af7f-ef6026201f93
 
         measure '04. Modyfikowanie Kontekstu - USERELATIONSHIP' = ```
 "
@@ -14228,7 +14228,7 @@ createOrReplace
 
 "
 ```
-            lineageTag: 6d565d1b-3292-4511-a79d-b211f39bc7db
+            lineageTag: 24226da4-5dfd-45f3-b72d-b74740475fbf
 
         measure '04a. Gaps' = ```
 "
@@ -14840,8 +14840,8 @@ createOrReplace
 
     const slotsPerPage = [1, 1, 1, 1, 1, 1];
     let slots = new Array(slotsPerPage[0]).fill('');
-    const correctSolutions = [["Brak r\u00f3\u017cnicy - dzia\u0142aj\u0105 identycznie"], ["ALLEXCEPT"], ["ALLSELECTED"], ["KEEPFILTERS"], ["Zmiany kierunku filtrowania relacji mi\u0119dzy tabelami"], ["USERELATIONSHIP"]];
-    const correctFeedback = ["\u2705 Brawo! Rozwi\u0105zanie poprawne!\nW kontek\u015bcie <code>CALCULATE</code> funkcje <code>ALL()</code> i <code>REMOVEFILTERS()</code> dzia\u0142aj\u0105 identycznie - obie usuwaj\u0105 filtry z tabeli lub kolumny. <code>REMOVEFILTERS()</code> zosta\u0142a wprowadzona w 2019 roku jako bardziej czytelna alternatywa. Zaleca si\u0119 u\u017cywa\u0107 <code>REMOVEFILTERS()</code> ze wzgl\u0119du na jasno\u015b\u0107 nazwy, ale <code>ALL()</code> nadal jest powszechnie stosowane. R\u00f3\u017cnica jest semantyczna, nie funkcjonalna.", "\u2705 Brawo! Rozwi\u0105zanie poprawne!\n<code>ALLEXCEPT()</code> usuwa wszystkie filtry z podanej tabeli OPR\u00d3CZ (except) wymienionych kolumn. Sk\u0142adnia: <code>ALLEXCEPT(tabela, kolumna1, kolumna2, ...)</code>. W tym przypadku <code>ALLEXCEPT(dProduct, dProduct[ProductCategoryName])</code> usuwa filtry ze wszystkich kolumn tabeli dProduct poza kategori\u0105 - dzi\u0119ki czemu mo\u017cesz policzy\u0107 sum\u0119 dla ca\u0142ej kategorii, ignoruj\u0105c filtry na produkty, marki, kolory itp.", "\u2705 Brawo! Rozwi\u0105zanie poprawne!\n<code>ALLSELECTED()</code> usuwa filtry z wizualizacji (wiersze/kolumny wykresu/tabeli), ale ZACHOWUJE filtry zewn\u0119trzne - slicery, filtry strony i raportu. Dzi\u0119ki temu mianownik uwzgl\u0119dnia tylko kategorie wybrane w slicerze, a procenty sumuj\u0105 si\u0119 do 100%. <code>ALL()</code> usun\u0119\u0142oby te\u017c filtr ze slicera, co da\u0142oby niepoprawne wyniki.", "\u2705 Brawo! Rozwi\u0105zanie poprawne!\n<code>KEEPFILTERS()</code> tworzy przeci\u0119cie (cz\u0119\u015b\u0107 wsp\u00f3ln\u0105) filtr\u00f3w zamiast nadpisywania. Gdy u\u017cytkownik wybierze Cameras w slicerze, a ty filtrujesz na Computers, przeci\u0119cie (Cameras) \u2229 (Computers) = \u2205 (zbi\u00f3r pusty) = BLANK. Bez <code>KEEPFILTERS()</code> filtr z <code>CALCULATE</code> nadpisa\u0142by wyb\u00f3r u\u017cytkownika i zawsze pokazywa\u0142by Computers.", "\u2705 Brawo! Rozwi\u0105zanie poprawne!\n<code>CROSSFILTER()</code> s\u0142u\u017cy do tymczasowej zmiany kierunku filtrowania relacji mi\u0119dzy tabelami w kontek\u015bcie danej miary. Mo\u017cliwe kierunki to: <code>Both</code> (dwukierunkowe), <code>None</code> (wy\u0142\u0105czone), <code>OneWay</code> (domy\u015blnie), <code>OneWayReverse</code> (odwr\u00f3cone). Pozwala to dynamicznie modyfikowa\u0107 przep\u0142yw filtr\u00f3w bez zmiany modelu danych.", "\u2705 Brawo! Rozwi\u0105zanie poprawne!\n<code>USERELATIONSHIP()</code> aktywuje nieaktywn\u0105 relacj\u0119 mi\u0119dzy tabelami na czas trwania obliczenia. Sk\u0142adnia: <code>USERELATIONSHIP(kolumna_z_tabeli_fakt\u00f3w, kolumna_z_tabeli_wymiaru)</code>. W modelu mo\u017ce by\u0107 wiele relacji mi\u0119dzy tymi samymi tabelami, ale tylko jedna aktywna domy\u015blnie. USERELATIONSHIP pozwala tymczasowo u\u017cy\u0107 innej relacji bez zmiany modelu."];
+    const correctSolutions = [['Brak r\u00f3\u017cnicy - dzia\u0142aj\u0105 identycznie'], ['ALLEXCEPT'], ['ALLSELECTED'], ['KEEPFILTERS'], ['Zmiany kierunku filtrowania relacji mi\u0119dzy tabelami'], ['USERELATIONSHIP']];
+    const correctFeedback = ['\u2705 Brawo! Rozwi\u0105zanie poprawne!\nW kontek\u015bcie <code>CALCULATE</code> funkcje <code>ALL()</code> i <code>REMOVEFILTERS()</code> dzia\u0142aj\u0105 identycznie - obie usuwaj\u0105 filtry z tabeli lub kolumny. <code>REMOVEFILTERS()</code> zosta\u0142a wprowadzona w 2019 roku jako bardziej czytelna alternatywa. Zaleca si\u0119 u\u017cywa\u0107 <code>REMOVEFILTERS()</code> ze wzgl\u0119du na jasno\u015b\u0107 nazwy, ale <code>ALL()</code> nadal jest powszechnie stosowane. R\u00f3\u017cnica jest semantyczna, nie funkcjonalna.', '\u2705 Brawo! Rozwi\u0105zanie poprawne!\n<code>ALLEXCEPT()</code> usuwa wszystkie filtry z podanej tabeli OPR\u00d3CZ (except) wymienionych kolumn. Sk\u0142adnia: <code>ALLEXCEPT(tabela, kolumna1, kolumna2, ...)</code>. W tym przypadku <code>ALLEXCEPT(dProduct, dProduct[ProductCategoryName])</code> usuwa filtry ze wszystkich kolumn tabeli dProduct poza kategori\u0105 - dzi\u0119ki czemu mo\u017cesz policzy\u0107 sum\u0119 dla ca\u0142ej kategorii, ignoruj\u0105c filtry na produkty, marki, kolory itp.', '\u2705 Brawo! Rozwi\u0105zanie poprawne!\n<code>ALLSELECTED()</code> usuwa filtry z wizualizacji (wiersze/kolumny wykresu/tabeli), ale ZACHOWUJE filtry zewn\u0119trzne - slicery, filtry strony i raportu. Dzi\u0119ki temu mianownik uwzgl\u0119dnia tylko kategorie wybrane w slicerze, a procenty sumuj\u0105 si\u0119 do 100%. <code>ALL()</code> usun\u0119\u0142oby te\u017c filtr ze slicera, co da\u0142oby niepoprawne wyniki.', '\u2705 Brawo! Rozwi\u0105zanie poprawne!\n<code>KEEPFILTERS()</code> tworzy przeci\u0119cie (cz\u0119\u015b\u0107 wsp\u00f3ln\u0105) filtr\u00f3w zamiast nadpisywania. Gdy u\u017cytkownik wybierze Cameras w slicerze, a ty filtrujesz na Computers, przeci\u0119cie (Cameras) \u2229 (Computers) = \u2205 (zbi\u00f3r pusty) = BLANK. Bez <code>KEEPFILTERS()</code> filtr z <code>CALCULATE</code> nadpisa\u0142by wyb\u00f3r u\u017cytkownika i zawsze pokazywa\u0142by Computers.', '\u2705 Brawo! Rozwi\u0105zanie poprawne!\n<code>CROSSFILTER()</code> s\u0142u\u017cy do tymczasowej zmiany kierunku filtrowania relacji mi\u0119dzy tabelami w kontek\u015bcie danej miary. Mo\u017cliwe kierunki to: <code>Both</code> (dwukierunkowe), <code>None</code> (wy\u0142\u0105czone), <code>OneWay</code> (domy\u015blnie), <code>OneWayReverse</code> (odwr\u00f3cone). Pozwala to dynamicznie modyfikowa\u0107 przep\u0142yw filtr\u00f3w bez zmiany modelu danych.', '\u2705 Brawo! Rozwi\u0105zanie poprawne!\n<code>USERELATIONSHIP()</code> aktywuje nieaktywn\u0105 relacj\u0119 mi\u0119dzy tabelami na czas trwania obliczenia. Sk\u0142adnia: <code>USERELATIONSHIP(kolumna_z_tabeli_fakt\u00f3w, kolumna_z_tabeli_wymiaru)</code>. W modelu mo\u017ce by\u0107 wiele relacji mi\u0119dzy tymi samymi tabelami, ale tylko jedna aktywna domy\u015blnie. USERELATIONSHIP pozwala tymczasowo u\u017cy\u0107 innej relacji bez zmiany modelu.'];
     const incorrectFeedback = [{}, {}, {}, {}, {}, {}];
 
     function drag(event) {
@@ -15056,7 +15056,7 @@ createOrReplace
                 resetTask();
             }
     
-            // Zmień przycisk "Następne" na "Zakończ" przed ostatnim zadaniem
+            // Zmień przycisk 'Następne' na 'Zakończ' przed ostatnim zadaniem
             const nextBtn = document.getElementById('nextBtn');
             if (currentPage === totalTasks) {
                 nextBtn.textContent = 'Zakończ →';
@@ -15162,7 +15162,7 @@ createOrReplace
 
 "
 ```
-            lineageTag: d1e7edb4-27d8-481b-bd08-597328124568
+            lineageTag: fa7e1b12-3d07-4499-86c0-8bb3e9e9dc3a
 
         measure '04a. Quiz' = ```
 "
@@ -15607,7 +15607,7 @@ createOrReplace
     
     const correctAnswers = [1, 1, 1, 1, 3, 1, 0];
     
-    const explanations = ["<code>ALL</code> usuwa filtry z tabeli lub kolumny. M\u00f3wisz silnikowi DAX: zignoruj wszelkie filtry na\u0142o\u017cone na ten obiekt.", "<code>ALL(Tabela)</code> usuwa wszystkie filtry z ca\u0142ej tabeli, natomiast <code>ALL(Tabela[Kolumna])</code> usuwa filtry tylko z konkretnej kolumny, zachowuj\u0105c filtry na innych kolumnach.", "<code>REMOVEFILTERS</code> to nowoczesna alternatywa dla <code>ALL</code>, kt\u00f3ra ma bardziej czyteln\u0105 nazw\u0119 i jasno pokazuje intencj\u0119 - usuni\u0119cie filtr\u00f3w.", "<code>ALL(Produkty)</code> usuwa wszystkie filtry z tabeli Produkty, wi\u0119c <code>CALCULATE</code> zwr\u00f3ci sprzeda\u017c dla WSZYSTKICH produkt\u00f3w, niezale\u017cnie od aktualnych filtr\u00f3w.", "Procent obliczamy dziel\u0105c warto\u015b\u0107 bie\u017c\u0105c\u0105 przez warto\u015b\u0107 ca\u0142kowit\u0105 (bez filtr\u00f3w). Mo\u017cna to zrobi\u0107 bezpo\u015brednio lub przez osobn\u0105 miar\u0119.", "<code>ALLSELECTED</code> usuwa filtry wewn\u0119trzne (z wizualizacji), ale zachowuje filtry zewn\u0119trzne (slicery, filtry strony). Jest u\u017cyteczna do oblicze\u0144 typu \u2033procent od wybranego\u2033.", "<code>KEEPFILTERS</code> sprawia, \u017ce nowy filtr jest DODAWANY do istniej\u0105cych (<code>AND</code>), zamiast je NADPISYWA\u0106. Przydatne gdy chcemy zaw\u0119zi\u0107, a nie zast\u0105pi\u0107 kontekst."];
+    const explanations = ['<code>ALL</code> usuwa filtry z tabeli lub kolumny. M\u00f3wisz silnikowi DAX: zignoruj wszelkie filtry na\u0142o\u017cone na ten obiekt.', '<code>ALL(Tabela)</code> usuwa wszystkie filtry z ca\u0142ej tabeli, natomiast <code>ALL(Tabela[Kolumna])</code> usuwa filtry tylko z konkretnej kolumny, zachowuj\u0105c filtry na innych kolumnach.', '<code>REMOVEFILTERS</code> to nowoczesna alternatywa dla <code>ALL</code>, kt\u00f3ra ma bardziej czyteln\u0105 nazw\u0119 i jasno pokazuje intencj\u0119 - usuni\u0119cie filtr\u00f3w.', '<code>ALL(Produkty)</code> usuwa wszystkie filtry z tabeli Produkty, wi\u0119c <code>CALCULATE</code> zwr\u00f3ci sprzeda\u017c dla WSZYSTKICH produkt\u00f3w, niezale\u017cnie od aktualnych filtr\u00f3w.', 'Procent obliczamy dziel\u0105c warto\u015b\u0107 bie\u017c\u0105c\u0105 przez warto\u015b\u0107 ca\u0142kowit\u0105 (bez filtr\u00f3w). Mo\u017cna to zrobi\u0107 bezpo\u015brednio lub przez osobn\u0105 miar\u0119.', '<code>ALLSELECTED</code> usuwa filtry wewn\u0119trzne (z wizualizacji), ale zachowuje filtry zewn\u0119trzne (slicery, filtry strony). Jest u\u017cyteczna do oblicze\u0144 typu \u2033procent od wybranego\u2033.', '<code>KEEPFILTERS</code> sprawia, \u017ce nowy filtr jest DODAWANY do istniej\u0105cych (<code>AND</code>), zamiast je NADPISYWA\u0106. Przydatne gdy chcemy zaw\u0119zi\u0107, a nie zast\u0105pi\u0107 kontekst.'];
     
     document.getElementById('totalPages').textContent = totalQuestions;
     
@@ -15708,7 +15708,7 @@ createOrReplace
             pages.forEach(page => page.classList.remove('active'));
             pages[currentPage - 1].classList.add('active');
     
-            // Wyświetl numer pytania lub "Podsumowanie"
+            // Wyświetl numer pytania lub 'Podsumowanie'
             const pageIndicator = document.getElementById('currentPage');
             if (currentPage <= totalQuestions) {
                 pageIndicator.textContent = currentPage;
@@ -15716,7 +15716,7 @@ createOrReplace
                 pageIndicator.textContent = 'Podsumowanie';
             }
     
-            // Zmień przycisk "Następna" na "Zakończ" przed ostatnim pytaniem
+            // Zmień przycisk 'Następna' na 'Zakończ' przed ostatnim pytaniem
             const nextBtn = document.getElementById('nextBtn');
             if (currentPage === totalQuestions) {
                 nextBtn.textContent = 'Zakończ →';
@@ -15755,7 +15755,7 @@ createOrReplace
 
 "
 ```
-            lineageTag: 759c8be5-baad-4d73-804b-a685bc55e97a
+            lineageTag: 4f4cf1c9-2294-4a42-8331-cae5010f84ba
 
         measure '05. DAX - Zaawansowane Kwerendy - Query View' = ```
 "
@@ -16033,7 +16033,7 @@ createOrReplace
             <span class='dax-keyword'>VAR</span> A = <span class='dax-number'>1</span>
             <span class='dax-keyword'>VAR</span> B = <span class='dax-number'>5</span>
         <span class='dax-keyword'>RETURN</span>
-            <span class='dax-function'>ROW</span>("Test", A + B)</code></pre>
+            <span class='dax-function'>ROW</span>('Test', A + B)</code></pre>
         <p><strong>Status:</strong> ✅ <strong>Poprawne</strong></p>
         <ul>
         <li>Zmienne <code>A</code> i <code>B</code> są tworzone <strong>przed</strong> wykonaniem właściwego zapytania</li>
@@ -16067,7 +16067,7 @@ createOrReplace
             A + B
 
         EVALUATE
-            <span class='dax-function'>ROW</span>("Test", [Test])</code></pre>
+            <span class='dax-function'>ROW</span>('Test', [Test])</code></pre>
         <p><strong>Status:</strong> ✅ <strong>Poprawne</strong></p>
         <ul>
         <li>Zmienne <code>VAR</code> są zdefiniowane <strong>wewnątrz miary</strong> <code>[Test]</code></li>
@@ -16180,7 +16180,7 @@ createOrReplace
 
 "
 ```
-            lineageTag: 3b5616e6-190f-445d-9441-fee357de9b27
+            lineageTag: 5547a23f-2de3-4a84-a970-051936b8a0d0
 
         measure '05. DAX - Zaawansowane Kwerendy' = ```
 "
@@ -16649,7 +16649,7 @@ createOrReplace
 
 "
 ```
-            lineageTag: db8f860b-5d95-4ffc-9a67-0dc7191d7beb
+            lineageTag: f985ce9c-4c9c-4504-9d5f-27a1d4eba3ef
 
         measure '05a. Gaps' = ```
 "
@@ -17236,8 +17236,8 @@ createOrReplace
 
     const slotsPerPage = [2, 1, 2, 1, 1, 1];
     let slots = new Array(slotsPerPage[0]).fill('');
-    const correctSolutions = [["VAR", "RETURN"], ["S\u0105 obliczane na nowo dla ka\u017cdego wiersza"], ["Jednokrotnie", "Per Wiersz"], ["EVALUATE"], ["DEFINE MEASURE"], ["ROW"]];
-    const correctFeedback = ["\u2705 Brawo! Rozwi\u0105zanie poprawne!\nW DAX zmienne deklarujesz s\u0142owem kluczowym <code>VAR</code>, a wynik zwracasz s\u0142owem <code>RETURN</code>. Ka\u017cda zmienna rozpoczyna si\u0119 od <code>VAR</code>. Sk\u0142adnia: <code>VAR nazwa = wyra\u017cenie</code>. Mo\u017ce by\u0107 wiele zmiennych VAR, ale tylko jedno RETURN na ko\u0144cu. RETURN okre\u015bla, co zostanie zwr\u00f3cone jako wynik miary.", "\u2705 Brawo! Rozwi\u0105zanie poprawne!\nW funkcjach iteracyjnych jak <code>SUMX</code>, <code>FILTER</code>, <code>ADDCOLUMNS</code> zmienne VAR s\u0105 <strong>obliczane w ka\u017cdej iteracji</strong> z warto\u015bciami z aktualnego wiersza. Dla ka\u017cdego wiersza tabeli zmienna jest tworzona od nowa. To oznacza, \u017ce zmienne VAR wewn\u0105trz iteracji s\u0105 dynamiczne i dostosowuj\u0105 si\u0119 do kontekstu wiersza. W przyk\u0142adzie: dla 1 zwr\u00f3ci 1, dla 2 zwr\u00f3ci 4, dla 3 zwr\u00f3ci 9.", "\u2705 Brawo! Rozwi\u0105zanie poprawne!\nZmienna <code>\u015arednia</code> jest PRZED SUMX, wi\u0119c obliczana <strong>tylko raz</strong> i ma sta\u0142\u0105 warto\u015b\u0107 (3). Zmienna <code>Warto\u015b\u0107</code> jest WEWN\u0104TRZ SUMX, wi\u0119c obliczana <strong>dla ka\u017cdego wiersza</strong> osobno (1, 2, 3). Zmienne poza iteracj\u0105 s\u0105 statyczne, zmienne wewn\u0105trz iteracji s\u0105 dynamiczne. To pozwala por\u00f3wnywa\u0107 ka\u017cdy wiersz (Warto\u015b\u0107) ze sta\u0142\u0105 (\u015arednia).", "\u2705 Brawo! Rozwi\u0105zanie poprawne!\nW Query View zapytania DAX musz\u0105 zaczyna\u0107 si\u0119 od s\u0142owa kluczowego <code>EVALUATE</code>. Po nim umieszczasz wyra\u017cenie zwracaj\u0105ce tabel\u0119 (np. <code>ROW()</code>, <code>SUMMARIZECOLUMNS()</code>, nazw\u0119 tabeli). Query View s\u0142u\u017cy do testowania zapyta\u0144 DAX bez tworzenia miar w modelu. <code>EVALUATE</code> m\u00f3wi silnikowi DAX: wykonaj to zapytanie i zwr\u00f3\u0107 wynik tabelaryczny.", "\u2705 Brawo! Rozwi\u0105zanie poprawne!\n<code>DEFINE MEASURE</code> tworzy <strong>tymczasow\u0105 miar\u0119</strong> dost\u0119pn\u0105 tylko w kontek\u015bcie tego zapytania - nie dodaje jej do modelu danych. To przydatne do testowania i prototypowania miar bez za\u015bmiecania modelu. Miara istnieje tylko podczas wykonywania zapytania i znika po jego zako\u0144czeniu. Po <code>DEFINE</code> nast\u0119puje <code>EVALUATE</code> z w\u0142a\u015bciwym zapytaniem u\u017cywaj\u0105cym zdefiniowanej miary.", "\u2705 Brawo! Rozwi\u0105zanie poprawne!\nDAX w Query View (po <code>EVALUATE</code>) mo\u017ce zwraca\u0107 <strong>tylko warto\u015bci tabelaryczne</strong>. Wyra\u017cenie <code>A + B</code> zwraca pojedyncz\u0105 warto\u015b\u0107 (skalar), nie tabel\u0119. Funkcja <code>ROW()</code> tworzy sztuczn\u0105 tabel\u0119 z jednym wierszem i jedn\u0105 kolumn\u0105, dzi\u0119ki czemu mo\u017cemy zwr\u00f3ci\u0107 wynik skalara jako tabel\u0119. Sk\u0142adnia: <code>ROW(nazwa kolumny, warto\u015b\u0107)</code>."];
+    const correctSolutions = [['VAR', 'RETURN'], ['S\u0105 obliczane na nowo dla ka\u017cdego wiersza'], ['Jednokrotnie', 'Per Wiersz'], ['EVALUATE'], ['DEFINE MEASURE'], ['ROW']];
+    const correctFeedback = ['\u2705 Brawo! Rozwi\u0105zanie poprawne!\nW DAX zmienne deklarujesz s\u0142owem kluczowym <code>VAR</code>, a wynik zwracasz s\u0142owem <code>RETURN</code>. Ka\u017cda zmienna rozpoczyna si\u0119 od <code>VAR</code>. Sk\u0142adnia: <code>VAR nazwa = wyra\u017cenie</code>. Mo\u017ce by\u0107 wiele zmiennych VAR, ale tylko jedno RETURN na ko\u0144cu. RETURN okre\u015bla, co zostanie zwr\u00f3cone jako wynik miary.', '\u2705 Brawo! Rozwi\u0105zanie poprawne!\nW funkcjach iteracyjnych jak <code>SUMX</code>, <code>FILTER</code>, <code>ADDCOLUMNS</code> zmienne VAR s\u0105 <strong>obliczane w ka\u017cdej iteracji</strong> z warto\u015bciami z aktualnego wiersza. Dla ka\u017cdego wiersza tabeli zmienna jest tworzona od nowa. To oznacza, \u017ce zmienne VAR wewn\u0105trz iteracji s\u0105 dynamiczne i dostosowuj\u0105 si\u0119 do kontekstu wiersza. W przyk\u0142adzie: dla 1 zwr\u00f3ci 1, dla 2 zwr\u00f3ci 4, dla 3 zwr\u00f3ci 9.', '\u2705 Brawo! Rozwi\u0105zanie poprawne!\nZmienna <code>\u015arednia</code> jest PRZED SUMX, wi\u0119c obliczana <strong>tylko raz</strong> i ma sta\u0142\u0105 warto\u015b\u0107 (3). Zmienna <code>Warto\u015b\u0107</code> jest WEWN\u0104TRZ SUMX, wi\u0119c obliczana <strong>dla ka\u017cdego wiersza</strong> osobno (1, 2, 3). Zmienne poza iteracj\u0105 s\u0105 statyczne, zmienne wewn\u0105trz iteracji s\u0105 dynamiczne. To pozwala por\u00f3wnywa\u0107 ka\u017cdy wiersz (Warto\u015b\u0107) ze sta\u0142\u0105 (\u015arednia).', '\u2705 Brawo! Rozwi\u0105zanie poprawne!\nW Query View zapytania DAX musz\u0105 zaczyna\u0107 si\u0119 od s\u0142owa kluczowego <code>EVALUATE</code>. Po nim umieszczasz wyra\u017cenie zwracaj\u0105ce tabel\u0119 (np. <code>ROW()</code>, <code>SUMMARIZECOLUMNS()</code>, nazw\u0119 tabeli). Query View s\u0142u\u017cy do testowania zapyta\u0144 DAX bez tworzenia miar w modelu. <code>EVALUATE</code> m\u00f3wi silnikowi DAX: wykonaj to zapytanie i zwr\u00f3\u0107 wynik tabelaryczny.', '\u2705 Brawo! Rozwi\u0105zanie poprawne!\n<code>DEFINE MEASURE</code> tworzy <strong>tymczasow\u0105 miar\u0119</strong> dost\u0119pn\u0105 tylko w kontek\u015bcie tego zapytania - nie dodaje jej do modelu danych. To przydatne do testowania i prototypowania miar bez za\u015bmiecania modelu. Miara istnieje tylko podczas wykonywania zapytania i znika po jego zako\u0144czeniu. Po <code>DEFINE</code> nast\u0119puje <code>EVALUATE</code> z w\u0142a\u015bciwym zapytaniem u\u017cywaj\u0105cym zdefiniowanej miary.', '\u2705 Brawo! Rozwi\u0105zanie poprawne!\nDAX w Query View (po <code>EVALUATE</code>) mo\u017ce zwraca\u0107 <strong>tylko warto\u015bci tabelaryczne</strong>. Wyra\u017cenie <code>A + B</code> zwraca pojedyncz\u0105 warto\u015b\u0107 (skalar), nie tabel\u0119. Funkcja <code>ROW()</code> tworzy sztuczn\u0105 tabel\u0119 z jednym wierszem i jedn\u0105 kolumn\u0105, dzi\u0119ki czemu mo\u017cemy zwr\u00f3ci\u0107 wynik skalara jako tabel\u0119. Sk\u0142adnia: <code>ROW(nazwa kolumny, warto\u015b\u0107)</code>.'];
     const incorrectFeedback = [{}, {}, {}, {}, {}, {}];
 
     function drag(event) {
@@ -17452,7 +17452,7 @@ createOrReplace
                 resetTask();
             }
     
-            // Zmień przycisk "Następne" na "Zakończ" przed ostatnim zadaniem
+            // Zmień przycisk 'Następne' na 'Zakończ' przed ostatnim zadaniem
             const nextBtn = document.getElementById('nextBtn');
             if (currentPage === totalTasks) {
                 nextBtn.textContent = 'Zakończ →';
@@ -17558,7 +17558,7 @@ createOrReplace
 
 "
 ```
-            lineageTag: 4d2f828f-cb60-4a42-8a0e-5a693e486d98
+            lineageTag: 8c6f7145-2fe9-428d-95bb-e18c5e001b15
 
         measure '05a. Quiz' = ```
 "
@@ -18003,7 +18003,7 @@ createOrReplace
     
     const correctAnswers = [1, 1, 1, 2, 1, 1, 2];
     
-    const explanations = ["Prawid\u0142owa odpowied\u017a: B. VAR s\u0142u\u017cy do deklarowania zmiennych i przechowywania w nich warto\u015bci (liczb, tekst\u00f3w, tabel, wynik\u00f3w oblicze\u0144).", "W jednej mierze mo\u017ce by\u0107 tylko jedno <code>RETURN</code>, kt\u00f3re zwraca ko\u0144cowy wynik miary.", "Zmienne <code>VAR</code> wewn\u0105trz funkcji iteracyjnych s\u0105 obliczane na nowo w ka\u017cdej iteracji, dostosowuj\u0105c si\u0119 do aktualnego wiersza.", "Obliczenia: 2\u00b2=4, 3\u00b2=9, 4\u00b2=16. Suma: 4+9+16=29.", "<code>VAR</code> pomaga unika\u0107 powtarzania kodu, poprawia czytelno\u015b\u0107 i wydajno\u015b\u0107 miar (warto\u015b\u0107 obliczana tylko raz).", "Zmienna zadeklarowana przed funkcj\u0105 iteracyjn\u0105 jest obliczana tylko raz i jej warto\u015b\u0107 jest u\u017cywana we wszystkich iteracjach.", "Zmienna <code>VAR</code> mo\u017ce zawiera\u0107 liczby, teksty, tabele i wyniki oblicze\u0144 - jest bardzo wszechstronna."];
+    const explanations = ['Prawid\u0142owa odpowied\u017a: B. VAR s\u0142u\u017cy do deklarowania zmiennych i przechowywania w nich warto\u015bci (liczb, tekst\u00f3w, tabel, wynik\u00f3w oblicze\u0144).', 'W jednej mierze mo\u017ce by\u0107 tylko jedno <code>RETURN</code>, kt\u00f3re zwraca ko\u0144cowy wynik miary.', 'Zmienne <code>VAR</code> wewn\u0105trz funkcji iteracyjnych s\u0105 obliczane na nowo w ka\u017cdej iteracji, dostosowuj\u0105c si\u0119 do aktualnego wiersza.', 'Obliczenia: 2\u00b2=4, 3\u00b2=9, 4\u00b2=16. Suma: 4+9+16=29.', '<code>VAR</code> pomaga unika\u0107 powtarzania kodu, poprawia czytelno\u015b\u0107 i wydajno\u015b\u0107 miar (warto\u015b\u0107 obliczana tylko raz).', 'Zmienna zadeklarowana przed funkcj\u0105 iteracyjn\u0105 jest obliczana tylko raz i jej warto\u015b\u0107 jest u\u017cywana we wszystkich iteracjach.', 'Zmienna <code>VAR</code> mo\u017ce zawiera\u0107 liczby, teksty, tabele i wyniki oblicze\u0144 - jest bardzo wszechstronna.'];
     
     document.getElementById('totalPages').textContent = totalQuestions;
     
@@ -18104,7 +18104,7 @@ createOrReplace
             pages.forEach(page => page.classList.remove('active'));
             pages[currentPage - 1].classList.add('active');
     
-            // Wyświetl numer pytania lub "Podsumowanie"
+            // Wyświetl numer pytania lub 'Podsumowanie'
             const pageIndicator = document.getElementById('currentPage');
             if (currentPage <= totalQuestions) {
                 pageIndicator.textContent = currentPage;
@@ -18112,7 +18112,7 @@ createOrReplace
                 pageIndicator.textContent = 'Podsumowanie';
             }
     
-            // Zmień przycisk "Następna" na "Zakończ" przed ostatnim pytaniem
+            // Zmień przycisk 'Następna' na 'Zakończ' przed ostatnim pytaniem
             const nextBtn = document.getElementById('nextBtn');
             if (currentPage === totalQuestions) {
                 nextBtn.textContent = 'Zakończ →';
@@ -18151,7 +18151,7 @@ createOrReplace
 
 "
 ```
-            lineageTag: 4453cefb-13a5-40e8-842b-6cd5664a3de3
+            lineageTag: 1bb41527-4a81-4177-9795-c005a3f0d4b1
 
         measure '06. Tworzenie zestawień tabelarycznych - Tworzenie Tabeli' = ```
 "
@@ -18415,7 +18415,7 @@ createOrReplace
             <span class='dax-function'>FILTER</span> (  
                 <span class='dax-function'>ADDCOLUMNS</span> (  
                     <span class='dax-function'>SUMMARIZE</span> ( Sales, 'Product'[Brand], 'Date'[Year] ),  
-                    "Sales", <span class='dax-function'>CALCULATE</span> ( <span class='dax-function'>SUMX</span> ( Sales, Sales[Quantity] * Sales[Unit Price] ) )  
+                    'Sales', <span class='dax-function'>CALCULATE</span> ( <span class='dax-function'>SUMX</span> ( Sales, Sales[Quantity] * Sales[Unit Price] ) )  
                 ),  
                 NOT <span class='dax-function'>ISBLANK</span> ( [Sales] )  
             )  
@@ -18424,7 +18424,7 @@ createOrReplace
         EVALUATE  
             <span class='dax-function'>SUMMARIZECOLUMNS</span> (  
                 'Product'[Brand], 'Date'[Year],  
-                "Sales", <span class='dax-function'>CALCULATE</span> ( <span class='dax-function'>SUMX</span> ( Sales, Sales[Quantity] * Sales[Unit Price] ) )  
+                'Sales', <span class='dax-function'>CALCULATE</span> ( <span class='dax-function'>SUMX</span> ( Sales, Sales[Quantity] * Sales[Unit Price] ) )  
             )</code></pre>
 
     </div>
@@ -18452,8 +18452,8 @@ createOrReplace
             <span class='dax-function'>SUMMARIZECOLUMNS</span> (  
                 'Product'[Category],  
                 Store[Country],  
-                "Sales", <span class='dax-function'>CALCULATE</span> ( <span class='dax-function'>SUMX</span> ( Sales, Sales[Quantity] * Sales[Net Price] ) ),  
-                "Purchases", <span class='dax-function'>CALCULATE</span> ( <span class='dax-function'>SUMX</span> ( Purchase, Purchase[Quantity] * Purchase[Unit Cost] ) )   
+                'Sales', <span class='dax-function'>CALCULATE</span> ( <span class='dax-function'>SUMX</span> ( Sales, Sales[Quantity] * Sales[Net Price] ) ),  
+                'Purchases', <span class='dax-function'>CALCULATE</span> ( <span class='dax-function'>SUMX</span> ( Purchase, Purchase[Quantity] * Purchase[Unit Cost] ) )   
             )  
 
         <span class='dax-comment'>------- PROBLEMATIC  </span>
@@ -18461,12 +18461,12 @@ createOrReplace
             <span class='dax-keyword'>VAR</span> S =   
                 <span class='dax-function'>ADDCOLUMNS</span> (  
                     <span class='dax-function'>SUMMARIZE</span> ( Sales, 'Product'[Category], Store[Country] ),  
-                    "Sales", <span class='dax-function'>CALCULATE</span> ( <span class='dax-function'>SUMX</span> ( Sales, Sales[Quantity] * Sales[Net Price] ) )   
+                    'Sales', <span class='dax-function'>CALCULATE</span> ( <span class='dax-function'>SUMX</span> ( Sales, Sales[Quantity] * Sales[Net Price] ) )   
                 )  
             <span class='dax-keyword'>VAR</span> P =   
                 <span class='dax-function'>ADDCOLUMNS</span> (  
                     <span class='dax-function'>SUMMARIZE</span> ( Purchase, 'Product'[Category], Store[Country] ),  
-                    "Purchase", <span class='dax-function'>CALCULATE</span> ( <span class='dax-function'>SUMX</span> ( Purchase, Purchase[Quantity] * Purchase[Unit Cost] ) )   
+                    'Purchase', <span class='dax-function'>CALCULATE</span> ( <span class='dax-function'>SUMX</span> ( Purchase, Purchase[Quantity] * Purchase[Unit Cost] ) )   
                 )  
             <span class='dax-keyword'>VAR</span> G =   
                 <span class='dax-function'>CROSSJOIN</span>( <span class='dax-function'>VALUES</span> ( 'Product'[Category] ), <span class='dax-function'>VALUES</span> ( Store[Country] ) )  
@@ -18605,7 +18605,7 @@ createOrReplace
 
 "
 ```
-            lineageTag: 6185d376-088c-456e-bb42-c30726f93daf
+            lineageTag: bfebd8d7-d467-495c-9eac-5f0abe6ab2e4
 
         measure '06a. Gaps' = ```
 "
@@ -18953,7 +18953,7 @@ createOrReplace
 
 <div class='pagination'>
     <button class='nav-button' id='prevBtn' onclick='prevPage()'>← Poprzednie</button>
-    <span class='page-info'>Zadanie <span id='currentPage'>1</span> z <span id='totalPages'>3</span></span>
+    <span class='page-info'>Zadanie <span id='currentPage'>1</span> z <span id='totalPages'>2</span></span>
     <button class='nav-button' id='nextBtn' onclick='nextPage()'>Następne →</button>
 </div>
 
@@ -19033,45 +19033,12 @@ createOrReplace
 
 <div class='page' data-page='3'>
 <div class='container'>
-    <div class='task-description'>
-        <h3>Zalecenia - SUMMARIZE vs SUMMARIZECOLUMNS</h3>
-        Która zasada jest prawidłowa według materiału?
-    </div>
-
-    <div>
-        <span class='function-chip' draggable='true' ondragstart='drag(event)' data-function='Grupowanie bez miar: SUMMARIZE z tabelą źródłową; z miarami: SUMMARIZECOLUMNS'>Grupowanie bez miar: SUMMARIZE z tabelą źródłową; z miarami: SUMMARIZECOLUMNS</span>
-        <span class='function-chip' draggable='true' ondragstart='drag(event)' data-function='Zawsze używaj SUMMARIZECOLUMNS'>Zawsze używaj SUMMARIZECOLUMNS</span>
-        <span class='function-chip' draggable='true' ondragstart='drag(event)' data-function='Zawsze używaj SUMMARIZE'>Zawsze używaj SUMMARIZE</span>
-        <span class='function-chip' draggable='true' ondragstart='drag(event)' data-function='Zależy od wydajności zapytania'>Zależy od wydajności zapytania</span>
-    </div>
-
-    <div class='code-container'>
-        <div>DAX</div>
-        <div>-- Zasada decyzyjna:</div>
-        <div><div class='drop-zone' data-slot='0' ondrop='drop(event)' ondragover='allowDrop(event)' ondragleave='dragLeave(event)'></div></div>
-    </div>
-
-    <div class='button-group'>
-        <button onclick='checkSolution()'>Sprawdź rozwiązanie</button>
-        <button class='reset-btn' onclick='resetTask()'>Reset</button>
-    </div>
-
-    <div class='hint-box'>
-        Materiał kończy się sekcją Zasada: która jasno to definiuje. Co tam jest napisane?
-    </div>
-
-    <div class='feedback' id='feedback'></div>
-</div>
-</div>
-
-<div class='page' data-page='4'>
-<div class='container'>
     <h2>Podsumowanie wyników</h2>
 
     <div class='summary-stats'>
         <div class='stat-box'>
             <div class='stat-label'>Ukończone zadania</div>
-            <div class='stat-value'><span id='completedCount'>0</span> / 3</div>
+            <div class='stat-value'><span id='completedCount'>0</span> / 2</div>
         </div>
         <div class='stat-box'>
             <div class='stat-label'>Wynik</div>
@@ -19092,18 +19059,18 @@ createOrReplace
 
 <script>
     let currentPage = 1;
-    const totalTasks = 3;
-    const totalPages = 4;
+    const totalTasks = 2;
+    const totalPages = 3;
 
     const taskAttempts = new Array(totalTasks).fill(0);
     const taskCompleted = new Array(totalTasks).fill(false);
     const taskCorrect = new Array(totalTasks).fill(false);
 
-    const slotsPerPage = [1, 1, 1];
+    const slotsPerPage = [1, 1];
     let slots = new Array(slotsPerPage[0]).fill('');
-    const correctSolutions = [["SUMMARIZECOLUMNS"], ["Zwr\u00f3ci tylko kombinacje istniej\u0105ce w tej tabeli"], ["Grupowanie bez miar: SUMMARIZE z tabel\u0105 \u017ar\u00f3d\u0142ow\u0105; z miarami: SUMMARIZECOLUMNS"]];
-    const correctFeedback = ["\u2705 Brawo! Rozwi\u0105zanie poprawne!\n<code>SUMMARIZECOLUMNS</code> to obecnie zalecany standard do tworzenia zestawie\u0144 tabelarycznych z miarami. \u0141\u0105czy grupowanie, obliczenia i automatyczne usuwanie pustych wierszy w jednej funkcji. Jest kr\u00f3tsze, czytelniejsze i bezpieczniejsze ni\u017c legacy approach z <code>SUMMARIZE</code> + <code>ADDCOLUMNS</code> + <code>FILTER</code>. Rozumie kontekst ca\u0142ego modelu danych i poprawnie obs\u0142uguje relacje.", "\u2705 Brawo! Rozwi\u0105zanie poprawne!\nGdy pierwszy parametr <code>SUMMARIZE</code> to tabela fakt\u00f3w (np. Sales), funkcja zwraca tylko kombinacje wymiar\u00f3w rzeczywi\u015bcie wyst\u0119puj\u0105ce w tej tabeli. Filtruje automatycznie do istniej\u0105cych relacji. To jest po\u017c\u0105dane zachowanie - nie dostaniesz pustych kombinacji Brand-Continent, kt\u00f3re nie maj\u0105 transakcji. To g\u0142\u00f3wny przypadek u\u017cycia <code>SUMMARIZE</code> - proste grupowanie bez miar.", "\u2705 Brawo! Rozwi\u0105zanie poprawne!\nTo kluczowa zasada z materia\u0142u: <strong>Do samego grupowania bez miar u\u017cywaj <code>SUMMARIZE</code> z tabel\u0105 \u017ar\u00f3d\u0142ow\u0105. Do grupowania z miarami u\u017cywaj <code>SUMMARIZECOLUMNS</code>.</strong> SUMMARIZE z tabel\u0105 zwraca tylko istniej\u0105ce kombinacje (unika pustych wierszy). SUMMARIZECOLUMNS jest lepsze gdy dodajesz obliczenia - automatycznie usuwa puste wiersze i obs\u0142uguje wiele tabel fakt\u00f3w."];
-    const incorrectFeedback = [{}, {}, {}];
+    const correctSolutions = [['SUMMARIZECOLUMNS'], ['Zwr\u00f3ci tylko kombinacje istniej\u0105ce w tej tabeli']];
+    const correctFeedback = ['\u2705 Brawo! Rozwi\u0105zanie poprawne!\n<code>SUMMARIZECOLUMNS</code> to obecnie zalecany standard do tworzenia zestawie\u0144 tabelarycznych z miarami. \u0141\u0105czy grupowanie, obliczenia i automatyczne usuwanie pustych wierszy w jednej funkcji. Jest kr\u00f3tsze, czytelniejsze i bezpieczniejsze ni\u017c legacy approach z <code>SUMMARIZE</code> + <code>ADDCOLUMNS</code> + <code>FILTER</code>. Rozumie kontekst ca\u0142ego modelu danych i poprawnie obs\u0142uguje relacje.', '\u2705 Brawo! Rozwi\u0105zanie poprawne!\nGdy pierwszy parametr <code>SUMMARIZE</code> to tabela fakt\u00f3w (np. Sales), funkcja zwraca tylko kombinacje wymiar\u00f3w rzeczywi\u015bcie wyst\u0119puj\u0105ce w tej tabeli. Filtruje automatycznie do istniej\u0105cych relacji. To jest po\u017c\u0105dane zachowanie - nie dostaniesz pustych kombinacji Brand-Continent, kt\u00f3re nie maj\u0105 transakcji. To g\u0142\u00f3wny przypadek u\u017cycia <code>SUMMARIZE</code> - proste grupowanie bez miar.'];
+    const incorrectFeedback = [{}, {}];
 
     function drag(event) {
             event.dataTransfer.setData('function', event.target.getAttribute('data-function'));
@@ -19317,7 +19284,7 @@ createOrReplace
                 resetTask();
             }
     
-            // Zmień przycisk "Następne" na "Zakończ" przed ostatnim zadaniem
+            // Zmień przycisk 'Następne' na 'Zakończ' przed ostatnim zadaniem
             const nextBtn = document.getElementById('nextBtn');
             if (currentPage === totalTasks) {
                 nextBtn.textContent = 'Zakończ →';
@@ -19423,7 +19390,7 @@ createOrReplace
 
 "
 ```
-            lineageTag: 627fb862-b660-4291-b05c-2a11c07c078e
+            lineageTag: 12c10696-f804-43ab-ac05-7520293451db
 
         measure '06a. Quiz' = ```
 "
@@ -19868,7 +19835,7 @@ createOrReplace
     
     const correctAnswers = [1, 1, 2, 0, 2, 0, 1];
     
-    const explanations = ["<code>SUMMARIZECOLUMNS</code> to nowoczesne podej\u015bcie zalecane przez Microsoft. Jest bardziej wydajna i \u0142atwiejsza w u\u017cyciu ni\u017c legacy <code>SUMMARIZE</code>.", "<code>SUMMARIZECOLUMNS</code> zwraca tabel\u0119 zawieraj\u0105c\u0105 unikalne kombinacje warto\u015bci z wybranych kolumn oraz opcjonalnie obliczone agregacje dla ka\u017cdej kombinacji.", "Sk\u0142adnia to: <code>SUMMARIZECOLUMNS(kolumna1, kolumna2, ..., \u00b4Nazwa Miary\u00b4, [Wyra\u017cenie], ...).</code> Najpierw kolumny grupuj\u0105ce, potem pary: nazwa i wyra\u017cenie miary.", "<code>SUMMARIZE</code> ma nieoczywist\u0105 sk\u0142adni\u0119 i mo\u017ce dawa\u0107 nieoczekiwane wyniki. <code>SUMMARIZECOLUMNS</code> jest szybsza, bardziej czytelna i zalecana przez Microsoft.", "<code>SUMMARIZECOLUMNS</code> mo\u017ce zawiera\u0107 dowoln\u0105 liczb\u0119 miar. Ka\u017cda miara to para: <code>\u00b4Nazwa Miary\u00b4, [Wyra\u017cenie Miary].</code>", "<code>ADDCOLUMNS</code> przyjmuje tabel\u0119 i dodaje do niej nowe kolumny kalkulowane. Sk\u0142adnia: <code>ADDCOLUMNS(tabela, \u00b4Nowa Kolumna\u00b4, [Wyra\u017cenie], ...)</code>.", "Funkcja zwr\u00f3ci tabel\u0119 z kolumn\u0105 Kategoria (unikalne warto\u015bci) oraz kolumn\u0105 Suma (sprzeda\u017c zagregowana dla ka\u017cdej kategorii)."];
+    const explanations = ['<code>SUMMARIZECOLUMNS</code> to nowoczesne podej\u015bcie zalecane przez Microsoft. Jest bardziej wydajna i \u0142atwiejsza w u\u017cyciu ni\u017c legacy <code>SUMMARIZE</code>.', '<code>SUMMARIZECOLUMNS</code> zwraca tabel\u0119 zawieraj\u0105c\u0105 unikalne kombinacje warto\u015bci z wybranych kolumn oraz opcjonalnie obliczone agregacje dla ka\u017cdej kombinacji.', 'Sk\u0142adnia to: <code>SUMMARIZECOLUMNS(kolumna1, kolumna2, ..., \u00b4Nazwa Miary\u00b4, [Wyra\u017cenie], ...).</code> Najpierw kolumny grupuj\u0105ce, potem pary: nazwa i wyra\u017cenie miary.', '<code>SUMMARIZE</code> ma nieoczywist\u0105 sk\u0142adni\u0119 i mo\u017ce dawa\u0107 nieoczekiwane wyniki. <code>SUMMARIZECOLUMNS</code> jest szybsza, bardziej czytelna i zalecana przez Microsoft.', '<code>SUMMARIZECOLUMNS</code> mo\u017ce zawiera\u0107 dowoln\u0105 liczb\u0119 miar. Ka\u017cda miara to para: <code>\u00b4Nazwa Miary\u00b4, [Wyra\u017cenie Miary].</code>', '<code>ADDCOLUMNS</code> przyjmuje tabel\u0119 i dodaje do niej nowe kolumny kalkulowane. Sk\u0142adnia: <code>ADDCOLUMNS(tabela, \u00b4Nowa Kolumna\u00b4, [Wyra\u017cenie], ...)</code>.', 'Funkcja zwr\u00f3ci tabel\u0119 z kolumn\u0105 Kategoria (unikalne warto\u015bci) oraz kolumn\u0105 Suma (sprzeda\u017c zagregowana dla ka\u017cdej kategorii).'];
     
     document.getElementById('totalPages').textContent = totalQuestions;
     
@@ -19969,7 +19936,7 @@ createOrReplace
             pages.forEach(page => page.classList.remove('active'));
             pages[currentPage - 1].classList.add('active');
     
-            // Wyświetl numer pytania lub "Podsumowanie"
+            // Wyświetl numer pytania lub 'Podsumowanie'
             const pageIndicator = document.getElementById('currentPage');
             if (currentPage <= totalQuestions) {
                 pageIndicator.textContent = currentPage;
@@ -19977,7 +19944,7 @@ createOrReplace
                 pageIndicator.textContent = 'Podsumowanie';
             }
     
-            // Zmień przycisk "Następna" na "Zakończ" przed ostatnim pytaniem
+            // Zmień przycisk 'Następna' na 'Zakończ' przed ostatnim pytaniem
             const nextBtn = document.getElementById('nextBtn');
             if (currentPage === totalQuestions) {
                 nextBtn.textContent = 'Zakończ →';
@@ -20016,7 +19983,7 @@ createOrReplace
 
 "
 ```
-            lineageTag: 9a1f1980-7287-4079-9ac5-35b60d3005ed
+            lineageTag: 1a811f76-2fef-4bee-bcf2-69d70a0cc320
 
         measure '07. Iteratory - AVERAGEX' = ```
 "
@@ -20361,7 +20328,7 @@ createOrReplace
 
 "
 ```
-            lineageTag: 3aed4baf-63e4-4371-b3c1-99c72a969115
+            lineageTag: eaeddf54-a9f1-4036-9357-7e28819a2e24
 
         measure '07. Iteratory - COUNTX' = ```
 "
@@ -20707,7 +20674,7 @@ createOrReplace
 
 "
 ```
-            lineageTag: 8322756c-5cee-42dc-af6e-c22277f6f21a
+            lineageTag: 34e79f04-036f-4ce5-aa23-d6187b08fba3
 
         measure '07. Iteratory - Funkcje iteracyjne (X-functions)' = ```
 "
@@ -21071,7 +21038,7 @@ createOrReplace
 
 "
 ```
-            lineageTag: 5f37e6e8-3e8b-4e70-90fb-744a844e4607
+            lineageTag: dd93301d-1134-4333-8f68-99114c3d0903
 
         measure '07. Iteratory - MINX i MAXX' = ```
 "
@@ -21416,7 +21383,7 @@ createOrReplace
 
 "
 ```
-            lineageTag: 80f29c05-791b-4dd1-8f08-6e4a38189bd7
+            lineageTag: 324e68f6-2df1-4c4a-b18e-80b5016fad45
 
         measure '07. Iteratory - SUMX' = ```
 "
@@ -21842,7 +21809,7 @@ createOrReplace
 
 "
 ```
-            lineageTag: 65dab175-741a-40d4-9a34-cd8e58a615e5
+            lineageTag: 31e569b7-87ad-4187-8b31-d60b317b3905
 
         measure '07a. Gaps' = ```
 "
@@ -22336,8 +22303,8 @@ createOrReplace
 
     const slotsPerPage = [1, 1, 2];
     let slots = new Array(slotsPerPage[0]).fill('');
-    const correctSolutions = [["SUMX"], ["AVERAGEX"], ["COUNTX", "Sprzedaz"]];
-    const correctFeedback = ["\u2705Brawo! <code>SUMX</code> to funkcja iteracyjna, kt\u00f3ra przechodzi przez ka\u017cdy wiersz tabeli Sprzeda\u017c, mno\u017cy Cen\u0119 przez Ilo\u015b\u0107 dla ka\u017cdego wiersza osobno, a nast\u0119pnie sumuje wszystkie wyniki.", "\u2705Brawo! <code>AVERAGEX</code> iteruje przez ka\u017cdy wiersz tabeli Sprzeda\u017c, oblicza mar\u017c\u0119 dla ka\u017cdej transakcji odejmuj\u0105c Koszty od Warto\u015bci Netto, a nast\u0119pnie oblicza \u015bredni\u0105 z wszystkich wynik\u00f3w.", "\u2705Brawo! <code>COUNTX</code> iteruje przez ka\u017cdy wiersz tabeli Sprzeda\u017c, sprawdza warunek dla ka\u017cdego wiersza osobno i liczy ile razy wyra\u017cenie zwr\u00f3ci\u0142o niepust\u0105 warto\u015b\u0107. Gdy Warto\u015b\u0107 Netto przekracza 1000, funkcja IF zwraca 1, kt\u00f3re jest liczone."];
+    const correctSolutions = [['SUMX'], ['AVERAGEX'], ['COUNTX', 'Sprzedaz']];
+    const correctFeedback = ['\u2705Brawo! <code>SUMX</code> to funkcja iteracyjna, kt\u00f3ra przechodzi przez ka\u017cdy wiersz tabeli Sprzeda\u017c, mno\u017cy Cen\u0119 przez Ilo\u015b\u0107 dla ka\u017cdego wiersza osobno, a nast\u0119pnie sumuje wszystkie wyniki.', '\u2705Brawo! <code>AVERAGEX</code> iteruje przez ka\u017cdy wiersz tabeli Sprzeda\u017c, oblicza mar\u017c\u0119 dla ka\u017cdej transakcji odejmuj\u0105c Koszty od Warto\u015bci Netto, a nast\u0119pnie oblicza \u015bredni\u0105 z wszystkich wynik\u00f3w.', '\u2705Brawo! <code>COUNTX</code> iteruje przez ka\u017cdy wiersz tabeli Sprzeda\u017c, sprawdza warunek dla ka\u017cdego wiersza osobno i liczy ile razy wyra\u017cenie zwr\u00f3ci\u0142o niepust\u0105 warto\u015b\u0107. Gdy Warto\u015b\u0107 Netto przekracza 1000, funkcja IF zwraca 1, kt\u00f3re jest liczone.'];
     const incorrectFeedback = [{}, {}, {}];
 
     function drag(event) {
@@ -22552,7 +22519,7 @@ createOrReplace
                 resetTask();
             }
     
-            // Zmień przycisk "Następne" na "Zakończ" przed ostatnim zadaniem
+            // Zmień przycisk 'Następne' na 'Zakończ' przed ostatnim zadaniem
             const nextBtn = document.getElementById('nextBtn');
             if (currentPage === totalTasks) {
                 nextBtn.textContent = 'Zakończ →';
@@ -22658,7 +22625,7 @@ createOrReplace
 
 "
 ```
-            lineageTag: 36a75a85-d6e6-44ff-a717-c2e69fef6a14
+            lineageTag: 3155e84f-76aa-4691-bc64-4f497c02aa1f
 
         measure '07a. Quiz' = ```
 "
@@ -23079,7 +23046,7 @@ createOrReplace
     
     const correctAnswers = [1, 2, 1, 1, 2, 1];
     
-    const explanations = ["Funkcje iteracyjne przechodz\u0105 przez ka\u017cdy wiersz tabeli i wykonuj\u0105 obliczenia dla ka\u017cdego wiersza osobno, a dopiero potem wykonuj\u0105 agregacj\u0119. To odr\u00f3\u017cnia je od zwyk\u0142ych funkcji agreguj\u0105cych.", "", "<code>AVERAGEX</code> iteruje przez ka\u017cdy wiersz tabeli Sprzedaz, oblicza r\u00f3\u017cnic\u0119 mi\u0119dzy Warto\u015b\u0107 Netto a Koszty Netto dla ka\u017cdego wiersza, a nast\u0119pnie wyznacza \u015bredni\u0105 z tych warto\u015bci. Zwyk\u0142a funkcja <code>AVERAGE</code> nie pozwala na takie obliczenia wiersz po wierszu.", "Funkcje iteracyjne s\u0105 niezb\u0119dne gdy musisz wykona\u0107 obliczenia \u0142\u0105cz\u0105ce warto\u015bci z r\u00f3\u017cnych kolumn w tym samym wierszu, np. pomno\u017cy\u0107 cen\u0119 przez ilo\u015b\u0107. Zwyk\u0142e funkcje agreguj\u0105ce nie pozwalaj\u0105 na takie operacje wiersz po wierszu.", "<code>COUNTX</code> iteruje przez wiersze tabeli <code>Sprzedaz</code> i liczy ile razy wyra\u017cenie zwr\u00f3ci\u0142o niepust\u0105 warto\u015b\u0107. Funkcja <code>IF</code> zwraca 1 gdy <code>Warto\u015b\u0107 Netto</code> jest wi\u0119ksza ni\u017c 1000, w przeciwnym razie zwraca <code>BLANK</code>. W efekcie <code>COUNTX</code> zlicza ile zam\u00f3wie\u0144 ma warto\u015b\u0107 powy\u017cej 1000.", "MAXX jest funkcj\u0105 iteracyjn\u0105, kt\u00f3ra oblicza okre\u015blone wyra\u017cenie dla ka\u017cdego wiersza tabeli, a nast\u0119pnie zwraca maksymaln\u0105 warto\u015b\u0107 spo\u015br\u00f3d tych oblicze\u0144. MAX natomiast po prostu znajduje najwi\u0119ksz\u0105 warto\u015b\u0107 w pojedynczej kolumnie bez mo\u017cliwo\u015bci wykonania oblicze\u0144 wiersz po wierszu."];
+    const explanations = ['Funkcje iteracyjne przechodz\u0105 przez ka\u017cdy wiersz tabeli i wykonuj\u0105 obliczenia dla ka\u017cdego wiersza osobno, a dopiero potem wykonuj\u0105 agregacj\u0119. To odr\u00f3\u017cnia je od zwyk\u0142ych funkcji agreguj\u0105cych.', '', '<code>AVERAGEX</code> iteruje przez ka\u017cdy wiersz tabeli Sprzedaz, oblicza r\u00f3\u017cnic\u0119 mi\u0119dzy Warto\u015b\u0107 Netto a Koszty Netto dla ka\u017cdego wiersza, a nast\u0119pnie wyznacza \u015bredni\u0105 z tych warto\u015bci. Zwyk\u0142a funkcja <code>AVERAGE</code> nie pozwala na takie obliczenia wiersz po wierszu.', 'Funkcje iteracyjne s\u0105 niezb\u0119dne gdy musisz wykona\u0107 obliczenia \u0142\u0105cz\u0105ce warto\u015bci z r\u00f3\u017cnych kolumn w tym samym wierszu, np. pomno\u017cy\u0107 cen\u0119 przez ilo\u015b\u0107. Zwyk\u0142e funkcje agreguj\u0105ce nie pozwalaj\u0105 na takie operacje wiersz po wierszu.', '<code>COUNTX</code> iteruje przez wiersze tabeli <code>Sprzedaz</code> i liczy ile razy wyra\u017cenie zwr\u00f3ci\u0142o niepust\u0105 warto\u015b\u0107. Funkcja <code>IF</code> zwraca 1 gdy <code>Warto\u015b\u0107 Netto</code> jest wi\u0119ksza ni\u017c 1000, w przeciwnym razie zwraca <code>BLANK</code>. W efekcie <code>COUNTX</code> zlicza ile zam\u00f3wie\u0144 ma warto\u015b\u0107 powy\u017cej 1000.', 'MAXX jest funkcj\u0105 iteracyjn\u0105, kt\u00f3ra oblicza okre\u015blone wyra\u017cenie dla ka\u017cdego wiersza tabeli, a nast\u0119pnie zwraca maksymaln\u0105 warto\u015b\u0107 spo\u015br\u00f3d tych oblicze\u0144. MAX natomiast po prostu znajduje najwi\u0119ksz\u0105 warto\u015b\u0107 w pojedynczej kolumnie bez mo\u017cliwo\u015bci wykonania oblicze\u0144 wiersz po wierszu.'];
     
     document.getElementById('totalPages').textContent = totalQuestions;
     
@@ -23180,7 +23147,7 @@ createOrReplace
             pages.forEach(page => page.classList.remove('active'));
             pages[currentPage - 1].classList.add('active');
     
-            // Wyświetl numer pytania lub "Podsumowanie"
+            // Wyświetl numer pytania lub 'Podsumowanie'
             const pageIndicator = document.getElementById('currentPage');
             if (currentPage <= totalQuestions) {
                 pageIndicator.textContent = currentPage;
@@ -23188,7 +23155,7 @@ createOrReplace
                 pageIndicator.textContent = 'Podsumowanie';
             }
     
-            // Zmień przycisk "Następna" na "Zakończ" przed ostatnim pytaniem
+            // Zmień przycisk 'Następna' na 'Zakończ' przed ostatnim pytaniem
             const nextBtn = document.getElementById('nextBtn');
             if (currentPage === totalQuestions) {
                 nextBtn.textContent = 'Zakończ →';
@@ -23227,7 +23194,7 @@ createOrReplace
 
 "
 ```
-            lineageTag: a6e733f8-0224-4461-82e9-6f55787e772a
+            lineageTag: de9c59e7-08ea-43ec-96e7-46e703d61c43
 
         measure '08. Time Intelligence - DATEADD' = ```
 "
@@ -23698,7 +23665,7 @@ createOrReplace
 
 "
 ```
-            lineageTag: 4ee075f2-a15e-45fe-89c5-d6aa239f2814
+            lineageTag: b4bacec5-3b7e-4471-b920-29edbc5187dc
 
         measure '08. Time Intelligence - DATESINPERIOD' = ```
 "
@@ -24203,7 +24170,7 @@ createOrReplace
 
 "
 ```
-            lineageTag: 5c694615-62f7-49ad-a1b8-6bb0588f13f3
+            lineageTag: 965e31cb-7612-4e20-958a-1dd33ddeb21d
 
         measure '08. Time Intelligence - DATESYTD' = ```
 "
@@ -24659,7 +24626,7 @@ createOrReplace
 
 "
 ```
-            lineageTag: 430b64ad-6a38-43dc-b7e6-6b4603c24867
+            lineageTag: e8291f13-bb00-4355-90b4-261f194415cf
 
         measure '08. Time Intelligence - PARALLELPERIOD' = ```
 "
@@ -25063,7 +25030,7 @@ createOrReplace
 
 "
 ```
-            lineageTag: 31f54b9c-db60-43b0-ab24-4e7aabf4d8ef
+            lineageTag: 45937df0-c3ee-42bf-9781-56758380554f
 
         measure '08. Time Intelligence - SAMEPERIODLASTYEAR' = ```
 "
@@ -25543,7 +25510,7 @@ createOrReplace
 
 "
 ```
-            lineageTag: 192ce119-0f8b-4ec8-94ac-ad9fb416dfe4
+            lineageTag: 5b3d5dbe-9840-4dfc-bf31-0b1ce12949a0
 
         measure '08. Time Intelligence - Tabela porównawcza funkcji' = ```
 "
@@ -25936,7 +25903,7 @@ createOrReplace
 
 "
 ```
-            lineageTag: 8de6d8f7-202f-42fe-ab6c-89e01d0b6891
+            lineageTag: 3961d708-ee83-4242-b372-09ae82f23eab
 
         measure '08. Time Intelligence - TOTALYTD' = ```
 "
@@ -26207,7 +26174,7 @@ createOrReplace
             <span class='dax-function'>SUM</span>(fSprzedaz[Wartość]),
             Kalendarz[Data],
             ,
-            "<span class='dax-number'>6</span>/<span class='dax-number'>30</span>"
+            '<span class='dax-number'>6</span>/<span class='dax-number'>30</span>'
         )</code></pre>
         <p><strong>Rok obrotowy:</strong> lipiec-czerwiec</p>
         <table>
@@ -26359,7 +26326,7 @@ createOrReplace
 
 "
 ```
-            lineageTag: 29cafcbc-cbd2-416f-873c-91b64ac4e2c3
+            lineageTag: 089d0784-910d-43e5-89f1-0ce9296eaebb
 
         measure '08a. Quiz' = ```
 "
@@ -26852,7 +26819,7 @@ createOrReplace
     
     const correctAnswers = [1, 1, 1, 1, 2, 1, 0, 1, 1];
     
-    const explanations = ["Funkcje Time Intelligence wymagaj\u0105 tabeli dat (dimension table) z nieprzerwanym ci\u0105giem dat, kt\u00f3ra jest oznaczona jako tabela dat w modelu. Bez tego funkcje te nie b\u0119d\u0105 dzia\u0142a\u0107 poprawnie lub w og\u00f3le.", "<code>TOTALYTD</code> to funkcja agreguj\u0105ca warto\u015bci od pocz\u0105tku roku do daty okre\u015blonej przez bie\u017c\u0105cy kontekst filtra. W przeciwie\u0144stwie do <code>SUM</code>, kt\u00f3ra sumuje warto\u015bci tylko z bie\u017c\u0105cego kontekstu, <code>TOTALYTD</code> automatycznie modyfikuje kontekst, aby uwzgl\u0119dni\u0107 wszystkie daty od 1 stycznia do daty w kontek\u015bcie.", "<code>SAMEPERIODLASTYEAR</code> automatycznie przesuwa kontekst dat o rok wstecz, zachowuj\u0105c ten sam okres (dzie\u0144, miesi\u0105c lub dowolny inny zakres dat). Funkcja ta jest zaprojektowana specjalnie do por\u00f3wna\u0144 rok do roku i automatycznie obs\u0142uguje wszystkie przypadki brzegowe.", "Funkcja <code>DATESBETWEEN</code> w po\u0142\u0105czeniu z <code>CALCULATE</code> zast\u0119puje kontekst filtra dat okre\u015blonym zakresem. Oznacza to, \u017ce niezale\u017cnie od tego, kt\u00f3ry miesi\u0105c jest w wierszu tabeli, miara zawsze zwr\u00f3ci sum\u0119 za ca\u0142y Q1 2024, poniewa\u017c <code>CALCULATE</code> nadpisuje kontekst filtra.", "<code>TOTALMTD</code> oblicza warto\u015b\u0107 skumulowan\u0105 od pocz\u0105tku miesi\u0105ca. Gdy kontekst obejmuje ca\u0142y rok, funkcja oblicza warto\u015b\u0107 do ostatniego dnia ostatniego miesi\u0105ca w tym roku, czyli faktycznie sum\u0119 za ca\u0142y rok, ale przez pryzmat od pocz\u0105tku miesi\u0105ca dla grudnia.", "<code>PARALLELPERIOD</code> przesuwa bie\u017c\u0105cy kontekst o okre\u015blon\u0105 liczb\u0119 okres\u00f3w wstecz lub w prz\u00f3d. W tym przypadku -4 kwarta\u0142y od Q3 2024 to Q3 2023. Funkcja zwraca tabel\u0119 dat dla tego r\u00f3wnoleg\u0142ego okresu, zachowuj\u0105c ten sam typ okresu (kwarta\u0142).", "<code>ALL(Kalendarz)</code> usuwa wszystkie filtry z tabeli Kalendarz, w\u0142\u0105czaj\u0105c w to filtry roku, kwarta\u0142u i miesi\u0105ca. W efekcie mianownik zawsze pokazuje sum\u0119 globaln\u0105 ze wszystkich lat, a nie tylko z bie\u017c\u0105cego roku. Aby obliczy\u0107 udzia\u0142 w ramach roku, nale\u017ca\u0142oby u\u017cy\u0107 <code>ALL(Kalendarz[Miesi\u0105c])</code> lub <code>ALLEXCEPT(Kalendarz, Kalendarz[Rok])</code>.", "<code>DATEADD</code> przesuwa ka\u017cd\u0105 dat\u0119 w kontek\u015bcie o okre\u015blon\u0105 liczb\u0119 okres\u00f3w (np. ka\u017cdy dzie\u0144 w marcu zostanie przesuni\u0119ty o rok wstecz). <code>PARALLELPERIOD</code> natomiast przesuwa ca\u0142y okres jako kompletn\u0105 jednostk\u0119 (np. ca\u0142y Q1 2024 zostanie przesuni\u0119ty do Q1 2023), zachowuj\u0105c struktur\u0119 okresu. To powoduje r\u00f3\u017cne wyniki, szczeg\u00f3lnie przy por\u00f3wnaniach okres\u00f3w.", "<code>FIRSTDATE</code> zwraca pierwsz\u0105 dat\u0119 z bie\u017c\u0105cego kontekstu filtra. Gdy kontekstem jest pojedynczy miesi\u0105c (np. marzec 2024), funkcja zwr\u00f3ci pierwszy dzie\u0144 tego miesi\u0105ca (1 marca 2024). Jest to funkcja uwzgl\u0119dniaj\u0105ca kontekst, nie zwraca globalnie pierwszej daty."];
+    const explanations = ['Funkcje Time Intelligence wymagaj\u0105 tabeli dat (dimension table) z nieprzerwanym ci\u0105giem dat, kt\u00f3ra jest oznaczona jako tabela dat w modelu. Bez tego funkcje te nie b\u0119d\u0105 dzia\u0142a\u0107 poprawnie lub w og\u00f3le.', '<code>TOTALYTD</code> to funkcja agreguj\u0105ca warto\u015bci od pocz\u0105tku roku do daty okre\u015blonej przez bie\u017c\u0105cy kontekst filtra. W przeciwie\u0144stwie do <code>SUM</code>, kt\u00f3ra sumuje warto\u015bci tylko z bie\u017c\u0105cego kontekstu, <code>TOTALYTD</code> automatycznie modyfikuje kontekst, aby uwzgl\u0119dni\u0107 wszystkie daty od 1 stycznia do daty w kontek\u015bcie.', '<code>SAMEPERIODLASTYEAR</code> automatycznie przesuwa kontekst dat o rok wstecz, zachowuj\u0105c ten sam okres (dzie\u0144, miesi\u0105c lub dowolny inny zakres dat). Funkcja ta jest zaprojektowana specjalnie do por\u00f3wna\u0144 rok do roku i automatycznie obs\u0142uguje wszystkie przypadki brzegowe.', 'Funkcja <code>DATESBETWEEN</code> w po\u0142\u0105czeniu z <code>CALCULATE</code> zast\u0119puje kontekst filtra dat okre\u015blonym zakresem. Oznacza to, \u017ce niezale\u017cnie od tego, kt\u00f3ry miesi\u0105c jest w wierszu tabeli, miara zawsze zwr\u00f3ci sum\u0119 za ca\u0142y Q1 2024, poniewa\u017c <code>CALCULATE</code> nadpisuje kontekst filtra.', '<code>TOTALMTD</code> oblicza warto\u015b\u0107 skumulowan\u0105 od pocz\u0105tku miesi\u0105ca. Gdy kontekst obejmuje ca\u0142y rok, funkcja oblicza warto\u015b\u0107 do ostatniego dnia ostatniego miesi\u0105ca w tym roku, czyli faktycznie sum\u0119 za ca\u0142y rok, ale przez pryzmat od pocz\u0105tku miesi\u0105ca dla grudnia.', '<code>PARALLELPERIOD</code> przesuwa bie\u017c\u0105cy kontekst o okre\u015blon\u0105 liczb\u0119 okres\u00f3w wstecz lub w prz\u00f3d. W tym przypadku -4 kwarta\u0142y od Q3 2024 to Q3 2023. Funkcja zwraca tabel\u0119 dat dla tego r\u00f3wnoleg\u0142ego okresu, zachowuj\u0105c ten sam typ okresu (kwarta\u0142).', '<code>ALL(Kalendarz)</code> usuwa wszystkie filtry z tabeli Kalendarz, w\u0142\u0105czaj\u0105c w to filtry roku, kwarta\u0142u i miesi\u0105ca. W efekcie mianownik zawsze pokazuje sum\u0119 globaln\u0105 ze wszystkich lat, a nie tylko z bie\u017c\u0105cego roku. Aby obliczy\u0107 udzia\u0142 w ramach roku, nale\u017ca\u0142oby u\u017cy\u0107 <code>ALL(Kalendarz[Miesi\u0105c])</code> lub <code>ALLEXCEPT(Kalendarz, Kalendarz[Rok])</code>.', '<code>DATEADD</code> przesuwa ka\u017cd\u0105 dat\u0119 w kontek\u015bcie o okre\u015blon\u0105 liczb\u0119 okres\u00f3w (np. ka\u017cdy dzie\u0144 w marcu zostanie przesuni\u0119ty o rok wstecz). <code>PARALLELPERIOD</code> natomiast przesuwa ca\u0142y okres jako kompletn\u0105 jednostk\u0119 (np. ca\u0142y Q1 2024 zostanie przesuni\u0119ty do Q1 2023), zachowuj\u0105c struktur\u0119 okresu. To powoduje r\u00f3\u017cne wyniki, szczeg\u00f3lnie przy por\u00f3wnaniach okres\u00f3w.', '<code>FIRSTDATE</code> zwraca pierwsz\u0105 dat\u0119 z bie\u017c\u0105cego kontekstu filtra. Gdy kontekstem jest pojedynczy miesi\u0105c (np. marzec 2024), funkcja zwr\u00f3ci pierwszy dzie\u0144 tego miesi\u0105ca (1 marca 2024). Jest to funkcja uwzgl\u0119dniaj\u0105ca kontekst, nie zwraca globalnie pierwszej daty.'];
     
     document.getElementById('totalPages').textContent = totalQuestions;
     
@@ -26953,7 +26920,7 @@ createOrReplace
             pages.forEach(page => page.classList.remove('active'));
             pages[currentPage - 1].classList.add('active');
     
-            // Wyświetl numer pytania lub "Podsumowanie"
+            // Wyświetl numer pytania lub 'Podsumowanie'
             const pageIndicator = document.getElementById('currentPage');
             if (currentPage <= totalQuestions) {
                 pageIndicator.textContent = currentPage;
@@ -26961,7 +26928,7 @@ createOrReplace
                 pageIndicator.textContent = 'Podsumowanie';
             }
     
-            // Zmień przycisk "Następna" na "Zakończ" przed ostatnim pytaniem
+            // Zmień przycisk 'Następna' na 'Zakończ' przed ostatnim pytaniem
             const nextBtn = document.getElementById('nextBtn');
             if (currentPage === totalQuestions) {
                 nextBtn.textContent = 'Zakończ →';
@@ -27000,7 +26967,7 @@ createOrReplace
 
 "
 ```
-            lineageTag: d202c63b-4690-4596-b87a-83dc4ec07dda
+            lineageTag: 8bb9cc2d-ab39-46b6-b13e-2cc45609016f
 
         measure '99. Praktyczne - CALCULATEDGROUP' = ```
 "
@@ -27363,7 +27330,7 @@ createOrReplace
 
 "
 ```
-            lineageTag: 76eb641d-68a2-4963-8b06-86ac4c9b51e0
+            lineageTag: 318f61db-9f12-44c2-ab82-d23fcfa6b2a6
 
         measure '99. Praktyczne - Proporcjonalny podział celu' = ```
 "
@@ -27766,7 +27733,7 @@ createOrReplace
 
 "
 ```
-            lineageTag: a2b7cb26-4c55-4b71-a4ea-9eba6cfb5f85
+            lineageTag: e0fbade4-5a5d-4a32-92f0-bc1e884c605d
 
         measure '99. Praktyczne - Przewalutowanie' = ```
 "
@@ -28131,7 +28098,7 @@ createOrReplace
 
 "
 ```
-            lineageTag: d5873b2b-b306-4f07-964b-c16c38670089
+            lineageTag: 32d769ae-78ff-4ee7-9f38-33adc67708a4
 
         measure '99. Praktyczne - USERELATIONSHIP' = ```
 "
@@ -28488,7 +28455,7 @@ createOrReplace
 
 "
 ```
-            lineageTag: 5a392488-a763-4724-8e27-506e1e21c965
+            lineageTag: d9cacd5b-0fbb-477e-b467-aaeea6ce96d9
 
         measure '99. Praktyczne - Warunkowe kolorowanie' = ```
 "
@@ -28856,7 +28823,7 @@ createOrReplace
 
 "
 ```
-            lineageTag: fb46398f-be91-4867-a954-9f251e3358fc
+            lineageTag: 087c9a04-bc09-43c3-a4e6-7c99c462d8e2
 
         partition _HTML = m
             mode: import

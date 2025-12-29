@@ -1,0 +1,486 @@
+================================================================================
+SZCZEGÓŁOWE PRZYKŁADY KODÓW - ZAMIANA " NA '
+================================================================================
+
+PRZYKŁAD 1: HTML - Atrybuty (BEZPIECZNE)
+================================================================================
+
+ORIGINAL:
+--------
+<div class="container">
+    <button id="btn1" data-id="123" disabled>Click me</button>
+    <input type="text" placeholder="Enter name">
+</div>
+
+PO ZAMIANIE " NA ':
+-------------------
+<div class='container'>
+    <button id='btn1' data-id='123' disabled>Click me</button>
+    <input type='text' placeholder='Enter name'>
+</div>
+
+WYNIK: OK WSZYSTKIE ZMIANY BEZPIECZNE
+- Atrybuty HTML akceptują zarówno ' jak i "
+- Żaden z nich nie zawiera apostrofów w wartościach
+- Parser HTML traktuje je identycznie
+
+================================================================================
+PRZYKŁAD 2: Event handler BEZ stringów (BEZPIECZNE)
+================================================================================
+
+ORIGINAL:
+--------
+<button onclick="toggleMenu()">Menu</button>
+<div onclick="showDetails(42)">Details</div>
+<img onload="initSlider()">
+
+PO ZAMIANIE " NA ':
+-------------------
+<button onclick='toggleMenu()'>Menu</button>
+<div onclick='showDetails(42)'>Details</div>
+<img onload='initSlider()'>
+
+WYNIK: OK BEZPIECZNE
+- Handlery zawierają tylko nazwę funkcji i liczby
+- Brak stringów, które mogłyby zawierać znaki specjalne
+
+================================================================================
+PRZYKŁAD 3: Event handler Z stringami (NIEBEZPIECZNE!)
+================================================================================
+
+ORIGINAL (BEZPIECZNE):
+---------------------
+<button onclick="alert('Hello World')">Say Hello</button>
+<div onclick="doAction('save', 123)">Save</div>
+
+NAIWNA ZAMIANA (BŁĄD!):
+-----------------------
+<button onclick='alert('Hello World')'>Say Hello</button>
+<!-- BŁĄD SKŁADNIOWY! Parser HTML uważa że onclick kończy się na
+     drugim apostrofie, następnie 'Hello World')' to tekst poza HTML -->
+
+<div onclick='doAction('save', 123)'>Save</div>
+<!-- BŁĄD! -->
+
+PRAWIDŁOWA ZAMIANA (OPCJA 1):
+-----------------------------
+<button onclick='alert("Hello World")'>Say Hello</button>
+<div onclick='doAction("save", 123)'>Save</div>
+
+PRAWIDŁOWA ZAMIANA (OPCJA 2):
+-----------------------------
+<button onclick="alert('Hello World')">Say Hello</button>
+<div onclick="doAction('save', 123)">Save</div>
+<!-- Pozostawić oryginalne cudzysłowy -->
+
+PRAWIDŁOWA ZAMIANA (OPCJA 3):
+-----------------------------
+<button onclick='alert("Hello World")'>Say Hello</button>
+<div onclick='doAction("save", 123)'>Save</div>
+<!-- Konsekwentnie: zewnętrzne ' wewnętrzne " -->
+
+================================================================================
+PRZYKŁAD 4: Data attributes z apostrofami (NIEBEZPIECZNE!)
+================================================================================
+
+ORIGINAL (BEZPIECZNE):
+---------------------
+<div data-tooltip="Hello">Hover me</div>
+<div data-config='{"color":"red"}'>Item</div>
+
+NAIWNA ZAMIANA (BŁĄD!):
+-----------------------
+<div data-tooltip='Hello'>Hover me</div>
+<!-- To może być OK jeśli "Hello" nie zawiera apostrofu -->
+
+<div data-config='{"color":"red"}'>Item</div>
+<!-- BŁĄD! JSON wewnątrz musi mieć ", a my mamy ' -->
+
+PRZYKŁAD PROBLEMU:
+------------------
+<div data-message='John's message'>Item</div>
+<!-- BŁĄD! Apostrofy kolidują! -->
+
+<!-- Parser HTML interpretuje to jako:
+     data-message='John
+     a następnie: s message' ... co jest błędne
+-->
+
+PRAWIDŁOWE ROZWIĄZANIA:
+
+1. Escapowanie HTML entity:
+   <div data-message='John&#39;s message'>Item</div>
+
+2. Zmiana na " z escapowaniem wewnątrz JSON:
+   <div data-config="{\"color\":\"red\"}">Item</div>
+
+3. Pozostawienie " dla danych z apostrofami:
+   <div data-message="John's message">Item</div>
+   <div data-config='{"color":"red"}'>Item</div>
+
+================================================================================
+PRZYKŁAD 5: CSS - Content property (BEZPIECZNE)
+================================================================================
+
+ORIGINAL:
+--------
+.tooltip::before {
+    content: "Tooltip text";
+}
+
+.icon::before {
+    content: "→";
+}
+
+PO ZAMIANIE " NA ':
+-------------------
+.tooltip::before {
+    content: 'Tooltip text';
+}
+
+.icon::before {
+    content: '→';
+}
+
+WYNIK: OK BEZPIECZNE
+- CSS akceptuje zarówno ' jak i " dla content
+- Znaki specjalne działają identycznie
+
+PRZYKŁAD Z ESCAPOWANIEM:
+------------------------
+ORIGINAL:
+.quote::before {
+    content: "\"quoted\"";
+}
+
+ZAMIANA:
+.quote::before {
+    content: '\'quoted\'';
+}
+
+WYNIK: OK BEZPIECZNE - Escapowanie działa tak samo
+
+================================================================================
+PRZYKŁAD 6: CSS - URL z apostrofami (ZAGROŻENIE!)
+================================================================================
+
+PROBLEM:
+-------
+.background {
+    background-image: url('C:\Users\John\'s Files\image.png');
+}
+/* BŁĄD! Apostrofy w ścieżce powodują problem */
+
+/* Parser CSS widzi:
+   url('C:\Users\John\
+   następnie: 's Files\image.png')
+   To jest błędne */
+
+ROZWIĄZANIA:
+
+1. Użycie " zamiast ':
+   .background {
+       background-image: url("C:\Users\John's Files\image.png");
+   }
+   /* OK - apostrofy w ścieżce są OK w " */
+
+2. Escapowanie apostrofów w stringu URL:
+   .background {
+       background-image: url('C:\Users\John\'s Files\image.png');
+   }
+   /* OK - jeśli prawidłowo escapujemy */
+
+3. Bez cudzysłowów:
+   .background {
+       background-image: url(C:\Users\John\'s Files\image.png);
+   }
+   /* OK dla ścieżek bez spacji */
+
+4. HTML entities w CSS:
+   .background {
+       background-image: url('path/to/John%27s Files/image.png');
+   }
+   /* Słaba praktyka */
+
+NAJLEPSZE ROZWIĄZANIE:
+   .background {
+       background-image: url("C:\Users\John's Files\image.png");
+   }
+   /* Użycie " dla ścieżek z apostrofami */
+
+================================================================================
+PRZYKŁAD 7: JavaScript - Stringi z apostrofami (NIEBEZPIECZNE!)
+================================================================================
+
+ORIGINAL (BEZPIECZNE):
+---------------------
+const message = "It's working!";
+const greeting = 'Hello';
+
+NAIWNA ZAMIANA (BŁĄD!):
+-----------------------
+const message = 'It's working!';
+/* BŁĄD SKŁADNIOWY!
+   Parser JavaScript widzi:
+   const message = 'It
+   a następnie: s working!'
+   To nie jest valid JS */
+
+PRAWIDŁOWA ZAMIANA:
+
+1. Escapowanie wewnątrz:
+   const message = 'It\'s working!';
+
+2. Zmiana na ":
+   const message = "It's working!";
+
+3. Template literals:
+   const message = `It's working!`;
+
+WSZYSTKIE SĄ RÓWNOWAŻNE I DZIAŁAJĄ!
+
+================================================================================
+PRZYKŁAD 8: JavaScript - Zagnieźdżone stringi (ZAGROŻENIE!)
+================================================================================
+
+ORIGINAL (BEZPIECZNE):
+---------------------
+const config = {
+    name: "John",
+    greeting: "Hello \"John\""
+};
+
+const clickHandler = "onclick=\"doAction('save')\"";
+
+NAIWNA ZAMIANA (BŁĘDY!):
+------------------------
+const config = {
+    name: 'John',
+    greeting: 'Hello \'John\''  /* OK - prawidłowy escape */
+};
+
+const clickHandler = 'onclick=\'doAction('save')\''
+/* BŁĄD! Za dużo apostrofów, parser się gubi */
+
+PRAWIDŁOWE ROZWIĄZANIA:
+
+1. Mieszanie typów cudzysłowów:
+   const clickHandler = 'onclick="doAction(\'save\')"';
+   /* Wewnątrze ' escapowane */
+
+2. LUB odwrotnie:
+   const clickHandler = "onclick='doAction(\"save\")'";
+
+3. LUB template literals:
+   const clickHandler = `onclick="doAction('save')"`;
+
+4. LUB JSON:
+   const handler = {
+       onClick: "doAction('save')"
+   };
+   const html = `onclick="${handler.onClick}"`;
+
+================================================================================
+PRZYKŁAD 9: JSON.parse/stringify (ZAGROŻENIE!)
+================================================================================
+
+ORIGINAL (BEZPIECZNE):
+---------------------
+const data = { name: "John", age: 30 };
+const json = JSON.stringify(data);
+/* Wynik: '{"name":"John","age":30}' */
+
+const parsed = JSON.parse(json);
+/* OK - JSON zawsze ma " dla kluczy i stringów */
+
+PROBLEM:
+--------
+const jsonString = '{"name":"John","age":30}';
+/* OK - zewnątrze ' OK, wewnątrz JSON ma " */
+
+const jsonString = "{'name':'John','age':30}";
+/* BŁĄD! JSON nie akceptuje ' dla kluczy i stringów */
+
+JSON.parse(jsonString);
+/* Wyrzuca błąd: SyntaxError */
+
+PRAWIDŁOWE PRZYKŁADY:
+
+1. JSON w stringu z ':
+   const json = '{"name":"John","age":30}';
+   const data = JSON.parse(json);  /* OK */
+
+2. JSON w stringu z ":
+   const json = "{\"name\":\"John\",\"age\":30}";
+   const data = JSON.parse(json);  /* OK */
+
+3. JavaScript object (nie JSON!):
+   const obj = {name: 'John', age: 30};  /* OK - to JS obiekt */
+   const json = JSON.stringify(obj);     /* Konwertuj na JSON */
+
+KLUCZOWA ROZNICA:
+- JSON zawsze ma " dla kluczy i stringów
+- JavaScript obiekty mogą mieć ' lub "
+- JSON.parse() wymaga prawidłowego JSON formatu
+
+================================================================================
+PRZYKŁAD 10: Template Literals (ZAWSZE BEZPIECZNE)
+================================================================================
+
+ORIGINAL:
+--------
+const name = "John";
+const greeting = "Hello " + name;
+const message = `Hello "${name}"`;
+
+PO ZAMIANIE " NA ':
+-------------------
+const name = 'John';
+const greeting = 'Hello ' + name;
+const message = `Hello '${name}'`;
+/* Template literals (`) nie zamieniane! */
+
+WSZYSTKIE WARIANTY BEZPIECZNE:
+-------------------------------
+const msg1 = `Hello "World"`;     /* OK - " wewnątrz ` */
+const msg2 = `Hello 'World'`;     /* OK - ' wewnątrz ` */
+const msg3 = `It's "working"`;    /* OK - mieszanina */
+
+WYNIK: OK ZAWSZE BEZPIECZNE
+- Template literals (`) chronią przed zmianami
+- Mogą zawierać dowolne kombinacje ' i "
+
+================================================================================
+PRZYKŁAD 11: Regex wyrażenia (BEZPIECZNE)
+================================================================================
+
+ORIGINAL:
+--------
+const regex1 = /test"word/;
+const regex2 = /test'word/;
+const regex3 = new RegExp("test\"word");
+const regex4 = new RegExp('test\'word');
+
+PO ZAMIANIE " NA ':
+-------------------
+const regex1 = /test"word/;         /* Bez zmian - to regex literal */
+const regex2 = /test'word/;         /* Bez zmian */
+const regex3 = new RegExp('test"word');   /* OK */
+const regex4 = new RegExp('test\'word');  /* OK z escapowaniem */
+
+WYNIK: OK BEZPIECZNE
+- Regex literały (/.../) nie zawierają cudzysłowów
+- Stringi w RegExp mogą mieć zarówno ' jak i "
+
+================================================================================
+PRZYKŁAD 12: Praktyczne porównanie dla tego projektu
+================================================================================
+
+Z WYGENEROWANEGO PLIKU HTML:
+
+ORIGINAL:
+---------
+<div class='container' id='viz_5dc96cd3'>
+    <button id='prevBtn_5dc96cd3' onclick='changePage_5dc96cd3(-1)'>
+        Poprzednia
+    </button>
+    <span class='page-indicator'>
+        Strona <span id='currentPage_5dc96cd3'>1</span>
+    </span>
+</div>
+
+JAVASCRIPT:
+-----------
+var vizId = '5dc96cd3';
+var containerId = 'viz_' + vizId;
+window['showPage_5dc96cd3'] = function(n) {
+    ...
+};
+img.addEventListener('click', function() {
+    ...
+});
+
+OCENA:
+------
+OK Atrybuty HTML - apostrofy OK
+OK onclick handler - zawiera tylko nazwę funkcji, apostrofy OK
+OK JavaScript stringi - proste stringi bez apostrofów wewnątrz
+OK window[...] - nawiasy z apostrofami, OK
+OK Brak JSON, brak zagnieźdzonych stringów, brak CSS url()
+
+KONKLUZJA: W PEŁNI BEZPIECZNE dla tego kodu!
+
+================================================================================
+PODSUMOWANIE NAUKI
+================================================================================
+
+1. ZAWSZE BEZPIECZNE:
+   - HTML atrybuty (bez apostrofów w wartościach)
+   - CSS content property
+   - CSS selektory atrybutów
+   - JavaScript stringi bez apostrofów
+   - JavaScript zagnieźdżenia (jeśli konsekwentnie mieszane)
+   - Template literals (`)
+   - Regex wyrażenia
+
+2. WYMAGA UWAZNOŚCI:
+   - HTML event handlery (jeśli mają stringi)
+   - HTML data-* atrybuty (jeśli zawierają apostrofy)
+   - CSS url() (jeśli zawiera apostrofy w ścieżce)
+   - JSON (zawsze wymaga ")
+
+3. NIGDY NIE MIESZAJ:
+   - 'string"with"mixed'  <- Wymaga prawidłowego escapowania
+   - "string'with'mixed"  <- Wymaga prawidłowego escapowania
+
+4. ZAWSZE PRACUJ Z:
+   - Lintery (ESLint)
+   - Formatery (Prettier)
+   - Version control (Git)
+   - Automatyczne testy
+
+================================================================================
+REKOMENDACJE PRAKTYCZNE
+================================================================================
+
+DLA PROGRAMISTY - CZYSTY KOD:
+  1. Ustal standard w .prettierrc:
+     {
+       "singleQuote": true,
+       "semi": true,
+       "trailingComma": "es5"
+     }
+
+  2. Uruchom prettier na wszystkich plikach:
+     npx prettier --write "**/*.{html,css,js}"
+
+  3. Skonfiguruj ESLint:
+     {
+       "extends": ["prettier"],
+       "rules": {
+         "quotes": ["error", "single", {"avoidEscape": true}]
+       }
+     }
+
+  4. Commit do git:
+     git add .
+     git commit -m "Style: Format with single quotes using Prettier"
+
+DLA PROJEKTU LEGACY:
+  1. Najpierw przeanalizuj zagrożenia
+  2. Zaktualizuj krytyczne miejsca ręcznie
+  3. Użyj Prettier tylko na nowym kodzie
+  4. Pozostaw stary kod bez zmian
+
+DLA DUŻYCH PROJEKTÓW:
+  1. Wdrażaj stopniowo (moduł po module)
+  2. Uruchamiaj pełne testy po każdej zmianie
+  3. Dokumentuj zmiany
+  4. Trapianie regresji w CI/CD
+
+================================================================================
+KONIEC PRZYKŁADÓW
+================================================================================
+
+Data: 2025-12-28
+Status: ZAKONCZONE - Pełna analiza z konkretnymi Case Studies

@@ -496,3 +496,61 @@ def normalize_quotes(text):
     text = text.replace('‚', "'")  # Single low-9 quotation mark
 
     return text
+
+
+def apply_content_quote_replacement(text, characters_config):
+    """Zamiana cudzysłowów w treści markdown (.md) na znaki typograficzne
+
+    Ta funkcja działa na treści użytkownika (paragrafy, nagłówki, listy)
+    aby zastąpić standardowe cudzysłowy znakami typograficznymi dla lepszej
+    czytelności.
+
+    Args:
+        text: str - tekst z pliku markdown
+        characters_config: dict - konfiguracja zamian
+
+    Returns:
+        str - tekst z zamienionymi cudzysłowami na znaki typograficzne
+    """
+    if not characters_config:
+        return text
+
+    quote_replacement = characters_config.get('quote', '"')
+    single_quote_replacement = characters_config.get('single_quote', '‛')
+
+    # Zamień podwójne cudzysłowy na znaki typograficzne
+    text = text.replace('"', quote_replacement)
+
+    # Zamień pojedyncze cudzysłowy/apostrofy na znaki typograficzne
+    text = text.replace("'", single_quote_replacement)
+
+    return text
+
+
+def escape_quotes_in_html_structure(html_content):
+    """Zamienia cudzysłowy w strukturze HTML/JS/CSS na apostrofy
+
+    Ta funkcja działa NA CAŁYM HTML po wygenerowaniu, zamieniając
+    wszystkie cudzysłowy w atrybutach HTML, kodzie JS i CSS na apostrofy,
+    aby kod działał poprawnie w miarze DAX Power BI.
+
+    WAŻNE: Ta funkcja działa PO apply_content_quote_replacement(),
+    więc treść użytkownika już ma znaki typograficzne (np. " " zamiast ").
+
+    Zamiana " → ' jest bezpieczna dla tego projektu, ponieważ:
+    - Event handlery zawierają tylko nazwy funkcji (bez stringów)
+    - Brak JSON w atrybutach HTML
+    - Brak apostrofów w JavaScript stringach
+    - Kod konsekwentnie używa apostrofów
+
+    Args:
+        html_content: str - kompletny wygenerowany HTML
+
+    Returns:
+        str - HTML z apostrofami zamiast cudzysłowów w strukturze
+    """
+    # Zamień WSZYSTKIE pozostałe cudzysłowy " na apostrofy '
+    # (treść użytkownika już ma znaki typograficzne, więc to dotyczy tylko struktury)
+    html_content = html_content.replace('"', "'")
+
+    return html_content

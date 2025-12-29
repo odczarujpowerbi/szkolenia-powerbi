@@ -1,0 +1,13 @@
+{
+	"nodes":[
+		{"id":"19e7ea19cf6ab696","type":"file","file":"000. UTILITIES/ABOUT/01. Diagram Przepływu Danych.md","x":-1840,"y":-1960,"width":2180,"height":2460},
+		{"id":"f7c6e44139b4d713","type":"file","file":"000. UTILITIES/ABOUT/03. Stack Technologiczny.md","x":-1840,"y":-3360,"width":2180,"height":1280},
+		{"id":"145520f718f369b5","type":"file","file":"000. UTILITIES/ABOUT/06. Workflow Tworzenia Treści - Instrukcja.md","x":2080,"y":-3360,"width":1500,"height":3860},
+		{"id":"d8a7b6914295358e","type":"file","file":"000. UTILITIES/ABOUT/06. Workflow Tworzenia Treści.md","x":480,"y":-3360,"width":1500,"height":3860}
+	],
+	"edges":[],
+	"metadata":{
+		"version":"1.0-1.0",
+		"frontmatter":{}
+	}
+}

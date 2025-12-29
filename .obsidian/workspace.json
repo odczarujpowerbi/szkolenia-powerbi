@@ -4,22 +4,24 @@
     "type": "split",
     "children": [
       {
-        "id": "3ff02ebadfdd3dce",
+        "id": "adb65b574d5781e4",
         "type": "tabs",
         "children": [
           {
-            "id": "f1c696942fbe2a70",
+            "id": "603a5964f8681938",
             "type": "leaf",
             "state": {
-              "type": "markdown",
+              "type": "canvas",
               "state": {
-                "file": "400. OUTPUTS/_Measures/_HTML.md",
-                "mode": "source",
-                "source": false,
-                "backlinks": false
+                "file": "_MAIN.canvas",
+                "viewState": {
+                  "x": 355.0786458404822,
+                  "y": -2442.997511237819,
+                  "zoom": -1.3758590384039526
+                }
               },
-              "icon": "lucide-file",
-              "title": "_HTML"
+              "icon": "lucide-layout-dashboard",
+              "title": "_MAIN"
             }
           }
         ],
@@ -107,13 +109,27 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "400. OUTPUTS/_Measures/_HTML.md",
+                "file": "300. INPUTS/2025-12 Poziom Podstawowy/00 - 02 Podstawy/00. Konfiguracja Power BI.md",
                 "followCursor": true,
                 "showSearch": false,
                 "searchQuery": ""
               },
               "icon": "lucide-list",
-              "title": "Outline of _HTML"
+              "title": "Outline of 00. Konfiguracja Power BI"
+            }
+          },
+          {
+            "id": "21f282e236bd8c29",
+            "type": "leaf",
+            "state": {
+              "type": "all-properties",
+              "state": {
+                "sortOrder": "frequency",
+                "showSearch": false,
+                "searchQuery": ""
+              },
+              "icon": "lucide-archive",
+              "title": "All properties"
             }
           }
         ]
@@ -129,7 +145,7 @@
             "state": {
               "type": "localgraph",
               "state": {
-                "file": "400. OUTPUTS/_Measures/_HTML.md",
+                "file": "_MAIN.canvas",
                 "options": {
                   "collapse-filter": true,
                   "search": "",
@@ -157,7 +173,7 @@
                 }
               },
               "icon": "lucide-git-fork",
-              "title": "Graph of _HTML"
+              "title": "Graph of _MAIN"
             }
           }
         ]
@@ -171,54 +187,54 @@
       "switcher:Open quick switcher": false,
       "graph:Open graph view": false,
       "canvas:Create new canvas": false,
-      "templates:Insert template": false,
       "command-palette:Open command palette": false,
       "bases:Create new base": false,
       "obsidian-shellcommands:Shell commands: Custom variables": false,
       "obsidian-excalidraw-plugin:New drawing": false,
       "obsidian-git:Open Git source control": false,
       "hide-folders:Show hidden folders": false,
-      "templater-obsidian:Templater": false,
-      "system3-relay:Relay": false
+      "templater-obsidian:Templater": false
     }
   },
-  "active": "f1c696942fbe2a70",
+  "active": "603a5964f8681938",
   "lastOpenFiles": [
+    "000. UTILITIES/ABOUT/02c. Budowa Gaps.md",
+    "000. UTILITIES/ABOUT/02b. Budowa Quiz.md",
+    "_MAIN.canvas",
+    "000. UTILITIES/ABOUT/02a. Budowa Teorii.md",
+    "000. UTILITIES/ABOUT/06. Workflow Tworzenia Treści - Instrukcja.md",
+    "000. UTILITIES/ABOUT/02. Wspólne Elementy Formatowania.md",
+    "000. UTILITIES/ABOUT/06. Workflow Tworzenia Treści.md",
+    "000. UTILITIES/ABOUT/02. Budowa Treści - Building Blocks.md",
+    "000. UTILITIES/ABOUT/01. Diagram Przepływu Danych.md",
+    "000. UTILITIES/ABOUT/02a. Szczegółowy Przepływ - Gaps.md",
+    "000. UTILITIES/ABOUT/03. Stack Technologiczny.md",
+    "000. UTILITIES/ABOUT/ABOUT.md",
+    "000. UTILITIES/000. UTILITIES.md",
+    "000. UTILITIES/ABOUT/02c. Szczegółowy Przepływ - Teoria.md",
+    "000. UTILITIES/ABOUT/02b. Szczegółowy Przepływ - Quiz.md",
+    "Todo.md",
     "README.md",
-    "400. OUTPUTS/Szkolenie 2025-12/00 - 02 Podstawy/02a. Gaps.html",
-    "400. OUTPUTS/Szkolenie 2025-12/00 - 02 Podstawy/02a. Quiz.html",
-    "300. INPUTS/Szkolenie 2025-12/03 - 06 Zaawansowany DAX/07. Iteratory.md",
+    "config.md",
+    "000. UTILITIES/ABOUT/04. Struktura Folderów.md",
+    "000. UTILITIES/ABOUT/05. Sekwencja Transformacji.md",
+    "Untitled.md",
     "400. OUTPUTS/_Measures/_Parametr.md",
     "400. OUTPUTS/_Measures/_HTML.md",
-    "400. OUTPUTS/_Measures",
-    "400. OUTPUTS/Szkolenie 2025-12/99. Dodatki/99. Praktyczne - Warunkowe kolorowanie.html",
-    "400. OUTPUTS/Szkolenie 2025-12/99. Dodatki/99. Praktyczne - USERELATIONSHIP.html",
-    "400. OUTPUTS/Szkolenie 2025-12/99. Dodatki/99. Praktyczne - Przewalutowanie.html",
-    "400. OUTPUTS/Szkolenie 2025-12/99. Dodatki/99. Praktyczne - Proporcjonalny podział celu.html",
-    "400. OUTPUTS/Szkolenie 2025-12/99. Dodatki/99. Praktyczne - CALCULATEDGROUP.html",
-    "400. OUTPUTS/Szkolenie 2025-12/99. Dodatki",
-    "400. OUTPUTS/Szkolenie 2025-12/03 - 06 Zaawansowany DAX/08a. Quiz.html",
-    "300. INPUTS/Szkolenie 2025-12/03 - 06 Zaawansowany DAX/03. Wprowadzenie do CALCULATE.md",
-    "300. INPUTS/Szkolenie 2025-12/00 - 02 Podstawy/01. Podstawy DAX.md",
-    "300. INPUTS/Szkolenie 2025-12/00 - 02 Podstawy/02. Miary vs Kolumny kalkulowane.md",
-    "300. INPUTS/Szkolenie 2025-12/00 - 02 Podstawy/00. Konfiguracja Power BI.md",
-    "300. INPUTS/300. INPUTS.md",
-    "300. INPUTS/02. Zaawansowane/Gaps.md",
-    "300. INPUTS/02. Zaawansowane/Quiz.md",
-    "Todo.md",
-    "300. INPUTS/01. Podstawy/Teoria.md",
-    "000. TEMPLATES/1. Teoria.md",
-    "000. TEMPLATES/2. Quiz.md",
-    "000. TEMPLATES/3. Gaps.md",
-    "000. TEMPLATES/4. Board.md",
-    "500. ARCHIVE/500. ARCHIVE.md",
-    "300. INPUTS/Gaps.md",
-    "300. INPUTS/Quiz.md",
-    "300. INPUTS/Teoria.md",
-    "400. OUTPUTS/400. OUTPUTS.md",
-    "config.md",
-    "400. OUTPUTS/TMDL/_Parametr.md",
-    "400. OUTPUTS/TMDL/_HTML.md",
+    "000. UTILITIES/TEMPLATES/0. Embed GIF.md",
+    "000. UTILITIES/ABOUT",
+    "000. UTILITIES/TEMPLATES",
+    "100. RESOURCES/100. RESOURCES.md",
+    "architecture-diagram.md",
+    "400. OUTPUTS/2025-12 Poziom Podstawowy/00 - 02 Podstawy/01a. Quiz.html",
+    "300. INPUTS/2025-12 Poziom Podstawowy/00 - 02 Podstawy/01a. Quiz.md",
+    "200. DRAFTS/Board Test.html",
+    "400. OUTPUTS/2025-12 Poziom Podstawowy/00 - 02 Podstawy/00. Konfiguracja Power BI - Przygotowanie środowiska Power BI.html",
+    "400. OUTPUTS/2025-12 Poziom Podstawowy/00 - 02 Podstawy/00. Konfiguracja Power BI - Główne widoki Power BI Desktop.html",
+    "400. OUTPUTS/2025-12 Poziom Podstawowy/99. Dodatki/99. Praktyczne - Warunkowe kolorowanie.html",
+    "400. OUTPUTS/2025-12 Poziom Podstawowy/99. Dodatki/99. Praktyczne - USERELATIONSHIP.html",
+    "400. OUTPUTS/2025-12 Poziom Podstawowy/99. Dodatki/99. Praktyczne - Przewalutowanie.html",
+    "400. OUTPUTS/2025-12 Poziom Podstawowy/99. Dodatki/99. Praktyczne - Proporcjonalny podział celu.html",
     "bin/Pasted Image 20251211193432_248.png",
     "bin/Pasted Image 20251211193344_966.png",
     "bin/Pasted Image 20251211193253_443.png",

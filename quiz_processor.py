@@ -10,7 +10,7 @@ Functions:
 """
 
 import json
-from text_utils import format_user_text, apply_character_replacements, escape_quotes_for_dax
+from text_utils import format_user_text, apply_character_replacements, escape_quotes_for_dax, escape_quotes_in_html_structure
 
 
 def create_quiz_html(title, questions, css='', js='', characters_config=None):
@@ -482,7 +482,13 @@ def create_quiz_html(title, questions, css='', js='', characters_config=None):
     html_parts.append("</html>\n")
 
     # Zwróć HTML (character replacements były już zastosowane w format_user_text)
-    return ''.join(html_parts)
+    html_content = ''.join(html_parts)
+
+    # KROK KOŃCOWY: Zamień wszystkie cudzysłowy w strukturze HTML/JS/CSS na apostrofy
+    # (treść użytkownika już ma znaki typograficzne z characters_config)
+    html_content = escape_quotes_in_html_structure(html_content)
+
+    return html_content
 
 
 def parse_quiz_markdown(content):

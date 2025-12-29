@@ -42,7 +42,7 @@ Zautomatyzowany pipeline, który:
 		- Template JS dla teorii: [[100. RESOURCES/JS - Teoria|JS - Teoria]]
 		- Template JS dla quizów: [[100. RESOURCES/JS - Quiz|JS - Quiz]]
 		- Template JS dla gaps: [[100. RESOURCES/JS - Gaps|JS - Gaps]]
-	- Template dostępne w folderze [[000. TEMPLATES]] oraz pod komendą `Templates: Insert Template`, skrót klawiszowy: `ctrl + shift + 1`
+	- Template dostępne w folderze [[000. UTILITIES]] oraz pod komendą `Templates: Insert Template`, skrót klawiszowy: `ctrl + shift + 1`
 
 4. **Integruje z Power BI** - tworzy miary w tabeli `_HTML`, a następnie wyświetla na wizualizacji interpretującej wartości dokumentów html
 	- Gotowe miary trafiają do folderu [[400. OUTPUTS/400. OUTPUTS|400. OUTPUTS]]
@@ -52,7 +52,7 @@ Zautomatyzowany pipeline, który:
 
 ## Foldery
 
-- **[[000. TEMPLATES/000. TEMPLATES|000. TEMPLATES]]** - szablony Obsidian i inne wzorce
+- **[[000. UTILITIES|000. UTILITIES]]** - szablony Obsidian i inne wzorce
 	- Szablony notatek dla różnych typów treści
 	- Wzorce struktury dla teorii i quizów
 	- Dostępne przez komendę `Templates: Insert Template` (`ctrl + shift + 1`)
@@ -123,5 +123,4 @@ Plik `config.md` musi zawierać blok JSON z kluczem `assets`:
 }
 ```
 
-**Uwaga:** Stary format JSON (z kluczami `css_files` i `js_files`) nie jest już obsługiwany.
 

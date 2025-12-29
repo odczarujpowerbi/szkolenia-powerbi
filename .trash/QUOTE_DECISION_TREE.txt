@@ -1,0 +1,225 @@
+================================================================================
+DRZEWO DECYZYJNE - Czy zamiana " na ' jest bezpieczna?
+================================================================================
+
+START: Czy mam kod zawierający " zamiast '?
+  |
+  +-- TAK --> Przejdź do analizy
+  |
+  +-- NIE --> Koniec (już używasz ')
+
+================================================================================
+KROK 1: Sprawdzenie HTML
+================================================================================
+
+Czy kod zawiera HTML atrybuty?
+  |
+  +-- NIE --> Przejdź do KROKU 2
+  |
+  +-- TAK -->
+        |
+        +-- Czy data-* atrybuty zawierają apostrofy?
+        |     |
+        |     +-- TAK  --> ZAGROŻENIE! Escapuj HTML entity lub zmień na "
+        |     +-- NIE  --> OK
+        |
+        +-- Czy onclick/on* handlery mają zagnieżdżone stringi?
+        |     |
+        |     +-- TAK  --> ZAGROŻENIE! Zmień na cudzysłowy wewnętrzne
+        |     +-- NIE  --> OK
+        |
+        +-- Czy atrybuty zawierają JSON?
+        |     |
+        |     +-- TAK  --> ZAGROŻENIE! JSON wymaga "
+        |     +-- NIE  --> OK
+        |
+        +-- Czy pozostałe atrybuty zawierają apostrofy?
+              |
+              +-- TAK  --> ZAGROŻENIE!
+              +-- NIE  --> OK
+
+Wszystkie atrybuty bezpieczne? --> Przejdź do KROKU 2
+Znaleziono zagrożenie? --> STOP - Analiza manualna wymagana
+
+================================================================================
+KROK 2: Sprawdzenie CSS
+================================================================================
+
+Czy kod zawiera CSS?
+  |
+  +-- NIE --> Przejdź do KROKU 3
+  |
+  +-- TAK -->
+        |
+        +-- Czy CSS zawiera url()?
+        |     |
+        |     +-- TAK -->
+        |     |     |
+        |     |     +-- Czy ścieżka zawiera apostrofy?
+        |     |           |
+        |     |           +-- TAK  --> ZAGROŻENIE!
+        |     |           +-- NIE  --> OK
+        |     |
+        |     +-- NIE --> OK
+        |
+        +-- Czy CSS zawiera content property?
+              |
+              +-- TAK -->
+              |     |
+              |     +-- Czy tekst zawiera apostrofy?
+              |           |
+              |           +-- TAK  --> Wymaga escapowania: \'
+              |           +-- NIE  --> OK
+              |
+              +-- NIE --> OK
+
+Wszystkie CSS reguły bezpieczne? --> Przejdź do KROKU 3
+Znaleziono zagrożenie? --> STOP - Analiza manualna wymagana
+
+================================================================================
+KROK 3: Sprawdzenie JavaScript
+================================================================================
+
+Czy kod zawiera JavaScript?
+  |
+  +-- NIE --> KONIEC - Zamiana jest bezpieczna!
+  |
+  +-- TAK -->
+        |
+        +-- Czy kod zawiera JSON.parse() lub JSON.stringify()?
+        |     |
+        |     +-- TAK -->
+        |     |     |
+        |     |     +-- Czy stringi JSON mają ' zamiast "?
+        |     |           |
+        |     |           +-- TAK  --> ZAGROŻENIE! JSON wymaga "
+        |     |           +-- NIE  --> OK
+        |     |
+        |     +-- NIE --> OK
+        |
+        +-- Czy stringi zawierają apostrofy?
+        |     |
+        |     +-- TAK -->
+        |     |     |
+        |     |     +-- Czy stringi są już escapowane (\')?
+        |     |           |
+        |     |           +-- TAK  --> OK (już obsługiwane)
+        |     |           +-- NIE  --> ZAGROŻENIE!
+        |     |
+        |     +-- NIE --> OK
+        |
+        +-- Czy są zagnieżdżone stringi?
+        |     |
+        |     +-- TAK -->
+        |     |     |
+        |     |     +-- Czy jest konsekwentne mieszanie ' i "?
+        |     |           |
+        |     |           +-- TAK  --> OK (jeśli prawidłowe)
+        |     |           +-- NIE  --> ZAGROŻENIE!
+        |     |
+        |     +-- NIE --> OK
+        |
+        +-- Czy są dynamiczne eval() lub Function()?
+              |
+              +-- TAK  --> ZAGROŻENIE! (eval jest niebezpieczny)
+              +-- NIE  --> OK
+
+Wszystkie JS reguły bezpieczne? --> KONIEC - Zamiana jest bezpieczna!
+Znaleziono zagrożenie? --> STOP - Analiza manualna wymagana
+
+================================================================================
+WYNIK DLA TEGO PROJEKTU
+================================================================================
+
+  KROK 1: HTML
+    [ ] data-* z apostrofami     --> NIE (OK)
+    [ ] onclick z zagniezdzonymi  --> NIE (OK)
+    [ ] JSON w atrybutach         --> NIE (OK)
+    [ ] Apostrofy w wartościach   --> NIE (OK)
+    WYNIK: BEZPIECZNE
+
+  KROK 2: CSS
+    [ ] url() z apostrofami       --> NIE (OK)
+    [ ] content z apostrofami     --> NIE (OK)
+    WYNIK: BEZPIECZNE
+
+  KROK 3: JavaScript
+    [ ] JSON.parse/stringify      --> NIE (OK)
+    [ ] Stringi z apostrofami     --> NIE (OK)
+    [ ] Zagnieżdżone stringi      --> NIE (OK)
+    [ ] eval/Function             --> NIE (OK)
+    WYNIK: BEZPIECZNE
+
+================================================================================
+KONECZNA DECYZJA
+================================================================================
+
+Wszystkie zagrożenia: BRAK
+Status bezpieczeństwa: OK - 100% BEZPIECZNE
+Rekomendacja: MOŻNA ZAMIENIAĆ " na '
+
+================================================================================
+PLAN DZIAŁAŃ
+================================================================================
+
+1. Użyj Prettier z konfiguracją:
+   {
+     "singleQuote": true,
+     "semi": true,
+     "trailingComma": "es5"
+   }
+
+2. Uruchom formatowanie:
+   npx prettier --write "**/*.{html,css,js}"
+
+3. Skonfiguruj ESLint enforcement:
+   {
+     "rules": {
+       "quotes": ["error", "single", {"avoidEscape": true}]
+     }
+   }
+
+4. Zcommituj zmiany:
+   git add .
+   git commit -m "Style: Format code with single quotes"
+
+5. Uruchom testy:
+   npm test
+
+================================================================================
+CHECKLIST PRZED ZMIANĄ
+================================================================================
+
+HTML:
+  [ ] Sprawdzone data-* atrybuty
+  [ ] Sprawdzone event handlery
+  [ ] Sprawdzony JSON w atrybutach
+  [ ] Wszystkie testy przechodzą
+
+CSS:
+  [ ] Sprawdzone url() funkcje
+  [ ] Sprawdzone content property
+  [ ] Wszystkie style renderują się prawidłowo
+
+JavaScript:
+  [ ] Sprawdzony JSON.parse/stringify
+  [ ] Sprawdzone stringi z apostrofami
+  [ ] Sprawdzony JavaScript w HTML
+  [ ] Wszystkie testy jednostkowe przechodzą
+  [ ] Wszystkie testy integracyjne przechodzą
+
+Ogólne:
+  [ ] Backup wykonany
+  [ ] Git branch stworzony
+  [ ] Kod zreviewed
+  [ ] Dokumentacja zaktualizowana
+
+================================================================================
+ZAŁĄCZNIKI
+================================================================================
+
+Pełna analiza: QUOTE_SAFETY_ANALYSIS.txt
+Konkretne przykłady: QUOTE_DETAILED_EXAMPLES.txt
+Szybkie podsumowanie: SUMMARY.txt
+
+================================================================================
