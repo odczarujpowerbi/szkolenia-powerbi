@@ -1,7 +1,7 @@
 createOrReplace
 
     table _HTML
-        lineageTag: 8755ab05-7a01-47c7-b6a4-df4e6ee301d2
+        lineageTag: 9adf56f9-1ffa-46c4-a1fb-7ff58d896537
 
         measure 'Pierogi - Pierogi - tradycyjne polskie danie' = ```
 "
@@ -247,6 +247,7 @@ createOrReplace
     <div class='page active'>
         <h1>Przygotowanie ciasta</h1>
         <p>Ciasto na pierogi przygotowuje się z mąki pszennej, wody, jajka i szczypty soli. Wszystkie składniki zagniata się do uzyskania gładkiego, elastycznego ciasta, które następnie przykrywa się i pozostawia do odpoczynku na około 30 minut. Dobrze wyrobione ciasto powinno być miękkie, ale nie klejące się do rąk.</p>
+        <img src='https://github.com/odczarujpowerbi/szkolenia-powerbi/blob/main/bin/Pasted%20image%2020251229211503.png?raw=true' width='100%'>
 
     </div>
 
@@ -254,6 +255,7 @@ createOrReplace
     <div class='page'>
         <h1>Formowanie i gotowanie</h1>
         <p>Ciasto rozwałkowuje się na cienki placek i wykrawa kółka szklanką lub foremką. Na każde kółko nakłada się farsz (np. mięsny, ruskie, z kapustą i grzybami), następnie skleja brzegi, formując charakterystyczny kształt. Pierogi gotuje się w osolonej wodzie - są gotowe, gdy wypłyną na powierzchnię i gotują się jeszcze przez 2-3 minuty.</p>
+        <img src='https://github.com/odczarujpowerbi/szkolenia-powerbi/blob/main/bin/Pasted%20image%2020251229211330.png?raw=true' width='100%'>
 
     </div>
 
@@ -343,7 +345,7 @@ createOrReplace
 
 "
 ```
-            lineageTag: a96cfcc1-560a-44f7-bb1c-f1e4b31439b9
+            lineageTag: 44159643-e3ba-4f46-ace0-113e8b6f581a
 
         measure 'Ramen - Ramen - japońska zupa z makaronem' = ```
 "
@@ -685,7 +687,7 @@ createOrReplace
 
 "
 ```
-            lineageTag: 09aec50f-d213-4513-8df4-17b35bda3400
+            lineageTag: ea842231-9265-4c1e-9cd8-a77b1565e266
 
         partition _HTML = m
             mode: import

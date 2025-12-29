@@ -6,6 +6,7 @@ type: teoria
 ## Przygotowanie ciasta
 
 Ciasto na pierogi przygotowuje się z mąki pszennej, wody, jajka i szczypty soli. Wszystkie składniki zagniata się do uzyskania gładkiego, elastycznego ciasta, które następnie przykrywa się i pozostawia do odpoczynku na około 30 minut. Dobrze wyrobione ciasto powinno być miękkie, ale nie klejące się do rąk.
+![[Pasted image 20251229211503.png]]
 
 ---
 ## Formowanie i gotowanie
