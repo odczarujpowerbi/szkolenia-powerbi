@@ -1,4 +1,4 @@
-SUMX = 
+Ramen - japońska zupa z makaronem = 
 
 "
 
@@ -7,7 +7,7 @@ SUMX =
 <head>
     <meta charset='UTF-8'>
     <meta name='viewport' content='width=device-width, initial-scale=1.0'>
-    <title>SUMX</title>
+    <title>Ramen - japońska zupa z makaronem</title>
     <style>
             * {
                 margin: 0;
@@ -229,111 +229,27 @@ SUMX =
 </head>
 <body>
 
-<div class='container' id='viz_1f36501d'>
+<div class='container' id='viz_2f1251c3'>
     <!-- Nawigacja na górze -->
     <div class='navigation'>
-        <button id='prevBtn_1f36501d' onclick='changePage_1f36501d(-1)'>← Poprzednia</button>
+        <button id='prevBtn_2f1251c3' onclick='changePage_2f1251c3(-1)'>← Poprzednia</button>
         <span class='page-indicator'>
-            Strona <span id='currentPage_1f36501d'>1</span> z <span id='totalPages_1f36501d'>3</span>
+            Strona <span id='currentPage_2f1251c3'>1</span> z <span id='totalPages_2f1251c3'>2</span>
         </span>
-        <button id='nextBtn_1f36501d' onclick='changePage_1f36501d(1)'>Następna →</button>
+        <button id='nextBtn_2f1251c3' onclick='changePage_2f1251c3(1)'>Następna →</button>
     </div>
 
     <!-- Strona 1 -->
     <div class='page active'>
-        <h1>Jak działa SUMX?</h1>
-        <p>SUMX iteruje po wierszach, więc poniższa funkcja kolejno</p>
-        <ul>
-        <li>Przemnoży <code>ilość </code> i <code>Cenę</code> - wynikiem będzie <code>Wartość Netto</code></li>
-        <li>Zsumuje <code>Wartości Netto</code>, zależnie od kontekstu</li>
-        </ul>
-        <pre><code>DAX
-        Wartość Zamówień = <span class='dax-function'>SUMX</span>(Sprzedaz, Sprzedaz[Cena] * Sprzedaz[Ilość])</code></pre>
-        <h2>Proces iteracyjny krok po kroku:</h2>
-        <table>
-          <thead>
-            <tr>
-              <th>Iteracja</th>
-              <th>KATEGORIA</th>
-              <th>Cena</th>
-              <th>Ilość</th>
-              <th>Obliczenie (Cena × Ilość)</th>
-              <th>Wynik wiersza</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td>1</td>
-              <td>NAPOJE</td>
-              <td>3000</td>
-              <td>2</td>
-              <td>3000 × 2</td>
-              <td>6000</td>
-            </tr>
-            <tr>
-              <td>2</td>
-              <td>WINO</td>
-              <td>50</td>
-              <td>10</td>
-              <td>50 × 10</td>
-              <td>500</td>
-            </tr>
-            <tr>
-              <td>3</td>
-              <td>KULINARKA</td>
-              <td>150</td>
-              <td>5</td>
-              <td>150 × 5</td>
-              <td>750</td>
-            </tr>
-            <tr>
-              <td>4</td>
-              <td>PRZEKĄSKI</td>
-              <td>800</td>
-              <td>3</td>
-              <td>800 × 3</td>
-              <td>2400</td>
-            </tr>
-            <tr>
-              <td><strong>SUMA</strong></td>
-              <td></td>
-              <td></td>
-              <td></td>
-              <td></td>
-              <td><strong>9650</strong></td>
-            </tr>
-          </tbody>
-        </table>
-        <p><strong>Wynik końcowy:</strong> 9650 PLN</p>
+        <h1>Bulion</h1>
+        <p>Podstawą ramenu jest bogaty bulion, który może być przygotowany na różne sposoby: tonkotsu (wieprzowy), shoyu (sojowy), miso (na bazie pasty miso) lub shio (solny). Tradycyjny tonkotsu wymaga gotowania kości wieprzowych przez wiele godzin, często nawet 12-18 godzin, co pozwala wydobyć maksimum smaku i uzyskać kremową, mlecznobiałą konsystencję.</p>
 
     </div>
 
     <!-- Strona 2 -->
     <div class='page'>
-        <h1>Porównanie: <code>SUMX</code> vs zwykła <code>SUM</code></h1>
-        <h2>❌ To NIE zadziała poprawnie:</h2>
-        <pre><code>DAX
-        Błędna Wartość = <span class='dax-function'>SUM</span>(Sprzedaz[Cena]) * <span class='dax-function'>SUM</span>(Sprzedaz[Ilość])</code></pre>
-        <ul>
-        <li>SUM(Cena) = 3000 + 50 + 150 + 800 = <strong>4000</strong></li>
-        <li>SUM(Ilość) = 2 + 10 + 5 + 3 = <strong>20</strong></li>
-        <li>Wynik: 4000 × 20 = <strong>80 000</strong> ❌ (Błędny!)</li>
-        </ul>
-        <h2>✅ To działa poprawnie:</h2>
-        <pre><code>DAX
-        Poprawna Wartość = <span class='dax-function'>SUMX</span>(Sprzedaz, Sprzedaz[Cena] * Sprzedaz[Ilość])</code></pre>
-        <ul>
-        <li>Wynik: <strong>9650</strong> ✅ (Poprawny!)</li>
-        </ul>
-
-    </div>
-
-    <!-- Strona 3 -->
-    <div class='page'>
-        <h1>Ważna uwaga:</h1>
-        <p><strong>Nie używaj X-funkcji tam, gdzie wystarczy zwykła agregacja.</strong> </p>
-        <p>Jeśli po prostu chcesz zsumować wartości z jednej kolumny, użyj <code>SUM</code> - będzie znacznie szybsza. <code>X</code>-funkcje uruchamiaj się tylko wtedy, gdy musisz coś obliczyć <strong>w locie</strong> dla każdego wiersza. Każda niepotrzebna iteracja spowalnia raport.</p>
-        <p>---</p>
+        <h1>Składniki dodatkowe</h1>
+        <p>Gotowy ramen komponuje się z kilku elementów: ugotowanego makaronu ramen, gorącego bulionu, marynowanego jajka (ajitsuke tamago), plastrów wieprzowiny chashu, pokrojonej cebuli dymki, listków nori oraz kiełków bambusa. Każdy element dodaje się w określonej kolejności, tworząc harmonijną całość. Ramen podaje się gorący, bezpośrednio po przygotowaniu.</p>
 
     </div>
 
@@ -342,10 +258,10 @@ SUMX =
 <script>
 (function() {
     // Unikalny ID dla tej wizualizacji (wstrzykiwany przez Python)
-    var vizId = '1f36501d';
+    var vizId = '2f1251c3';
     var containerId = 'viz_' + vizId;
 
-    var currentPage_1f36501d = 1;
+    var currentPage_2f1251c3 = 1;
     var container = document.getElementById(containerId);
 
     if (!container) return;
@@ -355,27 +271,27 @@ SUMX =
 
     document.getElementById('totalPages_' + vizId).textContent = totalPages;
 
-    window['showPage_1f36501d'] = function(n) {
-        if (n > totalPages) currentPage_1f36501d = totalPages;
-        if (n < 1) currentPage_1f36501d = 1;
+    window['showPage_2f1251c3'] = function(n) {
+        if (n > totalPages) currentPage_2f1251c3 = totalPages;
+        if (n < 1) currentPage_2f1251c3 = 1;
 
         for (var i = 0; i < pages.length; i++) {
             pages[i].classList.remove('active');
         }
-        pages[currentPage_1f36501d - 1].classList.add('active');
+        pages[currentPage_2f1251c3 - 1].classList.add('active');
 
-        document.getElementById('currentPage_' + vizId).textContent = currentPage_1f36501d;
-        document.getElementById('prevBtn_' + vizId).disabled = (currentPage_1f36501d === 1);
-        document.getElementById('nextBtn_' + vizId).disabled = (currentPage_1f36501d === totalPages);
+        document.getElementById('currentPage_' + vizId).textContent = currentPage_2f1251c3;
+        document.getElementById('prevBtn_' + vizId).disabled = (currentPage_2f1251c3 === 1);
+        document.getElementById('nextBtn_' + vizId).disabled = (currentPage_2f1251c3 === totalPages);
     };
 
-    window['changePage_1f36501d'] = function(n) {
-        currentPage_1f36501d += n;
-        window['showPage_1f36501d'](currentPage_1f36501d);
+    window['changePage_2f1251c3'] = function(n) {
+        currentPage_2f1251c3 += n;
+        window['showPage_2f1251c3'](currentPage_2f1251c3);
     };
 
     // Inicjalizacja
-    window['showPage_1f36501d'](1);
+    window['showPage_2f1251c3'](1);
 
     // Funkcjonalność powiększania obrazów
     var images = container.querySelectorAll('img');
