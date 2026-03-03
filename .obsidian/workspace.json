@@ -4,19 +4,22 @@
     "type": "split",
     "children": [
       {
-        "id": "17aadcd27ab42726",
+        "id": "7361220ec6fd4de3",
         "type": "tabs",
         "children": [
           {
-            "id": "473bc0f5d24e60be",
+            "id": "554f8491eb6ef43b",
             "type": "leaf",
             "state": {
-              "type": "html-view",
+              "type": "markdown",
               "state": {
-                "file": "400. OUTPUTS/Wprowadzenie do PowerQuery/01. UI - Wstęp.html"
+                "file": "300. INPUTS/Wprowadzenie do PowerQuery/01. UI.md",
+                "mode": "source",
+                "source": false,
+                "backlinks": false
               },
-              "icon": "code-glyph",
-              "title": "01. UI - Wstęp"
+              "icon": "lucide-file",
+              "title": "01. UI"
             }
           }
         ]
@@ -103,13 +106,13 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "400. OUTPUTS/Wprowadzenie do PowerQuery/01. UI - Wstęp.html",
+                "file": "300. INPUTS/Wprowadzenie do PowerQuery/01. UI.md",
                 "followCursor": true,
                 "showSearch": false,
                 "searchQuery": ""
               },
               "icon": "lucide-list",
-              "title": "Konspekt 01. UI - Wstęp"
+              "title": "Konspekt 01. UI"
             }
           },
           {
@@ -139,7 +142,7 @@
             "state": {
               "type": "localgraph",
               "state": {
-                "file": "400. OUTPUTS/Wprowadzenie do PowerQuery/01. UI - Wstęp.html",
+                "file": "300. INPUTS/Wprowadzenie do PowerQuery/01. UI.md",
                 "options": {
                   "collapse-filter": true,
                   "search": "",
@@ -167,7 +170,7 @@
                 }
               },
               "icon": "lucide-git-fork",
-              "title": "Graf: 01. UI - Wstęp"
+              "title": "Graf: 01. UI"
             }
           }
         ]
@@ -192,28 +195,35 @@
   },
   "active": "257cfe7088d8211a",
   "lastOpenFiles": [
-    "400. OUTPUTS/Wprowadzenie do PowerQuery/02. Działania na tabelach - Rozdział - to będzie osobna miara.html",
-    "400. OUTPUTS/Wprowadzenie do PowerQuery/01. UI - Wstęp.html",
-    "300. INPUTS/Wprowadzenie do PowerQuery/03. Język M.md",
-    "400. OUTPUTS/_Measures/_Parametr.md",
-    "400. OUTPUTS/_Measures/_HTML.md",
-    "400. OUTPUTS/Wprowadzenie do PowerQuery/03. Język M - Wstęp.html",
-    "400. OUTPUTS/Wprowadzenie do PowerQuery",
     "300. INPUTS/Wprowadzenie do PowerQuery/02. Działania na tabelach.md",
     "300. INPUTS/Wprowadzenie do PowerQuery/01. UI.md",
+    "300. INPUTS/Wprowadzenie do PowerQuery/03. Język M.md",
+    "bin/Pasted image 20260128082507 1.png",
     "300. INPUTS/300. INPUTS.md",
+    "bin/pierogi.png",
+    "000. UTILITIES/000. UTILITIES.md",
+    "000. UTILITIES/ABOUT/01. Diagram Przepływu Danych.md",
+    "000. UTILITIES/ABOUT/ABOUT.md",
+    "100. RESOURCES/100. RESOURCES.md",
+    "200. DRAFTS/200. DRAFTS.md",
+    "200. DRAFTS/Board Test.html",
+    "config.md",
+    "bin/Pasted image 20260128082632 1.png",
+    "bin/Pasted image 20260128082734 1.png",
+    "bin/Pasted image 20260128082807 1.png",
+    "bin/Pasted image 20260128082955 1.png",
+    "400. OUTPUTS/Wprowadzenie do PowerQuery/03. Język M - Wstęp.html",
+    "400. OUTPUTS/Wprowadzenie do PowerQuery/02. Działania na tabelach - Rozdział - to będzie osobna miara.html",
+    "400. OUTPUTS/_Measures/_HTML.md",
+    "400. OUTPUTS/Wprowadzenie do PowerQuery/01. UI - Wstęp.html",
+    "400. OUTPUTS/_Measures/_Parametr.md",
+    "400. OUTPUTS/Wprowadzenie do PowerQuery",
     "500. ARCHIVE/500. ARCHIVE.md",
     "_MAIN.canvas",
     "bin/Pasted image 20260303152152.png",
     "bin/Pasted image 20260303151950.png",
     "bin/Pasted image 20260303151916.png",
     "bin/Pasted image 20260303151901.png",
-    "bin/Pasted image 20260303151355.png",
-    "bin/Pasted image 20260303151207.png",
-    "bin/Pasted image 20260303145823.png",
-    "bin/Pasted image 20260303145812.png",
-    "bin/Pasted image 20260303144704.png",
-    "bin/Pasted image 20260303144645.png",
     "Bez nazwy.md",
     "300. INPUTS/Wprowadzenie do PowerQuery",
     "500. ARCHIVE/Podstawy PBI/03 - 06 Kontekst/07. Iteratory.md",
@@ -227,13 +237,6 @@
     "500. ARCHIVE/Podstawy PBI/03 - 06 Kontekst/04. Modyfikowanie Kontekstu.md",
     "500. ARCHIVE/Podstawy PBI/03 - 06 Kontekst/03a. Quiz.md",
     "500. ARCHIVE/Podstawy PBI/03 - 06 Kontekst/03a. Gaps.md",
-    "500. ARCHIVE/Podstawy PBI/03 - 06 Kontekst/03. Wprowadzenie do CALCULATE.md",
-    "500. ARCHIVE/Podstawy PBI/00 - 02 Podstawy/02a. Quiz.md",
-    "500. ARCHIVE/Podstawy PBI/00 - 02 Podstawy/02a. Gaps.md",
-    "500. ARCHIVE/Podstawy PBI/00 - 02 Podstawy/02. Miary vs Kolumny kalkulowane.md",
-    "500. ARCHIVE/Podstawy PBI/00 - 02 Podstawy/01a. Quiz.md",
-    "500. ARCHIVE/Podstawy PBI/00 - 02 Podstawy/01a. Gaps.md",
-    "200. DRAFTS/Board Test.html",
     "500. ARCHIVE/Podstawy PBI/03 - 06 Kontekst",
     "500. ARCHIVE/Podstawy PBI/00 - 02 Podstawy",
     "500. ARCHIVE/Podstawy PBI",
