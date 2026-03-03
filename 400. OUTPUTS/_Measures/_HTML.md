@@ -1,7 +1,7 @@
 createOrReplace
 
     table _HTML
-        lineageTag: 1f129d25-e7fb-4d69-8468-fabac5e8d996
+        lineageTag: 9c0832a4-f6e2-4260-aa52-61d96192e296
 
         measure '01. UI - Wstęp' = ```
 "
@@ -316,7 +316,7 @@ createOrReplace
         <li>Błyskawicznie znajdziesz etap, na którym coś poszło nie tak</li>
         <li>Cofnięcie do poprzedniego stanu to jedno kliknięcie – eksperymentuj bez obaw</li>
         </ul>
-        <img src='https://github.com/odczarujpowerbi/szkolenia-powerbi/blob/main/bin/Pasted%20image%2020260303145812.png|693?raw=true' width='100%'>
+        <img src='https://github.com/odczarujpowerbi/szkolenia-powerbi/blob/main/bin/Pasted%20image%2020260303145812.png?raw=true' width='100%'>
         <h2>Edytor Zaawansowany</h2>
         <p>Interfejs graficzny Power Query pokrywa zdecydowaną większość codziennych potrzeb – ale gdy zajdzie potrzeba wyjścia poza to co da się wyklikać, z pomocą przychodzi Edytor Zaawansowany i język M. Każda operacja wykonana w UI jest w tle zapisywana właśnie jako kod M, co oznacza że możesz płynnie przechodzić między oboma światami.</p>
         <ul>
@@ -415,7 +415,7 @@ createOrReplace
 
 "
 ```
-            lineageTag: d0ef8eaf-fcb6-41e6-9108-f6a6e44543e2
+            lineageTag: 5d8a5d78-56f2-4313-be27-428b3dcb54d1
 
         measure '02. Działania na tabelach - Rozdział - to będzie osobna miara' = ```
 "
@@ -785,7 +785,7 @@ createOrReplace
 
 "
 ```
-            lineageTag: f41305ef-595a-4db8-bcb8-e1f4fcff2f60
+            lineageTag: f35899b9-68a5-4a68-884f-a86cbf8ae46c
 
         measure '03. Język M - Wstęp' = ```
 "
@@ -1161,7 +1161,415 @@ createOrReplace
 
 "
 ```
-            lineageTag: 63e88cbe-31cf-4b77-8ff1-72415cf5f0f6
+            lineageTag: cc532f6f-bbbf-4ff9-8dad-0b0326397566
+
+        measure '04. Edytowanie kodu M - Przykład 1 - Kolumna warunkowa' = ```
+"
+
+<!DOCTYPE html>
+<html lang='pl'>
+<head>
+    <meta charset='UTF-8'>
+    <meta name='viewport' content='width=device-width, initial-scale=1.0'>
+    <title>Przykład 1 - Kolumna warunkowa</title>
+    <style>
+            * {
+                margin: 0;
+                padding: 0;
+                box-sizing: border-box;
+            }
+    
+            body {
+                font-family: 'Roboto', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+                font-size: 16px;
+                font-weight: 400;
+                line-height: 1.7;
+                color: #333;
+                background: transparent;
+                padding: 20px;
+            }
+    
+            .container {
+                max-width: 800px;
+                margin: 0 auto;
+                background: transparent;
+                padding: 40px;
+            }
+    
+            .navigation {
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                margin-bottom: 40px;
+                padding-bottom: 20px;
+                border-bottom: 1px solid #e1e4e8;
+            }
+    
+            button {
+                background: #6b1718;
+                color: white;
+                border: none;
+                padding: 12px 28px;
+                border-radius: 4px;
+                cursor: pointer;
+                font-size: 1em;
+                font-weight: 500;
+                transition: background 0.2s;
+            }
+    
+            button:hover {
+                background: #380c0c;
+            }
+    
+            button:disabled {
+                background: #ccc;
+                cursor: not-allowed;
+            }
+    
+            .page-indicator {
+                color: #666;
+                font-size: 1em;
+            }
+    
+            .page {
+                display: none;
+                min-height: 500px;
+            }
+    
+            .page.active {
+                display: block;
+                animation: fadeIn 0.3s ease-in;
+            }
+    
+            @keyframes fadeIn {
+                from { opacity: 0; transform: translateY(10px); }
+                to { opacity: 1; transform: translateY(0); }
+            }
+    
+            h1 {
+                font-size: 26px;
+                line-height: 36px;
+                font-weight: 600;
+                padding-top: 14px;
+                padding-bottom: 6px;
+                margin-bottom: 1em;
+                color: #6b1718;
+                border-bottom: 2px solid #6b1718;
+            }
+    
+            h2 {
+                font-size: 26px;
+                line-height: 36px;
+                font-weight: 600;
+                padding-top: 14px;
+                padding-bottom: 6px;
+                margin: 1.5em 0 0.8em 0;
+                color: #1a1a1a;
+                border-bottom: 2px solid #1a1a1a;
+            }
+    
+            h3 {
+                font-size: 1.1em;
+                font-weight: 600;
+                margin: 1.2em 0 0.6em 0;
+                padding-bottom: 5px;
+                color: #444;
+                border-bottom: 1px solid #999;
+            }
+    
+            p {
+                margin-bottom: 1em;
+                font-size: 1.05em;
+            }
+    
+            strong {
+                font-weight: 700;
+                color: #1a1a1a;
+            }
+    
+            code {
+                background: #f5f5f5;
+                padding: 3px 7px;
+                border-radius: 3px;
+                font-family: 'Fira Code', 'Courier New', monospace;
+                font-size: 0.95em;
+                color: #b82b4e;
+            }
+    
+            pre {
+                background: #f8f9fa;
+                border-left: 3px solid #6b1718;
+                padding: 18px;
+                margin: 1em 0;
+                overflow-x: auto;
+                border-radius: 3px;
+            }
+    
+            pre code {
+                background: none;
+                padding: 0;
+                color: #24292e;
+                font-size: 1em;
+                line-height: 1.6;
+            }
+    
+            .dax-keyword {
+                color: #6b1718;
+                font-weight: 600;
+            }
+    
+            .dax-function {
+                color: #6f42c1;
+            }
+    
+            .dax-number {
+                color: #005cc5;
+            }
+    
+            .dax-comment {
+                color: #6a737d;
+                font-style: italic;
+            }
+    
+            ul, ol {
+                margin: 0.3em 0;
+                padding-left: 1.8em;
+            }
+    
+            li {
+                margin: 0;
+                padding-left: 0.2em;
+                font-size: 1.05em;
+                line-height: 1.6;
+            }
+    
+            ol {
+                list-style-type: decimal;
+            }
+    
+            ol li::marker {
+                color: #999;
+                font-weight: 400;
+            }
+    
+            ul li::marker {
+                color: #999;
+            }
+    
+            ul ul, ol ol, ul ol, ol ul {
+                margin: 0.2em 0;
+                padding-left: 1.5em;
+            }
+    
+            blockquote {
+                border-left: 3px solid #6b1718;
+                background: #f8f9fa;
+                padding: 14px 18px;
+                margin: 1em 0;
+                color: #555;
+                font-style: italic;
+            }
+    
+            blockquote p {
+                margin: 0;
+            }
+    
+            .iteration-box {
+                border-left: 3px solid #6b1718;
+                padding: 14px 18px;
+                margin: 0.8em 0;
+            }
+    
+            .result-box {
+                background: #f5f5f5;
+                border-left: 3px solid #999;
+                padding: 14px 18px;
+                margin: 0.8em 0;
+                font-weight: 500;
+                color: #555;
+                font-size: 1.05em;
+            }
+        </style>
+</head>
+<body>
+
+<div class='container' id='viz_7a830c0c'>
+    <!-- Nawigacja na górze -->
+    <div class='navigation'>
+        <button id='prevBtn_7a830c0c' onclick='changePage_7a830c0c(-1)'>← Poprzednia</button>
+        <span class='page-indicator'>
+            Strona <span id='currentPage_7a830c0c'>1</span> z <span id='totalPages_7a830c0c'>5</span>
+        </span>
+        <button id='nextBtn_7a830c0c' onclick='changePage_7a830c0c(1)'>Następna →</button>
+    </div>
+
+    <!-- Strona 1 -->
+    <div class='page active'>
+        <h1>Tworzenie nowej kwerendy i odwołanie do tabeli</h1>
+        <p>Na początek utwórzmy nową kwerendę ”New Query”, żeby utworzyć obiekt, w którym będziemy pisać kod M.</p>
+        <img src='https://github.com/odczarujpowerbi/szkolenia-powerbi/blob/main/bin/Pasted%20image%2020260303184759.png?raw=true' width='100%'>
+        <p>W utworzonym obiekcie możemy od razu zadeklarować odwołanie do istniejącej tabeli o nazwie <code>tabela_sprzedazy</code> — wystarczy przypisać ją do jedynego kroku w bloku <code>let...in</code>. Zauważ, że ten sam krok jest jednocześnie zwracany, ponieważ pojawia się po słowie kluczowym <code>in</code>.</p>
+        <img src='https://github.com/odczarujpowerbi/szkolenia-powerbi/blob/main/bin/Pasted%20image%2020260303184728.png?raw=true' width='100%'>
+        <h1>Dodawanie kolumn przez interfejs użytkownika</h1>
+        <p>Załóżmy, że chcemy policzyć rabaty naliczane dla klientów w odpowiednich okresach. Jeżeli wartość transakcji przekroczy określony próg w danym miesiącu (np. 1500 zł), chcemy oznaczyć, że przy następnej transakcji klient otrzyma rabat na ten sam zakup. Niestety, nasza tabela zawiera jedynie podstawowe informacje: datę, nazwę klienta, cenę oraz liczbę transakcji.</p>
+        <p>Korzystając z interfejsu Power Query, możemy dodać nowe kolumny: Sprzedaży, Kosztów, Zysku i Rabatu. Można to zrobić na dwa sposoby — używając wstążki ”Add Column” lub przycisku w lewym górnym rogu tabeli.</p>
+        <img src='https://github.com/odczarujpowerbi/szkolenia-powerbi/blob/main/bin/Pasted%20image%2020260303185041.png?raw=true' width='100%'>
+        <p>Po prawej stronie modułu ”Custom Column” dostępne są już nazwy kolumn — możemy je dodawać do edytora zamiast ręcznie przepisywać. Wystarczy dopisać jedynie operację, którą chcemy wykonać. W tym przypadku jest to iloczyn, czyli znak <code>*</code>.</p>
+        <img src='https://github.com/odczarujpowerbi/szkolenia-powerbi/blob/main/bin/Pasted%20image%2020260303193152.png?raw=true' width='100%'>
+
+    </div>
+
+    <!-- Strona 2 -->
+    <div class='page'>
+        <h1>Edycja kodu w Advanced Editorze</h1>
+        <p>Dodawanie wielu kolumn przez interfejs może być żmudne. Dlatego warto uruchomić Advanced Editor i po prostu skopiować istniejący krok.</p>
+        <img src='https://github.com/odczarujpowerbi/szkolenia-powerbi/blob/main/bin/Pasted%20image%2020260303185401.png?raw=true' width='100%'>
+        <p>Dzięki skopiowaniu mamy już <strong>szkielet</strong> operacji dodania nowej kolumny. Dostosujmy go teraz do naszego przykładu — obliczenia kosztu. Na poniższym obrazie dobrze widać, za co odpowiadają kolejne elementy kodu. Na zielono oznaczone są komentarze (znak <code>//</code> wyłącza kod w danej linii, od miejsca wystąpienia do końca wiersza).</p>
+        <p>Aby dodać nową kolumnę, należy edytować:</p>
+        <ul>
+        <li><strong>Nazwę nowego kroku</strong> — dowolna nazwa, która pomaga zrozumieć sekwencję kroków bez zagłębiania się w kod.</li>
+        <li><strong>Obiekt i metodę</strong> — można je traktować jako dwuczłonową nazwę funkcji. Pierwszy człon odwołuje się do obiektu (np. <code>Table</code>), a drugi do akcji (np. <code>AddColumn</code>).</li>
+        <li><strong>Pierwszy argument</strong> — dla metod tabelarycznych jest to zazwyczaj nazwa poprzedniego kroku. Ponieważ kroki są sekwencyjne (od góry do dołu), w 99% przypadków pierwszym argumentem jest krok bezpośrednio poprzedzający.</li>
+        <li><strong>Nazwę kolumny</strong> — po prostu nazwa nowej kolumny 🙂</li>
+        <li><strong>Operację</strong> — słowo kluczowe <code>each</code> oznacza, że działamy na poziomie pojedynczych wierszy. Odwołując się do nazw kolumn, sięgamy do konkretnych wartości w tabeli (analogicznie do komórek w Excelu). <code>each</code> można rozumieć jako ”<strong>dla każdego</strong> wiersza”.</li>
+        </ul>
+        <p>> <strong>⚠️ Ważne!</strong> Początkujący często o tym zapominają — jeżeli dodajesz nowy krok, musisz zaktualizować nazwę, do której odwołuje się następny krok. Dotyczy to również nazwy zwracanej przez <code>in</code>.</p>
+        <img src='https://github.com/odczarujpowerbi/szkolenia-powerbi/blob/main/bin/Pasted%20image%2020260303190856.png?raw=true' width='100%'>
+        <h1>Naliczanie rabatu — kolumna warunkowa</h1>
+        <p>Mamy już obliczony Zysk. Pora napisać formułę dla ”Conditional Column” z użyciem edytora UI.</p>
+        <img src='https://github.com/odczarujpowerbi/szkolenia-powerbi/blob/main/bin/Pasted%20image%2020260303191159.png?raw=true' width='100%'>
+        <p>Jest jednak pewne ograniczenie — w edytorze jako ”Output” można zwrócić wyłącznie:</p>
+        <ul>
+        <li>wartości statyczne (”na sztywno”),</li>
+        <li>całe kolumny,</li>
+        <li>parametr.</li>
+        </ul>
+        <p>Żadna z tych opcji nie pozwoli na dynamiczne wygenerowanie wartości w stylu ”10% Michał K.”.</p>
+        <h1>Column From Examples — AI w służbie kodu M</h1>
+        <p>Zacznijmy od utworzenia osobnej kolumny. Tym razem użyjemy funkcji ”Column From Examples” z opcją ”From Selection”. Aktywuje to wbudowany model AI, który generuje kod M na podstawie zaznaczonych danych. Pamiętaj, że przed użyciem tej opcji musisz <strong>zaznaczyć kolumny</strong>, które Cię interesują — w tym przypadku imię i nazwisko klienta.</p>
+        <img src='https://github.com/odczarujpowerbi/szkolenia-powerbi/blob/main/bin/Pasted%20image%2020260303191921.png?raw=true' width='100%'>
+        <p>Wystarczy ręcznie wpisać kilka przykładowych wartości, aby algorytm ”załapał”, o co nam chodzi. Wpisanie samego ”Dorota N.” może nie wystarczyć — algorytm znajdzie imię ”Dorota”, ale nie domyśli się od razu, że ”N.” pochodzi od pierwszej litery nazwiska, i prawdopodobnie przypisze ”N.” wszystkim wierszom. Dopiero wpisanie drugiego przykładu, np. ”Łukasz Z.”, daje mu wystarczający kontekst, aby wywnioskować: ”aha, to pierwsza litera z kolumny z nazwiskiem, zakończona kropką”.</p>
+        <img src='https://github.com/odczarujpowerbi/szkolenia-powerbi/blob/main/bin/Pasted%20image%2020260303195625.png?raw=true' width='100%'>
+
+    </div>
+
+    <!-- Strona 3 -->
+    <div class='page'>
+        <h1>Łączenie kolumny warunkowej z dynamiczną wartością</h1>
+        <p>Teraz najlepsza część! Mając gotowy kod generujący nową kolumnę, możemy go skopiować i wkleić jako wartość zwracaną przez kolumnę warunkową.</p>
+        <img src='https://github.com/odczarujpowerbi/szkolenia-powerbi/blob/main/bin/Pasted%20image%2020260303192519.png?raw=true' width='100%'>
+        <p>I gotowe! Nie znając wszystkich funkcji Power Query — operując jedynie na szkielecie kodu — jesteśmy w stanie tworzyć naprawdę zaawansowaną logikę biznesową.</p>
+        <img src='https://github.com/odczarujpowerbi/szkolenia-powerbi/blob/main/bin/Pasted%20image%2020260303192422.png?raw=true' width='100%'>
+
+    </div>
+
+    <!-- Strona 4 -->
+    <div class='page'>
+        <h1>Zanim zaczniesz — kilka przydatnych wskazówek</h1>
+        <ul>
+        <li>Edytor stara się podpowiadać podczas pisania kodu — wystarczy wpisać np. <code>Table</code>, aby wyświetlić listę wszystkich dostępnych metod dla obiektu tabeli.</li>
+        </ul>
+        <img src='https://github.com/odczarujpowerbi/szkolenia-powerbi/blob/main/bin/Pasted%20image%2020260303194543.png?raw=true' width='100%'>
+        <ul>
+        <li>Po najechaniu kursorem na metodę w kodzie możesz zobaczyć podgląd jej składni.</li>
+        </ul>
+        <img src='https://github.com/odczarujpowerbi/szkolenia-powerbi/blob/main/bin/Pasted%20image%2020260303194547.png?raw=true' width='100%'>
+
+    </div>
+
+    <!-- Strona 5 -->
+    <div class='page'>
+        <p>Główne zmiany: dodano 6 nagłówków H2 porządkujących strukturę, poprawiono kilka niezręcznych sformułowań (np. ”w dwójnasób” → ”na dwa sposoby”, ”ślamazarne” → ”żmudne”), ujednolicono styl i interpunkcję, przekształcono blok z ostrzeżeniem na wyróżniony cytat. Odwołania do zdjęć pozostały bez zmian.</p>
+
+    </div>
+
+</div>
+
+<script>
+(function() {
+    // Unikalny ID dla tej wizualizacji (wstrzykiwany przez Python)
+    var vizId = '7a830c0c';
+    var containerId = 'viz_' + vizId;
+
+    var currentPage_7a830c0c = 1;
+    var container = document.getElementById(containerId);
+
+    if (!container) return;
+
+    var pages = container.querySelectorAll('.page');
+    var totalPages = pages.length;
+
+    document.getElementById('totalPages_' + vizId).textContent = totalPages;
+
+    window['showPage_7a830c0c'] = function(n) {
+        if (n > totalPages) currentPage_7a830c0c = totalPages;
+        if (n < 1) currentPage_7a830c0c = 1;
+
+        for (var i = 0; i < pages.length; i++) {
+            pages[i].classList.remove('active');
+        }
+        pages[currentPage_7a830c0c - 1].classList.add('active');
+
+        document.getElementById('currentPage_' + vizId).textContent = currentPage_7a830c0c;
+        document.getElementById('prevBtn_' + vizId).disabled = (currentPage_7a830c0c === 1);
+        document.getElementById('nextBtn_' + vizId).disabled = (currentPage_7a830c0c === totalPages);
+    };
+
+    window['changePage_7a830c0c'] = function(n) {
+        currentPage_7a830c0c += n;
+        window['showPage_7a830c0c'](currentPage_7a830c0c);
+    };
+
+    // Inicjalizacja
+    window['showPage_7a830c0c'](1);
+
+    // Funkcjonalność powiększania obrazów
+    var images = container.querySelectorAll('img');
+    images.forEach(function(img) {
+        img.style.cursor = 'pointer';
+        img.style.transition = 'transform 0.3s ease';
+
+        img.addEventListener('click', function() {
+            if (this.classList.contains('zoomed')) {
+                // Pomniejsz obraz
+                this.classList.remove('zoomed');
+                this.style.position = '';
+                this.style.top = '';
+                this.style.left = '';
+                this.style.transform = '';
+                this.style.width = '100%';
+                this.style.maxWidth = '';
+                this.style.maxHeight = '';
+                this.style.zIndex = '';
+                this.style.backgroundColor = '';
+                this.style.padding = '';
+                this.style.boxShadow = '';
+            } else {
+                // Powiększ obraz
+                this.classList.add('zoomed');
+                this.style.position = 'fixed';
+                this.style.top = '50%';
+                this.style.left = '50%';
+                this.style.transform = 'translate(-50%, -50%)';
+                this.style.width = 'auto';
+                this.style.maxWidth = '95vw';
+                this.style.maxHeight = '95vh';
+                this.style.zIndex = '9999';
+                this.style.backgroundColor = 'rgba(255, 255, 255, 0.95)';
+                this.style.padding = '10px';
+                this.style.boxShadow = '0 4px 20px rgba(0, 0, 0, 0.3)';
+            }
+        });
+    });
+})();
+</script>
+
+</body>
+</html>
+
+"
+```
+            lineageTag: 6540ff5a-f5ea-4ecb-b3e2-2cf76d28f066
 
         partition _HTML = m
             mode: import
