@@ -1,7 +1,7 @@
 createOrReplace
 
     table _HTML
-        lineageTag: 9c0832a4-f6e2-4260-aa52-61d96192e296
+        lineageTag: ef39d3bc-2ed3-4762-8fb8-ed4b9fd9a071
 
         measure '01. UI - Wstęp' = ```
 "
@@ -415,7 +415,7 @@ createOrReplace
 
 "
 ```
-            lineageTag: 5d8a5d78-56f2-4313-be27-428b3dcb54d1
+            lineageTag: 1d451156-c8ca-4405-9f07-0e5fcf011642
 
         measure '02. Działania na tabelach - Rozdział - to będzie osobna miara' = ```
 "
@@ -785,7 +785,7 @@ createOrReplace
 
 "
 ```
-            lineageTag: f35899b9-68a5-4a68-884f-a86cbf8ae46c
+            lineageTag: f73676a1-427a-4042-83e6-162ad8b67869
 
         measure '03. Język M - Wstęp' = ```
 "
@@ -1055,13 +1055,14 @@ createOrReplace
         <h1>Co przechowuje PQ?</h1>
         <p>Power Query nie jest magazynem danych – jest magazynem instrukcji. To fundamentalna rzecz, którą warto zrozumieć: Power Query przechowuje wyłącznie opis operacji do wykonania, a nie same dane. Dane fizycznie żyją w modelu semantycznym Power BI – Power Query jest tylko potokiem, przez który przepływają podczas odświeżania.</p>
         <p>To co widzisz w oknie Power Query – podgląd tabeli z wierszami i kolumnami – to nie są ”Twoje dane”. To jest wynik wykonania zapytania na próbce danych, wygenerowany wyłącznie po to, żebyś mógł zobaczyć efekt transformacji. Po zamknięciu edytora ten podgląd znika.</p>
-        <p>Każda tabela w Power Query to osobne, niezależne zapytanie. Z tego wynika ważna konsekwencja:</p>
+        <p>Każda tabela w Power Query to osobne, choć może być zależne, zapytanie. Z tego wynika ważna konsekwencja:</p>
         <ul>
         <li>Jeśli masz dwie tabele oparte na tym samym źródle – Power Query odpyta to źródło <strong>dwukrotnie</strong>, osobno dla każdego zapytania</li>
         <li>Dane z jednego zapytania <strong>nie są współdzielone</strong> z drugim, nawet jeśli zapytania są identyczne</li>
         <li>Przy wielu tabelach opartych na tym samym źródle czas odświeżania rośnie liniowo – każde zapytanie to osobne połączenie ze źródłem</li>
         <li>Rozwiązaniem jest <strong>zapytanie bazowe</strong> – jedno zapytanie pobierające dane ze źródła, z którego kolejne zapytania dziedziczą przez referencję, a nie przez ponowne połączenie</li>
         </ul>
+        <img src='https://github.com/odczarujpowerbi/szkolenia-powerbi/blob/main/bin/Pasted%20image%2020260303201734.png?raw=true' width='100%'>
         <p><strong>Podgląd danych w edytorze – cache lokalny</strong></p>
         <p>Jest jednak jeden wyjątek od reguły ”Power Query nie przechowuje danych”. Podczas pracy w edytorze Power Query zapisuje tymczasowy cache podglądu lokalnie na dysku komputera. Dzięki temu po ponownym otwarciu edytora widzisz dane w tabelach natychmiast – bez konieczności ponownego odpytywania źródła.</p>
         <p>To wygodne, ale może prowadzić do nieporozumień:</p>
@@ -1161,7 +1162,7 @@ createOrReplace
 
 "
 ```
-            lineageTag: cc532f6f-bbbf-4ff9-8dad-0b0326397566
+            lineageTag: b8ddd9ae-b7a9-4558-bb3a-fc0866b9ed9f
 
         measure '04. Edytowanie kodu M - Przykład 1 - Kolumna warunkowa' = ```
 "
@@ -1398,7 +1399,7 @@ createOrReplace
     <div class='navigation'>
         <button id='prevBtn_7a830c0c' onclick='changePage_7a830c0c(-1)'>← Poprzednia</button>
         <span class='page-indicator'>
-            Strona <span id='currentPage_7a830c0c'>1</span> z <span id='totalPages_7a830c0c'>5</span>
+            Strona <span id='currentPage_7a830c0c'>1</span> z <span id='totalPages_7a830c0c'>4</span>
         </span>
         <button id='nextBtn_7a830c0c' onclick='changePage_7a830c0c(1)'>Następna →</button>
     </div>
@@ -1460,6 +1461,12 @@ createOrReplace
         <img src='https://github.com/odczarujpowerbi/szkolenia-powerbi/blob/main/bin/Pasted%20image%2020260303192519.png?raw=true' width='100%'>
         <p>I gotowe! Nie znając wszystkich funkcji Power Query — operując jedynie na szkielecie kodu — jesteśmy w stanie tworzyć naprawdę zaawansowaną logikę biznesową.</p>
         <img src='https://github.com/odczarujpowerbi/szkolenia-powerbi/blob/main/bin/Pasted%20image%2020260303192422.png?raw=true' width='100%'>
+        <h1>Łączenie warunków — operator <code>and</code></h1>
+        <p>Co jeśli chcemy zawęzić logikę rabatu do konkretnego roku? Wystarczy rozszerzyć warunek o dodatkowe kryterium, łącząc je operatorem <code>and</code>:</p>
+        <pre><code>and Date.Year([Data Sprzedaży]) = 2023</code></pre>
+        <p>Operator <code>and</code> sprawia, że rabat zostanie przyznany tylko wtedy, gdy <strong>oba</strong> warunki są spełnione jednocześnie — czyli zysk przekracza 1500 zł <strong>oraz</strong> transakcja pochodzi z roku 2023.</p>
+        <p>Do wyciągnięcia roku z kolumny z datą służy funkcja <code>Date.Year()</code>, która przyjmuje jako argument wartość typu <code>date</code> i zwraca liczbę całkowitą. Analogicznie działają <code>Date.Month()</code> oraz <code>Date.Day()</code> — przydatne, gdy chcesz filtrować dane np. po kwartałach czy konkretnych dniach.</p>
+        <p>Jeśli chcesz, żeby wystarczył <strong>jeden</strong> z warunków zamiast oba, zamień <code>and</code> na <code>or</code>.</p>
 
     </div>
 
@@ -1474,12 +1481,6 @@ createOrReplace
         <li>Po najechaniu kursorem na metodę w kodzie możesz zobaczyć podgląd jej składni.</li>
         </ul>
         <img src='https://github.com/odczarujpowerbi/szkolenia-powerbi/blob/main/bin/Pasted%20image%2020260303194547.png?raw=true' width='100%'>
-
-    </div>
-
-    <!-- Strona 5 -->
-    <div class='page'>
-        <p>Główne zmiany: dodano 6 nagłówków H2 porządkujących strukturę, poprawiono kilka niezręcznych sformułowań (np. ”w dwójnasób” → ”na dwa sposoby”, ”ślamazarne” → ”żmudne”), ujednolicono styl i interpunkcję, przekształcono blok z ostrzeżeniem na wyróżniony cytat. Odwołania do zdjęć pozostały bez zmian.</p>
 
     </div>
 
@@ -1569,7 +1570,768 @@ createOrReplace
 
 "
 ```
-            lineageTag: 6540ff5a-f5ea-4ecb-b3e2-2cf76d28f066
+            lineageTag: a429faf6-5101-407b-a39d-630b11cc6748
+
+        measure '05. Bufforwanie Tabel - Przykład 2' = ```
+"
+
+<!DOCTYPE html>
+<html lang='pl'>
+<head>
+    <meta charset='UTF-8'>
+    <meta name='viewport' content='width=device-width, initial-scale=1.0'>
+    <title>Przykład 2</title>
+    <style>
+            * {
+                margin: 0;
+                padding: 0;
+                box-sizing: border-box;
+            }
+    
+            body {
+                font-family: 'Roboto', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+                font-size: 16px;
+                font-weight: 400;
+                line-height: 1.7;
+                color: #333;
+                background: transparent;
+                padding: 20px;
+            }
+    
+            .container {
+                max-width: 800px;
+                margin: 0 auto;
+                background: transparent;
+                padding: 40px;
+            }
+    
+            .navigation {
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                margin-bottom: 40px;
+                padding-bottom: 20px;
+                border-bottom: 1px solid #e1e4e8;
+            }
+    
+            button {
+                background: #6b1718;
+                color: white;
+                border: none;
+                padding: 12px 28px;
+                border-radius: 4px;
+                cursor: pointer;
+                font-size: 1em;
+                font-weight: 500;
+                transition: background 0.2s;
+            }
+    
+            button:hover {
+                background: #380c0c;
+            }
+    
+            button:disabled {
+                background: #ccc;
+                cursor: not-allowed;
+            }
+    
+            .page-indicator {
+                color: #666;
+                font-size: 1em;
+            }
+    
+            .page {
+                display: none;
+                min-height: 500px;
+            }
+    
+            .page.active {
+                display: block;
+                animation: fadeIn 0.3s ease-in;
+            }
+    
+            @keyframes fadeIn {
+                from { opacity: 0; transform: translateY(10px); }
+                to { opacity: 1; transform: translateY(0); }
+            }
+    
+            h1 {
+                font-size: 26px;
+                line-height: 36px;
+                font-weight: 600;
+                padding-top: 14px;
+                padding-bottom: 6px;
+                margin-bottom: 1em;
+                color: #6b1718;
+                border-bottom: 2px solid #6b1718;
+            }
+    
+            h2 {
+                font-size: 26px;
+                line-height: 36px;
+                font-weight: 600;
+                padding-top: 14px;
+                padding-bottom: 6px;
+                margin: 1.5em 0 0.8em 0;
+                color: #1a1a1a;
+                border-bottom: 2px solid #1a1a1a;
+            }
+    
+            h3 {
+                font-size: 1.1em;
+                font-weight: 600;
+                margin: 1.2em 0 0.6em 0;
+                padding-bottom: 5px;
+                color: #444;
+                border-bottom: 1px solid #999;
+            }
+    
+            p {
+                margin-bottom: 1em;
+                font-size: 1.05em;
+            }
+    
+            strong {
+                font-weight: 700;
+                color: #1a1a1a;
+            }
+    
+            code {
+                background: #f5f5f5;
+                padding: 3px 7px;
+                border-radius: 3px;
+                font-family: 'Fira Code', 'Courier New', monospace;
+                font-size: 0.95em;
+                color: #b82b4e;
+            }
+    
+            pre {
+                background: #f8f9fa;
+                border-left: 3px solid #6b1718;
+                padding: 18px;
+                margin: 1em 0;
+                overflow-x: auto;
+                border-radius: 3px;
+            }
+    
+            pre code {
+                background: none;
+                padding: 0;
+                color: #24292e;
+                font-size: 1em;
+                line-height: 1.6;
+            }
+    
+            .dax-keyword {
+                color: #6b1718;
+                font-weight: 600;
+            }
+    
+            .dax-function {
+                color: #6f42c1;
+            }
+    
+            .dax-number {
+                color: #005cc5;
+            }
+    
+            .dax-comment {
+                color: #6a737d;
+                font-style: italic;
+            }
+    
+            ul, ol {
+                margin: 0.3em 0;
+                padding-left: 1.8em;
+            }
+    
+            li {
+                margin: 0;
+                padding-left: 0.2em;
+                font-size: 1.05em;
+                line-height: 1.6;
+            }
+    
+            ol {
+                list-style-type: decimal;
+            }
+    
+            ol li::marker {
+                color: #999;
+                font-weight: 400;
+            }
+    
+            ul li::marker {
+                color: #999;
+            }
+    
+            ul ul, ol ol, ul ol, ol ul {
+                margin: 0.2em 0;
+                padding-left: 1.5em;
+            }
+    
+            blockquote {
+                border-left: 3px solid #6b1718;
+                background: #f8f9fa;
+                padding: 14px 18px;
+                margin: 1em 0;
+                color: #555;
+                font-style: italic;
+            }
+    
+            blockquote p {
+                margin: 0;
+            }
+    
+            .iteration-box {
+                border-left: 3px solid #6b1718;
+                padding: 14px 18px;
+                margin: 0.8em 0;
+            }
+    
+            .result-box {
+                background: #f5f5f5;
+                border-left: 3px solid #999;
+                padding: 14px 18px;
+                margin: 0.8em 0;
+                font-weight: 500;
+                color: #555;
+                font-size: 1.05em;
+            }
+        </style>
+</head>
+<body>
+
+<div class='container' id='viz_e8d6168a'>
+    <!-- Nawigacja na górze -->
+    <div class='navigation'>
+        <button id='prevBtn_e8d6168a' onclick='changePage_e8d6168a(-1)'>← Poprzednia</button>
+        <span class='page-indicator'>
+            Strona <span id='currentPage_e8d6168a'>1</span> z <span id='totalPages_e8d6168a'>4</span>
+        </span>
+        <button id='nextBtn_e8d6168a' onclick='changePage_e8d6168a(1)'>Następna →</button>
+    </div>
+
+    <!-- Strona 1 -->
+    <div class='page active'>
+        <h2>Filtrowanie sprzedaży do aktywnych sklepów raportujących</h2>
+        <p>Kierownicy sklepów chcą widzieć w raporcie Power BI <strong>tylko te sklepy, które zostały zatwierdzone do raportowania</strong> — czyli nowo otwarte lub tymczasowo wyłączone oddziały nie powinny zaburzać analiz. Tabela <code>sklep_raportowania</code> pełni rolę ”białej listy” sklepów aktywnych.</p>
+        <p>Do podstawowej kwerendy:</p>
+        <pre><code>let
+            Source = tabela_sprzedazy
+        in
+            Source</code></pre>
+        <p>Dodajmy nowy krok, który pobierze listę sklepów - wartości z kolumny <code>Whitelist Sklepów</code> tabeli <code>sklepy_raportowanie</code></p>
+        <pre><code>let
+            Source = tabela_sprzedazy,
+            AktywneSklepyLista = sklepy_raportowanie[Whitelist Sklepów]
+        in
+            AktywneSklepyLista</code></pre>
+        <p>Teraz wystarczy dodać prostą formułę, która sprawdza czy wartość z listy zawiera się w wartości z tabeli.</p>
+        <img src='https://github.com/odczarujpowerbi/szkolenia-powerbi/blob/main/bin/Pasted%20image%2020260303204222.png?raw=true' width='100%'>
+
+    </div>
+
+    <!-- Strona 2 -->
+    <div class='page'>
+        <h2>Bez buffera — wolno</h2>
+        <pre><code>let
+            Source = tabela_sprzedazy,
+            AktywneSklepyLista = sklepy_raportowanie[Whitelist Sklepów],  // odczyt przy KAŻDYM wierszu
+
+            #'Dodaj flagę' = Table.AddColumn(Source, 'Aktywny w raporcie', 
+                each List.Contains(AktywneSklepyLista, [Nazwa Sklepu])
+            )
+        in
+            #'Dodaj flagę'</code></pre>
+        <p><code>List.Contains</code> odpytuje <code>sklep_raportowania</code> dla każdego wiersza <code>tabela_sprzedazy</code> — przy 100k wierszach to 100k odczytów.</p>
+
+    </div>
+
+    <!-- Strona 3 -->
+    <div class='page'>
+        <h2>Z List.Buffer — szybko</h2>
+        <pre><code>let
+            Source = tabela_sprzedazy,
+            AktywneSklepyLista = List.Buffer(sklepy_raportowanie[Whitelist Sklepów]),  // raz do pamięci
+
+            #'Dodaj flagę' = Table.AddColumn(Source, 'Aktywny w raporcie', 
+                each List.Contains(AktywneSklepyLista, [Nazwa Sklepu])
+            )
+        in
+            #'Dodaj flagę'</code></pre>
+        <p>Jedna zmiana — <code>List.Buffer</code> — a lista <code>Whitelist Sklepów</code> jest wczytywana <strong>raz do pamięci</strong> i re-używana dla każdego wiersza.</p>
+
+    </div>
+
+    <!-- Strona 4 -->
+    <div class='page'>
+        <h2>Dlaczego to ma sens w Power BI?</h2>
+        <p>Kolumna <code>Aktywny w raporcie</code> jako <code>true/false</code> jest w modelu użyteczna — kierownik może w raporcie <strong>samodzielnie przełączać</strong> widok między wszystkimi sklepami a tylko aktywnymi, bez konieczności tworzenia dwóch osobnych miar w DAX. Buffer sprawia, że ta kolumna nie spowalnia odświeżania.</p>
+        <p>Natomiast, jeżeli chciałbym po prostu odfiltrować wiersze dynamicznie - w takim przypadku lepiej dokonać operacji <code>Merge</code> na obu tabelach za pomocą <code>INNER JOIN</code> - to nic innego jak znalezienie wartości wspólnych dla obu tabel :). Taka metoda jest na tylne popularna, że ten rodzaj tabeli ma nawet swoją własną nazwę - <strong>junk dimension</strong> (wymiar śmietnikowy). To tabela, która grupuje w sobie różne flagi i wskaźniki o niskiej kardynalności, które nie pasują do żadnego innego wymiaru — zamiast tworzyć osobną tabelę dla każdej flagi, zbieramy je wszystkie w jednym miejscu. </p>
+        <p>Częstym scenariuszem jest również, że taka tabela później trafia do samego modelu. Wtedy, tabela typu JUNK DIMENSION filtruje standardowy DIMENSION, a następnie FACT TABLE.</p>
+        <p>Fascynujące, jak Power BI potrafi zaoferować masę sposobów na ten sam problem. Natomiast, każdy z tych sposobów ma swoje wady i zalety. O metodzie decyduje przede wszystkim problem biznesowy, w dalszej kolejności technologia (wielkość tabel, kardynalność, częstość aktualizacji).</p>
+
+    </div>
+
+</div>
+
+<script>
+(function() {
+    // Unikalny ID dla tej wizualizacji (wstrzykiwany przez Python)
+    var vizId = 'e8d6168a';
+    var containerId = 'viz_' + vizId;
+
+    var currentPage_e8d6168a = 1;
+    var container = document.getElementById(containerId);
+
+    if (!container) return;
+
+    var pages = container.querySelectorAll('.page');
+    var totalPages = pages.length;
+
+    document.getElementById('totalPages_' + vizId).textContent = totalPages;
+
+    window['showPage_e8d6168a'] = function(n) {
+        if (n > totalPages) currentPage_e8d6168a = totalPages;
+        if (n < 1) currentPage_e8d6168a = 1;
+
+        for (var i = 0; i < pages.length; i++) {
+            pages[i].classList.remove('active');
+        }
+        pages[currentPage_e8d6168a - 1].classList.add('active');
+
+        document.getElementById('currentPage_' + vizId).textContent = currentPage_e8d6168a;
+        document.getElementById('prevBtn_' + vizId).disabled = (currentPage_e8d6168a === 1);
+        document.getElementById('nextBtn_' + vizId).disabled = (currentPage_e8d6168a === totalPages);
+    };
+
+    window['changePage_e8d6168a'] = function(n) {
+        currentPage_e8d6168a += n;
+        window['showPage_e8d6168a'](currentPage_e8d6168a);
+    };
+
+    // Inicjalizacja
+    window['showPage_e8d6168a'](1);
+
+    // Funkcjonalność powiększania obrazów
+    var images = container.querySelectorAll('img');
+    images.forEach(function(img) {
+        img.style.cursor = 'pointer';
+        img.style.transition = 'transform 0.3s ease';
+
+        img.addEventListener('click', function() {
+            if (this.classList.contains('zoomed')) {
+                // Pomniejsz obraz
+                this.classList.remove('zoomed');
+                this.style.position = '';
+                this.style.top = '';
+                this.style.left = '';
+                this.style.transform = '';
+                this.style.width = '100%';
+                this.style.maxWidth = '';
+                this.style.maxHeight = '';
+                this.style.zIndex = '';
+                this.style.backgroundColor = '';
+                this.style.padding = '';
+                this.style.boxShadow = '';
+            } else {
+                // Powiększ obraz
+                this.classList.add('zoomed');
+                this.style.position = 'fixed';
+                this.style.top = '50%';
+                this.style.left = '50%';
+                this.style.transform = 'translate(-50%, -50%)';
+                this.style.width = 'auto';
+                this.style.maxWidth = '95vw';
+                this.style.maxHeight = '95vh';
+                this.style.zIndex = '9999';
+                this.style.backgroundColor = 'rgba(255, 255, 255, 0.95)';
+                this.style.padding = '10px';
+                this.style.boxShadow = '0 4px 20px rgba(0, 0, 0, 0.3)';
+            }
+        });
+    });
+})();
+</script>
+
+</body>
+</html>
+
+"
+```
+            lineageTag: 501cf140-f6a2-41cc-81da-33d9f75a457f
+
+        measure '06. Akumulacja progów - Przykład 3' = ```
+"
+
+<!DOCTYPE html>
+<html lang='pl'>
+<head>
+    <meta charset='UTF-8'>
+    <meta name='viewport' content='width=device-width, initial-scale=1.0'>
+    <title>Przykład 3</title>
+    <style>
+            * {
+                margin: 0;
+                padding: 0;
+                box-sizing: border-box;
+            }
+    
+            body {
+                font-family: 'Roboto', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+                font-size: 16px;
+                font-weight: 400;
+                line-height: 1.7;
+                color: #333;
+                background: transparent;
+                padding: 20px;
+            }
+    
+            .container {
+                max-width: 800px;
+                margin: 0 auto;
+                background: transparent;
+                padding: 40px;
+            }
+    
+            .navigation {
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                margin-bottom: 40px;
+                padding-bottom: 20px;
+                border-bottom: 1px solid #e1e4e8;
+            }
+    
+            button {
+                background: #6b1718;
+                color: white;
+                border: none;
+                padding: 12px 28px;
+                border-radius: 4px;
+                cursor: pointer;
+                font-size: 1em;
+                font-weight: 500;
+                transition: background 0.2s;
+            }
+    
+            button:hover {
+                background: #380c0c;
+            }
+    
+            button:disabled {
+                background: #ccc;
+                cursor: not-allowed;
+            }
+    
+            .page-indicator {
+                color: #666;
+                font-size: 1em;
+            }
+    
+            .page {
+                display: none;
+                min-height: 500px;
+            }
+    
+            .page.active {
+                display: block;
+                animation: fadeIn 0.3s ease-in;
+            }
+    
+            @keyframes fadeIn {
+                from { opacity: 0; transform: translateY(10px); }
+                to { opacity: 1; transform: translateY(0); }
+            }
+    
+            h1 {
+                font-size: 26px;
+                line-height: 36px;
+                font-weight: 600;
+                padding-top: 14px;
+                padding-bottom: 6px;
+                margin-bottom: 1em;
+                color: #6b1718;
+                border-bottom: 2px solid #6b1718;
+            }
+    
+            h2 {
+                font-size: 26px;
+                line-height: 36px;
+                font-weight: 600;
+                padding-top: 14px;
+                padding-bottom: 6px;
+                margin: 1.5em 0 0.8em 0;
+                color: #1a1a1a;
+                border-bottom: 2px solid #1a1a1a;
+            }
+    
+            h3 {
+                font-size: 1.1em;
+                font-weight: 600;
+                margin: 1.2em 0 0.6em 0;
+                padding-bottom: 5px;
+                color: #444;
+                border-bottom: 1px solid #999;
+            }
+    
+            p {
+                margin-bottom: 1em;
+                font-size: 1.05em;
+            }
+    
+            strong {
+                font-weight: 700;
+                color: #1a1a1a;
+            }
+    
+            code {
+                background: #f5f5f5;
+                padding: 3px 7px;
+                border-radius: 3px;
+                font-family: 'Fira Code', 'Courier New', monospace;
+                font-size: 0.95em;
+                color: #b82b4e;
+            }
+    
+            pre {
+                background: #f8f9fa;
+                border-left: 3px solid #6b1718;
+                padding: 18px;
+                margin: 1em 0;
+                overflow-x: auto;
+                border-radius: 3px;
+            }
+    
+            pre code {
+                background: none;
+                padding: 0;
+                color: #24292e;
+                font-size: 1em;
+                line-height: 1.6;
+            }
+    
+            .dax-keyword {
+                color: #6b1718;
+                font-weight: 600;
+            }
+    
+            .dax-function {
+                color: #6f42c1;
+            }
+    
+            .dax-number {
+                color: #005cc5;
+            }
+    
+            .dax-comment {
+                color: #6a737d;
+                font-style: italic;
+            }
+    
+            ul, ol {
+                margin: 0.3em 0;
+                padding-left: 1.8em;
+            }
+    
+            li {
+                margin: 0;
+                padding-left: 0.2em;
+                font-size: 1.05em;
+                line-height: 1.6;
+            }
+    
+            ol {
+                list-style-type: decimal;
+            }
+    
+            ol li::marker {
+                color: #999;
+                font-weight: 400;
+            }
+    
+            ul li::marker {
+                color: #999;
+            }
+    
+            ul ul, ol ol, ul ol, ol ul {
+                margin: 0.2em 0;
+                padding-left: 1.5em;
+            }
+    
+            blockquote {
+                border-left: 3px solid #6b1718;
+                background: #f8f9fa;
+                padding: 14px 18px;
+                margin: 1em 0;
+                color: #555;
+                font-style: italic;
+            }
+    
+            blockquote p {
+                margin: 0;
+            }
+    
+            .iteration-box {
+                border-left: 3px solid #6b1718;
+                padding: 14px 18px;
+                margin: 0.8em 0;
+            }
+    
+            .result-box {
+                background: #f5f5f5;
+                border-left: 3px solid #999;
+                padding: 14px 18px;
+                margin: 0.8em 0;
+                font-weight: 500;
+                color: #555;
+                font-size: 1.05em;
+            }
+        </style>
+</head>
+<body>
+
+<div class='container' id='viz_f2afad41'>
+    <!-- Nawigacja na górze -->
+    <div class='navigation'>
+        <button id='prevBtn_f2afad41' onclick='changePage_f2afad41(-1)'>← Poprzednia</button>
+        <span class='page-indicator'>
+            Strona <span id='currentPage_f2afad41'>1</span> z <span id='totalPages_f2afad41'>2</span>
+        </span>
+        <button id='nextBtn_f2afad41' onclick='changePage_f2afad41(1)'>Następna →</button>
+    </div>
+
+    <!-- Strona 1 -->
+    <div class='page active'>
+        <h1>Narastające progi rabatowe z <code>List.Accumulate</code></h1>
+        <p>Analitycy sprzedaży chcą przyznawać klientom rabaty na podstawie <strong>łącznej wartości zakupów w danym miesiącu</strong> — im więcej klient wydał, tym wyższy rabat otrzymuje na kolejną transakcję. Progi są konfigurowalne i trzymane w osobnej tabeli <code>progi_rabatowe</code>.</p>
+        <p>Do podstawowej kwerendy:</p>
+        <pre><code>let
+            Source = tabela_sprzedazy
+        in
+            Source</code></pre>
+        <p>Dodajmy listę progów z tabeli <code>progi_rabatowe</code>, która zawiera kolumnę <code>Próg</code> z wartościami np. <code>{500, 1000, 2000, 5000}</code>:</p>
+        <pre><code>let
+            Source = tabela_sprzedazy,
+            ListaProgow = progi_rabatowe[Próg]
+        in
+            ListaProgow</code></pre>
+        <p>Teraz dla każdego wiersza chcemy sprawdzić, <strong>który próg został przekroczony</strong> — czyli iterować po liście progów i zatrzymać się na ostatnim przekroczonym.</p>
+        <p><strong>Bez <code>List.Accumulate</code> — niewygodnie</strong></p>
+        <p>Można by to zrobić zagnieżdżonymi <code>if...then...else</code>, ale przy 4+ progach kod staje się nieczytelny i nieelastyczny — każda zmiana progu wymaga edycji kodu.</p>
+
+    </div>
+
+    <!-- Strona 2 -->
+    <div class='page'>
+        <p><strong>Z <code>List.Accumulate</code> — elegancko</strong></p>
+        <pre><code>let
+            Source = tabela_sprzedazy,
+            ListaProgow = List.Buffer(progi_rabatowe[Próg]),
+
+            #'Dodaj rabat' = Table.AddColumn(Source, 'Kwota Rabatu',
+                each List.Accumulate(
+                    ListaProgow,
+                    0,
+                    (stan, prog) =&gt; if ([Ilość] * [Cena Jednostkowa]) &gt;= prog then prog * 0.05 else stan
+                )
+            )
+        in
+            #'Dodaj rabat'</code></pre>
+        <p><code>List.Accumulate</code> przechodzi po każdym progu i aktualizuje <code>stan</code> — na końcu iteracji <code>stan</code> zawiera <strong>najwyższy przekroczony próg</strong>. Jeśli klient nie przekroczył żadnego, zwracane jest <code>0</code>.</p>
+        <p><strong>Dlaczego to ma sens w Power BI?</strong></p>
+        <p>Kolumna <code>Próg Rabatowy</code> trafia do modelu jako liczba — można na jej podstawie stworzyć prostą miarę DAX przypisującą konkretny procent rabatu. Co ważniejsze, progi są zarządzane przez tabelę <code>progi_rabatowe</code>, którą biznes może aktualizować <strong>bez ingerencji w kod Power Query</strong>.</p>
+
+    </div>
+
+</div>
+
+<script>
+(function() {
+    // Unikalny ID dla tej wizualizacji (wstrzykiwany przez Python)
+    var vizId = 'f2afad41';
+    var containerId = 'viz_' + vizId;
+
+    var currentPage_f2afad41 = 1;
+    var container = document.getElementById(containerId);
+
+    if (!container) return;
+
+    var pages = container.querySelectorAll('.page');
+    var totalPages = pages.length;
+
+    document.getElementById('totalPages_' + vizId).textContent = totalPages;
+
+    window['showPage_f2afad41'] = function(n) {
+        if (n > totalPages) currentPage_f2afad41 = totalPages;
+        if (n < 1) currentPage_f2afad41 = 1;
+
+        for (var i = 0; i < pages.length; i++) {
+            pages[i].classList.remove('active');
+        }
+        pages[currentPage_f2afad41 - 1].classList.add('active');
+
+        document.getElementById('currentPage_' + vizId).textContent = currentPage_f2afad41;
+        document.getElementById('prevBtn_' + vizId).disabled = (currentPage_f2afad41 === 1);
+        document.getElementById('nextBtn_' + vizId).disabled = (currentPage_f2afad41 === totalPages);
+    };
+
+    window['changePage_f2afad41'] = function(n) {
+        currentPage_f2afad41 += n;
+        window['showPage_f2afad41'](currentPage_f2afad41);
+    };
+
+    // Inicjalizacja
+    window['showPage_f2afad41'](1);
+
+    // Funkcjonalność powiększania obrazów
+    var images = container.querySelectorAll('img');
+    images.forEach(function(img) {
+        img.style.cursor = 'pointer';
+        img.style.transition = 'transform 0.3s ease';
+
+        img.addEventListener('click', function() {
+            if (this.classList.contains('zoomed')) {
+                // Pomniejsz obraz
+                this.classList.remove('zoomed');
+                this.style.position = '';
+                this.style.top = '';
+                this.style.left = '';
+                this.style.transform = '';
+                this.style.width = '100%';
+                this.style.maxWidth = '';
+                this.style.maxHeight = '';
+                this.style.zIndex = '';
+                this.style.backgroundColor = '';
+                this.style.padding = '';
+                this.style.boxShadow = '';
+            } else {
+                // Powiększ obraz
+                this.classList.add('zoomed');
+                this.style.position = 'fixed';
+                this.style.top = '50%';
+                this.style.left = '50%';
+                this.style.transform = 'translate(-50%, -50%)';
+                this.style.width = 'auto';
+                this.style.maxWidth = '95vw';
+                this.style.maxHeight = '95vh';
+                this.style.zIndex = '9999';
+                this.style.backgroundColor = 'rgba(255, 255, 255, 0.95)';
+                this.style.padding = '10px';
+                this.style.boxShadow = '0 4px 20px rgba(0, 0, 0, 0.3)';
+            }
+        });
+    });
+})();
+</script>
+
+</body>
+</html>
+
+"
+```
+            lineageTag: fc5fcc9e-d2f3-462f-9b6f-444db0e27aae
 
         partition _HTML = m
             mode: import

@@ -13,13 +13,13 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "300. INPUTS/Wprowadzenie do PowerQuery/04. Edytowanie kodu M.md",
+                "file": "300. INPUTS/Wprowadzenie do PowerQuery/06. Akumulacja progów.md",
                 "mode": "source",
                 "source": false,
                 "backlinks": false
               },
               "icon": "lucide-file",
-              "title": "04. Edytowanie kodu M"
+              "title": "06. Akumulacja progów"
             }
           }
         ]
@@ -142,7 +142,7 @@
             "state": {
               "type": "localgraph",
               "state": {
-                "file": "300. INPUTS/Wprowadzenie do PowerQuery/04. Edytowanie kodu M.md",
+                "file": "300. INPUTS/Wprowadzenie do PowerQuery/06. Akumulacja progów.md",
                 "options": {
                   "collapse-filter": true,
                   "search": "",
@@ -170,7 +170,7 @@
                 }
               },
               "icon": "lucide-git-fork",
-              "title": "Graf: 04. Edytowanie kodu M"
+              "title": "Graf: 06. Akumulacja progów"
             }
           }
         ]
@@ -196,11 +196,22 @@
   },
   "active": "fb336dbca21b8834",
   "lastOpenFiles": [
-    "400. OUTPUTS/Wprowadzenie do PowerQuery/04. Edytowanie kodu M - Przykład 1 - Kolumna warunkowa.html",
-    "300. INPUTS/Wprowadzenie do PowerQuery/03. Język M.md",
+    "400. OUTPUTS/_Measures/_Parametr.md",
+    "400. OUTPUTS/_Measures/_HTML.md",
+    "400. OUTPUTS/Wprowadzenie do PowerQuery/06. Akumulacja progów - Przykład 3.html",
+    "400. OUTPUTS/Wprowadzenie do PowerQuery/05. Bufforwanie Tabel - Przykład 2.html",
+    "300. INPUTS/Wprowadzenie do PowerQuery/05. Bufforwanie Tabel.md",
+    "300. INPUTS/Wprowadzenie do PowerQuery/06. Akumulacja progów.md",
+    "300. INPUTS/300. INPUTS.md",
     "300. INPUTS/Wprowadzenie do PowerQuery/04. Edytowanie kodu M.md",
-    "bin/Pasted image 20260303195625.png",
+    "300. INPUTS/Wprowadzenie do PowerQuery/03. Język M.md",
+    "bin/Pasted image 20260303204222.png",
+    "bin/Pasted image 20260303201734.png",
+    "400. OUTPUTS/Wprowadzenie do PowerQuery/03. Język M - Wstęp.html",
+    "400. OUTPUTS/Wprowadzenie do PowerQuery/02. Działania na tabelach - Rozdział - to będzie osobna miara.html",
     "500. ARCHIVE/500. ARCHIVE.md",
+    "400. OUTPUTS/Wprowadzenie do PowerQuery/04. Edytowanie kodu M - Przykład 1 - Kolumna warunkowa.html",
+    "bin/Pasted image 20260303195625.png",
     "bin/Pasted image 20260303194547.png",
     "bin/Pasted image 20260303194546.png",
     "bin/Pasted image 20260303194543.png",
@@ -208,12 +219,8 @@
     "bin/Pasted image 20260303194444.png",
     "bin/Pasted image 20260303193152.png",
     "bin/Pasted image 20260303192519.png",
-    "bin/Pasted image 20260303192422.png",
-    "bin/Pasted image 20260303191931.png",
     "400. OUTPUTS/Wprowadzenie do PowerQuery/04. Edytowanie kodu M.html",
     "300. INPUTS/Wprowadzenie do PowerQuery/02. Działania na tabelach.md",
-    "300. INPUTS/300. INPUTS.md",
-    "400. OUTPUTS/_Measures/_HTML.md",
     "300. INPUTS/Wprowadzenie do PowerQuery/01. UI.md",
     "000. UTILITIES/000. UTILITIES.md",
     "000. UTILITIES/ABOUT/01. Diagram Przepływu Danych.md",
@@ -222,10 +229,7 @@
     "200. DRAFTS/200. DRAFTS.md",
     "200. DRAFTS/Board Test.html",
     "config.md",
-    "400. OUTPUTS/Wprowadzenie do PowerQuery/03. Język M - Wstęp.html",
-    "400. OUTPUTS/Wprowadzenie do PowerQuery/02. Działania na tabelach - Rozdział - to będzie osobna miara.html",
     "400. OUTPUTS/Wprowadzenie do PowerQuery/01. UI - Wstęp.html",
-    "400. OUTPUTS/_Measures/_Parametr.md",
     "400. OUTPUTS/Wprowadzenie do PowerQuery",
     "_MAIN.canvas",
     "Bez nazwy.md",
@@ -238,11 +242,6 @@
     "500. ARCHIVE/Podstawy PBI/03 - 06 Kontekst/05. DAX - Zaawansowane Kwerendy.md",
     "500. ARCHIVE/Podstawy PBI/03 - 06 Kontekst/04a. Quiz.md",
     "500. ARCHIVE/Podstawy PBI/03 - 06 Kontekst/04a. Gaps.md",
-    "500. ARCHIVE/Podstawy PBI/03 - 06 Kontekst/04. Modyfikowanie Kontekstu.md",
-    "500. ARCHIVE/Podstawy PBI/03 - 06 Kontekst/03a. Quiz.md",
-    "500. ARCHIVE/Podstawy PBI/03 - 06 Kontekst",
-    "500. ARCHIVE/Podstawy PBI/00 - 02 Podstawy",
-    "500. ARCHIVE/Podstawy PBI",
     "Generator.canvas"
   ]
 }

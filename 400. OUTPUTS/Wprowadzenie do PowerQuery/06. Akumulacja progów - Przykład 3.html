@@ -1,4 +1,4 @@
-Wstęp = 
+Przykład 3 = 
 
 "
 
@@ -7,7 +7,7 @@ Wstęp =
 <head>
     <meta charset='UTF-8'>
     <meta name='viewport' content='width=device-width, initial-scale=1.0'>
-    <title>Wstęp</title>
+    <title>Przykład 3</title>
     <style>
             * {
                 margin: 0;
@@ -229,62 +229,56 @@ Wstęp =
 </head>
 <body>
 
-<div class='container' id='viz_2adb3687'>
+<div class='container' id='viz_f2afad41'>
     <!-- Nawigacja na górze -->
     <div class='navigation'>
-        <button id='prevBtn_2adb3687' onclick='changePage_2adb3687(-1)'>← Poprzednia</button>
+        <button id='prevBtn_f2afad41' onclick='changePage_f2afad41(-1)'>← Poprzednia</button>
         <span class='page-indicator'>
-            Strona <span id='currentPage_2adb3687'>1</span> z <span id='totalPages_2adb3687'>2</span>
+            Strona <span id='currentPage_f2afad41'>1</span> z <span id='totalPages_f2afad41'>2</span>
         </span>
-        <button id='nextBtn_2adb3687' onclick='changePage_2adb3687(1)'>Następna →</button>
+        <button id='nextBtn_f2afad41' onclick='changePage_f2afad41(1)'>Następna →</button>
     </div>
 
     <!-- Strona 1 -->
     <div class='page active'>
-        <h1>Język M – co to jest i skąd się bierze?</h1>
-        <p>Każda operacja wykonana w interfejsie graficznym Power Query ma swoje odzwierciedlenie w kodzie – tym kodem jest właśnie język M. Nie musisz go znać, żeby korzystać z Power Query, ale rozumienie jego podstaw otwiera zupełnie nowy poziom możliwości.</p>
-        <p>M jest językiem funkcyjnym – opisujesz _co chcesz uzyskać_, a nie _jak to zrobić_ krok po kroku. Każde zapytanie to blok <code>let ... in</code>, gdzie między <code>let</code> a <code>in</code> definiujesz kolejne kroki transformacji oddzielone przecinkami, a po <code>in</code> wskazujesz który krok ma być wynikiem końcowym.</p>
+        <h1>Narastające progi rabatowe z <code>List.Accumulate</code></h1>
+        <p>Analitycy sprzedaży chcą przyznawać klientom rabaty na podstawie <strong>łącznej wartości zakupów w danym miesiącu</strong> — im więcej klient wydał, tym wyższy rabat otrzymuje na kolejną transakcję. Progi są konfigurowalne i trzymane w osobnej tabeli <code>progi_rabatowe</code>.</p>
+        <p>Do podstawowej kwerendy:</p>
         <pre><code>let
-            Źródło = Excel.Workbook(...),
-            #'Zmieniono typ' = Table.TransformColumnTypes(Źródło, ...),
-            #'Przefiltrowane wiersze' = Table.SelectRows(#'Zmieniono typ', ...)
+            Source = tabela_sprzedazy
         in
-            #'Przefiltrowane wiersze'</code></pre>
-        <p>Kilka kluczowych rzeczy o składni:</p>
-        <ul>
-        <li>Każdy krok to <code>NazwaKroku = operacja(poprzedniKrok, ...)</code> – każdy krok odwołuje się do poprzedniego</li>
-        <li>Kroki oddzielone są <strong>przecinkami</strong> – brak przecinka po ostatnim kroku przed <code>in</code></li>
-        <li>Nazwy kroków ze spacjami lub polskimi znakami muszą być opakowane w <code>#”...”</code> – stąd charakterystyczne <code>#”Zmieniono typ”</code> generowane automatycznie przez UI</li>
-        <li>Język M jest <strong>case-sensitive</strong> – <code>table</code> to nie to samo co <code>Table</code></li>
-        <li>Kod M generuje się automatycznie podczas pracy w UI – możesz zacząć od klikania i tylko podglądać co powstaje w tle</li>
-        <li>Nie umiesz kodować? Opisz transformację chatbotowi – wklej gotowy kod M bezpośrednio do edytora</li>
-        </ul>
+            Source</code></pre>
+        <p>Dodajmy listę progów z tabeli <code>progi_rabatowe</code>, która zawiera kolumnę <code>Próg</code> z wartościami np. <code>{500, 1000, 2000, 5000}</code>:</p>
+        <pre><code>let
+            Source = tabela_sprzedazy,
+            ListaProgow = progi_rabatowe[Próg]
+        in
+            ListaProgow</code></pre>
+        <p>Teraz dla każdego wiersza chcemy sprawdzić, <strong>który próg został przekroczony</strong> — czyli iterować po liście progów i zatrzymać się na ostatnim przekroczonym.</p>
+        <p><strong>Bez <code>List.Accumulate</code> — niewygodnie</strong></p>
+        <p>Można by to zrobić zagnieżdżonymi <code>if...then...else</code>, ale przy 4+ progach kod staje się nieczytelny i nieelastyczny — każda zmiana progu wymaga edycji kodu.</p>
 
     </div>
 
     <!-- Strona 2 -->
     <div class='page'>
-        <h1>Co przechowuje PQ?</h1>
-        <p>Power Query nie jest magazynem danych – jest magazynem instrukcji. To fundamentalna rzecz, którą warto zrozumieć: Power Query przechowuje wyłącznie opis operacji do wykonania, a nie same dane. Dane fizycznie żyją w modelu semantycznym Power BI – Power Query jest tylko potokiem, przez który przepływają podczas odświeżania.</p>
-        <p>To co widzisz w oknie Power Query – podgląd tabeli z wierszami i kolumnami – to nie są ”Twoje dane”. To jest wynik wykonania zapytania na próbce danych, wygenerowany wyłącznie po to, żebyś mógł zobaczyć efekt transformacji. Po zamknięciu edytora ten podgląd znika.</p>
-        <p>Każda tabela w Power Query to osobne, choć może być zależne, zapytanie. Z tego wynika ważna konsekwencja:</p>
-        <ul>
-        <li>Jeśli masz dwie tabele oparte na tym samym źródle – Power Query odpyta to źródło <strong>dwukrotnie</strong>, osobno dla każdego zapytania</li>
-        <li>Dane z jednego zapytania <strong>nie są współdzielone</strong> z drugim, nawet jeśli zapytania są identyczne</li>
-        <li>Przy wielu tabelach opartych na tym samym źródle czas odświeżania rośnie liniowo – każde zapytanie to osobne połączenie ze źródłem</li>
-        <li>Rozwiązaniem jest <strong>zapytanie bazowe</strong> – jedno zapytanie pobierające dane ze źródła, z którego kolejne zapytania dziedziczą przez referencję, a nie przez ponowne połączenie</li>
-        </ul>
-        <img src='https://github.com/odczarujpowerbi/szkolenia-powerbi/blob/main/bin/Pasted%20image%2020260303201734.png?raw=true' width='100%'>
-        <p><strong>Podgląd danych w edytorze – cache lokalny</strong></p>
-        <p>Jest jednak jeden wyjątek od reguły ”Power Query nie przechowuje danych”. Podczas pracy w edytorze Power Query zapisuje tymczasowy cache podglądu lokalnie na dysku komputera. Dzięki temu po ponownym otwarciu edytora widzisz dane w tabelach natychmiast – bez konieczności ponownego odpytywania źródła.</p>
-        <p>To wygodne, ale może prowadzić do nieporozumień:</p>
-        <ul>
-        <li>Podgląd w edytorze może pokazywać <strong>nieaktualne dane</strong> – cache nie jest odświeżany automatycznie przy każdym otwarciu</li>
-        <li>Jeśli źródło danych zmieniło się od ostatniego pobrania, edytor nadal pokaże stary podgląd</li>
-        <li>Cache można ręcznie odświeżyć przyciskiem <strong>Refresh Preview</strong> – dopiero wtedy Power Query ponownie odpyta źródło</li>
-        <li>Cache podglądu to wyłącznie narzędzie deweloperskie – nie ma żadnego wpływu na dane ładowane do modelu Power BI podczas właściwego odświeżania raportu</li>
-        </ul>
-        <p>Dlatego warto pamiętać: to co widzisz w edytorze podczas pracy, niekoniecznie odzwierciedla aktualny stan źródła danych.</p>
+        <p><strong>Z <code>List.Accumulate</code> — elegancko</strong></p>
+        <pre><code>let
+            Source = tabela_sprzedazy,
+            ListaProgow = List.Buffer(progi_rabatowe[Próg]),
+
+            #'Dodaj rabat' = Table.AddColumn(Source, 'Kwota Rabatu',
+                each List.Accumulate(
+                    ListaProgow,
+                    0,
+                    (stan, prog) =&gt; if ([Ilość] * [Cena Jednostkowa]) &gt;= prog then prog * 0.05 else stan
+                )
+            )
+        in
+            #'Dodaj rabat'</code></pre>
+        <p><code>List.Accumulate</code> przechodzi po każdym progu i aktualizuje <code>stan</code> — na końcu iteracji <code>stan</code> zawiera <strong>najwyższy przekroczony próg</strong>. Jeśli klient nie przekroczył żadnego, zwracane jest <code>0</code>.</p>
+        <p><strong>Dlaczego to ma sens w Power BI?</strong></p>
+        <p>Kolumna <code>Próg Rabatowy</code> trafia do modelu jako liczba — można na jej podstawie stworzyć prostą miarę DAX przypisującą konkretny procent rabatu. Co ważniejsze, progi są zarządzane przez tabelę <code>progi_rabatowe</code>, którą biznes może aktualizować <strong>bez ingerencji w kod Power Query</strong>.</p>
 
     </div>
 
@@ -293,10 +287,10 @@ Wstęp =
 <script>
 (function() {
     // Unikalny ID dla tej wizualizacji (wstrzykiwany przez Python)
-    var vizId = '2adb3687';
+    var vizId = 'f2afad41';
     var containerId = 'viz_' + vizId;
 
-    var currentPage_2adb3687 = 1;
+    var currentPage_f2afad41 = 1;
     var container = document.getElementById(containerId);
 
     if (!container) return;
@@ -306,27 +300,27 @@ Wstęp =
 
     document.getElementById('totalPages_' + vizId).textContent = totalPages;
 
-    window['showPage_2adb3687'] = function(n) {
-        if (n > totalPages) currentPage_2adb3687 = totalPages;
-        if (n < 1) currentPage_2adb3687 = 1;
+    window['showPage_f2afad41'] = function(n) {
+        if (n > totalPages) currentPage_f2afad41 = totalPages;
+        if (n < 1) currentPage_f2afad41 = 1;
 
         for (var i = 0; i < pages.length; i++) {
             pages[i].classList.remove('active');
         }
-        pages[currentPage_2adb3687 - 1].classList.add('active');
+        pages[currentPage_f2afad41 - 1].classList.add('active');
 
-        document.getElementById('currentPage_' + vizId).textContent = currentPage_2adb3687;
-        document.getElementById('prevBtn_' + vizId).disabled = (currentPage_2adb3687 === 1);
-        document.getElementById('nextBtn_' + vizId).disabled = (currentPage_2adb3687 === totalPages);
+        document.getElementById('currentPage_' + vizId).textContent = currentPage_f2afad41;
+        document.getElementById('prevBtn_' + vizId).disabled = (currentPage_f2afad41 === 1);
+        document.getElementById('nextBtn_' + vizId).disabled = (currentPage_f2afad41 === totalPages);
     };
 
-    window['changePage_2adb3687'] = function(n) {
-        currentPage_2adb3687 += n;
-        window['showPage_2adb3687'](currentPage_2adb3687);
+    window['changePage_f2afad41'] = function(n) {
+        currentPage_f2afad41 += n;
+        window['showPage_f2afad41'](currentPage_f2afad41);
     };
 
     // Inicjalizacja
-    window['showPage_2adb3687'](1);
+    window['showPage_f2afad41'](1);
 
     // Funkcjonalność powiększania obrazów
     var images = container.querySelectorAll('img');

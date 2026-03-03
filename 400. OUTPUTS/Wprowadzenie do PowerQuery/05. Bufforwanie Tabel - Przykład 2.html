@@ -1,4 +1,4 @@
-Wstęp = 
+Przykład 2 = 
 
 "
 
@@ -7,7 +7,7 @@ Wstęp =
 <head>
     <meta charset='UTF-8'>
     <meta name='viewport' content='width=device-width, initial-scale=1.0'>
-    <title>Wstęp</title>
+    <title>Przykład 2</title>
     <style>
             * {
                 margin: 0;
@@ -229,62 +229,75 @@ Wstęp =
 </head>
 <body>
 
-<div class='container' id='viz_2adb3687'>
+<div class='container' id='viz_e8d6168a'>
     <!-- Nawigacja na górze -->
     <div class='navigation'>
-        <button id='prevBtn_2adb3687' onclick='changePage_2adb3687(-1)'>← Poprzednia</button>
+        <button id='prevBtn_e8d6168a' onclick='changePage_e8d6168a(-1)'>← Poprzednia</button>
         <span class='page-indicator'>
-            Strona <span id='currentPage_2adb3687'>1</span> z <span id='totalPages_2adb3687'>2</span>
+            Strona <span id='currentPage_e8d6168a'>1</span> z <span id='totalPages_e8d6168a'>4</span>
         </span>
-        <button id='nextBtn_2adb3687' onclick='changePage_2adb3687(1)'>Następna →</button>
+        <button id='nextBtn_e8d6168a' onclick='changePage_e8d6168a(1)'>Następna →</button>
     </div>
 
     <!-- Strona 1 -->
     <div class='page active'>
-        <h1>Język M – co to jest i skąd się bierze?</h1>
-        <p>Każda operacja wykonana w interfejsie graficznym Power Query ma swoje odzwierciedlenie w kodzie – tym kodem jest właśnie język M. Nie musisz go znać, żeby korzystać z Power Query, ale rozumienie jego podstaw otwiera zupełnie nowy poziom możliwości.</p>
-        <p>M jest językiem funkcyjnym – opisujesz _co chcesz uzyskać_, a nie _jak to zrobić_ krok po kroku. Każde zapytanie to blok <code>let ... in</code>, gdzie między <code>let</code> a <code>in</code> definiujesz kolejne kroki transformacji oddzielone przecinkami, a po <code>in</code> wskazujesz który krok ma być wynikiem końcowym.</p>
+        <h2>Filtrowanie sprzedaży do aktywnych sklepów raportujących</h2>
+        <p>Kierownicy sklepów chcą widzieć w raporcie Power BI <strong>tylko te sklepy, które zostały zatwierdzone do raportowania</strong> — czyli nowo otwarte lub tymczasowo wyłączone oddziały nie powinny zaburzać analiz. Tabela <code>sklep_raportowania</code> pełni rolę ”białej listy” sklepów aktywnych.</p>
+        <p>Do podstawowej kwerendy:</p>
         <pre><code>let
-            Źródło = Excel.Workbook(...),
-            #'Zmieniono typ' = Table.TransformColumnTypes(Źródło, ...),
-            #'Przefiltrowane wiersze' = Table.SelectRows(#'Zmieniono typ', ...)
+            Source = tabela_sprzedazy
         in
-            #'Przefiltrowane wiersze'</code></pre>
-        <p>Kilka kluczowych rzeczy o składni:</p>
-        <ul>
-        <li>Każdy krok to <code>NazwaKroku = operacja(poprzedniKrok, ...)</code> – każdy krok odwołuje się do poprzedniego</li>
-        <li>Kroki oddzielone są <strong>przecinkami</strong> – brak przecinka po ostatnim kroku przed <code>in</code></li>
-        <li>Nazwy kroków ze spacjami lub polskimi znakami muszą być opakowane w <code>#”...”</code> – stąd charakterystyczne <code>#”Zmieniono typ”</code> generowane automatycznie przez UI</li>
-        <li>Język M jest <strong>case-sensitive</strong> – <code>table</code> to nie to samo co <code>Table</code></li>
-        <li>Kod M generuje się automatycznie podczas pracy w UI – możesz zacząć od klikania i tylko podglądać co powstaje w tle</li>
-        <li>Nie umiesz kodować? Opisz transformację chatbotowi – wklej gotowy kod M bezpośrednio do edytora</li>
-        </ul>
+            Source</code></pre>
+        <p>Dodajmy nowy krok, który pobierze listę sklepów - wartości z kolumny <code>Whitelist Sklepów</code> tabeli <code>sklepy_raportowanie</code></p>
+        <pre><code>let
+            Source = tabela_sprzedazy,
+            AktywneSklepyLista = sklepy_raportowanie[Whitelist Sklepów]
+        in
+            AktywneSklepyLista</code></pre>
+        <p>Teraz wystarczy dodać prostą formułę, która sprawdza czy wartość z listy zawiera się w wartości z tabeli.</p>
+        <img src='https://github.com/odczarujpowerbi/szkolenia-powerbi/blob/main/bin/Pasted%20image%2020260303204222.png?raw=true' width='100%'>
 
     </div>
 
     <!-- Strona 2 -->
     <div class='page'>
-        <h1>Co przechowuje PQ?</h1>
-        <p>Power Query nie jest magazynem danych – jest magazynem instrukcji. To fundamentalna rzecz, którą warto zrozumieć: Power Query przechowuje wyłącznie opis operacji do wykonania, a nie same dane. Dane fizycznie żyją w modelu semantycznym Power BI – Power Query jest tylko potokiem, przez który przepływają podczas odświeżania.</p>
-        <p>To co widzisz w oknie Power Query – podgląd tabeli z wierszami i kolumnami – to nie są ”Twoje dane”. To jest wynik wykonania zapytania na próbce danych, wygenerowany wyłącznie po to, żebyś mógł zobaczyć efekt transformacji. Po zamknięciu edytora ten podgląd znika.</p>
-        <p>Każda tabela w Power Query to osobne, choć może być zależne, zapytanie. Z tego wynika ważna konsekwencja:</p>
-        <ul>
-        <li>Jeśli masz dwie tabele oparte na tym samym źródle – Power Query odpyta to źródło <strong>dwukrotnie</strong>, osobno dla każdego zapytania</li>
-        <li>Dane z jednego zapytania <strong>nie są współdzielone</strong> z drugim, nawet jeśli zapytania są identyczne</li>
-        <li>Przy wielu tabelach opartych na tym samym źródle czas odświeżania rośnie liniowo – każde zapytanie to osobne połączenie ze źródłem</li>
-        <li>Rozwiązaniem jest <strong>zapytanie bazowe</strong> – jedno zapytanie pobierające dane ze źródła, z którego kolejne zapytania dziedziczą przez referencję, a nie przez ponowne połączenie</li>
-        </ul>
-        <img src='https://github.com/odczarujpowerbi/szkolenia-powerbi/blob/main/bin/Pasted%20image%2020260303201734.png?raw=true' width='100%'>
-        <p><strong>Podgląd danych w edytorze – cache lokalny</strong></p>
-        <p>Jest jednak jeden wyjątek od reguły ”Power Query nie przechowuje danych”. Podczas pracy w edytorze Power Query zapisuje tymczasowy cache podglądu lokalnie na dysku komputera. Dzięki temu po ponownym otwarciu edytora widzisz dane w tabelach natychmiast – bez konieczności ponownego odpytywania źródła.</p>
-        <p>To wygodne, ale może prowadzić do nieporozumień:</p>
-        <ul>
-        <li>Podgląd w edytorze może pokazywać <strong>nieaktualne dane</strong> – cache nie jest odświeżany automatycznie przy każdym otwarciu</li>
-        <li>Jeśli źródło danych zmieniło się od ostatniego pobrania, edytor nadal pokaże stary podgląd</li>
-        <li>Cache można ręcznie odświeżyć przyciskiem <strong>Refresh Preview</strong> – dopiero wtedy Power Query ponownie odpyta źródło</li>
-        <li>Cache podglądu to wyłącznie narzędzie deweloperskie – nie ma żadnego wpływu na dane ładowane do modelu Power BI podczas właściwego odświeżania raportu</li>
-        </ul>
-        <p>Dlatego warto pamiętać: to co widzisz w edytorze podczas pracy, niekoniecznie odzwierciedla aktualny stan źródła danych.</p>
+        <h2>Bez buffera — wolno</h2>
+        <pre><code>let
+            Source = tabela_sprzedazy,
+            AktywneSklepyLista = sklepy_raportowanie[Whitelist Sklepów],  // odczyt przy KAŻDYM wierszu
+
+            #'Dodaj flagę' = Table.AddColumn(Source, 'Aktywny w raporcie', 
+                each List.Contains(AktywneSklepyLista, [Nazwa Sklepu])
+            )
+        in
+            #'Dodaj flagę'</code></pre>
+        <p><code>List.Contains</code> odpytuje <code>sklep_raportowania</code> dla każdego wiersza <code>tabela_sprzedazy</code> — przy 100k wierszach to 100k odczytów.</p>
+
+    </div>
+
+    <!-- Strona 3 -->
+    <div class='page'>
+        <h2>Z List.Buffer — szybko</h2>
+        <pre><code>let
+            Source = tabela_sprzedazy,
+            AktywneSklepyLista = List.Buffer(sklepy_raportowanie[Whitelist Sklepów]),  // raz do pamięci
+
+            #'Dodaj flagę' = Table.AddColumn(Source, 'Aktywny w raporcie', 
+                each List.Contains(AktywneSklepyLista, [Nazwa Sklepu])
+            )
+        in
+            #'Dodaj flagę'</code></pre>
+        <p>Jedna zmiana — <code>List.Buffer</code> — a lista <code>Whitelist Sklepów</code> jest wczytywana <strong>raz do pamięci</strong> i re-używana dla każdego wiersza.</p>
+
+    </div>
+
+    <!-- Strona 4 -->
+    <div class='page'>
+        <h2>Dlaczego to ma sens w Power BI?</h2>
+        <p>Kolumna <code>Aktywny w raporcie</code> jako <code>true/false</code> jest w modelu użyteczna — kierownik może w raporcie <strong>samodzielnie przełączać</strong> widok między wszystkimi sklepami a tylko aktywnymi, bez konieczności tworzenia dwóch osobnych miar w DAX. Buffer sprawia, że ta kolumna nie spowalnia odświeżania.</p>
+        <p>Natomiast, jeżeli chciałbym po prostu odfiltrować wiersze dynamicznie - w takim przypadku lepiej dokonać operacji <code>Merge</code> na obu tabelach za pomocą <code>INNER JOIN</code> - to nic innego jak znalezienie wartości wspólnych dla obu tabel :). Taka metoda jest na tylne popularna, że ten rodzaj tabeli ma nawet swoją własną nazwę - <strong>junk dimension</strong> (wymiar śmietnikowy). To tabela, która grupuje w sobie różne flagi i wskaźniki o niskiej kardynalności, które nie pasują do żadnego innego wymiaru — zamiast tworzyć osobną tabelę dla każdej flagi, zbieramy je wszystkie w jednym miejscu. </p>
+        <p>Częstym scenariuszem jest również, że taka tabela później trafia do samego modelu. Wtedy, tabela typu JUNK DIMENSION filtruje standardowy DIMENSION, a następnie FACT TABLE.</p>
+        <p>Fascynujące, jak Power BI potrafi zaoferować masę sposobów na ten sam problem. Natomiast, każdy z tych sposobów ma swoje wady i zalety. O metodzie decyduje przede wszystkim problem biznesowy, w dalszej kolejności technologia (wielkość tabel, kardynalność, częstość aktualizacji).</p>
 
     </div>
 
@@ -293,10 +306,10 @@ Wstęp =
 <script>
 (function() {
     // Unikalny ID dla tej wizualizacji (wstrzykiwany przez Python)
-    var vizId = '2adb3687';
+    var vizId = 'e8d6168a';
     var containerId = 'viz_' + vizId;
 
-    var currentPage_2adb3687 = 1;
+    var currentPage_e8d6168a = 1;
     var container = document.getElementById(containerId);
 
     if (!container) return;
@@ -306,27 +319,27 @@ Wstęp =
 
     document.getElementById('totalPages_' + vizId).textContent = totalPages;
 
-    window['showPage_2adb3687'] = function(n) {
-        if (n > totalPages) currentPage_2adb3687 = totalPages;
-        if (n < 1) currentPage_2adb3687 = 1;
+    window['showPage_e8d6168a'] = function(n) {
+        if (n > totalPages) currentPage_e8d6168a = totalPages;
+        if (n < 1) currentPage_e8d6168a = 1;
 
         for (var i = 0; i < pages.length; i++) {
             pages[i].classList.remove('active');
         }
-        pages[currentPage_2adb3687 - 1].classList.add('active');
+        pages[currentPage_e8d6168a - 1].classList.add('active');
 
-        document.getElementById('currentPage_' + vizId).textContent = currentPage_2adb3687;
-        document.getElementById('prevBtn_' + vizId).disabled = (currentPage_2adb3687 === 1);
-        document.getElementById('nextBtn_' + vizId).disabled = (currentPage_2adb3687 === totalPages);
+        document.getElementById('currentPage_' + vizId).textContent = currentPage_e8d6168a;
+        document.getElementById('prevBtn_' + vizId).disabled = (currentPage_e8d6168a === 1);
+        document.getElementById('nextBtn_' + vizId).disabled = (currentPage_e8d6168a === totalPages);
     };
 
-    window['changePage_2adb3687'] = function(n) {
-        currentPage_2adb3687 += n;
-        window['showPage_2adb3687'](currentPage_2adb3687);
+    window['changePage_e8d6168a'] = function(n) {
+        currentPage_e8d6168a += n;
+        window['showPage_e8d6168a'](currentPage_e8d6168a);
     };
 
     // Inicjalizacja
-    window['showPage_2adb3687'](1);
+    window['showPage_e8d6168a'](1);
 
     // Funkcjonalność powiększania obrazów
     var images = container.querySelectorAll('img');
