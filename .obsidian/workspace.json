@@ -4,26 +4,22 @@
     "type": "split",
     "children": [
       {
-        "id": "9a353bede615ddab",
+        "id": "17aadcd27ab42726",
         "type": "tabs",
         "children": [
           {
-            "id": "e3dd31b27131863b",
+            "id": "473bc0f5d24e60be",
             "type": "leaf",
             "state": {
-              "type": "markdown",
+              "type": "html-view",
               "state": {
-                "file": "300. INPUTS/Test/Pierogi.md",
-                "mode": "source",
-                "source": false,
-                "backlinks": false
+                "file": "400. OUTPUTS/Wprowadzenie do PowerQuery/01. UI - Wstęp.html"
               },
-              "icon": "lucide-file",
-              "title": "Pierogi"
+              "icon": "code-glyph",
+              "title": "01. UI - Wstęp"
             }
           }
-        ],
-        "stacked": true
+        ]
       }
     ],
     "direction": "vertical"
@@ -46,7 +42,7 @@
                 "autoReveal": false
               },
               "icon": "lucide-folder-closed",
-              "title": "Files"
+              "title": "Przeglądarka plików"
             }
           },
           {
@@ -55,7 +51,7 @@
             "state": {
               "type": "search",
               "state": {
-                "query": "iteratory",
+                "query": "Pasted image 20251229211503.png",
                 "matchingCase": false,
                 "explainSearch": true,
                 "collapseAll": true,
@@ -80,8 +76,7 @@
       }
     ],
     "direction": "horizontal",
-    "width": 314.5,
-    "collapsed": true
+    "width": 314.5
   },
   "right": {
     "id": "a3e901ef3e57a84e",
@@ -108,13 +103,27 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "300. INPUTS/Test/Pierogi.md",
+                "file": "400. OUTPUTS/Wprowadzenie do PowerQuery/01. UI - Wstęp.html",
                 "followCursor": true,
                 "showSearch": false,
                 "searchQuery": ""
               },
               "icon": "lucide-list",
-              "title": "Outline of Pierogi"
+              "title": "Konspekt 01. UI - Wstęp"
+            }
+          },
+          {
+            "id": "5092f82527a9ea36",
+            "type": "leaf",
+            "state": {
+              "type": "all-properties",
+              "state": {
+                "sortOrder": "frequency",
+                "showSearch": false,
+                "searchQuery": ""
+              },
+              "icon": "lucide-archive",
+              "title": "All properties"
             }
           }
         ]
@@ -130,7 +139,7 @@
             "state": {
               "type": "localgraph",
               "state": {
-                "file": "300. INPUTS/Test/Pierogi.md",
+                "file": "400. OUTPUTS/Wprowadzenie do PowerQuery/01. UI - Wstęp.html",
                 "options": {
                   "collapse-filter": true,
                   "search": "",
@@ -158,7 +167,7 @@
                 }
               },
               "icon": "lucide-git-fork",
-              "title": "Graph of Pierogi"
+              "title": "Graf: 01. UI - Wstęp"
             }
           }
         ]
@@ -169,11 +178,11 @@
   },
   "left-ribbon": {
     "hiddenItems": {
-      "switcher:Open quick switcher": false,
-      "graph:Open graph view": false,
-      "canvas:Create new canvas": false,
-      "command-palette:Open command palette": false,
-      "bases:Create new base": false,
+      "switcher:Otwórz okno szybkiego wyboru": false,
+      "graph:Otwórz podgląd grafu": false,
+      "canvas:Stwórz nową tablicę": false,
+      "command-palette:Otwórz listę poleceń": false,
+      "bases:Stwórz nową bazę danych": false,
       "obsidian-shellcommands:Shell commands: Custom variables": false,
       "obsidian-excalidraw-plugin:New drawing": false,
       "obsidian-git:Open Git source control": false,
@@ -181,54 +190,54 @@
       "templater-obsidian:Templater": false
     }
   },
-  "active": "e3dd31b27131863b",
+  "active": "257cfe7088d8211a",
   "lastOpenFiles": [
-    "400. OUTPUTS/Test/Pierogi - Pierogi - tradycyjne polskie danie.html",
-    "300. INPUTS/Test/Pierogi.md",
-    "bin/Pasted image 20251229211503.png",
-    "bin/Pasted image 20251229211500.png",
-    "400. OUTPUTS/Test/Ramen - Ramen - japońska zupa z makaronem.html",
-    "bin/Pasted image 20251229211330.png",
-    "300. INPUTS/Test/Ramen.md",
-    "000. UTILITIES/TEMPLATES/1. Teoria.md",
-    "300. INPUTS/Test",
-    "400. OUTPUTS/_Measures/_HTML.md",
+    "400. OUTPUTS/Wprowadzenie do PowerQuery/02. Działania na tabelach - Rozdział - to będzie osobna miara.html",
+    "400. OUTPUTS/Wprowadzenie do PowerQuery/01. UI - Wstęp.html",
+    "300. INPUTS/Wprowadzenie do PowerQuery/03. Język M.md",
     "400. OUTPUTS/_Measures/_Parametr.md",
-    "300. INPUTS/Test/Teoria - Czegoś.md",
-    "400. OUTPUTS/Test/Teoria - Czegoś - Rozdział 2.html",
-    "400. OUTPUTS/Test/Teoria - Czegoś - Rozdział1.html",
-    "400. OUTPUTS/Test",
-    "400. OUTPUTS/Teoria - Czegoś - Rozdział1.html",
+    "400. OUTPUTS/_Measures/_HTML.md",
+    "400. OUTPUTS/Wprowadzenie do PowerQuery/03. Język M - Wstęp.html",
+    "400. OUTPUTS/Wprowadzenie do PowerQuery",
+    "300. INPUTS/Wprowadzenie do PowerQuery/02. Działania na tabelach.md",
+    "300. INPUTS/Wprowadzenie do PowerQuery/01. UI.md",
     "300. INPUTS/300. INPUTS.md",
-    "300. INPUTS/Teoria - Czegos.md",
-    "500. ARCHIVE/2025-12 Poziom Podstawowy/00 - 02 Podstawy/00. Konfiguracja Power BI.md",
-    "Todo.md",
-    "README.md",
-    "500. ARCHIVE/2025-12 Poziom Podstawowy/03 - 06 Kontekst/07. Iteratory.md",
-    "500. ARCHIVE/2025-12 Poziom Podstawowy/00 - 02 Podstawy/01. Podstawy DAX.md",
-    "200. DRAFTS/Board Test.html",
-    "000. UTILITIES/000. UTILITIES.md",
-    "000. UTILITIES/ABOUT/02. Wspólne Elementy Formatowania.md",
-    "000. UTILITIES/ABOUT/02c. Budowa Gaps.md",
-    "000. UTILITIES/ABOUT/02b. Budowa Quiz.md",
+    "500. ARCHIVE/500. ARCHIVE.md",
     "_MAIN.canvas",
-    "000. UTILITIES/ABOUT/02a. Budowa Teorii.md",
-    "000. UTILITIES/ABOUT/06. Workflow Tworzenia Treści - Instrukcja.md",
-    "000. UTILITIES/ABOUT/06. Workflow Tworzenia Treści.md",
-    "000. UTILITIES/ABOUT/02. Budowa Treści - Building Blocks.md",
-    "000. UTILITIES/ABOUT/01. Diagram Przepływu Danych.md",
-    "000. UTILITIES/ABOUT/02a. Szczegółowy Przepływ - Gaps.md",
-    "000. UTILITIES/ABOUT/03. Stack Technologiczny.md",
-    "000. UTILITIES/ABOUT/ABOUT.md",
-    "000. UTILITIES/ABOUT",
-    "000. UTILITIES/TEMPLATES",
-    "bin/Pasted Image 20251211193432_248.png",
-    "bin/Pasted Image 20251211193344_966.png",
-    "bin/Pasted Image 20251211193253_443.png",
-    "bin/Pasted image 20251211193244.png",
-    "bin/Pasted image 20251210001950.png",
-    "bin/Pasted image 20251209193536.png",
-    "bin/Pasted image 20251209181932.png",
+    "bin/Pasted image 20260303152152.png",
+    "bin/Pasted image 20260303151950.png",
+    "bin/Pasted image 20260303151916.png",
+    "bin/Pasted image 20260303151901.png",
+    "bin/Pasted image 20260303151355.png",
+    "bin/Pasted image 20260303151207.png",
+    "bin/Pasted image 20260303145823.png",
+    "bin/Pasted image 20260303145812.png",
+    "bin/Pasted image 20260303144704.png",
+    "bin/Pasted image 20260303144645.png",
+    "Bez nazwy.md",
+    "300. INPUTS/Wprowadzenie do PowerQuery",
+    "500. ARCHIVE/Podstawy PBI/03 - 06 Kontekst/07. Iteratory.md",
+    "500. ARCHIVE/Podstawy PBI/03 - 06 Kontekst/06a. Quiz.md",
+    "500. ARCHIVE/Podstawy PBI/03 - 06 Kontekst/06. Tworzenie zestawień tabelarycznych.md",
+    "500. ARCHIVE/Podstawy PBI/03 - 06 Kontekst/05a. Quiz.md",
+    "500. ARCHIVE/Podstawy PBI/03 - 06 Kontekst/05a. Gaps.md",
+    "500. ARCHIVE/Podstawy PBI/03 - 06 Kontekst/05. DAX - Zaawansowane Kwerendy.md",
+    "500. ARCHIVE/Podstawy PBI/03 - 06 Kontekst/04a. Quiz.md",
+    "500. ARCHIVE/Podstawy PBI/03 - 06 Kontekst/04a. Gaps.md",
+    "500. ARCHIVE/Podstawy PBI/03 - 06 Kontekst/04. Modyfikowanie Kontekstu.md",
+    "500. ARCHIVE/Podstawy PBI/03 - 06 Kontekst/03a. Quiz.md",
+    "500. ARCHIVE/Podstawy PBI/03 - 06 Kontekst/03a. Gaps.md",
+    "500. ARCHIVE/Podstawy PBI/03 - 06 Kontekst/03. Wprowadzenie do CALCULATE.md",
+    "500. ARCHIVE/Podstawy PBI/00 - 02 Podstawy/02a. Quiz.md",
+    "500. ARCHIVE/Podstawy PBI/00 - 02 Podstawy/02a. Gaps.md",
+    "500. ARCHIVE/Podstawy PBI/00 - 02 Podstawy/02. Miary vs Kolumny kalkulowane.md",
+    "500. ARCHIVE/Podstawy PBI/00 - 02 Podstawy/01a. Quiz.md",
+    "500. ARCHIVE/Podstawy PBI/00 - 02 Podstawy/01a. Gaps.md",
+    "200. DRAFTS/Board Test.html",
+    "500. ARCHIVE/Podstawy PBI/03 - 06 Kontekst",
+    "500. ARCHIVE/Podstawy PBI/00 - 02 Podstawy",
+    "500. ARCHIVE/Podstawy PBI",
+    "400. OUTPUTS/2025-12 Poziom Podstawowy/00 - 02 Podstawy/02a. Quiz.html",
     "Generator.canvas"
   ]
 }

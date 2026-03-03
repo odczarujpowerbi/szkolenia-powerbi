@@ -1,4 +1,5 @@
 _pHTML = {
-    ("Pierogi - Pierogi - tradycyjne polskie danie", NAMEOF('_HTML'[Pierogi - Pierogi - tradycyjne polskie danie]), 0, "T. POLSKIE DANIE", "00"),
-    ("Ramen - Ramen - japońska zupa z makaronem", NAMEOF('_HTML'[Ramen - Ramen - japońska zupa z makaronem]), 1, "J. ZUPA Z MAKARONEM", "00")
+    ("01. UI - Wstęp", NAMEOF('_HTML'[01. UI - Wstęp]), 0, "WSTĘP", "01"),
+    ("02. Działania na tabelach - Rozdział - to będzie osobna miara", NAMEOF('_HTML'[02. Działania na tabelach - Rozdział - to będzie osobna miara]), 1, "T. BĘDZIE OSOBNA MIARA", "02"),
+    ("03. Język M - Wstęp", NAMEOF('_HTML'[03. Język M - Wstęp]), 2, "WSTĘP", "03")
 }

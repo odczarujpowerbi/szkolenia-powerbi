@@ -30,3 +30,4 @@
 > 	  - Puste tablice `[]` oznaczają brak zewnętrznych assetów (użycie inline)
 > - `generate_css_measures`: `true` (generuje osobne miary CSS*.html) lub `false` (wyłącza generowanie)
 > - `characters`: mapowanie sposobu zastąpienia tradycyjnych znaków na nowe - z uwagi na konieczność obsłużenia miary DAX (brak cudzysłowia) oraz płynących z tego implikacji używania JS (apostrofy)
+
