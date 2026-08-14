@@ -4,6 +4,8 @@ Ten plan rozwija dokumentację koncepcyjną (`Wirtualny_Pracownik_AI_Dokumentacj
 
 Główny problem, który ten plan rozwiązuje: **administrator traci czas na ręczne zatwierdzanie każdego zadania.** Rozwiązaniem jest silnik walidacji z kilkoma niezależnymi walidatorami działającymi równolegle — administrator zatwierdza już tylko wyjątki (czerwone/sporne), nie każdą pojedynczą akcję.
 
+Ten dokument opisuje architekturę **jednego** pracownika. Docelowa wersja wieloosobowa (kilka botów-ról na osobnych komputerach, agent strategiczny doradzający prezesowi) jest osobnym rozwinięciem w [ZESPOL-BOTOW.md](./ZESPOL-BOTOW.md) — budowanym dopiero po ustabilizowaniu tego, co tutaj opisane.
+
 ## 1. Zasada nadrzędna: rezultat, nie instrukcja
 
 Zadanie w Projectly opisuje **oczekiwany rezultat i kryteria akceptacji**, nie krok po kroku co robić. Planner AI sam dekomponuje zadanie na kroki, wybiera narzędzia i skrypty, wykonuje, a na końcu **sam ocenia własny wynik** względem kryteriów, zanim cokolwiek trafi do człowieka.

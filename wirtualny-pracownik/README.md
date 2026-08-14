@@ -7,6 +7,8 @@ Wirtualny pracownik działający niezależnie od laptopów zespołu: cyklicznie 
 > Pełna dokumentacja koncepcyjna (biznesowa i techniczna, v1.0, 6 sierpnia 2026): `Wirtualny_Pracownik_AI_Dokumentacja_Biznesowa_i_Techniczna.pdf` (przekazana przez właściciela projektu, nie dołączona do repo).
 >
 > Rozwinięcie o konkretne narzędzia (Projectly, CRM, Meta Ads, Google/SharePoint, e-mail przez MCP, skille) — patrz **[PLAN-WDROZENIA.md](./PLAN-WDROZENIA.md)** (architektura, silnik auto-zatwierdzania, komunikacja) i **[SKRYPTY.md](./SKRYPTY.md)** (katalog skryptów do zaimplementowania).
+>
+> Docelowo to nie jeden bot, tylko **zespół botów-ról** (Waldek-marketing, Krzysztof-developer, Zofia-asystentka, Zenek-administracja, Strateg) na osobnych komputerach — patrz **[ZESPOL-BOTOW.md](./ZESPOL-BOTOW.md)**. To faza E z mapy rozwoju, budowana dopiero po ustabilizowaniu jednego pracownika.
 
 ## Rekomendacja: pilotaż najpierw
 
@@ -66,3 +68,4 @@ Rozpocząć od 2–4 tygodniowego pilotażu na jednym, używanym komputerze z Wi
 
 - **[PLAN-WDROZENIA.md](./PLAN-WDROZENIA.md)** — architektura komunikacji przez Projectly, silnik auto-zatwierdzania, fazy wdrożenia, integracje.
 - **[SKRYPTY.md](./SKRYPTY.md)** — pełny katalog skryptów Python do zaimplementowania, z celem, wyzwalaczem i poziomem ryzyka.
+- **[ZESPOL-BOTOW.md](./ZESPOL-BOTOW.md)** — docelowa architektura wieloosobowa: role-boty na osobnych komputerach, agent strategiczny, komunikacja bot-bot, dystrybucja skilli.
