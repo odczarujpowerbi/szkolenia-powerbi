@@ -20,7 +20,7 @@ Rozpocząć od 2–4 tygodniowego pilotażu na jednym, używanym komputerze z Wi
 - **Kolejka zadań i komunikacja:** **Projectly** (własna apka do zadań, API + MCP) — jedyne źródło prawdy o statusie i historii pracy bota; zastępuje generyczną kolejkę folderową z pierwotnej koncepcji. Szczegóły w [PLAN-WDROZENIA.md](./PLAN-WDROZENIA.md).
 - **Audyt:** `status.json`, `events.jsonl`, screenshoty, logi stdout/stderr, `costs.json`, raport końcowy — osobny folder per zadanie (`TASK-000142\...`), dodatkowo komentarz-podsumowanie w Projectly.
 - **Zdalny dostęp:** Tailscale + Pulpit zdalny (bez publikowania RDP do internetu).
-- **Integracje docelowe:** CRM (MCP), Meta Ads (API + Playwright fallback), Google Workspace, SharePoint (Graph API), e-mail przez dedykowanego agenta (MCP), Power BI (jak niżej), narzędzia developerskie.
+- **Integracje docelowe:** CRM (MCP), Meta Ads (API + Playwright fallback), Google Workspace, SharePoint (Graph API), e-mail przez dedykowanego agenta (MCP), Power BI (jak niżej), narzędzia developerskie, system transakcyjny (sprzedaż), inFakt (księgowość — dedykowane konto bota), Google Search Console/Analytics + social media (widoczność w sieci).
 - **Repozytoria:** kod i PBIP wersjonowane w GitHubie, poza folderem synchronizowanym przez OneDrive; agent nie zapisuje bezpośrednio do `main` — zawsze branch + pull request do akceptacji.
 
 ## Kluczowe zasady
@@ -59,6 +59,7 @@ Rozpocząć od 2–4 tygodniowego pilotażu na jednym, używanym komputerze z Wi
 - [ ] Podłączyć integracje wg kolejności z planu wdrożenia: CRM → Meta Ads → Google/SharePoint → e-mail (MCP)
 - [ ] Zbudować intake z maila i innych źródeł (`email_intake_triage.py`, `task_routing_classifier.py`) — automatyczne tworzenie i rozdzielanie zadań, patrz PLAN-WDROZENIA.md sekcja 11
 - [ ] Uruchomić rejestr skilli i bota ulepszającego skille (`skill_registry.py`, `skill_improver_bot.py`)
+- [ ] Zbudować cotygodniowe raporty biznesowe (sprzedaż, wydatki reklamowe, finanse przez inFakt, widoczność w sieci) — dopiero po dojrzałym silniku walidacji, bo dotyka pieniędzy, patrz PLAN-WDROZENIA.md sekcja 18
 - [ ] Po potwierdzeniu kryteriów odbioru: przenieść folder do docelowego repozytorium `odczarujpowerbi/wirtualny-pracownik`
 
 ## Dalsza dokumentacja

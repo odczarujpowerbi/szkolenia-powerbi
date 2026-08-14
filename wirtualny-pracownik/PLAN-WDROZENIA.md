@@ -78,11 +78,16 @@ Klasyfikacja ryzyka zostaje z oryginalnego dokumentu (zielone/żółte/czerwone)
 
 - **Zielone** (odczyt, screenshot, raport, draft) — zero walidacji, zapis do audytu i komentarz "na koniec dnia" zbiorczy, żeby nie zaśmiecać Projectly.
 - **Żółte** (commit na gałęzi, aktualizacja CRM, draft maila, zmiana statusu) — walidatory głosują, próg 2 z 3 do auto-zatwierdzenia. Poniżej progu → zadanie dla człowieka (sekcja 4), dokładnie ten sam mechanizm co dla czerwonych.
-- **Czerwone** (publikacja, budżet reklamowy, wysyłka masowa, usunięcie danych, nadanie roli) — **zawsze** trafiają do człowieka, niezależnie od wyniku walidatorów. To się nie zmienia względem oryginalnej dokumentacji — auto-zatwierdzanie dotyczy wyłącznie żółtych.
+- **Czerwone** (publikacja, budżet reklamowy, wysyłka masowa, usunięcie danych, nadanie roli) — **domyślnie zawsze** trafiają do człowieka, niezależnie od wyniku walidatorów. Wyjątek: **czerwone w granicach** (bounded autonomy), patrz niżej.
 - Reguły klasyfikacji i progi trzymane w `approval_policy.yaml` — edytowalne bez zmiany kodu, żeby można było kręcić progiem "ile walidatorów musi się zgodzić" per typ zadania.
 - Gdy walidatory się nie zgadzają albo mają niską pewność — to **nie jest błąd, to sygnał** do eskalacji, nie do zgadywania.
 - **Kalibracja liczby walidatorów pod kątem kosztu:** 3 walidatory na każde żółte zadanie to koszt, nie tylko rygor — 3 dodatkowe wywołania modelu (część vision, najdroższe tokeny) do każdej zmiany. Dla typów zadań z ugruntowaną historią sukcesu (`skill_usage_logger.py` pokazuje wysoką skuteczność) liczba walidatorów w `approval_policy.yaml` powinna spaść do 1; pełne 3 zostają dla nowych/nieprzetestowanych typów zadań. Bez tej kalibracji hasło "bardzo tani pracownik" nie będzie prawdziwe w praktyce — warto policzyć realny koszt miesięczny (liczba zadań/dzień × wywołania × koszt tokenów) zanim silnik trafi na produkcję.
 - **Zasada domyślna: agent radzi sobie sam.** Zadanie dla człowieka to wyjątek zarezerwowany dla decyzji, które faktycznie wymagają człowieka (autoryzacja czerwona, brakująca wiedza/dostęp, czynność prawna/fizyczna) — nie sposób na zrzucenie pracy, którą agent mógłby wykonać sam.
+- **Czerwone w granicach (bounded autonomy)** — decyzja podjęta świadomie: dla wybranych typów czerwonych akcji (na start: zmiany budżetu reklamowego w zdefiniowanych widełkach) agent wykonuje **bez pytania**, jeśli mieści się w jawnie zdefiniowanej granicy liczbowej w `approval_policy.yaml` (np. „budżet dzienny kampanii Meta Ads: autonomicznie w zakresie ±15%, poza tym — zwykłe czerwone do człowieka”). Poza granicą ta sama akcja wraca do zwykłego trybu czerwonego (sekcja 4). To dokładnie faza D „Ograniczona autonomia” z dokumentacji bazowej (rozdz. 17) — nie nowy wymysł, tylko domknięcie mapy rozwoju, która już to przewidywała.
+  - **Granice ustawia człowiek, nie bot.** Agent nigdy sam nie rozszerza ani nie zgaduje granicy — brak zdefiniowanej granicy dla danego typu akcji = zwykłe czerwone.
+  - **Bounded red nadal przechodzi przez `validator_pool.py`** jak żółte — granica liczbowa to warunek konieczny, nie wystarczający.
+  - **Każde wykonanie w granicach trafia widocznie do cotygodniowego digestu** (`digest_generator.py`), nawet jeśli nie wymagało akceptacji — żeby nic nie „ucichło" tylko dlatego, że nie wymagało kliknięcia.
+  - **Rekomendacja startowa: pusta lista granic.** Zacząć z `approval_policy.yaml` bez żadnych bounded red, uruchomić zwykły tryb czerwony (sekcja 4) na produkcji przez kilka tygodni, i dopiero po zbudowaniu zaufania do konkretnego typu akcji (widoczne w KPI z sekcji 8) dodawać granicę dla tego jednego typu — nie wszystkich naraz.
 
 ## 4. Obieg eskalacji: zadanie dla człowieka → komentarz → weryfikacja → kontynuacja
 
@@ -143,12 +148,16 @@ Poza własną kolejką agent cyklicznie **przegląda też zadania przypisane lud
 |---|---|---|---|
 | Projectly | REST API + MCP | infra (bez ryzyka biznesowego) | Kolejka zadań, komentarze, status — rdzeń komunikacji |
 | CRM | MCP | żółte (odczyt: zielone) | Zapis/zmiana rekordów przez walidatory; masowe operacje = czerwone |
-| Meta Ads | API (główne) + Playwright (fallback UI) | budżet/publikacja = **zawsze czerwone** | API do odczytu i zmian w granicach limitu; UI tylko gdy brak API |
+| Meta Ads | API (główne) + Playwright (fallback UI) | budżet/publikacja = czerwone, **w zdefiniowanych widełkach: bounded red** | Zmiana budżetu w granicach z `approval_policy.yaml` autonomicznie (sekcja 3), poza granicą — zwykłe czerwone |
 | Google Workspace | Google API (Docs/Sheets) | żółte | Tworzenie/aktualizacja plików roboczych |
 | SharePoint | Microsoft Graph | żółte | Upload/aktualizacja artefaktów, audytu, raportów |
 | Power BI | PBIP/TMDL + Desktop Bridge | odczyt: zielone, zmiana: żółte, publikacja: czerwone | Zgodnie z PBI-01/PBI-02 z dokumentacji bazowej |
 | E-mail (wychodzący) | MCP → dedykowany agent mailowy | wysyłka = **zawsze czerwone** | Bot deleguje redakcję/wysyłkę do wyspecjalizowanego agenta przez MCP, nie wysyła bezpośrednio |
 | E-mail (przychodzący) — intake | MCP/Graph, odczyt skrzynki | zielone (samo utworzenie zadania) | Bot czyta i klasyfikuje, tworzy zadanie w Projectly — patrz sekcja 11 |
+| System transakcyjny (sprzedaż) | API/MCP (do doprecyzowania po stronie systemu) | zielone (odczyt) | Źródło dla raportu sprzedażowego — sekcja 18 |
+| inFakt (księgowość) | API jeśli dostępne, inaczej eksport CSV z portalu — **dedykowane konto bota** | odczyt: zielone, jakakolwiek zmiana danych księgowych: **zawsze czerwone, bez granic** | Księgowość celowo bez bounded red na starcie — zbyt wrażliwe, żeby uczyć się na granicach |
+| Google Search Console + Analytics | API | zielone | SEO, ruch na stronie — źródło raportu widoczności, sekcja 18 |
+| Social media (zasięgi, wzmianki) | API per platforma (do doprecyzowania które) | zielone | Drugie źródło raportu widoczności, sekcja 18 |
 | Dev tools (git, testy, deploy) | CLI/skrypty | commit na gałęzi: żółte, merge/deploy: czerwone | Standardowy flow branch → PR → decyzja |
 
 ## 7. Fazy wdrożenia
@@ -167,7 +176,8 @@ Poza własną kolejką agent cyklicznie **przegląda też zadania przypisane lud
 | 8. Biblioteka skilli + bot ulepszający | Rejestr skilli, logowanie skuteczności, cykliczna analiza i propozycje poprawek | Skille poprawiają się same na podstawie danych z produkcji | Ciągłe, start równolegle z Fazą 2 |
 | 9. Skille raportowe, porządkowanie danych i podsumowania | report_builder.py, data_tidy.py, source_schema_watcher.py, newsletter_drafter.py, digest_generator.py (sekcja 10) | Największy zmierzony koszt (INDEKA/DIVERSE firefighting, ~175h w próbce) zaczyna spadać | 5-8 dni — **priorytet nr 2** po silniku walidacji |
 | 10. Intake — rozdzielanie zadań z maila i innych źródeł | email_intake_triage.py, task_routing_classifier.py, routing_confidence_check.py (sekcja 11) | Zadania powstają i trafiają do właściwej osoby/bota bez ręcznego zakładania w Projectly | 4-6 dni, po Fazie 9 |
-| 11. Stabilizacja i metryki | KPI z dokumentacji bazowej (powtarzalność, koszt/zadanie, liczba eskalacji) | Decyzja: rozwijamy / iterujemy / zatrzymujemy | 4-8 dni |
+| 11. Raporty biznesowe cykliczne | sales_report_builder.py, ad_spend_report_builder.py, infakt_export.py, company_financial_report_builder.py, web_visibility_report_builder.py, weekly_business_review.py (sekcja 18) | Cotygodniowa analiza sprzedaży/wydatków/finansów/widoczności z gotowym planem wdrożenia | 8-12 dni, po Fazach 2b i 9 — **wymaga dojrzałego silnika walidacji, bo dotyka pieniędzy** |
+| 12. Stabilizacja i metryki | KPI z dokumentacji bazowej (powtarzalność, koszt/zadanie, liczba eskalacji) | Decyzja: rozwijamy / iterujemy / zatrzymujemy | 4-8 dni |
 
 ## 8. Metryka sukcesu specyficzna dla tego problemu
 
@@ -256,8 +266,8 @@ Przykład zastosowania tej zasady: `task_routing_classifier.py` (sekcja 11) najp
 | **Co 15 min** | `source_schema_watcher.py`, `pbi_service_check.py` (status odświeżenia), `email_intake_triage.py` (fetch + wstępna klasyfikacja regułowa), `other_source_intake.py`, `meta_ads_api_client.py` (odczyt statusu kampanii) |
 | **Co godzinę** | `human_task_scanner.py`, `crm_sync_task.py` (odczyt), `sharepoint_sync.py` (batch synchronizacji artefaktów) |
 | **Codziennie** | `digest_generator.py` (przed Daily/Weekly), `crm_report_generator.py`, `secret_scanner.py` (skan logów z całego dnia), `cost_tracker.py` (agregacja dzienna) |
-| **Co tydzień** | `newsletter_drafter.py`, `skill_improver_bot.py` |
-| **Zdarzeniowe (nie harmonogram)** | Wszystko wywoływane w reakcji na zadanie: `risk_classifier.py`, `validator_pool.py` + walidatory, `auto_approve_yellow.py`, `escalate_to_human.py`, `human_response_validator.py`, `continuation_task_creator.py`, `projectly_reporter.py`, `projectly_self_review.py`, `pbip_validate.py`, `report_builder.py`, `data_tidy.py`, `human_task_partial_executor.py`, `human_task_briefing.py`, `mcp_email_agent_bridge.py`, `email_draft_reviewer.py` |
+| **Co tydzień** | `newsletter_drafter.py`, `skill_improver_bot.py`, `sales_report_builder.py`, `ad_spend_report_builder.py`, `infakt_export.py`, `company_financial_report_builder.py`, `web_visibility_report_builder.py`, `weekly_business_review.py` |
+| **Zdarzeniowe (nie harmonogram)** | Wszystko wywoływane w reakcji na zadanie: `risk_classifier.py`, `validator_pool.py` + walidatory, `auto_approve_yellow.py`, `bounded_red_executor.py`, `escalate_to_human.py`, `human_response_validator.py`, `continuation_task_creator.py`, `projectly_reporter.py`, `projectly_self_review.py`, `pbip_validate.py`, `report_builder.py`, `data_tidy.py`, `human_task_partial_executor.py`, `human_task_briefing.py`, `mcp_email_agent_bridge.py`, `email_draft_reviewer.py` |
 | **Na żądanie (skille, nie harmonogram)** | `pq_error_triage`, `content_summarizer.py` |
 
 ### Równoległość — komputer dedykowany, nie do codziennej pracy
@@ -311,3 +321,23 @@ Limity kosztu per zadanie (`max_ai_cost_usd`) i logi (`cost_tracker.py`) nie są
 - Jeden globalny przełącznik (plik `STOP.flag` sprawdzany przez `runner_loop.py` na starcie każdej pętli, lub komenda w Projectly) zatrzymuje **wszystkie** workery, niezależnie od tego, w jakiej fazie/zadaniu są.
 - Kill switch działa niezależnie od kolejki — nie czeka, aż bieżące zadanie się skończy, tylko przerywa bezpiecznie (zapisuje stan, jak w procedurze PAUSE z dokumentacji bazowej) i nie podejmuje nowych akcji do czasu ręcznego zdjęcia blokady.
 - To uzupełnienie, nie zamiennik dla limitów per zadanie i klasyfikacji ryzyka — pierwsza linia obrony to nadal risk_classifier i walidatory; kill switch to ostatnia linia, na wypadek gdyby pierwsza zawiodła.
+
+## 18. Raporty biznesowe cykliczne: sprzedaż, wydatki reklamowe, finanse, widoczność w sieci
+
+Cztery nowe raporty cykliczne (co tydzień), agregowane w jedną cotygodniową analizę biznesową — dokładają się do biblioteki z sekcji 10, tym razem na poziomie całej firmy, nie pojedynczego klienta.
+
+| Raport | Źródło danych | Skrypt |
+|---|---|---|
+| Sprzedażowy | System transakcyjny (API/MCP — mechanizm do doprecyzowania po stronie systemu) | `sales_report_builder.py` |
+| Wydatki reklamowe | Meta Ads API (+ inne kanały reklamowe, jeśli dojdą) | `ad_spend_report_builder.py` |
+| Finansowy całej firmy | System transakcyjny + inFakt (**dedykowane konto bota**, API jeśli dostępne, inaczej eksport CSV z portalu — `infakt_export.py`) | `company_financial_report_builder.py` |
+| Widoczność w sieci | Google Search Console + Analytics (SEO, ruch) **oraz** social media (zasięgi, wzmianki) | `web_visibility_report_builder.py` |
+
+**`weekly_business_review.py`** — cykliczny (co tydzień), agreguje wszystkie cztery raporty, generuje wnioski i **od razu gotowy plan wdrożenia** dla każdego z nich. Szybkość jest tu realna: analiza i rekomendacja powstają natychmiast, nie czekają na nic. To, co dzieje się z każdym wnioskiem dalej, zależy od jego klasyfikacji ryzyka — dokładnie ten sam trójstopniowy podział co reszta systemu, nie osobna ścieżka dla raportów biznesowych:
+
+- **Zielone wnioski** (np. "ten wpis blogowy generuje najwięcej ruchu, warto zrobić podobny") — agent może od razu przygotować draft/rekomendację, bez pytania.
+- **Żółte wdrożenia** (np. poprawka w raporcie, aktualizacja danych w CRM na podstawie wniosku) — przez `validator_pool.py` jak każda inna żółta akcja.
+- **Czerwone wdrożenia** (zmiana budżetu, cen, strategii) — **domyślnie do człowieka jako gotowe zadanie z uzasadnieniem i planem** (sekcja 4), **chyba że mieszczą się w zdefiniowanej granicy bounded red** (sekcja 3 — np. korekta budżetu Meta Ads w ustalonych widełkach). Poza granicą — zawsze do Ciebie, nawet jeśli wniosek jest oczywisty.
+- Finanse (inFakt, dane transakcyjne) **celowo nie mają na starcie żadnego bounded red** — to jedyna domena, gdzie nawet drobne, pozornie oczywiste działania zostają w 100% ręczne, dopóki nie zapadnie osobna decyzja o rozszerzeniu.
+
+To domyka sposób, w jaki "od razu wdraża" współistnieje z "czerwone zawsze do człowieka": **szybkość jest w tempie analizy i gotowości planu, nie w pomijaniu zgody na nieodwracalne/finansowe kroki.**

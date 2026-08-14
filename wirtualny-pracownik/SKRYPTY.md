@@ -38,6 +38,7 @@ Pomysły na skrypty pogrupowane wg domeny. Każdy skrypt ma jasno określony cel
 | `escalate_to_human.py` | Dla czerwonych i spornych żółtych: tworzy w Projectly osobne zadanie przypisane człowiekowi (nie tylko komentarz) — z kontekstem, uzasadnieniem i linkami do screenshotów/diffów (patrz PLAN-WDROZENIA.md sekcja 4) | Gdy akcja czerwona lub walidatory bez zgody | infra |
 | `human_response_validator.py` | Sprawdza, czy komentarz człowieka na eskalowanym zadaniu faktycznie rozstrzyga sprawę (jednoznaczna decyzja/wartość), czy trzeba dopytać | Po nowym komentarzu na zadaniu-eskalacji | infra |
 | `continuation_task_creator.py` | Po pozytywnej weryfikacji odpowiedzi człowieka — tworzy w Projectly nowe zadanie-kontynuację dla agenta z decyzją człowieka wbudowaną w kontekst | Po `human_response_validator.py` (wynik: wystarczające) | infra |
+| `bounded_red_executor.py` | Wykonuje czerwoną akcję bez pytania, jeśli mieści się w granicy liczbowej z `approval_policy.yaml` (bounded autonomy, PLAN-WDROZENIA.md sekcja 3); poza granicą przekazuje do `escalate_to_human.py` | Gdy `risk_classifier.py` oznaczy akcję jako czerwoną z dopasowaną granicą w polityce | czerwone w granicach |
 
 ## D. Screenshoty i weryfikacja wizualna
 
@@ -125,13 +126,6 @@ Wynika wprost z analizy realnego raportu godzin: ok. 175h w próbce to firefight
 | `digest_audio.py` | TTS nad tekstem już wygenerowanym przez `digest_generator.py` — nie generuje treści od nowa, tylko narracja głosowa dla wybranych, ważniejszych podsumowań | Na żądanie / cykliczny digest tygodniowy | zielone |
 | `digest_video.py` | Narracja TTS nad prezentacją/dashboardem, montaż — tylko dla dużych deliverabli (np. miesięczne podsumowanie dla klienta), nie domyślny format | Na żądanie | zielone |
 
-## O. Retro-audyt i tryb rozmowy (patrz PLAN-WDROZENIA.md sekcje 14 i 16)
-
-| Skrypt | Cel | Wyzwalacz | Ryzyko |
-|---|---|---|---|
-| `task_retro_auditor.py` | Przechodzi przez zamknięte/nieudane zadania w Projectly za okres, robi ponowną ewidencję czasu/kosztu wg klienta/projektu, diagnozuje powtarzające się wzorce i proponuje automatyzacje do `SKRYPTY.md` (jako zadanie do przeglądu, nie cichy log) | Harmonogram, co miesiąc | żółte (rekomendacja do przeglądu) |
-| `audit_query.py` | Odpytuje `state_store.py`/`events.jsonl`/historię Projectly w naturalnym języku — baza pod tryb rozmowy ("dlaczego zrobiłeś X zamiast Y", "co się działo w INDECE w tym tygodniu") | Na żądanie, w sesji rozmowy z agentem | zielone |
-
 ## N. Intake — tworzenie i rozdzielanie zadań (mail i inne źródła, patrz PLAN-WDROZENIA.md sekcja 11)
 
 | Skrypt | Cel | Wyzwalacz | Ryzyko |
@@ -140,3 +134,23 @@ Wynika wprost z analizy realnego raportu godzin: ok. 175h w próbce to firefight
 | `task_routing_classifier.py` | Dopasowuje nowe zadanie do właściciela wg słów kluczowych klienta/projektu i typu pracy; domyślnie do bota, jeśli w pełni automatyzowalne | Po utworzeniu zadania przez `email_intake_triage.py` | infra |
 | `routing_confidence_check.py` | Sprawdza pewność klasyfikacji przed auto-przypisaniem; poniżej progu zadanie trafia do wspólnej puli z adnotacją do ręcznego przypisania | Po `task_routing_classifier.py` | infra |
 | `other_source_intake.py` | Ten sam wzorzec intake dla innych kanałów (Teams, CRM, formularz) — adapter per źródło, wspólna klasyfikacja i routing | Cyklicznie / webhook per źródło | zielone |
+
+## O. Retro-audyt i tryb rozmowy (patrz PLAN-WDROZENIA.md sekcje 14 i 16)
+
+| Skrypt | Cel | Wyzwalacz | Ryzyko |
+|---|---|---|---|
+| `task_retro_auditor.py` | Przechodzi przez zamknięte/nieudane zadania w Projectly za okres, robi ponowną ewidencję czasu/kosztu wg klienta/projektu, diagnozuje powtarzające się wzorce i proponuje automatyzacje do `SKRYPTY.md` (jako zadanie do przeglądu, nie cichy log) | Harmonogram, co miesiąc | żółte (rekomendacja do przeglądu) |
+| `audit_query.py` | Odpytuje `state_store.py`/`events.jsonl`/historię Projectly w naturalnym języku — baza pod tryb rozmowy ("dlaczego zrobiłeś X zamiast Y", "co się działo w INDECE w tym tygodniu") | Na żądanie, w sesji rozmowy z agentem | zielone |
+
+## P. Raporty biznesowe cykliczne (patrz PLAN-WDROZENIA.md sekcja 18)
+
+Cotygodniowa analiza całej firmy — sprzedaż, wydatki reklamowe, finanse, widoczność w sieci — z gotowym planem wdrożenia, klasyfikowanym wg tego samego trójstopniowego ryzyka co reszta systemu.
+
+| Skrypt | Cel | Wyzwalacz | Ryzyko |
+|---|---|---|---|
+| `sales_report_builder.py` | Cykliczny raport sprzedażowy z systemu transakcyjnego | Harmonogram, co tydzień | zielone |
+| `ad_spend_report_builder.py` | Cykliczny raport wydatków reklamowych (Meta Ads + inne kanały) | Harmonogram, co tydzień | zielone |
+| `infakt_export.py` | Pobiera dane księgowe z inFakt (API jeśli dostępne, inaczej eksport CSV z portalu) przez dedykowane konto bota | Harmonogram, co tydzień / przed `company_financial_report_builder.py` | zielone (odczyt) |
+| `company_financial_report_builder.py` | Łączy system transakcyjny + `infakt_export.py` w raport finansowy całej firmy | Harmonogram, co tydzień | zielone |
+| `web_visibility_report_builder.py` | Raport widoczności w sieci: Google Search Console + Analytics oraz social media | Harmonogram, co tydzień | zielone |
+| `weekly_business_review.py` | Agreguje cztery powyższe raporty, generuje wnioski i gotowy plan wdrożenia dla każdego, klasyfikuje wg ryzyka (zielone/żółte/czerwone/bounded red) i kieruje dalej zgodnie z resztą systemu | Harmonogram, co tydzień, po zakończeniu raportów cząstkowych | zielone (analiza) → dziedziczy ryzyko z konkretnego wdrożenia |
