@@ -226,3 +226,43 @@ Dziś zadania w Projectly zakłada człowiek ręcznie. Docelowo agent **czyta we
 - **Ten sam wzorzec dla innych źródeł** (`other_source_intake.py`) — Teams, CRM, formularz zgłoszeniowy — każde źródło to osobny adapter wpinający się w tę samą klasyfikację i routing, nie osobna logika.
 - **Niska pewność klasyfikacji nie jest zgadywana** — zgodnie z zasadą fail-closed z reszty dokumentu, niepewne przypadki trafiają do wspólnej puli z adnotacją, nie są przypisywane na siłę do przypadkowej osoby.
 - To domyka pętlę z sekcji 1: zadanie od początku (jego powstanie) do końca (self-review, komentarz, ewentualna eskalacja) przechodzi przez Projectly bez ręcznego zakładania na wejściu.
+
+## 12. Harmonogram i równoległość: co jest czystym Pythonem, co dopiero czyta bot AI
+
+**Zasada warstwowa:** nie każdy skrypt woła model AI. Zdecydowana większość pracy to zwykłe skrypty Python odpalane z Harmonogramu zadań Windows, które **pobierają dane, wstępnie je obrabiają i porządkują do ustandaryzowanego, małego formatu** (JSON/plik statusu/gotowy wpis w Projectly). Bot AI wchodzi dopiero na tym już posprzątanym wyniku — interpretuje, klasyfikuje przypadki niejednoznaczne, decyduje o akcji. To tańsze (mniej wywołań modelu), szybsze i bardziej deterministyczne niż odpalanie AI do samego pobierania i parsowania danych.
+
+```
+Warstwa 1 — Python, BEZ AI, na harmonogramie          Warstwa 2 — bot AI
+┌─────────────────────────────────────┐                ┌───────────────────────┐
+│ fetch (API/plik/skrzynka)            │                │ czyta już POSPRZĄTANY │
+│ → parsowanie, normalizacja           │  ─────────▶    │ wynik, klasyfikuje    │
+│ → reguły deterministyczne (regex,    │  (tylko gdy     │ niejednoznaczne       │
+│   słowa kluczowe, proste warunki)    │   reguły nie     │ przypadki, decyduje   │
+│ → zapis: status.json / task w        │   rozstrzygną)   │ o akcji, tworzy/      │
+│   Projectly / plik do dalszej pracy  │                 │ aktualizuje zadania    │
+└─────────────────────────────────────┘                └───────────────────────┘
+```
+
+Przykład zastosowania tej zasady: `task_routing_classifier.py` (sekcja 11) najpierw próbuje dopasować projekt/klienta prostym dopasowaniem słów kluczowych w Pythonie (INDEKA, DIVERSE, Magnapharm...) — AI jest wywoływane tylko wtedy, gdy dopasowanie po słowach kluczowych jest niejednoznaczne. Tak samo `source_schema_watcher.py` sam w sobie tylko liczy hash/diff schematu pliku — AI ocenia dopiero, czy wykryta zmiana faktycznie zepsuje raport i co dokładnie napisać właścicielowi pliku.
+
+### Harmonogram wg częstotliwości
+
+| Częstotliwość | Skrypty (wszystkie: Python, bez AI, chyba że zaznaczono) |
+|---|---|
+| **Stały proces (usługa)** | `runner_loop.py` |
+| **Co 30-60 s** | `heartbeat.py`, `projectly_poller.py` |
+| **Co 1-2 min** | `watchdog.py` (sprawdza heartbeat) |
+| **Co 15 min** | `source_schema_watcher.py`, `pbi_service_check.py` (status odświeżenia), `email_intake_triage.py` (fetch + wstępna klasyfikacja regułowa), `other_source_intake.py`, `meta_ads_api_client.py` (odczyt statusu kampanii) |
+| **Co godzinę** | `human_task_scanner.py`, `crm_sync_task.py` (odczyt), `sharepoint_sync.py` (batch synchronizacji artefaktów) |
+| **Codziennie** | `digest_generator.py` (przed Daily/Weekly), `crm_report_generator.py`, `secret_scanner.py` (skan logów z całego dnia), `cost_tracker.py` (agregacja dzienna) |
+| **Co tydzień** | `newsletter_drafter.py`, `skill_improver_bot.py` |
+| **Zdarzeniowe (nie harmonogram)** | Wszystko wywoływane w reakcji na zadanie: `risk_classifier.py`, `validator_pool.py` + walidatory, `auto_approve_yellow.py`, `escalate_to_human.py`, `human_response_validator.py`, `continuation_task_creator.py`, `projectly_reporter.py`, `projectly_self_review.py`, `pbip_validate.py`, `report_builder.py`, `data_tidy.py`, `human_task_partial_executor.py`, `human_task_briefing.py`, `mcp_email_agent_bridge.py`, `email_draft_reviewer.py` |
+| **Na żądanie (skille, nie harmonogram)** | `pq_error_triage`, `content_summarizer.py` |
+
+### Równoległość — komputer dedykowany, nie do codziennej pracy
+
+Skoro maszyna jest mocna i nie będzie używana interaktywnie na co dzień, to dwa ograniczenia z pierwotnej dokumentacji (rozdz. 7.2: *"jedno zadanie sterujące myszą i klawiaturą może działać na workerze w danym momencie"*) można rozluźnić:
+
+- **Skrypty bez UI** (fetch/tidy/monitoring, cała warstwa 1 powyżej, walidatory, integracje API) nie rywalizują o nic i mogą biec w pełni równolegle — ograniczeniem jest tylko CPU/RAM/limity API, nie pulpit.
+- **Workery sterujące UI** (Power BI Desktop Bridge + zrzuty, Playwright, automatyzacja Windows) da się rozdzielić na **kilka równoległych sesji/wirtualnych pulpitów** zamiast jednej wspólnej — np. jedna sesja dla Power BI, druga dla przeglądarki, trzecia dla CRM UI — każda z własną myszą/klawiaturą, bez konfliktu. To nadal jedno zadanie UI na sesję w danym momencie, ale sesji może być kilka naraz.
+- Skoro komputer nie jest maszyną do codziennej pracy, można na nim swobodnie trzymać **dużo narzędzi deweloperskich** (kilka wersji Pythona, Tabular Editor, DAX Studio, VS Code, dodatkowe CLI) bez obawy o konflikt z czyjąś codzienną konfiguracją — inaczej niż na typowym pilotażowym "używanym komputerze" z pierwotnej dokumentacji.

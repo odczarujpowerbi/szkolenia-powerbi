@@ -2,6 +2,8 @@
 
 Pomysły na skrypty pogrupowane wg domeny. Każdy skrypt ma jasno określony cel, wyzwalacz i poziom ryzyka (zielone/żółte/czerwone wg `PLAN-WDROZENIA.md`). To jest lista robocza do rozbicia na zadania implementacyjne — nie gotowy kod.
 
+**Ważne:** większość poniższych skryptów to czysty Python bez wywołania AI — pobierają dane, normalizują, stosują proste reguły deterministyczne i zapisują ustandaryzowany wynik. Bot AI wchodzi dopiero na już posprzątanym wyniku (klasyfikacja niejednoznacznych przypadków, decyzja o akcji, treść komunikatu). Konkretny harmonogram (co 15 min / co godzinę / codziennie / zdarzeniowe) i ta zasada warstwowa są opisane w `PLAN-WDROZENIA.md` sekcja 12.
+
 ## A. Core / orkiestracja
 
 | Skrypt | Cel | Wyzwalacz | Ryzyko |
