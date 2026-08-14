@@ -28,9 +28,10 @@ Rozpocząć od 2–4 tygodniowego pilotażu na jednym, używanym komputerze z Wi
 - AI planuje, interpretuje i ocenia rezultat; skrypty i dedykowane narzędzia wykonują powtarzalne czynności. Klikanie po ekranie dopiero, gdy brak stabilnego API/CLI.
 - Hierarchia metod wykonania: **1. API/MCP → 2. pliki/CLI/skrypt → 3. automatyzacja UI → 4. computer use (screenshoty)**.
 - Zasada fail closed: przy niepewności co do aplikacji/konta/rezultatu agent nie wykonuje działania nieodwracalnego — zapisuje stan i prosi o decyzję.
-- Klasyfikacja działań: **zielone** (odczyt, automatycznie) / **żółte** (zmiana, automatycznie w granicach polityki — auto-zatwierdzane przez pulę niezależnych walidatorów, patrz [PLAN-WDROZENIA.md](./PLAN-WDROZENIA.md) sekcja 3) / **czerwone** (publikacja, budżet, dane — zawsze wymaga jawnej akceptacji człowieka, niezależnie od walidatorów).
+- Klasyfikacja działań: **zielone** (odczyt, automatycznie) / **żółte** (zmiana, automatycznie w granicach polityki — auto-zatwierdzane przez pulę niezależnych walidatorów, patrz [PLAN-WDROZENIA.md](./PLAN-WDROZENIA.md) sekcja 3) / **czerwone** (publikacja, budżet, dane — zawsze trafia do człowieka jako zadanie, niezależnie od walidatorów).
 - Sekrety nigdy w repo/logach/screenshotach; maskowanie pól password/token/api_key/authorization/cookie.
-- Bot sam ocenia własny rezultat względem kryteriów zadania (self-review) i dopisuje komentarz w Projectly, zanim (jeśli trzeba) poprosi o decyzję człowieka.
+- Bot sam ocenia własny rezultat względem kryteriów zadania (self-review) i dopisuje komentarz w Projectly, zanim (jeśli trzeba) utworzy zadanie dla człowieka.
+- Domyślnie agent radzi sobie sam. Eskalacja do człowieka to wyjątek: pełny obieg zadanie → komentarz człowieka → weryfikacja odpowiedzi → kontynuacja agenta (sekcja 4 planu), plus bot cyklicznie zagląda w zadania ludzi i wykonuje ich automatyzowalną część lub przygotowuje im opracowanie (sekcja 5 planu).
 
 ## Pierwsze procesy pilotażowe
 

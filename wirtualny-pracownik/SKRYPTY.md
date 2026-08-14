@@ -33,7 +33,9 @@ Pomysły na skrypty pogrupowane wg domeny. Każdy skrypt ma jasno określony cel
 | `validator_visual.py` (`vision_reviewer.py`) | Walidator: ocena zrzutu ekranu przez model AI (czy wygląda poprawnie, brak błędów wizualnych) | Wywoływany przez `validator_pool.py` | infra |
 | `validator_scope.py` | Walidator: czy akcja mieści się w zadeklarowanym zakresie zadania i limicie kosztu | Wywoływany przez `validator_pool.py` | infra |
 | `auto_approve_yellow.py` | Jeśli głosy walidatorów ≥ próg z polityki — auto-zatwierdza, loguje kto/co zatwierdziło | Po zebraniu głosów z `validator_pool.py` | żółte |
-| `escalate_red.py` | Dla czerwonych i spornych żółtych: tworzy komentarz "wymaga decyzji" w Projectly z kontekstem i linkami | Gdy akcja czerwona lub walidatory bez zgody | infra |
+| `escalate_to_human.py` | Dla czerwonych i spornych żółtych: tworzy w Projectly osobne zadanie przypisane człowiekowi (nie tylko komentarz) — z kontekstem, uzasadnieniem i linkami do screenshotów/diffów (patrz PLAN-WDROZENIA.md sekcja 4) | Gdy akcja czerwona lub walidatory bez zgody | infra |
+| `human_response_validator.py` | Sprawdza, czy komentarz człowieka na eskalowanym zadaniu faktycznie rozstrzyga sprawę (jednoznaczna decyzja/wartość), czy trzeba dopytać | Po nowym komentarzu na zadaniu-eskalacji | infra |
+| `continuation_task_creator.py` | Po pozytywnej weryfikacji odpowiedzi człowieka — tworzy w Projectly nowe zadanie-kontynuację dla agenta z decyzją człowieka wbudowaną w kontekst | Po `human_response_validator.py` (wynik: wystarczające) | infra |
 
 ## D. Screenshoty i weryfikacja wizualna
 
@@ -94,3 +96,11 @@ Pomysły na skrypty pogrupowane wg domeny. Każdy skrypt ma jasno określony cel
 |---|---|---|---|
 | `cost_tracker.py` | Sumuje koszt AI per zadanie/dzień, alarm po przekroczeniu limitu | Po każdym wywołaniu modelu | infra |
 | `secret_scanner.py` | Skanuje logi/artefakty pod kątem sekretów przed zapisem/synchronizacją | Przed `sharepoint_sync.py` / commitem | infra |
+
+## L. Asystent zadań ludzkich (proactive assist — patrz PLAN-WDROZENIA.md sekcja 5)
+
+| Skrypt | Cel | Wyzwalacz | Ryzyko |
+|---|---|---|---|
+| `human_task_scanner.py` | Cyklicznie przegląda zadania przypisane ludziom (nie tylko agentowi) w Projectly i klasyfikuje, gdzie agent może pomóc | Harmonogram, np. co godzinę | zielone |
+| `human_task_partial_executor.py` | Wykonuje automatyzowalną część zadania człowieka, dopisuje komentarz "zrobiłem X, zostaje Ci Y" | Gdy `human_task_scanner.py` znajdzie automatyzowalną część | żółte (jak natywne ryzyko wykonanej czynności) |
+| `human_task_briefing.py` | Przygotowuje opracowanie/research/draft ułatwiające człowiekowi wykonanie w pełni ludzkiego zadania, dołącza jako komentarz/załącznik | Gdy zadanie wymaga researchu, ale decyzję/wykonanie musi podjąć człowiek | zielone |
