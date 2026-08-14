@@ -22,11 +22,21 @@ Minimalny kontrakt zadania (pole w Projectly lub JSON w treści/komentarzu):
     "Każda strona ma zrzut ekranu bez elementów wychodzących poza obszar",
     "Dane zgadzają się z sumą kontrolną ze źródła"
   ],
+  "source_file_link": "https://.../sales_q3_source.xlsx",
   "risk_level_hint": "yellow",
   "max_ai_cost_usd": 3.0,
   "created_by": "pawel"
 }
 ```
+
+### Praca na próbce z pełnym kontekstem, nie na pełnej kopii ani czystej atrapie
+
+Odpowiedź na pytanie ze `PRZED-PILOTAZEM.md` ("środowisko testowe vs produkcyjne, sandbox czy żywe repo") jest środkiem między tymi dwiema skrajnościami:
+
+- Bot dev domyślnie **nie pobiera i nie przetwarza całego pliku źródłowego** — pracuje na próbce/danych szczątkowych (np. pierwsze N wierszy, zamaskowane wartości wrażliwe) wystarczającej do zrozumienia struktury i zbudowania logiki. To taniej (mniej tokenów, szczególnie przy dużych plikach) i bezpieczniej (mniej pełnych danych klienta w kontekście modelu).
+- Ale ma **pełen kontekst** — metadane o strukturze całego pliku (schemat, liczba wierszy, historia zmian z `source_schema_watcher.py`, kontrakt z `data_contract_validator.py`) — więc próbka nie jest zgadywaniem w ciemno.
+- Zadanie od człowieka zawsze zawiera **`source_file_link`** — bezpośredni odnośnik do prawdziwego pliku, nie jego treść wklejoną do zadania. Gdy rozwiązanie faktycznie wymaga zweryfikowania na realnym przykładzie (np. czy naprawiona logika PQ działa na prawdziwych danych, nie tylko na próbce), bot sięga po link i wykonuje operację na nim przez skrypt — nadal w granicach zwykłej klasyfikacji ryzyka (odczyt pliku = zielone, zmiana = żółte/czerwone zależnie co to za plik).
+- To eliminuje fałszywy wybór między "kopiuj wszystko do sandboxa" (kosztowne, trzeba utrzymywać drugą wersję każdego źródła) a "pracuj wyłącznie na syntetycznych atrapach" (nie łapie realnych przypadków brzegowych, które są dokładnie tym, co psuje raporty w INDECE/DIVERSE — sekcja 10).
 
 ## 2. Komunikacja: Projectly jako jedyne źródło prawdy
 
