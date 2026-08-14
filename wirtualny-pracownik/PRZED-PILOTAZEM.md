@@ -6,15 +6,17 @@ Zbiera w jednym miejscu decyzje otwarte, rozproszone dziś po `PLAN-WDROZENIA.md
 
 Załącznik D oryginalnego dokumentu koncepcyjnego (`Wirtualny_Pracownik_AI_Dokumentacja_Biznesowa_i_Techniczna.pdf`) zawiera te pytania od sierpnia — żadne nie zostało jeszcze formalnie zamknięte w tej rozmowie:
 
-| ID | Decyzja | Odpowiedzialny |
-|---|---|---|
-| D-01 | Który konkretny komputer i czy obsługuje 32 GB RAM | Właściciel projektu |
-| D-02 | Które 3 procesy mają najwyższą wartość i najniższy poziom ryzyka | Biznes + techniczny |
-| D-03 | Czy istniejący plan Claude zapewnia potrzebną funkcję interaktywną | Właściciel projektu |
-| D-04 | Który workspace Power BI i które repo są sandboxem | Power BI owner |
-| D-05 | Jaka retencja screenshotów i logów jest akceptowalna | Właściciel danych |
-| D-06 | Które działania są zielone, żółte i czerwone (pierwsza wersja `approval_policy.yaml`) | Właściciele procesów |
-| D-07 | Kto odbiera alerty i zatwierdza działania poza godzinami | Zespół |
+| ID | Decyzja | Odpowiedzialny | Status |
+|---|---|---|---|
+| D-01 | Który konkretny komputer i czy obsługuje 32 GB RAM | Właściciel projektu | **Rozstrzygnięte: tak, komputer obsługuje 32 GB.** |
+| D-02 | Które 3 procesy mają najwyższą wartość i najniższy poziom ryzyka | Biznes + techniczny | Częściowo: wskazane domeny (Dev, marketing, treści, programy/skrypty/strony/aplikacje) — **wciąż brakuje wyboru 1-3 konkretnych, wąskich procesów** (jak PBI-01/02) w ramach tych domen na start pilotażu. |
+| D-03 | Czy istniejący plan Claude zapewnia potrzebną funkcję interaktywną | Właściciel projektu | **Rozstrzygnięte** — patrz notatka niżej. |
+| D-04 | Który workspace Power BI i które repo są sandboxem | Power BI owner | Otwarte |
+| D-05 | Jaka retencja screenshotów i logów jest akceptowalna | Właściciel danych | Otwarte |
+| D-06 | Które działania są zielone, żółte i czerwone (pierwsza wersja `approval_policy.yaml`) | Właściciele procesów | Otwarte |
+| D-07 | Kto odbiera alerty i zatwierdza działania poza godzinami | Zespół | Otwarte |
+
+**D-03, notatka:** runner (bot działający 24/7) korzysta z **Anthropic API** (płatność za tokeny) — nie z subskrypcji interaktywnej (Claude Pro/Max, ~500 zł), która jest zaprojektowana pod człowieka przy klawiaturze, nie pod bezobsługową ciągłą pracę. Sterowanie pulpitem, gdy brak API/CLI, realizuje computer use tego samego dostawcy (Anthropic) — nie ma potrzeby wprowadzania drugiego dostawcy AI do sterowania komputerem, bo rozbiłoby to audyt i tryb rozmowy (`PLAN-WDROZENIA.md` sekcja 14) na dwa niespójne źródła. Makra/skrypty deterministyczne to główna dźwignia ograniczania kosztu (sekcja 12: "Python bez AI"). Subskrypcja interaktywna ma zastosowanie gdzie indziej — na komputerze-"warsztacie" (`ZESPOL-BOTOW.md` sekcja 4), do rozwijania i testowania skilli przez Pawła, zanim trafią do komputerów-pracowników.
 
 ## 2. Integracje ze statusem "do doprecyzowania"
 
