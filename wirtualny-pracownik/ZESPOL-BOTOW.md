@@ -2,6 +2,18 @@
 
 Rozwinięcie architektury z `PLAN-WDROZENIA.md` (jeden wirtualny pracownik) na **zespół**: każdy bot to osobna rola/osoba w Projectly, zwykle na osobnym komputerze, z własnym zestawem umiejętności — dokładnie faza E "Platforma zespołowa" z mapy rozwoju dokumentacji bazowej (rozdz. 17: *"MCP, panel, helpdesk, marketing, media — warunek: Control plane, RBAC, monitoring i SLA"*), teraz rozpisana szczegółowo. Wszystko z `PLAN-WDROZENIA.md` (silnik walidacji, fail-closed, czerwone/żółte/zielone, bounded red, kill switch) obowiązuje **każdą** rolę bez wyjątku — ten dokument dokłada tylko warstwę wieloosobową na wierzchu.
 
+## 0. Rola człowieka w zoskryptowanej firmie
+
+Im dalej ten plan idzie, tym ważniejsze jest jasno powiedzieć, co **zostaje** po stronie człowieka — nie jako ograniczenie techniczne "jeszcze tego nie umiemy", tylko jako świadoma granica architektury. Trzy rzeczy są zarezerwowane dla ludzi z definicji, nie z braku możliwości:
+
+1. **Decyzje czerwone i strategiczne.** Budżet, ceny, strategia, rekrutacja, narzędzia rozwojowe. Agent strategiczny (sekcja 2) agreguje dane i proponuje kierunki, ale wybór zawsze należy do prezesa — to nie jest limit dzisiejszej technologii, to definicja tego, co znaczy zarządzać firmą.
+2. **Źródło nowych procedur.** Ktoś musi zrobić coś po raz pierwszy, żeby dało się to zaproceduralizować i przekazać botowi (patrz "warsztat" — sekcja 4). W pełni zoskryptowanej firmie praca ludzi przesuwa się z wykonywania powtarzalnych rzeczy na robienie nowych, nieprzewidzianych rzeczy i zamienianie ich w skille/procedury po 2-3 powtórzeniach. Im lepsza automatyzacja, tym **cenniejsza**, nie mniej potrzebna, staje się ta rola.
+3. **Relacje, w których zaufanie jest produktem.** Rozmowy z klientami i szkolenie ludzi to transfer zaufania człowiek-człowiek, nie transfer informacji — bot może przygotować materiał czy briefing (`human_task_briefing.py`), ale nie zastąpi człowieka w samej rozmowie.
+
+**Spotkania zespołu maleją liczebnie wraz z mniejszym zespołem, ale zmieniają charakter** — status/Daily/Weekly w dużej mierze zastępuje już digest i tryb rozmowy (`PLAN-WDROZENIA.md` sekcje 14/16); to, co zostaje, to mentoring, decyzje i rozmowy z klientami — czyli dokładnie te trzy kategorie powyżej, nie raportowanie statusu.
+
+**Metryka warta śledzenia:** obok istniejącego KPI "Ręczne zatwierdzenia / 100 zadań" (`PLAN-WDROZENIA.md` sekcja 8, który powinien maleć — to sygnał przecieku rutyny do ludzi), warto dodać drugi, odwrotny: **godziny człowieka wg kategorii (decyzje czerwone / tworzenie nowych procedur / relacje)** — ten powinien zostać stabilny albo rosnąć w wartości, nawet gdy całkowita liczba godzin ludzkich maleje. Spadek pierwszego KPI przy stabilnym drugim to dowód, że automatyzacja działa tak, jak powinna — nie że ludzie stają się zbędni.
+
 ## 1. Zasada: jeden komputer = jeden pracownik = jedna rola w Projectly
 
 | Rola (przykład) | Odpowiedzialność | Umiejętności/skille |
