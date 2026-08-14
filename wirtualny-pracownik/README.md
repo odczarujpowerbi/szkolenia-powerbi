@@ -32,6 +32,8 @@ Rozpocząć od 2–4 tygodniowego pilotażu na jednym, używanym komputerze z Wi
 - Sekrety nigdy w repo/logach/screenshotach; maskowanie pól password/token/api_key/authorization/cookie.
 - Bot sam ocenia własny rezultat względem kryteriów zadania (self-review) i dopisuje komentarz w Projectly, zanim (jeśli trzeba) utworzy zadanie dla człowieka.
 - Domyślnie agent radzi sobie sam. Eskalacja do człowieka to wyjątek: pełny obieg zadanie → komentarz człowieka → weryfikacja odpowiedzi → kontynuacja agenta (sekcja 4 planu), plus bot cyklicznie zagląda w zadania ludzi i wykonuje ich automatyzowalną część lub przygotowuje im opracowanie (sekcja 5 planu).
+- Agent nie odmawia wykonania w ramach swoich uprawnień, ale ma własne zdanie: wykonuje zadanie i dopisuje odmienną opinię/sugestię usprawnienia obok, zamiast blokować pracę na własnej ocenie (sekcja 13 planu). Da się z nim też porozmawiać na żądanie — zapytać "dlaczego zrobiłeś tak, a nie inaczej" i dostać odpowiedź opartą na realnym audycie, nie na zgadywaniu (sekcja 14).
+- **Uwaga kosztowa:** cel "bardzo tani pracownik" wymaga kalibracji liczby walidatorów pod kątem historii sukcesu zadania (sekcja 3) — 3 walidatory na każde żółte zadanie to realny, policzalny koszt, nie tylko rygor.
 
 ## Pierwsze procesy pilotażowe
 

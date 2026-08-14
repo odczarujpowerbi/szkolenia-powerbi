@@ -98,6 +98,7 @@ Pomysły na skrypty pogrupowane wg domeny. Każdy skrypt ma jasno określony cel
 |---|---|---|---|
 | `cost_tracker.py` | Sumuje koszt AI per zadanie/dzień, alarm po przekroczeniu limitu | Po każdym wywołaniu modelu | infra |
 | `secret_scanner.py` | Skanuje logi/artefakty pod kątem sekretów przed zapisem/synchronizacją | Przed `sharepoint_sync.py` / commitem | infra |
+| `kill_switch.py` | Sprawdza globalny plik/flagę STOP przy starcie każdej pętli runnera; jeśli aktywna, bezpiecznie przerywa (jak PAUSE) i nie podejmuje nowych akcji (PLAN-WDROZENIA.md sekcja 17) | Na starcie każdej iteracji `runner_loop.py` | infra |
 
 ## L. Asystent zadań ludzkich (proactive assist — patrz PLAN-WDROZENIA.md sekcja 5)
 
@@ -121,6 +122,15 @@ Wynika wprost z analizy realnego raportu godzin: ok. 175h w próbce to firefight
 | `newsletter_drafter.py` | Przygotowuje cykliczny draft newslettera z materiału źródłowego (zmiany produktowe, notatki, artykuły) | Harmonogram (np. tygodniowy) / zadanie typu `newsletter_draft` | zielone |
 | `digest_generator.py` | Generuje cykliczny digest aktywności z Projectly (przed Daily/Weekly, do skrócenia lub częściowego zastąpienia spotkania) | Harmonogram, przed spotkaniem cyklicznym | zielone |
 | `content_summarizer.py` | Streszcza na żądanie długi materiał (maile, notatki ze spotkań, raporty) do krótkiej wersji | Zadanie typu `summarize` | zielone |
+| `digest_audio.py` | TTS nad tekstem już wygenerowanym przez `digest_generator.py` — nie generuje treści od nowa, tylko narracja głosowa dla wybranych, ważniejszych podsumowań | Na żądanie / cykliczny digest tygodniowy | zielone |
+| `digest_video.py` | Narracja TTS nad prezentacją/dashboardem, montaż — tylko dla dużych deliverabli (np. miesięczne podsumowanie dla klienta), nie domyślny format | Na żądanie | zielone |
+
+## O. Retro-audyt i tryb rozmowy (patrz PLAN-WDROZENIA.md sekcje 14 i 16)
+
+| Skrypt | Cel | Wyzwalacz | Ryzyko |
+|---|---|---|---|
+| `task_retro_auditor.py` | Przechodzi przez zamknięte/nieudane zadania w Projectly za okres, robi ponowną ewidencję czasu/kosztu wg klienta/projektu, diagnozuje powtarzające się wzorce i proponuje automatyzacje do `SKRYPTY.md` (jako zadanie do przeglądu, nie cichy log) | Harmonogram, co miesiąc | żółte (rekomendacja do przeglądu) |
+| `audit_query.py` | Odpytuje `state_store.py`/`events.jsonl`/historię Projectly w naturalnym języku — baza pod tryb rozmowy ("dlaczego zrobiłeś X zamiast Y", "co się działo w INDECE w tym tygodniu") | Na żądanie, w sesji rozmowy z agentem | zielone |
 
 ## N. Intake — tworzenie i rozdzielanie zadań (mail i inne źródła, patrz PLAN-WDROZENIA.md sekcja 11)
 

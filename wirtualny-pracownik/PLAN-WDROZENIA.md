@@ -81,6 +81,7 @@ Klasyfikacja ryzyka zostaje z oryginalnego dokumentu (zielone/żółte/czerwone)
 - **Czerwone** (publikacja, budżet reklamowy, wysyłka masowa, usunięcie danych, nadanie roli) — **zawsze** trafiają do człowieka, niezależnie od wyniku walidatorów. To się nie zmienia względem oryginalnej dokumentacji — auto-zatwierdzanie dotyczy wyłącznie żółtych.
 - Reguły klasyfikacji i progi trzymane w `approval_policy.yaml` — edytowalne bez zmiany kodu, żeby można było kręcić progiem "ile walidatorów musi się zgodzić" per typ zadania.
 - Gdy walidatory się nie zgadzają albo mają niską pewność — to **nie jest błąd, to sygnał** do eskalacji, nie do zgadywania.
+- **Kalibracja liczby walidatorów pod kątem kosztu:** 3 walidatory na każde żółte zadanie to koszt, nie tylko rygor — 3 dodatkowe wywołania modelu (część vision, najdroższe tokeny) do każdej zmiany. Dla typów zadań z ugruntowaną historią sukcesu (`skill_usage_logger.py` pokazuje wysoką skuteczność) liczba walidatorów w `approval_policy.yaml` powinna spaść do 1; pełne 3 zostają dla nowych/nieprzetestowanych typów zadań. Bez tej kalibracji hasło "bardzo tani pracownik" nie będzie prawdziwe w praktyce — warto policzyć realny koszt miesięczny (liczba zadań/dzień × wywołania × koszt tokenów) zanim silnik trafi na produkcję.
 - **Zasada domyślna: agent radzi sobie sam.** Zadanie dla człowieka to wyjątek zarezerwowany dla decyzji, które faktycznie wymagają człowieka (autoryzacja czerwona, brakująca wiedza/dostęp, czynność prawna/fizyczna) — nie sposób na zrzucenie pracy, którą agent mógłby wykonać sam.
 
 ## 4. Obieg eskalacji: zadanie dla człowieka → komentarz → weryfikacja → kontynuacja
@@ -266,3 +267,47 @@ Skoro maszyna jest mocna i nie będzie używana interaktywnie na co dzień, to d
 - **Skrypty bez UI** (fetch/tidy/monitoring, cała warstwa 1 powyżej, walidatory, integracje API) nie rywalizują o nic i mogą biec w pełni równolegle — ograniczeniem jest tylko CPU/RAM/limity API, nie pulpit.
 - **Workery sterujące UI** (Power BI Desktop Bridge + zrzuty, Playwright, automatyzacja Windows) da się rozdzielić na **kilka równoległych sesji/wirtualnych pulpitów** zamiast jednej wspólnej — np. jedna sesja dla Power BI, druga dla przeglądarki, trzecia dla CRM UI — każda z własną myszą/klawiaturą, bez konfliktu. To nadal jedno zadanie UI na sesję w danym momencie, ale sesji może być kilka naraz.
 - Skoro komputer nie jest maszyną do codziennej pracy, można na nim swobodnie trzymać **dużo narzędzi deweloperskich** (kilka wersji Pythona, Tabular Editor, DAX Studio, VS Code, dodatkowe CLI) bez obawy o konflikt z czyjąś codzienną konfiguracją — inaczej niż na typowym pilotażowym "używanym komputerze" z pierwotnej dokumentacji.
+
+## 13. Zasada: agent nie odmawia wykonania, ale ma własne zdanie
+
+Te dwie rzeczy są celowo rozdzielone, żeby się nie zlały z fail-closed i z "czerwone zawsze do człowieka" (sekcje 3-4):
+
+- **Nie odmawia wykonania** oznacza: w ramach dozwolonego zestawu narzędzi i zakresu zadania agent próbuje, dekomponuje, szuka rozwiązania — nie kończy pracy stwierdzeniem "nie zrobię tego", jeśli zadanie mieści się w jego uprawnieniach.
+- **To nie to samo co fail-closed.** Zatrzymanie się i eskalacja z powodu braku danych, uprawnień albo pewności co do rezultatu (sekcje 3-4) to nie jest odmowa — to bezpiecznik, który zostaje bez zmian. Agent nie "przełamuje" fail-closed w imię zasady "nie odmawiam".
+- **Ma swoje zdanie** oznacza: może i powinien wykonać zadanie tak, jak zostało poproszone, **i jednocześnie** zostawić komentarz z odmienną opinią, zauważonym ryzykiem albo lepszym podejściem — decyzję, czy coś zmienić, zostawia człowiekowi przy następnym zadaniu. Nie blokuje bieżącej pracy na własnej opinii.
+- **Sam wymyśla usprawnienia** — to nie jest zarezerwowane dla cotygodniowego `skill_improver_bot.py`. Każdy szablon komentarza z `projectly_reporter.py` (sekcja 2) dostaje opcjonalne pole "Sugestia usprawnienia", które agent wypełnia, gdy podczas pracy zauważy powtarzalny wzorzec wart zautomatyzowania — dokładnie tak, jak to zrobiliśmy ręcznie analizując raport godzin, tylko systematycznie i na bieżąco.
+
+## 14. Tryb rozmowy: status i uzasadnienia na żądanie
+
+Cały dotychczasowy plan jest asynchroniczny (zadania i komentarze w Projectly). To nie wystarcza, gdy chcesz usiąść i **zapytać agenta wprost: "dlaczego zrobiłeś to tak, a nie inaczej?"** — czyli rozmawiać z nim jak z pracownikiem, nie tylko czytać jego raporty.
+
+- To **nie jest nowy kanał komunikacji** — Projectly zostaje jedynym źródłem prawdy o zadaniach. To jest dodatkowy **tryb odczytu i rozmowy nad tymi samymi danymi**: audytem (`events.jsonl`), historią decyzji, wynikami walidatorów, kosztami.
+- Warunek konieczny: cały audyt musi być zapisywany w formie, którą agent (lub inna sesja agenta) potrafi odczytać i **wytłumaczyć w naturalnym języku na żądanie**, nie tylko jako suchy log techniczny — czyli każdy wpis w `events.jsonl` powinien zawierać krótkie uzasadnienie decyzji (nie tylko "co", ale "dlaczego"), zapisane w chwili jej podjęcia, a nie rekonstruowane po fakcie.
+- W praktyce: sesja rozmowy to agent z dostępem do `state_store.py`, `events.jsonl` i historii zadań w Projectly dla danego okresu/klienta/projektu, odpytywana swobodnie ("pokaż mi wszystko co zrobiłeś w INDECE w tym tygodniu i dlaczego", "czemu to zadanie poszło do mnie zamiast do Asi") — bez konieczności grzebania w Projectly ręcznie.
+- To domyka pętlę statusowania: zamiast czytać dziesiątki komentarzy, pytasz bezpośrednio i dostajesz odpowiedź opartą na realnym zapisie, nie na zgadywaniu przez agenta post factum.
+
+## 15. Podsumowania: tekst, głos, wideo — i kiedy używać czego
+
+Domyślny format zostaje tekstowy (szablon komentarza z sekcji 2, `digest_generator.py`) — to najtańsza i najszybsza forma, wystarczająca dla większości zadań. Głos i wideo to **opcje dla wybranych, ważniejszych podsumowań**, nie domyślny format każdego raportu — inaczej sama produkcja podsumowań zje budżet czasu i pieniędzy, który miał być oszczędnością.
+
+| Format | Kiedy | Mechanizm | Koszt względem tekstu |
+|---|---|---|---|
+| Tekst (domyślny) | Każde zadanie, każdy digest | Szablon komentarza, `digest_generator.py` | bazowy |
+| Głos (TTS) | Cykliczny digest tygodniowy, ważniejsze podsumowania na życzenie | `digest_audio.py` — TTS nad tekstem już wygenerowanym przez `digest_generator.py`, nie od zera | niski dodatkowy koszt |
+| Wideo | Na życzenie, dla dużych deliverabli (np. miesięczne podsumowanie dla klienta) | `digest_video.py` — narracja TTS nad prezentacją/dashboardem, montaż | najwyższy koszt i czas generowania — używać selektywnie |
+
+## 16. Cykliczny retro-audyt: ponowna ewidencja i diagnoza w Projectly
+
+Analiza raportu godzin, którą zrobiliśmy ręcznie (znalezienie ~175h firefightingu danych w INDECE/DIVERSE), nie powinna być jednorazowa — powinna dziać się **cyklicznie i automatycznie** nad historią zadań w samej Projectly, nie tylko nad eksportem CSV.
+
+- **`task_retro_auditor.py`** (harmonogram: co miesiąc) — przechodzi przez zamknięte i nieudane zadania w Projectly za dany okres, robi ponowną ewidencję (ile czasu/kosztu poszło na co, wg klienta/projektu/typu pracy), diagnozuje powtarzające się wzorce porażek lub czasochłonności (tak jak wzorzec "przepięcie danych" w tej rozmowie), i proponuje konkretne automatyzacje do dopisania do `SKRYPTY.md`.
+- Wynik trafia jako **zadanie do przeglądu przez człowieka** (żółte — to rekomendacja, nie automatyczna zmiana priorytetów), nie jako cichy log — żeby retro-audyt faktycznie wpływał na kolejność prac, a nie tylko leżał w pliku.
+- To zamyka pętlę uczenia się całego systemu: zadania → wykonanie → audyt → retro-audyt → nowe skrypty/skille → mniej firefightingu → kolejny retro-audyt pokazuje mniejsze liczby. Bez tego mechanizmu plan wdrożenia bazuje tylko na jednorazowej analizie z sierpnia 2026, która z czasem się zdezaktualizuje.
+
+## 17. Wyłącznik awaryjny (kill switch)
+
+Limity kosztu per zadanie (`max_ai_cost_usd`) i logi (`cost_tracker.py`) nie są tym samym co twardy wyłącznik całego systemu. Przy integracji z Meta Ads (pieniądze), CRM (dane klientów) i mailem (reputacja), pojedynczy błąd w klasyfikacji ryzyka mógłby narobić szkód szybciej, niż limity per zadanie zdążą zareagować.
+
+- Jeden globalny przełącznik (plik `STOP.flag` sprawdzany przez `runner_loop.py` na starcie każdej pętli, lub komenda w Projectly) zatrzymuje **wszystkie** workery, niezależnie od tego, w jakiej fazie/zadaniu są.
+- Kill switch działa niezależnie od kolejki — nie czeka, aż bieżące zadanie się skończy, tylko przerywa bezpiecznie (zapisuje stan, jak w procedurze PAUSE z dokumentacji bazowej) i nie podejmuje nowych akcji do czasu ręcznego zdjęcia blokady.
+- To uzupełnienie, nie zamiennik dla limitów per zadanie i klasyfikacji ryzyka — pierwsza linia obrony to nadal risk_classifier i walidatory; kill switch to ostatnia linia, na wypadek gdyby pierwsza zawiodła.
