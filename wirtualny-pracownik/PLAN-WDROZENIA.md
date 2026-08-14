@@ -146,7 +146,8 @@ Poza własną kolejką agent cyklicznie **przegląda też zadania przypisane lud
 | Google Workspace | Google API (Docs/Sheets) | żółte | Tworzenie/aktualizacja plików roboczych |
 | SharePoint | Microsoft Graph | żółte | Upload/aktualizacja artefaktów, audytu, raportów |
 | Power BI | PBIP/TMDL + Desktop Bridge | odczyt: zielone, zmiana: żółte, publikacja: czerwone | Zgodnie z PBI-01/PBI-02 z dokumentacji bazowej |
-| E-mail | MCP → dedykowany agent mailowy | wysyłka = **zawsze czerwone** | Bot deleguje redakcję/wysyłkę do wyspecjalizowanego agenta przez MCP, nie wysyła bezpośrednio |
+| E-mail (wychodzący) | MCP → dedykowany agent mailowy | wysyłka = **zawsze czerwone** | Bot deleguje redakcję/wysyłkę do wyspecjalizowanego agenta przez MCP, nie wysyła bezpośrednio |
+| E-mail (przychodzący) — intake | MCP/Graph, odczyt skrzynki | zielone (samo utworzenie zadania) | Bot czyta i klasyfikuje, tworzy zadanie w Projectly — patrz sekcja 11 |
 | Dev tools (git, testy, deploy) | CLI/skrypty | commit na gałęzi: żółte, merge/deploy: czerwone | Standardowy flow branch → PR → decyzja |
 
 ## 7. Fazy wdrożenia
@@ -163,7 +164,9 @@ Poza własną kolejką agent cyklicznie **przegląda też zadania przypisane lud
 | 6. E-mail przez agenta MCP | Most do dedykowanego agenta mailowego, walidator treści przed wysyłką | Bot przygotowuje maile, wysyłka zawsze z akceptacją | 2-4 dni |
 | 7. Asystent zadań ludzkich | human_task_scanner.py, częściowa automatyzacja, przygotowywanie opracowań (sekcja 5) | Agent skraca zadania ludzi, nie tylko realizuje własne | 3-5 dni, po Fazie 2b |
 | 8. Biblioteka skilli + bot ulepszający | Rejestr skilli, logowanie skuteczności, cykliczna analiza i propozycje poprawek | Skille poprawiają się same na podstawie danych z produkcji | Ciągłe, start równolegle z Fazą 2 |
-| 9. Stabilizacja i metryki | KPI z dokumentacji bazowej (powtarzalność, koszt/zadanie, liczba eskalacji) | Decyzja: rozwijamy / iterujemy / zatrzymujemy | 4-8 dni |
+| 9. Skille raportowe, porządkowanie danych i podsumowania | report_builder.py, data_tidy.py, source_schema_watcher.py, newsletter_drafter.py, digest_generator.py (sekcja 10) | Największy zmierzony koszt (INDEKA/DIVERSE firefighting, ~175h w próbce) zaczyna spadać | 5-8 dni — **priorytet nr 2** po silniku walidacji |
+| 10. Intake — rozdzielanie zadań z maila i innych źródeł | email_intake_triage.py, task_routing_classifier.py, routing_confidence_check.py (sekcja 11) | Zadania powstają i trafiają do właściwej osoby/bota bez ręcznego zakładania w Projectly | 4-6 dni, po Fazie 9 |
+| 11. Stabilizacja i metryki | KPI z dokumentacji bazowej (powtarzalność, koszt/zadanie, liczba eskalacji) | Decyzja: rozwijamy / iterujemy / zatrzymujemy | 4-8 dni |
 
 ## 8. Metryka sukcesu specyficzna dla tego problemu
 
@@ -176,7 +179,50 @@ Oprócz kryteriów z dokumentacji bazowej (rozdz. 13), dodatkowy KPI dla tego wd
 | Czas do decyzji człowieka | Od utworzenia zadania dla człowieka do jego odpowiedzi w Projectly | Mierzony, nie musi maleć — ale nie powinien blokować kolejki |
 | Dopytania po odpowiedzi człowieka | Odsetek przypadków, gdzie `human_response_validator.py` uznał komentarz za niewystarczający | Niski i stabilny — wysoki wskazywałby na źle sformułowane zadania dla ludzi |
 | Wsparcie zadań ludzkich | Liczba zadań ludzi, gdzie agent wykonał część lub przygotował opracowanie | Rosnący — miara realnej odciążki, nie tylko własnej kolejki agenta |
+| Godziny firefightingu danych (INDEKA/DIVERSE-owy wzorzec) | Godziny na "przepięcie"/"błąd w PQ"/"komunikacja o zmianach w pliku" wg raportu godzin | Malejący z miesiąca na miesiąc od wdrożenia Fazy 9 |
+| Trafność auto-routingu zadań | Odsetek zadań z intake, których przypisanie nie wymagało ręcznej korekty | Rosnący w miarę kalibracji `task_routing_classifier.py` |
 
 ## 9. Bezpieczeństwo — bez zmian względem zasady nadrzędnej
 
 Auto-zatwierdzanie żółtych **nie zmienia** zasady fail-closed z dokumentacji bazowej: jeśli agent nie jest pewny konta/aplikacji/rezultatu, to i tak zatrzymuje się i eskaluje — walidatory nie "przegłosowują" niepewności agenta, tylko potwierdzają jakość już wykonanej, jednoznacznej pracy. Czerwone pozostają zawsze poza automatycznym zatwierdzeniem, niezależnie od tego, ile walidatorów by się zgodziło.
+
+## 10. Skille raportowe, porządkowanie danych i podsumowania
+
+Wynik z analizy realnego raportu godzin (kwiecień-sierpień 2026): **ok. 175h w próbce to firefighting wokół danych** dla INDEKA i DIVERSE — powtarzający się wzorzec "właściciel pliku źródłowego (Michał/Wojtek/Paweł D.) zmienia strukturę bez ostrzeżenia → Power Query się wywala → godziny na ręczne przepinanie i wyjaśnianie, co się zmieniło". To największy pojedynczy koszt w całej próbce, większy niż jakikolwiek pojedynczy projekt klienta — stąd priorytet #2 zaraz po silniku walidacji.
+
+**Biblioteka skilli raportowo-porządkowych** (szersza niż sam Power BI — Excel, Google Sheets, dowolne źródło):
+
+- **Wykrywanie zmian struktury źródeł** (`source_schema_watcher.py`) — pilnuje plików źródłowych, wykrywa zmianę kolumny/arkusza/typu **zanim** odświeżenie się wywali, i sam tworzy zadanie dla właściciela pliku (obieg z sekcji 4) zamiast czekać, aż ktoś odkryje awarię.
+- **Kontrakt struktury danych** (`data_contract_validator.py`) — lekki, uzgodniony szablon struktury pliku źródłowego per klient/proces, walidowany automatycznie przed każdym przepięciem.
+- **Triage błędów Power Query** (skill, nie tylko skrypt) — wklejony błąd M/PQ dostaje klasyfikację przyczyny i gotową poprawkę, zamiast ręcznego dochodzenia za każdym razem od zera.
+- **Budowa i porządkowanie raportów poza Power BI** (`report_builder.py`, `data_tidy.py`) — te same zasady co PBI-01/PBI-02 (rezultat + kryteria akceptacji, walidacja, ślad audytowy), zastosowane do raportów Excel/Google Sheets/dokumentów, które dziś Asia robi ręcznie (Kadry, Finansowy, Dane ruchy mag, raport na stronę).
+- **Newsletter** (`newsletter_drafter.py`) — cykliczny draft z materiału źródłowego (zmiany produktowe, notatki, artykuły); człowiek redaguje i wysyła. Regularna, ustrukturyzowana praca — dobry pierwszy kandydat do sprawdzenia jakości draftów AI w praktyce.
+- **Podsumowania** (`digest_generator.py`, `content_summarizer.py`) — bot potrafi generować: cykliczny digest aktywności z Projectly (przed Daily/Weekly, żeby skrócić lub częściowo zastąpić spotkanie), oraz streszczenia na żądanie dowolnego długiego materiału (maile, notatki ze spotkań, raporty) do szybkiego przeglądu przez człowieka.
+
+## 11. Intake — automatyczne tworzenie i rozdzielanie zadań z maila i innych źródeł
+
+Dziś zadania w Projectly zakłada człowiek ręcznie. Docelowo agent **czyta wejście (mail, i pluggable inne źródła) i sam zakłada dobrze opisane zadanie**, rozdzielając je do właściwej osoby lub do własnej kolejki — analogicznie do tego, jak już rozdziela pracę między siebie a ludzi (sekcje 4-5).
+
+```
+  mail / inne źródło ──▶ email_intake_triage.py
+  (Teams, CRM, formularz)      │
+                                 ▼
+                     klasyfikacja: typ pracy +
+                     projekt/klient (słowa kluczowe:
+                     INDEKA, DIVERSE, AXL, Magnapharm...)
+                                 │
+                     ┌───────────┴───────────┐
+                     ▼                       ▼
+           routing_confidence_check.py   niska pewność
+           wysoka pewność                       │
+                     │                          ▼
+                     ▼                zadanie trafia do wspólnej
+        auto-tworzy zadanie w         puli z adnotacją "do
+        Projectly, przypisane do      ręcznego przypisania"
+        właściwej osoby lub bota      (fail-closed, jak wszędzie indziej)
+```
+
+- **Rozdzielanie po właścicielu projektu/klienta** (`task_routing_classifier.py`): dopasowanie po słowach kluczowych i historii (np. INDEKA → Asia, Magnapharm → Kacper, Okołosprzedażowe → Karol), z domyślnym przypisaniem do bota, jeśli praca jest w pełni automatyzowalna.
+- **Ten sam wzorzec dla innych źródeł** (`other_source_intake.py`) — Teams, CRM, formularz zgłoszeniowy — każde źródło to osobny adapter wpinający się w tę samą klasyfikację i routing, nie osobna logika.
+- **Niska pewność klasyfikacji nie jest zgadywana** — zgodnie z zasadą fail-closed z reszty dokumentu, niepewne przypadki trafiają do wspólnej puli z adnotacją, nie są przypisywane na siłę do przypadkowej osoby.
+- To domyka pętlę z sekcji 1: zadanie od początku (jego powstanie) do końca (self-review, komentarz, ewentualna eskalacja) przechodzi przez Projectly bez ręcznego zakładania na wejściu.

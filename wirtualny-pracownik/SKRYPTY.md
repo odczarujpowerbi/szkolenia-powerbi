@@ -104,3 +104,27 @@ Pomysły na skrypty pogrupowane wg domeny. Każdy skrypt ma jasno określony cel
 | `human_task_scanner.py` | Cyklicznie przegląda zadania przypisane ludziom (nie tylko agentowi) w Projectly i klasyfikuje, gdzie agent może pomóc | Harmonogram, np. co godzinę | zielone |
 | `human_task_partial_executor.py` | Wykonuje automatyzowalną część zadania człowieka, dopisuje komentarz "zrobiłem X, zostaje Ci Y" | Gdy `human_task_scanner.py` znajdzie automatyzowalną część | żółte (jak natywne ryzyko wykonanej czynności) |
 | `human_task_briefing.py` | Przygotowuje opracowanie/research/draft ułatwiające człowiekowi wykonanie w pełni ludzkiego zadania, dołącza jako komentarz/załącznik | Gdy zadanie wymaga researchu, ale decyzję/wykonanie musi podjąć człowiek | zielone |
+
+## M. Raporty, porządkowanie danych i podsumowania (priorytet #2 — patrz PLAN-WDROZENIA.md sekcja 10)
+
+Wynika wprost z analizy realnego raportu godzin: ok. 175h w próbce to firefighting wokół danych źródłowych (INDEKA/DIVERSE) — największy pojedynczy koszt w całej próbce.
+
+| Skrypt | Cel | Wyzwalacz | Ryzyko |
+|---|---|---|---|
+| `source_schema_watcher.py` | Pilnuje struktury plików źródłowych (Excel/Google Sheets), wykrywa zmianę kolumny/arkusza/typu zanim odświeżenie się wywali, tworzy zadanie dla właściciela pliku | Cyklicznie / przed każdym zaplanowanym odświeżeniem | zielone |
+| `data_contract_validator.py` | Waliduje plik źródłowy wobec uzgodnionego kontraktu struktury (per klient/proces) | Przed przepięciem/odświeżeniem raportu | zielone |
+| `pq_error_triage` (skill) | Klasyfikuje wklejony błąd Power Query (zmieniona kolumna, typ danych, ścieżka, uprawnienia) i podaje gotową poprawkę | Na żądanie, po błędzie odświeżenia | zielone |
+| `report_builder.py` | Buduje/aktualizuje raporty poza Power BI (Excel/Google Sheets/dokument) wg szablonu i zadeklarowanego rezultatu (Kadry, Finansowy, Dane ruchy mag) | Zadanie typu `report_build` | żółte |
+| `data_tidy.py` | Porządkuje dane źródłowe na żądanie: deduplikacja, ujednolicenie formatów, uzupełnianie braków | Zadanie typu `data_tidy` lub jako krok przed `report_builder.py` | żółte |
+| `newsletter_drafter.py` | Przygotowuje cykliczny draft newslettera z materiału źródłowego (zmiany produktowe, notatki, artykuły) | Harmonogram (np. tygodniowy) / zadanie typu `newsletter_draft` | zielone |
+| `digest_generator.py` | Generuje cykliczny digest aktywności z Projectly (przed Daily/Weekly, do skrócenia lub częściowego zastąpienia spotkania) | Harmonogram, przed spotkaniem cyklicznym | zielone |
+| `content_summarizer.py` | Streszcza na żądanie długi materiał (maile, notatki ze spotkań, raporty) do krótkiej wersji | Zadanie typu `summarize` | zielone |
+
+## N. Intake — tworzenie i rozdzielanie zadań (mail i inne źródła, patrz PLAN-WDROZENIA.md sekcja 11)
+
+| Skrypt | Cel | Wyzwalacz | Ryzyko |
+|---|---|---|---|
+| `email_intake_triage.py` | Czyta skrzynkę (MCP/Graph), klasyfikuje treść (zlecenie/pytanie/błąd/zmiana), tworzy opisane zadanie w Projectly | Cyklicznie / webhook nowej wiadomości | zielone |
+| `task_routing_classifier.py` | Dopasowuje nowe zadanie do właściciela wg słów kluczowych klienta/projektu i typu pracy; domyślnie do bota, jeśli w pełni automatyzowalne | Po utworzeniu zadania przez `email_intake_triage.py` | infra |
+| `routing_confidence_check.py` | Sprawdza pewność klasyfikacji przed auto-przypisaniem; poniżej progu zadanie trafia do wspólnej puli z adnotacją do ręcznego przypisania | Po `task_routing_classifier.py` | infra |
+| `other_source_intake.py` | Ten sam wzorzec intake dla innych kanałów (Teams, CRM, formularz) — adapter per źródło, wspólna klasyfikacja i routing | Cyklicznie / webhook per źródło | zielone |

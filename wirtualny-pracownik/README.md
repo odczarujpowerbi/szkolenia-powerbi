@@ -51,9 +51,11 @@ Rozpocząć od 2–4 tygodniowego pilotażu na jednym, używanym komputerze z Wi
 - [ ] Ustalić repo GitHub i workspace Power BI jako sandbox pilotażu
 - [ ] Skonfigurować Anthropic API (limit pilotażowy) + OpenRouter jako fallback
 - [ ] Zaimplementować runner + pętlę Projectly (poller → wykonanie → komentarz-raport)
-- [ ] Zbudować silnik walidacji i auto-zatwierdzania żółtych akcji (`validator_pool.py`, `approval_policy.yaml`) — priorytet, patrz [PLAN-WDROZENIA.md](./PLAN-WDROZENIA.md)
+- [ ] Zbudować silnik walidacji i auto-zatwierdzania żółtych akcji (`validator_pool.py`, `approval_policy.yaml`) — priorytet #1, patrz [PLAN-WDROZENIA.md](./PLAN-WDROZENIA.md)
+- [ ] Zbudować skille raportowe/porządkujące dane (`source_schema_watcher.py`, `data_contract_validator.py`, `newsletter_drafter.py`, `digest_generator.py`) — priorytet #2, oparty na realnej analizie raportu godzin (~175h firefightingu danych), patrz PLAN-WDROZENIA.md sekcja 10
 - [ ] Przetestować PAUSE/RESUME i wznowienie po restarcie
 - [ ] Podłączyć integracje wg kolejności z planu wdrożenia: CRM → Meta Ads → Google/SharePoint → e-mail (MCP)
+- [ ] Zbudować intake z maila i innych źródeł (`email_intake_triage.py`, `task_routing_classifier.py`) — automatyczne tworzenie i rozdzielanie zadań, patrz PLAN-WDROZENIA.md sekcja 11
 - [ ] Uruchomić rejestr skilli i bota ulepszającego skille (`skill_registry.py`, `skill_improver_bot.py`)
 - [ ] Po potwierdzeniu kryteriów odbioru: przenieść folder do docelowego repozytorium `odczarujpowerbi/wirtualny-pracownik`
 
