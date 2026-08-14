@@ -69,3 +69,4 @@ Rozpocząć od 2–4 tygodniowego pilotażu na jednym, używanym komputerze z Wi
 - **[PLAN-WDROZENIA.md](./PLAN-WDROZENIA.md)** — architektura komunikacji przez Projectly, silnik auto-zatwierdzania, fazy wdrożenia, integracje.
 - **[SKRYPTY.md](./SKRYPTY.md)** — pełny katalog skryptów Python do zaimplementowania, z celem, wyzwalaczem i poziomem ryzyka.
 - **[ZESPOL-BOTOW.md](./ZESPOL-BOTOW.md)** — docelowa architektura wieloosobowa: role-boty na osobnych komputerach, agent strategiczny, komunikacja bot-bot, dystrybucja skilli.
+- **[PRZED-PILOTAZEM.md](./PRZED-PILOTAZEM.md)** — checklist otwartych decyzji do zamknięcia przed startem (rejestr D-01..D-07, RODO, zespół, backup, dostępy) i przypomnienie realnego zakresu pilotażu.
