@@ -56,6 +56,19 @@ Odpowiedź na pytanie ze `PRZED-PILOTAZEM.md` ("środowisko testowe vs produkcyj
 - **Decyzja człowieka** = komentarz lub zmiana statusu w Projectly, parsowany przez pollera jako `approve` / `reject` / `changes_requested`. Nie ma osobnego kanału do klikania "zatwierdź" — wszystko dzieje się tam, gdzie i tak żyje zadanie.
 - Powiadomienie push/e-mail o pozycji "wymaga decyzji" jest opcjonalne — do dograć, jeśli Projectly nie powiadamia natywnie o nowych komentarzach/statusach.
 
+### Status na żywo — moduł analizy pracy w toku, nie tylko zakończonych zadań
+
+Komentarz po zakończeniu zadania (wyżej) i `digest_generator.py` (sekcja 10) mówią, **co już się stało**. To nie wystarcza — potrzebny jest też widok tego, **co dzieje się teraz**, zanim zadanie się skończy, i widok zdrowia całej pracy w toku, nie tylko pojedynczego zadania.
+
+- **`live_status_publisher.py`** (harmonogram: co 1-2 min, ta sama częstotliwość co `watchdog.py`) — utrzymuje w Projectly **jeden, stały, nigdy niezamykany wpis per bot-rola** (np. "🟢 Status: Krzysztof-dev"), który jest **nadpisywany**, nie dopisywany jak komentarze na zwykłych zadaniach. Zawiera:
+  - aktualne zadanie w toku i postęp (np. "krok 3/5: walidacja PBIP"), albo "bezczynny — czeka na zadanie",
+  - czas ostatniego heartbeatu,
+  - liczbę zadań w kolejce i liczbę czekających na decyzję człowieka (`needs_approval`),
+  - koszt AI dziś / w tym tygodniu,
+  - zdrowie: OK / ALERT (z `watchdog.py`).
+- To jest **osobny mechanizm od digestu i trybu rozmowy** (sekcje 10 i 14): digest podsumowuje po fakcie, tryb rozmowy odpowiada na żądanie, status na żywo jest **zawsze widoczny bez pytania** — jeden rzut oka na Projectly pokazuje, co robi każdy bot teraz, nie tylko co zrobił.
+- Przy jednym pracowniku to jeden wpis. Przy wielu rolach (`ZESPOL-BOTOW.md`) to naturalnie staje się widokiem całej floty naraz — dokładnie to, czego potrzebuje przyszły "Operator floty" (`ZESPOL-BOTOW.md` sekcja 1).
+
 ## 3. Silnik walidacji i auto-zatwierdzania (rdzeń rozwiązania problemu)
 
 Klasyfikacja ryzyka zostaje z oryginalnego dokumentu (zielone/żółte/czerwone), ale dochodzi **warstwa wielu niezależnych walidatorów głosujących nad żółtymi akcjami**, żeby człowiek nie musiał klikać za każdym razem.

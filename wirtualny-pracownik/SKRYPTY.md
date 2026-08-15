@@ -23,6 +23,7 @@ Pomysły na skrypty pogrupowane wg domeny. Każdy skrypt ma jasno określony cel
 | `projectly_self_review.py` | LLM-judge: porównuje rezultat z `acceptance_criteria` zadania, ocenia pass/fail, dopisuje ocenę | Przed poproszeniem o akceptację | zielone |
 | `projectly_status_sync.py` | Mapuje wewnętrzny status runnera na status zadania w Projectly | Przy każdej zmianie stanu | infra |
 | `projectly_decision_parser.py` | Parsuje odpowiedź człowieka (komentarz/status) na `approve`/`reject`/`changes_requested` | Po wykryciu nowego komentarza na eskalowanym zadaniu | infra |
+| `live_status_publisher.py` | Utrzymuje jeden, stały, nadpisywany wpis "status na żywo" per bot-rola w Projectly (zadanie w toku, kolejka, koszt, zdrowie) — nie kolejny komentarz, tylko zawsze aktualny stan (PLAN-WDROZENIA.md sekcja 2) | Harmonogram, co 1-2 min | zielone |
 
 ## C. Walidacja i auto-zatwierdzanie (priorytet — rozwiązuje problem z czasem admina)
 

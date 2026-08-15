@@ -23,9 +23,19 @@ Im dalej ten plan idzie, tym ważniejsze jest jasno powiedzieć, co **zostaje** 
 | Zofia | Asystentka prezesa | Digesty/podsumowania, przygotowywanie opracowań, tryb rozmowy z Pawłem |
 | Zenek | Administracja | Microsoft Graph (konta, licencje), SharePoint, Kadry/HR — operacje na listach |
 | Strateg | Analiza całej firmy, rekomendacje dla prezesa | Czyta wszystko (cross-role), nie wykonuje zadań operacyjnych |
+| Operator floty | Bieżące zarządzanie pracą wszystkich agentów naraz, nadawanie kierunku, przegląd eskalacji | Czyta status na żywo i kolejki wszystkich ról (`PLAN-WDROZENIA.md` sekcja 2), nie wykonuje zadań operacyjnych — patrz sekcja 1a |
 | Paweł | Prezes — decyzje strategiczne i czerwone | — (człowiek) |
 
 Każda rola w Projectly to osobne przypisanie, dokładnie tak jak przy ludziach (Asia/Kacper/Karol dziś). `task_routing_classifier.py` (`PLAN-WDROZENIA.md` sekcja 11) rozszerza się o routing do **konkretnej roli-bota**, nie tylko "bot ogólny vs człowiek" — to jest jedyna zmiana w istniejącym mechanizmie intake, reszta działa bez zmian.
+
+## 1a. Operator floty — rola człowieka, nie bota, na później
+
+W odróżnieniu od reszty tabeli to jest **stanowisko dla człowieka**, nie kolejny bot — i celowo odłożone w czasie, nie do obsadzenia teraz.
+
+- **Co robi:** ogląda `live_status_publisher.py` (`PLAN-WDROZENIA.md` sekcja 2) i kolejki eskalacji wszystkich ról naraz, zarządza priorytetami bieżącej pracy, przekierowuje uwagę agentów tam, gdzie akurat potrzeba — codzienna operacyjna koordynacja floty, nie strategia firmy.
+- **Czym się różni od Stratega:** Strateg (bot, sekcja 2 wyżej) analizuje dane i rekomenduje kierunek prezesowi raz w tygodniu — strategia firmy, nie codzienna operacja. Operator floty to bieżące, godzina-po-godzinie zarządzanie kolejkami i priorytetami — operacyjne, nie strategiczne.
+- **Czym się różni od Pawła:** Operator floty triażuje i porządkuje kolejkę eskalacji, ale **nie przejmuje autorytetu decyzyjnego** nad czerwonymi/strategicznymi sprawami — te nadal trafiają do właściwego właściciela procesu albo do Pawła, zgodnie z zasadami z `PLAN-WDROZENIA.md` sekcji 3-4. Operator floty to dyspozytor, nie ostateczny zatwierdzający.
+- **Kiedy to obsadzić:** dopiero gdy istnieje więcej niż jedna rola-bot do nadzorowania (czyli po co najmniej dwóch stabilnych wdrożeniach z sekcji 5). Przy jednym pracowniku Paweł sam jest naturalnym operatorem — dodanie tej roli wcześniej byłoby stanowiskiem bez pracy do wykonania.
 
 ## 2. Agent strategiczny: pełny wgląd, zero własnej egzekucji operacyjnej
 
