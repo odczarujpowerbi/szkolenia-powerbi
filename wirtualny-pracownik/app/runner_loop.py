@@ -33,6 +33,7 @@ import risk_classifier
 import skill_usage_logger
 import state_store
 import task_router
+import validator_prompt
 from escalation import escalate_to_human
 from projectly_client import get_client
 from validator_pool import run_validators
@@ -54,6 +55,20 @@ def process_task(task, policy, routing, client):
 
     state_store.upsert_task(task_id, payload=task, status="planning", now=now)
     state_store.record_event(task_id, "task_received", task["title"], now)
+
+    # Sprawdzenie bezpieczeństwa treści PRZED klasyfikacją ryzyka — wykryta
+    # próba wstrzyknięcia eskaluje zawsze, niezależnie od koloru zadania
+    # (dokumentacja bazowa 9.4: tekst zewnętrzny to dane, nie polecenie).
+    prompt_check = validator_prompt.check_prompt_safety(task.get("title", ""))
+    state_store.record_event(task_id, "prompt_safety_check", str(prompt_check), now_iso())
+    if not prompt_check["safe"]:
+        owner, _ = task_router.route_task(task["title"], routing)
+        escalate_to_human(task, f"Wykryto podejrzaną treść: {prompt_check['detail']}", client, assignee=owner)
+        status = "needs_approval"
+        state_store.upsert_task(task_id, payload=task, status=status, assigned_to=owner, risk_level="red", now=now_iso())
+        client.post_comment(task_id, _comment_escalated(owner, prompt_check["detail"]))
+        client.update_status(task_id, status)
+        return {"task_id": task_id, "risk": "red", "owner": owner, "status": status}
 
     action_type = HINT_TO_ACTION.get(task.get("risk_level_hint", "yellow"), "report_build")
     risk = risk_classifier.classify(action_type, policy)

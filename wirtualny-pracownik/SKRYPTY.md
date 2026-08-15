@@ -65,12 +65,13 @@ Pomysły na skrypty pogrupowane wg domeny. Każdy skrypt ma jasno określony cel
 | `crm_sync_task.py` | Odczyt/zapis rekordów CRM powiązanych z zadaniem (np. status leada) | Zadanie typu `crm_update` | żółte (odczyt: zielone) |
 | `crm_report_generator.py` | Generuje podsumowania na podstawie zapytań CRM (np. COQL) do wykorzystania w innych zadaniach | Zadanie cykliczne / na żądanie | zielone |
 
-## G. Meta Ads
+## G. Meta Ads i TikTok Ads
 
 | Skrypt | Cel | Wyzwalacz | Ryzyko |
 |---|---|---|---|
 | `meta_ads_api_client.py` | Odczyt kampanii i kontrolowane zmiany przez Marketing API w granicach limitu | Zadanie typu `ads_check` / `ads_adjust` | żółte (budżet: **czerwone**) |
 | `meta_ads_ui_fallback.py` | Playwright dla funkcji niedostępnych w API — stan kampanii, zrzut, weryfikacja | Gdy API nie pokrywa potrzeby | żółte |
+| `tiktok_ads_api_client.py` | Odczyt kampanii i kontrolowane zmiany przez TikTok Marketing API, ten sam wzorzec ryzyka co Meta Ads | Zadanie typu `ads_check` / `ads_adjust` | żółte (budżet: **czerwone**) |
 
 ## H. E-mail i inny agent (przez MCP)
 

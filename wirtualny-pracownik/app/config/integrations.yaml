@@ -1,0 +1,68 @@
+# Rejestr dostępnych integracji/kont — SKALOWANIE.md sekcja 2, "konfiguracja
+# firmy". Jeden plik na wszystko, co jest realnie dostępne, żeby nie szukać
+# tego po całym repo. Uzupełniaj access/notes, gdy dostęp zostanie
+# potwierdzony/rozszerzony. Klucze i tokeny NIGDY tutaj — tylko referencja,
+# że dane konto istnieje (same sekrety w lokalnym magazynie/.env).
+
+integrations:
+  microsoft_365:
+    mechanism: "konto Microsoft 365 (już założone)"
+    access: "mail: read+send z jednego wspólnego konta"
+    notes: "Aplikacje Microsoft (Graph itd.) dostępne — do wykorzystania przez e-mail (przychodzący/wychodzący), SharePoint, OneDrive."
+
+  google_workspace:
+    mechanism: "konto Google (już założone)"
+    access: "do potwierdzenia dokładny zakres (Docs/Sheets/Search Console/Analytics — PLAN-WDROZENIA.md sekcja 6/18)"
+    notes: ""
+
+  zoho_crm:
+    mechanism: "MCP"
+    access: "read+write (do potwierdzenia dokładne uprawnienia po stronie MCP)"
+
+  projectly:
+    mechanism: "MCP"
+    access: "read+write"
+    notes: "Główny kanał komunikacji, PLAN-WDROZENIA.md sekcja 2."
+
+  platforma_sprzedazowa_zanfi:
+    mechanism: "MCP"
+    access: "unknown"
+    notes: "Nazwa 'zanfii' niepotwierdzona (możliwa literówka/nazwa własna) — do doprecyzowania z użytkownikiem. Miejsce sprzedaży produktów."
+
+  github:
+    mechanism: "repozytoria Git"
+    access: "read+write"
+    notes: "Strony internetowe trzymane jako projekty na GitHub."
+
+  onedrive:
+    mechanism: "lokalny sync"
+    access: "read+write"
+    notes: "Lokalna kopia projektów stron (te same repo co GitHub) i biblioteka skilli (ZESPOL-BOTOW.md sekcja 4)."
+
+  miro:
+    mechanism: "connector"
+    access: "read-only"
+
+  tiktok_ads:
+    mechanism: "API (do potwierdzenia dokładny mechanizm/uprawnienia konta)"
+    access: "budżet/publikacja = czerwone jak Meta Ads (PLAN-WDROZENIA.md sekcja 6), odczyt statusu kampanii = zielone"
+    notes: "Drugi kanał reklamowy obok Meta Ads — ad_spend_report_builder.py (sekcja 18) obejmuje teraz oba."
+
+  mailerlite:
+    mechanism: "apka / API (do potwierdzenia które konkretnie)"
+    access: "unknown — do potwierdzenia, czy plan/API pozwala na zapis (tworzenie/aktualizacja subskrybentów, kampanii)"
+    notes: >
+      MailerLite ma publiczne API, które w typowych planach obsługuje zapis
+      (subskrybenci, grupy, kampanie) — ale to zależy od konkretnego planu i
+      wersji API na tym koncie. Potwierdź na koncie, zanim uzależnisz od tego
+      newsletter_drafter.py (SKRYPTY.md kategoria M). Jeśli zapis niemożliwy,
+      do zamiany na inne narzędzie mailingowe.
+
+  hermes_local_llm:
+    mechanism: "lokalny model (np. przez Ollama, http://localhost:11434)"
+    access: "n/a — nie jest to konto/API zewnętrzne, tylko proces na tej samej maszynie"
+    notes: >
+      Założenie robocze: 'Hermes' to lokalnie hostowany model open-source,
+      używany jako tania/szybka druga opinia w validator_prompt.py, nie
+      zamiennik głównego modelu (Anthropic API) do planowania/wykonania.
+      Do potwierdzenia z użytkownikiem, jeśli chodziło o coś innego.

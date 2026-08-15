@@ -20,6 +20,7 @@ To nie jest pseudokod ani dokumentacja — to realny, uruchomiony i przetestowan
 | `live_status_publisher.py` | Buduje i publikuje status na żywo (kolejka, koszt, zdrowie) | ✅ |
 | `skill_registry.py` / `skill_usage_logger.py` | Rejestr skilli z wersją, log użycia | ✅ |
 | `pbip_validate.py` | Waliduje strukturę PBIP (JSON, TMDL) bez Power BI Desktop | ✅ (na syntetycznym przykładzie w `mock_data/sample_pbip/`) |
+| `validator_prompt.py` | Wykrywa próby wstrzyknięcia instrukcji w treści zewnętrznej (heurystyka regex + opcjonalnie lokalny model przez Ollamę) — sprawdzane PRZED klasyfikacją, wykrycie zawsze eskaluje | ✅ heurystyka; opcjonalny lokalny model gracefully pomijany, gdy niedostępny |
 | `runner_loop.py` | Spina wszystko: klasyfikacja → routing → walidacja/eskalacja → status → koszt | ✅ (`python runner_loop.py`) |
 | `bootstrap_register.py` / `bootstrap_smoke_test.py` | Rejestracja roli i test dymny nowego komputera | ✅ |
 | `bootstrap_install.ps1` | Przygotowanie systemu Windows i klon repo | ⚠️ napisany wg specyfikacji, **nie testowany na prawdziwym Windows** z tej sesji |
@@ -65,7 +66,9 @@ Stan w `runs/state.db`, heartbeat w `runs/heartbeat.json` — folder `runs/` jes
 
 ## Konfiguracja firmy — osobno od kodu
 
-`config/approval_policy.yaml`, `config/clients_routing.yaml`, `config/skills_manifest.yaml` to "konfiguracja firmy" (`SKALOWANIE.md` sekcja 2) — edytowalne bez zmiany kodu, wymieniane przy kopiowaniu do innej firmy. `approval_policy.yaml` ma celowo **pustą** listę `bounded_red` — nie dodawaj tam nic, dopóki zwykły tryb czerwony nie przepracował na produkcji kilku tygodni (sekcja 3 planu).
+`config/approval_policy.yaml`, `config/clients_routing.yaml`, `config/skills_manifest.yaml`, `config/integrations.yaml` to "konfiguracja firmy" (`SKALOWANIE.md` sekcja 2) — edytowalne bez zmiany kodu, wymieniane przy kopiowaniu do innej firmy. `approval_policy.yaml` ma celowo **pustą** listę `bounded_red` — nie dodawaj tam nic, dopóki zwykły tryb czerwony nie przepracował na produkcji kilku tygodni (sekcja 3 planu).
+
+`config/integrations.yaml` to jeden, konsolidowany rejestr wszystkich dostępnych kont/połączeń (Microsoft 365, Google, Zoho CRM, Projectly, GitHub, OneDrive, Miro, MailerLite, TikTok Ads, lokalny model Hermes...) — mechanizm, poziom dostępu i uwagi, **nigdy klucze/tokeny** (te w lokalnym magazynie sekretów/`.env`). Dwa wpisy mają status jawnie oznaczony jako niepewny: nazwa platformy sprzedażowej "zanfi" (możliwa literówka) i czy MailerLite pozwala na zapis — potwierdź je, zanim skrypty, które ich potrzebują, trafią na produkcję.
 
 ## Instalacja na docelowym komputerze (Windows)
 

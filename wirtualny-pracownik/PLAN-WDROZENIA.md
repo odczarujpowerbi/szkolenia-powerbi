@@ -354,7 +354,7 @@ Cztery nowe raporty cykliczne (co tydzień), agregowane w jedną cotygodniową a
 | Raport | Źródło danych | Skrypt |
 |---|---|---|
 | Sprzedażowy | System transakcyjny (API/MCP — mechanizm do doprecyzowania po stronie systemu) | `sales_report_builder.py` |
-| Wydatki reklamowe | Meta Ads API (+ inne kanały reklamowe, jeśli dojdą) | `ad_spend_report_builder.py` |
+| Wydatki reklamowe | Meta Ads API + TikTok Ads API | `ad_spend_report_builder.py` |
 | Finansowy całej firmy | System transakcyjny + inFakt (**dedykowane konto bota**, API jeśli dostępne, inaczej eksport CSV z portalu — `infakt_export.py`) | `company_financial_report_builder.py` |
 | Widoczność w sieci | Google Search Console + Analytics (SEO, ruch) **oraz** social media (zasięgi, wzmianki) | `web_visibility_report_builder.py` |
 
