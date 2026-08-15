@@ -9,6 +9,8 @@ Wirtualny pracownik działający niezależnie od laptopów zespołu: cyklicznie 
 > Rozwinięcie o konkretne narzędzia (Projectly, CRM, Meta Ads, Google/SharePoint, e-mail przez MCP, skille) — patrz **[PLAN-WDROZENIA.md](./PLAN-WDROZENIA.md)** (architektura, silnik auto-zatwierdzania, komunikacja) i **[SKRYPTY.md](./SKRYPTY.md)** (katalog skryptów do zaimplementowania).
 >
 > Docelowo to nie jeden bot, tylko **zespół botów-ról** (Waldek-marketing, Krzysztof-developer, Zofia-asystentka, Zenek-administracja, Strateg) na osobnych komputerach — patrz **[ZESPOL-BOTOW.md](./ZESPOL-BOTOW.md)**. To faza E z mapy rozwoju, budowana dopiero po ustabilizowaniu jednego pracownika.
+>
+> **[app/](./app/)** — działający, przetestowany szkielet kodu Fazy 0-1 (nie dokumentacja): runner, klasyfikacja ryzyka, routing zadań, stan, heartbeat, kill switch. Uruchamialny lokalnie bez żadnych kluczy API (tryb mock). Zobacz `app/README.md` co działa, a czego celowo brakuje (prawdziwe Projectly, walidatory, workery).
 
 ## Rekomendacja: pilotaż najpierw
 
