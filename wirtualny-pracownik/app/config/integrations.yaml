@@ -24,10 +24,10 @@ integrations:
     access: "read+write"
     notes: "Główny kanał komunikacji, PLAN-WDROZENIA.md sekcja 2."
 
-  platforma_sprzedazowa_zanfi:
+  zanfia_courses:
     mechanism: "MCP"
-    access: "unknown"
-    notes: "Nazwa 'zanfii' niepotwierdzona (możliwa literówka/nazwa własna) — do doprecyzowania z użytkownikiem. Miejsce sprzedaży produktów."
+    access: "unknown — do potwierdzenia dokładne uprawnienia po stronie MCP"
+    notes: "zanfia.com — platforma do sprzedaży kursów online. Potwierdzone (nie literówka)."
 
   github:
     mechanism: "repozytoria Git"
@@ -49,14 +49,23 @@ integrations:
     notes: "Drugi kanał reklamowy obok Meta Ads — ad_spend_report_builder.py (sekcja 18) obejmuje teraz oba."
 
   mailerlite:
-    mechanism: "apka / API (do potwierdzenia które konkretnie)"
-    access: "unknown — do potwierdzenia, czy plan/API pozwala na zapis (tworzenie/aktualizacja subskrybentów, kampanii)"
+    mechanism: "REST API (developers.mailerlite.com)"
+    access: >
+      Kampanie: PEŁNY zapis potwierdzony — tworzenie (draft), harmonogram,
+      wysyłka, anulowanie, pobieranie statystyk (otwarcia/kliknięcia/
+      rezygnacje/odbicia). Subskrybenci/grupy/pola: pełny zapis, w tym
+      wprowadzanie subskrybenta do już istniejącej automatyzacji przez
+      grupę/pole/trigger. Automatyzacje (sama struktura kroków/triggerów):
+      PRAWDOPODOBNIE budowane raz w edytorze UI MailerLite, nie generowane
+      od zera przez API — niepotwierdzone w 100% (brak dostępu do pełnej
+      dokumentacji z tej sesji), zweryfikuj na koncie przed poleganiem na tym.
     notes: >
-      MailerLite ma publiczne API, które w typowych planach obsługuje zapis
-      (subskrybenci, grupy, kampanie) — ale to zależy od konkretnego planu i
-      wersji API na tym koncie. Potwierdź na koncie, zanim uzależnisz od tego
-      newsletter_drafter.py (SKRYPTY.md kategoria M). Jeśli zapis niemożliwy,
-      do zamiany na inne narzędzie mailingowe.
+      Wzorzec analogiczny do PBIP: automatyzację buduje się raz ręcznie
+      (jak "warsztat" — ZESPOL-BOTOW.md sekcja 4), a bot zarządza danymi
+      wjeżdżającymi w nią (subskrybenci/pola) i czyta wyniki przez API.
+      Wysyłka masowa i tak jest `red` w approval_policy.yaml niezależnie
+      od możliwości API — to nie zmienia zasad bezpieczeństwa, tylko
+      zakres tego, co bot może przygotować/przeanalizować samodzielnie.
 
   hermes_local_llm:
     mechanism: "lokalny model (np. przez Ollama, http://localhost:11434)"
