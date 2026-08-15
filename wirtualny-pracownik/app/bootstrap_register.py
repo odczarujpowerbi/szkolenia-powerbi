@@ -12,6 +12,10 @@ import json
 import sys
 from pathlib import Path
 
+from dotenv import load_dotenv
+
+load_dotenv()
+
 from live_status_publisher import publish
 from projectly_client import get_client
 

@@ -12,6 +12,7 @@ To nie jest pseudokod ani dokumentacja — to realny, uruchomiony i przetestowan
 | `risk_classifier.py` | Klasyfikacja zielone/żółte/czerwone z `approval_policy.yaml`, fail-closed dla nieznanych akcji | ✅ |
 | `task_router.py` | Routing po słowach kluczowych z `clients_routing.yaml`, niska pewność → `unassigned_pool` | ✅ |
 | `validators.py` + `validator_pool.py` | 3 walidatory równolegle (technical/scope/visual), próg zgody z polityki | ✅ |
+| `validators.py::_call_vision_model` | Realne wywołanie modelu wizyjnego (pakiet `anthropic`) przy podanym zrzucie i kluczu | ⚠️ napisane i gałęzie bez klucza przetestowane; sama rozmowa z modelem nietestowana — brak klucza w tej sesji |
 | `escalation.py` | Tworzy zadanie dla człowieka (nie tylko komentarz), sprawdza jednoznaczność odpowiedzi, tworzy kontynuację | ✅ |
 | `bounded_red_executor.py` | Sprawdza granicę liczbową bounded red — bez wpisu w polityce zawsze odmawia (bezpieczny domyślny stan) | ✅ |
 | `cost_tracker.py` | Sumuje koszt dzienny, wyzwala kill switch po przekroczeniu limitu | ✅ |
@@ -26,7 +27,7 @@ To nie jest pseudokod ani dokumentacja — to realny, uruchomiony i przetestowan
 ## Czego celowo brakuje (uczciwie, nie udawane)
 
 - **Prawdziwe połączenie z Projectly** (`projectly_client.py`) — endpointy/autoryzacja nie są znane z tej sesji. Domyślnie `MockProjectlyClient` (czyta/pisze pliki w `mock_data/` i `runs/`). Ustaw `PROJECTLY_API_KEY` + `PROJECTLY_BASE_URL`, dopisz metody `ProjectlyClient`.
-- **Realne wywołanie modelu w `validator_visual.py`** — dziś zawsze zwraca `approved=False` z jasnym wyjaśnieniem (brak zrzutu lub brak `ANTHROPIC_API_KEY`), zgodnie z fail-closed. Nie symuluje fałszywego wyniku modelu.
+- **Realne wywołanie modelu w `validator_visual.py`** — kod jest napisany i wywoła prawdziwy model, jeśli podasz `ANTHROPIC_API_KEY` i zrzut ekranu; bez nich zwraca `approved=False` z jasnym wyjaśnieniem, zgodnie z fail-closed. Sama rozmowa z modelem nietestowana z tej sesji (brak klucza) — zweryfikuj na docelowej maszynie z prawdziwym zrzutem.
 - **Prawdziwe workery** (Power BI Desktop Bridge + zrzuty, CRM, Meta Ads, SharePoint...) — `runner_loop.py` dziś tylko klasyfikuje i komentuje (`execution_result` to zaślepka), nie wykonuje realnej pracy w tych systemach. `pbip_validate.py` sprawdza tylko warstwę plikową — zrzuty stron wymagają Desktop Bridge na prawdziwym Windows z Power BI Desktop.
 - **`bootstrap_install.ps1`** — napisany wiernie wg `SKALOWANIE.md`, ale nieprzetestowany (środowisko budowy to Linux bez dostępu do docelowego Windows). Sprawdź krok po kroku przy pierwszym użyciu.
 
@@ -34,6 +35,7 @@ To nie jest pseudokod ani dokumentacja — to realny, uruchomiony i przetestowan
 
 ```bash
 pip install -r requirements.txt
+cp .env.example .env   # uzupełnij prawdziwe klucze, gdy będą znane — .env jest w .gitignore
 python runner_loop.py                     # jeden przebieg na mock_data/sample_tasks.json
 python runner_loop.py --loop               # ciągła pętla co 30s (Ctrl+C żeby zatrzymać)
 python bootstrap_smoke_test.py             # pełny test dymny (cykl + heartbeat + kill switch)
@@ -42,6 +44,24 @@ python pbip_validate.py mock_data/sample_pbip   # walidacja przykładowego PBIP
 ```
 
 Stan w `runs/state.db`, heartbeat w `runs/heartbeat.json` — folder `runs/` jest w `.gitignore` (stan lokalny, nie kod — `SKALOWANIE.md` sekcja 2).
+
+## Co jeszcze będzie potrzebne (pakiety i narzędzia wg fazy)
+
+`requirements.txt` ma dziś tylko to, czego kod faktycznie używa (PyYAML, python-dotenv, anthropic). Reszta jest tam wypisana w komentarzu, żeby nie instalować pakietów, których jeszcze nic nie używa (ten sam problem co przedwczesny rozrost zakresu, tylko na poziomie zależności) — dodawaj je, gdy realnie piszesz danego workera:
+
+| Faza / worker | Pakiety Python | Poza-pythonowe (system/konto) |
+|---|---|---|
+| Już teraz | PyYAML, python-dotenv, anthropic | — |
+| Prawdziwe Projectly (`projectly_client.py`) | `requests` (albo SDK Projectly, jeśli istnieje) | Klucz API Projectly, dokumentacja endpointów |
+| Power BI (Faza 3, zrzuty stron) | — (Bridge to nie pakiet pip) | **Power BI Desktop**, ewentualnie Tabular Editor/DAX Studio (opcjonalnie, do pracy nad modelem) |
+| Screenshoty/diff (`screenshot_diff.py`) | `Pillow` | — |
+| Przeglądarka (Meta Ads UI fallback, CRM UI) | `playwright` + `playwright install chromium` | — |
+| Dane/raporty (`data_tidy.py`, `report_builder.py`, watcher schematu) | `pandas`, `openpyxl` | — |
+| Google Workspace / Search Console / Analytics | `google-api-python-client`, `google-auth-oauthlib` | Konto serwisowe Google Cloud z odpowiednimi scope'ami |
+| SharePoint / Microsoft Graph | `msal` | Rejestracja aplikacji w Azure AD (Microsoft Entra) |
+| inFakt | `requests` | Dedykowane konto bota w inFakt, klucz API |
+| Orkiestrator / Claude Code na docelowej maszynie | — (osobny CLI, nie pakiet pip) | Node.js (Claude Code jest dystrybuowany przez npm), klucz Anthropic API |
+| Zdalny dostęp administracyjny | — | Tailscale (dokumentacja bazowa rozdz. 10.1) |
 
 ## Konfiguracja firmy — osobno od kodu
 

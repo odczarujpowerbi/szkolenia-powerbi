@@ -21,6 +21,10 @@ import sys
 import time
 from datetime import datetime, timezone
 
+from dotenv import load_dotenv
+
+load_dotenv()  # wczytuje .env jeśli istnieje (ANTHROPIC_API_KEY, PROJECTLY_API_KEY...) — patrz .env.example
+
 import cost_tracker
 import heartbeat
 import kill_switch
