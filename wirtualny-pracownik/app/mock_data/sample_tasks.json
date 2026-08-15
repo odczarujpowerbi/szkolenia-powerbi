@@ -18,5 +18,15 @@
     "risk_level_hint": "yellow",
     "max_ai_cost_usd": 2.0,
     "created_by": "pawel"
+  },
+  {
+    "task_id": "PRJ-0003",
+    "title": "Zwiększ budżet kampanii Meta Ads",
+    "expected_result": "Budżet dzienny zwiększony zgodnie z rekomendacją",
+    "acceptance_criteria": ["Nowy budżet ustawiony", "Potwierdzenie w panelu Meta Ads"],
+    "source_file_link": null,
+    "risk_level_hint": "red",
+    "max_ai_cost_usd": 0.2,
+    "created_by": "pawel"
   }
 ]

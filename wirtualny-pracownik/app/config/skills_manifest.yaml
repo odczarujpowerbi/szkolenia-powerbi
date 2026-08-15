@@ -1,0 +1,13 @@
+# Rejestr dostępnych skilli/narzędzi z metadanymi (SKRYPTY.md kategoria J).
+# To jest "konfiguracja firmy" w rozumieniu SKALOWANIE.md — wymieniana per
+# wdrożenie, nie zaszyta w kodzie.
+
+skills:
+  - name: pbip_validate
+    version: "0.1.0"
+    risk: green
+    description: Waliduje strukturę projektu PBIP (PBI-01)
+  - name: source_schema_watcher
+    version: "0.1.0"
+    risk: green
+    description: Wykrywa zmiany struktury plików źródłowych

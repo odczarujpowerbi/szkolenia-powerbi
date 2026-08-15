@@ -30,11 +30,16 @@ CREATE TABLE IF NOT EXISTS events (
 """
 
 
-def _connect():
+def get_connection():
+    """Publiczny dostęp do połączenia — do zapytań, których nie pokrywają
+    gotowe funkcje pomocnicze poniżej (np. agregacje w cost_tracker.py)."""
     DB_PATH.parent.mkdir(parents=True, exist_ok=True)
     conn = sqlite3.connect(DB_PATH)
     conn.executescript(SCHEMA)
     return conn
+
+
+_connect = get_connection  # zachowana nazwa wewnętrzna dla zwięzłości w tym pliku
 
 
 def upsert_task(task_id, payload, status="queued", assigned_to=None, risk_level=None, now=None):

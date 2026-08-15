@@ -1,13 +1,15 @@
 """
 Główna pętla: pobiera zadania, klasyfikuje ryzyko, rozdziela do właściciela,
-zapisuje stan, aktualizuje heartbeat (PLAN-WDROZENIA.md sekcja 1-3, SKRYPTY.md
-kategoria A). To jest szkielet Fazy 0-1 — wykonuje realny cykl
-queued -> classified -> routed -> (auto | needs_human), ale bez jeszcze
-podłączonych workerów (Power BI, CRM itd.) i bez prawdziwego Projectly
-(patrz projectly_client.py).
+uruchamia walidatory dla żółtych, sprawdza granice bounded red dla
+czerwonych, eskaluje sporne/czerwone jako osobne zadania, publikuje status
+na żywo, zapisuje stan i koszt (PLAN-WDROZENIA.md sekcje 1-4, 17, SKRYPTY.md
+kategoria A). Sprawdza kill switch na starcie każdej iteracji.
 
-Sprawdza kill switch (STOP.flag) na starcie każdej iteracji, zgodnie z
-PLAN-WDROZENIA.md sekcja 17.
+Czego celowo brakuje (uczciwie): prawdziwych workerów (Power BI, CRM, Meta
+Ads...). `execution_result` poniżej jest zaślepką reprezentującą "zadanie
+odebrane, praca jeszcze niewykonana realnie" — wystarczającą, żeby
+przetestować mechanikę klasyfikacji/walidacji/eskalacji, ale nie
+zastępującą realnego workera z Fazy 3+.
 
 Użycie:
     python runner_loop.py            # jeden przebieg, tryb mock
@@ -18,19 +20,19 @@ import argparse
 import sys
 import time
 from datetime import datetime, timezone
-from pathlib import Path
 
+import cost_tracker
 import heartbeat
+import kill_switch
+import live_status_publisher
 import risk_classifier
+import skill_usage_logger
 import state_store
 import task_router
+from escalation import escalate_to_human
 from projectly_client import get_client
+from validator_pool import run_validators
 
-STOP_FLAG_PATH = Path(__file__).parent / "runs" / "STOP.flag"
-
-# Zgrubne mapowanie: pole risk_level_hint z zadania na typ akcji z approval_policy.yaml.
-# W pełnej wersji to robi risk_classifier per-krok planu, nie per-całe zadanie —
-# tu upraszczamy do jednego kroku "przetwórz zadanie", żeby Faza 0 była testowalna.
 HINT_TO_ACTION = {
     "green": "read_report",
     "yellow": "report_build",
@@ -40,10 +42,6 @@ HINT_TO_ACTION = {
 
 def now_iso():
     return datetime.now(timezone.utc).isoformat()
-
-
-def kill_switch_active():
-    return STOP_FLAG_PATH.exists()
 
 
 def process_task(task, policy, routing, client):
@@ -58,33 +56,34 @@ def process_task(task, policy, routing, client):
     owner, confident = task_router.route_task(task["title"], routing)
 
     state_store.record_event(
-        task_id,
-        "classified",
-        f"action_type={action_type} risk={risk} owner={owner} confident={confident}",
-        now,
+        task_id, "classified", f"action_type={action_type} risk={risk} owner={owner} confident={confident}", now
     )
 
+    # Zaślepka wykonania — patrz docstring modułu. Koszt=0, bo żaden model
+    # jeszcze nie został wywołany na tym etapie (Faza 0-1).
+    execution_result = {"cost_usd": 0.0, "acceptance_notes": "Faza 0-1: brak realnego workera, tylko klasyfikacja."}
+    cost_tracker.record_cost(task_id, execution_result["cost_usd"])
+
     if risk == "green":
-        status = "done"
-        comment = (
-            f"✅ Zadanie zielone, wykonane automatycznie.\n"
-            f"Co zrobiono: klasyfikacja i routing (Faza 0 — bez realnego workera jeszcze).\n"
-            f"Przypisano do: {owner}\n"
-        )
+        status, comment = "done", _comment_green(owner)
+        skill_usage_logger.log_usage(task_id, "risk_classifier", "success", "zielone, auto")
+
     elif risk == "yellow":
-        status = "needs_approval"
-        comment = (
-            f"⚠️ Zadanie żółte — w pełnej wersji trafiłoby do validator_pool.py.\n"
-            f"Przypisano do: {owner} (pewność routingu: {confident})\n"
-            f"Wymaga decyzji: tak — walidatory jeszcze niepodłączone w tym szkielecie.\n"
-        )
-    else:
-        status = "needs_approval"
-        comment = (
-            f"🔴 Zadanie czerwone — zawsze do człowieka (PLAN-WDROZENIA.md sekcja 3-4).\n"
-            f"Przypisano do: {owner}\n"
-            f"Wymaga decyzji: tak.\n"
-        )
+        requirements = risk_classifier.validator_requirements(action_type, policy)
+        validation = run_validators(task, execution_result, requirements)
+        if validation["auto_approved"]:
+            status, comment = "done", _comment_yellow_approved(owner, validation)
+            skill_usage_logger.log_usage(task_id, "validator_pool", "success", str(validation["agreement"]))
+        else:
+            reason = _validator_failure_reason(validation)
+            escalate_to_human(task, reason, client, assignee=owner)
+            status, comment = "needs_approval", _comment_escalated(owner, reason)
+            skill_usage_logger.log_usage(task_id, "validator_pool", "failure", reason)
+
+    else:  # red
+        reason = "Czerwona akcja — poza zakresem tego szkieletu, brak jeszcze zdefiniowanej bounded_red do sprawdzenia."
+        escalate_to_human(task, reason, client, assignee=owner)
+        status, comment = "needs_approval", _comment_escalated(owner, reason)
 
     state_store.upsert_task(task_id, payload=task, status=status, assigned_to=owner, risk_level=risk, now=now_iso())
     state_store.record_event(task_id, "status_set", status, now_iso())
@@ -95,9 +94,31 @@ def process_task(task, policy, routing, client):
     return {"task_id": task_id, "risk": risk, "owner": owner, "status": status}
 
 
+def _comment_green(owner):
+    return f"✅ done\nCo zrobiono: klasyfikacja i routing (Faza 0-1 — bez realnego workera jeszcze).\nPrzypisano do: {owner}\n"
+
+
+def _comment_yellow_approved(owner, validation):
+    return (
+        f"✅ done (auto-zatwierdzone: {validation['agreement']}/{validation['total']} walidatorów, "
+        f"próg {validation['required']})\nPrzypisano do: {owner}\n"
+    )
+
+
+def _comment_escalated(owner, reason):
+    return f"⚠️ needs_approval\nWymaga decyzji: tak — {reason}\nUtworzono osobne zadanie dla: {owner}\n"
+
+
+def _validator_failure_reason(validation):
+    failed = [r["detail"] for r in validation["results"] if not r["approved"]]
+    return f"Zgoda {validation['agreement']}/{validation['total']} poniżej progu {validation['required']}. " + "; ".join(
+        failed
+    )
+
+
 def run_once():
-    if kill_switch_active():
-        print("STOP.flag obecny — kill switch aktywny, runner nie podejmuje akcji.")
+    if kill_switch.is_active():
+        print(f"Kill switch aktywny ({kill_switch.reason()}) — runner nie podejmuje akcji.")
         return []
 
     policy = risk_classifier.load_policy()
@@ -113,6 +134,15 @@ def run_once():
         results.append(process_task(task, policy, routing, client))
 
     heartbeat.write_heartbeat(current_task_id=None)
+    live_status_publisher.publish(client, role="dev")
+
+    daily_cost = cost_tracker.check_daily_limit()
+    if daily_cost["over_limit"]:
+        kill_switch.activate(
+            f"Przekroczono dzienny limit kosztu: {daily_cost['total']} > {daily_cost['limit']} USD."
+        )
+        print("UWAGA: przekroczono dzienny limit kosztu, aktywowano kill switch.")
+
     return results
 
 
@@ -131,8 +161,8 @@ def main():
     print(f"Runner w trybie ciągłym, interwał {args.interval}s. Ctrl+C żeby zatrzymać.")
     try:
         while True:
-            if kill_switch_active():
-                print("STOP.flag wykryty — zatrzymuję runner.")
+            if kill_switch.is_active():
+                print(f"Kill switch aktywny ({kill_switch.reason()}) — zatrzymuję runner.")
                 sys.exit(0)
             for r in run_once():
                 print(r)

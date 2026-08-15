@@ -1,36 +1,63 @@
-# Szkielet Fazy 0-1 — działający, przetestowany kod
+# Szkielet Fazy 0-2 — działający, przetestowany kod
 
-To nie jest pseudokod ani dokumentacja — to realny, uruchomiony i przetestowany szkielet pętli runnera z `PLAN-WDROZENIA.md` (Faza 0: fundament, Faza 1: pętla end-to-end, Faza 2: pierwszy krok silnika walidacji — klasyfikacja ryzyka i routing już działają).
+To nie jest pseudokod ani dokumentacja — to realny, uruchomiony i przetestowany szkielet: fundament (Faza 0), pętla end-to-end (Faza 1), silnik walidacji i obieg eskalacji (Fazy 2-2b), plus struktura walidacji PBIP (Faza 3, bez zrzutów ekranu — patrz niżej) i bootstrap nowego komputera (`SKALOWANIE.md`).
 
-## Co realnie działa już teraz
+## Co realnie działa i jest przetestowane
 
-- `runner_loop.py` — pobiera zadania (z mocka lub prawdziwego Projectly), klasyfikuje ryzyko (`risk_classifier.py`), rozdziela do właściciela (`task_router.py`), zapisuje stan i historię zdarzeń (`state_store.py`), pisze heartbeat, sprawdza kill switch.
-- `watchdog.py` — wykrywa nieaktualny heartbeat.
-- Kill switch — plik `runs/STOP.flag` zatrzymuje runner bez podejmowania akcji (PLAN-WDROZENIA.md sekcja 17).
-- Klasyfikacja ryzyka i routing to **czysty Python bez AI** (sekcja 12) — deterministyczne, testowalne bez żadnego klucza API.
+| Moduł | Co robi | Test |
+|---|---|---|
+| `state_store.py` | Stan zadań + historia zdarzeń w SQLite, przeżywa restart | ✅ |
+| `heartbeat.py` / `watchdog.py` | Zapis i wykrywanie nieaktualnego heartbeatu | ✅ |
+| `kill_switch.py` | Globalny STOP.flag, blokuje runner bez podejmowania akcji | ✅ |
+| `risk_classifier.py` | Klasyfikacja zielone/żółte/czerwone z `approval_policy.yaml`, fail-closed dla nieznanych akcji | ✅ |
+| `task_router.py` | Routing po słowach kluczowych z `clients_routing.yaml`, niska pewność → `unassigned_pool` | ✅ |
+| `validators.py` + `validator_pool.py` | 3 walidatory równolegle (technical/scope/visual), próg zgody z polityki | ✅ |
+| `escalation.py` | Tworzy zadanie dla człowieka (nie tylko komentarz), sprawdza jednoznaczność odpowiedzi, tworzy kontynuację | ✅ |
+| `bounded_red_executor.py` | Sprawdza granicę liczbową bounded red — bez wpisu w polityce zawsze odmawia (bezpieczny domyślny stan) | ✅ |
+| `cost_tracker.py` | Sumuje koszt dzienny, wyzwala kill switch po przekroczeniu limitu | ✅ |
+| `secret_scanner.py` | Maskuje sekrety wg wzorca pola i kształtu klucza | ✅ |
+| `live_status_publisher.py` | Buduje i publikuje status na żywo (kolejka, koszt, zdrowie) | ✅ |
+| `skill_registry.py` / `skill_usage_logger.py` | Rejestr skilli z wersją, log użycia | ✅ |
+| `pbip_validate.py` | Waliduje strukturę PBIP (JSON, TMDL) bez Power BI Desktop | ✅ (na syntetycznym przykładzie w `mock_data/sample_pbip/`) |
+| `runner_loop.py` | Spina wszystko: klasyfikacja → routing → walidacja/eskalacja → status → koszt | ✅ (`python runner_loop.py`) |
+| `bootstrap_register.py` / `bootstrap_smoke_test.py` | Rejestracja roli i test dymny nowego komputera | ✅ |
+| `bootstrap_install.ps1` | Przygotowanie systemu Windows i klon repo | ⚠️ napisany wg specyfikacji, **nie testowany na prawdziwym Windows** z tej sesji |
 
-## Czego celowo brakuje (i dlaczego)
+## Czego celowo brakuje (uczciwie, nie udawane)
 
-- **Prawdziwe połączenie z Projectly** (`projectly_client.py`) — endpointy/autoryzacja Projectly nie są znane z tej sesji. Domyślnie działa `MockProjectlyClient` (czyta `mock_data/sample_tasks.json`). Ustaw `PROJECTLY_API_KEY` w środowisku i dopisz metody `ProjectlyClient`, żeby przejść na prawdziwe dane.
-- **`validator_pool.py` i sam model AI** — ten szkielet klasyfikuje ryzyko i pokazuje, co by się stało dalej, ale nie woła jeszcze żadnego modelu ani walidatorów wizualnych/technicznych. To następny krok Fazy 2.
-- **Workery** (Power BI, CRM, Meta Ads...) — jeszcze nie podłączone. `runner_loop.py` dziś tylko klasyfikuje i komentuje, nie wykonuje realnej pracy w tych systemach.
+- **Prawdziwe połączenie z Projectly** (`projectly_client.py`) — endpointy/autoryzacja nie są znane z tej sesji. Domyślnie `MockProjectlyClient` (czyta/pisze pliki w `mock_data/` i `runs/`). Ustaw `PROJECTLY_API_KEY` + `PROJECTLY_BASE_URL`, dopisz metody `ProjectlyClient`.
+- **Realne wywołanie modelu w `validator_visual.py`** — dziś zawsze zwraca `approved=False` z jasnym wyjaśnieniem (brak zrzutu lub brak `ANTHROPIC_API_KEY`), zgodnie z fail-closed. Nie symuluje fałszywego wyniku modelu.
+- **Prawdziwe workery** (Power BI Desktop Bridge + zrzuty, CRM, Meta Ads, SharePoint...) — `runner_loop.py` dziś tylko klasyfikuje i komentuje (`execution_result` to zaślepka), nie wykonuje realnej pracy w tych systemach. `pbip_validate.py` sprawdza tylko warstwę plikową — zrzuty stron wymagają Desktop Bridge na prawdziwym Windows z Power BI Desktop.
+- **`bootstrap_install.ps1`** — napisany wiernie wg `SKALOWANIE.md`, ale nieprzetestowany (środowisko budowy to Linux bez dostępu do docelowego Windows). Sprawdź krok po kroku przy pierwszym użyciu.
 
-## Jak uruchomić lokalnie (bez żadnych kluczy, na dowolnym Pythonie 3.9+)
+## Jak uruchomić lokalnie (Python 3.9+, zero kluczy API na start)
 
 ```bash
 pip install -r requirements.txt
-python runner_loop.py            # jeden przebieg na mock_data/sample_tasks.json
-python runner_loop.py --loop      # ciągła pętla co 30s (Ctrl+C żeby zatrzymać)
-python watchdog.py                # sprawdza świeżość heartbeat.json
-touch runs/STOP.flag && python runner_loop.py   # test kill switcha — runner nic nie robi
+python runner_loop.py                     # jeden przebieg na mock_data/sample_tasks.json
+python runner_loop.py --loop               # ciągła pętla co 30s (Ctrl+C żeby zatrzymać)
+python bootstrap_smoke_test.py             # pełny test dymny (cykl + heartbeat + kill switch)
+python bootstrap_register.py dev           # rejestracja roli
+python pbip_validate.py mock_data/sample_pbip   # walidacja przykładowego PBIP
 ```
 
-Stan zapisuje się w `runs/state.db` (SQLite), heartbeat w `runs/heartbeat.json` — folder `runs/` jest w `.gitignore`, bo to stan lokalny, nie kod (`SKALOWANIE.md` sekcja 2: rdzeń vs stan lokalny).
+Stan w `runs/state.db`, heartbeat w `runs/heartbeat.json` — folder `runs/` jest w `.gitignore` (stan lokalny, nie kod — `SKALOWANIE.md` sekcja 2).
 
 ## Konfiguracja firmy — osobno od kodu
 
-`config/approval_policy.yaml` i `config/clients_routing.yaml` to "konfiguracja firmy" w rozumieniu `SKALOWANIE.md` sekcja 2 — edytowalne bez zmiany kodu, to jest wymieniane przy kopiowaniu do innej firmy. `approval_policy.yaml` ma celowo **pustą** listę `bounded_red` — nie dodawaj tam nic, dopóki zwykły tryb czerwony nie przepracował na produkcji kilku tygodni (sekcja 3).
+`config/approval_policy.yaml`, `config/clients_routing.yaml`, `config/skills_manifest.yaml` to "konfiguracja firmy" (`SKALOWANIE.md` sekcja 2) — edytowalne bez zmiany kodu, wymieniane przy kopiowaniu do innej firmy. `approval_policy.yaml` ma celowo **pustą** listę `bounded_red` — nie dodawaj tam nic, dopóki zwykły tryb czerwony nie przepracował na produkcji kilku tygodni (sekcja 3 planu).
+
+## Instalacja na docelowym komputerze (Windows)
+
+Pełna specyfikacja: `../SKALOWANIE.md` sekcja 4. Skrót:
+
+```powershell
+.\bootstrap_install.ps1 -RepoUrl "https://github.com/<org>/<repo>.git"
+# ustaw zmienne środowiskowe (patrz .env.example)
+python bootstrap_register.py dev
+python bootstrap_smoke_test.py
+```
 
 ## Następny krok
 
-Ten kod jest gotowy, żeby lokalny Claude Code (albo inny agent) na docelowym komputerze go przejął i dokończył: podłączył prawdziwe Projectly, dodał `validator_pool.py` z realnym wywołaniem modelu, i pierwszy worker (najlepiej PBI-01 — walidacja PBIP, zgodnie z priorytetem z `PLAN-WDROZENIA.md`).
+Ten kod jest gotowy, żeby lokalny Claude Code (albo inny agent) na docelowym komputerze go przejął i dokończył: podłączył prawdziwe Projectly i klucze, dodał realne wywołanie modelu w `validator_visual.py`, i pierwszy prawdziwy worker (najlepiej dalsza część PBI-01 — zrzuty stron przez Desktop Bridge, skoro walidacja struktury już działa).
