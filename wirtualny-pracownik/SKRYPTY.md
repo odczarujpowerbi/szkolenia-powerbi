@@ -40,6 +40,7 @@ Pomysły na skrypty pogrupowane wg domeny. Każdy skrypt ma jasno określony cel
 | `human_response_validator.py` | Sprawdza, czy komentarz człowieka na eskalowanym zadaniu faktycznie rozstrzyga sprawę (jednoznaczna decyzja/wartość), czy trzeba dopytać | Po nowym komentarzu na zadaniu-eskalacji | infra |
 | `continuation_task_creator.py` | Po pozytywnej weryfikacji odpowiedzi człowieka — tworzy w Projectly nowe zadanie-kontynuację dla agenta z decyzją człowieka wbudowaną w kontekst | Po `human_response_validator.py` (wynik: wystarczające) | infra |
 | `bounded_red_executor.py` | Wykonuje czerwoną akcję bez pytania, jeśli mieści się w granicy liczbowej z `approval_policy.yaml` (bounded autonomy, PLAN-WDROZENIA.md sekcja 3); poza granicą przekazuje do `escalate_to_human.py` | Gdy `risk_classifier.py` oznaczy akcję jako czerwoną z dopasowaną granicą w polityce | czerwone w granicach |
+| `validator_prompt.py` | Lokalny walidator wstrzyknięć promptów w treści zewnętrznej — heurystyka regex zawsze + opcjonalny lokalny model (Hermes/Ollama) jako druga opinia; wykrycie eskaluje niezależnie od koloru zadania | Przed klasyfikacją ryzyka, na każdym zadaniu | infra (blokuje do eskalacji) |
 
 ## D. Screenshoty i weryfikacja wizualna
 
@@ -62,7 +63,8 @@ Pomysły na skrypty pogrupowane wg domeny. Każdy skrypt ma jasno określony cel
 
 | Skrypt | Cel | Wyzwalacz | Ryzyko |
 |---|---|---|---|
-| `crm_sync_task.py` | Odczyt/zapis rekordów CRM powiązanych z zadaniem (np. status leada) | Zadanie typu `crm_update` | żółte (odczyt: zielone) |
+| `zoho_crm_client.py` | Konektor do Zoho CRM przez MCP — rekordy, tagi, zapytania COQL. **Nie napisany jeszcze** — dziś tylko wpis w `config/integrations.yaml` | — | infra |
+| `crm_sync_task.py` | Odczyt/zapis rekordów CRM powiązanych z zadaniem (np. status leada), korzysta z `zoho_crm_client.py` | Zadanie typu `crm_update` | żółte (odczyt: zielone) |
 | `crm_report_generator.py` | Generuje podsumowania na podstawie zapytań CRM (np. COQL) do wykorzystania w innych zadaniach | Zadanie cykliczne / na żądanie | zielone |
 
 ## G. Meta Ads i TikTok Ads
@@ -78,14 +80,17 @@ Pomysły na skrypty pogrupowane wg domeny. Każdy skrypt ma jasno określony cel
 | Skrypt | Cel | Wyzwalacz | Ryzyko |
 |---|---|---|---|
 | `mcp_email_agent_bridge.py` | Łączy się przez MCP z dedykowanym agentem mailowym, przekazuje kontekst i prosi o draft | Zadanie typu `email_draft` | żółte |
+| `microsoft_graph_mail_client.py` | Konektor Microsoft Graph dla jednej wspólnej skrzynki (odczyt + wysyłka) — `config/integrations.yaml` wpis `microsoft_365`. **Nie napisany jeszcze** | — | infra |
 | `email_draft_reviewer.py` | Walidator treści/odbiorcy/załączników przed przekazaniem do wysyłki | Przed wysyłką | infra (blokuje do czerwonej akceptacji) |
 
 ## I. Google Workspace i SharePoint
 
 | Skrypt | Cel | Wyzwalacz | Ryzyko |
 |---|---|---|---|
-| `google_docs_writer.py` | Tworzy/aktualizuje pliki Google Docs/Sheets przez API | Zadanie typu `google_file` | żółte |
+| `google_workspace_client.py` | Konektor do konta Google (Docs/Sheets/Drive, Search Console, Analytics) — `config/integrations.yaml` wpis `google_workspace`. **Nie napisany jeszcze**, dokładny zakres uprawnień do potwierdzenia | — | infra |
+| `google_docs_writer.py` | Tworzy/aktualizuje pliki Google Docs/Sheets przez API, korzysta z `google_workspace_client.py` | Zadanie typu `google_file` | żółte |
 | `sharepoint_sync.py` | Microsoft Graph: upload/aktualizacja plików i folderów, archiwizacja artefaktów | Po zakończeniu każdego zadania z artefaktami | zielone |
+| `mailerlite_client.py` | Konektor MailerLite REST API — kampanie (pełny zapis: draft/harmonogram/wysyłka/statystyki), subskrybenci/grupy/pola (wjazd do już zbudowanych automatyzacji). **Nie napisany jeszcze** | — | infra |
 
 ## J. Skille i samodoskonalenie
 
@@ -143,6 +148,7 @@ Wynika wprost z analizy realnego raportu godzin: ok. 175h w próbce to firefight
 |---|---|---|---|
 | `task_retro_auditor.py` | Przechodzi przez zamknięte/nieudane zadania w Projectly za okres, robi ponowną ewidencję czasu/kosztu wg klienta/projektu, diagnozuje powtarzające się wzorce i proponuje automatyzacje do `SKRYPTY.md` (jako zadanie do przeglądu, nie cichy log) | Harmonogram, co miesiąc | żółte (rekomendacja do przeglądu) |
 | `audit_query.py` | Odpytuje `state_store.py`/`events.jsonl`/historię Projectly w naturalnym języku — baza pod tryb rozmowy ("dlaczego zrobiłeś X zamiast Y", "co się działo w INDECE w tym tygodniu") | Na żądanie, w sesji rozmowy z agentem | zielone |
+| `miro_read_client.py` | Konektor do Miro przez connector (tylko odczyt) — wyciąga kontekst/notatki z boardów jako dodatkowe źródło dla trybu rozmowy i Stratega. **Nie napisany jeszcze** | Na żądanie | zielone |
 
 ## P. Raporty biznesowe cykliczne (patrz PLAN-WDROZENIA.md sekcja 18)
 
@@ -150,7 +156,8 @@ Cotygodniowa analiza całej firmy — sprzedaż, wydatki reklamowe, finanse, wid
 
 | Skrypt | Cel | Wyzwalacz | Ryzyko |
 |---|---|---|---|
-| `sales_report_builder.py` | Cykliczny raport sprzedażowy z systemu transakcyjnego | Harmonogram, co tydzień | zielone |
+| `zanfia_client.py` | Konektor do zanfia.com (platforma kursów) przez MCP — dane sprzedażowe kursów. **Nie napisany jeszcze** | — | infra |
+| `sales_report_builder.py` | Cykliczny raport sprzedażowy z systemu transakcyjnego + `zanfia_client.py` | Harmonogram, co tydzień | zielone |
 | `ad_spend_report_builder.py` | Cykliczny raport wydatków reklamowych (Meta Ads + inne kanały) | Harmonogram, co tydzień | zielone |
 | `infakt_export.py` | Pobiera dane księgowe z inFakt (API jeśli dostępne, inaczej eksport CSV z portalu) przez dedykowane konto bota | Harmonogram, co tydzień / przed `company_financial_report_builder.py` | zielone (odczyt) |
 | `company_financial_report_builder.py` | Łączy system transakcyjny + `infakt_export.py` w raport finansowy całej firmy | Harmonogram, co tydzień | zielone |

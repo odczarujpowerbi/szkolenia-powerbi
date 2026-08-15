@@ -68,7 +68,9 @@ Stan w `runs/state.db`, heartbeat w `runs/heartbeat.json` — folder `runs/` jes
 
 `config/approval_policy.yaml`, `config/clients_routing.yaml`, `config/skills_manifest.yaml`, `config/integrations.yaml` to "konfiguracja firmy" (`SKALOWANIE.md` sekcja 2) — edytowalne bez zmiany kodu, wymieniane przy kopiowaniu do innej firmy. `approval_policy.yaml` ma celowo **pustą** listę `bounded_red` — nie dodawaj tam nic, dopóki zwykły tryb czerwony nie przepracował na produkcji kilku tygodni (sekcja 3 planu).
 
-`config/integrations.yaml` to jeden, konsolidowany rejestr wszystkich dostępnych kont/połączeń (Microsoft 365, Google, Zoho CRM, Projectly, GitHub, OneDrive, Miro, MailerLite, TikTok Ads, lokalny model Hermes...) — mechanizm, poziom dostępu i uwagi, **nigdy klucze/tokeny** (te w lokalnym magazynie sekretów/`.env`). Dwa wpisy mają status jawnie oznaczony jako niepewny: nazwa platformy sprzedażowej "zanfi" (możliwa literówka) i czy MailerLite pozwala na zapis — potwierdź je, zanim skrypty, które ich potrzebują, trafią na produkcję.
+`config/integrations.yaml` to jeden, konsolidowany rejestr wszystkich dostępnych kont/połączeń (Microsoft 365, Google, Zoho CRM, Projectly, zanfia.com, GitHub, OneDrive, Miro, MailerLite, TikTok Ads, lokalny model Hermes...) — mechanizm, poziom dostępu i uwagi, **nigdy klucze/tokeny** (te w lokalnym magazynie sekretów/`.env`).
+
+**Ważne rozróżnienie: rejestracja w `integrations.yaml` ≠ istniejący konektor.** Dla większości nowych integracji jest dziś tylko wpis w tym pliku, nie ma jeszcze skryptu, który się z nimi łączy — `SKRYPTY.md` (kategorie F, H, I, O, P) oznacza je jawnie jako "nie napisany jeszcze": `zoho_crm_client.py`, `microsoft_graph_mail_client.py`, `google_workspace_client.py`, `mailerlite_client.py`, `zanfia_client.py`, `miro_read_client.py`. Do każdego z nich potrzebny będzie też **skill** (wiedza jak dobrze z tego korzystać, nie tylko hydraulika) — planowane skille wypisane w `config/skills_manifest.yaml` ze statusem `"planned"`.
 
 ## Instalacja na docelowym komputerze (Windows)
 
