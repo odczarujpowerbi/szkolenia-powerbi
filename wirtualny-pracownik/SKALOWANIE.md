@@ -27,12 +27,48 @@ Kuszące jest zbudowanie jednego wspólnego systemu obsługującego wiele firm n
 
 ## 4. Bootstrap nowego komputera
 
-Dziś dołączenie nowego komputera-pracownika to nieopisany, ręczny proces. Potrzebny jeden powtarzalny skrypt/checklist:
+Dziś dołączenie nowego komputera-pracownika to nieopisany, ręczny proces. Poniżej pełna specyfikacja — do zaplanowania teraz (tanie, to tylko dokumentacja), do zbudowania i przetestowania dopiero gdy realnie pojawi się drugi komputer (zgodnie z sekcją "Kiedy to robić" niżej).
 
-1. Nowy komputer uruchamia skrypt instalacyjny — pobiera rdzeń z Git, pakiet konfiguracji firmy, klucze z bezpiecznego źródła.
-2. Rejestruje się w `role_registry.py` (jaka rola: dev/marketing/admin/inne) i w Projectly.
-3. Uruchamia `skill_sync_puller.py` (`ZESPOL-BOTOW.md` sekcja 4) — pobiera skille pasujące do swojej roli.
-4. Startuje `runner_loop.py`, zapisuje pierwszy heartbeat.
+### Etapy bootstrapu
+
+**0. Warunki wstępne (raz, po stronie firmy, nie per komputer)**
+- Istnieje pakiet konfiguracji firmy (`approval_policy.yaml`, `clients_routing.yaml`, wpisy `role_registry.py`) w bezpiecznym, wersjonowanym miejscu — prywatne repo Git lub OneDrive z ograniczonym dostępem, osobno od rdzenia (kodu).
+- Istnieje magazyn sekretów (vault) z kluczami API per wdrożenie (sekcja 5).
+
+**1. Przygotowanie systemu** (`bootstrap_install.ps1`, PowerShell — minimalny, jednorazowy)
+- Sprawdza wersję Windows i RAM (min. 16 GB, docelowo 32 GB — dokumentacja bazowa rozdz. 4.1).
+- Wyłącza uśpienie/hibernację, konfiguruje politykę logowania automatycznego.
+- Tworzy dedykowane konto standardowe dla bota (osobne od konta administratora — model tożsamości z dokumentacji bazowej rozdz. 9.1).
+
+**2. Instalacja zależności**
+- Git, Python (przypięta wersja), PowerShell 7, przeglądarki Playwright, oraz narzędzia specyficzne dla roli (Power BI Desktop + Tabular Editor/DAX Studio tylko dla roli dev, nie dla marketingu/administracji).
+- Klonuje rdzeń (kod, ten sam dla każdego wdrożenia) do `C:\AIWorker\app\`.
+
+**3. Przypisanie roli** (`bootstrap_register.py`)
+- Odczytuje, jaką rolę ma pełnić ten komputer (dev/marketing/admin/strateg — podane ręcznie przy instalacji albo z pliku provisioningu), zapisuje lokalnie.
+- Rejestruje się w `role_registry.py` i w Projectly — od tego momentu inne boty i ludzie widzą, że ten komputer istnieje i co robi.
+
+**4. Pobranie konfiguracji firmy**
+- Ściąga `approval_policy.yaml`, `clients_routing.yaml` i resztę pakietu konfiguracyjnego z warunku wstępnego 0 — **nie** z repo rdzenia, zgodnie z rozdziałem warstw z sekcji 2.
+
+**5. Prowizjonowanie poświadczeń**
+- Pobiera z magazynu sekretów klucze API scope'owane do tego wdrożenia (sekcja 5), zapisuje w lokalnym, zaszyfrowanym magazynie (Windows Credential Manager — dokumentacja bazowa rozdz. 9.3), nigdy w plikach konfiguracyjnych ani repo.
+- Uruchamia `secret_scanner.py` jako pierwszy autotest — potwierdza, że nic nie wyciekło już na tym etapie.
+
+**6. Pobranie skilli**
+- Jednorazowe, ręczne uruchomienie `skill_sync_puller.py` (`ZESPOL-BOTOW.md` sekcja 4) — pobiera skille pasujące do przypisanej roli z biblioteki na OneDrive, zanim zostanie zaplanowane cyklicznie.
+- Zapisuje wersje pobranych skilli do lokalnego `skill_registry.py` (podstawa wersjonowania floty z sekcji 7).
+
+**7. Konfiguracja harmonogramu**
+- Rejestruje w Harmonogramie zadań Windows tylko te skrypty, które dotyczą przypisanej roli (`PLAN-WDROZENIA.md` sekcja 12 — np. komputer marketingowy nie potrzebuje `pbip_validate.py` w harmonogramie).
+- Uruchamia `runner_loop.py` jako usługę startującą przy starcie systemu.
+
+**8. Test dymny (smoke test)**
+- Przepuszcza jedno testowe zadanie przez pełen cykl `queued → done`, sprawdza że komentarz pojawia się w Projectly, że `heartbeat.json` się aktualizuje, że `kill_switch.py` reaguje na `STOP.flag`.
+- To odpowiednik scenariuszy T-01/T-07 z planu testów dokumentacji bazowej, tylko jako checklist odbioru nowej maszyny, nie całego pilotażu.
+
+**9. Przekazanie**
+- Komputer zostawia w Projectly status "gotowy" z rolą i wersjami skilli — trafia do rejestru floty (sekcja 7), Ty widzisz go w trybie rozmowy (`PLAN-WDROZENIA.md` sekcja 14) tak samo jak każdy inny komputer.
 
 Bez tego każde nowe stanowisko to ręczna, niepowtarzalna robota administracyjna — dokładnie ten sam problem co "prowizjonowanie dostępów" z `PRZED-PILOTAZEM.md`, tylko pomnożony przez liczbę komputerów.
 

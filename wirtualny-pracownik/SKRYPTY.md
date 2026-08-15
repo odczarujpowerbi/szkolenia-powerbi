@@ -154,3 +154,11 @@ Cotygodniowa analiza całej firmy — sprzedaż, wydatki reklamowe, finanse, wid
 | `company_financial_report_builder.py` | Łączy system transakcyjny + `infakt_export.py` w raport finansowy całej firmy | Harmonogram, co tydzień | zielone |
 | `web_visibility_report_builder.py` | Raport widoczności w sieci: Google Search Console + Analytics oraz social media | Harmonogram, co tydzień | zielone |
 | `weekly_business_review.py` | Agreguje cztery powyższe raporty, generuje wnioski i gotowy plan wdrożenia dla każdego, klasyfikuje wg ryzyka (zielone/żółte/czerwone/bounded red) i kieruje dalej zgodnie z resztą systemu | Harmonogram, co tydzień, po zakończeniu raportów cząstkowych | zielone (analiza) → dziedziczy ryzyko z konkretnego wdrożenia |
+
+## Q. Bootstrap nowego komputera (patrz SKALOWANIE.md sekcja 4 — planować teraz, budować dopiero przy drugim komputerze)
+
+| Skrypt | Cel | Wyzwalacz | Ryzyko |
+|---|---|---|---|
+| `bootstrap_install.ps1` | Przygotowuje system (sprawdza RAM, wyłącza uśpienie, tworzy dedykowane konto), instaluje zależności, klonuje rdzeń | Ręcznie, raz przy dołączaniu nowego komputera | infra |
+| `bootstrap_register.py` | Odczytuje przypisaną rolę, rejestruje komputer w `role_registry.py` i w Projectly | Po `bootstrap_install.ps1` | infra |
+| `bootstrap_smoke_test.py` | Przepuszcza jedno testowe zadanie przez pełen cykl queued→done, sprawdza heartbeat i reakcję `kill_switch.py`, zanim komputer trafi do produkcji | Ostatni krok bootstrapu, przed przekazaniem komputera do pracy | zielone |
