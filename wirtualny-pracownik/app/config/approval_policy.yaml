@@ -19,13 +19,16 @@ action_risk:
   update_task_status: yellow
   report_build: yellow
   data_tidy: yellow
+  ad_variant_pause: yellow   # wyłączenie słabego wariantu testowego — ogranicza wydatek, nie zwiększa go (sekcja 20)
+  ad_copy_draft: green       # sam tekst reklamy to draft, dopiero uruchomienie wydaje pieniądze
 
   publish: red
   budget_change: red
   mass_email: red
   delete_data: red
   grant_role: red
-  accounting_change: red   # inFakt — celowo bez bounded_red, patrz SKALOWANIE.md / sekcja 18
+  accounting_change: red    # inFakt — celowo bez bounded_red, patrz SKALOWANIE.md / sekcja 18
+  ad_test_launch: red       # uruchomienie NOWEGO zestawu testowego — czerwone, chyba że w granicach bounded_red niżej (sekcja 20)
 
 # Próg walidatorów dla żółtych: ile z N musi się zgodzić, żeby auto-zatwierdzić.
 # `validator_count` startuje na 3 dla nowych/nieprzetestowanych typów zadań;
@@ -42,4 +45,7 @@ validator_thresholds:
 #   meta_ads_budget_change:
 #     max_percent_change: 15
 #     window: daily
+#   ad_test_launch:                    # sekcja 20 planu — testy kreatyw co 48h
+#     max_daily_budget_per_variant: 50 # PLN, przykład — Ty ustalasz realną kwotę
+#     max_concurrent_variants: 5
 bounded_red: {}

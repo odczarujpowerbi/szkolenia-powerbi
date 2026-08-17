@@ -24,6 +24,10 @@ To nie jest pseudokod ani dokumentacja — to realny, uruchomiony i przetestowan
 | `runner_loop.py` | Spina wszystko: klasyfikacja → routing → walidacja/eskalacja → status → koszt | ✅ (`python runner_loop.py`) |
 | `bootstrap_register.py` / `bootstrap_smoke_test.py` | Rejestracja roli i test dymny nowego komputera | ✅ |
 | `bootstrap_install.ps1` | Przygotowanie systemu Windows i klon repo | ⚠️ napisany wg specyfikacji, **nie testowany na prawdziwym Windows** z tej sesji |
+| `ad_copy_generator.py` | Generuje warianty tekstu reklamowego z realnym kontekstem buyer person (`persony-sprzedaz/`) | ✅ czyta persony poprawnie; generowanie przez model nietestowane (brak klucza w tej sesji) |
+| `ad_performance_analyzer.py` | Liczy CTR/CPC/CPA i klasyfikuje warianty (pause/scale/keep_testing) | ✅ (na `mock_data/sample_ad_metrics.json`) |
+| `ad_test_report.py` | Raport 48h + zadania follow-up w Projectly (pauza żółta, skalowanie czerwone) | ✅ end-to-end na mocku |
+| `ad_set_launcher.py` | Uruchamia test reklamowy w ramach bounded red `ad_test_launch` | ✅ bramka bounded_red działa (domyślnie wymaga człowieka); samo wywołanie Meta/TikTok API — stub |
 
 ## Czego celowo brakuje (uczciwie, nie udawane)
 

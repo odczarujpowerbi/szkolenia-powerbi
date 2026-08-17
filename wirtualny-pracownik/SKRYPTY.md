@@ -74,6 +74,10 @@ Pomysły na skrypty pogrupowane wg domeny. Każdy skrypt ma jasno określony cel
 | `meta_ads_api_client.py` | Odczyt kampanii i kontrolowane zmiany przez Marketing API w granicach limitu | Zadanie typu `ads_check` / `ads_adjust` | żółte (budżet: **czerwone**) |
 | `meta_ads_ui_fallback.py` | Playwright dla funkcji niedostępnych w API — stan kampanii, zrzut, weryfikacja | Gdy API nie pokrywa potrzeby | żółte |
 | `tiktok_ads_api_client.py` | Odczyt kampanii i kontrolowane zmiany przez TikTok Marketing API, ten sam wzorzec ryzyka co Meta Ads | Zadanie typu `ads_check` / `ads_adjust` | żółte (budżet: **czerwone**) |
+| `ad_copy_generator.py` | Generuje wiele wariantów tekstu reklamowego dopasowanych do buyer person z `persony-sprzedaz/` (PLAN-WDROZENIA.md sekcja 20) | Na żądanie / przed cyklem testowym | zielone |
+| `ad_set_launcher.py` | Uruchamia wariant jako mały test na Meta/TikTok w ramach budżetu testowego | Po `ad_copy_generator.py` | czerwone w granicach (`ad_test_launch`, bounded red) |
+| `ad_performance_analyzer.py` | Liczy CTR/CPC/CPA per testowany wariant, klasyfikuje pause/scale/keep_testing — czysty Python bez AI | Harmonogram, co 48h | zielone |
+| `ad_test_report.py` | Publikuje raport 48h w Projectly, tworzy zadania follow-up (pauza = żółte, skalowanie budżetu = czerwone) | Harmonogram, co 48h, po `ad_performance_analyzer.py` | zielone (raport) → dziedziczy ryzyko z konkretnej rekomendacji |
 
 ## H. E-mail i inny agent (przez MCP)
 

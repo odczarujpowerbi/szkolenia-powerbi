@@ -291,8 +291,9 @@ Przykład zastosowania tej zasady: `task_routing_classifier.py` (sekcja 11) najp
 | **Co 15 min** | `source_schema_watcher.py`, `pbi_service_check.py` (status odświeżenia), `email_intake_triage.py` (fetch + wstępna klasyfikacja regułowa), `other_source_intake.py`, `meta_ads_api_client.py` (odczyt statusu kampanii) |
 | **Co godzinę** | `human_task_scanner.py`, `crm_sync_task.py` (odczyt), `sharepoint_sync.py` (batch synchronizacji artefaktów) |
 | **Codziennie** | `digest_generator.py` (przed Daily/Weekly), `crm_report_generator.py`, `secret_scanner.py` (skan logów z całego dnia), `cost_tracker.py` (agregacja dzienna) |
+| **Co 48 h** | `ad_performance_analyzer.py`, `ad_test_report.py` (cykl testowania kreatyw reklamowych — sekcja 20; osobny, częstszy cykl niż cotygodniowy przegląd biznesowy) |
 | **Co tydzień** | `newsletter_drafter.py`, `skill_improver_bot.py`, `sales_report_builder.py`, `ad_spend_report_builder.py`, `infakt_export.py`, `company_financial_report_builder.py`, `web_visibility_report_builder.py`, `weekly_business_review.py` |
-| **Zdarzeniowe (nie harmonogram)** | Wszystko wywoływane w reakcji na zadanie: `risk_classifier.py`, `validator_pool.py` + walidatory, `auto_approve_yellow.py`, `bounded_red_executor.py`, `escalate_to_human.py`, `human_response_validator.py`, `continuation_task_creator.py`, `projectly_reporter.py`, `projectly_self_review.py`, `pbip_validate.py`, `report_builder.py`, `data_tidy.py`, `human_task_partial_executor.py`, `human_task_briefing.py`, `mcp_email_agent_bridge.py`, `email_draft_reviewer.py` |
+| **Zdarzeniowe (nie harmonogram)** | Wszystko wywoływane w reakcji na zadanie: `risk_classifier.py`, `validator_pool.py` + walidatory, `auto_approve_yellow.py`, `bounded_red_executor.py`, `escalate_to_human.py`, `human_response_validator.py`, `continuation_task_creator.py`, `projectly_reporter.py`, `projectly_self_review.py`, `pbip_validate.py`, `report_builder.py`, `data_tidy.py`, `human_task_partial_executor.py`, `human_task_briefing.py`, `mcp_email_agent_bridge.py`, `email_draft_reviewer.py`, `ad_copy_generator.py`, `ad_set_launcher.py` |
 | **Na żądanie (skille, nie harmonogram)** | `pq_error_triage`, `content_summarizer.py` |
 
 ### Równoległość — komputer dedykowany, nie do codziennej pracy
@@ -375,3 +376,22 @@ Rozbicie "co konkretnie siedzi na ekranie" pokrywa się niemal 1:1 z tym, co ju�
 2. **Claude Code w VS Code** (praca nad projektami w folderach) — właściwy wykonawca pracy deweloperskiej: otwiera repo, edytuje pliki, testuje, commituje na gałęzi. To realnie duża część pracy bota-dev (Krzysztof w `ZESPOL-BOTOW.md`). Subskrypcja vs API mają różny profil ryzyka przy pracy 24/7: subskrypcja ma limity okresowe pomyślane pod człowieka pracującego z przerwami — przy ciągłym automatycznym obciążeniu realne ryzyko to zatrzymanie się w połowie zadania po wyczerpaniu limitu okna czasowego. API rozlicza się ściśle za zużycie, bez takiego sufitu. Rekomendacja: API dla runnera (zgodnie z resztą planu), subskrypcja zostaje na komputerze-warsztacie do pracy interaktywnej (`ZESPOL-BOTOW.md` sekcja 4) — i **przetestować to empirycznie** przed oparciem całodobowej pracy na limicie subskrypcji.
 3. **AI w przeglądarce (rozszerzenie Anthropica w Chrome)** — to nie to samo co Playwright już zaplanowany w `meta_ads_ui_fallback.py`/browser worker. Rozszerzenie to narzędzie ad-hoc do pojedynczych, nieprzewidzianych zadań, dla których nie ma jeszcze skryptu. Dla zadań powtarzalnych (Meta Ads, CRM UI) zostaje Playwright — deterministyczny i w pełni audytowalny. Rozszerzenie to wyjątek w hierarchii z pkt 1, nie podstawowa metoda.
 4. **Walidator błędów klikający po ekranie, sprawdzający czy praca idzie do przodu** = `validator_visual.py` (`vision_reviewer.py`) z `SKRYPTY.md` kategorii C, część `validator_pool.py`. To już istnieje w planie pod inną nazwą.
+
+## 20. Cykl testowania kreatyw reklamowych — Meta i TikTok, co 48h
+
+Główny zmierzony ból w reklamach: analiza, raport co 48h, dobre teksty w wielu wariantach, test i weryfikacja co dwa dni. To osobny, częstszy cykl niż cotygodniowy `weekly_business_review.py` (sekcja 18) — tamten to strategiczny przegląd całej firmy, ten to taktyczna pętla testowa dla aktywnych kreatyw.
+
+```
+ad_copy_generator.py ──▶ ad_set_launcher.py ──▶ (2 dni działania) ──▶ ad_performance_analyzer.py ──▶ ad_test_report.py
+(warianty z person          (bounded_red:                                (CTR/CPC/CPA,                (raport + zadania
+ kupujących, zielone)        budżet testowy                                bez AI, czyste                follow-up: pauza
+                             na wariant)                                   liczenie)                     lub skalowanie)
+```
+
+- **`ad_copy_generator.py`** — generuje wiele wariantów tekstu reklamowego (nagłówek, treść, CTA), dopasowanych do konkretnych buyer person z `persony-sprzedaz/persony-odczaruj.md` / `persony-clickless.md` (już wgrane wcześniej w tej rozmowie) — nie ten sam tekst przeformułowany, tylko realnie różne kąty per segment. Zielone: to draft, nic jeszcze nie kosztuje.
+- **`ad_set_launcher.py`** — uruchamia wariant jako mały test na Meta/TikTok. To **nowy typ bounded red: `ad_test_launch`** (sekcja 3) — autonomicznie tylko w ramach jawnie ustawionej granicy (budżet dzienny na wariant × maks. liczba równoległych wariantów), którą Ty ustawiasz w `approval_policy.yaml`, nie bot. Bez ustawionej granicy — zwykłe czerwone, jak wszędzie.
+- **`ad_performance_analyzer.py`** — co 48h liczy CTR/CPC/CPA per wariant, czysty Python bez AI (sekcja 12 — to jest liczenie, nie ocena). Klasyfikuje: `pause_candidate` (0 konwersji przy sensownym wydatku), `scale_candidate` (najlepsze CPA), `keep_testing` (za wcześnie albo średnio).
+- **`ad_test_report.py`** — publikuje raport w Projectly i **od razu** tworzy zadania follow-up, każde z właściwym poziomem ryzyka:
+  - Wariant do wstrzymania → zadanie typu `ad_variant_pause` (**żółte** — ograniczenie wydatku jest z natury bezpieczniejsze niż jego zwiększenie, więc nie wymaga Twojej zgody za każdym razem).
+  - Wariant do skalowania → zadanie dla Ciebie, `budget_change` (**czerwone** — to realne przesunięcie budżetu, zawsze Twoja decyzja, niezależnie jak oczywisty wygląda wynik).
+- To domyka pętlę z sekcji 18 ("szybkość jest w tempie analizy, nie w pomijaniu zgody"): agent samodzielnie testuje, liczy i rekomenduje co 48h; Ty klikasz tylko przy realnym przesunięciu pieniędzy, nie przy każdym teście.
