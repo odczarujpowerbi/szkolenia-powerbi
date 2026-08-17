@@ -46,6 +46,8 @@ To nie jest pseudokod ani dokumentacja — to realny, uruchomiony i przetestowan
 | `bootstrap_install_claude_code.ps1` | Instaluje Claude Code (CLI) natywnym instalatorem | ✅ logika wykrywania przetestowana realnie (w tej sesji Claude Code już jest, więc zadziałała ścieżka "już zainstalowany") |
 | `bootstrap_install_claude_desktop.ps1` | Pobiera i uruchamia instalator Claude Desktop | ⚠️ logika poprawna składniowo; samo pobranie nietestowane — `downloads.claude.ai` zablokowane w sieci tej sesji budowy (potwierdzone: 403/policy denial), nie problem kodu |
 | `bootstrap_install_python.ps1` | Instaluje Python 3.11+ (winget → fallback: instalator z python.org, cicha instalacja udokumentowanymi przełącznikami) | ⚠️ logika wykrywania przetestowana realnie; samo pobranie z python.org nietestowane (zablokowane w sieci tej sesji budowy, ten sam powód co Claude Desktop) |
+| `bootstrap_all.ps1` | Orkiestrator: uruchamia Kroki 2-5 jednym poleceniem, pokazuje numer/nazwę/status/czas trwania każdego kroku, zapisuje historię do `runs/bootstrap_history.json` | ✅ **przetestowany end-to-end realnie** (pełny udany przebieg, wymuszona awaria kroku wymaganego — poprawnie przerywa, `-SkipClaudeCode`) — po drodze złapał i naprawił 2 subtelne błędy PowerShella (zanieczyszczenie wartości zwracanej wyjściem podprocesu, `Format-Table -AutoSize` nic niewypisujące bez prawdziwej konsoli) |
+| `machine_status_reporter.py` | Cogodzinny raport statusu maszyny (wersje narzędzi, historia bootstrapu, RAM) do Projectly przez `client.publish_status()` | ✅ przetestowany z i bez historii bootstrapu; wysyłka w trybie mock — czeka na zapowiedzianą dedykowaną funkcję MCP po stronie Projectly |
 
 ## Czego celowo brakuje (uczciwie, nie udawane)
 
@@ -103,6 +105,10 @@ Stan w `runs/state.db`, heartbeat w `runs/heartbeat.json` — folder `runs/` jes
 Pełna specyfikacja: `../SKALOWANIE.md` sekcja 4, instruktaż krok po kroku: `../INSTRUKCJA-WDROZENIA.md`. Skrót:
 
 ```powershell
+# Szybka ścieżka — jedno polecenie zamiast kroków 1-4 niżej:
+.\bootstrap_all.ps1 -RepoUrl "https://github.com/<org>/<repo>.git"
+
+# Albo krok po kroku, ten sam efekt:
 .\bootstrap_install_git.ps1                # jeśli świeża maszyna/Windows Server nie ma jeszcze gita
 .\bootstrap_install_python.ps1             # jeśli nie ma jeszcze Pythona 3.11+
 .\bootstrap_install_claude_code.ps1        # narzędzie terminalowe do dalszej pracy nad tym kodem

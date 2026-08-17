@@ -20,6 +20,37 @@ Jeśli w którymś miejscu coś nie zadziała tak, jak opisano — zatrzymaj si�
 
 **Po czym poznasz, że ten krok się udał:** komputer jest włączony, podłączony do prądu i internetu, ekran się nie wygasza, są dwa konta użytkownika widoczne na ekranie logowania.
 
+## Szybka ścieżka — jedno polecenie zamiast Kroków 2-5
+
+Jeśli nie chcesz klikać przez każdy krok osobno, `bootstrap_all.ps1` robi Kroki 2-5 za Ciebie automatycznie — instaluje git/Python/Claude Code, pobiera projekt, zakłada folder na dostępy, i na koniec pokazuje **czytelne podsumowanie: który krok, ile trwał, czy się udał**:
+
+```powershell
+irm https://raw.githubusercontent.com/odczarujpowerbi/szkolenia-powerbi/claude/new-repo-i29t2e/wirtualny-pracownik/app/bootstrap_all.ps1 -OutFile bootstrap_all.ps1
+.\bootstrap_all.ps1 -RepoUrl "https://github.com/odczarujpowerbi/szkolenia-powerbi.git"
+```
+
+Wygląda to tak (przykład, wszystko się udało):
+
+```
+[1/6] Git...
+Git już jest zainstalowany: git version 2.43.0
+[1/6] Git -> OK (0.6s)
+
+[2/6] Python 3.11+...
+...
+=== Podsumowanie ===
+[OK]   Git                                              0.6s
+[OK]   Python 3.11+                                     0.5s
+[OK]   Claude Code (CLI)                                1.1s
+[OK]   Pobranie repo + zależności Pythona               4.2s
+[OK]   Inicjalizacja sekretów (secrets/)                0.1s
+[OK]   Test dymny                                       0.2s
+```
+
+Krok **wymagany** (git, Python, pobranie repo, sekrety, test dymny), który się nie uda, **zatrzymuje cały przebieg** — nie jedzie dalej na niepełnej instalacji. Claude Code jest **opcjonalny**: jeśli akurat zawiedzie, skrypt tylko ostrzega i leci dalej. Claude Desktop celowo nie jest w tej liście (to instalator z oknem, wymaga klikania) — uruchom go osobno, patrz Krok 2 niżej.
+
+Jeśli wolisz zrozumieć/kontrolować każdy krok osobno (albo coś w szybkiej ścieżce nie zadziała) — czytaj dalej, Kroki 2-5 robią dokładnie to samo, tylko ręcznie.
+
 ## Krok 2 — Instalacja programów
 
 Instaluj w tej kolejności. Każdy program pobierasz z oficjalnej strony, klikasz "Dalej"/"Next" z ustawieniami domyślnymi, chyba że napisano inaczej.
@@ -188,9 +219,17 @@ Powtórz te same kroki 2-9 dla **drugiego** zadania — monitora zdrowia maszyny
 - W polu "Argumenty" wpisz: `system_health_monitor.py --loop`
 - Reszta identyczna jak wyżej (ten sam folder "Rozpocznij w").
 
-Od tego momentu działają **dwie niezależne, samodzielne pętle** — jedna pobiera i wykonuje zadania z Projectly, druga co 2 minuty sprawdza samą maszynę i eskaluje, jeśli coś wymaga uwagi. Nie musisz nic więcej klikać — to jest właśnie ten "dzieje się samo", o który chodziło.
+I trzecie zadanie — cogodzinny raport statusu maszyny (wersje narzędzi, jak poszedł ostatni bootstrap, RAM) do Projectly:
 
-**Po czym poznasz, że się udało:** po restarcie komputera, po kilku minutach, w Projectly pojawiają się DWA wpisy statusu ("status na żywo") dla tego komputera — jeden dla roli bota, drugi z etykietą "system-health".
+- Nazwa: np. "Wirtualny Pracownik — Status maszyny".
+- W polu "Argumenty" wpisz: `machine_status_reporter.py --loop`
+- Reszta identyczna jak wyżej.
+
+Od tego momentu działają **trzy niezależne, samodzielne pętle** — jedna pobiera i wykonuje zadania z Projectly, druga co 2 minuty sprawdza samą maszynę i eskaluje, jeśli coś wymaga uwagi, trzecia co godzinę wysyła "zdjęcie" stanu maszyny. Nie musisz nic więcej klikać — to jest właśnie ten "dzieje się samo", o który chodziło.
+
+**Uwaga:** wysyłka do Projectly przez `machine_status_reporter.py` dziś działa w trybie mock (wypisuje status, nie wysyła naprawdę) — czeka na dedykowaną funkcję MCP po stronie Projectly. Gdy powstanie, podłącza się w jednym miejscu (`projectly_client.py`), bez zmiany tego skryptu.
+
+**Po czym poznasz, że się udało:** po restarcie komputera, po kilku minutach, w Projectly pojawiają się wpisy statusu ("status na żywo") dla tego komputera — dla roli bota i etykiety "system-health" na pewno; "machine-status" dopiero po podłączeniu wspomnianej wyżej funkcji MCP.
 
 ## Krok 9 — Jak sprawdzić, że wszystko działa na żywo
 

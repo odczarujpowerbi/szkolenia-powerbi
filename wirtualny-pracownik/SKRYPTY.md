@@ -113,6 +113,7 @@ Pomysły na skrypty pogrupowane wg domeny. Każdy skrypt ma jasno określony cel
 | `secret_scanner.py` | Skanuje logi/artefakty pod kątem sekretów przed zapisem/synchronizacją | Przed `sharepoint_sync.py` / commitem | infra |
 | `kill_switch.py` | Sprawdza globalny plik/flagę STOP przy starcie każdej pętli runnera; jeśli aktywna, bezpiecznie przerywa (jak PAUSE) i nie podejmuje nowych akcji (PLAN-WDROZENIA.md sekcja 17) | Na starcie każdej iteracji `runner_loop.py` | infra |
 | `system_health_monitor.py` | Patrzy na realny stan maszyny (RAM, czy oczekiwane skrypty faktycznie działają w systemie — nie tylko czy piszą heartbeat), publikuje status, eskaluje przy problemie. Uzupełnia `heartbeat.py`/`watchdog.py` (te widzą tylko czy runner "daje znać", nie widzą samego systemu) | Harmonogram, co 2 min (`--loop --interval 120`), niezależnie od `runner_loop.py` | zielone |
+| `machine_status_reporter.py` | Cogodzinny, czysto informacyjny (bez eskalacji) raport statusu maszyny do Projectly: wersje narzędzi, historia ostatniego bootstrapu, RAM | Harmonogram, co godzinę (`--loop --interval 3600`) | zielone |
 
 ## L. Asystent zadań ludzkich (proactive assist — patrz PLAN-WDROZENIA.md sekcja 5)
 
@@ -181,6 +182,7 @@ Cotygodniowa analiza całej firmy — sprzedaż, wydatki reklamowe, finanse, wid
 | `bootstrap_install_python.ps1` | Instaluje Python 3.11+ (winget → fallback: instalator z python.org, cicha instalacja udokumentowanymi przełącznikami) | Ręcznie, po gicie | infra |
 | `bootstrap_install_claude_code.ps1` | Instaluje Claude Code (CLI) natywnym instalatorem — narzędzie terminalowe do dalszej pracy nad kodem | Ręcznie, po gicie | infra |
 | `bootstrap_install_claude_desktop.ps1` | Pobiera i uruchamia instalator Claude Desktop (opcjonalnie, interfejs okienkowy z sesjami w chmurze) | Ręcznie, opcjonalne | infra |
+| `bootstrap_all.ps1` | Orkiestrator — uruchamia git/Python/Claude Code/klon repo/sekrety/test dymny jednym poleceniem, pokazuje status i czas trwania każdego kroku, zapisuje historię | Ręcznie, zamiast ręcznego odpalania poniższych po kolei | infra |
 | `bootstrap_install.ps1` | Przygotowuje system (sprawdza RAM, wyłącza uśpienie, tworzy dedykowane konto), instaluje zależności, klonuje rdzeń | Ręcznie, raz przy dołączaniu nowego komputera | infra |
 | `bootstrap_init_secrets.py` | Tworzy scentralizowany folder `secrets/` (`.env` + szablony MCP na podstawie `integrations.yaml`) — jedno miejsce do ręcznego wypełnienia dostępów | Po `bootstrap_install.ps1`, przed pierwszym uruchomieniem | infra |
 | `bootstrap_register.py` | Odczytuje przypisaną rolę, rejestruje komputer w `role_registry.py` i w Projectly | Po `bootstrap_init_secrets.py` | infra |
