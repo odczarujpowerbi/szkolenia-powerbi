@@ -175,4 +175,8 @@ if ($stoppedEarly) {
     exit 1
 }
 
-Write-Host "`nGotowe. Następny krok: uzupełnij secrets\.env i secrets\mcp\*.json, potem 'python bootstrap_register.py <rola>'." -ForegroundColor Green
+Write-Host "`nGotowe. Następne kroki:" -ForegroundColor Green
+Write-Host "  1. Uzupełnij secrets\.env i secrets\mcp\*.json"
+Write-Host "  2. python bootstrap_register.py <rola>"
+Write-Host "  3. Zarejestruj JEDNO zadanie w Harmonogramie zadań: python job_scheduler.py (Rozpocznij w: $appPath)"
+Write-Host "  4. python job_scheduler.py --status   # podgląd stanu wszystkich zadań cyklicznych"
