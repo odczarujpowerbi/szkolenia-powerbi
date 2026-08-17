@@ -94,7 +94,8 @@ Pomysły na skrypty pogrupowane wg domeny. Każdy skrypt ma jasno określony cel
 | `google_workspace_client.py` | Konektor do konta Google (Docs/Sheets/Drive, Search Console, Analytics) — `config/integrations.yaml` wpis `google_workspace`. **Nie napisany jeszcze**, dokładny zakres uprawnień do potwierdzenia | — | infra |
 | `google_docs_writer.py` | Tworzy/aktualizuje pliki Google Docs/Sheets przez API, korzysta z `google_workspace_client.py` | Zadanie typu `google_file` | żółte |
 | `sharepoint_sync.py` | Microsoft Graph: upload/aktualizacja plików i folderów, archiwizacja artefaktów | Po zakończeniu każdego zadania z artefaktami | zielone |
-| `mailerlite_client.py` | Konektor MailerLite REST API — kampanie (pełny zapis: draft/harmonogram/wysyłka/statystyki), subskrybenci/grupy/pola (wjazd do już zbudowanych automatyzacji). **Nie napisany jeszcze** | — | infra |
+| `mailerlite_client.py` | Konektor MailerLite REST API — kampanie (pełny zapis: draft/harmonogram/wysyłka/statystyki), subskrybenci/grupy/pola (wjazd do już zbudowanych automatyzacji) | — | infra |
+| `mailerlite_report_analyzer.py` | Cotygodniowy raport z wysłanych maili: statystyki (open rate/CTR), czytelność tekstu (heurystyka), ocena tonu/tytułu (model). Ocena wyglądu — **nie zaimplementowana**, wymaga Playwright (PLAN-WDROZENIA.md sekcja 21) | Harmonogram, co tydzień | zielone (analiza) |
 
 ## J. Skille i samodoskonalenie
 

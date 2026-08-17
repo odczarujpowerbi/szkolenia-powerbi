@@ -292,7 +292,7 @@ Przykład zastosowania tej zasady: `task_routing_classifier.py` (sekcja 11) najp
 | **Co godzinę** | `human_task_scanner.py`, `crm_sync_task.py` (odczyt), `sharepoint_sync.py` (batch synchronizacji artefaktów) |
 | **Codziennie** | `digest_generator.py` (przed Daily/Weekly), `crm_report_generator.py`, `secret_scanner.py` (skan logów z całego dnia), `cost_tracker.py` (agregacja dzienna) |
 | **Co 48 h** | `ad_performance_analyzer.py`, `ad_test_report.py` (cykl testowania kreatyw reklamowych — sekcja 20; osobny, częstszy cykl niż cotygodniowy przegląd biznesowy) |
-| **Co tydzień** | `newsletter_drafter.py`, `skill_improver_bot.py`, `sales_report_builder.py`, `ad_spend_report_builder.py`, `infakt_export.py`, `company_financial_report_builder.py`, `web_visibility_report_builder.py`, `weekly_business_review.py` |
+| **Co tydzień** | `newsletter_drafter.py`, `mailerlite_report_analyzer.py`, `skill_improver_bot.py`, `sales_report_builder.py`, `ad_spend_report_builder.py`, `infakt_export.py`, `company_financial_report_builder.py`, `web_visibility_report_builder.py`, `weekly_business_review.py` |
 | **Zdarzeniowe (nie harmonogram)** | Wszystko wywoływane w reakcji na zadanie: `risk_classifier.py`, `validator_pool.py` + walidatory, `auto_approve_yellow.py`, `bounded_red_executor.py`, `escalate_to_human.py`, `human_response_validator.py`, `continuation_task_creator.py`, `projectly_reporter.py`, `projectly_self_review.py`, `pbip_validate.py`, `report_builder.py`, `data_tidy.py`, `human_task_partial_executor.py`, `human_task_briefing.py`, `mcp_email_agent_bridge.py`, `email_draft_reviewer.py`, `ad_copy_generator.py`, `ad_set_launcher.py` |
 | **Na żądanie (skille, nie harmonogram)** | `pq_error_triage`, `content_summarizer.py` |
 
@@ -395,3 +395,15 @@ ad_copy_generator.py ──▶ ad_set_launcher.py ──▶ (2 dni działania) �
   - Wariant do wstrzymania → zadanie typu `ad_variant_pause` (**żółte** — ograniczenie wydatku jest z natury bezpieczniejsze niż jego zwiększenie, więc nie wymaga Twojej zgody za każdym razem).
   - Wariant do skalowania → zadanie dla Ciebie, `budget_change` (**czerwone** — to realne przesunięcie budżetu, zawsze Twoja decyzja, niezależnie jak oczywisty wygląda wynik).
 - To domyka pętlę z sekcji 18 ("szybkość jest w tempie analizy, nie w pomijaniu zgody"): agent samodzielnie testuje, liczy i rekomenduje co 48h; Ty klikasz tylko przy realnym przesunięciu pieniędzy, nie przy każdym teście.
+
+## 21. Cotygodniowy raport z maili MailerLite
+
+Osobny raport od newslettera (`newsletter_drafter.py`, sekcja 10, który *tworzy* treść) — ten *analizuje* to, co już zostało wysłane w danym tygodniu: teksty, tytuły, czytelność, klikalność, i docelowo wygląd.
+
+- **`mailerlite_client.py`** — konektor do MailerLite REST API (kampanie + statystyki, potwierdzone jako w pełni dostępne przez API — sekcja 6/`integrations.yaml`).
+- **`mailerlite_report_analyzer.py`** (harmonogram: co tydzień) — dla każdej kampanii wysłanej w ostatnich 7 dniach liczy:
+  - **Statystyki** (zielone, czysty Python): open rate, CTR, click-to-open rate.
+  - **Czytelność tekstu** (zielone, czysty Python, heurystyka): średnia długość zdania, najdłuższe zdanie — sygnał typu "ściana tekstu", nie certyfikowany indeks dla języka polskiego.
+  - **Ocena tonu i tytułu** (wymaga modelu — jeśli brak klucza API, raport jasno to zaznacza zamiast zmyślać opinię, ten sam wzorzec fail-closed co `validator_visual.py`).
+  - **Ocena wyglądu maila** — **celowo jeszcze nie zaimplementowana**. Wymaga wyrenderowania HTML maila do obrazu (Playwright — dopisany do `requirements.txt` jako kolejna warstwa) i przepuszczenia przez ten sam walidator wizualny co zrzuty Power BI. Do dodania, gdy Playwright trafi do pilotażu.
+- Raport trafia jako komentarz w Projectly (zielone — to analiza, nic nie wykonuje) — jeśli z raportu wynika konkretna rekomendacja zmiany (np. "skróć zdania", "zmień porę wysyłki"), to trafia jako zwykłe zadanie żółte/czerwone zależnie od tego, co konkretnie miałoby się zmienić, nie automatycznie z tego raportu.

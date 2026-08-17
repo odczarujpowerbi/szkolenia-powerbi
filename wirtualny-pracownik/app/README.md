@@ -28,6 +28,8 @@ To nie jest pseudokod ani dokumentacja — to realny, uruchomiony i przetestowan
 | `ad_performance_analyzer.py` | Liczy CTR/CPC/CPA i klasyfikuje warianty (pause/scale/keep_testing) | ✅ (na `mock_data/sample_ad_metrics.json`) |
 | `ad_test_report.py` | Raport 48h + zadania follow-up w Projectly (pauza żółta, skalowanie czerwone) | ✅ end-to-end na mocku |
 | `ad_set_launcher.py` | Uruchamia test reklamowy w ramach bounded red `ad_test_launch` | ✅ bramka bounded_red działa (domyślnie wymaga człowieka); samo wywołanie Meta/TikTok API — stub |
+| `mailerlite_client.py` | Konektor MailerLite REST API (kampanie + statystyki) | ⚠️ napisany wg publicznej dokumentacji znalezionej przez wyszukiwarkę (bezpośredni dostęp zablokowany w tej sesji) — zweryfikuj dokładne ścieżki przed produkcją |
+| `mailerlite_report_analyzer.py` | Cotygodniowy raport: statystyki, czytelność (heurystyka), ocena tonu/tytułu (model) | ✅ end-to-end na `mock_data/sample_mailerlite_campaigns.json` — poprawnie odróżnia dobry mail od rozwlekłego |
 
 ## Czego celowo brakuje (uczciwie, nie udawane)
 
