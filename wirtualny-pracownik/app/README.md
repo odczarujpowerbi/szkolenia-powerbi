@@ -24,6 +24,7 @@ To nie jest pseudokod ani dokumentacja — to realny, uruchomiony i przetestowan
 | `runner_loop.py` | Spina wszystko: klasyfikacja → routing → walidacja/eskalacja → status → koszt | ✅ (`python runner_loop.py`) |
 | `bootstrap_register.py` / `bootstrap_smoke_test.py` | Rejestracja roli i test dymny nowego komputera | ✅ |
 | `bootstrap_install.ps1` | Przygotowanie systemu Windows i klon repo | ⚠️ napisany wg specyfikacji, **nie testowany na prawdziwym Windows** z tej sesji |
+| `bootstrap_install_vps.sh` | Odpowiednik dla Linuksa/VPS (`WDROZENIE-VPS-TESTOWE.md`) | ✅ **przetestowany end-to-end w tej sesji** — klon, venv, zależności, smoke test, wszystko przeszło |
 | `ad_copy_generator.py` | Generuje warianty tekstu reklamowego z realnym kontekstem buyer person (`persony-sprzedaz/`) | ✅ czyta persony poprawnie; generowanie przez model nietestowane (brak klucza w tej sesji) |
 | `ad_performance_analyzer.py` | Liczy CTR/CPC/CPA i klasyfikuje warianty (pause/scale/keep_testing) | ✅ (na `mock_data/sample_ad_metrics.json`) |
 | `ad_test_report.py` | Raport 48h + zadania follow-up w Projectly (pauza żółta, skalowanie czerwone) | ✅ end-to-end na mocku |
