@@ -13,6 +13,8 @@ import json
 import os
 from pathlib import Path
 
+import env_bootstrap  # noqa: F401  # wczytuje .env / secrets/.env przed odczytem ANTHROPIC_API_KEY
+
 PERSONY_DIR = Path(__file__).parent.parent.parent / "persony-sprzedaz"
 
 

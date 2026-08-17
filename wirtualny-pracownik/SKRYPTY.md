@@ -177,6 +177,10 @@ Cotygodniowa analiza całej firmy — sprzedaż, wydatki reklamowe, finanse, wid
 
 | Skrypt | Cel | Wyzwalacz | Ryzyko |
 |---|---|---|---|
+| `bootstrap_install_git.ps1` | Instaluje gita (winget → fallback: pobranie z GitHuba, cicha instalacja) — świeża maszyna/Windows Server go nie ma | Ręcznie, pierwszy krok na zupełnie świeżej maszynie | infra |
+| `bootstrap_install_claude_code.ps1` | Instaluje Claude Code (CLI) natywnym instalatorem — narzędzie terminalowe do dalszej pracy nad kodem | Ręcznie, po gicie | infra |
+| `bootstrap_install_claude_desktop.ps1` | Pobiera i uruchamia instalator Claude Desktop (opcjonalnie, interfejs okienkowy z sesjami w chmurze) | Ręcznie, opcjonalne | infra |
 | `bootstrap_install.ps1` | Przygotowuje system (sprawdza RAM, wyłącza uśpienie, tworzy dedykowane konto), instaluje zależności, klonuje rdzeń | Ręcznie, raz przy dołączaniu nowego komputera | infra |
-| `bootstrap_register.py` | Odczytuje przypisaną rolę, rejestruje komputer w `role_registry.py` i w Projectly | Po `bootstrap_install.ps1` | infra |
+| `bootstrap_init_secrets.py` | Tworzy scentralizowany folder `secrets/` (`.env` + szablony MCP na podstawie `integrations.yaml`) — jedno miejsce do ręcznego wypełnienia dostępów | Po `bootstrap_install.ps1`, przed pierwszym uruchomieniem | infra |
+| `bootstrap_register.py` | Odczytuje przypisaną rolę, rejestruje komputer w `role_registry.py` i w Projectly | Po `bootstrap_init_secrets.py` | infra |
 | `bootstrap_smoke_test.py` | Przepuszcza jedno testowe zadanie przez pełen cykl queued→done, sprawdza heartbeat i reakcję `kill_switch.py`, zanim komputer trafi do produkcji | Ostatni krok bootstrapu, przed przekazaniem komputera do pracy | zielone |

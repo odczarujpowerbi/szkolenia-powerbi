@@ -15,6 +15,8 @@ import json
 import os
 from pathlib import Path
 
+import env_bootstrap  # noqa: F401  # wczytuje .env / secrets/.env przed odczytem PROJECTLY_API_KEY
+
 MOCK_TASKS_PATH = Path(__file__).parent / "mock_data" / "sample_tasks.json"
 MOCK_RUNS_DIR = Path(__file__).parent / "runs"
 

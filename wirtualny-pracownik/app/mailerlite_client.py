@@ -17,6 +17,8 @@ import os
 
 import requests
 
+import env_bootstrap  # noqa: F401  # wczytuje .env / secrets/.env przed odczytem MAILERLITE_API_KEY
+
 BASE_URL = "https://connect.mailerlite.com/api"
 
 

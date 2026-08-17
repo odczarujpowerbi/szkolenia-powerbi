@@ -37,21 +37,37 @@ irm https://raw.githubusercontent.com/odczarujpowerbi/szkolenia-powerbi/claude/n
 |---|---|---|---|
 | 1 | Git | [git-scm.com](https://git-scm.com/download/win) (albo skrypt powyżej) | Ustawienia domyślne wystarczą |
 | 2 | Python 3.11 lub nowszy | [python.org/downloads](https://www.python.org/downloads/windows/) | **WAŻNE:** na pierwszym ekranie instalatora zaznacz "Add python.exe to PATH", zanim klikniesz Install |
-| 3 | Node.js (wersja LTS) | [nodejs.org](https://nodejs.org/) | Potrzebny do Claude Code (krok niżej) |
-| 4 | Power BI Desktop | Microsoft Store albo [powerbi.microsoft.com](https://powerbi.microsoft.com/desktop/) | Potrzebne dopiero, gdy dojdziemy do automatyzacji raportów Power BI — możesz zainstalować teraz albo później |
+| 3 | Power BI Desktop | Microsoft Store albo [powerbi.microsoft.com](https://powerbi.microsoft.com/desktop/) | Potrzebne dopiero, gdy dojdziemy do automatyzacji raportów Power BI — możesz zainstalować teraz albo później. **Uwaga na Windows Server:** Power BI Desktop nie jest oficjalnie wspierany przez Microsoft na tym systemie |
 
-Po instalacji Node.js, zainstaluj Claude Code — otwórz **Wiersz polecenia** (wpisz w wyszukiwarce Windows "cmd") i wklej:
+Node.js **nie jest już potrzebny** — Claude Code instaluje się dziś bezpośrednio, bez npm (starsza metoda przez Node.js nadal działa, ale to nie jest już zalecana ścieżka).
 
+**Claude Code (narzędzie terminalowe)** — potrzebne, żeby dalej rozwijać/poprawiać ten mechanizm na tej maszynie, tak jak robiliśmy to dotąd. Jedna komenda w PowerShell:
+
+```powershell
+irm https://claude.ai/install.ps1 | iex
 ```
-npm install -g @anthropic-ai/claude-code
+
+Albo automatycznie, tym samym skryptem co dalsze kroki (sam wykrywa, czy Claude Code już jest):
+
+```powershell
+irm https://raw.githubusercontent.com/odczarujpowerbi/szkolenia-powerbi/claude/new-repo-i29t2e/wirtualny-pracownik/app/bootstrap_install_claude_code.ps1 -OutFile bootstrap_install_claude_code.ps1
+.\bootstrap_install_claude_code.ps1
 ```
+
+**Claude Desktop (aplikacja z zakładkami Chat/Cowork/Code, w tym sesje w chmurze)** — opcjonalna, ale wygodna, jeśli wolisz interfejs okienkowy zamiast samego terminala:
+
+```powershell
+irm https://raw.githubusercontent.com/odczarujpowerbi/szkolenia-powerbi/claude/new-repo-i29t2e/wirtualny-pracownik/app/bootstrap_install_claude_desktop.ps1 -OutFile bootstrap_install_claude_desktop.ps1
+.\bootstrap_install_claude_desktop.ps1
+```
+
+Ten drugi skrypt pobiera instalator automatycznie, ale samo kliknięcie "Dalej" w oknie instalatora zostaje po Twojej stronie — to zwykła aplikacja okienkowa, nie da się jej w pełni zainstalować bez klikania.
 
 **Jak sprawdzić, czy wszystko się zainstalowało:** otwórz Wiersz polecenia i po kolei wpisz poniższe komendy — każda powinna pokazać numer wersji, nie komunikat błędu:
 
 ```
 git --version
 python --version
-node --version
 claude --version
 ```
 
@@ -77,17 +93,31 @@ git clone <adres repozytorium> C:\AIWorker
 
 To najważniejszy krok do zrobienia uważnie — te dane działają jak hasła. **Nigdy nie wysyłaj ich mailem, na czacie ani nikomu nie pokazuj zrzutu ekranu z nimi.**
 
-1. W folderze `C:\AIWorker\wirtualny-pracownik\app\` znajdź plik `.env.example`. Skopiuj go i zmień nazwę kopii na `.env` (bez ".example" na końcu).
-2. Otwórz plik `.env` Notatnikiem (kliknij prawym przyciskiem → Otwórz za pomocą → Notatnik).
-3. Wpisz klucze w odpowiednich miejscach, po znaku `=`, bez spacji i bez cudzysłowów.
+Nie twórz nic ręcznie — jest do tego skrypt, który sam zakłada jedno, stałe miejsce na wszystkie dostępy:
 
-| Klucz w pliku `.env` | Skąd go wziąć | Czy obowiązkowy na start |
+```
+cd C:\AIWorker\wirtualny-pracownik\app
+python bootstrap_init_secrets.py
+```
+
+Tworzy to folder `secrets\` (nigdy niewysyłany do repozytorium, nawet przez pomyłkę — jest na stałej liście wykluczeń), a w nim:
+
+- **`secrets\.env`** — tu wpisujesz klucze API (Anthropic, Projectly, MailerLite, Microsoft Graph...).
+- **`secrets\mcp\*.json`** — po jednym pliku-szablonie na każdą integrację połączoną przez MCP (dziś: Zoho CRM, Projectly, zanfia.com) — skrypt sam je zakłada na podstawie `config/integrations.yaml`, Ty tylko wypełniasz dane w środku.
+
+Uruchom ten skrypt ponownie za każdym razem, gdy dojdzie nowa integracja — nigdy nie nadpisze tego, co już wpisałeś, dorobi tylko brakujące pliki.
+
+1. Otwórz `secrets\.env` Notatnikiem (kliknij prawym przyciskiem → Otwórz za pomocą → Notatnik).
+2. Wpisz klucze w odpowiednich miejscach, po znaku `=`, bez spacji i bez cudzysłowów.
+
+| Klucz w pliku `secrets\.env` | Skąd go wziąć | Czy obowiązkowy na start |
 |---|---|---|
 | `ANTHROPIC_API_KEY` | Załóż konto na [console.anthropic.com](https://console.anthropic.com), zakładka "API Keys", stwórz nowy klucz. Ustaw tam też miesięczny limit wydatków (zalecane: zacznij od małej kwoty, np. 20 USD) | **Tak, obowiązkowy** |
 | `PROJECTLY_API_KEY` / `PROJECTLY_BASE_URL` | Z ustawień konta w Projectly | **Tak, obowiązkowy** |
-| Reszta (Zoho CRM, Google, MailerLite, zanfia.com...) | Osobno dla każdej usługi — pełna lista i status w pliku `config/integrations.yaml` w tym samym folderze | Nie od razu — dograj, gdy dana funkcja zacznie być używana |
+| Reszta (Google, MailerLite...) | Osobno dla każdej usługi — pełna lista i status w pliku `config/integrations.yaml` w tym samym folderze | Nie od razu — dograj, gdy dana funkcja zacznie być używana |
+| Integracje MCP (Zoho CRM, Projectly, zanfia.com) | Osobne pliki `secrets\mcp\zoho_crm.json` itd. — nie w `.env` | Nie od razu — dograj, gdy dana integracja zacznie być używana |
 
-**Po czym poznasz, że się udało:** plik `.env` istnieje (nie `.env.example`), ma wpisany przynajmniej klucz Anthropic i dane do Projectly.
+**Po czym poznasz, że się udało:** folder `secrets\` istnieje, ma w środku `.env` (wypełniony przynajmniej kluczem Anthropic i danymi do Projectly) oraz podfolder `mcp\` z plikami `.json`.
 
 ## Krok 5 — Pierwsze uruchomienie i test
 
@@ -162,7 +192,7 @@ Otwórz Projectly. Powinieneś widzieć:
 - Komentarze zostawiane przy zadaniach z podsumowaniem, co bot zrobił.
 - Wpis "status na żywo" dla tego komputera, aktualizowany co 1-2 minuty.
 
-Jeśli nic się nie dzieje przez dłuższy czas — sprawdź Krok 8 (czy zadanie w Harmonogramie faktycznie wystartowało) i plik `.env` (czy klucze są poprawnie wpisane).
+Jeśli nic się nie dzieje przez dłuższy czas — sprawdź Krok 8 (czy zadanie w Harmonogramie faktycznie wystartowało) i plik `secrets\.env` (czy klucze są poprawnie wpisane).
 
 ## Krok 10 — Bezpieczeństwo: jak natychmiast wszystko zatrzymać
 
@@ -183,9 +213,9 @@ Nie musisz się bać używać tego zbyt często — to jest dokładnie po to, ż
 ## Checklist końcowy
 
 - [ ] Komputer przygotowany (prąd, internet, usypianie wyłączone, dwa konta użytkownika)
-- [ ] Zainstalowane: Git, Python, Node.js, Claude Code (Power BI Desktop w miarę potrzeby)
+- [ ] Zainstalowane: Git, Python, Claude Code, opcjonalnie Claude Desktop (Power BI Desktop w miarę potrzeby)
 - [ ] Projekt pobrany do `C:\AIWorker\`
-- [ ] Plik `.env` utworzony i wypełniony (minimum: Anthropic + Projectly)
+- [ ] `python bootstrap_init_secrets.py` uruchomiony, folder `secrets\` istnieje i jest wypełniony (minimum: Anthropic + Projectly)
 - [ ] `pip install -r requirements.txt` wykonane bez błędów
 - [ ] `python bootstrap_smoke_test.py` pokazuje "Wszystkie testy przeszły"
 - [ ] Komputer zarejestrowany z właściwą rolą (`bootstrap_register.py`)

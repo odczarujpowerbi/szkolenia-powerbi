@@ -41,22 +41,27 @@ To nie jest pseudokod ani dokumentacja — to realny, uruchomiony i przetestowan
 | `task_feedback_requester.py` | Prosi o feedback po zamknięciu zadania: komentarz + zadanie w Projectly + mail | ✅ end-to-end na mocku, w tym idempotencja (nie pyta drugi raz o to samo zadanie, `runs/feedback_requested.json`) |
 | `weekly_team_report.py` | Raport tygodniowy zespołu: zrobione/przeterminowane zadania + zaległe wpisy czasu + opcjonalna interpretacja słabych stron (model) | ✅ end-to-end, w tym z prawdziwym eksportem godzin podanym jako `time_entries_csv` |
 | `system_health_monitor.py` | Cyklicznie (domyślnie co 2 min) patrzy na RAM i czy oczekiwane skrypty (`runner_loop.py`) faktycznie działają w systemie, publikuje status, eskaluje przy problemie | ✅ obie ścieżki (ok/critical) przetestowane, w tym z realnym odczytem RAM przez `psutil` |
+| `env_bootstrap.py` | Centralny loader `.env`/`secrets/.env`, importowany przez każdy moduł czytający klucz API, żeby działał też uruchomiony samodzielnie | ✅ przetestowany, w tym że `secrets/.env` realnie nadpisuje wartość |
+| `bootstrap_init_secrets.py` | Tworzy `secrets/.env` i `secrets/mcp/*.json` (na podstawie `integrations.yaml`) — jedno miejsce na wszystkie dostępy | ✅ tworzenie i idempotencja (nigdy nie nadpisuje już wypełnionych plików) przetestowane |
+| `bootstrap_install_claude_code.ps1` | Instaluje Claude Code (CLI) natywnym instalatorem | ✅ logika wykrywania przetestowana realnie (w tej sesji Claude Code już jest, więc zadziałała ścieżka "już zainstalowany") |
+| `bootstrap_install_claude_desktop.ps1` | Pobiera i uruchamia instalator Claude Desktop | ⚠️ logika poprawna składniowo; samo pobranie nietestowane — `downloads.claude.ai` zablokowane w sieci tej sesji budowy (potwierdzone: 403/policy denial), nie problem kodu |
 
 ## Czego celowo brakuje (uczciwie, nie udawane)
 
 - **Prawdziwe połączenie z Projectly** (`projectly_client.py`) — endpointy/autoryzacja nie są znane z tej sesji. Domyślnie `MockProjectlyClient` (czyta/pisze pliki w `mock_data/` i `runs/`). Ustaw `PROJECTLY_API_KEY` + `PROJECTLY_BASE_URL`, dopisz metody `ProjectlyClient`.
 - **Realne wywołanie modelu w `validator_visual.py`** — kod jest napisany i wywoła prawdziwy model, jeśli podasz `ANTHROPIC_API_KEY` i zrzut ekranu; bez nich zwraca `approved=False` z jasnym wyjaśnieniem, zgodnie z fail-closed. Sama rozmowa z modelem nietestowana z tej sesji (brak klucza) — zweryfikuj na docelowej maszynie z prawdziwym zrzutem.
 - **Prawdziwe workery** (Power BI Desktop Bridge + zrzuty, CRM, Meta Ads, SharePoint...) — `runner_loop.py` dziś tylko klasyfikuje i komentuje (`execution_result` to zaślepka), nie wykonuje realnej pracy w tych systemach. `pbip_validate.py` sprawdza tylko warstwę plikową — zrzuty stron wymagają Desktop Bridge na prawdziwym Windows z Power BI Desktop.
-- **Realna wysyłka maila** (`email_client.py`) — wymaga rejestracji aplikacji w Azure AD (Microsoft Entra) i pakietu `msal`; do czasu podania `MS_GRAPH_CLIENT_ID/SECRET/TENANT_ID/MAILBOX` w `.env` działa w trybie mock (draft zapisywany do `runs/mock_outbox/`, nic nie wysyła naprawdę).
+- **Realna wysyłka maila** (`email_client.py`) — wymaga rejestracji aplikacji w Azure AD (Microsoft Entra) i pakietu `msal`; do czasu podania `MS_GRAPH_CLIENT_ID/SECRET/TENANT_ID/MAILBOX` w `secrets/.env` działa w trybie mock (draft zapisywany do `runs/mock_outbox/`, nic nie wysyła naprawdę).
 - **`bootstrap_install.ps1`** — napisany wiernie wg `SKALOWANIE.md`, ale nieprzetestowany (środowisko budowy to Linux bez dostępu do docelowego Windows). Sprawdź krok po kroku przy pierwszym użyciu.
 
 ## Jak uruchomić lokalnie (Python 3.9+, zero kluczy API na start)
 
 ```bash
 pip install -r requirements.txt
-cp .env.example .env   # uzupełnij prawdziwe klucze, gdy będą znane — .env jest w .gitignore
+python bootstrap_init_secrets.py           # tworzy secrets/.env + secrets/mcp/*.json — uzupełnij ręcznie, gdy klucze będą znane
 python runner_loop.py                     # jeden przebieg na mock_data/sample_tasks.json
 python runner_loop.py --loop               # ciągła pętla co 30s (Ctrl+C żeby zatrzymać)
+python system_health_monitor.py --loop     # druga, niezależna pętla: RAM + czy runner faktycznie działa (co 2 min)
 python bootstrap_smoke_test.py             # pełny test dymny (cykl + heartbeat + kill switch)
 python bootstrap_register.py dev           # rejestracja roli
 python pbip_validate.py mock_data/sample_pbip   # walidacja przykładowego PBIP
@@ -86,17 +91,19 @@ Stan w `runs/state.db`, heartbeat w `runs/heartbeat.json` — folder `runs/` jes
 
 `config/approval_policy.yaml`, `config/clients_routing.yaml`, `config/skills_manifest.yaml`, `config/integrations.yaml` to "konfiguracja firmy" (`SKALOWANIE.md` sekcja 2) — edytowalne bez zmiany kodu, wymieniane przy kopiowaniu do innej firmy. `approval_policy.yaml` ma celowo **pustą** listę `bounded_red` — nie dodawaj tam nic, dopóki zwykły tryb czerwony nie przepracował na produkcji kilku tygodni (sekcja 3 planu).
 
-`config/integrations.yaml` to jeden, konsolidowany rejestr wszystkich dostępnych kont/połączeń (Microsoft 365, Google, Zoho CRM, Projectly, zanfia.com, GitHub, OneDrive, Miro, MailerLite, TikTok Ads, lokalny model Hermes...) — mechanizm, poziom dostępu i uwagi, **nigdy klucze/tokeny** (te w lokalnym magazynie sekretów/`.env`).
+`config/integrations.yaml` to jeden, konsolidowany rejestr wszystkich dostępnych kont/połączeń (Microsoft 365, Google, Zoho CRM, Projectly, zanfia.com, GitHub, OneDrive, Miro, MailerLite, TikTok Ads, lokalny model Hermes...) — mechanizm, poziom dostępu i uwagi, **nigdy klucze/tokeny** (te w `secrets/` — patrz `bootstrap_init_secrets.py` niżej, tworzy ten folder automatycznie z szablonami MCP na podstawie tego właśnie pliku).
 
-**Ważne rozróżnienie: rejestracja w `integrations.yaml` ≠ istniejący konektor.** Dla większości nowych integracji jest dziś tylko wpis w tym pliku, nie ma jeszcze skryptu, który się z nimi łączy — `SKRYPTY.md` (kategorie F, H, I, O, P) oznacza je jawnie jako "nie napisany jeszcze": `zoho_crm_client.py`, `microsoft_graph_mail_client.py`, `google_workspace_client.py`, `mailerlite_client.py`, `zanfia_client.py`, `miro_read_client.py`. Do każdego z nich potrzebny będzie też **skill** (wiedza jak dobrze z tego korzystać, nie tylko hydraulika) — planowane skille wypisane w `config/skills_manifest.yaml` ze statusem `"planned"`.
+**Ważne rozróżnienie: rejestracja w `integrations.yaml` ≠ istniejący konektor.** Dla większości nowych integracji jest dziś tylko wpis w tym pliku, nie ma jeszcze skryptu, który się z nimi łączy — `SKRYPTY.md` (kategorie F, H, I, O, P) oznacza je jawnie jako "nie napisany jeszcze": `zoho_crm_client.py`, `microsoft_graph_mail_client.py`, `google_workspace_client.py`, `zanfia_client.py`, `miro_read_client.py` (`mailerlite_client.py` jest już napisany, patrz tabela wyżej). Do każdego z nich potrzebny będzie też **skill** (wiedza jak dobrze z tego korzystać, nie tylko hydraulika) — planowane skille wypisane w `config/skills_manifest.yaml` ze statusem `"planned"`.
 
 ## Instalacja na docelowym komputerze (Windows)
 
-Pełna specyfikacja: `../SKALOWANIE.md` sekcja 4. Skrót:
+Pełna specyfikacja: `../SKALOWANIE.md` sekcja 4, instruktaż krok po kroku: `../INSTRUKCJA-WDROZENIA.md`. Skrót:
 
 ```powershell
+.\bootstrap_install_git.ps1                # jeśli świeża maszyna/Windows Server nie ma jeszcze gita
+.\bootstrap_install_claude_code.ps1        # narzędzie terminalowe do dalszej pracy nad tym kodem
 .\bootstrap_install.ps1 -RepoUrl "https://github.com/<org>/<repo>.git"
-# ustaw zmienne środowiskowe (patrz .env.example)
+python bootstrap_init_secrets.py           # tworzy secrets/.env + secrets/mcp/*.json — uzupełnij ręcznie
 python bootstrap_register.py dev
 python bootstrap_smoke_test.py
 ```

@@ -26,6 +26,8 @@ from pathlib import Path
 
 import yaml
 
+import env_bootstrap  # noqa: F401  # wczytuje .env / secrets/.env przed odczytem MS_GRAPH_*
+
 MOCK_OUTBOX_DIR = Path(__file__).parent / "runs" / "mock_outbox"
 EMAIL_SAFETY_PATH = Path(__file__).parent / "config" / "email_safety.yaml"
 
