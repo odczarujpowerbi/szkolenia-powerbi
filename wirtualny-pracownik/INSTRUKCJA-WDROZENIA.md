@@ -24,9 +24,18 @@ Jeśli w którymś miejscu coś nie zadziała tak, jak opisano — zatrzymaj si�
 
 Instaluj w tej kolejności. Każdy program pobierasz z oficjalnej strony, klikasz "Dalej"/"Next" z ustawieniami domyślnymi, chyba że napisano inaczej.
 
+**Ważne dla maszyn wirtualnych/Windows Server:** świeża maszyna wirtualna (w odróżnieniu od zwykłego komputera dewelopera) zwykle **nie ma gita** — to pierwsza rzecz, która się wywali, jeśli spróbujesz od razu klonować repozytorium. Jeśli nie masz wygodnego dostępu do przeglądarki na tej maszynie (np. łączysz się samym pulpitem zdalnym), możesz zainstalować gita automatycznie, jednym poleceniem w PowerShell, zamiast pobierać instalator ręcznie:
+
+```powershell
+irm https://raw.githubusercontent.com/odczarujpowerbi/szkolenia-powerbi/claude/new-repo-i29t2e/wirtualny-pracownik/app/bootstrap_install_git.ps1 -OutFile bootstrap_install_git.ps1
+.\bootstrap_install_git.ps1
+```
+
+(Jeśli repo jest prywatne i `irm` nie zadziała bez logowania — pobierz plik ręcznie z GitHuba i uruchom lokalnie, albo po prostu zainstaluj gita ze strony w tabeli niżej.) Skrypt sam sprawdza, czy git już jest, próbuje `winget`, a w razie braku pobiera najnowszy instalator bezpośrednio i instaluje go cicho, bez klikania okienek.
+
 | # | Program | Skąd pobrać | Uwaga przy instalacji |
 |---|---|---|---|
-| 1 | Git | [git-scm.com](https://git-scm.com/download/win) | Ustawienia domyślne wystarczą |
+| 1 | Git | [git-scm.com](https://git-scm.com/download/win) (albo skrypt powyżej) | Ustawienia domyślne wystarczą |
 | 2 | Python 3.11 lub nowszy | [python.org/downloads](https://www.python.org/downloads/windows/) | **WAŻNE:** na pierwszym ekranie instalatora zaznacz "Add python.exe to PATH", zanim klikniesz Install |
 | 3 | Node.js (wersja LTS) | [nodejs.org](https://nodejs.org/) | Potrzebny do Claude Code (krok niżej) |
 | 4 | Power BI Desktop | Microsoft Store albo [powerbi.microsoft.com](https://powerbi.microsoft.com/desktop/) | Potrzebne dopiero, gdy dojdziemy do automatyzacji raportów Power BI — możesz zainstalować teraz albo później |

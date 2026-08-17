@@ -72,7 +72,7 @@ function Test-PythonWorks {
 }
 
 if (-not (Test-CommandExists "git")) {
-    Write-Error "Git nie jest zainstalowany. Zainstaluj z https://git-scm.com/download/win i uruchom ten skrypt ponownie."
+    Write-Error "Git nie jest zainstalowany (typowe na świeżej maszynie wirtualnej/Windows Server). Zainstaluj z https://git-scm.com/download/win, albo uruchom .\bootstrap_install_git.ps1 z tego samego folderu (instaluje automatycznie), a potem uruchom ten skrypt ponownie."
     exit 1
 }
 
