@@ -1,4 +1,4 @@
-# Instaluje Git dla Windows, jeśli nie jest jeszcze na maszynie.
+﻿# Instaluje Git dla Windows, jeśli nie jest jeszcze na maszynie.
 #
 # Dlaczego to osobny skrypt: świeża maszyna wirtualna / Windows Server
 # domyślnie NIE MA gita (w odróżnieniu od komputera dewelopera, gdzie

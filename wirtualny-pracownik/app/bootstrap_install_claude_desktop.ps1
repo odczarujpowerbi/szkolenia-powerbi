@@ -1,4 +1,4 @@
-# Pobiera i uruchamia instalator Claude Desktop — aplikacja z zakładkami
+﻿# Pobiera i uruchamia instalator Claude Desktop — aplikacja z zakładkami
 # Chat/Cowork/Code, w tym możliwością uruchamiania sesji w chmurze
 # ("Cloud", nie tylko lokalnie) i podłączania integracji (Connectors/MCP)
 # przez okienko zamiast ręcznej edycji configu.

@@ -1,4 +1,4 @@
-# Krok 1-2 bootstrapu (SKALOWANIE.md sekcja 4): przygotowanie systemu i
+﻿# Krok 1-2 bootstrapu (SKALOWANIE.md sekcja 4): przygotowanie systemu i
 # instalacja zależności. Uruchamiane raz, ręcznie, na nowym komputerze
 # Windows, jako administrator.
 #

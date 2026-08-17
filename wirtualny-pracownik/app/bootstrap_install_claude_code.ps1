@@ -1,4 +1,4 @@
-# Instaluje Claude Code (CLI) — narzędzie terminalowe, którym rozwijany
+﻿# Instaluje Claude Code (CLI) — narzędzie terminalowe, którym rozwijany
 # jest ten mechanizm. Nie jest wymagane do samego DZIAŁANIA runner_loop.py
 # (ten woła pakiet Python 'anthropic' bezpośrednio) — jest za to potrzebne,
 # żeby na docelowej maszynie dało się dalej poprawiać/rozbudowywać ten

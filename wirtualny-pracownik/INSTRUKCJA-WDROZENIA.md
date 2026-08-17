@@ -36,8 +36,15 @@ irm https://raw.githubusercontent.com/odczarujpowerbi/szkolenia-powerbi/claude/n
 | # | Program | Skąd pobrać | Uwaga przy instalacji |
 |---|---|---|---|
 | 1 | Git | [git-scm.com](https://git-scm.com/download/win) (albo skrypt powyżej) | Ustawienia domyślne wystarczą |
-| 2 | Python 3.11 lub nowszy | [python.org/downloads](https://www.python.org/downloads/windows/) | **WAŻNE:** na pierwszym ekranie instalatora zaznacz "Add python.exe to PATH", zanim klikniesz Install |
+| 2 | Python 3.11 lub nowszy | [python.org/downloads](https://www.python.org/downloads/windows/) (albo skrypt niżej) | **WAŻNE (instalacja ręczna):** na pierwszym ekranie instalatora zaznacz "Add python.exe to PATH", zanim klikniesz Install |
 | 3 | Power BI Desktop | Microsoft Store albo [powerbi.microsoft.com](https://powerbi.microsoft.com/desktop/) | Potrzebne dopiero, gdy dojdziemy do automatyzacji raportów Power BI — możesz zainstalować teraz albo później. **Uwaga na Windows Server:** Power BI Desktop nie jest oficjalnie wspierany przez Microsoft na tym systemie |
+
+Python też da się zainstalować automatycznie, jednym poleceniem (dodaje do PATH samo, bez zaznaczania okienek):
+
+```powershell
+irm https://raw.githubusercontent.com/odczarujpowerbi/szkolenia-powerbi/claude/new-repo-i29t2e/wirtualny-pracownik/app/bootstrap_install_python.ps1 -OutFile bootstrap_install_python.ps1
+.\bootstrap_install_python.ps1
+```
 
 Node.js **nie jest już potrzebny** — Claude Code instaluje się dziś bezpośrednio, bez npm (starsza metoda przez Node.js nadal działa, ale to nie jest już zalecana ścieżka).
 

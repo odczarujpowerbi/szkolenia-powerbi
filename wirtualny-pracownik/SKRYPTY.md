@@ -178,6 +178,7 @@ Cotygodniowa analiza całej firmy — sprzedaż, wydatki reklamowe, finanse, wid
 | Skrypt | Cel | Wyzwalacz | Ryzyko |
 |---|---|---|---|
 | `bootstrap_install_git.ps1` | Instaluje gita (winget → fallback: pobranie z GitHuba, cicha instalacja) — świeża maszyna/Windows Server go nie ma | Ręcznie, pierwszy krok na zupełnie świeżej maszynie | infra |
+| `bootstrap_install_python.ps1` | Instaluje Python 3.11+ (winget → fallback: instalator z python.org, cicha instalacja udokumentowanymi przełącznikami) | Ręcznie, po gicie | infra |
 | `bootstrap_install_claude_code.ps1` | Instaluje Claude Code (CLI) natywnym instalatorem — narzędzie terminalowe do dalszej pracy nad kodem | Ręcznie, po gicie | infra |
 | `bootstrap_install_claude_desktop.ps1` | Pobiera i uruchamia instalator Claude Desktop (opcjonalnie, interfejs okienkowy z sesjami w chmurze) | Ręcznie, opcjonalne | infra |
 | `bootstrap_install.ps1` | Przygotowuje system (sprawdza RAM, wyłącza uśpienie, tworzy dedykowane konto), instaluje zależności, klonuje rdzeń | Ręcznie, raz przy dołączaniu nowego komputera | infra |

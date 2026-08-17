@@ -45,6 +45,7 @@ To nie jest pseudokod ani dokumentacja — to realny, uruchomiony i przetestowan
 | `bootstrap_init_secrets.py` | Tworzy `secrets/.env` i `secrets/mcp/*.json` (na podstawie `integrations.yaml`) — jedno miejsce na wszystkie dostępy | ✅ tworzenie i idempotencja (nigdy nie nadpisuje już wypełnionych plików) przetestowane |
 | `bootstrap_install_claude_code.ps1` | Instaluje Claude Code (CLI) natywnym instalatorem | ✅ logika wykrywania przetestowana realnie (w tej sesji Claude Code już jest, więc zadziałała ścieżka "już zainstalowany") |
 | `bootstrap_install_claude_desktop.ps1` | Pobiera i uruchamia instalator Claude Desktop | ⚠️ logika poprawna składniowo; samo pobranie nietestowane — `downloads.claude.ai` zablokowane w sieci tej sesji budowy (potwierdzone: 403/policy denial), nie problem kodu |
+| `bootstrap_install_python.ps1` | Instaluje Python 3.11+ (winget → fallback: instalator z python.org, cicha instalacja udokumentowanymi przełącznikami) | ⚠️ logika wykrywania przetestowana realnie; samo pobranie z python.org nietestowane (zablokowane w sieci tej sesji budowy, ten sam powód co Claude Desktop) |
 
 ## Czego celowo brakuje (uczciwie, nie udawane)
 
@@ -97,10 +98,13 @@ Stan w `runs/state.db`, heartbeat w `runs/heartbeat.json` — folder `runs/` jes
 
 ## Instalacja na docelowym komputerze (Windows)
 
+**Uwaga dla każdego, kto edytuje pliki `.ps1` w tym repo:** zapisuj je z BOM (UTF-8 with BOM), nie zwykłym UTF-8. Bez BOM, Windows PowerShell 5.1 czyta plik w starej stronie kodowej systemu zamiast UTF-8 — polskie znaki i myślniki się rozjeżdżają, a w najgorszym razie łamie to parser w środku stringa (realnie napotkane i naprawione w tej sesji — patrz historia commitów). Edytory typu VS Code robią to poprawnie same, jeśli plik już ma BOM; nowy plik trzeba zapisać świadomie jako "UTF-8 with BOM".
+
 Pełna specyfikacja: `../SKALOWANIE.md` sekcja 4, instruktaż krok po kroku: `../INSTRUKCJA-WDROZENIA.md`. Skrót:
 
 ```powershell
 .\bootstrap_install_git.ps1                # jeśli świeża maszyna/Windows Server nie ma jeszcze gita
+.\bootstrap_install_python.ps1             # jeśli nie ma jeszcze Pythona 3.11+
 .\bootstrap_install_claude_code.ps1        # narzędzie terminalowe do dalszej pracy nad tym kodem
 .\bootstrap_install.ps1 -RepoUrl "https://github.com/<org>/<repo>.git"
 python bootstrap_init_secrets.py           # tworzy secrets/.env + secrets/mcp/*.json — uzupełnij ręcznie
