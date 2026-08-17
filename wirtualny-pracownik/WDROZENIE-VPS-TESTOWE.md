@@ -62,10 +62,11 @@ Na Linuksie nie ma Harmonogramu zadań — dwie proste opcje:
 crontab -e
 ```
 
-i dopisz (uruchamia pojedynczy przebieg co 5 minut, nie tryb `--loop`):
+i dopisz (uruchamia pojedynczy przebieg co 5 minut, nie tryb `--loop`, plus monitor zdrowia maszyny co 2 minuty):
 
 ```
 */5 * * * * cd ~/AIWorker/wirtualny-pracownik/app && venv/bin/python runner_loop.py >> runs/cron.log 2>&1
+*/2 * * * * cd ~/AIWorker/wirtualny-pracownik/app && venv/bin/python system_health_monitor.py >> runs/health.log 2>&1
 ```
 
 **Opcja B — systemd, do trybu ciągłego (`--loop`), z automatycznym restartem po awarii:**
@@ -91,7 +92,29 @@ sudo systemctl enable --now wirtualny-pracownik.service
 sudo systemctl status wirtualny-pracownik.service
 ```
 
-Zacznij od cron — łatwiej podejrzeć, czy coś w ogóle działa, zanim zostawisz to bez nadzoru w trybie ciągłym.
+Analogicznie drugi serwis dla monitora zdrowia (ta sama recepta, inna nazwa i `ExecStart`):
+
+```bash
+sudo tee /etc/systemd/system/wirtualny-pracownik-health.service << 'EOF'
+[Unit]
+Description=Wirtualny Pracownik AI — monitor zdrowia maszyny
+After=network.target
+
+[Service]
+WorkingDirectory=%h/AIWorker/wirtualny-pracownik/app
+ExecStart=%h/AIWorker/wirtualny-pracownik/app/venv/bin/python system_health_monitor.py --loop
+Restart=always
+RestartSec=10
+
+[Install]
+WantedBy=multi-user.target
+EOF
+
+sudo systemctl daemon-reload
+sudo systemctl enable --now wirtualny-pracownik-health.service
+```
+
+Zacznij od cron — łatwiej podejrzeć, czy coś w ogóle działa, zanim zostawisz to bez nadzoru w trybie ciągłym. Docelowo obie pętle (zadania + zdrowie maszyny) mają działać niezależnie i cały czas — to one, razem, są tym "dzieje się samo", bez klikania.
 
 ## Co konkretnie przetestować w pierwszym tygodniu
 

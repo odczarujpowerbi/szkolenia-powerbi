@@ -145,7 +145,15 @@ Lista umiejętności, które są już zaplanowane (część gotowa, część cze
 8. W polu "Rozpocznij w" wpisz: `C:\AIWorker\wirtualny-pracownik\app`
 9. Zapisz zadanie.
 
-**Po czym poznasz, że się udało:** po restarcie komputera, po kilku minutach, w Projectly pojawia się wpis statusu ("status na żywo") dla tego komputera.
+Powtórz te same kroki 2-9 dla **drugiego** zadania — monitora zdrowia maszyny, który patrzy, czy komputerowi niczego nie brakuje (pamięć, czy runner faktycznie działa), i sam zgłasza alert, jeśli coś jest nie tak:
+
+- Nazwa: np. "Wirtualny Pracownik — Monitor zdrowia".
+- W polu "Argumenty" wpisz: `system_health_monitor.py --loop`
+- Reszta identyczna jak wyżej (ten sam folder "Rozpocznij w").
+
+Od tego momentu działają **dwie niezależne, samodzielne pętle** — jedna pobiera i wykonuje zadania z Projectly, druga co 2 minuty sprawdza samą maszynę i eskaluje, jeśli coś wymaga uwagi. Nie musisz nic więcej klikać — to jest właśnie ten "dzieje się samo", o który chodziło.
+
+**Po czym poznasz, że się udało:** po restarcie komputera, po kilku minutach, w Projectly pojawiają się DWA wpisy statusu ("status na żywo") dla tego komputera — jeden dla roli bota, drugi z etykietą "system-health".
 
 ## Krok 9 — Jak sprawdzić, że wszystko działa na żywo
 
@@ -182,6 +190,6 @@ Nie musisz się bać używać tego zbyt często — to jest dokładnie po to, ż
 - [ ] `python bootstrap_smoke_test.py` pokazuje "Wszystkie testy przeszły"
 - [ ] Komputer zarejestrowany z właściwą rolą (`bootstrap_register.py`)
 - [ ] Folder skilli na OneDrive znaleziony i znany
-- [ ] Zadanie w Harmonogramie zadań Windows utworzone i przetestowane (restart komputera)
+- [ ] OBA zadania w Harmonogramie zadań Windows utworzone i przetestowane — runner i monitor zdrowia (restart komputera)
 - [ ] W Projectly widać status na żywo i przetworzone zadania
 - [ ] Wiadomo, jak i kiedy użyć `kill_switch.py stop`

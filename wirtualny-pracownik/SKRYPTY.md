@@ -112,6 +112,7 @@ Pomysły na skrypty pogrupowane wg domeny. Każdy skrypt ma jasno określony cel
 | `cost_tracker.py` | Sumuje koszt AI per zadanie/dzień, alarm po przekroczeniu limitu | Po każdym wywołaniu modelu | infra |
 | `secret_scanner.py` | Skanuje logi/artefakty pod kątem sekretów przed zapisem/synchronizacją | Przed `sharepoint_sync.py` / commitem | infra |
 | `kill_switch.py` | Sprawdza globalny plik/flagę STOP przy starcie każdej pętli runnera; jeśli aktywna, bezpiecznie przerywa (jak PAUSE) i nie podejmuje nowych akcji (PLAN-WDROZENIA.md sekcja 17) | Na starcie każdej iteracji `runner_loop.py` | infra |
+| `system_health_monitor.py` | Patrzy na realny stan maszyny (RAM, czy oczekiwane skrypty faktycznie działają w systemie — nie tylko czy piszą heartbeat), publikuje status, eskaluje przy problemie. Uzupełnia `heartbeat.py`/`watchdog.py` (te widzą tylko czy runner "daje znać", nie widzą samego systemu) | Harmonogram, co 2 min (`--loop --interval 120`), niezależnie od `runner_loop.py` | zielone |
 
 ## L. Asystent zadań ludzkich (proactive assist — patrz PLAN-WDROZENIA.md sekcja 5)
 

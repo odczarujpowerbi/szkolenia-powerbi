@@ -40,6 +40,7 @@ To nie jest pseudokod ani dokumentacja — to realny, uruchomiony i przetestowan
 | `email_client.py` / `email_draft_generator.py` | Draft/wysyłka maila z szablonu (`templates/email/`), przygotowanie pod Microsoft Graph | ✅ tryb mock (zapis do `runs/mock_outbox/`); **każda wysyłka (`send_email`) przekierowana do `config/email_safety.yaml` (dziś: Paweł/Aldona), nigdy bezpośrednio do zamierzonego adresata** — fail-closed, pusta lista blokuje wysyłkę; realny Graph — stub |
 | `task_feedback_requester.py` | Prosi o feedback po zamknięciu zadania: komentarz + zadanie w Projectly + mail | ✅ end-to-end na mocku, w tym idempotencja (nie pyta drugi raz o to samo zadanie, `runs/feedback_requested.json`) |
 | `weekly_team_report.py` | Raport tygodniowy zespołu: zrobione/przeterminowane zadania + zaległe wpisy czasu + opcjonalna interpretacja słabych stron (model) | ✅ end-to-end, w tym z prawdziwym eksportem godzin podanym jako `time_entries_csv` |
+| `system_health_monitor.py` | Cyklicznie (domyślnie co 2 min) patrzy na RAM i czy oczekiwane skrypty (`runner_loop.py`) faktycznie działają w systemie, publikuje status, eskaluje przy problemie | ✅ obie ścieżki (ok/critical) przetestowane, w tym z realnym odczytem RAM przez `psutil` |
 
 ## Czego celowo brakuje (uczciwie, nie udawane)
 

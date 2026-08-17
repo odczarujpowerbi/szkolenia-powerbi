@@ -48,6 +48,12 @@ skills:
     description: >
       Raport tygodniowy zespołu (zrobione/przeterminowane zadania + zaległe wpisy czasu +
       opcjonalna interpretacja słabych stron przez model), publikowany w Projectly i mailem
+  - name: system_health_monitor
+    version: "0.1.0"
+    risk: green
+    description: >
+      Cyklicznie (co 2 min) sprawdza RAM i czy oczekiwane skrypty faktycznie działają
+      w systemie (config/health_thresholds.yaml), publikuje status, eskaluje przy problemie
 
   # Poniższe: PLANOWANE, nie autorskie jeszcze — integracja jest zarejestrowana
   # w integrations.yaml, ale ani skill, ani konektor (SKRYPTY.md) nie istnieją.
