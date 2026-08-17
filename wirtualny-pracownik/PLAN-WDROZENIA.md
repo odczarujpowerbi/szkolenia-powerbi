@@ -224,7 +224,11 @@ Auto-zatwierdzanie żółtych **nie zmienia** zasady fail-closed z dokumentacji 
 
 ## 10. Skille raportowe, porządkowanie danych i podsumowania
 
-Wynik z analizy realnego raportu godzin (kwiecień-sierpień 2026): **ok. 175h w próbce to firefighting wokół danych** dla INDEKA i DIVERSE — powtarzający się wzorzec "właściciel pliku źródłowego (Michał/Wojtek/Paweł D.) zmienia strukturę bez ostrzeżenia → Power Query się wywala → godziny na ręczne przepinanie i wyjaśnianie, co się zmieniło". To największy pojedynczy koszt w całej próbce, większy niż jakikolwiek pojedynczy projekt klienta — stąd priorytet #2 zaraz po silniku walidacji.
+Wynik z analizy realnego raportu godzin (kwiecień-sierpień 2026): **ok. 175h w pierwszej próbce to firefighting wokół danych** dla INDEKA i DIVERSE — powtarzający się wzorzec "właściciel pliku źródłowego (Michał/Wojtek/Paweł D.) zmienia strukturę bez ostrzeżenia → Power Query się wywala → godziny na ręczne przepinanie i wyjaśnianie, co się zmieniło". Drugi, pełny raport całego zespołu (czerwiec-sierpień 2026, 9 osób, 1997h łącznie) **potwierdza i skaluje** ten wzorzec: sam wątek dane/pliki/aktualizacje/przepięcia to **214h w 114 wpisach**, najmocniej u Kacpra (65,5h) i Pawła (46,3h) — nadal największy pojedynczy, powtarzalny koszt operacyjny, stąd priorytet #2 zaraz po silniku walidacji.
+
+Ten sam pełny raport ujawnia drugi koszt tej samej skali, wcześniej niepoliczony: **spotkania i koordynacja (daily/weekly/prio/bieżące) to 392,8h w 438 wpisach — ok. 20% wszystkich zalogowanych godzin zespołu**, w rzeczywistości największa pojedyncza pozycja w całym zestawieniu, przed jakimkolwiek projektem klienta. `digest_generator.py` (sekcja poniżej) adresuje to wprost — ma skracać albo częściowo zastępować spotkanie cykliczny digestem z Projectly, nie tylko podsumowywać je po fakcie. Warto potraktować to jako współpriorytet #2, nie dodatek.
+
+Trzecie znalezisko z tego raportu to nie koszt czasu, tylko **luka w śledzeniu**: **298h czasu jest zalogowane jako wciąż "otwarte"**, z czego 265,6h u jednej osoby — część prawdopodobnie od tygodni bez zamknięcia. To potwierdza z innej strony problem opisany w `PROJECTLY-ROZWOJ.md` (brak realnej daty wykonania, nic nie wymusza domknięcia wpisu) i uzasadnia nowy, tani skrypt: `stale_time_entry_nudger.py` (sekcja M w `SKRYPTY.md`).
 
 **Biblioteka skilli raportowo-porządkowych** (szersza niż sam Power BI — Excel, Google Sheets, dowolne źródło):
 

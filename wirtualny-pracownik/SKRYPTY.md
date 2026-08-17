@@ -123,11 +123,12 @@ Pomysły na skrypty pogrupowane wg domeny. Każdy skrypt ma jasno określony cel
 
 ## M. Raporty, porządkowanie danych i podsumowania (priorytet #2 — patrz PLAN-WDROZENIA.md sekcja 10)
 
-Wynika wprost z analizy realnego raportu godzin: ok. 175h w próbce to firefighting wokół danych źródłowych (INDEKA/DIVERSE) — największy pojedynczy koszt w całej próbce.
+Wynika wprost z analizy realnych raportów godzin: pierwsza próbka (INDEKA/DIVERSE) pokazała ok. 175h firefightingu danych; pełny raport całego zespołu (czerwiec-sierpień 2026, 1997h) potwierdza to na większej skali — 214h w 114 wpisach, plus dodatkowo 298h czasu zalogowanego jako wciąż "otwarte" (patrz `PLAN-WDROZENIA.md` sekcja 10) — stąd `stale_time_entry_nudger.py` niżej.
 
 | Skrypt | Cel | Wyzwalacz | Ryzyko |
 |---|---|---|---|
 | `source_schema_watcher.py` | Pilnuje struktury plików źródłowych (Excel/Google Sheets), wykrywa zmianę kolumny/arkusza/typu zanim odświeżenie się wywali, tworzy zadanie dla właściciela pliku | Cyklicznie / przed każdym zaplanowanym odświeżeniem | zielone |
+| `stale_time_entry_nudger.py` | Skanuje wpisy czasu/zadania utknięte w statusie "otwarte"/"w toku" dłużej niż ustalony próg (np. 5 dni roboczych) i tworzy przypomnienie dla właściciela o domknięciu | Harmonogram (codziennie) | zielone |
 | `data_contract_validator.py` | Waliduje plik źródłowy wobec uzgodnionego kontraktu struktury (per klient/proces) | Przed przepięciem/odświeżeniem raportu | zielone |
 | `pq_error_triage` (skill) | Klasyfikuje wklejony błąd Power Query (zmieniona kolumna, typ danych, ścieżka, uprawnienia) i podaje gotową poprawkę | Na żądanie, po błędzie odświeżenia | zielone |
 | `report_builder.py` | Buduje/aktualizuje raporty poza Power BI (Excel/Google Sheets/dokument) wg szablonu i zadeklarowanego rezultatu (Kadry, Finansowy, Dane ruchy mag) | Zadanie typu `report_build` | żółte |
