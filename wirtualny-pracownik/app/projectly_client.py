@@ -52,6 +52,16 @@ class ProjectlyClient:
         (live_status_publisher.py, PLAN-WDROZENIA.md sekcja 2)."""
         raise NotImplementedError("Jak wyżej.")
 
+    def list_tasks(self, project_id=None, status=None):
+        """Lista zadań z polami zgodnymi z realnym, potwierdzonym schematem
+        Projectly (sprawdzonym w tej sesji przez MCP: title, status
+        todo/in_progress/done, dueDate, estimatedHours, assignee) — używane
+        przez digest_generator.py. UWAGA: Projectly nie ma dziś (patrz
+        PROJECTLY-ROZWOJ.md) pola daty realnego wykonania — digest poniżej
+        dlatego bazuje na statusie i dueDate, nie na tym, KIEDY coś naprawdę
+        się skończyło."""
+        raise NotImplementedError("Jak wyżej.")
+
 
 class MockProjectlyClient:
     """Symuluje Projectly przy użyciu lokalnych plików JSON — do testowania
@@ -60,8 +70,9 @@ class MockProjectlyClient:
     żywo trafiają do runs/mock_created_tasks.json i runs/mock_live_status.json,
     żeby dało się je zweryfikować po przebiegu."""
 
-    def __init__(self, tasks_path=MOCK_TASKS_PATH):
+    def __init__(self, tasks_path=MOCK_TASKS_PATH, project_tasks_path=None):
         self.tasks_path = tasks_path
+        self.project_tasks_path = project_tasks_path or Path(__file__).parent / "mock_data" / "sample_project_tasks.json"
         self._created_tasks_path = MOCK_RUNS_DIR / "mock_created_tasks.json"
         self._comments_path = MOCK_RUNS_DIR / "mock_comments.json"
         self._live_status_path = MOCK_RUNS_DIR / "mock_live_status.json"
@@ -106,6 +117,14 @@ class MockProjectlyClient:
         self._save(self._live_status_path, statuses)
         print(f"[MOCK Projectly] status na żywo ({role}): {payload}")
         return True
+
+    def list_tasks(self, project_id=None, status=None):
+        tasks = self._load(self.project_tasks_path, default=[])
+        if project_id:
+            tasks = [t for t in tasks if t.get("project_id") == project_id]
+        if status:
+            tasks = [t for t in tasks if t.get("status") == status]
+        return tasks
 
     @staticmethod
     def _load(path, default):

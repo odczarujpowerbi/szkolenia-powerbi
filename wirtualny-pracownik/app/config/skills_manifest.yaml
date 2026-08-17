@@ -10,7 +10,29 @@ skills:
   - name: source_schema_watcher
     version: "0.1.0"
     risk: green
-    description: Wykrywa zmiany struktury plików źródłowych
+    description: Wykrywa zmiany struktury plików źródłowych CSV (Excel wymaga jeszcze openpyxl), tworzy zadanie dla właściciela
+  - name: data_contract_validator
+    version: "0.1.0"
+    risk: green
+    description: Waliduje plik źródłowy wobec zadeklarowanego kontraktu struktury (config/data_contracts/*.yaml)
+  - name: digest_generator
+    version: "0.1.0"
+    risk: green
+    description: >
+      Cykliczny digest z Projectly (zrobione/przeterminowane/w toku) do skrócenia daily/weekly —
+      bez pola realnej daty wykonania (patrz PROJECTLY-ROZWOJ.md), bazuje na statusie i dueDate
+  - name: stale_time_entry_nudger
+    version: "0.1.0"
+    risk: green
+    description: Skanuje eksport CSV wpisów czasu, znajduje wpisy "otwarte" dłużej niż próg dni, grupuje wg osoby
+  - name: report_builder
+    version: "0.1.0"
+    risk: żółte
+    description: Generyczny silnik raportów (markdown/CSV) z listy rekordów — realne dane (Kadry, Finansowy) wymagają osobnego podłączenia źródła
+  - name: email_draft_generator
+    version: "0.1.0 (tryb mock — realna wysyłka wymaga Microsoft Graph)"
+    risk: żółte
+    description: Generuje draft maila z szablonu (templates/email/*.md), opcjonalnie dopracowany przez model; dziś zapisuje do runs/mock_outbox/, nie wysyła
 
   # Poniższe: PLANOWANE, nie autorskie jeszcze — integracja jest zarejestrowana
   # w integrations.yaml, ale ani skill, ani konektor (SKRYPTY.md) nie istnieją.

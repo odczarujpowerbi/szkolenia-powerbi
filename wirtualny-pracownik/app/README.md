@@ -30,12 +30,19 @@ To nie jest pseudokod ani dokumentacja — to realny, uruchomiony i przetestowan
 | `ad_set_launcher.py` | Uruchamia test reklamowy w ramach bounded red `ad_test_launch` | ✅ bramka bounded_red działa (domyślnie wymaga człowieka); samo wywołanie Meta/TikTok API — stub |
 | `mailerlite_client.py` | Konektor MailerLite REST API (kampanie + statystyki) | ⚠️ napisany wg publicznej dokumentacji znalezionej przez wyszukiwarkę (bezpośredni dostęp zablokowany w tej sesji) — zweryfikuj dokładne ścieżki przed produkcją |
 | `mailerlite_report_analyzer.py` | Cotygodniowy raport: statystyki, czytelność (heurystyka), ocena tonu/tytułu (model) | ✅ end-to-end na `mock_data/sample_mailerlite_campaigns.json` — poprawnie odróżnia dobry mail od rozwlekłego |
+| `digest_generator.py` | Digest z Projectly (zrobione/przeterminowane/w toku) przed daily/weekly — priorytet #2, patrz PLAN-WDROZENIA.md sekcja 10 | ✅ na `mock_data/sample_project_tasks.json`; celowo bez pola realnej daty wykonania (patrz `PROJECTLY-ROZWOJ.md`) |
+| `source_schema_watcher.py` | Wykrywa zmianę struktury pliku źródłowego CSV, tworzy zadanie dla właściciela | ✅ end-to-end na `mock_data/source_sample_v1.csv` → `v2_changed.csv` (wykrywa zmianę nazwy i nową kolumnę) |
+| `data_contract_validator.py` | Waliduje plik wobec zadeklarowanego kontraktu (`config/data_contracts/*.yaml`) | ✅ na tych samych plikach co watcher — v1 zgodny, v2 niezgodny |
+| `stale_time_entry_nudger.py` | Znajduje wpisy czasu "otwarte" dłużej niż próg dni, grupuje wg osoby | ✅ uruchomiony na mocku ORAZ na prawdziwym eksporcie godzin — realnie znalazł 260h zaległych wpisów |
+| `report_builder.py` | Generyczny silnik raportów (markdown/CSV) z listy rekordów | ✅ markdown i CSV; `.xlsx` jasny stub (wymaga openpyxl, celowo niezainstalowany) |
+| `email_client.py` / `email_draft_generator.py` | Draft maila z szablonu (`templates/email/`), przygotowanie pod Microsoft Graph | ✅ tryb mock (zapis do `runs/mock_outbox/`), w tym walidacja niewypełnionych placeholderów; realna wysyłka — stub, wymaga Graph+msal |
 
 ## Czego celowo brakuje (uczciwie, nie udawane)
 
 - **Prawdziwe połączenie z Projectly** (`projectly_client.py`) — endpointy/autoryzacja nie są znane z tej sesji. Domyślnie `MockProjectlyClient` (czyta/pisze pliki w `mock_data/` i `runs/`). Ustaw `PROJECTLY_API_KEY` + `PROJECTLY_BASE_URL`, dopisz metody `ProjectlyClient`.
 - **Realne wywołanie modelu w `validator_visual.py`** — kod jest napisany i wywoła prawdziwy model, jeśli podasz `ANTHROPIC_API_KEY` i zrzut ekranu; bez nich zwraca `approved=False` z jasnym wyjaśnieniem, zgodnie z fail-closed. Sama rozmowa z modelem nietestowana z tej sesji (brak klucza) — zweryfikuj na docelowej maszynie z prawdziwym zrzutem.
 - **Prawdziwe workery** (Power BI Desktop Bridge + zrzuty, CRM, Meta Ads, SharePoint...) — `runner_loop.py` dziś tylko klasyfikuje i komentuje (`execution_result` to zaślepka), nie wykonuje realnej pracy w tych systemach. `pbip_validate.py` sprawdza tylko warstwę plikową — zrzuty stron wymagają Desktop Bridge na prawdziwym Windows z Power BI Desktop.
+- **Realna wysyłka maila** (`email_client.py`) — wymaga rejestracji aplikacji w Azure AD (Microsoft Entra) i pakietu `msal`; do czasu podania `MS_GRAPH_CLIENT_ID/SECRET/TENANT_ID/MAILBOX` w `.env` działa w trybie mock (draft zapisywany do `runs/mock_outbox/`, nic nie wysyła naprawdę).
 - **`bootstrap_install.ps1`** — napisany wiernie wg `SKALOWANIE.md`, ale nieprzetestowany (środowisko budowy to Linux bez dostępu do docelowego Windows). Sprawdź krok po kroku przy pierwszym użyciu.
 
 ## Jak uruchomić lokalnie (Python 3.9+, zero kluczy API na start)
