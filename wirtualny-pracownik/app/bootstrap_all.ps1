@@ -34,6 +34,12 @@ param(
 
     [string]$InstallPath = "C:\AIWorker",
 
+    # Praca dziś żyje na claude/new-repo-i29t2e, nie na main — patrz
+    # bootstrap_install.ps1 (realny błąd napotkany i naprawiony w tej sesji:
+    # klon bez podanej gałęzi brał domyślną main, na której nie ma jeszcze
+    # folderu wirtualny-pracownik/). Podmień, gdy praca trafi na main.
+    [string]$Branch = "claude/new-repo-i29t2e",
+
     [switch]$SkipClaudeCode
 )
 
@@ -85,7 +91,7 @@ $steps = @(
     @{ Name = "Git"; Required = $true; Run = { Invoke-PowerShellScript (Get-BootstrapScriptPath "bootstrap_install_git.ps1") @() } }
     @{ Name = "Python 3.11+"; Required = $true; Run = { Invoke-PowerShellScript (Get-BootstrapScriptPath "bootstrap_install_python.ps1") @() } }
     @{ Name = "Claude Code (CLI)"; Required = $false; Run = { Invoke-PowerShellScript (Get-BootstrapScriptPath "bootstrap_install_claude_code.ps1") @() } }
-    @{ Name = "Pobranie repo + zależności Pythona"; Required = $true; Run = { Invoke-PowerShellScript (Get-BootstrapScriptPath "bootstrap_install.ps1") @("-RepoUrl", $RepoUrl, "-InstallPath", $InstallPath, "-SkipSystemChecks") } }
+    @{ Name = "Pobranie repo + zależności Pythona"; Required = $true; Run = { Invoke-PowerShellScript (Get-BootstrapScriptPath "bootstrap_install.ps1") @("-RepoUrl", $RepoUrl, "-InstallPath", $InstallPath, "-Branch", $Branch, "-SkipSystemChecks") } }
     @{ Name = "Inicjalizacja sekretów (secrets/)"; Required = $true; Run = { Invoke-PythonScript $appPath "bootstrap_init_secrets.py" } }
     @{ Name = "Test dymny"; Required = $true; Run = { Invoke-PythonScript $appPath "bootstrap_smoke_test.py" } }
 )
