@@ -11,13 +11,47 @@ dostępu wystarczyło dopisać `EmailClient`, bez zmiany reszty pipeline'u
 przechodzi normalną ścieżkę walidacji/auto-zatwierdzenia (sekcja 3 planu),
 zanim cokolwiek pójdzie do klienta. Ten moduł sam z siebie niczego nie
 wysyła bez świadomego wywołania `send_email`.
+
+BEZPIECZEŃSTWO (na wyraźne życzenie): dopóki approval_policy nie mówi
+inaczej, KAŻDA wysyłka (`send_email`) leci do człowieka wewnątrz firmy —
+adresaci w `config/email_safety.yaml` — a nie bezpośrednio do zamierzonego
+adresata. Zamierzony adresat jest jawnie opisany w temacie i treści.
+`save_draft` tego NIE robi — draft w skrzynce bota i tak nikt nie widzi,
+dopóki ktoś ręcznie go nie wyśle.
 """
 
 import os
 import re
 from pathlib import Path
 
+import yaml
+
 MOCK_OUTBOX_DIR = Path(__file__).parent / "runs" / "mock_outbox"
+EMAIL_SAFETY_PATH = Path(__file__).parent / "config" / "email_safety.yaml"
+
+
+def load_review_recipients(path=EMAIL_SAFETY_PATH):
+    with open(path, encoding="utf-8") as f:
+        return yaml.safe_load(f).get("review_recipients", [])
+
+
+def resolve_send_recipients(intended_to, subject, body_text, path=EMAIL_SAFETY_PATH):
+    """Przekierowuje KAŻDĄ wysyłkę do ludzi z email_safety.yaml, zamiast
+    bezpośrednio do zamierzonego adresata (fail-closed — brak wpisów w
+    configu oznacza, że nic nie ma prawa wyjść, nie że wraca do zgadywania
+    oryginalnego adresata)."""
+    reviewers = load_review_recipients(path)
+    if not reviewers:
+        raise RuntimeError(
+            "config/email_safety.yaml nie ma żadnych review_recipients — "
+            "fail-closed: wysyłka zablokowana, dopóki lista jest pusta."
+        )
+    redirected_subject = f"[DO PRZEKAZANIA -> {intended_to}] {subject}"
+    redirected_body = (
+        f"(Bot: mail przygotowany dla {intended_to}, wysłany tutaj do przeglądu przed przekazaniem dalej.)\n\n"
+        f"{body_text}"
+    )
+    return ", ".join(reviewers), redirected_subject, redirected_body
 
 
 class EmailClient:
@@ -31,6 +65,10 @@ class EmailClient:
         self.mailbox = mailbox
 
     def send_email(self, to, subject, body_text, cc=None):
+        # Przekierowanie do ludzi z email_safety.yaml MUSI zostać zastosowane
+        # tutaj, zanim faktyczna implementacja Graph zostanie dopisana —
+        # to jedna linijka do przeniesienia w dół razem z resztą.
+        resolve_send_recipients(to, subject, body_text)
         raise NotImplementedError(
             "Prawdziwy Microsoft Graph nie jest jeszcze podłączony. "
             "Wymaga: rejestracji aplikacji w Azure AD, pakietu 'msal', "
@@ -51,7 +89,10 @@ class MockEmailClient:
         self.outbox_dir = outbox_dir
 
     def send_email(self, to, subject, body_text, cc=None):
-        return self._write(to, subject, body_text, cc, action="SEND (mock — nie wysłano naprawdę)")
+        review_to, redirected_subject, redirected_body = resolve_send_recipients(to, subject, body_text)
+        return self._write(
+            review_to, redirected_subject, redirected_body, cc, action="SEND (mock — nie wysłano naprawdę)"
+        )
 
     def save_draft(self, to, subject, body_text, cc=None):
         return self._write(to, subject, body_text, cc, action="DRAFT")

@@ -120,6 +120,7 @@ Pomysły na skrypty pogrupowane wg domeny. Każdy skrypt ma jasno określony cel
 | `human_task_scanner.py` | Cyklicznie przegląda zadania przypisane ludziom (nie tylko agentowi) w Projectly i klasyfikuje, gdzie agent może pomóc | Harmonogram, np. co godzinę | zielone |
 | `human_task_partial_executor.py` | Wykonuje automatyzowalną część zadania człowieka, dopisuje komentarz "zrobiłem X, zostaje Ci Y" | Gdy `human_task_scanner.py` znajdzie automatyzowalną część | żółte (jak natywne ryzyko wykonanej czynności) |
 | `human_task_briefing.py` | Przygotowuje opracowanie/research/draft ułatwiające człowiekowi wykonanie w pełni ludzkiego zadania, dołącza jako komentarz/załącznik | Gdy zadanie wymaga researchu, ale decyzję/wykonanie musi podjąć człowiek | zielone |
+| `task_feedback_requester.py` | Po zamknięciu zadania: komentarz z prośbą o feedback + osobne zadanie feedbackowe w Projectly + mail (przez `email_safety.yaml` dziś zawsze do Pawła/Aldony) | Zadanie zmienia status na "done" | zielone |
 
 ## M. Raporty, porządkowanie danych i podsumowania (priorytet #2 — patrz PLAN-WDROZENIA.md sekcja 10)
 
@@ -135,6 +136,7 @@ Wynika wprost z analizy realnych raportów godzin: pierwsza próbka (INDEKA/DIVE
 | `data_tidy.py` | Porządkuje dane źródłowe na żądanie: deduplikacja, ujednolicenie formatów, uzupełnianie braków | Zadanie typu `data_tidy` lub jako krok przed `report_builder.py` | żółte |
 | `newsletter_drafter.py` | Przygotowuje cykliczny draft newslettera z materiału źródłowego (zmiany produktowe, notatki, artykuły) | Harmonogram (np. tygodniowy) / zadanie typu `newsletter_draft` | zielone |
 | `digest_generator.py` | Generuje cykliczny digest aktywności z Projectly (przed Daily/Weekly, do skrócenia lub częściowego zastąpienia spotkania) | Harmonogram, przed spotkaniem cyklicznym | zielone |
+| `weekly_team_report.py` | Raport tygodniowy całego zespołu: zrobione/przeterminowane zadania (`digest_generator`) + zaległe wpisy czasu (`stale_time_entry_nudger`) + interpretacja słabych stron (model) | Harmonogram, raz w tygodniu | zielone |
 | `content_summarizer.py` | Streszcza na żądanie długi materiał (maile, notatki ze spotkań, raporty) do krótkiej wersji | Zadanie typu `summarize` | zielone |
 | `digest_audio.py` | TTS nad tekstem już wygenerowanym przez `digest_generator.py` — nie generuje treści od nowa, tylko narracja głosowa dla wybranych, ważniejszych podsumowań | Na żądanie / cykliczny digest tygodniowy | zielone |
 | `digest_video.py` | Narracja TTS nad prezentacją/dashboardem, montaż — tylko dla dużych deliverabli (np. miesięczne podsumowanie dla klienta), nie domyślny format | Na żądanie | zielone |

@@ -71,15 +71,22 @@ def ai_polish(body_text):
     return response.content[0].text.strip()
 
 
-def generate_draft(template_name, to, cc=None, polish=False, email_client=None, **template_vars):
+def generate_draft(template_name, to, cc=None, polish=False, email_client=None, action="draft", **template_vars):
+    """`action='draft'` (domyślnie) zapisuje draft, nic nie wysyła.
+    `action='send'` faktycznie wysyła — a więc przechodzi przez
+    `resolve_send_recipients` w email_client.py (zawsze do człowieka
+    wewnątrz firmy, patrz config/email_safety.yaml), nie bezpośrednio do `to`."""
     rendered = render_template(template_name, **template_vars)
     subject, body = _split_subject_body(rendered)
     if polish:
         body = ai_polish(body)
 
     client = email_client or get_email_client()
-    path = client.save_draft(to=to, subject=subject, body_text=body, cc=cc)
-    return {"path": path, "subject": subject, "body": body}
+    if action == "send":
+        path = client.send_email(to=to, subject=subject, body_text=body, cc=cc)
+    else:
+        path = client.save_draft(to=to, subject=subject, body_text=body, cc=cc)
+    return {"path": path, "subject": subject, "body": body, "action": action}
 
 
 if __name__ == "__main__":

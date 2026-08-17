@@ -35,7 +35,9 @@ To nie jest pseudokod ani dokumentacja — to realny, uruchomiony i przetestowan
 | `data_contract_validator.py` | Waliduje plik wobec zadeklarowanego kontraktu (`config/data_contracts/*.yaml`) | ✅ na tych samych plikach co watcher — v1 zgodny, v2 niezgodny |
 | `stale_time_entry_nudger.py` | Znajduje wpisy czasu "otwarte" dłużej niż próg dni, grupuje wg osoby | ✅ uruchomiony na mocku ORAZ na prawdziwym eksporcie godzin — realnie znalazł 260h zaległych wpisów |
 | `report_builder.py` | Generyczny silnik raportów (markdown/CSV) z listy rekordów | ✅ markdown i CSV; `.xlsx` jasny stub (wymaga openpyxl, celowo niezainstalowany) |
-| `email_client.py` / `email_draft_generator.py` | Draft maila z szablonu (`templates/email/`), przygotowanie pod Microsoft Graph | ✅ tryb mock (zapis do `runs/mock_outbox/`), w tym walidacja niewypełnionych placeholderów; realna wysyłka — stub, wymaga Graph+msal |
+| `email_client.py` / `email_draft_generator.py` | Draft/wysyłka maila z szablonu (`templates/email/`), przygotowanie pod Microsoft Graph | ✅ tryb mock (zapis do `runs/mock_outbox/`); **każda wysyłka (`send_email`) przekierowana do `config/email_safety.yaml` (dziś: Paweł/Aldona), nigdy bezpośrednio do zamierzonego adresata** — fail-closed, pusta lista blokuje wysyłkę; realny Graph — stub |
+| `task_feedback_requester.py` | Prosi o feedback po zamknięciu zadania: komentarz + zadanie w Projectly + mail | ✅ end-to-end na mocku, w tym idempotencja (nie pyta drugi raz o to samo zadanie, `runs/feedback_requested.json`) |
+| `weekly_team_report.py` | Raport tygodniowy zespołu: zrobione/przeterminowane zadania + zaległe wpisy czasu + opcjonalna interpretacja słabych stron (model) | ✅ end-to-end, w tym z prawdziwym eksportem godzin podanym jako `time_entries_csv` |
 
 ## Czego celowo brakuje (uczciwie, nie udawane)
 
